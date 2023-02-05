@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
+  <ItemGroup>
+    <ApplicationDefinition Update="App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="LoginUI\external.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="LoginUI\Microsoft.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="LoginUI\MicrosoftLoginWb.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="LoginUI\Mojang.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="LoginUI\offline.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\JavaDownloadPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\VersionSelection.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Tools\DownloaderPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="LoginUI\external.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="LoginUI\Microsoft.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="LoginUI\MicrosoftLoginWb.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="LoginUI\Mojang.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="LoginUI\offline.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\JavaDownloadPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\VersionSelection.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\Dark.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Tools\DownloaderPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+</Project>

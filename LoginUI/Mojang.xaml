@@ -1,0 +1,17 @@
+﻿<Page x:Class="YMCL.LoginUI.Mojang"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:YMCL.LoginUI"
+      mc:Ignorable="d" 
+      d:DesignHeight="380" d:DesignWidth="360"
+      Title="mojang">
+
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="380" Width="360">
+        <TextBlock Text="账号" Width="99" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Margin="32,193,0,0" FontFamily="Noto Sans Mono CJK SC Medium" FontSize="18"/>
+        <TextBox x:Name="mojangacount" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="248" Margin="82,190,0,0" />
+        <TextBlock Text="密码" Width="68" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Margin="32,232,0,0" FontFamily="Noto Sans Mono CJK SC Medium" FontSize="18"/>
+        <TextBox x:Name="mojangpassword" HorizontalAlignment="Right" VerticalAlignment="Top" Height="30" Width="248" Margin="0,230,30,0" />
+    </Grid>
+</Page>

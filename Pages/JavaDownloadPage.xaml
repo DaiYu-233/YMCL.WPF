@@ -1,0 +1,39 @@
+﻿<Window x:Class="YMCL.Pages.JavaDownloadPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:YMCL.Pages"
+        mc:Ignorable="d"
+        Title="" Height="310" Width="520" WindowStyle="None" HorizontalAlignment="Left" VerticalAlignment="Top" ResizeMode="NoResize" SizeToContent="Width" Foreground="{x:Null}" MouseDown="Window_MouseDown" Background="Transparent" AllowsTransparency="True">
+
+    <Border CornerRadius="8" Visibility="Visible" Background="White" VerticalAlignment="Top" HorizontalAlignment="Left" Width="520" Height="310" BorderBrush="Gray" BorderThickness="2,2,2,2" >
+        <Grid Background="{DynamicResource SecundaryGridColor}" >
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Height="30" Width="50" HorizontalAlignment="Right" Cursor="" Margin="0,0,2,0">
+                <Button x:Name="btnMinimize" Style="{DynamicResource IconButtonsStyle}" Content="{DynamicResource minimize}" Click="btnMinimize_Click"/>
+                <Button x:Name="btnClose" Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Click="btnClose_Click" Tag="IsCloseButton"/>
+
+            </StackPanel>
+            <TextBlock Foreground="{DynamicResource TextPrimaryColor}" VerticalAlignment="Top" HorizontalAlignment="Left" Text="Java下载" Height="24" Width="59" Margin="5,5,0,0" FontFamily="Noto Sans CJK SC Medium" FontSize="14" >
+
+            </TextBlock>
+            <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,10" Height="25" Width="109" />
+            <TextBlock x:Name="qwq" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,10" Height="23" Width="109" FontFamily="Noto Sans CJK SC Medium" Text="0%" TextAlignment="Center" FontSize="14" >
+                <TextBlock.Foreground>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black"/>
+                        <GradientStop Color="Black" Offset="1"/>
+                    </LinearGradientBrush>
+                </TextBlock.Foreground>
+            </TextBlock>
+            <TextBox x:Name="ewd" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="24" Width="374" Margin="10,0,0,10" Text="C:\YMCL\Java" FontFamily="Noto Sans CJK SC Medium" />
+            <Button x:Name="jdk8btn" Height="40" Width="245" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,35,0,0" Content="OpenJDK8" FontFamily="Noto Sans CJK SC Medium" FontSize="16" Click="Button_Click" />
+            <Button x:Name="jdk11btn" Height="40" Width="245" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,35,10,0" Content="OpenJDK11" FontFamily="Noto Sans CJK SC Medium" FontSize="16" Click="jdk11btn_Click" />
+
+            <Button x:Name="jdk17btn" Height="40" Width="245" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,85,0,0" Content="OpenJDK17" FontFamily="Noto Sans CJK SC Medium" FontSize="16" Click="jdk17btn_Click"  />
+
+            <Button x:Name="jdk18btn" Height="40" Width="245" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,85,10,0" Content="OpenJDK18" FontFamily="Noto Sans CJK SC Medium" FontSize="16" Click="jdk18btn_Click" />
+        </Grid>
+    </Border>
+
+</Window>
