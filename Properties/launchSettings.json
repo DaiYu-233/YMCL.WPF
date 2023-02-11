@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "YMCL": {
+      "commandName": "Project",
+      "remoteDebugEnabled": false,
+      "remoteDebugMachine": "1.116.137.111:4026",
+      "authenticationMode": "None"
+    }
+  }
+}
