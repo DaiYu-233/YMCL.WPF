@@ -1,9 +1,13 @@
 ﻿using MinecraftLaunch.Modules.Installer;
 using MinecraftLaunch.Modules.Models.Install;
 using Natsurainko.FluentCore.Extension.Windows.Service;
+using Newtonsoft.Json;
+using Panuon.UI.Silver;
 using PInvoke;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -26,12 +30,44 @@ namespace YMCL.Pages
     /// </summary>
     public partial class SoundsPage : Page
     {
+        /// <summary>
+        /// 数据保存
+        /// </summary>
+        #region
+        string ConfigPath = @"YMCL.config.json";
+        LauncherSetting setting = new LauncherSetting();//链接设置
+        public class LauncherSetting
+        {
+            public string Ram = "1024";
+        }
+
+        //设置初始化
+        public void LauncherSettingInitialization()
+        {
+            if (!File.Exists(ConfigPath))
+            {
+                File.WriteAllText(ConfigPath, JsonConvert.SerializeObject(setting));
+            }
+            else
+            {
+                setting = JsonConvert.DeserializeObject<LauncherSetting>(File.ReadAllText(ConfigPath));
+                MaxMemTextBox.Text = setting.Ram;
+            }
+        }
+
+
+
+
+        #endregion
+
         bool colorMode = true;
         Pages.NotesPage downloadpage = new();
         Pages.JavaDownloadPage javaDownloadPage = new();
         List<string> JavaList = new List<string>();
-        //Java
 
+        /// <summary>
+        /// 内存检测
+        #region
         [StructLayout(LayoutKind.Sequential)]
         public struct MemoryInfo
         {
@@ -61,18 +97,18 @@ namespace YMCL.Pages
 
         [DllImport("kernel32.dll")]
         static extern bool GlobalMemoryStatusEx(ref MEMORYSTATUSEX lpBuffer);
-
+        #endregion
         public SoundsPage()
         {
-            
-
+            InitializeComponent();
+            LauncherSettingInitialization();
+            //内存
+            #region
             MemoryInfo MemInfo = new MemoryInfo();
             GlobalMemoryStatus(ref MemInfo);
 
             double totalMb = MemInfo.TotalPhysical / 1024 / 1024;
             double avaliableMb = MemInfo.AvailablePhysical / 1024 / 1024;
-
-            InitializeComponent();
 
             MEMORYSTATUSEX status = new MEMORYSTATUSEX();
             status.dwLength = 0x40;
@@ -81,15 +117,39 @@ namespace YMCL.Pages
             MaxMemSlider.Maximum = status.ullAvailPhys / 1024 / 1024;
 
             //内存显示
-            Memory.Text = "物理内存: " + status.ullTotalPhys / 1024 / 1024  + "MB";
+            Memory.Text = "物理内存: " + status.ullTotalPhys / 1024 / 1024 + "MB";
             MemoryRem.Text = "可用内存: " + status.ullAvailPhys / 1024 / 1024 + "MB " + ($"{Math.Round((avaliableMb / totalMb) * 100, 2)}%");
             MemoryUse.Text = "使用内存: " + ((status.ullTotalPhys / 1024 / 1024) - (status.ullAvailPhys / 1024 / 1024)) + "MB";
+            #endregion
+
+            //初始化
+            #region
+
+            //寻找Java
             JavaList = (List<string>)JavaHelper.SearchJavaRuntime();
-            //JavaList.Add(@"C:\Program Files\Java\jre1.8.0_341\bin\javaw.exe");
             JavaListComboSetting.ItemsSource = JavaList;
 
-            //下拉框初始化
+            //Java下拉框初始化
             JavaListComboSetting.SelectedItem = JavaListComboSetting.Items[0];
+
+
+            #endregion
+
+            //设置
+            #region
+
+            //设置读取
+
+
+            MaxMemTextBox.Text = setting.Ram;
+
+            #endregion
+
+
+
+            
+
+
         }
 
         private void seletJavaPathButton_Click(object sender, RoutedEventArgs e)//Java自定义选择
@@ -136,7 +196,8 @@ namespace YMCL.Pages
             MaxMemTextBox.Text = MaxMemSlider.Value.ToString();
             MaxMemSlider.Maximum = status.ullAvailPhys / 1024 / 1024;
             GameMemUse.Text = ((Convert.ToInt32(MaxMemTextBox.Text)/ Convert.ToInt32((status.ullAvailPhys / 1024 / 1024)))*100).ToString();
-            //MemUsePercent.Text = MaxMemSlider.Value.ToString() + "MB / " + status.ullTotalPhys / 1024 / 1024 + "MB";
+            setting.Ram = MaxMemTextBox.Text;
+            File.WriteAllText(ConfigPath, JsonConvert.SerializeObject(setting));
         }
 
         private void Hyperlink_Click(object sender, RoutedEventArgs e)
@@ -157,6 +218,29 @@ namespace YMCL.Pages
                 System.Windows.Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/YMCL;component/Themes/Light.xaml") });
                 colorMode = true;
             }
+        }
+
+        private void github_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("explorer.exe", "https://github.com/DaiYu-233/YMCL");
+        }
+
+        private void gw_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("explorer.exe", "https://ymcl.daiyu-233.top");
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Process.Start("Update.exe");
+            }
+            catch
+            {
+                MessageBoxX.Show("启动更新程序失败\n请尝试使用管理员身份运行YMCL", "检查更新失败!");
+            }
+            
         }
     }
 }

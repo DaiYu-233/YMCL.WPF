@@ -5,19 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:YMCL"
         mc:Ignorable="d" Name="home"
-        Title="YMCL" Height="570" Width="900"
+        Title="YMCL" Height="560" Width="900"
         WindowStartupLocation="CenterScreen"
         Background="Transparent"
         xmlns:ui="http://schemas.modernwpf.com/2019"
-        ui:WindowHelper.UseModernWindowStyle="True" ResizeMode="NoResize" Loaded="home_Loaded">
-    <Border  Background="{DynamicResource PrimaryBackgroundColor}">
+        ResizeMode="NoResize" Loaded="home_Loaded" WindowStyle="None" Foreground="Transparent" AllowsTransparency="True" >
+    <Border  Background="{DynamicResource PrimaryBackgroundColor}" CornerRadius="8,8,8,8">
+        <Grid>
+            <Border Height="30" VerticalAlignment="Top" MouseDown="Grid_MouseDown" Background="{DynamicResource SecundaryBackgroundColor}" CornerRadius="8,8,0,0" MouseLeftButtonDown="Border_MouseLeftButtonDown">
+                <Grid VerticalAlignment="Top" Height="30" MouseDown="Grid_MouseDown" Margin="60,0,0,0">
+                    <Button x:Name="btnMinimize" Style="{DynamicResource IconButtonsStyle}" Content="{DynamicResource minimize}" Click="btnMinimize_Click" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,30,0"/>
+                    <Button x:Name="btnClose" Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Click="btnClose_Click" Tag="IsCloseButton" HorizontalAlignment="Right" Margin="0,0,3,0"/>
+                </Grid>
+            </Border>
+            
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <!-- Start: GridColum Left-->
-            <Border Background="{DynamicResource SecundaryBackgroundColor}" Grid.RowSpan="2">
+            <Border Background="{DynamicResource SecundaryBackgroundColor}" Grid.RowSpan="2" CornerRadius="8,0,0,8">
                 <Grid x:Name="gridMenu" Width="60">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="60"/>
@@ -57,29 +65,14 @@
                         </ToggleButton.Triggers>
                     </ToggleButton>
 
-                    <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Top" Height="30" Width="85" HorizontalAlignment="Left" Margin="140,-45,0,0" Cursor="">
-                        <Button x:Name="btnMinimize" Style="{DynamicResource IconButtonsStyle}" Content="{DynamicResource minimize}" Click="btnMinimize_Click"/>
-                        <!--<Button x:Name="btnRestore" Margin="5,0" Click="btnRestore_Click">
-                            <Button.Style>
-                                <Style TargetType="{x:Type Button}" BasedOn="{StaticResource IconButtonsStyle}">
-                                    <Setter Property="Content" Value="{DynamicResource maximize}"/>
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding WindowState, ElementName=home}" Value="Maximized">
-                                            <Setter Property="Content" Value="{DynamicResource restore}"/>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Style>
-                        </Button>-->
-                        <Button x:Name="btnClose" Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Click="btnClose_Click" Tag="IsCloseButton"/>
-
-                    </StackPanel>
+                    
 
                     <StackPanel Grid.Row="3">
-                        <RadioButton x:Name="rdHome" IsChecked="True" Content="   启动" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource home}" Click="rdHome_Click" Checked="rdHome_Checked"/>
-                        <RadioButton x:Name="rdSounds" Content="   设置" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource headphones}" Margin="0 5 0 5" Click="rdSounds_Click"/>
-                        <RadioButton x:Name="rdNotes" Content="   下载" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource notes}" Click="rdNotes_Click"/>
-                        <RadioButton x:Name="rdPayment" Content="   更多" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource payment}" Margin="0 5 0 5" Click="rdPayment_Click"/>
+                        <RadioButton x:Name="rdHome" Content="   启动" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource home}" Click="rdHome_Click" Checked="rdHome_Checked" FontFamily="Noto Sans CJK SC Medium" IsChecked="True"/>
+                            <!--<RadioButton x:Name="rdAc" Content="   账户" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource Ac}" Margin="0 5 0 5" Click="rdSounds_Click" FontFamily="Noto Sans CJK SC Medium"/>-->
+                            <RadioButton x:Name="rdSounds" Content="   设置" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource headphones}" Margin="0 5 0 5" Click="rdSounds_Click" FontFamily="Noto Sans CJK SC Medium"/>
+                            <RadioButton x:Name="rdNotes" Content="   下载" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource notes}" Click="rdNotes_Click" FontFamily="Noto Sans CJK SC Medium"/>
+                        <RadioButton x:Name="rdPayment" Content="   更多" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource payment}" Margin="0 5 0 5" Click="rdPayment_Click" FontFamily="Noto Sans Mono CJK SC Medium"/>
                     </StackPanel>
 
                     <StackPanel Grid.Row="3" VerticalAlignment="Bottom" Orientation="Horizontal" Margin="0,0,-140,20" Height="0">
@@ -107,6 +100,7 @@
                 <!-- End: Button Close | Restore | Minimize -->
             </Grid>
             <!-- Start: GridColumn Rigth -->
+            </Grid>
         </Grid>
     </Border>
 </Window>

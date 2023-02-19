@@ -325,8 +325,31 @@
 
     <!--客户区-->
     <Border  Height="535" Width="840" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-        <Grid>
-            <Border Width="369" HorizontalAlignment="Left" VerticalAlignment="Center" Background="{DynamicResource SecundaryGridColor}" BorderBrush="#FF949494" Height="515" CornerRadius="8,8,8,8" BorderThickness="4,4,4,4" Margin="461,0,0,0" >
+        <Grid Margin="0,5,0,0">
+
+            <Border Background="{DynamicResource SecundaryGridColor}" VerticalAlignment="Top" BorderBrush="#FF949494" Height="80" CornerRadius="8,8,8,8" BorderThickness="4,4,4,4"  Margin="10,10,10,0" >
+                <Grid>
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="{DynamicResource TextPrimaryColor}" Text="欢迎使用YMCL启动器!" FontFamily="Noto Sans Mono CJK SC Medium" FontSize="18" Margin="34,2,0,0" Width="172" />
+                    <TextBlock Foreground="{DynamicResource TextPrimaryColor}" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Noto Sans Mono CJK SC Medium" Margin="10,33,0,0" Width="172" ><Run Text="练习两年半的启动器"/><LineBreak/><Run Text="→ "/><Hyperlink Foreground="DeepSkyBlue" Click="Hyperlink_Click"><Run Text="YMCL官网"/></Hyperlink><Run Text=" ←"/></TextBlock>
+                    <Image HorizontalAlignment="Left" Height="30" Margin="2,2,0,0" VerticalAlignment="Top" Width="30" Source="/Pages/YMCL-Icon.png"/>
+                </Grid>
+            </Border>
+            <Border SnapsToDevicePixels="True" CornerRadius="5"
+        BorderBrush="#FF949494" BorderThickness="0.1" VerticalAlignment="Bottom" Height="53" Background="White" Margin="25,0,25,25">
+                <Border.Effect>
+                    <DropShadowEffect Color="black" BlurRadius="8" ShadowDepth="0" Opacity="1" />
+                </Border.Effect>
+                <Grid Style="{x:Null}">
+                </Grid>
+            </Border>
+            <!--btn-->
+            <Button  x:Name="KMCCClaunch" Height="36"  Width="120" HorizontalAlignment="Right" Content="启动游戏" VerticalAlignment="Bottom" FontFamily="Noto Sans CJK SC Medium" Background="#33000000" Click="KMCCClaunch_Click" FontSize="14" Margin="0,0,35,33"/>
+            <TextBlock x:Name="VersionNameButtonTextBlock" FontSize="13" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="230" Height="22" Text="游戏版本" Margin="0,0,573,33" FontFamily="Noto Sans CJK SC Medium" SnapsToDevicePixels="True" Foreground="DeepSkyBlue" />
+            <TextBlock x:Name="VersionNameButtonTextBlock_Copy" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="230" Height="22" Text="当前启动核心" Margin="0,0,573,49" FontSize="14" SnapsToDevicePixels="True" Foreground="Black" FontWeight="Bold" FontFamily="Noto Sans Mono CJK SC Medium" />
+            <Button x:Name="VersionSelectionButton" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,191,33" Height="36" Width="106" Content="版本选择" Background="#33000000" FontFamily="Noto Sans CJK SC Medium" Click="VersionSelectionButton_Click"/>
+            <TextBlock HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,172,32" Height="36" Width="2" Background="#FFE2E2E2" />
+
+            <Border Width="370" HorizontalAlignment="Left" VerticalAlignment="Top" Background="White" BorderBrush="#FF949494" Height="435" CornerRadius="8,8,8,8" BorderThickness="4,4,4,4" Margin="460,12,0,0" Visibility="Hidden" >
                 <Grid >
                     <Frame x:Name="LoginUIFrame"  Margin="0,31,0,0" Width="360" HorizontalAlignment="Center" VerticalAlignment="Top" Height="380" />
                     <Grid Height="30" VerticalAlignment="Top"  HorizontalAlignment="Center" Margin="0,1,0,0">
@@ -336,28 +359,37 @@
                         <RadioButton x:Name="exteralButton" Content="外置登录" Style="{StaticResource  GroupSelectRadioButton_Right}" Margin="269,0,0,0" HorizontalAlignment="Left" Width="90" Click="exteralButton_Click"/>
                     </Grid>
                     <Button Content="验证Microsoft账户" HorizontalAlignment="Center" x:Name="microsoftLoginButton"  VerticalAlignment="Top" Height="30" Width="341" Margin="0,381,0,0" FontFamily="Noto Sans CJK SC Medium" Click="microsoftLoginButton_Click" Visibility="Hidden"/>
-                    <TextBlock x:Name="VersionNameButtonTextBlock" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="230" Height="20" Text="游戏版本" Margin="0,0,10,60" FontSize="14" TextAlignment="Center" FontFamily="Noto Sans CJK SC Medium" SnapsToDevicePixels="True" Foreground="DeepSkyBlue" />
-                    <Button x:Name="KMCCClaunch" Height="80" VerticalContentAlignment="Bottom" Width="230" HorizontalAlignment="Right" Content="启动游戏" VerticalAlignment="Bottom" Margin="0,0,10,10" FontSize="24" FontFamily="Noto Sans CJK SC Medium" Background="#33000000" Click="KMCCClaunch_Click"/>
-                    <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,245,10" Height="37" Width="106" Content="版本设置" FontFamily="Noto Sans CJK SC Medium" Background="#33000000"/>
-                    <Button x:Name="VersionSelectionButton" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,245,53" Height="37" Width="106" Content="版本选择" Background="#33000000" FontFamily="Noto Sans CJK SC Medium" Click="VersionSelectionButton_Click"/>
                 </Grid>
             </Border>
-            <Grid VerticalAlignment="Top">
-                <!--左侧消息区-->
-                <Border Width="441" Background="{DynamicResource SecundaryGridColor}" HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="#FF949494" Height="80" CornerRadius="8,8,8,8" BorderThickness="4,4,4,4"  Margin="10,10,0,0" >
-                    <Grid>
-                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="{DynamicResource TextPrimaryColor}" Text="欢迎使用YMCL启动器!" FontFamily="Noto Sans Mono CJK SC Medium" FontSize="18" Margin="34,2,0,0" Width="172" />
-                        <TextBlock Foreground="{DynamicResource TextPrimaryColor}" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Noto Sans Mono CJK SC Medium" Margin="10,33,0,0" Width="172" ><Run Text="练习两年半的启动器"/><LineBreak/><Run Text="→ "/><Hyperlink Foreground="DeepSkyBlue" Click="Hyperlink_Click"><Run Text="YMCL官网"/></Hyperlink><Run Text=" ←"/></TextBlock>
-                        <Image HorizontalAlignment="Left" Height="30" Margin="2,2,0,0" VerticalAlignment="Top" Width="30" Source="/Pages/YMCL-Icon.png"/>
-                    </Grid>
-                </Border>
-            </Grid>
-            <Grid x:Name="VersionListGrid" Background="White" Margin="0,-1,0,0" Visibility="Hidden">
-                <ListBox x:Name="VersionListbox" Margin="10,35,10,0" VerticalAlignment="Top" Height="491" DisplayMemberPath="Id" SelectedValuePath="Id" FontFamily="Noto Sans Mono CJK SC Medium" SelectionChanged="VersionListbox_SelectionChanged" />
+
+
+            <Grid x:Name="VersionListGrid" Background="White" Visibility="Hidden">
+                <TextBox x:Name="SearchBox" HorizontalAlignment="Right" VerticalAlignment="Top" Height="24" Width="285" Margin="0,6,10,0" TextChanged="SearchBox_TextChanged" FontSize="15" Text="" Visibility="Hidden">
+                    <TextBox.Resources>
+                        <VisualBrush x:Key="HintText" TileMode="None" Opacity="0.5" Stretch="None" AlignmentX="Left">
+                            <VisualBrush.Visual>
+                                <TextBlock FontStyle="Italic" Text="搜索游戏核心..."/>
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </TextBox.Resources>
+                    <TextBox.Style>
+                        <Style TargetType="TextBox">
+                            <Style.Triggers>
+                                <Trigger Property="Text" Value="{x:Null}">
+                                    <Setter Property="Background" Value="{StaticResource HintText}"/>
+                                </Trigger>
+                                <Trigger Property="Text" Value="">
+                                    <Setter Property="Background" Value="{StaticResource HintText}"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBox.Style>
+                </TextBox>
                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="←" FontFamily="Noto Sans CJK SC Medium" Height="36" Width="36" FontSize="24" TextAlignment="Center" Foreground="#FF00B3FF" Margin="5,0,0,0" MouseDown="TextBlock_MouseDown" />
-                <Button x:Name="VersionListBoxRefresh" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,505" Height="30" Width="76" Content="刷新" FontFamily="Noto Sans CJK SC Medium" Click="VersionListBoxRefresh_Click" />
+                <ListBox x:Name="VersionListbox" Margin="10,35,10,0" VerticalAlignment="Top" Height="485" DisplayMemberPath="Id" SelectedValuePath="Id" FontFamily="Noto Sans Mono CJK SC Medium" SelectionChanged="VersionListbox_SelectionChanged" BorderBrush="{x:Null}" TextSearch.TextPath="SearchBox.Text"/>
 
             </Grid>
         </Grid>
+
     </Border>
 </Page>

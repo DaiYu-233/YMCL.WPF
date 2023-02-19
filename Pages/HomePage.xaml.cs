@@ -32,7 +32,7 @@ namespace YMCL.Pages
 
     public partial class HomePage : Page
     {
-        LaunchOptions launchoptions = new LaunchOptions(); //判断启动模式
+        LaunchOptions launchoptions = new LaunchOptions(); 
         public static LaunchConfig launchConfig { get; } = new LaunchConfig();
         public static Account UserInfo { get; private set; }
 
@@ -222,6 +222,7 @@ namespace YMCL.Pages
         private void VersionSelectionButton_Click(object sender, RoutedEventArgs e)
         {
             VersionListGrid.Visibility = Visibility.Visible;
+            VersionListbox.ItemsSource = Core.GetVersions();
         }
 
         private void TextBlock_MouseDown(object sender, MouseButtonEventArgs e)
@@ -236,7 +237,12 @@ namespace YMCL.Pages
 
         private void VersionListbox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            VersionNameButtonTextBlock.Text = VersionListbox.SelectedItem.ToString();
+            VersionNameButtonTextBlock.Text = VersionListbox.SelectedValue.ToString();
+        }
+
+        private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            //(FindResource())
         }
     }
 }
