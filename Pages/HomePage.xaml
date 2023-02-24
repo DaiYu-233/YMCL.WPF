@@ -349,7 +349,7 @@
             <Button x:Name="VersionSelectionButton" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,191,33" Height="36" Width="106" Content="版本选择" Background="#33000000" FontFamily="Noto Sans CJK SC Medium" Click="VersionSelectionButton_Click"/>
             <TextBlock HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,172,32" Height="36" Width="2" Background="#FFE2E2E2" />
 
-            <Border Width="370" HorizontalAlignment="Left" VerticalAlignment="Top" Background="White" BorderBrush="#FF949494" Height="435" CornerRadius="8,8,8,8" BorderThickness="4,4,4,4" Margin="460,12,0,0" Visibility="Hidden" >
+            <Border Width="370" HorizontalAlignment="Left" VerticalAlignment="Top" Background="White" BorderBrush="#FF949494" Height="435" CornerRadius="8,8,8,8" BorderThickness="4,4,4,4" Margin="460,12,0,0"  >
                 <Grid >
                     <Frame x:Name="LoginUIFrame"  Margin="0,31,0,0" Width="360" HorizontalAlignment="Center" VerticalAlignment="Top" Height="380" />
                     <Grid Height="30" VerticalAlignment="Top"  HorizontalAlignment="Center" Margin="0,1,0,0">
