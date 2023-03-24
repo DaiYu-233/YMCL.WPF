@@ -98,32 +98,55 @@
                                     <Button x:Name="seletJavaPathButton" Content="手动选择" HorizontalAlignment="Right" Margin="0,44,10,0" VerticalAlignment="Top" Height="30" Width="97" FontSize="14" FontFamily="Noto Sans CJK SC Medium" Click="seletJavaPathButton_Click"/>
                                     <TextBlock Foreground="{DynamicResource TextPrimaryColor}" HorizontalAlignment="Left" VerticalAlignment="Top" Text="Java路径" FontFamily="Noto Sans Mono CJK SC Medium" FontSize="22" Width="172" Height="40" Margin="6,0,0,0" />
                                     <TextBlock Foreground="{DynamicResource TextPrimaryColor}" HorizontalAlignment="Left" VerticalAlignment="Top" Text="Minecraft1.17+请使用Java17以上版本" FontFamily="Noto Sans Mono CJK SC Medium" FontSize="14" Margin="9,40,0,0" Width="327" Height="25" />
-
-                                    <TextBlock Foreground="{DynamicResource TextPrimaryColor}" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Noto Sans Mono CJK SC Medium" FontSize="14" Margin="10,55,0,0" Width="327" Height="25" ><Hyperlink Language="zh-cn" Foreground="#FF00B3FF" Click="Hyperlink_Click">→安装Java←</Hyperlink></TextBlock>
                                     <TextBlock Foreground="{DynamicResource TextPrimaryColor}" HorizontalAlignment="Left" VerticalAlignment="Top" Text="Java可执行文件(javaw.exe)路径" FontFamily="Noto Sans Mono CJK SC Medium" FontSize="14" Margin="7,25,0,0" Width="266" Height="25" />
                                     <CheckBox Foreground="{DynamicResource TextPrimaryColor}" Content="让「YMCL」为您选择Java" HorizontalAlignment="Right" Margin="0,0,120,2" VerticalAlignment="Bottom" Height="1" Width="200" FontSize="14" FontFamily="Noto Sans CJK SC Medium"/>
                                 </Grid>
                             </Border>
                             <Border VerticalAlignment="Top" BorderBrush="#FF949494" Height="85" CornerRadius="8,8,8,8" BorderThickness="2" Background="{DynamicResource SecundaryGridColor}" Margin="10,105,10,0" >
                                 <Grid>
-                                    <TextBox x:Name="MaxMemTextBox" Width="108" Height="30" Margin="0,10,50,0" HorizontalAlignment="Right" VerticalAlignment="Top" Text="1024" FontSize="16" FontFamily="Noto Sans CJK SC Medium" IsReadOnly="True" />
-                                    <TextBlock Foreground="{DynamicResource TextPrimaryColor}" HorizontalAlignment="Right" VerticalAlignment="Top" Text="MB" FontFamily="Noto Sans Mono CJK SC" FontSize="22" Width="36" Height="30" Margin="0,10,10,0"  />
+                                    <TextBox x:Name="MaxMemTextBox" Width="130" Height="30" Margin="619,41,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Text="1024" FontSize="16" FontFamily="Noto Sans CJK SC Medium" IsReadOnly="True" TextAlignment="Center" />
                                     <TextBlock  x:Name="GameMemUse" HorizontalAlignment="Right" VerticalAlignment="Top" Text="Null" FontFamily="Noto Sans Mono CJK SC" FontSize="16" Width="52" Height="20" Margin="0,13,10,0" Foreground="{DynamicResource TextPrimaryColor}" Visibility="Hidden" />
 
-                                    <TextBlock Foreground="{DynamicResource TextPrimaryColor}" HorizontalAlignment="Left" VerticalAlignment="Top" Text="最大内存" FontFamily="Noto Sans Mono CJK SC Medium" FontSize="22" Width="172" Height="40" Margin="6,0,0,0" />
-                                    <TextBlock Foreground="{DynamicResource TextPrimaryColor}" HorizontalAlignment="Left" VerticalAlignment="Top" Text="设置过高可能有内存溢出的风险" FontFamily="Noto Sans Mono CJK SC Medium" FontSize="14" Margin="7,40,0,0" Width="327" Height="25" />
-                                    <Slider x:Name="MaxMemSlider" HorizontalAlignment="Right" Margin="0,10,163,0" VerticalAlignment="Top" Width="361" Height="30" SmallChange="1" Value="1024" Minimum="1" Maximum="1025" ValueChanged="MaxMemSlider_ValueChanged" LargeChange="1" IsSnapToTickEnabled="True"/>
+                                    <TextBlock Foreground="{DynamicResource TextPrimaryColor}" HorizontalAlignment="Left" VerticalAlignment="Top" Text="游戏内存" FontFamily="Noto Sans Mono CJK SC Medium" FontSize="22" Width="172" Height="40" Margin="6,0,0,0" />
                                     <TextBlock  Foreground="{DynamicResource TextPrimaryColor}" HorizontalAlignment="Left" VerticalAlignment="Top" Text="游戏运行时使用运行内存的最大值" FontFamily="Noto Sans Mono CJK SC Medium" FontSize="14" Margin="7,25,0,0" Width="266" Height="25" />
-                                    <Grid HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="27" Width="532" Margin="0,0,2,0">
-                                        <TextBlock Foreground="{DynamicResource TextPrimaryColor}" x:Name="Memory" HorizontalAlignment="Left" VerticalAlignment="Center" Text="物理内存: Null" FontFamily="Noto Sans Mono CJK SC Medium" FontSize="14" Width="135" Height="20" />
-                                        <TextBlock Foreground="{DynamicResource TextPrimaryColor}" x:Name="MemoryRem" HorizontalAlignment="Left" VerticalAlignment="Center" Text="可用内存: Null" FontFamily="Noto Sans Mono CJK SC Medium" FontSize="14" Width="175" Height="20" Margin="140,0,0,0" />
-                                        <TextBlock Foreground="{DynamicResource TextPrimaryColor}" x:Name="MemoryUse" HorizontalAlignment="Left" VerticalAlignment="Center" Text="使用内存: Null" FontFamily="Noto Sans Mono CJK SC Medium" FontSize="14" Width="142" Height="20" Margin="320,0,0,0" />
 
-                                    </Grid>
-                                    <Button x:Name="MemoryRefresh" Content="刷新" Margin="369,0,4,4" Height="28" Width="65" FontFamily="Noto Sans CJK SC Medium" VerticalAlignment="Bottom" HorizontalAlignment="Right" Click="MemoryRefresh_Click" FontSize="11"/>
+                                    <TextBox x:Name="MinMemTextBox" Width="130" Height="30" Margin="444,41,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Text="1024" FontSize="16" FontFamily="Noto Sans CJK SC Medium" IsReadOnly="True" TextAlignment="Center" />
+                                    <TextBlock HorizontalAlignment="Left" Margin="477,14,0,0" TextWrapping="Wrap" Text="最小内存" VerticalAlignment="Top" FontSize="16"/>
+                                    <TextBlock HorizontalAlignment="Left" Margin="652,14,0,0" TextWrapping="Wrap" Text="最大内存" VerticalAlignment="Top" FontSize="16"/>
+
 
                                 </Grid>
                             </Border>
+                            <Expander HorizontalAlignment="Left" Height="157" Header="内存信息" VerticalAlignment="Top" Width="406" Margin="21,159,0,0" FontSize="14" Background="{x:Null}" Foreground="Black">
+                                <Border CornerRadius="8" BorderThickness="2" BorderBrush="#FFB9B9B9" Margin="0,13,0,0" Background="White">
+                                    <Grid>
+
+                                        <Border CornerRadius="8" BorderThickness="2,2,2,2" BorderBrush="#FFFFF609" Margin="10,10,167,0" Padding="5,5,5,5" HorizontalAlignment="Left" VerticalAlignment="Top" Width="125" Height="50">
+                                            <Grid>
+                                                <TextBlock Foreground="{DynamicResource TextPrimaryColor}" x:Name="Memory_Copy" VerticalAlignment="Top" Text="物理内存" FontFamily="Noto Sans Mono CJK SC Medium" FontSize="14" Height="23" TextAlignment="Center" />
+                                                <TextBlock x:Name="Memory" VerticalAlignment="Top" Text="Null" FontFamily="Noto Sans Mono CJK SC Medium" FontSize="14" Height="20" TextAlignment="Center" Foreground="DeepSkyBlue" Margin="0,15,0,0" />
+                                            </Grid>
+                                        </Border>
+                                        <Border CornerRadius="8" BorderThickness="2" BorderBrush="#FFFFF609" Margin="140,10,0,0" Padding="5,5,5,5" HorizontalAlignment="Left" VerticalAlignment="Top" Width="125" Height="50">
+                                            <Grid>
+                                                <TextBlock Foreground="{DynamicResource TextPrimaryColor}" VerticalAlignment="Top" Text="使用内存" FontFamily="Noto Sans Mono CJK SC Medium" FontSize="14" Height="23" TextAlignment="Center" />
+                                                <TextBlock x:Name="MemoryRem" VerticalAlignment="Top" Text="Null" FontFamily="Noto Sans Mono CJK SC Medium" FontSize="14" Height="20" TextAlignment="Center" Foreground="DeepSkyBlue" Margin="0,15,0,0" />
+                                            </Grid>
+                                        </Border>
+                                        <Border CornerRadius="8" BorderThickness="2" BorderBrush="#FFFFF609" Margin="270,10,0,0" Padding="5,5,5,5" HorizontalAlignment="Left" VerticalAlignment="Top" Width="125" Height="50">
+                                            <Grid>
+                                                <TextBlock Foreground="{DynamicResource TextPrimaryColor}" VerticalAlignment="Top" Text="可用内存" FontFamily="Noto Sans Mono CJK SC Medium" FontSize="14" Height="23" TextAlignment="Center" />
+                                                <TextBlock x:Name="MemoryUse" VerticalAlignment="Top" Text="Null" FontFamily="Noto Sans Mono CJK SC Medium" FontSize="14" Height="20" TextAlignment="Center" Foreground="DeepSkyBlue" Margin="0,15,0,0" />
+                                            </Grid>
+                                        </Border>
+                                        <Button x:Name="MemInfoRefresh" Content="刷新" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top" Height="30" Width="75" FontSize="14" Click="MemInfoRefresh_Click"/>
+
+
+
+
+                                    </Grid>
+                                </Border>
+                            </Expander>
                         </Grid>
                     </Border>
                 </TabItem>

@@ -5,11 +5,11 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:YMCL.LoginUI"
       mc:Ignorable="d" Title="Microsoft"
-      d:DesignHeight="380" d:DesignWidth="360">
+      d:DesignHeight="322" d:DesignWidth="680">
 
-    <Grid HorizontalAlignment="Center" VerticalAlignment="Top" Height="380" Width="360">
-        <TextBox x:Name="MicrosoftPlayerName" HorizontalAlignment="Center" Margin="0,145,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="179" IsReadOnly="True" Height="24" FontSize="14" FontFamily="Noto Sans CJK SC Medium" TextAlignment="Center"/>
-        <TextBox x:Name="MicrosoftPlayerUUID" HorizontalAlignment="Center" TextWrapping="Wrap" Text="UUID  请登录您的Microsoft账户" VerticalAlignment="Center" Width="330" IsReadOnly="True" Height="24" FontSize="14" FontFamily="Noto Sans CJK SC Medium" TextAlignment="Center" Margin="0,18,0,0"/>
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Top" Height="322" Width="680">
+        <TextBox x:Name="MicrosoftPlayerName" HorizontalAlignment="Center" Margin="0,113,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="180" IsReadOnly="True" Height="24" FontSize="14" FontFamily="Noto Sans CJK SC Medium" TextAlignment="Center"/>
+        <TextBox x:Name="MicrosoftPlayerUUID" HorizontalAlignment="Center" TextWrapping="Wrap" Text="UUID  请登录您的Microsoft账户" VerticalAlignment="Top" Width="330" IsReadOnly="True" Height="24" FontSize="14" FontFamily="Noto Sans CJK SC Medium" TextAlignment="Center" Margin="0,161,0,0"/>
 
     </Grid>
 </Page>

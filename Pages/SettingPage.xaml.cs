@@ -114,12 +114,12 @@ namespace YMCL.Pages
             status.dwLength = 0x40;
             GlobalMemoryStatusEx(ref status);
 
-            MaxMemSlider.Maximum = status.ullAvailPhys / 1024 / 1024;
+
 
             //内存显示
-            Memory.Text = "物理内存: " + status.ullTotalPhys / 1024 / 1024 + "MB";
-            MemoryRem.Text = "可用内存: " + status.ullAvailPhys / 1024 / 1024 + "MB " + ($"{Math.Round((avaliableMb / totalMb) * 100, 2)}%");
-            MemoryUse.Text = "使用内存: " + ((status.ullTotalPhys / 1024 / 1024) - (status.ullAvailPhys / 1024 / 1024)) + "MB";
+            Memory.Text =  status.ullTotalPhys / 1024 / 1024 + "MB";
+            MemoryRem.Text =  + status.ullAvailPhys / 1024 / 1024 + "MB " + ($"{Math.Round((avaliableMb / totalMb) * 100, 2)}%");
+            MemoryUse.Text =  + ((status.ullTotalPhys / 1024 / 1024) - (status.ullAvailPhys / 1024 / 1024)) + "MB";
             #endregion
 
             //初始化
@@ -168,42 +168,12 @@ namespace YMCL.Pages
             JavaListComboSetting.SelectedItem = JavaFilePath;
         }
 
-        private void MemoryRefresh_Click(object sender, RoutedEventArgs e)
-        {
-            MemoryInfo MemInfo = new MemoryInfo();
-            GlobalMemoryStatus(ref MemInfo);
-
-            double totalMb = MemInfo.TotalPhysical / 1024 / 1024;
-            double avaliableMb = MemInfo.AvailablePhysical / 1024 / 1024;
-
-            MEMORYSTATUSEX status = new MEMORYSTATUSEX();
-            status.dwLength = 0x40;
-            GlobalMemoryStatusEx(ref status);
-            //内存显示
-
-            Memory.Text = "物理内存: " + status.ullTotalPhys / 1024 / 1024 + "MB";
-            MemoryRem.Text = "可用内存: " + status.ullAvailPhys / 1024 / 1024 + "MB " + ($"{Math.Round((avaliableMb / totalMb) * 100, 2)}%");
-            MemoryUse.Text = "使用内存: " + ((status.ullTotalPhys / 1024 / 1024) - (status.ullAvailPhys / 1024 / 1024)) + "MB";
-
-        }
 
 
-        private void MaxMemSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            MEMORYSTATUSEX status = new MEMORYSTATUSEX();
-            status.dwLength = 0x40;
-            GlobalMemoryStatusEx(ref status);
-            MaxMemTextBox.Text = MaxMemSlider.Value.ToString();
-            MaxMemSlider.Maximum = status.ullAvailPhys / 1024 / 1024;
-            GameMemUse.Text = ((Convert.ToInt32(MaxMemTextBox.Text)/ Convert.ToInt32((status.ullAvailPhys / 1024 / 1024)))*100).ToString();
-            setting.Ram = MaxMemTextBox.Text;
-            File.WriteAllText(ConfigPath, JsonConvert.SerializeObject(setting));
-        }
 
-        private void Hyperlink_Click(object sender, RoutedEventArgs e)
-        {
-            javaDownloadPage.Show();
-        }
+
+
+
 
 
         private void CheckBox_Click(object sender, RoutedEventArgs e)
@@ -241,6 +211,24 @@ namespace YMCL.Pages
                 MessageBoxX.Show("启动更新程序失败\n请尝试使用管理员身份运行YMCL", "检查更新失败!");
             }
             
+        }
+
+        private void MemInfoRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            MemoryInfo MemInfo = new MemoryInfo();
+            GlobalMemoryStatus(ref MemInfo);
+
+            double totalMb = MemInfo.TotalPhysical / 1024 / 1024;
+            double avaliableMb = MemInfo.AvailablePhysical / 1024 / 1024;
+
+            MEMORYSTATUSEX status = new MEMORYSTATUSEX();
+            status.dwLength = 0x40;
+            GlobalMemoryStatusEx(ref status);
+            //内存显示
+
+            Memory.Text =  status.ullTotalPhys / 1024 / 1024 + "MB";
+            MemoryRem.Text = status.ullAvailPhys / 1024 / 1024 + "MB " + ($"{Math.Round((avaliableMb / totalMb) * 100, 2)}%");
+            MemoryUse.Text = ((status.ullTotalPhys / 1024 / 1024) - (status.ullAvailPhys / 1024 / 1024)) + "MB";
         }
     }
 }

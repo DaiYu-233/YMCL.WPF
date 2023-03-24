@@ -5,13 +5,13 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:YMCL.LoginUI"
       mc:Ignorable="d" 
-      d:DesignHeight="380" d:DesignWidth="360"
+      d:DesignHeight="322" d:DesignWidth="680"
       Title="mojang">
 
-    <Grid HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="380" Width="360">
-        <TextBlock Text="账号" Width="99" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Margin="32,193,0,0" FontFamily="Noto Sans Mono CJK SC Medium" FontSize="18"/>
-        <TextBox x:Name="mojangacount" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="248" Margin="82,190,0,0" />
-        <TextBlock Text="密码" Width="68" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Margin="32,232,0,0" FontFamily="Noto Sans Mono CJK SC Medium" FontSize="18"/>
-        <TextBox x:Name="mojangpassword" HorizontalAlignment="Right" VerticalAlignment="Top" Height="30" Width="248" Margin="0,230,30,0" />
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="322" Width="680">
+        <TextBlock Text="账号" Width="100" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Margin="156,95,0,0" FontFamily="Noto Sans Mono CJK SC Medium" FontSize="18"/>
+        <TextBox x:Name="mojangacount" HorizontalAlignment="Center" VerticalAlignment="Top" Height="30" Width="268" Margin="0,93,0,0" />
+        <TextBlock Text="密码" Width="68" HorizontalAlignment="Left" VerticalAlignment="Center" Height="30" Margin="156,2,0,0" FontFamily="Noto Sans Mono CJK SC Medium" FontSize="18"/>
+        <TextBox x:Name="mojangpassword" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="268" />
     </Grid>
 </Page>

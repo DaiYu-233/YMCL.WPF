@@ -84,10 +84,16 @@ namespace YMCL.Pages
                     await Dispatcher.BeginInvoke(() => { downloadingbfb.Text = "0%"; });
                     await Dispatcher.BeginInvoke(() => { downloadItem1Grid.Visibility = Visibility.Hidden; });
                     GameInstallBtnMode = 0;
+
+                    new NotifyBox()
+                    {
+                        NotifiMessage = "安装成功!"
+                    }.Show();
                 }
                 else
                 {
                     await Dispatcher.BeginInvoke(() => { MessageBoxX.Show("安装失败! "); });
+
 
                     await Dispatcher.BeginInvoke(() => { GameInstallButton.IsEnabled = true; });
                     await Dispatcher.BeginInvoke(() => { GameInstallButton.Content = "安装此版本"; }); 
@@ -95,6 +101,11 @@ namespace YMCL.Pages
                     await Dispatcher.BeginInvoke(() => { downloadingbfb.Text = "0%"; });
                     await Dispatcher.BeginInvoke(() => { downloadItem1Grid.Visibility = Visibility.Hidden; });
                     GameInstallBtnMode = 0;
+
+                    new NotifyBox()
+                    {
+                        NotifiMessage = "安装失败!"
+                    }.Show();
                 }
             });
 

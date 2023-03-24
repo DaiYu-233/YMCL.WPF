@@ -348,45 +348,34 @@
             <TextBlock x:Name="VersionNameButtonTextBlock_Copy" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="230" Height="22" Text="当前启动核心" Margin="0,0,573,49" FontSize="14" SnapsToDevicePixels="True" Foreground="Black" FontWeight="Bold" FontFamily="Noto Sans Mono CJK SC Medium" />
             <Button x:Name="VersionSelectionButton" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,191,33" Height="36" Width="106" Content="版本选择" Background="#33000000" FontFamily="Noto Sans CJK SC Medium" Click="VersionSelectionButton_Click"/>
             <TextBlock HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,172,32" Height="36" Width="2" Background="#FFE2E2E2" />
+            <Expander Height="352" Header="账户" Margin="25,95,25,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}" ExpandDirection="Up" FontFamily="Noto Sans CJK SC Medium">
+                <Grid>
+                    <Border VerticalAlignment="Top" Background="White" BorderBrush="#FF949494" Height="330" CornerRadius="8,8,8,8" BorderThickness="4,4,4,4"  >
+                        <Grid >
+                            <Border Width="100" HorizontalAlignment="Left" BorderThickness="0,0,3,0" BorderBrush="#FF989898">
+                                <Grid x:Name="gridMenu" Width="120" HorizontalAlignment="Left">
+                                    <StackPanel Grid.Row="1" HorizontalAlignment="Left" Width="120" Margin="0,10,0,0">
+                                        <RadioButton IsChecked="True" x:Name="offlineButton"   Style="{StaticResource SettingPageMenuRadioButtonStyle}" Content="离线模式" Width="97" VerticalAlignment="Top" Height="32" Click="offlineButton_Click" HorizontalAlignment="Left" Margin="0,5,0,5" />
+                                        <RadioButton x:Name="microsoftButton"     Style="{StaticResource SettingPageMenuRadioButtonStyle}" Content="微软登录" Width="97" VerticalAlignment="Top" Height="32" Click="microsoftButton_Click" HorizontalAlignment="Left" Margin="0,5,0,5" />
+                                        <RadioButton x:Name="mojangButton"     Style="{StaticResource SettingPageMenuRadioButtonStyle}" Content="Mojang"  HorizontalAlignment="Left" Width="97" Height="32" VerticalAlignment="Top" Click="mojangButton_Click" Margin="0,5,0,5" />
+                                        <RadioButton x:Name="exteralButton" Content="外置登录" Style="{StaticResource  SettingPageMenuRadioButtonStyle}"  HorizontalAlignment="Left" Width="97" Click="exteralButton_Click" Height="32" Margin="0,5,0,5"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
 
-            <Border Width="370" HorizontalAlignment="Left" VerticalAlignment="Top" Background="White" BorderBrush="#FF949494" Height="435" CornerRadius="8,8,8,8" BorderThickness="4,4,4,4" Margin="460,12,0,0"  >
-                <Grid >
-                    <Frame x:Name="LoginUIFrame"  Margin="0,31,0,0" Width="360" HorizontalAlignment="Center" VerticalAlignment="Top" Height="380" />
-                    <Grid Height="30" VerticalAlignment="Top"  HorizontalAlignment="Center" Margin="0,1,0,0">
-                        <RadioButton x:Name="offlineButton"   Style="{StaticResource GroupSelectRadioButton_Left}" Content="离线模式" HorizontalAlignment="Left" Width="90" VerticalAlignment="Top" Height="30" Click="offlineButton_Click" />
-                        <RadioButton x:Name="microsoftButton"     Style="{StaticResource GroupSelectRadioButton_Middle}" Content="微软登录" Margin="90,0,0,0" HorizontalAlignment="Left" Width="90" VerticalAlignment="Top" Height="30" Click="microsoftButton_Click" />
-                        <RadioButton x:Name="mojangButton"     Style="{StaticResource GroupSelectRadioButton_Middle}" Content="Mojang" Margin="179,0,0,0" HorizontalAlignment="Left" Width="90" Height="30" VerticalAlignment="Top" Click="mojangButton_Click" />
-                        <RadioButton x:Name="exteralButton" Content="外置登录" Style="{StaticResource  GroupSelectRadioButton_Right}" Margin="269,0,0,0" HorizontalAlignment="Left" Width="90" Click="exteralButton_Click"/>
-                    </Grid>
-                    <Button Content="验证Microsoft账户" HorizontalAlignment="Center" x:Name="microsoftLoginButton"  VerticalAlignment="Top" Height="30" Width="341" Margin="0,381,0,0" FontFamily="Noto Sans CJK SC Medium" Click="microsoftLoginButton_Click" Visibility="Hidden"/>
+                            <Frame x:Name="LoginUIFrame"  Margin="100,0,0,0" Width="680" HorizontalAlignment="Left" VerticalAlignment="Center" Height="322"  />
+
+                            <Button Content="验证Microsoft账户" HorizontalAlignment="Center" x:Name="microsoftLoginButton"  VerticalAlignment="Top" Height="30" Width="341" Margin="100,264,0,0" FontFamily="Noto Sans CJK SC Medium" Click="microsoftLoginButton_Click" Visibility="Hidden"/>
+                        </Grid>
+                    </Border>
                 </Grid>
-            </Border>
-
-
+            </Expander>
             <Grid x:Name="VersionListGrid" Background="White" Visibility="Hidden">
-                <TextBox x:Name="SearchBox" HorizontalAlignment="Right" VerticalAlignment="Top" Height="24" Width="285" Margin="0,6,10,0" TextChanged="SearchBox_TextChanged" FontSize="15" Text="" Visibility="Hidden">
-                    <TextBox.Resources>
-                        <VisualBrush x:Key="HintText" TileMode="None" Opacity="0.5" Stretch="None" AlignmentX="Left">
-                            <VisualBrush.Visual>
-                                <TextBlock FontStyle="Italic" Text="搜索游戏核心..."/>
-                            </VisualBrush.Visual>
-                        </VisualBrush>
-                    </TextBox.Resources>
-                    <TextBox.Style>
-                        <Style TargetType="TextBox">
-                            <Style.Triggers>
-                                <Trigger Property="Text" Value="{x:Null}">
-                                    <Setter Property="Background" Value="{StaticResource HintText}"/>
-                                </Trigger>
-                                <Trigger Property="Text" Value="">
-                                    <Setter Property="Background" Value="{StaticResource HintText}"/>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </TextBox.Style>
-                </TextBox>
-                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="←" FontFamily="Noto Sans CJK SC Medium" Height="36" Width="36" FontSize="24" TextAlignment="Center" Foreground="#FF00B3FF" Margin="5,0,0,0" MouseDown="TextBlock_MouseDown" />
-                <ListBox x:Name="VersionListbox" Margin="10,35,10,0" VerticalAlignment="Top" Height="485" DisplayMemberPath="Id" SelectedValuePath="Id" FontFamily="Noto Sans Mono CJK SC Medium" SelectionChanged="VersionListbox_SelectionChanged" BorderBrush="{x:Null}" TextSearch.TextPath="SearchBox.Text"/>
+
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="←返回" FontFamily="Noto Sans CJK SC Medium" Height="36" Width="83" FontSize="24" TextAlignment="Center" Foreground="#FF00B3FF" Margin="5,0,0,0" MouseDown="TextBlock_MouseDown" />
+                <ListBox x:Name="VersionListbox" Margin="10,41,10,0" VerticalAlignment="Top" Height="479" DisplayMemberPath="Id" SelectedValuePath="Id" FontFamily="Noto Sans Mono CJK SC Medium" BorderBrush="{x:Null}" SelectionChanged="VersionListbox_SelectionChanged" />
+                <ComboBox x:Name="GamePathCombo" HorizontalAlignment="Left" Margin="447,6,0,0" VerticalAlignment="Top" Width="243" Height="30" SelectionChanged="GamePathCombo_SelectionChanged"/>
+                <Button x:Name="AddMinecraft" Content="添加.minecraft文件夹" HorizontalAlignment="Left" Margin="695,6,0,0" VerticalAlignment="Top" Height="30" Width="135" FontFamily="Noto Sans CJK SC Medium" Click="AddMinecraft_Click"/>
 
             </Grid>
         </Grid>

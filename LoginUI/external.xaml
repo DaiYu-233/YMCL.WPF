@@ -5,10 +5,10 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:YMCL.LoginUI"
       mc:Ignorable="d" 
-      d:DesignHeight="380" d:DesignWidth="360"
-      Title="external">
+      d:DesignHeight="322" d:DesignWidth="680"
+      Title="external" Width="680" Height="322">
 
-    <Grid Height="380" Width="360" Margin="0,7,0,0">
+    <Grid Height="322" Width="680" Margin="0,0,0,0">
         <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Height="31" Width="228" FontFamily="Noto Sans CJK SC Medium" FontSize="18">YMCL目前还不支持外置登录</TextBlock>
         <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Height="30" Width="107" FontFamily="Noto Sans CJK SC Medium" FontSize="18" Margin="0,44,0,0">ヾ(•ω•`)o</TextBlock>
 

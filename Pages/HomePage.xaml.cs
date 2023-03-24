@@ -25,6 +25,8 @@ using System.Security.Cryptography.X509Certificates;
 using Natsurainko.FluentCore.Extension.Windows.Service;
 using MinecaftOAuth;
 using System.Data;
+using PInvoke;
+using MinecraftLaunch.Modules.Enum;
 //using Microsoft.Win32;
 
 namespace YMCL.Pages
@@ -36,6 +38,7 @@ namespace YMCL.Pages
         public static LaunchConfig launchConfig { get; } = new LaunchConfig();
         public static Account UserInfo { get; private set; }
 
+        #region 页面初始化
         Pages.SoundsPage settingpage = new Pages.SoundsPage();
         //Pages.VersionSelection versionSelection = new Pages.VersionSelection();
         LoginUI.offline offline = new LoginUI.offline();
@@ -43,18 +46,23 @@ namespace YMCL.Pages
         LoginUI.Microsoft microsoft = new LoginUI.Microsoft();
         LoginUI.external external = new LoginUI.external();
         LoginUI.Mojang mojang = new LoginUI.Mojang();
+        #endregion
         public int launchMode;
+        public string GamePath;
+        List<string> GamePathList = new List<string>();
         
-        public static LauncherCore Core = LauncherCore.Create();
-        
+        GameCoreToolkit gameCoreToolkit = new GameCoreToolkit();
+
+
         public HomePage()
         {
             InitializeComponent();
-            var versions = Core.GetVersions().ToArray();
-            VersionListbox.ItemsSource = Core.GetVersions();
-
             launchConfig.JvmConfig = new();
             launchMode = 1;
+            
+            GamePathCombo.Items.Add(".minecraft");
+            GamePathCombo.SelectedItem = GamePathCombo.Items[0];
+            VersionListbox.ItemsSource = new GameCoreToolkit(GamePathCombo.SelectedItem.ToString()).GetGameCores();
         }
 
 
@@ -64,12 +72,9 @@ namespace YMCL.Pages
             switch (launchMode)
             {
                 case 1://离线
-                    launchoptions.Authenticator = new KMCCC.Authentication.OfflineAuthenticator(offline.PlayerId.Text);
-                    KMCCCLaunch();
+                    OfflineLaunch();
                     break;
                 case 2://mojang
-                    launchoptions.Authenticator = new YggdrasilLogin(mojang.mojangacount.Text, mojang.mojangpassword.Text, false);
-                    KMCCCLaunch();
                     break;
                 case 3://Microsoft
                     MicrosoftLaunch();
@@ -77,7 +82,54 @@ namespace YMCL.Pages
 
             }
         }
-        public async void MicrosoftLaunch()
+
+
+        public async void OfflineLaunch()
+        {
+            MinecaftOAuth.OfflineAuthenticator offlineAuthenticator = new(offline.PlayerId.Text);
+            var launcherconfig = new LaunchConfig(offlineAuthenticator.Auth(), new(settingpage.JavaListComboSetting.SelectedItem.ToString()) { MaxMemory=Convert.ToInt32(settingpage.MaxMemTextBox.Text),MinMemory= Convert.ToInt32(settingpage.MaxMemTextBox.Text) });
+            var Launcher = new JavaClientLauncher(launcherconfig, new GameCoreToolkit(GamePath));
+            using var offlinelaunchres = await Launcher.LaunchTaskAsync(VersionListbox.SelectedItem.ToString());
+            if (offlinelaunchres.State is LaunchState.Succeess)
+            {
+                MessageBoxX.Show("正在等待游戏窗口出现", "启动成功");
+            }
+            else
+            {
+                MessageBoxX.Show($"异常信息：{offlinelaunchres.Exception}", offlinelaunchres.State.ToString());
+
+            }
+        }
+
+        public async Task McrosoftLoginAsync()//微软验证
+        {
+            var V = MessageBoxX.Show("确定开始验证您的账户", "验证", MessageBoxButton.OKCancel);
+            MicrosoftAuthenticator microsoftAuthenticator = new(MinecaftOAuth.Module.Enum.AuthType.Access)
+            {
+                ClientId = "ed0e15b9-fa1e-489b-b83d-7a66ff149abd"
+            };
+            var code = await microsoftAuthenticator.GetDeviceInfo();
+            MessageBoxX.Show(code.UserCode, "你的一次性访问代码 确定开始验证账户");
+            Debug.WriteLine("Link:{0} - Code:{1}", code.VerificationUrl, code.UserCode);
+            if (V == MessageBoxResult.OK)
+            {
+                Process.Start(new ProcessStartInfo(code.VerificationUrl)
+                {
+                    UseShellExecute = true,
+                    Verb = "open"
+                });
+            }
+            var token = await microsoftAuthenticator.GetTokenResponse(code);
+            var user = await microsoftAuthenticator.AuthAsync(x =>
+            {
+                Debug.WriteLine(x);
+            });
+            UserInfo = user;
+            microsoft.MicrosoftPlayerName.Text = user.Name;
+            microsoft.MicrosoftPlayerUUID.Text = user.Uuid.ToString();
+        }
+
+        public async void MicrosoftLaunch()//微软登录启动
         {
             launchConfig.Account = UserInfo;//这是非刷新验证方式
             launchConfig.JvmConfig.JavaPath = new(settingpage.JavaListComboSetting.Text);
@@ -86,49 +138,18 @@ namespace YMCL.Pages
             if (res.State is MinecraftLaunch.Modules.Enum.LaunchState.Succeess)
             {
                 MessageBoxX.Show("正在等待游戏窗口出现", "启动成功");
+
                 await Task.Run(res.Process.WaitForInputIdle);
             }
             else
             {
                 MessageBoxX.Show($"异常信息：{res.Exception}", res.State.ToString());
+
             }
         }
 
-        public void KMCCCLaunch()
-        {
-            // 离线,mojang启动 (KMCCC)
-            launchoptions.MaxMemory = Convert.ToInt32(settingpage.MaxMemTextBox.Text) * 1024;
-            //launchoptions.MaxMemory = 2048;
-            Core.JavaPath = settingpage.JavaListComboSetting.Text;
-            if (VersionListbox.SelectedItem.ToString() != string.Empty & launchMode == 1 || launchMode == 2)
-            {
-                var ver = (KMCCC.Launcher.Version)VersionListbox.SelectedItem;
-                launchoptions.Version = ver;
-                var result = Core.Launch(launchoptions);
-                if (!result.Success)
-                {
-                    switch (result.ErrorType)
-                    {
-                        case ErrorType.NoJAVA:
-                            MessageBoxX.Show("Java错误\n详细信息: " + result.ErrorMessage, "错误!");
-                            break;
-                        case ErrorType.AuthenticationFailed:
-                            MessageBoxX.Show("登录错误\n详细信息: " + result.ErrorMessage, "错误!");
-                            break;
-                        case ErrorType.UncompressingFailed:
-                            MessageBoxX.Show("文件错误\n详细信息: " + result.ErrorMessage, "错误!");
-                            break;
-                        default:
-                            MessageBoxX.Show("YMCL也不知道哪里出了问题awa\n详细信息: " + result.ErrorMessage, "错误!");
-                            break;
-                    }
-                }
-            }
-            else
-            {
-                MessageBoxX.Show("请选择游戏版本", "错误!");
-            }
-        }
+
+
 
 
 
@@ -176,36 +197,7 @@ namespace YMCL.Pages
         {
             
         }
-
-
-
-        public async Task McrosoftLoginAsync()
-        {
-            var V = MessageBoxX.Show("确定开始验证您的账户", "验证", MessageBoxButton.OKCancel);
-            MicrosoftAuthenticator microsoftAuthenticator = new(MinecaftOAuth.Module.Enum.AuthType.Access)
-            {
-                ClientId = "ed0e15b9-fa1e-489b-b83d-7a66ff149abd"
-            };
-            var code = await microsoftAuthenticator.GetDeviceInfo();
-            MessageBoxX.Show(code.UserCode, "你的一次性访问代码 确定开始验证账户");
-            Debug.WriteLine("Link:{0} - Code:{1}", code.VerificationUrl, code.UserCode);
-            if (V == MessageBoxResult.OK)
-            {
-                Process.Start(new ProcessStartInfo(code.VerificationUrl)
-                {
-                    UseShellExecute = true,
-                    Verb = "open"
-                });
-            }
-            var token = await microsoftAuthenticator.GetTokenResponse(code);
-            var user = await microsoftAuthenticator.AuthAsync(x =>
-            {
-                Debug.WriteLine(x);
-            });
-            UserInfo = user;
-            microsoft.MicrosoftPlayerName.Text = user.Name;
-            microsoft.MicrosoftPlayerUUID.Text = user.Uuid.ToString();
-        }
+        
 
         private void microsoftLoginButton_Click(object sender, RoutedEventArgs e)
         {
@@ -222,7 +214,7 @@ namespace YMCL.Pages
         private void VersionSelectionButton_Click(object sender, RoutedEventArgs e)
         {
             VersionListGrid.Visibility = Visibility.Visible;
-            VersionListbox.ItemsSource = Core.GetVersions();
+            VersionListbox.ItemsSource = new GameCoreToolkit(GamePathCombo.SelectedItem.ToString()).GetGameCores();
         }
 
         private void TextBlock_MouseDown(object sender, MouseButtonEventArgs e)
@@ -232,17 +224,42 @@ namespace YMCL.Pages
 
         private void VersionListBoxRefresh_Click(object sender, RoutedEventArgs e)
         {
-            VersionListbox.ItemsSource = Core.GetVersions();
+            VersionListbox.ItemsSource = new GameCoreToolkit(GamePath).GetGameCores();
         }
 
-        private void VersionListbox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            VersionNameButtonTextBlock.Text = VersionListbox.SelectedValue.ToString();
-        }
+
 
         private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             //(FindResource())
+        }
+
+        private void AddMinecraft_Click(object sender, RoutedEventArgs e)
+        {
+            FolderBrowserDialog folderBrowserDialog = new();
+            DialogResult dialogResult = folderBrowserDialog.ShowDialog();
+            if(dialogResult == System.Windows.Forms.DialogResult.Cancel)
+            {
+                return;
+            };
+            string MinecraftPath = folderBrowserDialog.SelectedPath.Trim();
+            GamePathCombo.Items.Add(MinecraftPath);
+            GamePathCombo.SelectedItem = MinecraftPath;
+            VersionListbox.ItemsSource = new GameCoreToolkit(GamePathCombo.SelectedItem.ToString()).GetGameCores();
+        }
+
+
+            
+
+            
+private void VersionListbox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            VersionNameButtonTextBlock.Text = VersionListbox.SelectedItem.ToString();
+        }
+
+        private void GamePathCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            VersionListbox.ItemsSource = new GameCoreToolkit(GamePathCombo.SelectedItem.ToString()).GetGameCores();
         }
     }
 }

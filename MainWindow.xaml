@@ -72,7 +72,7 @@
                             <!--<RadioButton x:Name="rdAc" Content="   账户" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource Ac}" Margin="0 5 0 5" Click="rdSounds_Click" FontFamily="Noto Sans CJK SC Medium"/>-->
                             <RadioButton x:Name="rdSounds" Content="   设置" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource headphones}" Margin="0 5 0 5" Click="rdSounds_Click" FontFamily="Noto Sans CJK SC Medium"/>
                             <RadioButton x:Name="rdNotes" Content="   下载" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource notes}" Click="rdNotes_Click" FontFamily="Noto Sans CJK SC Medium"/>
-                        <RadioButton x:Name="rdPayment" Content="   更多" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource payment}" Margin="0 5 0 5" Click="rdPayment_Click" FontFamily="Noto Sans Mono CJK SC Medium"/>
+                            <RadioButton x:Name="rdPayment" Content="   更多" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource payment}" Margin="0 5 0 5" Click="rdPayment_Click" FontFamily="Noto Sans CJK SC Medium"/>
                     </StackPanel>
 
                     <StackPanel Grid.Row="3" VerticalAlignment="Bottom" Orientation="Horizontal" Margin="0,0,-140,20" Height="0">
