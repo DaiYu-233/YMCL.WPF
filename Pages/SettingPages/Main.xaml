@@ -1,0 +1,59 @@
+﻿<Page x:Class="YMCL.Pages.SettingPages.Main"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:ui="http://schemas.modernwpf.com/2019" 
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:YMCL.Pages.SettingPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="840"
+      Title="Main" MouseDown="Page_MouseDown">
+    <Border Background="White" CornerRadius="0,0,8,0">
+        <Grid>
+            
+            <!--Java-->
+            <Border HorizontalAlignment="Center" Height="45" Margin="0,10,0,0" VerticalAlignment="Top" Width="820" Background="#FFEDEDED" CornerRadius="3,3,3,3">
+                <Grid>
+                    <TextBlock FontFamily="MiSans Medium" Text="Java" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="18,0,0,0" FontSize="16"/>
+                    <ComboBox x:Name="JavaCombo"  FontFamily="MiSans Medium" Width="572" VerticalAlignment="Center" Margin="76,0,0,0" SelectedIndex="0" SelectionChanged="JavaCombo_SelectionChanged" />
+                    <Button x:Name="AddCustomJavaBtn" Content="手动添加" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="716,6,10,7" FontFamily="MiSans Medium" Click="AddCustomJavaBtn_Click"/>
+                    <Button x:Name="AutoJavaBtn" Content="扫描" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="653,6,109,7" FontFamily="MiSans Medium" Click="Button_Click"/>
+                </Grid>
+            </Border>
+            <Border HorizontalAlignment="Center" Height="45" Margin="0,65,0,0" VerticalAlignment="Top" Width="820" Background="#FFEDEDED" CornerRadius="3,3,3,3">
+                <Grid>
+                    <TextBlock FontFamily="MiSans Medium" Text="游戏内存" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="18,0,0,0" FontSize="16"/>
+                    <Expander Header="内存信息" Margin="104,13,354,-67" FontFamily="MiSans Medium" Background="{x:Null}" Expanded="Expander_Expanded">
+                        <Border Background="#FFE5E5E5" Margin="0,22,0,0" CornerRadius="3,3,3,3">
+                            <Grid>
+                                <Border HorizontalAlignment="Left" VerticalAlignment="Top" Width="114" Height="47" Margin="5,5,0,0" BorderBrush="#FFF1FF00" BorderThickness="3,3,3,3" CornerRadius="3,3,3,3" Background="#FFF1FF00">
+                                    <Grid>
+                                        <TextBlock Text="物理内存" TextAlignment="Center"/>
+                                        <TextBlock x:Name="MexMemTextBl" Text="256G" TextAlignment="Center" Margin="0,17,0,0" FontSize="17" Foreground="#FF00FFE2"/>
+                                    </Grid>
+                                </Border>
+                                <Border HorizontalAlignment="Left" VerticalAlignment="Top" Width="114" Height="47" Margin="124,5,0,0" BorderBrush="#FFF1FF00" BorderThickness="3,3,3,3" CornerRadius="3,3,3,3" Background="#FFF1FF00">
+                                    <Grid>
+                                        <TextBlock Text="可用内存" TextAlignment="Center"/>
+                                        <TextBlock x:Name="SurMemTextBl" Text="256G" TextAlignment="Center" Margin="0,17,0,0" FontSize="17" Foreground="#FF00FFE2"/>
+                                    </Grid>
+                                </Border>
+                                <Border HorizontalAlignment="Left" VerticalAlignment="Top" Width="114" Height="47" Margin="243,5,0,0" BorderBrush="#FFF1FF00" BorderThickness="3,3,3,3" CornerRadius="3,3,3,3" Background="#FFF1FF00">
+                                    <Grid>
+                                        <TextBlock Text="已用内存" TextAlignment="Center"/>
+                                        <TextBlock x:Name="UsedMemTextBl" Text="256G" TextAlignment="Center" Margin="0,17,0,0" FontSize="17" Foreground="#FF00FFE2"/>
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                        </Border>
+                    </Expander>
+                    <TextBlock x:Name="SilderInfo" VerticalAlignment="Center" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Width="61" Height="16" Text="256G" FontFamily="MiSans Medium" TextAlignment="Center" Margin="754,0,0,0">
+                    </TextBlock>
+                    <Slider x:Name="SilderBox" HorizontalAlignment="Left" Margin="321,0,0,0" VerticalAlignment="Center" Width="426" SmallChange="1" Minimum="1" Value="1024" Maximum="2048" ValueChanged="Silder_ValueChanged"/>
+                </Grid>
+            </Border>
+            <Button x:Name="SaveSettingBtn" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-35,5,0" Height="30" Width="161" FontFamily="MiSans Medium" Content="保存设置信息" Click="SaveSettingBtn_Click"/>
+        </Grid>
+    </Border>
+
+</Page>

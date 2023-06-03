@@ -1,0 +1,70 @@
+﻿<Page x:Class="YMCL.Pages.SettingPages.Account"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:YMCL.Pages.SettingPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="840"
+      Title="Account">
+    <Border Background="White" CornerRadius="0,0,8,0">
+        <Grid  >
+            <Button x:Name="AddAcount" Content="添加新账户" Height="29" Margin="10,10,0,0" VerticalAlignment="Top" Width="161" FontFamily="MiSans Medium" Click="AddAcount_Click"/>
+            <Button x:Name="Del" Content="删除此账户" Height="29" Margin="176,10,0,0" VerticalAlignment="Top" Width="134" FontFamily="MiSans Medium" IsEnabled="False" Click="Button_Click_3" />
+
+            <Border Margin="10,44,10,10" Background="#FFEDEDED" CornerRadius="3,3,3,3">
+
+                <DataGrid x:Name="DataGr" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="5,5,5,5" FontFamily="MiSans Medium" SelectionChanged="DataGr_SelectionChanged" IsReadOnly="True" CanUserSortColumns="False"/>
+            </Border>
+            <Border x:Name="addacbro" Background="#FFE2E2E2" CornerRadius="3,3,3,3" HorizontalAlignment="Center" Width="396" Height="206" Visibility="Hidden" VerticalAlignment="Center">
+                <Grid>
+                    <Grid VerticalAlignment="Top" Height="25">
+                        <Button Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Tag="IsCloseButton" HorizontalAlignment="Right" Click="btnClose_Click" VerticalAlignment="Center"/>
+                        <TextBlock FontFamily="MiSans Medium" Text="添加新账户..." HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                    </Grid>
+                    <Grid Margin="0,25,0,0">
+                        <ComboBox x:Name="LoginTypeComboBox" Margin="23,38,0,0" Width="222" SelectionChanged="ComboBox_SelectionChanged">
+                            <ComboBoxItem Content="离线登录"/>
+                            <ComboBoxItem Content="微软登录"/>
+                            <ComboBoxItem Content="Mojang迁移"/>
+                        </ComboBox>
+                        <TextBlock FontFamily="MiSans Medium" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="32,19,0,0" Text="登录方式" />
+                        <Button Margin="312,142,0,0" VerticalAlignment="Top" Height="29" Width="74" FontFamily="MiSans Medium" Content="下一步" IsEnabled="True" Click="Button_Click" />
+
+                    </Grid>
+                </Grid>
+            </Border>
+            <Border x:Name="lxdl" Background="#FFE2E2E2" CornerRadius="3,3,3,3" HorizontalAlignment="Center" Width="392" VerticalAlignment="Center" Height="200" Visibility="Hidden">
+                <Grid>
+                    <Grid VerticalAlignment="Top" Height="25">
+                        <Button Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Tag="IsCloseButton" HorizontalAlignment="Right" Click="btnClose_Click" VerticalAlignment="Center"/>
+                        <TextBlock FontFamily="MiSans Medium" Text="离线登录..." HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                    </Grid>
+                    <Grid Margin="0,25,0,0">
+                        <TextBox x:Name="yhm2" Margin="0,53,0,90" Width="312" HorizontalAlignment="Center" Height="32" FontFamily="MiSans Medium"  />
+                        <TextBlock x:Name="yhm3" FontFamily="MiSans Medium" Text="用户名" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="48,32,0,0" FontSize="16" />
+                        <Button Margin="308,135,0,0" VerticalAlignment="Top" Height="29" Width="74" FontFamily="MiSans Medium" Content="确定" IsEnabled="True" Click="Button_Click_1" />
+                    </Grid>
+                </Grid>
+            </Border>
+            <Border x:Name="mojangbro" Background="#FFE2E2E2" CornerRadius="3,3,3,3" HorizontalAlignment="Center" Width="396" Visibility="Hidden" Height="218" VerticalAlignment="Center">
+                <Grid>
+                    <Grid VerticalAlignment="Top" Height="25">
+                        <Button Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Tag="IsCloseButton" HorizontalAlignment="Right" Click="btnClose_Click" VerticalAlignment="Center"/>
+                        <TextBlock FontFamily="MiSans Medium" Text="Mojang登录..." HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                    </Grid>
+                    <Grid Margin="0,25,0,0">
+                        <Button Margin="312,154,0,0" VerticalAlignment="Top" Height="29" Width="74" FontFamily="MiSans Medium" Content="确定" IsEnabled="True" Click="Button_Click_2" />
+                        <TextBox x:Name="yhm1" Margin="10,32,10,0" Height="32" VerticalAlignment="Top"/>
+                        <TextBlock x:Name="yhm" FontFamily="MiSans Medium" Text="账户" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,10,0,0" FontSize="16"/>
+                        <PasswordBox x:Name="mmk" Margin="10,96,10,0" VerticalAlignment="Top"/>
+                        <TextBlock FontFamily="MiSans Medium" Text="密码" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,73,0,0" FontSize="16"/>
+                    </Grid>
+                </Grid>
+            </Border>
+            <TextBlock TextWrapping="Wrap" Text="当前登录方式：" Margin="318,20,262,415" FontFamily="MiSans Medium" Foreground="DimGray"/>
+            <TextBlock x:Name="NowLoginType" TextWrapping="Wrap" Text="1" Margin="398,20,24,415" FontFamily="MiSans Medium" Foreground="DimGray"/>
+            <Button x:Name="SaveSetting" Content="保存账户设置" Height="29" Margin="0,10,10,0" VerticalAlignment="Top" Width="118" FontFamily="MiSans Medium" Visibility="Hidden" HorizontalAlignment="Right" Click="SaveSetting_Click"/>
+        </Grid>
+    </Border>
+</Page>

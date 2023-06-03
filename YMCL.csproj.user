@@ -7,60 +7,54 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="LoginUI\external.xaml.cs">
+    <Compile Update="Pages\DownloadPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="LoginUI\Microsoft.xaml.cs">
+    <Compile Update="Pages\DownloadPages\AutoInstall.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="LoginUI\MicrosoftLoginWb.xaml.cs">
+    <Compile Update="Pages\LaunchPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="LoginUI\Mojang.xaml.cs">
+    <Compile Update="Pages\MorePage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="LoginUI\offline.xaml.cs">
+    <Compile Update="Pages\SettingPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Pages\JavaDownloadPage.xaml.cs">
+    <Compile Update="Pages\SettingPages\Account.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Pages\VersionSelection.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Tools\DownloaderPage.xaml.cs">
+    <Compile Update="Pages\SettingPages\Main.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="LoginUI\external.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="LoginUI\Microsoft.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="LoginUI\MicrosoftLoginWb.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="LoginUI\Mojang.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="LoginUI\offline.xaml">
-      <SubType>Designer</SubType>
-    </Page>
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Pages\JavaDownloadPage.xaml">
+    <Page Update="Pages\DownloadPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Pages\VersionSelection.xaml">
+    <Page Update="Pages\DownloadPages\AutoInstall.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Themes\Dark.xaml">
+    <Page Update="Pages\LaunchPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Tools\DownloaderPage.xaml">
+    <Page Update="Pages\MorePage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\SettingPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\SettingPages\Account.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\SettingPages\Main.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Style.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

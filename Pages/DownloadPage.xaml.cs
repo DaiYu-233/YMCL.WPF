@@ -1,11 +1,6 @@
-using MinecraftLaunch.Modules.Installer;
-using MinecraftLaunch.Modules.Models.Install;
-using Panuon.UI.Silver;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -17,113 +12,29 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using YMCL.Pages.SettingPages;
 
 namespace YMCL.Pages
 {
     /// <summary>
-    /// Lógica de interacción para NotesPage.xaml
+    /// DownloadPage.xaml 的交互逻辑
     /// </summary>
-    public partial class NotesPage : Page
+    public partial class DownloadPage : Page
     {
-        int GameInstallBtnMode = 0;
-        public async void DownloadListRefresh()
-        {
-            await Task.Run(async () =>
-            {
-                GameCoreInstaller list = new(new(".minecraft"), "1.12.2");
-                var res = (await list.GetGameCoresAsync()).Cores;
-                res.ToList().ForEach(x =>
-                {
-                    if (x.Type is "release")
-                        this.Dispatcher.BeginInvoke(() => { GameDownloadList.Items.Add(x); });
-                });
-            });
-        }
-
-        public NotesPage()
+        Pages.DownloadPages.AutoInstall autoInstall = new();
+        public DownloadPage()
         {
             InitializeComponent();
-            DownloadListRefresh();
+            MainFrame.Content = autoInstall;
         }
 
-
-
-        private void GameListRefreshButton_Click(object sender, RoutedEventArgs e)
+        private void NavigationView_SelectionChanged(ModernWpf.Controls.NavigationView sender, ModernWpf.Controls.NavigationViewSelectionChangedEventArgs args)
         {
-            DownloadListRefresh();
-
-
-        }
-
-        private async void GameInstallButton_Click(object sender, RoutedEventArgs e)
-        {
-
-            var id = (GameDownloadList.SelectedItem as GameCoreEmtity)!.Id;
-            await Task.Run(async () =>
+            if (AutoInstall.IsSelected)
             {
-                GameCoreInstaller list = new(new(".minecraft"), id);
-                var res = await list.InstallAsync(async x =>
-                {
-                    //await Dispatcher.BeginInvoke(() => { Debug.WriteLine(x.Item2); });
-                    await Dispatcher.BeginInvoke(() => { downloadItem1Grid.Visibility = Visibility.Visible; });
-                    await Dispatcher.BeginInvoke(() => { DownloadProgress.Value = Math.Round((x.Item1 * 100),2); });
-                    await Dispatcher.BeginInvoke(() => { downloadingbfb.Text = ((x.Item1 * 100).ToString())+"%"; });
-                    GameInstallBtnMode = 1;
-                    await Dispatcher.BeginInvoke(() => { GameInstallButton.IsEnabled = false; });
-                    await Dispatcher.BeginInvoke(() => { GameInstallButton.Content = "安装中..."; });
-                    await Dispatcher.BeginInvoke(() => { DownloadingTextBlock.Text = x.Item2; });
-                });
-
-                if (res.Success)
-                {
-                    await Dispatcher.BeginInvoke(() => { MessageBoxX.Show("安装成功! "); });
-                    await Dispatcher.BeginInvoke(() => { GameInstallButton.IsEnabled = true; });
-                    await Dispatcher.BeginInvoke(() => { GameInstallButton.Content = "安装此版本"; });
-                    await Dispatcher.BeginInvoke(() => { DownloadProgress.Value = 0; });
-                    await Dispatcher.BeginInvoke(() => { DownloadingTextBlock.Text = "Null"; });
-                    await Dispatcher.BeginInvoke(() => { downloadingbfb.Text = "0%"; });
-                    await Dispatcher.BeginInvoke(() => { downloadItem1Grid.Visibility = Visibility.Hidden; });
-                    GameInstallBtnMode = 0;
-
-                    new NotifyBox()
-                    {
-                        NotifiMessage = "安装成功!"
-                    }.Show();
-                }
-                else
-                {
-                    await Dispatcher.BeginInvoke(() => { MessageBoxX.Show("安装失败! "); });
-
-
-                    await Dispatcher.BeginInvoke(() => { GameInstallButton.IsEnabled = true; });
-                    await Dispatcher.BeginInvoke(() => { GameInstallButton.Content = "安装此版本"; }); 
-                    await Dispatcher.BeginInvoke(() => { DownloadingTextBlock.Text = "Null"; });
-                    await Dispatcher.BeginInvoke(() => { downloadingbfb.Text = "0%"; });
-                    await Dispatcher.BeginInvoke(() => { downloadItem1Grid.Visibility = Visibility.Hidden; });
-                    GameInstallBtnMode = 0;
-
-                    new NotifyBox()
-                    {
-                        NotifiMessage = "安装失败!"
-                    }.Show();
-                }
-            });
-
-        }
-
-
-
-        private void GameDownloadList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (GameInstallBtnMode != 1)
-            {
-                GameInstallButton.IsEnabled = true;
+                MainFrame.Content = autoInstall;
             }
-            
+
         }
-
-
-
-        
     }
 }

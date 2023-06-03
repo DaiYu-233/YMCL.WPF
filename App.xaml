@@ -4,18 +4,17 @@
              xmlns:local="clr-namespace:YMCL"
              StartupUri="MainWindow.xaml"
              xmlns:ui="http://schemas.modernwpf.com/2019">
-    
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-
-                <ResourceDictionary Source="Themes/Light.xaml"/>
                 <ui:ThemeResources />
                 <ui:XamlControlsResources />
-                <ResourceDictionary Source="Assets/Icons/Icons.xaml"/>
-
+                <!-- Other merged dictionaries here -->
+                <ResourceDictionary Source="Styles/Light.xaml"/>
+                <ResourceDictionary Source="Styles/Icons.xaml"/>
                 <ResourceDictionary Source="Styles/MainStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <!-- Other app resources here -->
         </ResourceDictionary>
     </Application.Resources>
 </Application>

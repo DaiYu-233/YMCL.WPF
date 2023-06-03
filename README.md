@@ -1,2 +1,0 @@
-# YMCL
-Minecraft Launcher

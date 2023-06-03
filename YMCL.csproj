@@ -5,61 +5,54 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
-    <Version>1.1.0</Version>
-    <PackageId>YMCL</PackageId>
-    <Title>YMCL</Title>
-    <Authors>DaiYu</Authors>
-    <Company>呆鱼</Company>
-    <Product>Minecraft Launcher</Product>
-    <Description>Minecraft Launcher</Description>
-    <PackageIcon>YMCL-Icon.png</PackageIcon>
-    <Copyright>版权归呆鱼所有(https://daiyu-233.top)</Copyright>
     <ApplicationIcon>YMCL-Icon.ico</ApplicationIcon>
+    <Authors>呆鱼</Authors>
+    <Company>DaiYu</Company>
+    <Product>YMCL</Product>
+    <PackageIcon>YMCL-Icon.png</PackageIcon>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Remove="Pages\YMCL-Icon.png" />
-  </ItemGroup>
 
   <ItemGroup>
     <Content Include="YMCL-Icon.ico" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Cake.Powershell" Version="2.0.0" />
     <PackageReference Include="Costura.Fody" Version="5.7.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="MinecraftLaunch" Version="1.5.0" />
-    <PackageReference Include="MinecraftOAuth" Version="1.7.0" />
-    <PackageReference Include="ModernWpfUI" Version="0.9.6" />
-    <PackageReference Include="Natsurainko.FluentCore" Version="2.0.4" />
-    <PackageReference Include="Natsurainko.FluentCore.Extension.Windows" Version="2.0.4" />
+    <PackageReference Include="MahApps.Metro.IconPacks" Version="4.11.0" />
+    <PackageReference Include="MinecraftLaunch" Version="1.6.0" />
+    <PackageReference Include="MinecraftOAuth" Version="1.6.0" />
+    <PackageReference Include="ModernWpfUI" Version="0.9.7-preview.2" />
+    <PackageReference Include="Natsurainko.FluentCore" Version="2.0.6" />
+    <PackageReference Include="Natsurainko.FluentCore.Extension.Windows" Version="2.0.6" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="OneMinecraftLauncher.Core" Version="1.1.6" />
     <PackageReference Include="Panuon.UI.Silver" Version="2.2.20" />
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="microsoft_launcher">
-      <HintPath>microsoft_launcherx64.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Pages\YMCL-Icon.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="YMCL-Icon.ico">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <None Update="YMCL-Icon.png">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Widgets\" />
   </ItemGroup>
 
 </Project>

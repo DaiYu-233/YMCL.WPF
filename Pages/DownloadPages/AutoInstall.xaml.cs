@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace YMCL.Pages
+namespace YMCL.Pages.DownloadPages
 {
     /// <summary>
-    /// MorePage.xaml 的交互逻辑
+    /// AutoInstall.xaml 的交互逻辑
     /// </summary>
-    public partial class MorePage : Page
+    public partial class AutoInstall : Page
     {
-        public MorePage()
+        public AutoInstall()
         {
             InitializeComponent();
         }

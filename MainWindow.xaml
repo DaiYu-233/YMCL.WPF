@@ -3,29 +3,29 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:YMCL"
-        mc:Ignorable="d" Name="home"
-        Title="YMCL" Height="560" Width="900"
-        WindowStartupLocation="CenterScreen"
-        Background="Transparent"
-        xmlns:ui="http://schemas.modernwpf.com/2019"
-        ResizeMode="NoResize" Loaded="home_Loaded" WindowStyle="None" Foreground="Transparent" AllowsTransparency="True" >
-    <Border  Background="{DynamicResource PrimaryBackgroundColor}" CornerRadius="8,8,8,8">
-        <Grid>
-            <Border Height="30" VerticalAlignment="Top" MouseDown="Grid_MouseDown" Background="{DynamicResource SecundaryBackgroundColor}" CornerRadius="8,8,0,0" MouseLeftButtonDown="Border_MouseLeftButtonDown">
-                <Grid VerticalAlignment="Top" Height="30" MouseDown="Grid_MouseDown" Margin="60,0,0,0">
-                    <Button x:Name="btnMinimize" Style="{DynamicResource IconButtonsStyle}" Content="{DynamicResource minimize}" Click="btnMinimize_Click" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,30,0"/>
-                    <Button x:Name="btnClose" Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Click="btnClose_Click" Tag="IsCloseButton" HorizontalAlignment="Right" Margin="0,0,3,0"/>
+        xmlns:local="clr-namespace:YMCL" FontFamily="MiSans Medium"
+        mc:Ignorable="d" Height="521" Width="900"
+        xmlns:ui="http://schemas.modernwpf.com/2019" 
+        ui:WindowHelper.UseModernWindowStyle="False" Background="Transparent" ResizeMode="NoResize" WindowStyle="None" WindowStartupLocation="CenterScreen" OpacityMask="White" AllowsTransparency="True" Title="YMCL">
+    <Border CornerRadius="8,8,8,8" Background="White">
+        <Grid >
+            <Border VerticalAlignment="Top" Height="30" Background="#FFF9F9F9" CornerRadius="8,8,0,8" MouseLeftButtonDown="Border_MouseLeftButtonDown">
+                <Grid VerticalAlignment="Top" Height="30" Margin="60,0,0,0">
+                    <Button x:Name="btnMinimize" Style="{DynamicResource IconButtonsStyle}" Content="{DynamicResource minimize}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,30,0" Click="btnMinimize_Click"/>
+                    <Button x:Name="btnClose" Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Tag="IsCloseButton" HorizontalAlignment="Right" Margin="0,0,3,0" Click="btnClose_Click"/>
                 </Grid>
             </Border>
-            
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <!-- Start: GridColum Left-->
-            <Border Background="{DynamicResource SecundaryBackgroundColor}" Grid.RowSpan="2" CornerRadius="8,0,0,8">
+            <Border HorizontalAlignment="Left" VerticalAlignment="Top" Width="444" Height="40" Margin="7.8,10,0,0" CornerRadius="8,8,8,8" Background="#FFF2F2F2" Visibility="Hidden">
+                <ui:NavigationView IsSettingsVisible="False" PaneDisplayMode="Top" IsBackButtonVisible="Collapsed" Background="White" FontFamily="MiSans Medium" SelectionChanged="NavigationView_SelectionChanged" Margin="8,0,8,0" >
+                    <ui:NavigationView.MenuItems>
+                        <ui:NavigationViewItem IsSelected="True" Icon="Home" Content="启动" Tag="Launch" x:Name="ToLaunch"/>
+                        <ui:NavigationViewItem Icon="Setting" Content="设置" Tag="Setting" x:Name="ToSetting"/>
+                        <ui:NavigationViewItem Icon="Download" Content="下载" Tag="Download" x:Name="ToDownload"/>
+                    </ui:NavigationView.MenuItems>
+                </ui:NavigationView>
+            </Border>
+            <Frame x:Name="MainFrame" Content="" HorizontalAlignment="Right" Height="490" VerticalAlignment="Top" Width="840" NavigationUIVisibility="Hidden" Margin="0,30,0,0"/>
+            <Border Background="{DynamicResource SecundaryBackgroundColor}" CornerRadius="8,0,0,8" HorizontalAlignment="Left">
                 <Grid x:Name="gridMenu" Width="60">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="60"/>
@@ -34,13 +34,13 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    
+
 
                     <!-- Logo -->
-                    <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Top" Height="25">
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Top" Height="36">
                         <Path Data="{DynamicResource logo}" Margin="16 0 0 0" Stretch="Fill" Fill="{DynamicResource PrimaryBlueColor}" Width="25" Height="25" HorizontalAlignment="Left"/>
                         <Label Content="YMCL" Foreground="{DynamicResource PrimaryBlueColor}" FontWeight="Bold" FontSize="20" VerticalAlignment="Center" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Margin="20,0,0,0"/>
-                        
+
                     </StackPanel>
 
                     <!-- Menu -->
@@ -65,14 +65,13 @@
                         </ToggleButton.Triggers>
                     </ToggleButton>
 
-                    
+
 
                     <StackPanel Grid.Row="3">
-                        <RadioButton x:Name="rdHome" Content="   启动" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource home}" Click="rdHome_Click" Checked="rdHome_Checked" FontFamily="Noto Sans CJK SC Medium" IsChecked="True"/>
-                            <!--<RadioButton x:Name="rdAc" Content="   账户" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource Ac}" Margin="0 5 0 5" Click="rdSounds_Click" FontFamily="Noto Sans CJK SC Medium"/>-->
-                            <RadioButton x:Name="rdSounds" Content="   设置" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource headphones}" Margin="0 5 0 5" Click="rdSounds_Click" FontFamily="Noto Sans CJK SC Medium"/>
-                            <RadioButton x:Name="rdNotes" Content="   下载" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource notes}" Click="rdNotes_Click" FontFamily="Noto Sans CJK SC Medium"/>
-                            <RadioButton x:Name="rdPayment" Content="   更多" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource payment}" Margin="0 5 0 5" Click="rdPayment_Click" FontFamily="Noto Sans CJK SC Medium"/>
+                        <RadioButton x:Name="rdLaunch" Content="   启动" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource home}"  IsChecked="True" Checked="rdLaunch_Checked" />
+                        <RadioButton x:Name="rdSetting" Content="   设置" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource headphones}" Margin="0 5 0 5" Checked="rdSetting_Checked"  />
+                        <RadioButton x:Name="rdDownload" Content="   下载" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource notes}" Checked="rdDownload_Checked" />
+                        <RadioButton x:Name="rdMore" Content="   更多" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource payment}" Margin="0 5 0 5" Checked="rdMore_Checked" />
                     </StackPanel>
 
                     <StackPanel Grid.Row="3" VerticalAlignment="Bottom" Orientation="Horizontal" Margin="0,0,-140,20" Height="0">
@@ -80,27 +79,6 @@
                     </StackPanel>
                 </Grid>
             </Border>
-            <!-- End: GridColum Left-->
-
-            <!-- Start: GridColumn Rigth -->
-            <Grid Grid.Column="1" Grid.RowSpan="2">
-                <Grid.RowDefinitions>
-
-                </Grid.RowDefinitions>
-
-                <!-- Start: Button Close | Restore | Minimize -->
-                <!-- End: Button Close | Restore | Minimize -->
-
-                <Frame x:Name="PagesNavigation" NavigationUIVisibility="Hidden" Width="840" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="555">
-                    <!-- Page Content -->
-                </Frame>
-                
-
-                <!-- Start: Button Close | Restore | Minimize -->
-                <!-- End: Button Close | Restore | Minimize -->
-            </Grid>
-            <!-- Start: GridColumn Rigth -->
-            </Grid>
         </Grid>
     </Border>
 </Window>
