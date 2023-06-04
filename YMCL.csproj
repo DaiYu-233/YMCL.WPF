@@ -22,7 +22,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="MahApps.Metro.IconPacks" Version="4.11.0" />
-    <PackageReference Include="MinecraftLaunch" Version="1.6.0" />
+    <PackageReference Include="MinecraftLaunch" Version="1.9.3" />
     <PackageReference Include="MinecraftOAuth" Version="1.6.0" />
     <PackageReference Include="ModernWpfUI" Version="0.9.7-preview.2" />
     <PackageReference Include="Natsurainko.FluentCore" Version="2.0.6" />
