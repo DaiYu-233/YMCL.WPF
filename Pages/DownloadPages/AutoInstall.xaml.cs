@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MinecraftLaunch;
 using MinecraftLaunch.Modules.Installer;
+using MinecraftLaunch.Modules.Models.Install;
 using MinecraftLaunch.Modules.Toolkits;
 using Panuon.UI.Silver;
 
@@ -32,8 +33,10 @@ namespace YMCL.Pages.DownloadPages
         public AutoInstall()
         {
             InitializeComponent();
+            TestFolder("./YMCL");
+            TestFolder("./YMCL/logs");
             ReGetVer();
-            
+
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(VerListView.Items);
             view.Filter = UserFilter;
         }
@@ -85,7 +88,7 @@ namespace YMCL.Pages.DownloadPages
 
             await Task.Run(async () =>
             {
-                var res = FabricInstaller.GetFabricBuildsByVersionAsync(System.IO.File.ReadAllText("./YMCL/logs/InsVer.log")).Result.ToList();
+                var res = (await FabricInstaller.GetFabricBuildsByVersionAsync(System.IO.File.ReadAllText("./YMCL/logs/InsVer.log"))).ToList();
                 Dispatcher.BeginInvoke(() => { VerFabricListView.Items.Clear(); });
                 res.ForEach(x =>
                 {
@@ -104,6 +107,20 @@ namespace YMCL.Pages.DownloadPages
                 res.ForEach(x =>
                 {
                     Dispatcher.BeginInvoke(() => { VerOptiFineListView.Items.Add(x); });
+                });
+            });
+
+        }
+        private async void GetQuiltVer()
+        {
+
+            await Task.Run(async () =>
+            {
+                var res = QuiltInstaller.GetQuiltBuildsByVersionAsync(System.IO.File.ReadAllText("./YMCL/logs/InsVer.log")).Result.ToList();
+                Dispatcher.BeginInvoke(() => { VerQuiltListView.Items.Clear(); });
+                res.ForEach(x =>
+                {
+                    Dispatcher.BeginInvoke(() => { VerQuiltListView.Items.Add(x); });
                 });
             });
 
@@ -252,12 +269,22 @@ namespace YMCL.Pages.DownloadPages
         }
         private void NextStep_Click(object sender, RoutedEventArgs e)
         {
+            IsForge = false;
+            IsFabric = false;
+            IsOptiFine = false;
+            IsQuilt = false;
+            ForgeInfo.Text = "无安装任务";
+            FabricInfo.Text = "无安装任务";
+            QuiltInfo.Text = "无安装任务";
+            OptiFineInfo.Text = "无安装任务";
+            TestIns();
             Step1Br.Visibility = Visibility.Hidden;
             Step2Br.Visibility = Visibility.Visible;
             InstallVerText.Text = VerListView.SelectedValue.ToString();
             TestFolder("./YMCL");
             TestFolder("./YMCL/logs");
             System.IO.File.WriteAllText("./YMCL/logs/InsVer.log", VerListView.SelectedValue.ToString());
+
         }
 
         private void ReturnBtn_Click(object sender, RoutedEventArgs e)
@@ -352,6 +379,89 @@ namespace YMCL.Pages.DownloadPages
                 OptiFineInfo.Text = VerOptiFineListView.SelectedValue.ToString();
                 TestIns();
             }
+        }
+
+        private void ToFabricBtn_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (IsForge||IsQuilt)
+            {
+                MessageBoxX.Show("Fabric与Forge或Quilt不兼容!"); 
+            }
+            else
+            {
+                FabricBr.Visibility = Visibility.Visible;
+                GetFabricVer();
+            }
+            TestIns();
+        }
+
+        private void VerFabricListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (VerFabricListView.SelectedIndex >= 0)
+            {
+                CloseInses();
+                TestFolder("./YMCL");
+                TestFolder("./YMCL/logs");
+                System.IO.File.WriteAllText("./YMCL/logs/InsFabric.log", VerFabricListView.SelectedValue.ToString());
+                IsFabric = true;
+                FabricInfo.Text = VerFabricListView.SelectedValue.ToString();
+                TestIns();
+            }
+        }
+
+        private void ToQuiltBtn_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (IsFabric || IsForge)
+            {
+                MessageBoxX.Show("Quilt与Forge或Fabric不兼容!"); 
+            }
+            else
+            {
+                QuiltBr.Visibility = Visibility.Visible;
+                GetQuiltVer();
+            }
+            TestIns();
+        }
+
+        private void VerQuiltListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (VerFabricListView.SelectedIndex >= 0)
+            {
+                CloseInses();
+                TestFolder("./YMCL");
+                TestFolder("./YMCL/logs");
+                System.IO.File.WriteAllText("./YMCL/logs/InsQuilt.log", VerQuiltListView.SelectedValue.ToString());
+                IsQuilt = true;
+                QuiltInfo.Text = VerQuiltListView.SelectedValue.ToString();
+                TestIns();
+            }
+        }
+
+        private async void StartInsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            DownloadInfo.Visibility = Visibility.Visible;
+            await Task.Run(async () => {
+                GameCoreInstaller installer = new(@".minecraft", System.IO.File.ReadAllText("./YMCL/logs/InsVer.log"));
+
+                installer.ProgressChanged += (_, x) => {
+                    Dispatcher.BeginInvoke(() => { DownloadProText.Text = Math.Round(x.Progress * 100, 1).ToString()+"%";
+                        DownloadProBar.Value = Math.Round(x.Progress * 100, 1);
+                        qqqqq.Text = qqqqq.Text + "\n["+DateTime.Now.ToString()+"]   "+x.ProgressDescription;
+                    });
+                    
+                };
+
+                var result = await installer.InstallAsync();
+
+                if (result.Success)
+                {
+                    
+
+                        MessageBox.Show($"游戏核心 {result.GameCore.Id} 安装成功");
+
+                    
+                }
+            });
         }
     }
 }

@@ -34,11 +34,11 @@
                     </Grid>
                 </Border>
                 <!--Step1-->
-                <Border x:Name="Step2Br" Visibility="Visible" Background="#FFEDEDED" CornerRadius="3,3,3,3" Margin="10,10,10,10" >
+                <Border x:Name="Step2Br" Visibility="Hidden" Background="#FFEDEDED" CornerRadius="3,3,3,3" Margin="10,10,10,10" >
                     <Grid>
                         <Grid VerticalAlignment="Top" Height="40">
                             <TextBlock  HorizontalAlignment="Left" VerticalAlignment="Center" Width="64" Height="16" FontFamily="MiSans Medium" Text="安装预览" Margin="13,-1,0,0" FontSize="14"/>
-                            <Button Height="30" Width="170" Content="开始安装" FontFamily="MiSans Medium" Margin="645,0,0,0"/>
+                            <Button x:Name="StartInsBtn" Height="30" Width="170" Content="开始安装" FontFamily="MiSans Medium" Margin="645,0,0,0" Click="StartInsBtn_Click"/>
                             <Button x:Name="ReturnBtn" Height="30" Width="106" Content="←  返回" FontFamily="MiSans Medium" Margin="534,0,0,0" Click="ReturnBtn_Click"/>
                             <Button Height="30" Width="207" Content="取消所有附加安装" FontFamily="MiSans Medium" Margin="288,0,0,0" Click="Button_Click"/>
 
@@ -65,7 +65,7 @@
 
                             </Grid>
                         </Border>
-                        <Border x:Name="ToFabricBtn" VerticalAlignment="Top" Margin="10,205,10,0" Height="40" Background="#FFD6D6D6" CornerRadius="3,3,3,3">
+                        <Border x:Name="ToFabricBtn" VerticalAlignment="Top" Margin="10,205,10,0" Height="40" Background="#FFD6D6D6" CornerRadius="3,3,3,3" MouseDown="ToFabricBtn_MouseDown">
                             <Grid>
                                 <TextBlock HorizontalAlignment="Left" Width="245" Margin="15,0,0,0" FontFamily="MiSans Medium" Text="Fabric" FontSize="14" VerticalAlignment="Center"/>
                                 <ui:FontIcon Glyph="&#xE76C;" HorizontalAlignment="Right" Margin="0,0,7,0" FontSize="14" />
@@ -73,7 +73,7 @@
 
                             </Grid>
                         </Border>
-                        <Border x:Name="ToQuiltBtn" VerticalAlignment="Top" Margin="10,255,10,0" Height="40" Background="#FFD6D6D6" CornerRadius="3,3,3,3" MouseDown="ToForgeBtn_MouseDown">
+                        <Border x:Name="ToQuiltBtn" VerticalAlignment="Top" Margin="10,255,10,0" Height="40" Background="#FFD6D6D6" CornerRadius="3,3,3,3" MouseDown="ToQuiltBtn_MouseDown">
                             <Grid>
                                 <TextBlock HorizontalAlignment="Left" Width="245" Margin="15,0,0,0" FontFamily="MiSans Medium" Text="Quilt" FontSize="14" VerticalAlignment="Center"/>
                                 <ui:FontIcon Glyph="&#xE76C;" HorizontalAlignment="Right" Margin="0,0,7,0" FontSize="14" />
@@ -94,7 +94,7 @@
 
                     </Grid>
                 </Border>
-                <Border x:Name="OptiFineBr" Visibility="Visible"  Background="#FFEDEDED" CornerRadius="3,3,3,3" Margin="10,10,10,10" >
+                <Border x:Name="OptiFineBr" Visibility="Hidden"  Background="#FFEDEDED" CornerRadius="3,3,3,3" Margin="10,10,10,10" >
                     <Grid>
                         <Grid VerticalAlignment="Top" Height="25">
                             <Button Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Tag="IsCloseButton" HorizontalAlignment="Right" Click="btnClose_Click" VerticalAlignment="Center"/>
@@ -110,7 +110,7 @@
                             <Button Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Tag="IsCloseButton" HorizontalAlignment="Right" Click="btnClose_Click" VerticalAlignment="Center"/>
                             <TextBlock VerticalAlignment="Center" FontFamily="MiSans Medium" Text="Fabric" HorizontalAlignment="Left" Margin="7,0,0,0"/>
                         </Grid>
-                        <ListView x:Name="VerFabricListView" SelectedValuePath="ForgeVersion" DisplayMemberPath="ForgeVersion" d:ItemsSource="{d:SampleData ItemCount=5}" FontFamily="MiSans Medium" Margin="0,25,0,0"  />
+                        <ListView x:Name="VerFabricListView" d:ItemsSource="{d:SampleData ItemCount=5}" FontFamily="MiSans Medium" Margin="0,25,0,0" SelectionChanged="VerFabricListView_SelectionChanged"  />
 
                     </Grid>
                 </Border>
@@ -118,10 +118,22 @@
                     <Grid>
                         <Grid VerticalAlignment="Top" Height="25">
                             <Button Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Tag="IsCloseButton" HorizontalAlignment="Right" Click="btnClose_Click" VerticalAlignment="Center"/>
-                            <TextBlock VerticalAlignment="Center" FontFamily="MiSans Medium" Text="Forge" HorizontalAlignment="Left" Margin="7,0,0,0"/>
+                            <TextBlock VerticalAlignment="Center" FontFamily="MiSans Medium" Text="Quilt" HorizontalAlignment="Left" Margin="7,0,0,0"/>
                         </Grid>
-                        <ListView x:Name="VerQuiltListView" SelectedValuePath="ForgeVersion" DisplayMemberPath="ForgeVersion" d:ItemsSource="{d:SampleData ItemCount=5}" FontFamily="MiSans Medium" Margin="0,25,0,0" SelectionChanged="VerForgeListView_SelectionChanged"  />
+                        <ListView x:Name="VerQuiltListView" SelectedValuePath="Loader" DisplayMemberPath="Loader" d:ItemsSource="{d:SampleData ItemCount=5}" FontFamily="MiSans Medium" Margin="0,25,0,0" SelectionChanged="VerQuiltListView_SelectionChanged"  />
 
+                    </Grid>
+                </Border>
+                <Border x:Name="DownloadInfo" Visibility="Hidden"  Background="#FFEDEDED" CornerRadius="3,3,3,3" Margin="10,10,10,10" >
+                    <Grid Margin="10,0,10,0">
+                        <Grid VerticalAlignment="Top" Height="25">
+                            <TextBlock VerticalAlignment="Center" FontFamily="MiSans Medium" Text="下载信息" HorizontalAlignment="Left" Margin="7,0,0,0"/>
+                        </Grid>
+<ProgressBar x:Name="DownloadProBar" VerticalAlignment="Top" Margin="15,35,79,0" Background="#4D8A8A8A" FontFamily="MiSans Medium" />
+                        <TextBlock x:Name="DownloadProText" HorizontalAlignment="Right" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="67" Margin="0,29,7,0" Text="100.00%" FontFamily="MiSans Medium" TextAlignment="Center" >
+
+                        </TextBlock>
+                        <TextBox x:Name="qqqqq" Margin="0,50,0,10" FontFamily="MiSans Medium" />
                     </Grid>
                 </Border>
             </Grid>
