@@ -52,7 +52,7 @@
                         <Border x:Name="ToForgeBtn" VerticalAlignment="Top" Margin="10,105,10,0" Height="40" Background="#FFD6D6D6" CornerRadius="3,3,3,3" MouseDown="ToForgeBtn_MouseDown">
                             <Grid>
                                 <TextBlock HorizontalAlignment="Left" Width="245" Margin="15,0,0,0" FontFamily="MiSans Medium" Text="Forge" FontSize="14" VerticalAlignment="Center"/>
-                                <TextBlock x:Name="ForgeInfo" HorizontalAlignment="Left" Width="245" Margin="530,0,0,0" FontFamily="MiSans Medium" Text="无安装任务" FontSize="14" VerticalAlignment="Center" Foreground="#FFA5A5A5" TextAlignment="Right"/>
+                                <TextBlock x:Name="ForgeInfo" HorizontalAlignment="Left" Width="458" Margin="317,0,0,0" FontFamily="MiSans Medium" Text="无安装任务" FontSize="14" VerticalAlignment="Center" Foreground="#FFA5A5A5" TextAlignment="Right"/>
 
                                 <ui:FontIcon Glyph="&#xE76C;" HorizontalAlignment="Right" Margin="0,0,7,0" FontSize="14" />
                             </Grid>
@@ -61,7 +61,7 @@
                             <Grid>
                                 <TextBlock HorizontalAlignment="Left" Width="245" Margin="15,0,0,0" FontFamily="MiSans Medium" Text="OptiFine" FontSize="14" VerticalAlignment="Center"/>
                                 <ui:FontIcon Glyph="&#xE76C;" HorizontalAlignment="Right" Margin="0,0,7,0" FontSize="14" />
-                                <TextBlock x:Name="OptiFineInfo" HorizontalAlignment="Left" Width="245" Margin="530,0,0,0" FontFamily="MiSans Medium" Text="无安装任务" FontSize="14" VerticalAlignment="Center" Foreground="#FFA5A5A5" TextAlignment="Right"/>
+                                <TextBlock x:Name="OptiFineInfo" HorizontalAlignment="Left" Width="515" Margin="260,0,0,0" FontFamily="MiSans Medium" Text="无安装任务" FontSize="14" VerticalAlignment="Center" Foreground="#FFA5A5A5" TextAlignment="Right"/>
 
                             </Grid>
                         </Border>
@@ -69,7 +69,7 @@
                             <Grid>
                                 <TextBlock HorizontalAlignment="Left" Width="245" Margin="15,0,0,0" FontFamily="MiSans Medium" Text="Fabric" FontSize="14" VerticalAlignment="Center"/>
                                 <ui:FontIcon Glyph="&#xE76C;" HorizontalAlignment="Right" Margin="0,0,7,0" FontSize="14" />
-                                <TextBlock x:Name="FabricInfo" HorizontalAlignment="Left" Width="245" Margin="530,0,0,0" FontFamily="MiSans Medium" Text="无安装任务" FontSize="14" VerticalAlignment="Center" Foreground="#FFA5A5A5" TextAlignment="Right"/>
+                                <TextBlock x:Name="FabricInfo" HorizontalAlignment="Left" Width="556" Margin="219,0,0,0" FontFamily="MiSans Medium" Text="无安装任务" FontSize="14" VerticalAlignment="Center" Foreground="#FFA5A5A5" TextAlignment="Right"/>
 
                             </Grid>
                         </Border>
@@ -77,7 +77,7 @@
                             <Grid>
                                 <TextBlock HorizontalAlignment="Left" Width="245" Margin="15,0,0,0" FontFamily="MiSans Medium" Text="Quilt" FontSize="14" VerticalAlignment="Center"/>
                                 <ui:FontIcon Glyph="&#xE76C;" HorizontalAlignment="Right" Margin="0,0,7,0" FontSize="14" />
-                                <TextBlock x:Name="QuiltInfo" HorizontalAlignment="Left" Width="245" Margin="530,0,0,0" FontFamily="MiSans Medium" Text="无安装任务" FontSize="14" VerticalAlignment="Center" Foreground="#FFA5A5A5" TextAlignment="Right"/>
+                                <TextBlock x:Name="QuiltInfo" HorizontalAlignment="Left" Width="619" Margin="156,0,0,0" FontFamily="MiSans Medium" Text="无安装任务" FontSize="14" VerticalAlignment="Center" Foreground="#FFA5A5A5" TextAlignment="Right"/>
 
                             </Grid>
                         </Border>
@@ -124,16 +124,26 @@
 
                     </Grid>
                 </Border>
+                <Border x:Name="downjdgr" CornerRadius="25,25,25,25" Background="#FFDEDEDE" Width="45" Height="45" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,15,15" Visibility="Hidden">
+                    <Grid MouseDown="Grid_MouseDown">
+                        <ui:FontIcon Glyph="&#xE896;" FontWeight="Thin" FontSize="17" Height="30" Width="30" Margin="0.5,-11,0,0" />
+                        <TextBlock x:Name="downjdtext" Text="100%" FontSize="10" FontFamily="MiSans Medium" VerticalAlignment="Top" Margin="0,26,0,0" HorizontalAlignment="Center" Height="11" Width="26"/>
+                    </Grid>
+                </Border>
                 <Border x:Name="DownloadInfo" Visibility="Hidden"  Background="#FFEDEDED" CornerRadius="3,3,3,3" Margin="10,10,10,10" >
-                    <Grid Margin="10,0,10,0">
+                    <Grid Margin="0,0,0,0">
                         <Grid VerticalAlignment="Top" Height="25">
-                            <TextBlock VerticalAlignment="Center" FontFamily="MiSans Medium" Text="下载信息" HorizontalAlignment="Left" Margin="7,0,0,0"/>
+                            <TextBlock VerticalAlignment="Center" FontFamily="MiSans Medium" Text="下载信息" HorizontalAlignment="Left" Margin="6,0,0,0"/>
+                            <TextBlock VerticalAlignment="Center" FontFamily="MiSans Medium" Text="当前安装步骤: " HorizontalAlignment="Left" Margin="76,0,0,0"/>
+                            <TextBlock x:Name="installbz" VerticalAlignment="Center" FontFamily="MiSans Medium" Text="Vanllia" HorizontalAlignment="Left" Margin="153,0,0,0"/>
+                            <Button Style="{StaticResource IconButtonsStyle}" Visibility="Hidden" Content="{DynamicResource close}" Tag="IsCloseButton" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="795,0,0,0" Click="Button_Click_1"/>
+
                         </Grid>
-<ProgressBar x:Name="DownloadProBar" VerticalAlignment="Top" Margin="15,35,79,0" Background="#4D8A8A8A" FontFamily="MiSans Medium" />
-                        <TextBlock x:Name="DownloadProText" HorizontalAlignment="Right" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="67" Margin="0,29,7,0" Text="100.00%" FontFamily="MiSans Medium" TextAlignment="Center" >
+                        <ProgressBar x:Name="DownloadProBar" VerticalAlignment="Top" Margin="15,29,79,0" Background="#4D8A8A8A" FontFamily="MiSans Medium" />
+                        <TextBlock x:Name="DownloadProText" HorizontalAlignment="Right" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="67" Margin="0,23,7,0" Text="100.00%" FontFamily="MiSans Medium" TextAlignment="Center" >
 
                         </TextBlock>
-                        <TextBox x:Name="qqqqq" Margin="0,50,0,10" FontFamily="MiSans Medium" />
+                        <TextBox x:Name="qqqqq" Margin="10,44,10,10" FontFamily="MiSans Medium" />
                     </Grid>
                 </Border>
             </Grid>

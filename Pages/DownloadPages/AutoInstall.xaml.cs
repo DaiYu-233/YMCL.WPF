@@ -17,6 +17,7 @@ using MinecraftLaunch.Modules.Installer;
 using MinecraftLaunch.Modules.Models.Install;
 using MinecraftLaunch.Modules.Toolkits;
 using Panuon.UI.Silver;
+using PInvoke;
 
 namespace YMCL.Pages.DownloadPages
 {
@@ -439,29 +440,120 @@ namespace YMCL.Pages.DownloadPages
 
         private async void StartInsBtn_Click(object sender, RoutedEventArgs e)
         {
+            MinecraftLaunch.Modules.Models.Install.ForgeInstallEntity forgeInstallEntity = null;
+            OptiFineInstallEntity optiFineInstallEntity = null;
+            installbz.Text = "Vanllia";
+            int a = 0;
             DownloadInfo.Visibility = Visibility.Visible;
+            downjdgr.Visibility = Visibility.Visible;
+            Step1Br.Visibility = Visibility.Visible;
+            Step2Br.Visibility = Visibility.Hidden;
             await Task.Run(async () => {
                 GameCoreInstaller installer = new(@".minecraft", System.IO.File.ReadAllText("./YMCL/logs/InsVer.log"));
-
+                
                 installer.ProgressChanged += (_, x) => {
                     Dispatcher.BeginInvoke(() => { DownloadProText.Text = Math.Round(x.Progress * 100, 1).ToString()+"%";
+                        downjdtext.Text = Math.Round(x.Progress * 100, 0).ToString() + "%";
+                        a++;
+                        if (a == 23) {
+                            a = 0;
+                            qqqqq.Text = "";
+                        }
                         DownloadProBar.Value = Math.Round(x.Progress * 100, 1);
-                        qqqqq.Text = qqqqq.Text + "\n["+DateTime.Now.ToString()+"]   "+x.ProgressDescription;
+                        qqqqq.Text = qqqqq.Text + "["+DateTime.Now.ToString()+"]   "+x.ProgressDescription +"\n";
                     });
                     
                 };
 
                 var result = await installer.InstallAsync();
 
-                if (result.Success)
-                {
-                    
-
-                        MessageBox.Show($"游戏核心 {result.GameCore.Id} 安装成功");
-
-                    
-                }
             });
+            if (IsForge) {
+                installbz.Text = "Forge";
+                await Task.Run(async () =>
+                {
+
+                    var res = ForgeInstaller.GetForgeBuildsOfVersionAsync(System.IO.File.ReadAllText("./YMCL/logs/InsVer.log")).Result.ToList();
+                    Dispatcher.BeginInvoke(() => { VerForgeListView.Items.Clear(); });
+                    res.ForEach(x =>
+                    {
+                        Dispatcher.BeginInvoke(() => { if (x.ForgeVersion == System.IO.File.ReadAllText("./YMCL/logs/InsForge.log")) { forgeInstallEntity = x; } });
+
+                    });
+
+
+                    ForgeInstaller installer = new(".minecraft", forgeInstallEntity, System.IO.File.ReadAllText("./YMCL/logs/setting/java.log"));
+                    a = 0;
+                    installer.ProgressChanged += (_, x) =>
+                    {
+                        Dispatcher.BeginInvoke(() =>
+                        {
+                            DownloadProText.Text = Math.Round(x.Progress * 100, 1).ToString() + "%";
+                            downjdtext.Text = Math.Round(x.Progress * 100, 0).ToString() + "%";
+                            a++;
+                            if (a == 23)
+                            {
+                                a = 0;
+                                qqqqq.Text = "";
+                            }
+                            DownloadProBar.Value = Math.Round(x.Progress * 100, 1);
+                            qqqqq.Text = qqqqq.Text + "[" + DateTime.Now.ToString() + "]   " + x.ProgressDescription + "\n";
+                        });
+
+                    };
+                });
+                 }
+            if (IsOptiFine)
+            {
+                installbz.Text = "OptiFine";
+                await Task.Run(async () =>
+                {
+
+                    var res = OptiFineInstaller.GetOptiFineBuildsFromMcVersionAsync(System.IO.File.ReadAllText("./YMCL/logs/InsVer.log")).Result.ToList();
+                    Dispatcher.BeginInvoke(() => { VerOptiFineListView.Items.Clear(); });
+                    res.ForEach(x =>
+                    {
+                        Dispatcher.BeginInvoke(() => { if (x.FileName == System.IO.File.ReadAllText("./YMCL/logs/InsOptiFine.log")) { optiFineInstallEntity = x; } });
+                    });
+
+                    OptiFineInstaller installer = new(".minecraft", optiFineInstallEntity, System.IO.File.ReadAllText("./YMCL/logs/setting/java.log"));
+
+                    a = 0;
+                    installer.ProgressChanged += (_, x) =>
+                    {
+                        Dispatcher.BeginInvoke(() =>
+                        {
+                            DownloadProText.Text = Math.Round(x.Progress * 100, 1).ToString() + "%";
+                            downjdtext.Text = Math.Round(x.Progress * 100, 0).ToString() + "%";
+                            a++;
+                            if (a == 23)
+                            {
+                                a = 0;
+                                qqqqq.Text = "";
+                            }
+                            DownloadProBar.Value = Math.Round(x.Progress * 100, 1);
+                            qqqqq.Text = qqqqq.Text + "[" + DateTime.Now.ToString() + "]   " + x.ProgressDescription + "\n";
+                        });
+
+                    };
+                });
+            }
+
+
+
+            MessageBoxX.Show($"游戏核心 {System.IO.File.ReadAllText("./YMCL/logs/InsVer.log")} 安装完成");
+            DownloadInfo.Visibility = Visibility.Hidden;
+            downjdgr.Visibility = Visibility.Hidden;
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            DownloadInfo.Visibility = Visibility.Hidden;
+        }
+
+        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            DownloadInfo.Visibility = Visibility.Visible;
         }
     }
 }

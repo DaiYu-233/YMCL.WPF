@@ -14,8 +14,8 @@
                     <ui:NavigationView.MenuItems>
                         <ui:NavigationViewItem IsSelected="True" Icon="Setting" Content="通用" x:Name="ty"/>
                         <ui:NavigationViewItem Icon="Contact" Content="账户" x:Name="zh"/>
-                        <!--<ui:NavigationViewItem Icon="Tag" Content="个性化"   x:Name="gxh"/>
-                    <ui:NavigationViewItem Icon="Link" Content="启动器"  x:Name="qdq"/>-->
+                        <ui:NavigationViewItem Icon="Tag" Content="启动器"   x:Name="qdq"/>
+
                     </ui:NavigationView.MenuItems>
                 </ui:NavigationView>
             </Border>

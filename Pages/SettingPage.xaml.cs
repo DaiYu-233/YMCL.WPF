@@ -21,6 +21,7 @@ namespace YMCL.Pages
     public partial class SettingPage : Page
     {
         Frame main = new Frame() { Content = new Pages.SettingPages.Main() };
+        Frame qdqq = new Frame() { Content = new Pages.SettingPages.Launcher() };
         Frame account = new Frame() { Content = new Pages.SettingPages.Account() };
         public SettingPage()
         {
@@ -37,6 +38,10 @@ namespace YMCL.Pages
             else if (zh.IsSelected)
             {
                 MainFrame.Content = account;
+            }
+            else if (qdq.IsSelected)
+            {
+                MainFrame.Content = qdqq;
             }
         }
     }

@@ -25,6 +25,9 @@
     <Compile Update="Pages\SettingPages\Account.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Pages\SettingPages\Launcher.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Pages\SettingPages\Main.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -49,6 +52,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\SettingPages\Account.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\SettingPages\Launcher.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\SettingPages\Main.xaml">

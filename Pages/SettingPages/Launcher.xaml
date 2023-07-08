@@ -1,0 +1,28 @@
+﻿<Page x:Class="YMCL.Pages.SettingPages.Launcher"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:ui="http://schemas.modernwpf.com/2019" 
+      xmlns:local="clr-namespace:YMCL.Pages.SettingPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="840"
+      Title="Launcher">
+    <Border Background="White" CornerRadius="0,0,8,0">
+
+        <Grid>
+            <Border HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Width="820" Background="#FFEDEDED" CornerRadius="3,3,3,3" Height="72">
+                <Grid>
+                    <TextBlock FontFamily="MiSans Medium" Text="个性化" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="9,5,0,0" FontSize="14"/>
+                    <Border Background="#FFDADADA" CornerRadius="3,3,3,3" Margin="10,27,10,0" Height="35" VerticalAlignment="Top">
+                        <Grid>
+                            <TextBlock FontFamily="MiSans Medium" Text="主页面显示Java和账户信息" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="8,0,0,0" FontSize="14"/>
+                            <ui:ToggleSwitch x:Name="displayinf" Width="82" Height="32" IsOn="True" FontSize="14" FontFamily="MiSans Medium" Margin="718,0,0,0" MouseDown="displayinf_MouseDown" MouseLeave="displayinf_MouseLeave"/>
+                        </Grid>
+                    </Border>
+
+                </Grid>
+            </Border>
+
+        </Grid>
+    </Border>
+</Page>

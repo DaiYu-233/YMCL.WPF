@@ -67,7 +67,11 @@ namespace YMCL.Pages.SettingPages
                     JavaCombo.SelectedItem = JavaCombo.Items[0];
                 }
             }
-            SettingInitialization();
+            TestFolder("./YMCL/logs/setting/save");
+
+            JavaCombo.SelectedItem = System.IO.File.ReadAllText(@".\YMCL\logs\setting\save\java.log");
+            
+            SilderBox.Value = Convert.ToDouble(System.IO.File.ReadAllText(@".\YMCL\logs\setting\save\mem.log"));
             UpdateMem();
             
         }
@@ -78,12 +82,10 @@ namespace YMCL.Pages.SettingPages
             TestFolder("./YMCL/logs");
             TestFolder("./YMCL/logs/setting");
             TestFolder("./YMCL/logs/setting/save");
-            try
-            {
+
                 JavaCombo.SelectedItem = System.IO.File.ReadAllText(@".\YMCL\logs\setting\save\java.log");
                 SilderBox.Value = Convert.ToDouble(System.IO.File.ReadAllText(@".\YMCL\logs\setting\save\mem.log"));
-            }
-            catch { }
+
             
         }
 

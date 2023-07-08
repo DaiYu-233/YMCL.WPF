@@ -10,7 +10,8 @@
       Title="Main" MouseDown="Page_MouseDown">
     <Border Background="White" CornerRadius="0,0,8,0">
         <Grid>
-            
+
+
             <!--Java-->
             <Border HorizontalAlignment="Center" Height="45" Margin="0,10,0,0" VerticalAlignment="Top" Width="820" Background="#FFEDEDED" CornerRadius="3,3,3,3">
                 <Grid>
@@ -24,21 +25,21 @@
                 <Grid>
                     <TextBlock FontFamily="MiSans Medium" Text="游戏内存" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="18,0,0,0" FontSize="16"/>
                     <Expander Header="内存信息" Margin="104,13,354,-67" FontFamily="MiSans Medium" Background="{x:Null}" Expanded="Expander_Expanded">
-                        <Border Background="#FFE5E5E5" Margin="0,22,0,0" CornerRadius="3,3,3,3">
-                            <Grid>
-                                <Border HorizontalAlignment="Left" VerticalAlignment="Top" Width="114" Height="47" Margin="5,5,0,0" BorderBrush="#FFF1FF00" BorderThickness="3,3,3,3" CornerRadius="3,3,3,3" Background="#FFF1FF00">
+                        <Border Margin="0,1,0,19" CornerRadius="3,3,3,3" Background="WhiteSmoke">
+                            <Grid Margin="0,0,0,-17">
+                                <Border HorizontalAlignment="Left" VerticalAlignment="Top" Width="114" Height="47" Margin="5,5,0,0" BorderBrush="#FFF1FF00" BorderThickness="3,3,3,3" CornerRadius="3,3,3,3" Background="#FFF8FF86">
                                     <Grid>
                                         <TextBlock Text="物理内存" TextAlignment="Center"/>
                                         <TextBlock x:Name="MexMemTextBl" Text="256G" TextAlignment="Center" Margin="0,17,0,0" FontSize="17" Foreground="#FF00FFE2"/>
                                     </Grid>
                                 </Border>
-                                <Border HorizontalAlignment="Left" VerticalAlignment="Top" Width="114" Height="47" Margin="124,5,0,0" BorderBrush="#FFF1FF00" BorderThickness="3,3,3,3" CornerRadius="3,3,3,3" Background="#FFF1FF00">
+                                <Border HorizontalAlignment="Left" VerticalAlignment="Top" Width="114" Height="47" Margin="124,5,0,0" BorderThickness="3,3,3,3" CornerRadius="3,3,3,3" BorderBrush="#FFF1FF00" Background="#FFF8FF86">
                                     <Grid>
                                         <TextBlock Text="可用内存" TextAlignment="Center"/>
                                         <TextBlock x:Name="SurMemTextBl" Text="256G" TextAlignment="Center" Margin="0,17,0,0" FontSize="17" Foreground="#FF00FFE2"/>
                                     </Grid>
                                 </Border>
-                                <Border HorizontalAlignment="Left" VerticalAlignment="Top" Width="114" Height="47" Margin="243,5,0,0" BorderBrush="#FFF1FF00" BorderThickness="3,3,3,3" CornerRadius="3,3,3,3" Background="#FFF1FF00">
+                                <Border HorizontalAlignment="Left" VerticalAlignment="Top" Width="114" Height="47" Margin="243,5,0,0" BorderBrush="#FFF1FF00" BorderThickness="3,3,3,3" CornerRadius="3,3,3,3" Background="#FFF8FF86">
                                     <Grid>
                                         <TextBlock Text="已用内存" TextAlignment="Center"/>
                                         <TextBlock x:Name="UsedMemTextBl" Text="256G" TextAlignment="Center" Margin="0,17,0,0" FontSize="17" Foreground="#FF00FFE2"/>
