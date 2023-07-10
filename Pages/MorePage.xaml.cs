@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using YMCL.Pages.SettingPages;
 
 namespace YMCL.Pages
 {
@@ -20,9 +21,19 @@ namespace YMCL.Pages
     /// </summary>
     public partial class MorePage : Page
     {
+        Frame aboutp = new Frame() { Content = new Pages.MorePages.About() };
         public MorePage()
         {
             InitializeComponent();
+            MainFrame.Content = aboutp;
+        }
+
+        private void NavigationView_SelectionChanged(ModernWpf.Controls.NavigationView sender, ModernWpf.Controls.NavigationViewSelectionChangedEventArgs args)
+        {
+            if (about.IsSelected)
+            {
+                MainFrame.Content = aboutp;
+            }
         }
     }
 }

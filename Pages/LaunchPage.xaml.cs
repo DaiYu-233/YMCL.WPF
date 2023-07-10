@@ -15,14 +15,16 @@ using System.Windows.Shapes;
 using KMCCC.Launcher;
 using System.Net;
 using System.IO;
-using Panuon.UI.Silver;
 using MinecraftLaunch.Launch;
 using MinecraftLaunch.Modules.Models.Launch;
 using MinecraftLaunch.Modules.Models.Auth;
 using KMCCC.Authentication;
 using MinecaftOAuth;
 using MinecraftLaunch.Modules.Toolkits;
-using PInvoke;
+using Newtonsoft.Json;
+using YMCL.Pages.SettingPages;
+using System.Diagnostics;
+using Panuon.WPF.UI;
 
 namespace YMCL.Pages
 {
@@ -31,6 +33,8 @@ namespace YMCL.Pages
     /// </summary>
     public partial class LaunchPage : Page
     {
+        public static LaunchConfig launchConfig { get; } = new LaunchConfig();
+        public MinecraftLaunch.Modules.Models.Auth.Account UserInfo { get; private set; }
 
         public static KMCCC.Launcher.Version[] versions;
         public static LauncherCore Core = LauncherCore.Create();
@@ -97,54 +101,54 @@ namespace YMCL.Pages
                 LaunchGame.IsEnabled = false;
                 if (File.ReadAllText("./YMCL/logs/LoginType.log") == "离线登录")
                 {
-                    Core.JavaPath = File.ReadAllText("./YMCL/logs/setting/java.log");
-                    var ver = (KMCCC.Launcher.Version)VerListView.SelectedItem;
-                    var result = Core.Launch(new LaunchOptions
+                    MinecaftOAuth.OfflineAuthenticator authenticator = new(File.ReadAllText("./YMCL/logs/LoginName.log"));
+                    launchConfig.Account = authenticator.Auth();
+                    launchConfig.JvmConfig = File.ReadAllText("./YMCL/logs/setting/java.log");
+                    launchConfig.JvmConfig.MaxMemory = Convert.ToInt32(File.ReadAllText("./YMCL/logs/setting/mem.log"));
+                    JavaMinecraftLauncher javaMinecraftLauncher = new JavaMinecraftLauncher(launchConfig, new GameCoreToolkit(".minecraft"),true);
+                    using var res = await javaMinecraftLauncher.LaunchTaskAsync(VerListView.SelectedValue.ToString());
+                    if (res.State is MinecraftLaunch.Modules.Enum.LaunchState.Succeess)
                     {
-                        Version = ver,
-                        MaxMemory = Convert.ToInt32(File.ReadAllText("./YMCL/logs/setting/mem.log")),
-                        Authenticator = new KMCCC.Authentication.OfflineAuthenticator(File.ReadAllText("./YMCL/logs/LoginName.log")),
-                        Mode=LaunchMode.MCLauncher
-                    });
-                    if (!result.Success)
-                    {
-                        MessageBoxX.Show("错误信息:\n" + result.ErrorMessage, "启动错误");
+                        Panuon.WPF.UI.Toast.Show("启动成功,等待游戏窗口出现", ToastPosition.Top);
+                        NoticeBox.Show("启动成功,等待游戏窗口出现", "提示", MessageBoxIcon.Success);
+                        //Toast.Show("启动成功,等待游戏窗口出现", new ToastOptions { Icon = ToastIcons.Information, ToastMargin = new Thickness(10), Time = 5000, Location = ToastLocation.OwnerTopCenter });
                         LaunchGame.IsEnabled = true;
+                        await Task.Run(res.WaitForExit);
+                        MessageBoxX.Show("游戏已退出", "游戏已退出");
+
                     }
                     else
                     {
-                        MessageBoxX.Show("等待游戏窗口出现", "启动成功");
+                        NoticeBox.Show("启动错误", "提示", MessageBoxIcon.Error);
+                        MessageBoxX.Show("错误信息:\n" + res.State.ToString(), "启动错误");
+                        
                         LaunchGame.IsEnabled = true;
                     }
                 }
                 else if (File.ReadAllText("./YMCL/logs/LoginType.log") == "微软登录")
                 {
-                    var launchConfig = new LaunchConfig()
-                    {
-                        Account = new MicrosoftAccount(File.ReadAllText("./YMCL/logs/LoginName.log"), File.ReadAllText("./YMCL/logs/LoginUuid.log"), File.ReadAllText("./YMCL/logs/LoginToken.log"),File.ReadAllText("./YMCL/logs/LoginToken.log")),
-                        GameWindowConfig = new GameWindowConfig()
-                        {
-                            Width = 854,
-                            Height = 480,
-                            IsFullscreen = false
-                        },
-                        JvmConfig = new JvmConfig(File.ReadAllText("./YMCL/logs/setting/java.log"))
-                        {
-                            MaxMemory = Convert.ToInt32(File.ReadAllText("./YMCL/logs/setting/mem.log")),
-                            MinMemory = 1024,
-                        },
-                        NativesFolder = null,
-                    };
-                    JavaMinecraftLauncher javaMinecraftLauncher = new JavaMinecraftLauncher(launchConfig,new GameCoreToolkit(".minecraft"));
+                    UserInfo = JsonConvert.DeserializeObject<MinecraftLaunch.Modules.Models.Auth.Account>(File.ReadAllText("./YMCL/Accounts/Microsoft-" + File.ReadAllText("./YMCL/logs/LoginName.log") + ".json"));
+                    if (UserInfo == null) { MessageBoxX.Show("请尝试删除此账户并重新登录","登录失败"); return; }
+                    launchConfig.Account = UserInfo;
+                    launchConfig.JvmConfig = File.ReadAllText("./YMCL/logs/setting/java.log");
+                    launchConfig.JvmConfig.MaxMemory = Convert.ToInt32(File.ReadAllText("./YMCL/logs/setting/mem.log"));
+                    
+                    JavaMinecraftLauncher javaMinecraftLauncher = new JavaMinecraftLauncher(launchConfig,new GameCoreToolkit(".minecraft"),true);
                     using var res = await javaMinecraftLauncher.LaunchTaskAsync(VerListView.SelectedValue.ToString());
                     if (res.State is MinecraftLaunch.Modules.Enum.LaunchState.Succeess) 
                     {
-                        MessageBoxX.Show("等待游戏窗口出现", "启动成功");
+                        Panuon.WPF.UI.Toast.Show("启动成功,等待游戏窗口出现", ToastPosition.Top);
+                        NoticeBox.Show("启动成功,等待游戏窗口出现", "提示", MessageBoxIcon.Success);
+                        //Toast.Show("启动成功,等待游戏窗口出现", new ToastOptions { Icon = ToastIcons.Information, ToastMargin = new Thickness(10), Time = 5000, Location = ToastLocation.OwnerTopCenter });
                         LaunchGame.IsEnabled = true;
+                        await Task.Run(res.WaitForExit);
+                        MessageBoxX.Show("游戏已退出", "游戏已退出");
                     }
                     else
                     {
+                        NoticeBox.Show("启动错误", "提示", MessageBoxIcon.Error);
                         MessageBoxX.Show("错误信息:\n" + res.State.ToString(), "启动错误");
+                        
                         LaunchGame.IsEnabled = true;
                     }
                 }

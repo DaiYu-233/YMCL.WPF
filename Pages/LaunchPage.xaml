@@ -5,37 +5,37 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:YMCL.Pages"
       mc:Ignorable="d" xmlns:ui="http://schemas.modernwpf.com/2019" 
-      d:DesignHeight="490" d:DesignWidth="840"
+      d:DesignHeight="470" d:DesignWidth="840"
       Title="LaunchPage" MouseEnter="Page_MouseEnter">
-    <Border Background="White" CornerRadius="0,0,8,0">
+    <Border Background="{DynamicResource ThemeBackground}" CornerRadius="0,0,8,0">
         <Grid  >
 
-            <Border HorizontalAlignment="Center" Height="45" Margin="0,435,0,0" VerticalAlignment="Top" Width="820" Background="#FFEFEFEF" CornerRadius="3,3,3,3">
+            <Border HorizontalAlignment="Center" Height="45" VerticalAlignment="Bottom" Width="820" Background="{DynamicResource ThemeContentBorderBackground}" CornerRadius="3,3,3,3" Margin="0,0,0,10">
                 <Grid>
                     <Button x:Name="LaunchGame" Content="启动" Width="136" FontFamily="MiSans Medium" VerticalAlignment="Stretch" Margin="0,5,5,5" HorizontalAlignment="Right" Click="LaunchGame_Click" />
                     <Button Content="版本列表" Width="104" FontFamily="MiSans Medium" VerticalAlignment="Stretch" Margin="543,5,0,5" Click="Button_Click" Visibility="Hidden" />
-                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Width="84" Margin="6,4,0,0" Text="当前启动核心" FontFamily="MiSans Medium"/>
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Width="84" Margin="6,4,0,0" Text="当前启动核心" FontFamily="MiSans Medium" Foreground="{DynamicResource ThemeTextColor}"/>
                     <TextBlock x:Name="GameVerTextBlock" HorizontalAlignment="Left" VerticalAlignment="Top" Width="241" Margin="7,18,0,0" Text="None" FontFamily="MiSans Medium" Height="22" FontSize="18" Foreground="#FF00D6FF" MouseDown="GameVerTextBlock_MouseDown"/>
                 </Grid>
             </Border>
-            <Border Height="26" x:Name="LoginBr" Margin="0,10,10,0" VerticalAlignment="Top" Width="307" Background="White" CornerRadius="3,3,3,3" HorizontalAlignment="Right" BorderThickness="2,2,2,2" BorderBrush="#FFEDEDED">
+            <Border Height="26" x:Name="LoginBr" Margin="0,10,10,0" VerticalAlignment="Top" Width="307" Background="{DynamicResource ThemeBackground}" CornerRadius="3,3,3,3" HorizontalAlignment="Right" BorderThickness="2,2,2,2" BorderBrush="{DynamicResource ThemeContentContentBorderBackground}">
                 <Grid>
-                    <TextBlock x:Name="LoginTypeText" HorizontalAlignment="Left" VerticalAlignment="Center" Width="94" FontFamily="MiSans Medium" Margin="2,0,0,0" FontSize="14"/>
+                    <TextBlock x:Name="LoginTypeText" HorizontalAlignment="Left" VerticalAlignment="Center" Width="94" FontFamily="MiSans Medium" Margin="2,0,0,0" FontSize="14" Foreground="{DynamicResource ThemeTextColor}"/>
                     <TextBlock x:Name="LoginNameText" HorizontalAlignment="Left" VerticalAlignment="Center" Width="203" FontFamily="MiSans Medium" Margin="98,0,0,0" FontSize="14" TextAlignment="Center" Foreground="#FF00D6FF"/>
 
                 </Grid>
             </Border>
-            <Border Height="26" x:Name="JavaBr" Margin="0,10,322,0" VerticalAlignment="Top" Width="508" Background="White" CornerRadius="3,3,3,3" HorizontalAlignment="Right" BorderThickness="2,2,2,2" BorderBrush="#FFEDEDED">
+            <Border Height="26" x:Name="JavaBr" Margin="0,10,322,0" VerticalAlignment="Top" Width="508" Background="{DynamicResource ThemeBackground}" CornerRadius="3,3,3,3" HorizontalAlignment="Right" BorderThickness="2,2,2,2" BorderBrush="{DynamicResource ThemeContentContentBorderBackground}">
                 <Grid>
-                    <TextBlock x:Name="JavaText" HorizontalAlignment="Center" VerticalAlignment="Center" Width="500" FontFamily="MiSans Medium" FontSize="14" TextAlignment="Center" Foreground="Black"/>
+                    <TextBlock x:Name="JavaText" HorizontalAlignment="Center" VerticalAlignment="Center" Width="500" FontFamily="MiSans Medium" FontSize="14" TextAlignment="Center" Foreground="{DynamicResource ThemeTextColor}"/>
 
                 </Grid>
             </Border>
-            <Border x:Name="VerListBorder" Background="#FFEDEDED" CornerRadius="3,3,3,3" Margin="10,10,10,10" Visibility="Hidden">
+            <Border x:Name="VerListBorder" Background="{DynamicResource ThemeContentBorderBackground}" CornerRadius="3,3,3,3" Margin="10,10,10,10" Visibility="Hidden">
                 <Grid>
                     <Grid VerticalAlignment="Top" Height="30">
                         <Button x:Name="btnClose" Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Tag="IsCloseButton" HorizontalAlignment="Right" Click="btnClose_Click" VerticalAlignment="Center" Margin="0,0,3,0"/>
-                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="64" Height="14" FontFamily="MiSans Medium" Text="版本列表" Margin="11,0,0,0"/>
+                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="64" Height="14" FontFamily="MiSans Medium" Text="版本列表" Margin="11,0,0,0" Foreground="{DynamicResource ThemeTextColor}"/>
                     </Grid>
                     <ListView x:Name="VerListView" d:ItemsSource="{d:SampleData ItemCount=5}" FontFamily="MiSans Medium" SelectedValuePath="Id" DisplayMemberPath="Id" Margin="0,30,0,0" SelectionChanged="VerListView_SelectionChanged" />
                 </Grid>

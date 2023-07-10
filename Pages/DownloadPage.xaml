@@ -7,15 +7,15 @@
       mc:Ignorable="d" 
       d:DesignHeight="490" d:DesignWidth="840"
       Title="SettingPage">
-    <Border Background="White" CornerRadius="0,0,8,0">
+    <Border Background="{DynamicResource ThemeBackground}" CornerRadius="0,0,8,0">
         <Grid  >
-            <Border VerticalAlignment="Top" Height="40" Background="#FFF2F2F2">
+            <Border VerticalAlignment="Top" Height="40" Background="{DynamicResource ThemeNavigationBackground}">
                 <ui:NavigationView IsSettingsVisible="False" PaneDisplayMode="Top" IsBackButtonVisible="Collapsed" Background="White" FontFamily="MiSans Medium" SelectionChanged="NavigationView_SelectionChanged" Margin="8,0,8,0" >
                     <ui:NavigationView.MenuItems>
-                        <ui:NavigationViewItem IsSelected="True" Icon="Play" Content="自动安装" x:Name="AutoInstall"/>
-                        <ui:NavigationViewItem Icon="More" Content="手动下载" x:Name="HMDownload"/>
-                        <ui:NavigationViewItem Icon="Copy" Content="Mod" x:Name="ModDw"/>
-                        <ui:NavigationViewItem Icon="AllApps" Content="整合包" x:Name="PackageDw"/>
+                        <ui:NavigationViewItem  FontFamily="MiSans Medium" IsSelected="True" Icon="Play" Content="自动安装" x:Name="AutoInstall"/>
+                        <!--<ui:NavigationViewItem  FontFamily="MiSans Medium" Icon="More" Content="手动下载" x:Name="HMDownload"/>-->
+                        <ui:NavigationViewItem FontFamily="MiSans Medium"  Icon="Copy" Content="Mod" x:Name="ModDw"/>
+                        <ui:NavigationViewItem FontFamily="MiSans Medium"  Icon="AllApps" Content="整合包" x:Name="PackageDw"/>
                     </ui:NavigationView.MenuItems>
                 </ui:NavigationView>
             </Border>

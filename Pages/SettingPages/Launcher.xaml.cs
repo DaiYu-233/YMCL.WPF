@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
+using ModernWpf;
+using Panuon.WPF.UI;
 
 namespace YMCL.Pages.SettingPages
 {
@@ -24,6 +26,7 @@ namespace YMCL.Pages.SettingPages
         public Launcher()
         {
             InitializeComponent();
+            #region 初始化
             if (File.Exists("./YMCL/DisplayInformation.txt"))
             {
                 if (File.ReadAllText("./YMCL/DisplayInformation.txt") == "false")
@@ -34,12 +37,31 @@ namespace YMCL.Pages.SettingPages
                 {
                     displayinf.IsOn = true;
                 }
-
             }
             else
             {
                 File.WriteAllText("./YMCL/DisplayInformation.txt", "true");
             }
+            if (File.Exists("./YMCL/Theme.txt"))
+            {
+                if (File.ReadAllText("./YMCL/Theme.txt") == "Dark")
+                {
+                    DarkThemeSwitch.IsOn = true;
+                    ThemeManager.Current.ApplicationTheme = ApplicationTheme.Dark;
+                    Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/YMCL;component/Styles/Dark.xaml") });
+                }
+                else
+                {
+                    DarkThemeSwitch.IsOn = false;
+                    Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/YMCL;component/Styles/Light.xaml") });
+                    ThemeManager.Current.ApplicationTheme = ApplicationTheme.Light;
+                }
+            }
+            else
+            {
+                File.WriteAllText("./YMCL/Theme.txt", "Light");
+            }
+            #endregion
         }
         private void TestFolder(string Folder)
         {
@@ -54,23 +76,39 @@ namespace YMCL.Pages.SettingPages
 
 
 
-        private void displayinf_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            
-        }
 
-        private void displayinf_MouseLeave(object sender, MouseEventArgs e)
+
+        private void SaveSettingBtn_Click(object sender, RoutedEventArgs e)
         {
+            TestFolder("./YMCL");
+            if (DarkThemeSwitch.IsOn == true)
+            {
+                ThemeManager.Current.ApplicationTheme = ApplicationTheme.Dark;
+                Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/YMCL;component/Styles/Dark.xaml") });
+            }
+            else
+            {
+                Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/YMCL;component/Styles/Light.xaml") });
+                ThemeManager.Current.ApplicationTheme = ApplicationTheme.Light;
+            }
+
             if (displayinf.IsOn == true)
             {
-                TestFolder("./YMCL");
                 File.WriteAllText("./YMCL/DisplayInformation.txt", "true");
             }
             else
             {
-                TestFolder("./YMCL");
                 File.WriteAllText("./YMCL/DisplayInformation.txt", "false");
             }
+            if (DarkThemeSwitch.IsOn == true)
+            {
+                File.WriteAllText("./YMCL/Theme.txt", "Dark");
+            }
+            else
+            {
+                File.WriteAllText("./YMCL/Theme.txt", "Light");
+            }
+            Panuon.WPF.UI.Toast.Show("成功应用设置", ToastPosition.Top);
         }
     }
 }

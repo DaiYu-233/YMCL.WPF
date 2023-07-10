@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Panuon.WPF.UI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -20,7 +21,7 @@ namespace YMCL
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : WindowX
     {
         
         Pages.LaunchPage launch = new Pages.LaunchPage();

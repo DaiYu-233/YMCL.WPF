@@ -15,14 +15,9 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Natsurainko;
 using Natsurainko.FluentCore.Extension.Windows.Service;
-using Panuon.UI.Silver;
-using System.Drawing;
-using System.Drawing.Printing;
-using WpfToast.Controls;
-using System.Threading;
-using Microsoft.VisualBasic.Devices;
 using System.Runtime.InteropServices;
-using PInvoke;
+using Microsoft.Win32;
+using Panuon.WPF.UI;
 
 namespace YMCL.Pages.SettingPages
 {
@@ -67,13 +62,11 @@ namespace YMCL.Pages.SettingPages
                     JavaCombo.SelectedItem = JavaCombo.Items[0];
                 }
             }
-            TestFolder("./YMCL/logs/setting/save");
 
-            JavaCombo.SelectedItem = System.IO.File.ReadAllText(@".\YMCL\logs\setting\save\java.log");
-            
-            SilderBox.Value = Convert.ToDouble(System.IO.File.ReadAllText(@".\YMCL\logs\setting\save\mem.log"));
             UpdateMem();
-            
+            SettingInitialization();
+
+
         }
 
         private void SettingInitialization()
@@ -82,9 +75,13 @@ namespace YMCL.Pages.SettingPages
             TestFolder("./YMCL/logs");
             TestFolder("./YMCL/logs/setting");
             TestFolder("./YMCL/logs/setting/save");
-
+            try
+            {
                 JavaCombo.SelectedItem = System.IO.File.ReadAllText(@".\YMCL\logs\setting\save\java.log");
                 SilderBox.Value = Convert.ToDouble(System.IO.File.ReadAllText(@".\YMCL\logs\setting\save\mem.log"));
+            }
+            catch { }
+                
 
             
         }
@@ -130,7 +127,8 @@ namespace YMCL.Pages.SettingPages
             {
                 JavaCombo.Items.Add(item);
             }
-            Toast.Show("扫描成功,已发现"+ JavaCombo.Items.Count.ToString() + "个Java", new ToastOptions { Icon = ToastIcons.Information, ToastMargin = new Thickness(10), Time = 5000, Location = ToastLocation.OwnerTopCenter });
+            Toast.Show("扫描成功,已发现" + JavaCombo.Items.Count.ToString() + "个Java", ToastPosition.Top);
+            //Toast.Show("扫描成功,已发现"+ JavaCombo.Items.Count.ToString() + "个Java", new ToastOptions { Icon = ToastIcons.Information, ToastMargin = new Thickness(10), Time = 5000, Location = ToastLocation.OwnerTopCenter });
             if (JavaCombo.Items.Count >= 1)
             {
                 JavaCombo.SelectedItem = JavaCombo.Items[0];
@@ -147,7 +145,7 @@ namespace YMCL.Pages.SettingPages
 
         private void AddCustomJavaBtn_Click(object sender, RoutedEventArgs e)
         {
-            System.Windows.Forms.OpenFileDialog openFileDialog = new()
+            OpenFileDialog openFileDialog = new()
             {
                 Title = "选择Java(javaw.exe)",
                 Filter = "Java|javaw.exe",
@@ -169,7 +167,7 @@ namespace YMCL.Pages.SettingPages
 
         private void Expander_Expanded(object sender, RoutedEventArgs e)
         {
-            Toast.Show("点击任意处可刷新内存信息", new ToastOptions { Icon = ToastIcons.Warning, ToastMargin = new Thickness(10), Time = 5000, Location = ToastLocation.OwnerTopCenter });
+            //Toast.Show("点击任意处可刷新内存信息", new ToastOptions { Icon = ToastIcons.Warning, ToastMargin = new Thickness(10), Time = 5000, Location = ToastLocation.OwnerTopCenter });
             UpdateMem();
         }
 
@@ -196,7 +194,9 @@ namespace YMCL.Pages.SettingPages
             TestFolder("./YMCL/logs/setting/save");
             System.IO.File.WriteAllText(@".\YMCL\logs\setting\save\java.log", (string?)JavaCombo.SelectedItem);
             System.IO.File.WriteAllText(@".\YMCL\logs\setting\save\mem.log", SilderBox.Value.ToString());
-            Toast.Show("已保存设置", new ToastOptions { Icon = ToastIcons.Information, ToastMargin = new Thickness(10), Time = 5000, Location = ToastLocation.OwnerTopCenter });
+            Panuon.WPF.UI.Toast.Show("已保存设置", ToastPosition.Top);
+
+            //Toast.Show("已保存设置", new ToastOptions { Icon = ToastIcons.Information, ToastMargin = new Thickness(10), Time = 5000, Location = ToastLocation.OwnerTopCenter });
 
         }
     }

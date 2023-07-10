@@ -5,9 +5,10 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using MinecaftOAuth;
+using MinecraftLaunch.Modules.Toolkits;
 using Newtonsoft.Json;
-using Panuon.UI.Silver;
-using WpfToast.Controls;
+using Panuon.WPF.UI;
+
 
 namespace YMCL.Pages.SettingPages
 {
@@ -31,7 +32,7 @@ namespace YMCL.Pages.SettingPages
             datagrid();
             if((accountInfos.Count) == 0)
             {
-                System.IO.File.WriteAllText(@".\YMCL\YMCL.Account.json", "[{\"AccountType\": \"离线登录\",\"Name\": \"Steve\",\"ClientToken\": \"None\",\"Password\": \"None\",\"AddTime\": \"Null\",\"Token\": \"None\"}]");
+                System.IO.File.WriteAllText(@".\YMCL\YMCL.Account.json", "[{\"AccountType\": \"离线登录\",\"Name\": \"Steve\",\"AddTime\": \"Null\"}]");
                 string tstr = System.IO.File.ReadAllText(@".\YMCL\YMCL.Account.json");
                 accountInfos = JsonConvert.DeserializeObject<List<AccountInfo>>(tstr);
             }
@@ -46,15 +47,14 @@ namespace YMCL.Pages.SettingPages
             }
             
 
-            System.IO.File.WriteAllText(@".\YMCL\logs\LoginClientToken.log", accountInfos[DataGr.SelectedIndex].ClientToken.ToString());
+
             System.IO.File.WriteAllText(@".\YMCL\logs\LoginName.log", accountInfos[DataGr.SelectedIndex].Name.ToString());
             System.IO.File.WriteAllText(@".\YMCL\logs\LoginType.log", accountInfos[DataGr.SelectedIndex].AccountType.ToString());
-            System.IO.File.WriteAllText(@".\YMCL\logs\LoginToken.log", accountInfos[DataGr.SelectedIndex].Token.ToString());
-            System.IO.File.WriteAllText(@".\YMCL\logs\LoginPassword.log", accountInfos[DataGr.SelectedIndex].Password.ToString());
+
         }
         private async void MicrosoftLogin()
         {
-            var V = MessageBoxX.Show("确定开始验证您的账户", "验证", MessageBoxButton.OKCancel);
+            var V = MessageBoxX.Show("确定开始验证您的账户\n需要打开您的浏览器进行登录\n(登录成功后需要时间扫描账户信息)", "验证", MessageBoxButton.OKCancel);
             if (V == MessageBoxResult.OK)
             {
                 addacbro.Visibility = Visibility.Hidden;
@@ -68,6 +68,8 @@ namespace YMCL.Pages.SettingPages
                 lxdl.Visibility = Visibility.Hidden;
                 return;
             }
+            TestFolder("./YMCL");
+            TestFolder("./YMCL/Accounts");
             MicrosoftAuthenticator microsoftAuthenticator = new(MinecaftOAuth.Module.Enum.AuthType.Access) { ClientId = "c06d4d68-7751-4a8a-a2ff-d1b46688f428" };
             var code = await microsoftAuthenticator.GetDeviceInfo();
             Clipboard.SetText(code.UserCode);
@@ -76,7 +78,10 @@ namespace YMCL.Pages.SettingPages
             if (V == MessageBoxResult.OK) { Process.Start(new ProcessStartInfo(code.VerificationUrl) { UseShellExecute = true, Verb = "open" }); }
             var token = await microsoftAuthenticator.GetTokenResponse(code);
             var user = await microsoftAuthenticator.AuthAsync(x => { Debug.WriteLine(x); });
-            accountInfos.Add(new AccountInfo() { AccountType = "微软登录", Name = user.Name.ToString(), Password = user.Uuid.ToString(), ClientToken=user.ClientToken,AddTime = DateTime.Now.ToString(),Token=user.AccessToken.ToString() });
+            var a = JsonConvert.SerializeObject(user, Formatting.Indented);
+            MessageBoxX.Show(a,"账户Json信息");
+            System.IO.File.WriteAllText("./YMCL/Accounts/Microsoft-"+user.Name+".json",a);
+            accountInfos.Add(new AccountInfo() { AccountType = "微软登录", Name = user.Name.ToString(),AddTime = DateTime.Now.ToString()});
             WriteFile();
 
             string str = System.IO.File.ReadAllText(@".\YMCL\YMCL.Account.json");
@@ -85,6 +90,14 @@ namespace YMCL.Pages.SettingPages
 
 
         }
+
+
+
+
+
+
+
+
 
         private void TestFolder(string Folder)
         {
@@ -108,7 +121,7 @@ namespace YMCL.Pages.SettingPages
             }
             else
             {
-                System.IO.File.WriteAllText(@".\YMCL\YMCL.Account.json", "[{\"AccountType\": \"离线登录\",\"Name\": \"Steve\",\"Password\": \"None\",\"AddTime\": \"Null\",\"Token\": \"None\",\"ClientToken\": \"None\"}]");
+                System.IO.File.WriteAllText(@".\YMCL\YMCL.Account.json", "[{\"AccountType\": \"离线登录\",\"Name\": \"Steve\",\"AddTime\": \"Null\"}]");
                 string tstr = System.IO.File.ReadAllText(@".\YMCL\YMCL.Account.json");
                 accountInfos = JsonConvert.DeserializeObject<List<AccountInfo>>(tstr);
             }
@@ -157,7 +170,7 @@ namespace YMCL.Pages.SettingPages
         {
             if(yhm2.Text != string.Empty)
             {
-                accountInfos.Add(new AccountInfo() { AccountType = "离线登录", ClientToken="None",Name = yhm2.Text, Password = "None", AddTime = DateTime.Now.ToString(),Token = "None" });
+                accountInfos.Add(new AccountInfo() { AccountType = "离线登录",Name = yhm2.Text, AddTime = DateTime.Now.ToString()});
                 WriteFile();
                 addacbro.Visibility = Visibility.Hidden;
                 mojangbro.Visibility = Visibility.Hidden;
@@ -180,7 +193,7 @@ namespace YMCL.Pages.SettingPages
         {
             if (yhm1.Text != string.Empty && mmk.Password != string.Empty)
             {
-                accountInfos.Add(new AccountInfo() { AccountType = "Mojang", Name = yhm1.Text, Password = mmk.Password,AddTime=DateTime.Now.ToString(), Token = "None" });
+                accountInfos.Add(new AccountInfo() { AccountType = "Mojang", Name = yhm1.Text, AddTime=DateTime.Now.ToString() });
                 WriteFile();
                 addacbro.Visibility = Visibility.Hidden;
                 mojangbro.Visibility = Visibility.Hidden;
@@ -203,9 +216,7 @@ namespace YMCL.Pages.SettingPages
                 NowLoginType.Text = accountInfos[DataGr.SelectedIndex].AccountType.ToString()+" - "+accountInfos[DataGr.SelectedIndex].Name.ToString();
                 System.IO.File.WriteAllText(@".\YMCL\logs\LoginName.log", accountInfos[DataGr.SelectedIndex].Name.ToString());
                 System.IO.File.WriteAllText(@".\YMCL\logs\LoginType.log", accountInfos[DataGr.SelectedIndex].AccountType.ToString());
-                System.IO.File.WriteAllText(@".\YMCL\logs\LoginToken.log", accountInfos[DataGr.SelectedIndex].Token.ToString());
-                System.IO.File.WriteAllText(@".\YMCL\logs\LoginClientToken.log", accountInfos[DataGr.SelectedIndex].ClientToken.ToString());
-                System.IO.File.WriteAllText(@".\YMCL\logs\LoginPassword.log", accountInfos[DataGr.SelectedIndex].Password.ToString());
+
                 System.IO.File.WriteAllText(@".\YMCL\logs\setting\save\LoginIndex.log", DataGr.SelectedIndex.ToString());
 
             }
@@ -213,7 +224,7 @@ namespace YMCL.Pages.SettingPages
             {
                 if ((accountInfos.Count) == 0)
                 {
-                    System.IO.File.WriteAllText(@".\YMCL\YMCL.Account.json", "[{\"AccountType\": \"离线登录\",\"Name\": \"Steve\",\"ClientToken\": \"None\",\"Password\": \"None\",\"AddTime\": \"Null\",\"Token\": \"None\"}]");
+                    System.IO.File.WriteAllText(@".\YMCL\YMCL.Account.json", "[{\"AccountType\": \"离线登录\",\"Name\": \"Steve\",\"AddTime\": \"Null\"}]");
                     string tstr = System.IO.File.ReadAllText(@".\YMCL\YMCL.Account.json");
                     accountInfos = JsonConvert.DeserializeObject<List<AccountInfo>>(tstr);
                 }
@@ -226,7 +237,7 @@ namespace YMCL.Pages.SettingPages
             accountInfos.RemoveAt(DataGr.SelectedIndex);
             if ((accountInfos.Count) == 0)
             {
-                System.IO.File.WriteAllText(@".\YMCL\YMCL.Account.json", "[{\"AccountType\": \"离线登录\",\"Name\": \"Steve\",\"ClientToken\": \"None\",\"Password\": \"None\",\"AddTime\": \"Null\",\"Token\": \"None\"}]");
+                System.IO.File.WriteAllText(@".\YMCL\YMCL.Account.json", "[{\"AccountType\": \"离线登录\",\"Name\": \"Steve\",\"AddTime\": \"Null\"}]");
                 string tstr = System.IO.File.ReadAllText(@".\YMCL\YMCL.Account.json");
                 accountInfos = JsonConvert.DeserializeObject<List<AccountInfo>>(tstr);
             }
@@ -243,7 +254,7 @@ namespace YMCL.Pages.SettingPages
             TestFolder("./YMCL/logs/setting");
             TestFolder("./YMCL/logs/setting/save");
             System.IO.File.WriteAllText(@".\YMCL\logs\setting\save\LoginName.log", accountInfos[DataGr.SelectedIndex].Name.ToString());
-            Toast.Show("已保存账户设置", new ToastOptions { Icon = ToastIcons.Information, ToastMargin = new Thickness(10), Time = 5000, Location = ToastLocation.OwnerTopCenter });
+            Panuon.WPF.UI.Toast.Show("已保存账户设置", ToastPosition.Top);
         }
     }
 }
