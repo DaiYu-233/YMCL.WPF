@@ -256,5 +256,9 @@ namespace YMCL.Pages.SettingPages
             System.IO.File.WriteAllText(@".\YMCL\logs\setting\save\LoginName.log", accountInfos[DataGr.SelectedIndex].Name.ToString());
             Panuon.WPF.UI.Toast.Show("已保存账户设置", ToastPosition.Top);
         }
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            Toast.Show("启动逻辑尚未完善,建议使用离线模式", ToastPosition.Top);
+        }
     }
 }

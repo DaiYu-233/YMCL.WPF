@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:YMCL.Pages.SettingPages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="840"
-      Title="Account">
+      Title="Account" Loaded="Page_Loaded">
     <Border Background="{DynamicResource ThemeBackground}" CornerRadius="0,0,8,0">
         <Grid  >
             <Button x:Name="AddAcount" Content="添加新账户" Height="29" Margin="10,10,0,0" VerticalAlignment="Top" Width="161" FontFamily="MiSans Medium" Click="AddAcount_Click"/>

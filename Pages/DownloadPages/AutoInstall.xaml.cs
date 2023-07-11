@@ -540,7 +540,7 @@ namespace YMCL.Pages.DownloadPages
             //}
 
 
-            NoticeBox.Show($"游戏核心 {System.IO.File.ReadAllText("./YMCL/logs/InsVer.log")} 安装完成", "提示", MessageBoxIcon.Success);
+            //NoticeBox.Show($"游戏核心 {System.IO.File.ReadAllText("./YMCL/logs/InsVer.log")} 安装完成", "提示", MessageBoxIcon.Success);
             MessageBoxX.Show($"游戏核心 {System.IO.File.ReadAllText("./YMCL/logs/InsVer.log")} 安装完成");
             
             DownloadInfo.Visibility = Visibility.Hidden;
