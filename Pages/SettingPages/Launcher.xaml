@@ -10,25 +10,29 @@
     <Border Background="{DynamicResource ThemeBackground}" CornerRadius="0,0,8,0">
 
         <Grid>
-            <Border HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Width="820" Background="{DynamicResource ThemeContentBorderBackground}" CornerRadius="3,3,3,3" Height="117">
+            <Border HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Width="820" Background="{DynamicResource ThemeContentBorderBackground}" CornerRadius="3,3,3,3" Height="95">
                 <Grid>
-                    <TextBlock FontFamily="MiSans Medium" Text="个性化" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="9,5,0,0" FontSize="14" Foreground="{DynamicResource ThemeTextColor}"/>
-                    <Border Background="{DynamicResource ThemeContentContentBorderBackground}" CornerRadius="3,3,3,3" Margin="10,27,10,0" Height="35" VerticalAlignment="Top">
-                        <Grid>
-                            <TextBlock FontFamily="MiSans Medium" Text="深色主题" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="8,0,0,0" FontSize="14" Foreground="{DynamicResource ThemeTextColor}"/>
-                            <ui:ToggleSwitch x:Name="DarkThemeSwitch" Width="82" Height="32" IsOn="False" FontSize="14" FontFamily="MiSans Medium" Margin="718,0,0,0"/>
+                    <TextBlock FontFamily="MiSans Medium" Text="个性化" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="9,7,0,0" FontSize="13" Foreground="{DynamicResource ThemeTextColor}"/>
+                    <Grid Margin="0,26,0,0">
+                    <Grid Height="30" VerticalAlignment="Top" Margin="10,0,10,0">
+                            <TextBlock FontFamily="MiSans Medium" Text="显示信息" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="8,0,0,0" FontSize="14" Foreground="{DynamicResource ThemeTextColor}"/>
+                            <ui:ToggleSwitch x:Name="displayinf" Width="82" Height="28" IsOn="True" FontSize="14" FontFamily="MiSans Medium" Margin="718,-4,0,0"/>
                         </Grid>
-                    </Border>
-                    <Border Background="{DynamicResource ThemeContentContentBorderBackground}" CornerRadius="3,3,3,3" Margin="10,72,10,0" Height="35" VerticalAlignment="Top">
-                        <Grid>
-                            <TextBlock FontFamily="MiSans Medium" Text="显示Java和账户信息" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="8,0,0,0" FontSize="14" Foreground="{DynamicResource ThemeTextColor}"/>
-                            <ui:ToggleSwitch x:Name="displayinf" Width="82" Height="32" IsOn="True" FontSize="14" FontFamily="MiSans Medium" Margin="718,0,0,0"/>
-                        </Grid>
-                    </Border>
+                    <Grid Height="30" Margin="10,30,10,0" VerticalAlignment="Top">
+                         <TextBlock FontFamily="MiSans Medium" Text="深色主题" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="8,0,0,0" FontSize="14" Foreground="{DynamicResource ThemeTextColor}"/>
+                        <ui:ToggleSwitch x:Name="DarkThemeSwitch" Width="82" Height="28" IsOn="False" FontSize="14" FontFamily="MiSans Medium" Margin="718,-4,0,0"/>
+                    </Grid>
+                    </Grid>
 
                 </Grid>
             </Border>
             <Button x:Name="SaveSettingBtn" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-35,15,0" Height="30" Width="130" FontFamily="MiSans Medium" Content="应用更改" Click="SaveSettingBtn_Click"/>
+            <Border HorizontalAlignment="Center" Margin="0,115,0,0" VerticalAlignment="Top" Width="820" Background="{DynamicResource ThemeContentBorderBackground}" CornerRadius="3,3,3,3" Height="40">
+                <Grid>
+                    <TextBlock FontFamily="MiSans Medium" Text="外部启动" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="14,0,0,0" FontSize="14" Foreground="{DynamicResource ThemeTextColor}"/>
+                    <Button HorizontalAlignment="Right" Height="30" Width="127" Margin="0,0,5,0" FontFamily="MiSans Medium" Content="写入注册表" IsCancel="True" FontSize="13" Click="Button_Click"/>
+                </Grid>
+            </Border>
 
         </Grid>
     </Border>

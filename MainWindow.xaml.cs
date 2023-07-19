@@ -1,6 +1,8 @@
-﻿using Panuon.WPF.UI;
+﻿using Microsoft.Win32;
+using Panuon.UI.Silver;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -21,9 +23,11 @@ namespace YMCL
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : WindowX
+    public partial class MainWindow : Window
     {
         
+
+
         Pages.LaunchPage launch = new Pages.LaunchPage();
         Frame setting = new Frame() { Content = new Pages.SettingPage() };
         Frame download = new Frame() { Content = new Pages.DownloadPage() };
@@ -31,6 +35,25 @@ namespace YMCL
         public MainWindow()
         {
             InitializeComponent();
+            string path = System.AppDomain.CurrentDomain.BaseDirectory+"YMCL.exe";
+            if (System.IO.Directory.Exists("./YMCL")) { }
+            else
+            {
+                System.IO.DirectoryInfo directoryInfo = new System.IO.DirectoryInfo("./YMCL");
+                directoryInfo.Create();
+            }
+
+            //try { Registry.ClassesRoot.DeleteSubKey("YMCL"); } catch { }
+            
+            //RegistryKey registryKeyRoot = Registry.ClassesRoot.CreateSubKey("YMCL");
+            //registryKeyRoot.SetValue(default, "Yu Minecraft Launcher");
+            //registryKeyRoot.SetValue("URL Protocol", path);
+            //RegistryKey registryKeya = Registry.ClassesRoot.OpenSubKey(@"YMCL", true).CreateSubKey("DefaultIcon");
+            //registryKeya.SetValue(default, path);
+            //RegistryKey registryKeyb = Registry.ClassesRoot.OpenSubKey(@"YMCL", true).CreateSubKey(@"shell\open\command");
+            //registryKeyb.SetValue(default, path);
+
+
             if (System.IO.Directory.Exists("./YMCL")) { } else
             {
                 System.IO.DirectoryInfo directoryInfo = new System.IO.DirectoryInfo("./YMCL");
@@ -41,6 +64,8 @@ namespace YMCL
             
 
         }
+
+
 
         private void btnMinimize_Click(object sender, RoutedEventArgs e)
         {

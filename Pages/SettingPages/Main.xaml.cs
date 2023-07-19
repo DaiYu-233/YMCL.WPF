@@ -17,7 +17,11 @@ using Natsurainko;
 using Natsurainko.FluentCore.Extension.Windows.Service;
 using System.Runtime.InteropServices;
 using Microsoft.Win32;
-using Panuon.WPF.UI;
+using Panuon.UI.Silver;
+using System.IO;
+using WpfToast.Controls;
+using Toast = WpfToast.Controls.Toast;
+using YMCL.Class;
 
 namespace YMCL.Pages.SettingPages
 {
@@ -75,6 +79,21 @@ namespace YMCL.Pages.SettingPages
             TestFolder("./YMCL/logs");
             TestFolder("./YMCL/logs/setting");
             TestFolder("./YMCL/logs/setting/save");
+            if (File.Exists("./YMCL/logs/setting/save/alonecore.log"))
+            {
+                if (File.ReadAllText("./YMCL/logs/setting/save/alonecore.log") == "true")
+                {
+                    AloneCoreSwitch.IsOn = true;
+                }
+                else
+                {
+                    AloneCoreSwitch.IsOn = false;
+                }
+            }
+            else
+            {
+                File.WriteAllText("./YMCL/logs/setting/save/alonecore.log", "true");
+            }
             try
             {
                 JavaCombo.SelectedItem = System.IO.File.ReadAllText(@".\YMCL\logs\setting\save\java.log");
@@ -127,7 +146,7 @@ namespace YMCL.Pages.SettingPages
             {
                 JavaCombo.Items.Add(item);
             }
-            Toast.Show("扫描成功,已发现" + JavaCombo.Items.Count.ToString() + "个Java", ToastPosition.Top);
+            Toast.Show("扫描成功,已发现" + JavaCombo.Items.Count.ToString() + "个Java", new ToastOptions { Icon = ToastIcons.Information, ToastMargin = new Thickness(10), Time = 1500, Location = ToastLocation.OwnerTopCenter });
             //Toast.Show("扫描成功,已发现"+ JavaCombo.Items.Count.ToString() + "个Java", new ToastOptions { Icon = ToastIcons.Information, ToastMargin = new Thickness(10), Time = 5000, Location = ToastLocation.OwnerTopCenter });
             if (JavaCombo.Items.Count >= 1)
             {
@@ -194,10 +213,33 @@ namespace YMCL.Pages.SettingPages
             TestFolder("./YMCL/logs/setting/save");
             System.IO.File.WriteAllText(@".\YMCL\logs\setting\save\java.log", (string?)JavaCombo.SelectedItem);
             System.IO.File.WriteAllText(@".\YMCL\logs\setting\save\mem.log", SilderBox.Value.ToString());
-            Panuon.WPF.UI.Toast.Show("已保存设置", ToastPosition.Top);
+            if (AloneCoreSwitch.IsOn==true)
+            {
+                File.WriteAllText("./YMCL/logs/setting/save/alonecore.log", "true");
+            }
+            else
+            {
+                File.WriteAllText("./YMCL/logs/setting/save/alonecore.log", "false");
+            }
+            //Panuon.WPF.UI.Toast.Show("已保存设置", ToastPosition.Top);
 
-            //Toast.Show("已保存设置", new ToastOptions { Icon = ToastIcons.Information, ToastMargin = new Thickness(10), Time = 5000, Location = ToastLocation.OwnerTopCenter });
+            Toast.Show("已保存设置", new ToastOptions { Icon = ToastIcons.Information, ToastMargin = new Thickness(10), Time = 1500, Location = ToastLocation.OwnerTopCenter });
 
+        }
+
+        private void AloneCoreSwitch_Toggled(object sender, RoutedEventArgs e)
+        {
+            TestFolder("./YMCL");
+            TestFolder("./YMCL/logs");
+            TestFolder("./YMCL/logs/setting");
+            if (AloneCoreSwitch.IsOn == true)
+            {
+                File.WriteAllText("./YMCL/logs/setting/alonecore.log", "true");
+            }
+            else
+            {
+                File.WriteAllText("./YMCL/logs/setting/alonecore.log", "false");
+            }
         }
     }
 }

@@ -16,7 +16,8 @@ using MinecraftLaunch;
 using MinecraftLaunch.Modules.Installer;
 using MinecraftLaunch.Modules.Models.Install;
 using MinecraftLaunch.Modules.Toolkits;
-using Panuon.WPF.UI;
+using Panuon.UI.Silver;
+using WpfToast.Controls;
 
 namespace YMCL.Pages.DownloadPages
 {
@@ -53,21 +54,29 @@ namespace YMCL.Pages.DownloadPages
         }
         private async void ReGetVer()
         {
-            
-            await Task.Run(async () =>
+            try
             {
-                
-                Dispatcher.BeginInvoke(() => { RefreshVerListBtn.IsEnabled = false; });
-                Dispatcher.BeginInvoke(() => { vers.Clear(); });
-                var res = GameCoreInstaller.GetGameCoresAsync().Result.Cores.ToList();
-                res.ForEach(x =>
+                await Task.Run(async () =>
                 {
-                    Dispatcher.BeginInvoke(() => { vers.Add(new Ver() { Id = x.Id, ReleaseTime = x.ReleaseTime.ToString() }); });
+
+                    Dispatcher.BeginInvoke(() => { RefreshVerListBtn.IsEnabled = false; });
+                    Dispatcher.BeginInvoke(() => { vers.Clear(); });
+                    var res = GameCoreInstaller.GetGameCoresAsync().Result.Cores.ToList();
+                    res.ForEach(x =>
+                    {
+                        Dispatcher.BeginInvoke(() => { vers.Add(new Ver() { Id = x.Id, ReleaseTime = x.ReleaseTime.ToString() }); });
+                    });
+                    Dispatcher.BeginInvoke(() => { VerListView.ItemsSource = vers; });
+                    Dispatcher.BeginInvoke(() => { RefreshVerListBtn.IsEnabled = true; });
                 });
-                Dispatcher.BeginInvoke(() => { VerListView.ItemsSource = vers; }) ;
-                Dispatcher.BeginInvoke(() => { RefreshVerListBtn.IsEnabled = true;  });
-            });
-            
+            }
+            catch
+            {
+                Toast.Show("获取版本失败，这可能是网络问题", new ToastOptions { Icon = ToastIcons.Information, ToastMargin = new Thickness(10), Time = 3000, Location = ToastLocation.OwnerTopCenter });
+
+            }
+
+
         }
         private async void GetForgeVer()
         {

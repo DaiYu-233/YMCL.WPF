@@ -1,4 +1,4 @@
-﻿using Panuon.WPF.UI;
+﻿using Panuon.UI.Silver;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;

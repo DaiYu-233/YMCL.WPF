@@ -7,8 +7,9 @@ using System.Windows.Controls;
 using MinecaftOAuth;
 using MinecraftLaunch.Modules.Toolkits;
 using Newtonsoft.Json;
-using Panuon.WPF.UI;
-
+using Panuon.UI.Silver;
+using WpfToast.Controls;
+using YMCL.Class;
 
 namespace YMCL.Pages.SettingPages
 {
@@ -254,11 +255,12 @@ namespace YMCL.Pages.SettingPages
             TestFolder("./YMCL/logs/setting");
             TestFolder("./YMCL/logs/setting/save");
             System.IO.File.WriteAllText(@".\YMCL\logs\setting\save\LoginName.log", accountInfos[DataGr.SelectedIndex].Name.ToString());
-            Panuon.WPF.UI.Toast.Show("已保存账户设置", ToastPosition.Top);
+            Toast.Show("已保存账户设置", new ToastOptions { Icon = ToastIcons.Information, ToastMargin = new Thickness(10), Time = 1500, Location = ToastLocation.OwnerTopCenter });
+
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            Toast.Show("启动逻辑尚未完善,建议使用离线模式", ToastPosition.Top);
+            //Toast.Show("启动逻辑尚未完善,建议使用离线模式", ToastPosition.Top);
         }
     }
 }

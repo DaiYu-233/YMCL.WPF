@@ -15,16 +15,16 @@
             <!--Java-->
             <Border HorizontalAlignment="Center" Height="45" Margin="0,10,0,0" VerticalAlignment="Top" Width="820" Background="{DynamicResource ThemeContentBorderBackground}" CornerRadius="3,3,3,3">
                 <Grid>
-                    <TextBlock FontFamily="MiSans Medium" Text="Java" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="18,0,0,0" FontSize="16" Foreground="{DynamicResource ThemeTextColor}"/>
+                    <TextBlock FontFamily="MiSans Medium" Text="Java" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="18,0,0,0" FontSize="15" Foreground="{DynamicResource ThemeTextColor}"/>
                     <ComboBox x:Name="JavaCombo"  FontFamily="MiSans Medium" Width="572" VerticalAlignment="Center" Margin="76,0,0,0" SelectedIndex="0" SelectionChanged="JavaCombo_SelectionChanged" />
                     <Button x:Name="AddCustomJavaBtn" Content="手动添加" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="716,6,10,7" FontFamily="MiSans Medium" Click="AddCustomJavaBtn_Click"/>
                     <Button x:Name="AutoJavaBtn" Content="扫描" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="653,6,109,7" FontFamily="MiSans Medium" Click="Button_Click"/>
                 </Grid>
             </Border>
-            <Border HorizontalAlignment="Center" Height="45" Margin="0,65,0,0" VerticalAlignment="Top" Width="820" Background="{DynamicResource ThemeContentBorderBackground}" CornerRadius="3,3,3,3">
+            <Border HorizontalAlignment="Center" Height="37" Margin="0,65,0,0" VerticalAlignment="Top" Width="820" Background="{DynamicResource ThemeContentBorderBackground}" CornerRadius="3,3,3,3">
                 <Grid>
-                    <TextBlock FontFamily="MiSans Medium" Text="游戏内存" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="18,0,0,0" FontSize="16" Foreground="{DynamicResource ThemeTextColor}"/>
-                    <Expander Header="内存信息" Margin="104,13,354,-67" FontFamily="MiSans Medium" Background="{x:Null}" Expanded="Expander_Expanded">
+                    <TextBlock FontFamily="MiSans Medium" Text="游戏内存" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="18,0,0,0" FontSize="15" Foreground="{DynamicResource ThemeTextColor}"/>
+                    <Expander Visibility="Hidden" Header="内存信息" Margin="104,13,354,-67" FontFamily="MiSans Medium" Background="{x:Null}" Expanded="Expander_Expanded">
                         <Border Margin="0,1,0,19" CornerRadius="3,3,3,3" Background="{DynamicResource ThemeContentContentBorderBackground}">
                             <Grid Margin="0,0,0,-17">
                                 <Border HorizontalAlignment="Left" VerticalAlignment="Top" Width="114" Height="47" Margin="5,5,0,0" BorderBrush="#FFF1FF00" BorderThickness="3,3,3,3" CornerRadius="3,3,3,3" Background="#FFF8FF86">
@@ -50,10 +50,16 @@
                     </Expander>
                     <TextBlock x:Name="SilderInfo" VerticalAlignment="Center" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Width="61" Height="16" Text="256G" FontFamily="MiSans Medium" TextAlignment="Center" Margin="754,0,0,0" Foreground="{DynamicResource ThemeTextColor}">
                     </TextBlock>
-                    <Slider x:Name="SilderBox" HorizontalAlignment="Left" Margin="321,0,0,0" VerticalAlignment="Center" Width="426" SmallChange="1" Minimum="1" Value="1024" Maximum="2048" ValueChanged="Silder_ValueChanged"/>
+                    <Slider x:Name="SilderBox" HorizontalAlignment="Left" Margin="246,0,0,0" VerticalAlignment="Center" Width="501" SmallChange="1" Minimum="1" Value="1024" Maximum="2048" ValueChanged="Silder_ValueChanged"/>
                 </Grid>
             </Border>
             <Button x:Name="SaveSettingBtn" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-35,15,0" Height="30" Width="161" FontFamily="MiSans Medium" Content="保存设置信息" Click="SaveSettingBtn_Click"/>
+            <Border HorizontalAlignment="Center" Height="40" Margin="0,112,0,0" VerticalAlignment="Top" Width="820" Background="{DynamicResource ThemeContentBorderBackground}" CornerRadius="3,3,3,3">
+                <Grid>
+                    <TextBlock FontFamily="MiSans Medium" Text="版本隔离" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="18,0,0,0" FontSize="15" Foreground="{DynamicResource ThemeTextColor}"/>
+                    <ui:ToggleSwitch x:Name="AloneCoreSwitch" FontFamily="MiSans Medium" IsOn="True" Margin="735,0,0,0" Width="85" Toggled="AloneCoreSwitch_Toggled"/>
+                </Grid>
+            </Border>
         </Grid>
     </Border>
 
