@@ -23,6 +23,7 @@ namespace YMCL.Pages
         Frame main = new Frame() { Content = new Pages.SettingPages.Main() };
         Frame qdqq = new Frame() { Content = new Pages.SettingPages.Launcher() };
         Frame account = new Frame() { Content = new Pages.SettingPages.Account() };
+        Frame down = new Frame() { Content = new Pages.SettingPages.Download() };
         public SettingPage()
         {
             InitializeComponent();
@@ -42,6 +43,9 @@ namespace YMCL.Pages
             else if (qdq.IsSelected)
             {
                 MainFrame.Content = qdqq;
+            }else if (download.IsSelected)
+            {
+                MainFrame.Content = down;
             }
         }
     }

@@ -8,14 +8,21 @@ namespace YMCL.Class
 {
     public class SettingInfo
     {
-        public string? Java { get; set; }
-        public string? AloneCore { get; set; }
-        public string? LoginIndex { get; set; }
-        public string? LoginName { get; set; }
-        public string? LoginType { get; set; }
-        public string? LoginName { get; set; }
-        public string? LoginName { get; set; }
-        public string? LoginName { get; set; }
-        public string? LoginName { get; set; }
+
+            public string? Java { get; set; }
+            public string? MaxMem { get; set; }
+            public string? AloneCore { get; set; }
+
+
+            public string? LoginIndex { get; set; }
+            public string? LoginName { get; set; }
+            public string? LoginType { get; set; }
+
+
+            public string? Theme { get; set; }
+            public string? DisplayInformation { get; set; }
+
+            public string? DownloadSoure { get; set; }
+            public string? MaxDownloadThreads { get; set; }
     }
 }

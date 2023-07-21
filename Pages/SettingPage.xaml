@@ -12,8 +12,9 @@
             <Border VerticalAlignment="Top" Height="40" Background="{DynamicResource ThemeNavigationBackground}">
                 <ui:NavigationView IsSettingsVisible="False" PaneDisplayMode="Top" IsBackButtonVisible="Collapsed" Background="White" FontFamily="MiSans Medium" SelectionChanged="NavigationView_SelectionChanged" Margin="8,0,8,0" >
                     <ui:NavigationView.MenuItems>
-                        <ui:NavigationViewItem FontFamily="MiSans Medium"  IsSelected="True" Icon="Setting" Content="通用" x:Name="ty"/>
+                        <ui:NavigationViewItem FontFamily="MiSans Medium"  IsSelected="True" Icon="Setting" Content="启动" x:Name="ty"/>
                         <ui:NavigationViewItem  FontFamily="MiSans Medium" Icon="Contact" Content="账户" x:Name="zh"/>
+                        <ui:NavigationViewItem  FontFamily="MiSans Medium" Icon="Download" Content="下载" x:Name="download"/>
                         <ui:NavigationViewItem  FontFamily="MiSans Medium" Icon="Tag" Content="启动器"   x:Name="qdq"/>
 
                     </ui:NavigationView.MenuItems>

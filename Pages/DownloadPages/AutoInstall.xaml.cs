@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,8 +17,14 @@ using MinecraftLaunch;
 using MinecraftLaunch.Modules.Installer;
 using MinecraftLaunch.Modules.Models.Install;
 using MinecraftLaunch.Modules.Toolkits;
+using Natsurainko.FluentCore.Model.Install.Forge;
+using Natsurainko.FluentCore.Module.Downloader;
+using Natsurainko.FluentCore.Module.Installer;
+using Natsurainko.FluentCore.Module.Launcher;
+using Natsurainko.FluentCore.Service;
+using Newtonsoft.Json;
 using Panuon.UI.Silver;
-using WpfToast.Controls;
+using YMCL.Class;
 
 namespace YMCL.Pages.DownloadPages
 {
@@ -34,8 +41,6 @@ namespace YMCL.Pages.DownloadPages
         public AutoInstall()
         {
             InitializeComponent();
-            TestFolder("./YMCL");
-            TestFolder("./YMCL/logs");
             ReGetVer();
 
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(VerListView.Items);
@@ -52,6 +57,7 @@ namespace YMCL.Pages.DownloadPages
                 return ((item as Ver).Id.IndexOf(SearBox.Text, StringComparison.OrdinalIgnoreCase)>=0);
             }
         }
+        #region GetGame
         private async void ReGetVer()
         {
             try
@@ -72,7 +78,6 @@ namespace YMCL.Pages.DownloadPages
             }
             catch
             {
-                Toast.Show("获取版本失败，这可能是网络问题", new ToastOptions { Icon = ToastIcons.Information, ToastMargin = new Thickness(10), Time = 3000, Location = ToastLocation.OwnerTopCenter });
 
             }
 
@@ -80,63 +85,69 @@ namespace YMCL.Pages.DownloadPages
         }
         private async void GetForgeVer()
         {
-
+            VerForgeListView.Items.Clear();
             await Task.Run(async () =>
             {
-                var res = ForgeInstaller.GetForgeBuildsOfVersionAsync(System.IO.File.ReadAllText("./YMCL/logs/InsVer.log")).Result.ToList();
-                Dispatcher.BeginInvoke(() => { VerForgeListView.Items.Clear(); });
-                res.ForEach(x =>
+                var builds = MinecraftForgeInstaller.GetForgeBuildsFromMcVersionAsync(File.ReadAllText("./YMCL/Temp/InsVer.log")).GetAwaiter().GetResult().ToList();
+                builds.ForEach(x =>
                 {
                     Dispatcher.BeginInvoke(() => { VerForgeListView.Items.Add(x); });
                 });
             });
-
+            ForgeProgressRing.Visibility = Visibility.Hidden;
         }
         private async void GetFabricVer()
         {
-
+            VerFabricListView.Items.Clear();
             await Task.Run(async () =>
             {
-                var res = (await FabricInstaller.GetFabricBuildsByVersionAsync(System.IO.File.ReadAllText("./YMCL/logs/InsVer.log"))).ToList();
-                Dispatcher.BeginInvoke(() => { VerFabricListView.Items.Clear(); });
+                var res = MinecraftFabricInstaller.GetFabricBuildsFromMcVersionAsync(File.ReadAllText("./YMCL/Temp/InsVer.log")).GetAwaiter().GetResult().ToList();
                 res.ForEach(x =>
                 {
                     Dispatcher.BeginInvoke(() => { VerFabricListView.Items.Add(x); });
                 });
             });
-
+            FabricProgressRing.Visibility = Visibility.Hidden;
         }
         private async void GetOptiFineVer()
         {
-
+            VerOptiFineListView.Items.Clear();
             await Task.Run(async () =>
             {
-                var res = OptiFineInstaller.GetOptiFineBuildsFromMcVersionAsync(System.IO.File.ReadAllText("./YMCL/logs/InsVer.log")).Result.ToList();
-                Dispatcher.BeginInvoke(() => { VerOptiFineListView.Items.Clear(); });
+                var res = MinecraftOptiFineInstaller.GetOptiFineBuildsFromMcVersionAsync(File.ReadAllText("./YMCL/Temp/InsVer.log")).GetAwaiter().GetResult().ToList();
+
                 res.ForEach(x =>
                 {
                     Dispatcher.BeginInvoke(() => { VerOptiFineListView.Items.Add(x); });
                 });
             });
-
+            OptiFineProgressRing.Visibility = Visibility.Hidden;
         }
         private async void GetQuiltVer()
         {
-
+            VerQuiltListView.Items.Clear();
             await Task.Run(async () =>
             {
-                var res = QuiltInstaller.GetQuiltBuildsByVersionAsync(System.IO.File.ReadAllText("./YMCL/logs/InsVer.log")).Result.ToList();
-                Dispatcher.BeginInvoke(() => { VerQuiltListView.Items.Clear(); });
+                var res = MinecraftQuiltInstaller.GetQuiltBuildsFromMcVersionAsync(System.IO.File.ReadAllText("./YMCL/Temp/InsVer.log")).GetAwaiter().GetResult().ToList();
                 res.ForEach(x =>
                 {
                     Dispatcher.BeginInvoke(() => { VerQuiltListView.Items.Add(x); });
                 });
             });
-
+            QuiltProgressRing.Visibility = Visibility.Hidden;
         }
-
+        #endregion
 
         #region
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            DownloadInfo.Visibility = Visibility.Hidden;
+        }
+
+        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            DownloadInfo.Visibility = Visibility.Visible;
+        }
         public class Ver
         {
             public string? Id { get; set; }
@@ -290,9 +301,13 @@ namespace YMCL.Pages.DownloadPages
             Step1Br.Visibility = Visibility.Hidden;
             Step2Br.Visibility = Visibility.Visible;
             InstallVerText.Text = VerListView.SelectedValue.ToString();
-            TestFolder("./YMCL");
-            TestFolder("./YMCL/logs");
-            System.IO.File.WriteAllText("./YMCL/logs/InsVer.log", VerListView.SelectedValue.ToString());
+
+            ForgeProgressRing.Visibility = Visibility.Visible;
+            OptiFineProgressRing.Visibility = Visibility.Visible;
+            FabricProgressRing.Visibility = Visibility.Visible;
+            QuiltProgressRing.Visibility = Visibility.Visible;
+
+            System.IO.File.WriteAllText("./YMCL/Temp/InsVer.log", VerListView.SelectedValue.ToString());
 
         }
 
@@ -308,18 +323,12 @@ namespace YMCL.Pages.DownloadPages
         {
             CloseInses();
         }
-        private void TestFolder(string Folder)
-        {
-            if (System.IO.Directory.Exists(Folder)) { }
-            else
-            {
-                System.IO.DirectoryInfo directoryInfo = new System.IO.DirectoryInfo(Folder);
-                directoryInfo.Create();
-            }
-        }
-        #endregion
+
+
+
         private void ToForgeBtn_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            
             if (IsQuilt || IsFabric)
             {
                 MessageBoxX.Show("Forge与Fabric或Quilt不兼容!");
@@ -335,14 +344,15 @@ namespace YMCL.Pages.DownloadPages
         {
             if (VerForgeListView.SelectedIndex >= 0)
             {
+
+                Natsurainko.FluentCore.Model.Install.Forge.ForgeInstallBuild forgeInstallBuild
+                    = VerForgeListView.SelectedItem as Natsurainko.FluentCore.Model.Install.Forge.ForgeInstallBuild;
                 CloseInses();
-                TestFolder("./YMCL");
-                TestFolder("./YMCL/logs");
-                System.IO.File.WriteAllText("./YMCL/logs/InsForge.log", VerForgeListView.SelectedValue.ToString());
                 IsForge = true;
                 FabricInfo.Text = "与Forge不兼容";
-                ForgeInfo.Text = VerForgeListView.SelectedValue.ToString();
+                ForgeInfo.Text = forgeInstallBuild.BuildVersion;
                 QuiltInfo.Text = "与Forge不兼容";
+
                 TestIns();
             }
         }
@@ -362,11 +372,11 @@ namespace YMCL.Pages.DownloadPages
 
         private void ToOptiFineBtn_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (IsFabric)
+            
+            if (IsFabric||IsQuilt)
             {
-                MessageBoxX.Show("已选择安装Fabric,需要安装OptiFabric,否则会导致OptiFine无法使用!");
-                OptiFineBr.Visibility = Visibility.Visible;
-                GetOptiFineVer();
+                MessageBoxX.Show("OptiFine与Fabric或Quilt不兼容!");
+                return;
             }
             else
             {
@@ -380,21 +390,23 @@ namespace YMCL.Pages.DownloadPages
         {
             if (VerOptiFineListView.SelectedIndex >= 0)
             {
+                Natsurainko.FluentCore.Model.Install.OptiFine.OptiFineInstallBuild obj
+                    = VerOptiFineListView.SelectedItem as Natsurainko.FluentCore.Model.Install.OptiFine.OptiFineInstallBuild;
                 CloseInses();
-                TestFolder("./YMCL");
-                TestFolder("./YMCL/logs");
-                System.IO.File.WriteAllText("./YMCL/logs/InsOptiFine.log", VerOptiFineListView.SelectedValue.ToString());
+                FabricInfo.Text = "与OptiFine不兼容";
+                QuiltInfo.Text = "与OptiFine不兼容";
                 IsOptiFine = true;
-                OptiFineInfo.Text = VerOptiFineListView.SelectedValue.ToString();
+                OptiFineInfo.Text = obj.BuildVersion;
                 TestIns();
             }
         }
 
         private void ToFabricBtn_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (IsForge||IsQuilt)
+            
+            if (IsForge||IsQuilt||IsOptiFine)
             {
-                MessageBoxX.Show("Fabric与Forge或Quilt不兼容!"); 
+                MessageBoxX.Show("Fabric与Forge、OptiFine或Quilt不兼容!"); 
             }
             else
             {
@@ -408,21 +420,24 @@ namespace YMCL.Pages.DownloadPages
         {
             if (VerFabricListView.SelectedIndex >= 0)
             {
+                Natsurainko.FluentCore.Model.Install.Fabric.FabricInstallBuild obj
+                    = VerFabricListView.SelectedItem as Natsurainko.FluentCore.Model.Install.Fabric.FabricInstallBuild;
                 CloseInses();
-                TestFolder("./YMCL");
-                TestFolder("./YMCL/logs");
-                System.IO.File.WriteAllText("./YMCL/logs/InsFabric.log", VerFabricListView.SelectedValue.ToString());
+                OptiFineInfo.Text = "与Fabric不兼容";
+                QuiltInfo.Text = "与Fabric不兼容";
+                ForgeInfo.Text = "与Fabric不兼容";
                 IsFabric = true;
-                FabricInfo.Text = VerFabricListView.SelectedValue.ToString();
+                FabricInfo.Text = obj.BuildVersion;
                 TestIns();
             }
         }
 
         private void ToQuiltBtn_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (IsFabric || IsForge)
+            
+            if (IsFabric || IsForge||IsOptiFine)
             {
-                MessageBoxX.Show("Quilt与Forge或Fabric不兼容!"); 
+                MessageBoxX.Show("Quilt与Forge、OptiFine或Fabric不兼容!");
             }
             else
             {
@@ -434,136 +449,77 @@ namespace YMCL.Pages.DownloadPages
 
         private void VerQuiltListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (VerFabricListView.SelectedIndex >= 0)
+            if (VerQuiltListView.SelectedIndex >= 0)
             {
+                Natsurainko.FluentCore.Model.Install.Quilt.QuiltInstallBuild obj
+                    = VerQuiltListView.SelectedItem as Natsurainko.FluentCore.Model.Install.Quilt.QuiltInstallBuild;
                 CloseInses();
-                TestFolder("./YMCL");
-                TestFolder("./YMCL/logs");
-                System.IO.File.WriteAllText("./YMCL/logs/InsQuilt.log", VerQuiltListView.SelectedValue.ToString());
+                OptiFineInfo.Text = "与Fabric不兼容";
+                FabricInfo.Text = "与Fabric不兼容";
+                ForgeInfo.Text = "与Fabric不兼容";
                 IsQuilt = true;
-                QuiltInfo.Text = VerQuiltListView.SelectedValue.ToString();
+                QuiltInfo.Text = obj.BuildVersion;
                 TestIns();
             }
         }
-
+        #endregion
         private async void StartInsBtn_Click(object sender, RoutedEventArgs e)
         {
-            MinecraftLaunch.Modules.Models.Install.ForgeInstallEntity forgeInstallEntity = null;
-            OptiFineInstallEntity optiFineInstallEntity = null;
-            installbz.Text = "Vanllia";
-            int a = 0;
-            qqqqq.Text = "";
+            var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json"));
+            #region 下载源
+            if (obj.DownloadSoure == "Mcbbs")
+            {
+                DownloadApiManager.Current = DownloadApiManager.Mcbbs;
+            }
+            else if (obj.DownloadSoure == "BMCLAPI")
+            {
+                DownloadApiManager.Current = DownloadApiManager.Bmcl;
+            }
+            else if (obj.DownloadSoure == "Mojang")
+            {
+                DownloadApiManager.Current = DownloadApiManager.Mojang;
+            }
+            #endregion
+            ResourceDownloader.MaxDownloadThreads = Convert.ToInt32(obj.MaxDownloadThreads); //下载最大线程数
+
+            //Toast.Show($"开始安装{File.ReadAllText("./YMCL/Temp/InsVer.log") }\n下载源：{obj.DownloadSoure}  最大线程：{obj.MaxDownloadThreads}", new ToastOptions { Icon = ToastIcons.Information, Time = 3000, Location = ToastLocation.OwnerTopCenter });
+            DownloadText.Text = DownloadText.Text + $"[{ DateTime.Now.ToString()}]    开始安装{File.ReadAllText("./YMCL/Temp/InsVer.log")}  下载源：{obj.DownloadSoure}  最大线程：{obj.MaxDownloadThreads}\n";
+            #region UI
             DownloadInfo.Visibility = Visibility.Visible;
-            downjdgr.Visibility = Visibility.Visible;
+            installbz.Text = "Vanllia";
+            DownloadText.Text = "";
             Step1Br.Visibility = Visibility.Visible;
             Step2Br.Visibility = Visibility.Hidden;
+            #endregion
             await Task.Run(async () => {
-                GameCoreInstaller installer = new(@".minecraft", System.IO.File.ReadAllText("./YMCL/logs/InsVer.log"));
-                
-                installer.ProgressChanged += (_, x) => {
-                    Dispatcher.BeginInvoke(() => { DownloadProText.Text = Math.Round(x.Progress * 100, 1).ToString()+"%";
-                        downjdtext.Text = Math.Round(x.Progress * 100, 0).ToString() + "%";
-                        a++;
-                        if (a == 21) {
-                            a = 0;
-                            qqqqq.Text = "";
-                        }
-                        DownloadProBar.Value = Math.Round(x.Progress * 100, 1);
-                        qqqqq.Text = qqqqq.Text + "["+DateTime.Now.ToString()+"]   "+x.ProgressDescription +"\n";
-                    });
+                var installer = new MinecraftVanlliaInstaller(new GameCoreLocator(@".minecraft"), File.ReadAllText("./YMCL/Temp/InsVer.log")) ;
+            installer.ProgressChanged += (sender, e) =>
+            {
+                #region UI
+                Dispatcher.BeginInvoke(() => {
+                    DownloadProText.Text = $"{e.TotleProgress * 100:0.00}%";
+                    DownloadProBar.Value = Math.Round(e.TotleProgress * 100, 1);
                     
-                };
-
-                var result = await installer.InstallAsync();
-
+                });
+                #endregion
+            };
+            var res = await installer.InstallAsync();
             });
-            //if (IsForge) {
-            //    installbz.Text = "Forge";
-            //    await Task.Run(async () =>
-            //    {
-
-            //        var res = ForgeInstaller.GetForgeBuildsOfVersionAsync(System.IO.File.ReadAllText("./YMCL/logs/InsVer.log")).Result.ToList();
-            //        Dispatcher.BeginInvoke(() => { VerForgeListView.Items.Clear(); });
-            //        res.ForEach(x =>
-            //        {
-            //            Dispatcher.BeginInvoke(() => { if (x.ForgeVersion == System.IO.File.ReadAllText("./YMCL/logs/InsForge.log")) { forgeInstallEntity = x; } });
-
-            //        });
-
-
-            //        ForgeInstaller installer = new(".minecraft", forgeInstallEntity, System.IO.File.ReadAllText("./YMCL/logs/setting/java.log"));
-            //        a = 0;
-            //        installer.ProgressChanged += (_, x) =>
-            //        {
-            //            Dispatcher.BeginInvoke(() =>
-            //            {
-            //                DownloadProText.Text = Math.Round(x.Progress * 100, 1).ToString() + "%";
-            //                downjdtext.Text = Math.Round(x.Progress * 100, 0).ToString() + "%";
-            //                a++;
-            //                if (a == 23)
-            //                {
-            //                    a = 0;
-            //                    qqqqq.Text = "";
-            //                }
-            //                DownloadProBar.Value = Math.Round(x.Progress * 100, 1);
-            //                qqqqq.Text = qqqqq.Text + "[" + DateTime.Now.ToString() + "]   " + x.ProgressDescription + "\n";
-            //            });
-
-            //        };
-            //    });
-            //     }
-            //if (IsOptiFine)
-            //{
-            //    installbz.Text = "OptiFine";
-            //    await Task.Run(async () =>
-            //    {
-
-            //        var res = OptiFineInstaller.GetOptiFineBuildsFromMcVersionAsync(System.IO.File.ReadAllText("./YMCL/logs/InsVer.log")).Result.ToList();
-            //        Dispatcher.BeginInvoke(() => { VerOptiFineListView.Items.Clear(); });
-            //        res.ForEach(x =>
-            //        {
-            //            Dispatcher.BeginInvoke(() => { if (x.FileName == System.IO.File.ReadAllText("./YMCL/logs/InsOptiFine.log")) { optiFineInstallEntity = x; } });
-            //        });
-
-            //        OptiFineInstaller installer = new(".minecraft", optiFineInstallEntity, System.IO.File.ReadAllText("./YMCL/logs/setting/java.log"));
-
-            //        a = 0;
-            //        installer.ProgressChanged += (_, x) =>
-            //        {
-            //            Dispatcher.BeginInvoke(() =>
-            //            {
-            //                DownloadProText.Text = Math.Round(x.Progress * 100, 1).ToString() + "%";
-            //                downjdtext.Text = Math.Round(x.Progress * 100, 0).ToString() + "%";
-            //                a++;
-            //                if (a == 23)
-            //                {
-            //                    a = 0;
-            //                    qqqqq.Text = "";
-            //                }
-            //                DownloadProBar.Value = Math.Round(x.Progress * 100, 1);
-            //                qqqqq.Text = qqqqq.Text + "[" + DateTime.Now.ToString() + "]   " + x.ProgressDescription + "\n";
-            //            });
-
-            //        };
-            //    });
-            //}
-
-
-            //NoticeBox.Show($"游戏核心 {System.IO.File.ReadAllText("./YMCL/logs/InsVer.log")} 安装完成", "提示", MessageBoxIcon.Success);
-            MessageBoxX.Show($"游戏核心 {System.IO.File.ReadAllText("./YMCL/logs/InsVer.log")} 安装完成");
-            
-            DownloadInfo.Visibility = Visibility.Hidden;
-            downjdgr.Visibility = Visibility.Hidden;
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
+            DownloadText.Text = DownloadText.Text + $"游戏核心 {File.ReadAllText("./YMCL/Temp/InsVer.log")} 安装完成";
+            MessageBoxX.Show($"游戏核心 {File.ReadAllText("./YMCL/Temp/InsVer.log")} 安装完成");
             DownloadInfo.Visibility = Visibility.Hidden;
         }
 
-        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
+        private void DownloadText_TextChanged(object sender, TextChangedEventArgs e)
         {
-            DownloadInfo.Visibility = Visibility.Visible;
+            DownloadText.Select(DownloadText.Text.Length, 0);
         }
     }
 }
+
+//a++;
+//if (a == 19)
+//{
+//    a = 0;
+//    DownloadText.Text = "";
+//}

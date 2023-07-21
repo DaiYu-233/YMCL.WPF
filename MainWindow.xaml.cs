@@ -27,11 +27,13 @@ namespace YMCL
     {
         
 
-
         Pages.LaunchPage launch = new Pages.LaunchPage();
         Frame setting = new Frame() { Content = new Pages.SettingPage() };
         Frame download = new Frame() { Content = new Pages.DownloadPage() };
         Frame more = new Frame() { Content = new Pages.MorePage() };
+
+
+
         public MainWindow()
         {
             InitializeComponent();
@@ -42,17 +44,6 @@ namespace YMCL
                 System.IO.DirectoryInfo directoryInfo = new System.IO.DirectoryInfo("./YMCL");
                 directoryInfo.Create();
             }
-
-            //try { Registry.ClassesRoot.DeleteSubKey("YMCL"); } catch { }
-            
-            //RegistryKey registryKeyRoot = Registry.ClassesRoot.CreateSubKey("YMCL");
-            //registryKeyRoot.SetValue(default, "Yu Minecraft Launcher");
-            //registryKeyRoot.SetValue("URL Protocol", path);
-            //RegistryKey registryKeya = Registry.ClassesRoot.OpenSubKey(@"YMCL", true).CreateSubKey("DefaultIcon");
-            //registryKeya.SetValue(default, path);
-            //RegistryKey registryKeyb = Registry.ClassesRoot.OpenSubKey(@"YMCL", true).CreateSubKey(@"shell\open\command");
-            //registryKeyb.SetValue(default, path);
-
 
             if (System.IO.Directory.Exists("./YMCL")) { } else
             {

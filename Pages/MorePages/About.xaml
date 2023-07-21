@@ -11,10 +11,10 @@
         <Grid>
             <Border HorizontalAlignment="Center" Height="50" Margin="0,10,0,0" VerticalAlignment="Top" Width="820" CornerRadius="3,3,3,3" Background="{DynamicResource ThemeContentBorderBackground}">
                 <Grid>
-                    <Button x:Name="CheckUpdateBtn" Content="检查更新" VerticalAlignment="Stretch" Margin="662,10,0,10" FontFamily="MiSans Medium" Click="AddCustomJavaBtn_Click" Width="148" FontSize="14"/>
+                    <Button x:Name="CheckUpdateBtn" Content="检查更新" VerticalAlignment="Stretch" Margin="0,8,8,8" FontFamily="MiSans Medium" Click="AddCustomJavaBtn_Click" Width="148" FontSize="15" HorizontalAlignment="Right"/>
 
-                    <TextBlock FontFamily="MiSans Medium" Text="YMCL-1.0.0.20230710_Alpha" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="11,8,0,0" FontSize="16" Foreground="{DynamicResource ThemeTextColor}" Width="345"/>
-                    <TextBlock FontFamily="MiSans Medium" Text="内部测试版" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="13,26,0,0" Width="345" FontSize="11" Foreground="Gray"/>
+                    <TextBlock x:Name="NowVersionText" FontFamily="MiSans Medium" Text="UnKnown" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="11,8,0,0" FontSize="16" Foreground="{DynamicResource ThemeTextColor}" Width="345"/>
+                    <TextBlock x:Name="NowVersionTypeText" FontFamily="MiSans Medium" Text="UnKnown" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="11,26,0,0" Width="345" FontSize="11" Foreground="Gray"/>
                 </Grid>
             </Border>
 

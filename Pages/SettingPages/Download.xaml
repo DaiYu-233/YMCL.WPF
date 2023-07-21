@@ -1,0 +1,36 @@
+﻿<Page x:Class="YMCL.Pages.SettingPages.Download"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:YMCL.Pages.SettingPages"
+      mc:Ignorable="d" xmlns:ui="http://schemas.modernwpf.com/2019" 
+      d:DesignHeight="450" d:DesignWidth="840"
+      Title="Main" >
+    <Border Background="{DynamicResource ThemeBackground}" CornerRadius="0,0,8,0">
+        <Grid>
+
+
+            <!--Java-->
+            <Border HorizontalAlignment="Center" Height="45" Margin="0,10,0,0" VerticalAlignment="Top" Width="820" Background="{DynamicResource ThemeContentBorderBackground}" CornerRadius="3,3,3,3">
+                <Grid>
+                    <TextBlock FontFamily="MiSans Medium" Text="下载源" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="18,0,0,0" FontSize="15" Foreground="{DynamicResource ThemeTextColor}"/>
+                    <ComboBox x:Name="DownloadSourseCombo"  FontFamily="MiSans Medium" Width="416" VerticalAlignment="Center" Margin="398,0,0,0" SelectedIndex="0" SelectionChanged="DownloadSourseCombo_SelectionChanged" >
+                        <ComboBoxItem Content="Mcbbs (https://www.mcbbs.net)"/>
+                        <ComboBoxItem Content="BMCLAPI (https://bmclapi2.bangbang93.com)"/>
+                        <ComboBoxItem Content="官方源"/>
+                    </ComboBox>
+                </Grid>
+            </Border>
+            <Border HorizontalAlignment="Center" Height="37" Margin="0,65,0,0" VerticalAlignment="Top" Width="820" Background="{DynamicResource ThemeContentBorderBackground}" CornerRadius="3,3,3,3">
+                <Grid>
+                    <TextBlock FontFamily="MiSans Medium" Text="最大下载线程" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="18,0,0,0" FontSize="15" Foreground="{DynamicResource ThemeTextColor}"/>
+                    
+                    <TextBlock x:Name="SilderInfo" VerticalAlignment="Center" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Width="61" Height="16" Text="256G" FontFamily="MiSans Medium" TextAlignment="Center" Margin="754,0,0,0" Foreground="{DynamicResource ThemeTextColor}"/>
+                    <Slider x:Name="SilderBox" HorizontalAlignment="Left" Margin="246,0,0,0" VerticalAlignment="Center" Width="501" SmallChange="1" Minimum="1" Value="64" Maximum="512" ValueChanged="SilderBox_ValueChanged" MouseLeave="SilderBox_MouseLeave"/>
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
+
+</Page>

@@ -25,6 +25,7 @@ using Newtonsoft.Json;
 using YMCL.Pages.SettingPages;
 using System.Diagnostics;
 using Panuon.UI.Silver;
+using YMCL.Class;
 
 namespace YMCL.Pages
 {
@@ -41,51 +42,27 @@ namespace YMCL.Pages
         public LaunchPage()
         {
             InitializeComponent();
+            var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json"));
+
             #region
-            TestFolder("./YMCL");
-            TestFolder("./YMCL/logs");
-            TestFolder("./YMCL/logs/setting");
-            TestFolder("./YMCL/logs/setting/save");
-            if (System.IO.File.Exists("./YMCL/logs/setting/save/LoginName.log"))
-            {
 
-            }
-            else
-            {
-                System.IO.File.WriteAllText(@".\YMCL\logs\setting\save\LoginName.log", "Steve");
-                LoginNameText.Text = System.IO.File.ReadAllText("./YMCL/logs/setting/save/LoginName.log");
-            }
-            if (System.IO.File.Exists("./YMCL/logs/LoginType.log"))
-            {
 
-            }
-            else
-            {
-                System.IO.File.WriteAllText(@"./YMCL/logs/setting/save/LoginType.log", "离线登录");
-                LoginTypeText.Text = System.IO.File.ReadAllText("./YMCL/logs/setting/save/LoginType.log");
-            }
-            try
-            {
-                JavaText.Text = System.IO.File.ReadAllText("./YMCL/logs/setting/save/java.log");
-            }
-            catch { }
+                LoginNameText.Text = obj.LoginName;
 
-            TestFolder("./YMCL");
-            if (File.Exists("./YMCL/DisplayInformation.txt"))
-            {
-                if (File.ReadAllText("./YMCL/DisplayInformation.txt") == "false")
+
+                LoginTypeText.Text = obj.LoginType;
+
+                JavaText.Text = obj.Java;
+
+
+
+                if (obj.DisplayInformation == "False")
                 {
                     LoginBr.Visibility = Visibility.Hidden;
                     JavaBr.Visibility = Visibility.Hidden;
                 }
 
-            }
-            else
-            {
-                File.WriteAllText("./YMCL/DisplayInformation.txt", "true");
-            }
-            LoginNameText.Text = System.IO.File.ReadAllText("./YMCL/logs/setting/save/LoginName.log");
-            LoginTypeText.Text = System.IO.File.ReadAllText("./YMCL/logs/setting/save/LoginType.log");
+
             #endregion
 
 
@@ -99,10 +76,10 @@ namespace YMCL.Pages
             if (VerListView.SelectedIndex >= 0)
             {
                 LaunchGame.IsEnabled = false;
-                if (File.ReadAllText("./YMCL/logs/LoginType.log") == "离线登录")
+                if (File.ReadAllText("./YMCL/Temp/LoginType.log") == "离线登录")
                 {
                 }
-                else if (File.ReadAllText("./YMCL/logs/LoginType.log") == "微软登录")
+                else if (File.ReadAllText("./YMCL/Temp/LoginType.log") == "微软登录")
                 {
                 }
             }
@@ -120,32 +97,20 @@ namespace YMCL.Pages
 
         #region
 
-        private void TestFolder(string Folder)
-        {
-            if (System.IO.Directory.Exists(Folder)) { }
-            else
-            {
-                System.IO.DirectoryInfo directoryInfo = new System.IO.DirectoryInfo(Folder);
-                directoryInfo.Create();
-            }
-        }
+
         public void UpdateLogin()
         {
-            TestFolder("./YMCL");
-            TestFolder("./YMCL/logs");
-            TestFolder("./YMCL/logs/setting");
-            TestFolder("./YMCL/logs/setting/save");
+            var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json"));
+
             try {
-                LoginNameText.Text = System.IO.File.ReadAllText("./YMCL/logs/LoginName.log");
-                LoginTypeText.Text = System.IO.File.ReadAllText("./YMCL/logs/LoginType.log");
-                JavaText.Text = System.IO.File.ReadAllText("./YMCL/logs/setting/java.log");
+                LoginNameText.Text = System.IO.File.ReadAllText("./YMCL/Temp/LoginName.log");
+                LoginTypeText.Text = System.IO.File.ReadAllText("./YMCL/Temp/LoginType.log");
+                JavaText.Text = System.IO.File.ReadAllText("./YMCL/Temp/Java.log");
             }
             catch { }
 
 
-            if (File.Exists("./YMCL/DisplayInformation.txt"))
-            {
-                if (File.ReadAllText("./YMCL/DisplayInformation.txt") == "false")
+                if (obj.DisplayInformation == "False")
                 {
                     LoginBr.Visibility = Visibility.Hidden;
                     JavaBr.Visibility = Visibility.Hidden;
@@ -156,11 +121,7 @@ namespace YMCL.Pages
                     JavaBr.Visibility = Visibility.Visible;
                 }
 
-            }
-            else
-            {
-                File.WriteAllText("./YMCL/DisplayInformation.txt", "true");
-            }
+
         }
 
 

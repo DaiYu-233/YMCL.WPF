@@ -15,10 +15,10 @@ using System.Windows.Shapes;
 using System.IO;
 using ModernWpf;
 using Panuon.UI.Silver;
-using WpfToast.Controls;
-using Toast = WpfToast.Controls.Toast;
 using Microsoft.Win32;
 using System.Security.Principal;
+using Newtonsoft.Json;
+using YMCL.Class;
 
 namespace YMCL.Pages.SettingPages
 {
@@ -40,11 +40,10 @@ namespace YMCL.Pages.SettingPages
         public Launcher()
         {
             InitializeComponent();
-            
+            var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json"));
             #region 初始化
-            if (File.Exists("./YMCL/DisplayInformation.txt"))
-            {
-                if (File.ReadAllText("./YMCL/DisplayInformation.txt") == "false")
+
+                if (obj.DisplayInformation == "False")
                 {
                     displayinf.IsOn = false;
                 }
@@ -52,14 +51,10 @@ namespace YMCL.Pages.SettingPages
                 {
                     displayinf.IsOn = true;
                 }
-            }
-            else
-            {
-                File.WriteAllText("./YMCL/DisplayInformation.txt", "true");
-            }
-            if (File.Exists("./YMCL/Theme.txt"))
-            {
-                if (File.ReadAllText("./YMCL/Theme.txt") == "Dark")
+
+            
+
+            if (obj.Theme == "Dark")
                 {
                     DarkThemeSwitch.IsOn = true;
                     ThemeManager.Current.ApplicationTheme = ApplicationTheme.Dark;
@@ -71,22 +66,10 @@ namespace YMCL.Pages.SettingPages
                     Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/YMCL;component/Styles/Light.xaml") });
                     ThemeManager.Current.ApplicationTheme = ApplicationTheme.Light;
                 }
-            }
-            else
-            {
-                File.WriteAllText("./YMCL/Theme.txt", "Light");
-            }
+            
             #endregion
         }
-        private void TestFolder(string Folder)
-        {
-            if (System.IO.Directory.Exists(Folder)) { }
-            else
-            {
-                System.IO.DirectoryInfo directoryInfo = new System.IO.DirectoryInfo(Folder);
-                directoryInfo.Create();
-            }
-        }
+
 
 
 
@@ -95,7 +78,6 @@ namespace YMCL.Pages.SettingPages
 
         private void SaveSettingBtn_Click(object sender, RoutedEventArgs e)
         {
-            TestFolder("./YMCL");
             if (DarkThemeSwitch.IsOn == true)
             {
                 ThemeManager.Current.ApplicationTheme = ApplicationTheme.Dark;
@@ -109,24 +91,32 @@ namespace YMCL.Pages.SettingPages
 
             if (displayinf.IsOn == true)
             {
-                File.WriteAllText("./YMCL/DisplayInformation.txt", "true");
+                var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json"));
+                obj.DisplayInformation = "True";
+                File.WriteAllText(@"./YMCL/YMCL.Setting.json", JsonConvert.SerializeObject(obj, Newtonsoft.Json.Formatting.Indented));
             }
             else
             {
-                File.WriteAllText("./YMCL/DisplayInformation.txt", "false");
+                var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json"));
+                obj.DisplayInformation = "False";
+                File.WriteAllText(@"./YMCL/YMCL.Setting.json", JsonConvert.SerializeObject(obj, Newtonsoft.Json.Formatting.Indented));
             }
             if (DarkThemeSwitch.IsOn == true)
             {
-                File.WriteAllText("./YMCL/Theme.txt", "Dark");
+                var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json"));
+                obj.Theme = "Dark";
+                File.WriteAllText(@"./YMCL/YMCL.Setting.json", JsonConvert.SerializeObject(obj, Newtonsoft.Json.Formatting.Indented));
             }
             else
             {
-                File.WriteAllText("./YMCL/Theme.txt", "Light");
+                var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json"));
+                obj.Theme = "Light";
+                File.WriteAllText(@"./YMCL/YMCL.Setting.json", JsonConvert.SerializeObject(obj, Newtonsoft.Json.Formatting.Indented));
             }
             //Panuon.WPF.UI.Toast.Show("成功应用设置", ToastPosition.Top);
-            Toast.Show("成功应用设置", new ToastOptions { Icon = ToastIcons.Information, ToastMargin = new Thickness(10), Time = 1500, Location = ToastLocation.OwnerTopCenter });
+            //Toast.Show("成功应用设置", new ToastOptions { Icon = ToastIcons.Information, Time = 1500, Location = ToastLocation.OwnerTopCenter });
 
-        }
+        } 
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -137,7 +127,7 @@ namespace YMCL.Pages.SettingPages
                 return;
             }
             try { Registry.ClassesRoot.DeleteSubKey("YMCL"); } catch { }
-            try
+            try 
             {
                 RegistryKey keyRoot = Registry.ClassesRoot.CreateSubKey("YMCL", true);
                 keyRoot.SetValue("", "Yu Minecraft Launcher");
@@ -149,7 +139,7 @@ namespace YMCL.Pages.SettingPages
             }
             catch (Exception rf)
             {
-                MessageBoxX.Show($"写入注册表失败\n\n错误信息: {rf}");
+                MessageBoxX.Show($"写入注册表失败\n\n错误信息: {rf}","Yu Minecraft Launcher");
                 return;
             }
             finally

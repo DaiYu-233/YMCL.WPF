@@ -19,8 +19,6 @@ using System.Runtime.InteropServices;
 using Microsoft.Win32;
 using Panuon.UI.Silver;
 using System.IO;
-using WpfToast.Controls;
-using Toast = WpfToast.Controls.Toast;
 using YMCL.Class;
 
 namespace YMCL.Pages.SettingPages
@@ -48,24 +46,27 @@ namespace YMCL.Pages.SettingPages
         static extern bool GlobalMemoryStatusEx(ref MEMORYSTATUSEX LpBuffer);
         public Main()
         {
-            
+            var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json"));
+
             InitializeComponent();
-            TestFolder("./YMCL");
-            TestFolder("./YMCL/logs");
-            TestFolder("./YMCL/logs/setting");
+
             
             JavaList = (List<string>)JavaHelper.SearchJavaRuntime();
             foreach (var item in JavaList)
             {
                 JavaCombo.Items.Add(item);
             }
-            if (System.IO.File.ReadAllText(@".\YMCL\logs\setting\java.log") != "" || !System.IO.File.Exists(@".\YMCL\logs\setting\java.log"))
-            {
                 if (JavaCombo.Items.Count >= 1)
                 {
                     JavaCombo.SelectedItem = JavaCombo.Items[0];
+                if (obj.Java == "Null")
+                {
+                    obj.Java = (string?)JavaCombo.SelectedItem;
+
+                    File.WriteAllText(@"./YMCL/YMCL.Setting.json", JsonConvert.SerializeObject(obj, Newtonsoft.Json.Formatting.Indented));
                 }
             }
+
 
             UpdateMem();
             SettingInitialization();
@@ -75,13 +76,8 @@ namespace YMCL.Pages.SettingPages
 
         private void SettingInitialization()
         {
-            TestFolder("./YMCL");
-            TestFolder("./YMCL/logs");
-            TestFolder("./YMCL/logs/setting");
-            TestFolder("./YMCL/logs/setting/save");
-            if (File.Exists("./YMCL/logs/setting/save/alonecore.log"))
-            {
-                if (File.ReadAllText("./YMCL/logs/setting/save/alonecore.log") == "true")
+            var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json"));
+            if (obj.AloneCore == "True")
                 {
                     AloneCoreSwitch.IsOn = true;
                 }
@@ -89,15 +85,12 @@ namespace YMCL.Pages.SettingPages
                 {
                     AloneCoreSwitch.IsOn = false;
                 }
-            }
-            else
-            {
-                File.WriteAllText("./YMCL/logs/setting/save/alonecore.log", "true");
-            }
+            
+
             try
             {
-                JavaCombo.SelectedItem = System.IO.File.ReadAllText(@".\YMCL\logs\setting\save\java.log");
-                SilderBox.Value = Convert.ToDouble(System.IO.File.ReadAllText(@".\YMCL\logs\setting\save\mem.log"));
+                JavaCombo.SelectedItem = obj.Java;
+                SilderBox.Value = Convert.ToDouble(obj.MaxMem);
             }
             catch { }
                 
@@ -126,15 +119,7 @@ namespace YMCL.Pages.SettingPages
         
 
 
-        private void TestFolder(string Folder)
-        {
-            if (System.IO.Directory.Exists(Folder)) { }
-            else
-            {
-                System.IO.DirectoryInfo directoryInfo = new System.IO.DirectoryInfo(Folder);
-                directoryInfo.Create();
-            }
-        }
+
 
 
 
@@ -146,7 +131,7 @@ namespace YMCL.Pages.SettingPages
             {
                 JavaCombo.Items.Add(item);
             }
-            Toast.Show("扫描成功,已发现" + JavaCombo.Items.Count.ToString() + "个Java", new ToastOptions { Icon = ToastIcons.Information, ToastMargin = new Thickness(10), Time = 1500, Location = ToastLocation.OwnerTopCenter });
+            //Toast.Show("扫描成功,已发现" + JavaCombo.Items.Count.ToString() + "个Java", new ToastOptions { Icon = ToastIcons.Information, Time = 1500, Location = ToastLocation.OwnerTopCenter });
             //Toast.Show("扫描成功,已发现"+ JavaCombo.Items.Count.ToString() + "个Java", new ToastOptions { Icon = ToastIcons.Information, ToastMargin = new Thickness(10), Time = 5000, Location = ToastLocation.OwnerTopCenter });
             if (JavaCombo.Items.Count >= 1)
             {
@@ -156,10 +141,8 @@ namespace YMCL.Pages.SettingPages
 
         private void JavaCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            TestFolder("./YMCL");
-            TestFolder("./YMCL/logs");
-            TestFolder("./YMCL/logs/setting");
-            System.IO.File.WriteAllText(@".\YMCL\logs\setting\java.log", (string?)JavaCombo.SelectedItem);
+
+            System.IO.File.WriteAllText(@".\YMCL\Temp\Java.log", (string?)JavaCombo.SelectedItem);
         }
 
         private void AddCustomJavaBtn_Click(object sender, RoutedEventArgs e)
@@ -199,46 +182,39 @@ namespace YMCL.Pages.SettingPages
         {
             SilderBox.Value = Math.Round(SilderBox.Value,0);
             SilderInfo.Text = SilderBox.Value.ToString() + "M";
-            TestFolder("./YMCL");
-            TestFolder("./YMCL/logs");
-            TestFolder("./YMCL/logs/setting");
-            System.IO.File.WriteAllText(@".\YMCL\logs\setting\mem.log", SilderBox.Value.ToString());
+            System.IO.File.WriteAllText(@".\YMCL\Temp\MaxMem.log", SilderBox.Value.ToString());
         }
 
         private void SaveSettingBtn_Click(object sender, RoutedEventArgs e)
         {
-            TestFolder("./YMCL");
-            TestFolder("./YMCL/logs");
-            TestFolder("./YMCL/logs/setting");
-            TestFolder("./YMCL/logs/setting/save");
-            System.IO.File.WriteAllText(@".\YMCL\logs\setting\save\java.log", (string?)JavaCombo.SelectedItem);
-            System.IO.File.WriteAllText(@".\YMCL\logs\setting\save\mem.log", SilderBox.Value.ToString());
+            var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json"));
+            obj.Java = (string?)JavaCombo.SelectedItem;
+            obj.MaxMem = SilderBox.Value.ToString();
+
             if (AloneCoreSwitch.IsOn==true)
             {
-                File.WriteAllText("./YMCL/logs/setting/save/alonecore.log", "true");
+                obj.AloneCore = "True";
             }
             else
             {
-                File.WriteAllText("./YMCL/logs/setting/save/alonecore.log", "false");
+                obj.AloneCore = "False";
             }
             //Panuon.WPF.UI.Toast.Show("已保存设置", ToastPosition.Top);
 
-            Toast.Show("已保存设置", new ToastOptions { Icon = ToastIcons.Information, ToastMargin = new Thickness(10), Time = 1500, Location = ToastLocation.OwnerTopCenter });
-
+            //Toast.Show("已保存设置", new ToastOptions { Icon = ToastIcons.Information, Time = 1500, Location = ToastLocation.OwnerTopCenter });
+            File.WriteAllText(@"./YMCL/YMCL.Setting.json", JsonConvert.SerializeObject(obj, Newtonsoft.Json.Formatting.Indented));
         }
 
         private void AloneCoreSwitch_Toggled(object sender, RoutedEventArgs e)
         {
-            TestFolder("./YMCL");
-            TestFolder("./YMCL/logs");
-            TestFolder("./YMCL/logs/setting");
+
             if (AloneCoreSwitch.IsOn == true)
             {
-                File.WriteAllText("./YMCL/logs/setting/alonecore.log", "true");
+                File.WriteAllText("./YMCL/Temp/AloneCore.log", "True");
             }
             else
             {
-                File.WriteAllText("./YMCL/logs/setting/alonecore.log", "false");
+                File.WriteAllText("./YMCL/Temp/AloneCore.log", "False");
             }
         }
     }

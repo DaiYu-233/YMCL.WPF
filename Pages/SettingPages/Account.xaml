@@ -62,7 +62,7 @@
             </Border>
             <TextBlock TextWrapping="Wrap" Text="当前登录方式：" Margin="318,20,262,415" FontFamily="MiSans Medium" Foreground="DimGray"/>
             <TextBlock x:Name="NowLoginType" TextWrapping="Wrap" Text="1" Margin="398,20,24,415" FontFamily="MiSans Medium" Foreground="DimGray"/>
-            <Button x:Name="SaveSetting" Content="保存账户设置" Height="29" Margin="0,10,10,0" VerticalAlignment="Top" Width="118" FontFamily="MiSans Medium" Visibility="Hidden" HorizontalAlignment="Right" Click="SaveSetting_Click"/>
+
         </Grid>
     </Border>
 </Page>
