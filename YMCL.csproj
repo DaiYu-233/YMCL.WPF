@@ -3,6 +3,7 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net6.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>YMCL-Icon.ico</ApplicationIcon>
@@ -11,6 +12,16 @@
     <Product>YMCL</Product>
     <PackageIcon>YMCL-Icon.png</PackageIcon>
     <ApplicationManifest></ApplicationManifest>
+    <Copyright>呆鱼 - DaiYu</Copyright>
+    <RepositoryUrl>https://github.com/DaiYu-233/YMCL</RepositoryUrl>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>embedded</DebugType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>embedded</DebugType>
   </PropertyGroup>
 
   <ItemGroup>
@@ -36,8 +47,7 @@
     <PackageReference Include="Natsurainko.FluentCore" Version="2.0.6" />
     <PackageReference Include="Natsurainko.FluentCore.Extension.Windows" Version="2.0.6" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="OneMinecraftLauncher.Core" Version="1.1.6" />
-    <PackageReference Include="Panuon.UI.Silver" Version="2.2.20" />
+    <PackageReference Include="Panuon.WPF.UI" Version="1.1.15.1" />
     <PackageReference Include="UpdateD" Version="1.0.6" />
   </ItemGroup>
 

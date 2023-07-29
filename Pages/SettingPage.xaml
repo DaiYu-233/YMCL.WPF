@@ -20,7 +20,7 @@
                     </ui:NavigationView.MenuItems>
                 </ui:NavigationView>
             </Border>
-            <Frame x:Name="MainFrame" Content="" Margin="0,40,0,0" NavigationUIVisibility="Hidden" Background="{DynamicResource ThemeBackground}"/>
+            <Frame x:Name="MainFrame" Content="" Margin="0,40,0,0" NavigationUIVisibility="Hidden" />
         </Grid>
     </Border>
 </Page>

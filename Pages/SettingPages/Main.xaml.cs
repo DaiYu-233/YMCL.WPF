@@ -17,9 +17,11 @@ using Natsurainko;
 using Natsurainko.FluentCore.Extension.Windows.Service;
 using System.Runtime.InteropServices;
 using Microsoft.Win32;
-using Panuon.UI.Silver;
+using Panuon.WPF.UI;
 using System.IO;
 using YMCL.Class;
+using System.Windows.Forms;
+using System.Threading;
 
 namespace YMCL.Pages.SettingPages
 {
@@ -31,7 +33,8 @@ namespace YMCL.Pages.SettingPages
         public List<SettingInfo> settingInfos = new List<SettingInfo>();
         List<string> JavaList = new List<string>();
 
-        struct MEMORYSTATUSEX{
+        struct MEMORYSTATUSEX
+        {
             public int dwLength;
             public int dwMemoryLoad;
             public ulong ullTotalPhys;
@@ -50,15 +53,16 @@ namespace YMCL.Pages.SettingPages
 
             InitializeComponent();
 
-            
+            MinecraftPathText.Text = obj.MinecraftPath;
+
             JavaList = (List<string>)JavaHelper.SearchJavaRuntime();
             foreach (var item in JavaList)
             {
                 JavaCombo.Items.Add(item);
             }
-                if (JavaCombo.Items.Count >= 1)
-                {
-                    JavaCombo.SelectedItem = JavaCombo.Items[0];
+            if (JavaCombo.Items.Count >= 1)
+            {
+                JavaCombo.SelectedItem = JavaCombo.Items[0];
                 if (obj.Java == "Null")
                 {
                     obj.Java = (string?)JavaCombo.SelectedItem;
@@ -78,14 +82,14 @@ namespace YMCL.Pages.SettingPages
         {
             var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json"));
             if (obj.AloneCore == "True")
-                {
-                    AloneCoreSwitch.IsOn = true;
-                }
-                else
-                {
-                    AloneCoreSwitch.IsOn = false;
-                }
-            
+            {
+                AloneCoreSwitch.IsOn = true;
+            }
+            else
+            {
+                AloneCoreSwitch.IsOn = false;
+            }
+
 
             try
             {
@@ -93,9 +97,9 @@ namespace YMCL.Pages.SettingPages
                 SilderBox.Value = Convert.ToDouble(obj.MaxMem);
             }
             catch { }
-                
 
-            
+
+
         }
 
 
@@ -111,12 +115,12 @@ namespace YMCL.Pages.SettingPages
             GlobalMemoryStatusEx(ref status);
             MexMemTextBl.Text = status.ullTotalPhys / 1024 / 1024 + "M";
             SurMemTextBl.Text = status.ullAvailPhys / 1024 / 1024 + "M";
-            UsedMemTextBl.Text = (status.ullTotalPhys-status.ullAvailPhys) * 100 / status.ullTotalPhys + "%";
+            UsedMemTextBl.Text = (status.ullTotalPhys - status.ullAvailPhys) * 100 / status.ullTotalPhys + "%";
             SilderBox.Maximum = status.ullTotalPhys / 1024 / 1024;
         }
-        
 
-        
+
+
 
 
 
@@ -131,6 +135,7 @@ namespace YMCL.Pages.SettingPages
             {
                 JavaCombo.Items.Add(item);
             }
+            Panuon.WPF.UI.Toast.Show("扫描成功,已发现" + JavaCombo.Items.Count.ToString() + "个Java", ToastPosition.Top);
             //Toast.Show("扫描成功,已发现" + JavaCombo.Items.Count.ToString() + "个Java", new ToastOptions { Icon = ToastIcons.Information, Time = 1500, Location = ToastLocation.OwnerTopCenter });
             //Toast.Show("扫描成功,已发现"+ JavaCombo.Items.Count.ToString() + "个Java", new ToastOptions { Icon = ToastIcons.Information, ToastMargin = new Thickness(10), Time = 5000, Location = ToastLocation.OwnerTopCenter });
             if (JavaCombo.Items.Count >= 1)
@@ -147,7 +152,7 @@ namespace YMCL.Pages.SettingPages
 
         private void AddCustomJavaBtn_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFileDialog = new()
+            Microsoft.Win32.OpenFileDialog openFileDialog = new()
             {
                 Title = "选择Java(javaw.exe)",
                 Filter = "Java|javaw.exe",
@@ -158,7 +163,7 @@ namespace YMCL.Pages.SettingPages
             {
                 return;
             }
-            
+
             string JavaFilePath = openFileDialog.FileName;
 
             JavaCombo.Items.Add(JavaFilePath);
@@ -180,7 +185,7 @@ namespace YMCL.Pages.SettingPages
 
         private void Silder_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            SilderBox.Value = Math.Round(SilderBox.Value,0);
+            SilderBox.Value = Math.Round(SilderBox.Value, 0);
             SilderInfo.Text = SilderBox.Value.ToString() + "M";
             System.IO.File.WriteAllText(@".\YMCL\Temp\MaxMem.log", SilderBox.Value.ToString());
         }
@@ -191,7 +196,7 @@ namespace YMCL.Pages.SettingPages
             obj.Java = (string?)JavaCombo.SelectedItem;
             obj.MaxMem = SilderBox.Value.ToString();
 
-            if (AloneCoreSwitch.IsOn==true)
+            if (AloneCoreSwitch.IsOn == true)
             {
                 obj.AloneCore = "True";
             }
@@ -199,8 +204,7 @@ namespace YMCL.Pages.SettingPages
             {
                 obj.AloneCore = "False";
             }
-            //Panuon.WPF.UI.Toast.Show("已保存设置", ToastPosition.Top);
-
+            Panuon.WPF.UI.Toast.Show("已保存设置", ToastPosition.Top);
             //Toast.Show("已保存设置", new ToastOptions { Icon = ToastIcons.Information, Time = 1500, Location = ToastLocation.OwnerTopCenter });
             File.WriteAllText(@"./YMCL/YMCL.Setting.json", JsonConvert.SerializeObject(obj, Newtonsoft.Json.Formatting.Indented));
         }
@@ -215,6 +219,31 @@ namespace YMCL.Pages.SettingPages
             else
             {
                 File.WriteAllText("./YMCL/Temp/AloneCore.log", "False");
+            }
+        }
+
+        private void OpenMinecraftFolder_Click(object sender, RoutedEventArgs e)
+        {
+            FolderBrowserDialog dialog = new FolderBrowserDialog();
+            dialog.Description = ""; ;//左上角提示
+            string path = string.Empty;
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                path = dialog.SelectedPath;//获取选中文件路径
+                string[] Array = path.Split(@"\");
+                if (Array[Array.Length - 1] != ".minecraft")
+                {
+                    Toast.Show("需选择 .minecraft 文件夹", ToastPosition.Top);
+                    return;
+                }
+                var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json"));
+                obj.MinecraftPath = path;
+                File.WriteAllText(@"./YMCL/YMCL.Setting.json", JsonConvert.SerializeObject(obj, Newtonsoft.Json.Formatting.Indented));
+                
+                System.Windows.Forms.Application.Restart();
+                Toast.Show("重启YMCL生效", ToastPosition.Top);
+                
+                System.Environment.Exit(0);
             }
         }
     }

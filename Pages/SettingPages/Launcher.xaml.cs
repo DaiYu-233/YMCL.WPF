@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
 using ModernWpf;
-using Panuon.UI.Silver;
+using Panuon.WPF.UI;
 using Microsoft.Win32;
 using System.Security.Principal;
 using Newtonsoft.Json;
@@ -28,7 +28,7 @@ namespace YMCL.Pages.SettingPages
     public partial class Launcher : Page
     {
         public string path = System.AppDomain.CurrentDomain.BaseDirectory + @"YMCL\YMCL.bat";
-        public string pathroot = System.Windows.Forms.Application.StartupPath.Substring(0, System.Windows.Forms.Application.StartupPath.IndexOf(':'));
+
 
         bool IsAdministrator()
         {
@@ -120,7 +120,7 @@ namespace YMCL.Pages.SettingPages
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            File.WriteAllText(@"./YMCL/YMCL.bat", $"{pathroot}\ncd {AppDomain.CurrentDomain.BaseDirectory}:\nstart ./YMCL.exe");
+            File.WriteAllText(@"./YMCL/YMCL.bat", $"{path[0]}:\ncd {AppDomain.CurrentDomain.BaseDirectory}\nstart ./YMCL.exe");
             if (!IsAdministrator())
             {
                 MessageBoxX.Show("需要管理员权限以写入注册表\n请使用管理员权限运行", "Yu Minecraft Launcher");
@@ -144,7 +144,8 @@ namespace YMCL.Pages.SettingPages
             }
             finally
             {
-                MessageBoxX.Show($"写入成功！","Yu Minecraft Launcher");
+                Panuon.WPF.UI.Toast.Show("写入成功！", ToastPosition.Top);
+                //MessageBoxX.Show($"写入成功！","Yu Minecraft Launcher");
             }
         }
     }

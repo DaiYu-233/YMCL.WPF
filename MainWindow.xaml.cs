@@ -1,5 +1,5 @@
 ﻿using Microsoft.Win32;
-using Panuon.UI.Silver;
+using Panuon.WPF.UI;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -23,7 +23,7 @@ namespace YMCL
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : WindowX
     {
         
 

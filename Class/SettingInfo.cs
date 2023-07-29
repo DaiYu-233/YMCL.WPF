@@ -12,7 +12,7 @@ namespace YMCL.Class
             public string? Java { get; set; }
             public string? MaxMem { get; set; }
             public string? AloneCore { get; set; }
-
+            public string? MinecraftPath { get; set; }
 
             public string? LoginIndex { get; set; }
             public string? LoginName { get; set; }

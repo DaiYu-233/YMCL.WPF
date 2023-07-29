@@ -13,7 +13,6 @@
             <Border HorizontalAlignment="Center" Height="45" VerticalAlignment="Bottom" Width="820" Background="{DynamicResource ThemeContentBorderBackground}" CornerRadius="3,3,3,3" Margin="0,0,0,10">
                 <Grid>
                     <Button x:Name="LaunchGame" Content="启动" Width="136" FontFamily="MiSans Medium" VerticalAlignment="Stretch" Margin="0,5,5,5" HorizontalAlignment="Right" Click="LaunchGame_Click" />
-                    <Button Content="版本列表" Width="104" FontFamily="MiSans Medium" VerticalAlignment="Stretch" Margin="543,5,0,5" Click="Button_Click" Visibility="Hidden" />
                     <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Width="84" Margin="6,4,0,0" Text="当前启动核心" FontFamily="MiSans Medium" Foreground="{DynamicResource ThemeTextColor}"/>
                     <TextBlock x:Name="GameVerTextBlock" HorizontalAlignment="Left" VerticalAlignment="Top" Width="241" Margin="7,18,0,0" Text="None" FontFamily="MiSans Medium" Height="22" FontSize="18" Foreground="#FF00D6FF" MouseDown="GameVerTextBlock_MouseDown"/>
                 </Grid>

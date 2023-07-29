@@ -13,35 +13,47 @@
             <Button x:Name="Del" Content="删除此账户" Height="29" Margin="176,10,0,0" VerticalAlignment="Top" Width="134" FontFamily="MiSans Medium" IsEnabled="False" Click="Button_Click_3" />
 
             <Border Margin="10,44,10,10" Background="{DynamicResource ThemeContentBorderBackground}" CornerRadius="3,3,3,3">
-
-                <DataGrid x:Name="DataGr" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="5,5,5,5" FontFamily="MiSans Medium" SelectionChanged="DataGr_SelectionChanged" IsReadOnly="True" CanUserSortColumns="False"/>
+                <Grid>
+                    <DataGrid x:Name="DataGr" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="5,5,5,5" FontFamily="MiSans Medium" SelectionChanged="DataGr_SelectionChanged" IsReadOnly="True" CanUserSortColumns="False" Visibility="Hidden"/>
+                    <ListView x:Name="AccountsListView" Margin="5,5,5,5" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="AccountsListView_SelectionChanged">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <TextBlock Text="{Binding Name}" FontSize="14" FontFamily="MiSans Medium"/>
+                                    <TextBlock Text="{Binding AccountType}" Margin="0,15,0,0" FontSize="11" Foreground="#E48A8A8A" FontFamily="MiSans Medium"></TextBlock>
+                                    <TextBlock Text="{Binding AddTime}" FontSize="11" Foreground="#E48A8A8A" Margin="51,15,0,0" FontFamily="MiSans Medium"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
             </Border>
-            <Border x:Name="addacbro" Background="{DynamicResource ThemeContentContentBorderBackground}" CornerRadius="3,3,3,3" HorizontalAlignment="Center" Width="396" Height="206" Visibility="Hidden" VerticalAlignment="Center">
+            <Border x:Name="addacbro" Background="{DynamicResource ThemeContentContentBorderBackground}" CornerRadius="3,3,3,3" HorizontalAlignment="Center" Width="396" Height="108" VerticalAlignment="Center" Visibility="Hidden">
                 <Grid>
                     <Grid VerticalAlignment="Top" Height="25">
                         <Button Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Tag="IsCloseButton" HorizontalAlignment="Right" Click="btnClose_Click" VerticalAlignment="Center"/>
-                        <TextBlock FontFamily="MiSans Medium" Text="添加新账户..." HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0" Foreground="{DynamicResource ThemeTextColor}"/>
+                        <TextBlock FontFamily="MiSans Medium" Text="添加新账户" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0" Foreground="{DynamicResource ThemeTextColor}"/>
                     </Grid>
                     <Grid Margin="0,25,0,0">
-                        <ComboBox x:Name="LoginTypeComboBox" Margin="23,22,0,0" Width="291" SelectionChanged="ComboBox_SelectionChanged" FontFamily="MiSans Medium">
+                        <ComboBox x:Name="LoginTypeComboBox" Margin="18,10,0,0" Width="324" SelectionChanged="ComboBox_SelectionChanged" FontFamily="MiSans Medium" Height="26" SelectedIndex="0" FontSize="12">
                             <ComboBoxItem Content="离线登录"/>
                             <ComboBoxItem Content="微软登录"/>
                             <ComboBoxItem Content="Mojang迁移"/>
                         </ComboBox>
-                        <Button Margin="312,142,0,0" VerticalAlignment="Top" Height="29" Width="74" FontFamily="MiSans Medium" Content="下一步" IsEnabled="True" Click="Button_Click" />
+                        <Button VerticalAlignment="Bottom" Height="29" Width="74" FontFamily="MiSans Medium" Content="下一步" IsEnabled="True" Click="Button_Click" HorizontalAlignment="Right" Margin="0,0,5,5" />
 
                     </Grid>
                 </Grid>
             </Border>
-            <Border x:Name="lxdl" Background="{DynamicResource ThemeContentContentBorderBackground}" CornerRadius="3,3,3,3" HorizontalAlignment="Center" Width="392" VerticalAlignment="Center" Height="200" Visibility="Hidden">
+            <Border x:Name="lxdl" Background="{DynamicResource ThemeContentContentBorderBackground}" CornerRadius="3,3,3,3" HorizontalAlignment="Center" Width="492" VerticalAlignment="Center" Height="130" Visibility="Hidden">
                 <Grid>
                     <Grid VerticalAlignment="Top" Height="25">
                         <Button Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Tag="IsCloseButton" HorizontalAlignment="Right" Click="btnClose_Click" VerticalAlignment="Center"/>
-                        <TextBlock FontFamily="MiSans Medium" Text="离线登录..." HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0" Foreground="{DynamicResource ThemeTextColor}"/>
+                        <TextBlock FontFamily="MiSans Medium" Text="离线登录" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0" Foreground="{DynamicResource ThemeTextColor}"/>
                     </Grid>
                     <Grid Margin="0,25,0,0">
-                        <TextBox x:Name="yhm2" Margin="0,36,0,107" Width="312" HorizontalAlignment="Center" Height="32" FontFamily="MiSans Medium"  />
-                        <Button Margin="308,135,0,0" VerticalAlignment="Top" Height="29" Width="74" FontFamily="MiSans Medium" Content="确定" IsEnabled="True" Click="Button_Click_1" />
+                        <TextBox x:Name="yhm2" Width="444" HorizontalAlignment="Center" FontFamily="MiSans Medium" FontSize="16" VerticalAlignment="Top" Height="26" Margin="0,23,0,0"  />
+                        <Button VerticalAlignment="Bottom" Height="29" Width="74" FontFamily="MiSans Medium" Content="确定" IsEnabled="True" Click="Button_Click_1" HorizontalAlignment="Right" Margin="0,0,5,5" />
                     </Grid>
                 </Grid>
             </Border>

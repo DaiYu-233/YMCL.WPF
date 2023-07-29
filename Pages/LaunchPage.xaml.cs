@@ -12,20 +12,18 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using KMCCC.Launcher;
 using System.Net;
 using System.IO;
 using MinecraftLaunch.Launch;
 using MinecraftLaunch.Modules.Models.Launch;
 using MinecraftLaunch.Modules.Models.Auth;
-using KMCCC.Authentication;
 using MinecaftOAuth;
 using MinecraftLaunch.Modules.Toolkits;
 using Newtonsoft.Json;
 using YMCL.Pages.SettingPages;
 using System.Diagnostics;
-using Panuon.UI.Silver;
 using YMCL.Class;
+using Panuon.WPF.UI;
 
 namespace YMCL.Pages
 {
@@ -34,11 +32,11 @@ namespace YMCL.Pages
     /// </summary>
     public partial class LaunchPage : Page
     {
+
         public static LaunchConfig launchConfig { get; } = new LaunchConfig();
         public MinecraftLaunch.Modules.Models.Auth.Account UserInfo { get; private set; }
 
-        public static KMCCC.Launcher.Version[] versions;
-        public static LauncherCore Core = LauncherCore.Create();
+
         public LaunchPage()
         {
             InitializeComponent();
@@ -66,9 +64,13 @@ namespace YMCL.Pages
             #endregion
 
 
-            KMCCC.Launcher.Version[] versions = Core.GetVersions().ToArray();
-            VerListView.ItemsSource = versions;
-            
+            if (!Directory.Exists(obj.MinecraftPath))
+            {
+                System.IO.DirectoryInfo directoryInfo = new System.IO.DirectoryInfo(obj.MinecraftPath);
+                directoryInfo.Create();
+            }
+
+
         }
 
         private async void LaunchGame_Click(object sender, RoutedEventArgs e)
@@ -85,7 +87,8 @@ namespace YMCL.Pages
             }
             else
             {
-                MessageBoxX.Show("请选择游戏核心");
+                //MessageBoxX.Show("请选择游戏核心");
+                Toast.Show("请选择游戏核心", ToastPosition.Top);
             }
 
         }
@@ -125,7 +128,27 @@ namespace YMCL.Pages
         }
 
 
-
+        public void GetVers()
+        {
+            var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json"));
+            var Versionpath = obj.MinecraftPath + "\\versions";
+            if (!Directory.Exists(Versionpath))
+            {
+                System.IO.DirectoryInfo directoryInfo = new System.IO.DirectoryInfo(Versionpath);
+                directoryInfo.Create();
+            }
+            DirectoryInfo dir = new DirectoryInfo(Versionpath);
+            DirectoryInfo[] dii = dir.GetDirectories();  //获取.minecraft\versions的所有子目录
+            foreach (DirectoryInfo VersionDir in dii)
+            {
+                var Index = VersionDir.FullName.Split(@"\");
+                var VersionName = Index[Index.Length - 1];
+                if (File.Exists(Versionpath + @"\" + VersionName + @"\" + VersionName + ".json"))  //检查是否符合mc版本
+                {
+                    VerListView.Items.Add(VersionName);
+                }
+            }
+        }
 
 
 
@@ -134,8 +157,7 @@ namespace YMCL.Pages
         private void GameVerTextBlock_MouseDown(object sender, MouseButtonEventArgs e)
         {
             VerListBorder.Visibility = Visibility.Visible;
-            KMCCC.Launcher.Version[] versions = Core.GetVersions().ToArray();
-            VerListView.ItemsSource = versions;
+            GetVers();
         }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
@@ -143,17 +165,10 @@ namespace YMCL.Pages
             VerListBorder.Visibility = Visibility.Hidden;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            VerListBorder.Visibility = Visibility.Visible;
-            KMCCC.Launcher.Version[] versions = Core.GetVersions().ToArray();
-            VerListView.ItemsSource = versions;
-        }
-
         private void VerListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             VerListBorder.Visibility = Visibility.Hidden;
-            GameVerTextBlock.Text = VerListView.SelectedValue.ToString();
+            GameVerTextBlock.Text = VerListView.SelectedItem.ToString();
         }
 
         private void Page_MouseEnter(object sender, MouseEventArgs e)

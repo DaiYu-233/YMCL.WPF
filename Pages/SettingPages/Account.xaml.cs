@@ -9,7 +9,7 @@ using System.Xml;
 using MinecaftOAuth;
 using MinecraftLaunch.Modules.Toolkits;
 using Newtonsoft.Json;
-using Panuon.UI.Silver;
+using Panuon.WPF.UI;
 using YMCL.Class;
 
 namespace YMCL.Pages.SettingPages
@@ -19,9 +19,16 @@ namespace YMCL.Pages.SettingPages
     /// </summary>
     public partial class Account : Page
     {
+        public class AccountsList
+        {
+            public string? Name;
+            public string? AccountType;
+            public string? AddTime;
+
+        }
         public int indexAnd;
         public List<AccountInfo> accountInfos = new List<AccountInfo>();
-        
+        List<AccountsList> accounts = new List<AccountsList>();
 
         public Account()
         {
@@ -38,12 +45,12 @@ namespace YMCL.Pages.SettingPages
                 string tstr = System.IO.File.ReadAllText(@".\YMCL\YMCL.Account.json");
                 accountInfos = JsonConvert.DeserializeObject<List<AccountInfo>>(tstr);
             }
-            DataGr.SelectedItem = DataGr.Items[Convert.ToInt32(obj.LoginIndex)];
+            AccountsListView.SelectedItem = AccountsListView.Items[Convert.ToInt32(obj.LoginIndex)];
             
 
 
-            System.IO.File.WriteAllText(@".\YMCL\Temp\LoginName.log", accountInfos[DataGr.SelectedIndex].Name.ToString());
-            System.IO.File.WriteAllText(@".\YMCL\Temp\LoginType.log", accountInfos[DataGr.SelectedIndex].AccountType.ToString());
+            System.IO.File.WriteAllText(@".\YMCL\Temp\LoginName.log", accountInfos[AccountsListView.SelectedIndex].Name.ToString());
+            System.IO.File.WriteAllText(@".\YMCL\Temp\LoginType.log", accountInfos[AccountsListView.SelectedIndex].AccountType.ToString());
 
         }
         private async void MicrosoftLogin()
@@ -77,9 +84,7 @@ namespace YMCL.Pages.SettingPages
             accountInfos.Add(new AccountInfo() { AccountType = "微软登录", Name = user.Name.ToString(),AddTime = DateTime.Now.ToString()});
             WriteFile();
 
-            string str = System.IO.File.ReadAllText(@".\YMCL\YMCL.Account.json");
-            dynamic model = JsonConvert.DeserializeObject<List<AccountInfo>>(str);
-            DataGr.ItemsSource = model;
+            datagrid();
 
 
         }
@@ -97,20 +102,15 @@ namespace YMCL.Pages.SettingPages
 
         private void datagrid()
         {
-            if (System.IO.File.Exists(@".\YMCL\YMCL.Account.json"))
-            {
-                string tstr = System.IO.File.ReadAllText(@".\YMCL\YMCL.Account.json");
-                accountInfos = JsonConvert.DeserializeObject<List<AccountInfo>>(tstr);
-            }
-            else
+            int a = 0;
+            if (!System.IO.File.Exists(@".\YMCL\YMCL.Account.json"))
             {
                 System.IO.File.WriteAllText(@".\YMCL\YMCL.Account.json", "[{\"AccountType\": \"离线登录\",\"Name\": \"Steve\",\"AddTime\": \"Null\"}]");
-                string tstr = System.IO.File.ReadAllText(@".\YMCL\YMCL.Account.json");
-                accountInfos = JsonConvert.DeserializeObject<List<AccountInfo>>(tstr);
             }
             string str = System.IO.File.ReadAllText(@".\YMCL\YMCL.Account.json");
             dynamic model = JsonConvert.DeserializeObject<List<AccountInfo>>(str);
             accountInfos = JsonConvert.DeserializeObject<List<AccountInfo>>(str);
+            AccountsListView.ItemsSource = accountInfos;
             DataGr.ItemsSource = model;
         }
         private void AddAcount_Click(object sender, RoutedEventArgs e)
@@ -214,13 +214,13 @@ namespace YMCL.Pages.SettingPages
                     string tstr = System.IO.File.ReadAllText(@".\YMCL\YMCL.Account.json");
                     accountInfos = JsonConvert.DeserializeObject<List<AccountInfo>>(tstr);
                 }
-                DataGr.SelectedItem = DataGr.Items[0];
+                AccountsListView.SelectedItem = DataGr.Items[0];
             }
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
-            accountInfos.RemoveAt(DataGr.SelectedIndex);
+            accountInfos.RemoveAt(AccountsListView.SelectedIndex);
             if ((accountInfos.Count) == 0)
             {
                 System.IO.File.WriteAllText(@".\YMCL\YMCL.Account.json", "[{\"AccountType\": \"离线登录\",\"Name\": \"Steve\",\"AddTime\": \"Null\"}]");
@@ -230,13 +230,42 @@ namespace YMCL.Pages.SettingPages
             
             WriteFile();
             datagrid();
-            DataGr.SelectedItem = DataGr.Items[0];
+            AccountsListView.SelectedItem = AccountsListView.Items[0];
         }
 
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             //Toast.Show("启动逻辑尚未完善,建议使用离线模式", ToastPosition.Top);
+        }
+
+        private void AccountsListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (AccountsListView.SelectedIndex >= 0)
+            {
+
+                Del.IsEnabled = true;
+                NowLoginType.Text = accountInfos[AccountsListView.SelectedIndex].AccountType.ToString() + " - " + accountInfos[AccountsListView.SelectedIndex].Name.ToString();
+                System.IO.File.WriteAllText(@".\YMCL\Temp\LoginName.log", accountInfos[AccountsListView.SelectedIndex].Name.ToString());
+                System.IO.File.WriteAllText(@".\YMCL\Temp\LoginType.log", accountInfos[AccountsListView.SelectedIndex].AccountType.ToString());
+
+                var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json"));
+                obj.LoginIndex = AccountsListView.SelectedIndex.ToString();
+                obj.LoginName = accountInfos[AccountsListView.SelectedIndex].Name.ToString();
+                obj.LoginType = accountInfos[AccountsListView.SelectedIndex].AccountType.ToString();
+                System.IO.File.WriteAllText(@"./YMCL/YMCL.Setting.json", JsonConvert.SerializeObject(obj, Newtonsoft.Json.Formatting.Indented));
+
+            }
+            else
+            {
+                if ((accountInfos.Count) == 0)
+                {
+                    System.IO.File.WriteAllText(@".\YMCL\YMCL.Account.json", "[{\"AccountType\": \"离线登录\",\"Name\": \"Steve\",\"AddTime\": \"Null\"}]");
+                    string tstr = System.IO.File.ReadAllText(@".\YMCL\YMCL.Account.json");
+                    accountInfos = JsonConvert.DeserializeObject<List<AccountInfo>>(tstr);
+                }
+                AccountsListView.SelectedItem = DataGr.Items[0];
+            }
         }
     }
 }

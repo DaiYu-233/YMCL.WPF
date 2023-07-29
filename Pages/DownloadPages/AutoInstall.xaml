@@ -36,47 +36,47 @@
                 <!--Step1-->
                 <Border x:Name="Step2Br" Visibility="Hidden" Background="{DynamicResource ThemeContentBorderBackground}" CornerRadius="3,3,3,3" Margin="10,10,10,10" >
                     <Grid>
-                        <Grid VerticalAlignment="Top" Height="40">
-                            <TextBlock  HorizontalAlignment="Left" VerticalAlignment="Center" Width="64" Height="16" FontFamily="MiSans Medium" Text="安装预览" Margin="13,-1,0,0" FontSize="14" Foreground="{DynamicResource ThemeTextColor}"/>
-                            <Button x:Name="StartInsBtn" Height="30" Width="170" Content="开始安装" FontFamily="MiSans Medium" Margin="645,0,0,0" Click="StartInsBtn_Click"/>
-                            <Button x:Name="ReturnBtn" Height="30" Width="106" Content="←  返回" FontFamily="MiSans Medium" Margin="534,0,0,0" Click="ReturnBtn_Click"/>
-                            <Button Height="30" Width="207" Content="取消所有附加安装" FontFamily="MiSans Medium" Margin="288,0,0,0" Click="Button_Click"/>
+                        <Grid VerticalAlignment="Top" Height="45">
+                            <TextBlock  HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="MiSans Medium" Text="安装预览" Margin="16,0,0,0" FontSize="15" Foreground="{DynamicResource ThemeTextColor}"/>
+                            <Button x:Name="StartInsBtn" Height="30" Width="170" Content="开始安装" FontFamily="MiSans Medium" Click="StartInsBtn_Click" HorizontalAlignment="Right" Margin="0,0,6,0"/>
+                            <Button x:Name="ReturnBtn" Height="30" Width="106" Content="←  返回" FontFamily="MiSans Medium" Click="ReturnBtn_Click" HorizontalAlignment="Right" Margin="0,0,395,0"/>
+                            <Button Height="30" Width="207" Content="取消所有附加安装" FontFamily="MiSans Medium" Click="Button_Click" HorizontalAlignment="Right" Margin="0,0,182,0"/>
 
                         </Grid>
-                        <Border VerticalAlignment="Top" Margin="10,45,10,0" Height="50"  Background="{DynamicResource ThemeContentContentBorderBackground}"  CornerRadius="3,3,3,3">
+                        <Border VerticalAlignment="Top" Margin="10,45,10,0" Height="85"  Background="{DynamicResource ThemeContentContentBorderBackground}"  CornerRadius="3,3,3,3">
                             <Grid>
-
+                                <TextBox x:Name="VersionName" Height="30" VerticalAlignment="Bottom" Margin="5,0,5,5" FontFamily="MiSans Medium" />
                                 <TextBlock x:Name="InstallVerText" VerticalAlignment="Top" HorizontalAlignment="Left" Width="245" Margin="10,7,0,0" FontFamily="MiSans Medium" Text="1.19aq" FontSize="16" Foreground="{DynamicResource ThemeTextColor}"/>
-                                <TextBlock x:Name="fjaz" VerticalAlignment="Top" HorizontalAlignment="Left" Width="183" Margin="10,29,0,0" FontFamily="MiSans Medium" Text="无附加安装" Foreground="#FF717171"/>
+                                <TextBlock x:Name="fjaz" VerticalAlignment="Top" HorizontalAlignment="Left" Width="525" Margin="10,29,0,0" FontFamily="MiSans Medium" Text="无附加安装" Foreground="#FF717171"/>
                             </Grid>
                         </Border>
-                        <Border x:Name="ToForgeBtn" VerticalAlignment="Top" Margin="10,105,10,0" Height="40" Background="#FFD6D6D6" CornerRadius="3,3,3,3" MouseDown="ToForgeBtn_MouseDown">
+                        <Border x:Name="ToForgeBtn" VerticalAlignment="Top" Margin="10,140,10,0" Height="40" Background="{DynamicResource ThemeContentContentBorderBackground}" CornerRadius="3,3,3,3" MouseDown="ToForgeBtn_MouseDown">
                             <Grid>
-                                <TextBlock HorizontalAlignment="Left" Width="245" Margin="15,0,0,0" FontFamily="MiSans Medium" Text="Forge" FontSize="14" VerticalAlignment="Center"/>
+                                <TextBlock HorizontalAlignment="Left" Width="245" Margin="15,0,0,0" FontFamily="MiSans Medium" Text="Forge" FontSize="14" VerticalAlignment="Center" Foreground="{DynamicResource ThemeTextColor}"/>
                                 <TextBlock x:Name="ForgeInfo" HorizontalAlignment="Left" Width="458" Margin="317,0,0,0" FontFamily="MiSans Medium" Text="无安装任务" FontSize="14" VerticalAlignment="Center" Foreground="#FFA5A5A5" TextAlignment="Right"/>
 
                                 <ui:FontIcon Glyph="&#xE76C;" HorizontalAlignment="Right" Margin="0,0,7,0" FontSize="14" />
                             </Grid>
                         </Border>
-                        <Border x:Name="ToOptiFineBtn" VerticalAlignment="Top" Margin="10,155,10,0" Height="40" Background="#FFD6D6D6" CornerRadius="3,3,3,3" MouseDown="ToOptiFineBtn_MouseDown" >
+                        <Border x:Name="ToOptiFineBtn" VerticalAlignment="Top" Margin="10,190,10,0" Height="40" Background="{DynamicResource ThemeContentContentBorderBackground}" CornerRadius="3,3,3,3" MouseDown="ToOptiFineBtn_MouseDown" >
                             <Grid>
-                                <TextBlock HorizontalAlignment="Left" Width="245" Margin="15,0,0,0" FontFamily="MiSans Medium" Text="OptiFine" FontSize="14" VerticalAlignment="Center"/>
+                                <TextBlock HorizontalAlignment="Left" Width="245" Margin="15,0,0,0" FontFamily="MiSans Medium" Text="OptiFine" FontSize="14" VerticalAlignment="Center" Foreground="{DynamicResource ThemeTextColor}"/>
                                 <ui:FontIcon Glyph="&#xE76C;" HorizontalAlignment="Right" Margin="0,0,7,0" FontSize="14" />
                                 <TextBlock x:Name="OptiFineInfo" HorizontalAlignment="Left" Width="515" Margin="260,0,0,0" FontFamily="MiSans Medium" Text="无安装任务" FontSize="14" VerticalAlignment="Center" Foreground="#FFA5A5A5" TextAlignment="Right"/>
 
                             </Grid>
                         </Border>
-                        <Border x:Name="ToFabricBtn" VerticalAlignment="Top" Margin="10,205,10,0" Height="40" Background="#FFD6D6D6" CornerRadius="3,3,3,3" MouseDown="ToFabricBtn_MouseDown">
+                        <Border x:Name="ToFabricBtn" VerticalAlignment="Top" Margin="10,240,10,0" Height="40" Background="{DynamicResource ThemeContentContentBorderBackground}" CornerRadius="3,3,3,3" MouseDown="ToFabricBtn_MouseDown">
                             <Grid>
-                                <TextBlock HorizontalAlignment="Left" Width="245" Margin="15,0,0,0" FontFamily="MiSans Medium" Text="Fabric" FontSize="14" VerticalAlignment="Center"/>
+                                <TextBlock HorizontalAlignment="Left" Width="245" Margin="15,0,0,0" FontFamily="MiSans Medium" Text="Fabric" FontSize="14" VerticalAlignment="Center" Foreground="{DynamicResource ThemeTextColor}"/>
                                 <ui:FontIcon Glyph="&#xE76C;" HorizontalAlignment="Right" Margin="0,0,7,0" FontSize="14" />
                                 <TextBlock x:Name="FabricInfo" HorizontalAlignment="Left" Width="556" Margin="219,0,0,0" FontFamily="MiSans Medium" Text="无安装任务" FontSize="14" VerticalAlignment="Center" Foreground="#FFA5A5A5" TextAlignment="Right"/>
 
                             </Grid>
                         </Border>
-                        <Border x:Name="ToQuiltBtn" VerticalAlignment="Top" Margin="10,255,10,0" Height="40" Background="#FFD6D6D6" CornerRadius="3,3,3,3" MouseDown="ToQuiltBtn_MouseDown">
+                        <Border x:Name="ToQuiltBtn" VerticalAlignment="Top" Margin="10,290,10,0" Height="40" Background="{DynamicResource ThemeContentContentBorderBackground}" CornerRadius="3,3,3,3" MouseDown="ToQuiltBtn_MouseDown">
                             <Grid>
-                                <TextBlock HorizontalAlignment="Left" Width="245" Margin="15,0,0,0" FontFamily="MiSans Medium" Text="Quilt" FontSize="14" VerticalAlignment="Center"/>
+                                <TextBlock HorizontalAlignment="Left" Width="245" Margin="15,0,0,0" FontFamily="MiSans Medium" Text="Quilt" FontSize="14" VerticalAlignment="Center" Foreground="{DynamicResource ThemeTextColor}"/>
                                 <ui:FontIcon Glyph="&#xE76C;" HorizontalAlignment="Right" Margin="0,0,7,0" FontSize="14" />
                                 <TextBlock x:Name="QuiltInfo" HorizontalAlignment="Left" Width="619" Margin="156,0,0,0" FontFamily="MiSans Medium" Text="无安装任务" FontSize="14" VerticalAlignment="Center" Foreground="#FFA5A5A5" TextAlignment="Right"/>
 
@@ -85,47 +85,47 @@
                     </Grid>
                 </Border>
                 <!--Step2-->
-                <Border x:Name="ForgeBr"  Background="#FFEDEDED" CornerRadius="3,3,3,3" Margin="10,10,10,10" Visibility="Hidden" >
+                <Border x:Name="ForgeBr"  Background="{DynamicResource ThemeContentBorderBackground}" CornerRadius="3,3,3,3" Margin="10,10,10,10" Visibility="Hidden" >
                     <Grid>
                         <Grid VerticalAlignment="Top" Height="25">
                             <Button Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Tag="IsCloseButton" HorizontalAlignment="Right" Click="btnClose_Click" VerticalAlignment="Center"/>
-                            <TextBlock VerticalAlignment="Center" FontFamily="MiSans Medium" Text="Forge" HorizontalAlignment="Left" Margin="7,0,0,0"/>
+                            <TextBlock VerticalAlignment="Center" FontFamily="MiSans Medium" Text="Forge" HorizontalAlignment="Left" Margin="7,0,0,0" Foreground="{DynamicResource ThemeTextColor}"/>
                         </Grid>
                         <ListView x:Name="VerForgeListView" DisplayMemberPath="ForgeVersion" d:ItemsSource="{d:SampleData ItemCount=5}" FontFamily="MiSans Medium" Margin="0,25,0,0" SelectionChanged="VerForgeListView_SelectionChanged"  />
                         <ui:ProgressRing x:Name="ForgeProgressRing" IsActive="True" Width="50" Height="50" />
                     </Grid>
                 </Border>
-                <Border x:Name="OptiFineBr" Visibility="Hidden"  Background="#FFEDEDED" CornerRadius="3,3,3,3" Margin="10,10,10,10" >
+                <Border x:Name="OptiFineBr"  Background="{DynamicResource ThemeContentBorderBackground}" CornerRadius="3,3,3,3" Margin="10,10,10,10" Visibility="Hidden" >
                     <Grid>
                         <Grid VerticalAlignment="Top" Height="25">
                             <Button Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Tag="IsCloseButton" HorizontalAlignment="Right" Click="btnClose_Click" VerticalAlignment="Center"/>
-                            <TextBlock VerticalAlignment="Center" FontFamily="MiSans Medium" Text="OptiFine" HorizontalAlignment="Left" Margin="7,0,0,0"/>
+                            <TextBlock VerticalAlignment="Center" FontFamily="MiSans Medium" Text="OptiFine" HorizontalAlignment="Left" Margin="7,0,0,0" Foreground="{DynamicResource ThemeTextColor}"/>
                         </Grid>
                         <ListView x:Name="VerOptiFineListView" DisplayMemberPath="BuildVersion" d:ItemsSource="{d:SampleData ItemCount=5}" FontFamily="MiSans Medium" Margin="0,25,0,0" SelectionChanged="VerOptiFineListView_SelectionChanged"  />
                         <ui:ProgressRing x:Name="OptiFineProgressRing" IsActive="True" Width="50" Height="50" />
                     </Grid>
                 </Border>
-                <Border x:Name="FabricBr" Visibility="Hidden"  Background="#FFEDEDED" CornerRadius="3,3,3,3" Margin="10,10,10,10" >
+                <Border x:Name="FabricBr"  Background="{DynamicResource ThemeContentBorderBackground}" CornerRadius="3,3,3,3" Margin="10,10,10,10" Visibility="Hidden" >
                     <Grid>
                         <Grid VerticalAlignment="Top" Height="25">
                             <Button Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Tag="IsCloseButton" HorizontalAlignment="Right" Click="btnClose_Click" VerticalAlignment="Center"/>
-                            <TextBlock VerticalAlignment="Center" FontFamily="MiSans Medium" Text="Fabric" HorizontalAlignment="Left" Margin="7,0,0,0"/>
+                            <TextBlock VerticalAlignment="Center" FontFamily="MiSans Medium" Text="Fabric" HorizontalAlignment="Left" Margin="7,0,0,0" Foreground="{DynamicResource ThemeTextColor}"/>
                         </Grid>
                         <ListView x:Name="VerFabricListView" DisplayMemberPath="BuildVersion" d:ItemsSource="{d:SampleData ItemCount=5}" FontFamily="MiSans Medium" Margin="0,25,0,0" SelectionChanged="VerFabricListView_SelectionChanged"  />
                         <ui:ProgressRing x:Name="FabricProgressRing" IsActive="True" Width="50" Height="50" />
                     </Grid>
                 </Border>
-                <Border x:Name="QuiltBr" Visibility="Hidden"  Background="#FFEDEDED" CornerRadius="3,3,3,3" Margin="10,10,10,10" >
+                <Border x:Name="QuiltBr"  Background="{DynamicResource ThemeContentBorderBackground}" CornerRadius="3,3,3,3" Margin="10,10,10,10" Visibility="Hidden" >
                     <Grid>
                         <Grid VerticalAlignment="Top" Height="25">
                             <Button Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Tag="IsCloseButton" HorizontalAlignment="Right" Click="btnClose_Click" VerticalAlignment="Center"/>
-                            <TextBlock VerticalAlignment="Center" FontFamily="MiSans Medium" Text="Quilt" HorizontalAlignment="Left" Margin="7,0,0,0"/>
+                            <TextBlock VerticalAlignment="Center" FontFamily="MiSans Medium" Text="Quilt" HorizontalAlignment="Left" Margin="7,0,0,0" Foreground="{DynamicResource ThemeTextColor}"/>
                         </Grid>
                         <ListView x:Name="VerQuiltListView" DisplayMemberPath="BuildVersion" d:ItemsSource="{d:SampleData ItemCount=5}" FontFamily="MiSans Medium" Margin="0,25,0,0" SelectionChanged="VerQuiltListView_SelectionChanged"  />
                         <ui:ProgressRing x:Name="QuiltProgressRing" IsActive="True" Width="50" Height="50" />
                     </Grid>
                 </Border>
-                <Border x:Name="DownloadInfo" Visibility="Hidden" Background="{DynamicResource ThemeContentBorderBackground}"  CornerRadius="3,3,3,3" Margin="10,10,10,10" >
+                <Border x:Name="DownloadInfo" Background="{DynamicResource ThemeContentBorderBackground}"  CornerRadius="3,3,3,3" Margin="10,10,10,10" Visibility="Hidden" >
                     <Grid Margin="0,0,0,0">
                         <Grid VerticalAlignment="Top" Height="25">
                             <TextBlock VerticalAlignment="Center" FontFamily="MiSans Medium" Text="下载信息" HorizontalAlignment="Left" Margin="6,0,0,0" Foreground="{DynamicResource ThemeTextColor}"/>
@@ -138,7 +138,7 @@
                         <TextBlock x:Name="DownloadProText" HorizontalAlignment="Right" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="67" Margin="0,23,7,0" Text="100.00%" FontFamily="MiSans Medium" TextAlignment="Center" Foreground="{DynamicResource ThemeTextColor}" >
 
                         </TextBlock>
-                        <TextBox x:Name="DownloadText" Margin="10,44,10,10" IsReadOnlyCaretVisible="True" FontFamily="MiSans Medium" TextChanged="DownloadText_TextChanged" />
+                        <TextBox x:Name="DownloadText" Margin="10,44,10,10" IsReadOnlyCaretVisible="True" IsReadOnly="True" FontFamily="MiSans Medium" />
                     </Grid>
                 </Border>
             </Grid>

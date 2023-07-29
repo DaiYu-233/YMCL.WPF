@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Panuon.WPF.UI;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -62,19 +63,24 @@ namespace YMCL.Pages.SettingPages
 
         private void SilderBox_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
+            
             SilderBox.Value = Math.Round(SilderBox.Value, 0);
             SilderInfo.Text = SilderBox.Value.ToString();
-            if (SilderBox.Value>=128)
-            {
-            }
+
             
         }
 
         private void SilderBox_MouseLeave(object sender, MouseEventArgs e)
         {
+            if (SilderBox.Value >= 128)
+            {
+                Panuon.WPF.UI.Toast.Show("下载线程过大，可能会导致卡顿", ToastPosition.Top);
+            }
             var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json"));
             obj.MaxDownloadThreads = SilderInfo.Text;
             File.WriteAllText(@"./YMCL/YMCL.Setting.json", JsonConvert.SerializeObject(obj, Newtonsoft.Json.Formatting.Indented));
         }
+
+
     }
 }

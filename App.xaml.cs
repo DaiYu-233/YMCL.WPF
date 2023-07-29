@@ -26,11 +26,17 @@ namespace YMCL
                 System.IO.DirectoryInfo directoryInfo = new System.IO.DirectoryInfo("./YMCL");
                 directoryInfo.Create();
             }
-            if (!Directory.Exists("./YMCL/Temp")) 
+            if (!Directory.Exists("./YMCL/Temp"))
             {
                 System.IO.DirectoryInfo directoryInfo = new System.IO.DirectoryInfo("./YMCL/Temp");
                 directoryInfo.Create();
             }
+            if (!Directory.Exists("./YMCL/Accounts"))
+            {
+                System.IO.DirectoryInfo directoryInfo = new System.IO.DirectoryInfo("./YMCL/Accounts");
+                directoryInfo.Create();
+            }
+
             if (!File.Exists("./YMCL/YMCL.Setting.json"))
             {
                 var obj = new SettingInfo()
@@ -44,7 +50,8 @@ namespace YMCL
                     MaxMem = "1024",
                     Theme = "Light",
                     DownloadSoure = "Mcbbs",
-                    MaxDownloadThreads = "64"
+                    MaxDownloadThreads = "64",
+                    MinecraftPath = ".minecraft"
                 };
                 File.WriteAllText("./YMCL/YMCL.Setting.json", JsonConvert.SerializeObject(obj, Formatting.Indented));
             }
