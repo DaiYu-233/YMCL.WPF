@@ -7,7 +7,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Xml;
 using MinecaftOAuth;
-using MinecraftLaunch.Modules.Toolkits;
 using Newtonsoft.Json;
 using Panuon.WPF.UI;
 using YMCL.Class;

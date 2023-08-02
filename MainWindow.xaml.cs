@@ -60,7 +60,7 @@ namespace YMCL
 
         private void btnMinimize_Click(object sender, RoutedEventArgs e)
         {
-            Hide();
+            this.WindowState = WindowState.Minimized;
         }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)

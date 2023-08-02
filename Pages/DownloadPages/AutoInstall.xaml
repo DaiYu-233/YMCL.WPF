@@ -25,7 +25,10 @@
                                 <DataTemplate>
                                     <Grid>
                                         <TextBlock Text="{Binding Id}" FontSize="16"/>
-                                        <TextBlock Text="{Binding ReleaseTime}" Margin="0,18,0,0" FontSize="12" Foreground="#E48A8A8A"/>
+                                        <TextBlock  Margin="0,18,0,0" FontSize="12" Foreground="#E48A8A8A">
+                                            <Run Text="{Binding ReleaseTime}"/>
+                                            <Run Text="{Binding Type}"/>
+                                        </TextBlock>
                                     </Grid>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
@@ -101,7 +104,7 @@
                             <Button Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Tag="IsCloseButton" HorizontalAlignment="Right" Click="btnClose_Click" VerticalAlignment="Center"/>
                             <TextBlock VerticalAlignment="Center" FontFamily="MiSans Medium" Text="OptiFine" HorizontalAlignment="Left" Margin="7,0,0,0" Foreground="{DynamicResource ThemeTextColor}"/>
                         </Grid>
-                        <ListView x:Name="VerOptiFineListView" DisplayMemberPath="BuildVersion" d:ItemsSource="{d:SampleData ItemCount=5}" FontFamily="MiSans Medium" Margin="0,25,0,0" SelectionChanged="VerOptiFineListView_SelectionChanged"  />
+                        <ListView x:Name="VerOptiFineListView" DisplayMemberPath="FileName" d:ItemsSource="{d:SampleData ItemCount=5}" FontFamily="MiSans Medium" Margin="0,25,0,0" SelectionChanged="VerOptiFineListView_SelectionChanged"  />
                         <ui:ProgressRing x:Name="OptiFineProgressRing" IsActive="True" Width="50" Height="50" />
                     </Grid>
                 </Border>
@@ -111,7 +114,7 @@
                             <Button Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Tag="IsCloseButton" HorizontalAlignment="Right" Click="btnClose_Click" VerticalAlignment="Center"/>
                             <TextBlock VerticalAlignment="Center" FontFamily="MiSans Medium" Text="Fabric" HorizontalAlignment="Left" Margin="7,0,0,0" Foreground="{DynamicResource ThemeTextColor}"/>
                         </Grid>
-                        <ListView x:Name="VerFabricListView" DisplayMemberPath="BuildVersion" d:ItemsSource="{d:SampleData ItemCount=5}" FontFamily="MiSans Medium" Margin="0,25,0,0" SelectionChanged="VerFabricListView_SelectionChanged"  />
+                        <ListView x:Name="VerFabricListView" DisplayMemberPath="Loader.Version" d:ItemsSource="{d:SampleData ItemCount=5}" FontFamily="MiSans Medium" Margin="0,25,0,0" SelectionChanged="VerFabricListView_SelectionChanged"  />
                         <ui:ProgressRing x:Name="FabricProgressRing" IsActive="True" Width="50" Height="50" />
                     </Grid>
                 </Border>
@@ -121,7 +124,7 @@
                             <Button Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Tag="IsCloseButton" HorizontalAlignment="Right" Click="btnClose_Click" VerticalAlignment="Center"/>
                             <TextBlock VerticalAlignment="Center" FontFamily="MiSans Medium" Text="Quilt" HorizontalAlignment="Left" Margin="7,0,0,0" Foreground="{DynamicResource ThemeTextColor}"/>
                         </Grid>
-                        <ListView x:Name="VerQuiltListView" DisplayMemberPath="BuildVersion" d:ItemsSource="{d:SampleData ItemCount=5}" FontFamily="MiSans Medium" Margin="0,25,0,0" SelectionChanged="VerQuiltListView_SelectionChanged"  />
+                        <ListView x:Name="VerQuiltListView" DisplayMemberPath="Loader.Version" d:ItemsSource="{d:SampleData ItemCount=5}" FontFamily="MiSans Medium" Margin="0,25,0,0" SelectionChanged="VerQuiltListView_SelectionChanged"  />
                         <ui:ProgressRing x:Name="QuiltProgressRing" IsActive="True" Width="50" Height="50" />
                     </Grid>
                 </Border>

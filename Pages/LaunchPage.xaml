@@ -36,7 +36,7 @@
                         <Button x:Name="btnClose" Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Tag="IsCloseButton" HorizontalAlignment="Right" Click="btnClose_Click" VerticalAlignment="Center" Margin="0,0,3,0"/>
                         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="64" Height="14" FontFamily="MiSans Medium" Text="版本列表" Margin="11,0,0,0" Foreground="{DynamicResource ThemeTextColor}"/>
                     </Grid>
-                    <ListView x:Name="VerListView" d:ItemsSource="{d:SampleData ItemCount=5}" FontFamily="MiSans Medium" SelectedValuePath="Id" DisplayMemberPath="Id" Margin="0,30,0,0" SelectionChanged="VerListView_SelectionChanged" />
+                    <ListView DisplayMemberPath="Id" SelectedValuePath="Id" x:Name="VerListView" d:ItemsSource="{d:SampleData ItemCount=5}" FontFamily="MiSans Medium" Margin="0,30,0,0" SelectionChanged="VerListView_SelectionChanged" />
                 </Grid>
             </Border>
         </Grid>

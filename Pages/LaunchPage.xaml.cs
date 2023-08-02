@@ -17,13 +17,13 @@ using System.IO;
 using MinecraftLaunch.Launch;
 using MinecraftLaunch.Modules.Models.Launch;
 using MinecraftLaunch.Modules.Models.Auth;
-using MinecaftOAuth;
-using MinecraftLaunch.Modules.Toolkits;
 using Newtonsoft.Json;
 using YMCL.Pages.SettingPages;
 using System.Diagnostics;
 using YMCL.Class;
 using Panuon.WPF.UI;
+using KMCCC.Launcher;
+using MinecraftLaunch.Modules.Utils;
 
 namespace YMCL.Pages
 {
@@ -36,6 +36,7 @@ namespace YMCL.Pages
         public static LaunchConfig launchConfig { get; } = new LaunchConfig();
         public MinecraftLaunch.Modules.Models.Auth.Account UserInfo { get; private set; }
 
+        public static GameCoreUtil Core = new GameCoreUtil(JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json")).MinecraftPath);
 
         public LaunchPage()
         {
@@ -70,7 +71,7 @@ namespace YMCL.Pages
                 directoryInfo.Create();
             }
 
-
+            Core.GetGameCores();
         }
 
         private async void LaunchGame_Click(object sender, RoutedEventArgs e)
@@ -130,24 +131,27 @@ namespace YMCL.Pages
 
         public void GetVers()
         {
-            var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json"));
-            var Versionpath = obj.MinecraftPath + "\\versions";
-            if (!Directory.Exists(Versionpath))
-            {
-                System.IO.DirectoryInfo directoryInfo = new System.IO.DirectoryInfo(Versionpath);
-                directoryInfo.Create();
-            }
-            DirectoryInfo dir = new DirectoryInfo(Versionpath);
-            DirectoryInfo[] dii = dir.GetDirectories();  //获取.minecraft\versions的所有子目录
-            foreach (DirectoryInfo VersionDir in dii)
-            {
-                var Index = VersionDir.FullName.Split(@"\");
-                var VersionName = Index[Index.Length - 1];
-                if (File.Exists(Versionpath + @"\" + VersionName + @"\" + VersionName + ".json"))  //检查是否符合mc版本
-                {
-                    VerListView.Items.Add(VersionName);
-                }
-            }
+            //VerListView.Items.Clear();
+            //var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json"));
+            //var Versionpath = obj.MinecraftPath + "\\versions";
+            //if (!Directory.Exists(Versionpath))
+            //{
+            //    System.IO.DirectoryInfo directoryInfo = new System.IO.DirectoryInfo(Versionpath);
+            //    directoryInfo.Create();
+            //}
+            //DirectoryInfo dir = new DirectoryInfo(Versionpath);
+            //DirectoryInfo[] dii = dir.GetDirectories();  //获取.minecraft\versions的所有子目录
+            //foreach (DirectoryInfo VersionDir in dii)
+            //{
+            //    var Index = VersionDir.FullName.Split(@"\");
+            //    var VersionName = Index[Index.Length - 1];
+            //    if (File.Exists(Versionpath + @"\" + VersionName + @"\" + VersionName + ".json"))  //检查是否符合mc版本
+            //    {
+            //        VerListView.Items.Add(VersionName);
+            //    }
+            //}
+
+            Core.GetGameCores();
         }
 
 

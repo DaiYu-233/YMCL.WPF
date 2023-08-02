@@ -131,6 +131,7 @@ namespace YMCL.Pages.SettingPages
         {
             JavaCombo.Items.Clear();
             JavaList = (List<string>)JavaHelper.SearchJavaRuntime();
+
             foreach (var item in JavaList)
             {
                 JavaCombo.Items.Add(item);
