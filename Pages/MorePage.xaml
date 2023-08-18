@@ -5,16 +5,16 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:YMCL.Pages"
       mc:Ignorable="d" xmlns:ui="http://schemas.modernwpf.com/2019" 
-      d:DesignHeight="490" d:DesignWidth="840"
+
       Title="SettingPage">
     <Border Background="{DynamicResource ThemeBackground}" CornerRadius="0,0,8,0">
         <Grid  >
             <Border VerticalAlignment="Top" Height="40" Background="{DynamicResource ThemeNavigationBackground}">
                 <ui:NavigationView IsSettingsVisible="False" PaneDisplayMode="Top" IsBackButtonVisible="Collapsed" FontFamily="MiSans Medium" Margin="8,0,8,0" SelectionChanged="NavigationView_SelectionChanged"  >
                     <ui:NavigationView.MenuItems>
+                        
                         <ui:NavigationViewItem  FontFamily="MiSans Medium" IsSelected="True" Icon="Link" Content="关于" x:Name="about"/>
-
-
+                        <ui:NavigationViewItem  FontFamily="MiSans Medium" IsSelected="True" Icon="Play" Content="音乐播放器" x:Name="Music"/>
                     </ui:NavigationView.MenuItems>
                 </ui:NavigationView>
             </Border>

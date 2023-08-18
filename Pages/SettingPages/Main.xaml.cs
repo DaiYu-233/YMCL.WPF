@@ -32,6 +32,7 @@ namespace YMCL.Pages.SettingPages
     {
         public List<SettingInfo> settingInfos = new List<SettingInfo>();
         List<string> JavaList = new List<string>();
+        List<string> MinecraftPathList = new List<string>();
 
         struct MEMORYSTATUSEX
         {
@@ -53,8 +54,6 @@ namespace YMCL.Pages.SettingPages
 
             InitializeComponent();
 
-            MinecraftPathText.Text = obj.MinecraftPath;
-
             JavaList = (List<string>)JavaHelper.SearchJavaRuntime();
             foreach (var item in JavaList)
             {
@@ -71,7 +70,12 @@ namespace YMCL.Pages.SettingPages
                 }
             }
 
-
+            MinecraftPathList = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText("./YMCL/YMCL.MinecraftPath.json"));
+            MinecraftPathList.ForEach(x =>
+            {
+                MinecraftPathText.Items.Add(x);
+            });
+            MinecraftPathText.SelectedItem = obj.MinecraftPath;
             UpdateMem();
             SettingInitialization();
 
@@ -196,7 +200,7 @@ namespace YMCL.Pages.SettingPages
             var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json"));
             obj.Java = (string?)JavaCombo.SelectedItem;
             obj.MaxMem = SilderBox.Value.ToString();
-
+            obj.MinecraftPath = MinecraftPathText.Text;
             if (AloneCoreSwitch.IsOn == true)
             {
                 obj.AloneCore = "True";
@@ -205,9 +209,11 @@ namespace YMCL.Pages.SettingPages
             {
                 obj.AloneCore = "False";
             }
-            Panuon.WPF.UI.Toast.Show("已保存设置", ToastPosition.Top);
-            //Toast.Show("已保存设置", new ToastOptions { Icon = ToastIcons.Information, Time = 1500, Location = ToastLocation.OwnerTopCenter });
             File.WriteAllText(@"./YMCL/YMCL.Setting.json", JsonConvert.SerializeObject(obj, Newtonsoft.Json.Formatting.Indented));
+            File.WriteAllText("./YMCL/YMCL.MinecraftPath.json", JsonConvert.SerializeObject(MinecraftPathList, Newtonsoft.Json.Formatting.Indented));
+            Panuon.WPF.UI.Toast.Show("已保存", ToastPosition.Top);
+            //Toast.Show("已保存设置", new ToastOptions { Icon = ToastIcons.Information, Time = 1500, Location = ToastLocation.OwnerTopCenter });
+
         }
 
         private void AloneCoreSwitch_Toggled(object sender, RoutedEventArgs e)
@@ -237,15 +243,28 @@ namespace YMCL.Pages.SettingPages
                     Toast.Show("需选择 .minecraft 文件夹", ToastPosition.Top);
                     return;
                 }
-                var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json"));
-                obj.MinecraftPath = path;
-                File.WriteAllText(@"./YMCL/YMCL.Setting.json", JsonConvert.SerializeObject(obj, Newtonsoft.Json.Formatting.Indented));
-                
-                System.Windows.Forms.Application.Restart();
-                Toast.Show("重启YMCL生效", ToastPosition.Top);
-                
-                System.Environment.Exit(0);
+                MinecraftPathList.Add(path);
+                MinecraftPathText.Items.Add(path);
+                MinecraftPathText.SelectedItem = path;
+
             }
+        }
+
+        private void DelMinecraftFolder_Click(object sender, RoutedEventArgs e)
+        {
+            if (MinecraftPathText.Items.Count <= 1)
+            {
+                MinecraftPathList.Clear();
+                MinecraftPathList.Add(".minecraft");
+                MinecraftPathText.Items.Clear();
+                MinecraftPathText.Items.Add(".minecraft");
+                MinecraftPathText.SelectedItem = MinecraftPathText.Items[0];
+                return;
+            }
+            var index = MinecraftPathText.SelectedIndex;
+            MinecraftPathList.RemoveAt(index);
+            MinecraftPathText.Items.RemoveAt(index);
+            MinecraftPathText.SelectedItem = MinecraftPathText.Items[0];
         }
     }
 }

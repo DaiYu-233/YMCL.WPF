@@ -1,0 +1,114 @@
+﻿<pu:WindowX x:Class="YMCL.Pages.Forms.MusicPlayer"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:pu="https://opensource.panuon.com/wpf-ui"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:YMCL.Pages.Forms" FontFamily="MiSans Medium"
+        mc:Ignorable="d" Height="538" Width="918" 
+        xmlns:ui="http://schemas.modernwpf.com/2019" WindowStyle="None" pu:WindowXCaption.Height="0"
+        ui:WindowHelper.UseModernWindowStyle="False" Background="Transparent" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" OpacityMask="White" AllowsTransparency="True" Title="YMCL" Loaded="WindowX_Loaded" MouseMove="WindowX_MouseMove">
+    <Border CornerRadius="8,8,8,8"  Background="{DynamicResource ThemeBackground}">
+        <Border.Effect>
+            <DropShadowEffect Color="#FFAAAAAA" ShadowDepth="0" BlurRadius="10" Opacity="0.4"/>
+        </Border.Effect>
+        <Grid >
+            
+
+            <Border VerticalAlignment="Top" Height="30" Background="{DynamicResource SecundaryBackgroundColor}" CornerRadius="8,8,0,0" MouseLeftButtonDown="Border_MouseLeftButtonDown">
+                <Grid VerticalAlignment="Top" Height="30">
+                    <Button x:Name="btnMinimize" Style="{DynamicResource IconButtonsStyle}" Content="{DynamicResource minimize}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,30,0" Click="btnMinimize_Click"/>
+                    <Button x:Name="btnClose" Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Tag="IsCloseButton" HorizontalAlignment="Right" Margin="0,0,3,0" Click="btnClose_Click"/>
+                </Grid>
+            </Border>
+            <Border VerticalAlignment="Bottom" Height="65" Background="#FFF8F8F8" CornerRadius="0,0,8,8" BorderBrush="#FFE0E0E0">
+                <Grid>
+
+                    <Grid>
+                        <!-- 当前音乐名、作者 -->
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                            <Border Margin="12,10,0,10" CornerRadius="8,8,8,8">
+                                <Image x:Name="PlayingSongPic"
+                           HorizontalAlignment="Left"/>
+                            </Border>
+
+                            <StackPanel Margin="10,0,0,0" VerticalAlignment="Center">
+                                <TextBlock x:Name="PlayingSongName" Text="" FontSize="13" />
+                                <TextBlock x:Name="PlayingSongAuthors" Text=""
+                                   Opacity="0.6" FontSize="11" />
+                            </StackPanel>
+                        </StackPanel>
+
+                        <!-- 播放控制 -->
+                        <Slider VerticalAlignment="Top" Margin="0,-17,0,0" Value="-22"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,30,0"/>
+                        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Border Background="#FF16E9B8" HorizontalAlignment="Center" VerticalAlignment="Center" Width="48" Height="48" CornerRadius="9999999,9999999,9999999,9999999" Cursor="Hand" MouseDown="Border_MouseDown">
+                                <Grid>
+                                    <ui:FontIcon x:Name="PauseIcon" Glyph="&#xF5B0;" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2,0,0,0" FontSize="27" />
+                                    <ui:FontIcon x:Name="PlayIcon" Glyph="&#xF8AE;" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="27" Visibility="Hidden" />
+                                </Grid>
+                            </Border>
+                            <ui:FontIcon Glyph="&#xF5E7;" Margin="0,0,190,0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="17" Cursor="Hand" />
+                            <ui:FontIcon Glyph="&#xE994;" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="190,0,0,0" Cursor="Hand" />
+                            <ui:FontIcon Glyph="&#xF8AD;" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="95,0,0,0" Cursor="Hand" />
+                            <ui:FontIcon Glyph="&#xF8AC;" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,95,0" Cursor="Hand" />
+
+                        </Grid>
+                        <ui:FontIcon Glyph="&#xE7BC;" HorizontalAlignment="Right" Margin="0,0,25,0" VerticalAlignment="Center" FontSize="19" MouseDown="FontIcon_MouseDown" Cursor="Hand" />
+                        <ui:FontIcon Glyph="&#xF2B7;" HorizontalAlignment="Right" Margin="0,0,60,0" VerticalAlignment="Center" FontSize="19" Cursor="Hand" />
+                        <ui:FontIcon Glyph="&#xE896;" HorizontalAlignment="Right" Margin="0,0,95,0" VerticalAlignment="Center" FontSize="19" Cursor="Hand" />
+                        <TextBlock Text="00:00/00:00" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,135,0" MouseDown="TextBlock_MouseDown"/>
+                    </Grid>
+
+                </Grid>
+            </Border>
+            <Grid Margin="0,30,0,67">
+                
+                <Border x:Name="SearchGr" Visibility="Visible" Background="{DynamicResource ThemeContentBorderBackground}"  CornerRadius="3,3,3,3" Margin="10,10,10,13" >
+                    <Grid>
+                        <ui:AutoSuggestBox x:Name="SearchBox" QueryIcon="Zoom" Margin="175,5,5,0" QuerySubmitted="AutoSuggestBox_QuerySubmitted"/>
+                        <TextBox IsReadOnly="True" Margin="55,5,0,0" VerticalAlignment="Top" Text="" HorizontalAlignment="Left" Width="65" TextAlignment="Center" Height="32" />
+                        <TextBlock x:Name="PageText" VerticalAlignment="Top" Margin="61,12,0,0" Width="54" FontSize="14" Text="1" TextAlignment="Center" Foreground="{DynamicResource ThemeTextColor}" HorizontalAlignment="Left"/>
+                        <Button x:Name="NextPageBtn" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="125,5,5,0" Click="NextPageBtn_Click" Width="45">
+                            <ui:FontIcon Glyph="&#xE76C;" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FF7B7B7B" />
+                        </Button>
+                        <Button x:Name="BackPageBtn" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,5,0,0" Click="BackPageBtn_Click" Width="45">
+                            <ui:FontIcon Glyph="&#xE76B;" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FF7B7B7B" />
+                        </Button>
+                        <ListView x:Name="SongsListView" d:ItemsSource="{d:SampleData ItemCount=5}" FontFamily="MiSans Medium" Margin="0,40,0,0" SelectionChanged="SongsListView_SelectionChanged"   >
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <TextBlock ><Run  Text="{Binding SongName}" FontSize="13"/><Run Text=" "/><Run Text="{Binding Duration}"  FontSize="10" Foreground="#E48A8A8A"/></TextBlock>
+                                        <TextBlock  Margin="0,17,0,0" FontSize="12" Foreground="#E48A8A8A"><Run Text="{Binding Artists}" FontSize="11"/><Run Text="  "/></TextBlock>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+
+                    </Grid>
+                </Border>
+            </Grid>
+            <Border x:Name="PlayListViewGr" SnapsToDevicePixels="False" HorizontalAlignment="Right" Width="280" Margin="0,40,-290,80" Visibility="Visible" Background="#FFF8F8F8" CornerRadius="3,3,3,3">
+
+                <Grid>
+                    <Grid VerticalAlignment="Top" Height="40">
+                        <Button x:Name="AddLocalFileBtn" Height="30" HorizontalAlignment="Stretch" Margin="8,8,115,0" Content="添加本地音频文件" Click="AddLocalFileBtn_Click"/>
+                        <Button x:Name="DelObjBtn" Height="30" HorizontalAlignment="Stretch" Margin="170,8,8,0" Content="删除选中项" Click="DelObjBtn_Click" IsEnabled="False"/>
+                    </Grid>
+                    <!--<TextBlock Text="播放列表" FontSize="16"/>-->
+                    <ui:ListView x:Name="PlayListView"  d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,45,0,15" SelectionChanged="PlayListView_SelectionChanged" >
+                        <ui:ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <TextBlock ><Run  Text="{Binding SongName}" FontSize="13"/><Run Text=" "/><Run Text="{Binding Duration}"  FontSize="10" Foreground="#E48A8A8A"/></TextBlock>
+                                    <TextBlock  Margin="0,18,0,0" FontSize="11" Foreground="#E48A8A8A"><Run Text="{Binding Type}"/><Run Text="  "/><Run Text="{Binding Authors}"/></TextBlock>
+                                </Grid>
+                            </DataTemplate>
+                        </ui:ListView.ItemTemplate>
+                    </ui:ListView>
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
+</pu:WindowX>

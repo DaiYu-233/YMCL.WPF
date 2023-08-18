@@ -19,10 +19,14 @@ namespace YMCL.Class
             public string? LoginType { get; set; }
 
 
-            public string? Theme { get; set; }
-            public string? DisplayInformation { get; set; }
+        public string? Theme { get; set; }
+        public string? DisplayInformation { get; set; }
+        public double MainWindowWidth { get; set; }
+        public double MainWindowHeight { get; set; }
+        public double PlayerWindowWidth { get; set; }
+        public double PlayerWindowHeight { get; set; }
 
-            public string? DownloadSoure { get; set; }
-            public string? MaxDownloadThreads { get; set; }
+        public string? DownloadSoure { get; set; }
+        public string? MaxDownloadThreads { get; set; }
     }
 }

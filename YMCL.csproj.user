@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <_LastSelectedProfileId>D:\Desktop\YMCL\Properties\PublishProfiles\FolderProfile.pubxml</_LastSelectedProfileId>
+    <_LastSelectedProfileId>D:\Desktop\YMCL\Properties\PublishProfiles\FolderProfile1.pubxml</_LastSelectedProfileId>
   </PropertyGroup>
   <ItemGroup>
     <ApplicationDefinition Update="App.xaml">
@@ -15,6 +15,9 @@
     <Compile Update="Pages\DownloadPages\AutoInstall.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Pages\Forms\MusicPlayer.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Pages\LaunchPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -22,6 +25,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Pages\MorePages\About.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\MorePages\MusicPlayer.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Pages\SettingPage.xaml.cs">
@@ -50,6 +56,9 @@
     <Page Update="Pages\DownloadPages\AutoInstall.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Pages\Forms\MusicPlayer.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Pages\LaunchPage.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -57,6 +66,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\MorePages\About.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\MorePages\MusicPlayer.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\SettingPage.xaml">

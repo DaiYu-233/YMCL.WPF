@@ -5,8 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:YMCL.Pages.DownloadPages"
       mc:Ignorable="d" 
-         d:DesignHeight="450" d:DesignWidth="840"
-      Title="AutoInstall">
+      Title="AutoInstall" Loaded="Page_Loaded">
     <Grid>
         <Border Background="{DynamicResource SecundaryBackgroundColor}" CornerRadius="0,0,8,0">
             <Grid>
@@ -15,13 +14,14 @@
                         <Grid VerticalAlignment="Top" Height="40">
                             <TextBlock x:Name="StepText" HorizontalAlignment="Left" VerticalAlignment="Center" Width="64" Height="16" FontFamily="MiSans Medium" Text="Vanllia" Margin="13,-1,0,0" FontSize="14" Foreground="{DynamicResource ThemeTextColor}"/>
                             <Button x:Name="NextStep" Height="30" Width="120" Content="下一步" FontFamily="MiSans Medium" HorizontalAlignment="Right" Margin="0,0,5,0" IsEnabled="False" Click="NextStep_Click"/>
-                            <Button x:Name="RefreshVerListBtn" Height="30" Width="76" Content="刷新" FontFamily="MiSans Medium" Margin="614,0,0,0" Click="RefreshVerListBtn_Click"/>
+                            <Button x:Name="RefreshVerListBtn" Height="30" Width="76" Content="刷新" FontFamily="MiSans Medium" Click="RefreshVerListBtn_Click" Margin="0,0,130,0" HorizontalAlignment="Right"/>
 
-                            <TextBox x:Name="SearBox"  VerticalAlignment="Center" Height="30" HorizontalAlignment="Left" Margin="314,0,0,0" Width="295" FontFamily="MiSans Medium" FontSize="14" TextChanged="SearBox_TextChanged" ></TextBox>
-                            <ui:FontIcon Glyph="&#xE721;" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,510,0" Foreground="#FF7B7B7B" />
+                            <ui:AutoSuggestBox x:Name="SearBox"  VerticalAlignment="Center" Height="30" HorizontalAlignment="Right" Width="295" FontFamily="MiSans Medium" FontSize="14" QueryIcon="Zoom" TextChanged="SearBox_TextChanged" Margin="0,0,210,0" >
+                            </ui:AutoSuggestBox>
+                            <!--<ui:FontIcon Glyph="&#xE721;" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,510,0" Foreground="#FF7B7B7B" />-->
                         </Grid>
-                        <ListView x:Name="VerListView" SelectedValuePath="Id" d:ItemsSource="{d:SampleData ItemCount=5}" FontFamily="MiSans Medium" Margin="0,40,0,0" SelectionChanged="VerListView_SelectionChanged"  >
-                            <ListView.ItemTemplate>
+                        <ui:ListView x:Name="VerListView" SelectedValuePath="Id" d:ItemsSource="{d:SampleData ItemCount=5}" FontFamily="MiSans Medium" Margin="0,40,0,0" SelectionChanged="VerListView_SelectionChanged"  >
+                            <ui:ListView.ItemTemplate>
                                 <DataTemplate>
                                     <Grid>
                                         <TextBlock Text="{Binding Id}" FontSize="16"/>
@@ -31,8 +31,8 @@
                                         </TextBlock>
                                     </Grid>
                                 </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
+                            </ui:ListView.ItemTemplate>
+                        </ui:ListView>
 
                     </Grid>
                 </Border>
@@ -49,39 +49,39 @@
                         <Border VerticalAlignment="Top" Margin="10,45,10,0" Height="85"  Background="{DynamicResource ThemeContentContentBorderBackground}"  CornerRadius="3,3,3,3">
                             <Grid>
                                 <TextBox x:Name="VersionName" Height="30" VerticalAlignment="Bottom" Margin="5,0,5,5" FontFamily="MiSans Medium" />
-                                <TextBlock x:Name="InstallVerText" VerticalAlignment="Top" HorizontalAlignment="Left" Width="245" Margin="10,7,0,0" FontFamily="MiSans Medium" Text="1.19aq" FontSize="16" Foreground="{DynamicResource ThemeTextColor}"/>
-                                <TextBlock x:Name="fjaz" VerticalAlignment="Top" HorizontalAlignment="Left" Width="525" Margin="10,29,0,0" FontFamily="MiSans Medium" Text="无附加安装" Foreground="#FF717171"/>
+                                <TextBlock x:Name="InstallVerText" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,7,0,0" FontFamily="MiSans Medium" Text="1.19aq" FontSize="16" Foreground="{DynamicResource ThemeTextColor}"/>
+                                <TextBlock x:Name="fjaz" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,29,0,0" FontFamily="MiSans Medium" Text="无附加安装" Foreground="#FF717171"/>
                             </Grid>
                         </Border>
                         <Border x:Name="ToForgeBtn" VerticalAlignment="Top" Margin="10,140,10,0" Height="40" Background="{DynamicResource ThemeContentContentBorderBackground}" CornerRadius="3,3,3,3" MouseDown="ToForgeBtn_MouseDown">
                             <Grid>
-                                <TextBlock HorizontalAlignment="Left" Width="245" Margin="15,0,0,0" FontFamily="MiSans Medium" Text="Forge" FontSize="14" VerticalAlignment="Center" Foreground="{DynamicResource ThemeTextColor}"/>
-                                <TextBlock x:Name="ForgeInfo" HorizontalAlignment="Left" Width="458" Margin="317,0,0,0" FontFamily="MiSans Medium" Text="无安装任务" FontSize="14" VerticalAlignment="Center" Foreground="#FFA5A5A5" TextAlignment="Right"/>
+                                <TextBlock HorizontalAlignment="Left" Margin="15,0,0,0" FontFamily="MiSans Medium" Text="Forge" FontSize="14" VerticalAlignment="Center" Foreground="{DynamicResource ThemeTextColor}"/>
+                                <TextBlock x:Name="ForgeInfo" HorizontalAlignment="Right" FontFamily="MiSans Medium" Text="无安装任务" FontSize="14" VerticalAlignment="Center" Foreground="#FFA5A5A5" TextAlignment="Right" Margin="0,0,30,0"/>
 
                                 <ui:FontIcon Glyph="&#xE76C;" HorizontalAlignment="Right" Margin="0,0,7,0" FontSize="14" />
                             </Grid>
                         </Border>
                         <Border x:Name="ToOptiFineBtn" VerticalAlignment="Top" Margin="10,190,10,0" Height="40" Background="{DynamicResource ThemeContentContentBorderBackground}" CornerRadius="3,3,3,3" MouseDown="ToOptiFineBtn_MouseDown" >
                             <Grid>
-                                <TextBlock HorizontalAlignment="Left" Width="245" Margin="15,0,0,0" FontFamily="MiSans Medium" Text="OptiFine" FontSize="14" VerticalAlignment="Center" Foreground="{DynamicResource ThemeTextColor}"/>
+                                <TextBlock HorizontalAlignment="Left" Margin="15,0,0,0" FontFamily="MiSans Medium" Text="OptiFine" FontSize="14" VerticalAlignment="Center" Foreground="{DynamicResource ThemeTextColor}"/>
                                 <ui:FontIcon Glyph="&#xE76C;" HorizontalAlignment="Right" Margin="0,0,7,0" FontSize="14" />
-                                <TextBlock x:Name="OptiFineInfo" HorizontalAlignment="Left" Width="515" Margin="260,0,0,0" FontFamily="MiSans Medium" Text="无安装任务" FontSize="14" VerticalAlignment="Center" Foreground="#FFA5A5A5" TextAlignment="Right"/>
+                                <TextBlock x:Name="OptiFineInfo" HorizontalAlignment="Right" Margin="0,0,30,0" FontFamily="MiSans Medium" Text="无安装任务" FontSize="14" VerticalAlignment="Center" Foreground="#FFA5A5A5" TextAlignment="Right"/>
 
                             </Grid>
                         </Border>
                         <Border x:Name="ToFabricBtn" VerticalAlignment="Top" Margin="10,240,10,0" Height="40" Background="{DynamicResource ThemeContentContentBorderBackground}" CornerRadius="3,3,3,3" MouseDown="ToFabricBtn_MouseDown">
                             <Grid>
-                                <TextBlock HorizontalAlignment="Left" Width="245" Margin="15,0,0,0" FontFamily="MiSans Medium" Text="Fabric" FontSize="14" VerticalAlignment="Center" Foreground="{DynamicResource ThemeTextColor}"/>
+                                <TextBlock HorizontalAlignment="Left" Margin="15,0,0,0" FontFamily="MiSans Medium" Text="Fabric" FontSize="14" VerticalAlignment="Center" Foreground="{DynamicResource ThemeTextColor}"/>
                                 <ui:FontIcon Glyph="&#xE76C;" HorizontalAlignment="Right" Margin="0,0,7,0" FontSize="14" />
-                                <TextBlock x:Name="FabricInfo" HorizontalAlignment="Left" Width="556" Margin="219,0,0,0" FontFamily="MiSans Medium" Text="无安装任务" FontSize="14" VerticalAlignment="Center" Foreground="#FFA5A5A5" TextAlignment="Right"/>
+                                <TextBlock x:Name="FabricInfo" HorizontalAlignment="Right" FontFamily="MiSans Medium" Text="无安装任务" FontSize="14" VerticalAlignment="Center" Foreground="#FFA5A5A5" TextAlignment="Right" Margin="0,0,30,0"/>
 
                             </Grid>
                         </Border>
                         <Border x:Name="ToQuiltBtn" VerticalAlignment="Top" Margin="10,290,10,0" Height="40" Background="{DynamicResource ThemeContentContentBorderBackground}" CornerRadius="3,3,3,3" MouseDown="ToQuiltBtn_MouseDown">
                             <Grid>
-                                <TextBlock HorizontalAlignment="Left" Width="245" Margin="15,0,0,0" FontFamily="MiSans Medium" Text="Quilt" FontSize="14" VerticalAlignment="Center" Foreground="{DynamicResource ThemeTextColor}"/>
+                                <TextBlock HorizontalAlignment="Left" Margin="15,0,0,0" FontFamily="MiSans Medium" Text="Quilt" FontSize="14" VerticalAlignment="Center" Foreground="{DynamicResource ThemeTextColor}"/>
                                 <ui:FontIcon Glyph="&#xE76C;" HorizontalAlignment="Right" Margin="0,0,7,0" FontSize="14" />
-                                <TextBlock x:Name="QuiltInfo" HorizontalAlignment="Left" Width="619" Margin="156,0,0,0" FontFamily="MiSans Medium" Text="无安装任务" FontSize="14" VerticalAlignment="Center" Foreground="#FFA5A5A5" TextAlignment="Right"/>
+                                <TextBlock x:Name="QuiltInfo" HorizontalAlignment="Right" FontFamily="MiSans Medium" Text="无安装任务" FontSize="14" VerticalAlignment="Center" Foreground="#FFA5A5A5" TextAlignment="Right" Margin="0,0,30,0"/>
 
                             </Grid>
                         </Border>

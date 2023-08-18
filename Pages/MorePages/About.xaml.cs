@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,7 +28,7 @@ namespace YMCL.Pages.MorePages
     /// </summary>
     public partial class About : Page
     {
-        string NowVersion = "1.0.0.20230727_Alpha";
+        string NowVersion = "1.0.0.20230805_Alpha";
         string NowVersionType = "内部测试版";
 
 
@@ -57,55 +58,96 @@ namespace YMCL.Pages.MorePages
             NowVersionTypeText.Text = NowVersionType;
         }
 
-        private void AddCustomJavaBtn_Click(object sender, RoutedEventArgs e)
+        private async void AddCustomJavaBtn_Click(object sender, RoutedEventArgs e)
         {
             if(update.GetUpdate(id, NowVersion) == true)
             {
                 var V = MessageBoxX.Show(update.GetUpdateRem(id), "发现新版本 - " + update.GetVersionInternet(id), MessageBoxButton.OKCancel);
                 if (V == MessageBoxResult.OK)
                 {
-                    if (!IsAdministrator())
-                    {
-                        MessageBoxX.Show("需要管理员权限\n请使用管理员权限运行", "Yu Minecraft Launcher");
-                        return;
-                    }
+                    //if (!IsAdministrator())
+                    //{
+                    //    MessageBoxX.Show("需要管理员权限\n请使用管理员权限运行", "Yu Minecraft Launcher");
+                    //    return;
+                    //}
+                    CheckUpdateBtn.IsEnabled = false;
                     if (!File.Exists("./YMCL-Updater.exe"))
                     {
-                        var H = MessageBoxX.Show("YMCL更新程序 YMCL-Updater.exe 丢失\n点击确定开始下载", "Yu Minecraft Launcher", MessageBoxButton.OKCancel);
-                        if (H == MessageBoxResult.OK)
+                        string UpUrl = "https://ymcl.daiyu.fun/Up.exe";
+                        string UpsSavePath = "./Up.exe";
+                        using (HttpClient client = new HttpClient())
                         {
-                            Panuon.WPF.UI.Toast.Show("开始下载", ToastPosition.Top);
-                            var handler = PendingBox.Show("正在下载...", "提示");
-                            try
+                            using (HttpResponseMessage response = await client.GetAsync(UpUrl, HttpCompletionOption.ResponseHeadersRead))
                             {
-                                // 变量fileName获取你要下载的链接的文件名，
-                                string fileName = System.IO.Path.GetFileName("https://ymcl.daiyu.fun/YMCL-Updater.exe");
-                                // fileUrl为你的下载链接
-                                string fileUrl = "https://ymcl.daiyu.fun/YMCL-Updater.exe";
-                                // savePath是你要保存在本地的文件夹，需要加上你下载文件的文件名，要和文件名一致，他自己会在本地下载字节流转换
-                                string savePath = @"./" + fileName;
-                                // 加上using 
-                                using (WebClient client = new WebClient())
-                                {
-                                    // 填下载链接，和本地地址，下载完检查文件夹即可
-                                    client.DownloadFile(fileUrl, savePath);
-                                }
-                                Panuon.WPF.UI.Toast.Show("下载完成", ToastPosition.Top);
-                                handler.Close();
-                            }
-                            catch (Exception ex)
-                            {
-                                handler.Close();
-                                MessageBoxX.Show("下载失败\n\n错误信息：\n"+ex.ToString(), "Yu Minecraft Launcher");
+                                response.EnsureSuccessStatusCode();
 
+                                using (var downloadStream = await response.Content.ReadAsStreamAsync())
+                                {
+                                    using (var fileStream = new System.IO.FileStream(UpsSavePath, System.IO.FileMode.Create, System.IO.FileAccess.Write))
+                                    {
+                                        byte[] buffer = new byte[8192];
+                                        int bytesRead;
+                                        long totalBytesRead = 0;
+                                        long totalBytes = response.Content.Headers.ContentLength.HasValue ? response.Content.Headers.ContentLength.Value : -1;
+
+                                        while ((bytesRead = await downloadStream.ReadAsync(buffer, 0, buffer.Length)) > 0)
+                                        {
+                                            await fileStream.WriteAsync(buffer, 0, bytesRead);
+                                            totalBytesRead += bytesRead;
+
+                                            if (totalBytes > 0)
+                                            {
+                                                DownloadInfo.Visibility = Visibility.Visible;
+                                                double progress = ((double)totalBytesRead / totalBytes) * 100;
+                                                DownloadProText.Text = $"{Math.Round(progress, 1)}%";
+                                                DownloadProBar.Value = progress;
+                                            }
+                                        }
+                                    }
+                                }
                             }
-                        }
-                        else
-                        {
-                            return;
                         }
                     }
-                    Process.Start("./YMCL-Updater.exe");
+
+                    string url = update.GetUpdateFile(id); ;
+                    string savePath = "./YMCL-Temp.exe";
+
+                    using (HttpClient client = new HttpClient())
+                    {
+                        using (HttpResponseMessage response = await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead))
+                        {
+                            response.EnsureSuccessStatusCode();
+
+                            using (var downloadStream = await response.Content.ReadAsStreamAsync())
+                            {
+                                using (var fileStream = new System.IO.FileStream(savePath, System.IO.FileMode.Create, System.IO.FileAccess.Write))
+                                {
+                                    byte[] buffer = new byte[8192];
+                                    int bytesRead;
+                                    long totalBytesRead = 0;
+                                    long totalBytes = response.Content.Headers.ContentLength.HasValue ? response.Content.Headers.ContentLength.Value : -1;
+
+                                    while ((bytesRead = await downloadStream.ReadAsync(buffer, 0, buffer.Length)) > 0)
+                                    {
+                                        await fileStream.WriteAsync(buffer, 0, bytesRead);
+                                        totalBytesRead += bytesRead;
+
+                                        if (totalBytes > 0)
+                                        {
+                                            DownloadInfo.Visibility = Visibility.Visible;
+
+                                            double progress = ((double)totalBytesRead / totalBytes) * 100;
+                                            DownloadProText.Text = $"{Math.Round(progress, 1)}%";
+                                            DownloadProBar.Value = progress;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    DownloadInfo.Visibility = Visibility.Hidden;
+
+                    Process.Start("./Up.exe");
                     System.Environment.Exit(0);
                 }
             }

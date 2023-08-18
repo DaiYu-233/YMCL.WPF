@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:YMCL.Pages"
       mc:Ignorable="d" xmlns:ui="http://schemas.modernwpf.com/2019" 
-      d:DesignHeight="490" d:DesignWidth="840"
+
       Title="SettingPage">
     <Border Background="White" CornerRadius="0,0,8,0">
         <Grid  >

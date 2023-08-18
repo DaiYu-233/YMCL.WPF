@@ -6,9 +6,15 @@
         xmlns:local="clr-namespace:YMCL" FontFamily="MiSans Medium"
         mc:Ignorable="d" Height="521" Width="900" 
         xmlns:ui="http://schemas.modernwpf.com/2019" WindowStyle="None" pu:WindowXCaption.Height="0"
-        ui:WindowHelper.UseModernWindowStyle="False" Background="Transparent" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" OpacityMask="White" AllowsTransparency="True" Title="YMCL">
+        ui:WindowHelper.UseModernWindowStyle="False" Background="Transparent" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" OpacityMask="White" AllowsTransparency="True" Title="YMCL" Loaded="WindowX_Loaded" SizeChanged="WindowX_SizeChanged" MouseMove="WindowX_MouseMove" >
+    
     <Border CornerRadius="8,8,8,8"  Background="{DynamicResource SecundaryBackgroundColor}">
+        <Border.Effect>
+            <DropShadowEffect Color="#FFAAAAAA" ShadowDepth="0" BlurRadius="10" Opacity="0.4"/>
+        </Border.Effect>
+
         <Grid >
+
             <Border VerticalAlignment="Top" Height="30" Background="{DynamicResource SecundaryBackgroundColor}" CornerRadius="8,8,0,8" MouseLeftButtonDown="Border_MouseLeftButtonDown">
                 <Grid VerticalAlignment="Top" Height="30" Margin="60,0,0,0">
                     <Button x:Name="btnMinimize" Style="{DynamicResource IconButtonsStyle}" Content="{DynamicResource minimize}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,30,0" Click="btnMinimize_Click"/>
@@ -24,7 +30,7 @@
                     </ui:NavigationView.MenuItems>
                 </ui:NavigationView>
             </Border>
-            <Frame x:Name="MainFrame" Content="" HorizontalAlignment="Right" Height="490" VerticalAlignment="Top" Width="840" NavigationUIVisibility="Hidden" Margin="0,30,0,0"/>
+            <Frame x:Name="MainFrame" Content="" NavigationUIVisibility="Hidden" Margin="60,30,0,0"/>
             <Border Background="{DynamicResource SecundaryBackgroundColor}" CornerRadius="8,0,0,8" HorizontalAlignment="Left">
                 <Grid x:Name="gridMenu" Width="60">
                     <Grid.RowDefinitions>

@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:YMCL.Pages.SettingPages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="840"
+
       Title="Account" Loaded="Page_Loaded">
     <Border Background="{DynamicResource ThemeBackground}" CornerRadius="0,0,8,0">
         <Grid  >
@@ -57,23 +57,9 @@
                     </Grid>
                 </Grid>
             </Border>
-            <Border x:Name="mojangbro" Background="#FFE2E2E2" CornerRadius="3,3,3,3" HorizontalAlignment="Center" Width="396" Visibility="Hidden" Height="218" VerticalAlignment="Center">
-                <Grid>
-                    <Grid VerticalAlignment="Top" Height="25">
-                        <Button Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Tag="IsCloseButton" HorizontalAlignment="Right" Click="btnClose_Click" VerticalAlignment="Center"/>
-                        <TextBlock FontFamily="MiSans Medium" Text="Mojang登录..." HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0"/>
-                    </Grid>
-                    <Grid Margin="0,25,0,0">
-                        <Button Margin="312,154,0,0" VerticalAlignment="Top" Height="29" Width="74" FontFamily="MiSans Medium" Content="确定" IsEnabled="True" Click="Button_Click_2" />
-                        <TextBox x:Name="yhm1" Margin="10,32,10,0" Height="32" VerticalAlignment="Top"/>
-                        <TextBlock x:Name="yhm" FontFamily="MiSans Medium" Text="账户" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,10,0,0" FontSize="16"/>
-                        <PasswordBox x:Name="mmk" Margin="10,96,10,0" VerticalAlignment="Top"/>
-                        <TextBlock FontFamily="MiSans Medium" Text="密码" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,73,0,0" FontSize="16"/>
-                    </Grid>
-                </Grid>
-            </Border>
-            <TextBlock TextWrapping="Wrap" Text="当前登录方式：" Margin="318,20,262,415" FontFamily="MiSans Medium" Foreground="DimGray"/>
-            <TextBlock x:Name="NowLoginType" TextWrapping="Wrap" Text="1" Margin="398,20,24,415" FontFamily="MiSans Medium" Foreground="DimGray"/>
+            
+            <TextBlock TextWrapping="Wrap" Text="当前登录方式：" Margin="318,20,0,0" FontFamily="MiSans Medium" Foreground="DimGray" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <TextBlock x:Name="NowLoginType" TextWrapping="Wrap" Text="1" Margin="398,20,0,0" FontFamily="MiSans Medium" Foreground="DimGray" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
         </Grid>
     </Border>

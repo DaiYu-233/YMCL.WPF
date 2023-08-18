@@ -24,6 +24,9 @@ using YMCL.Class;
 using Panuon.WPF.UI;
 using KMCCC.Launcher;
 using MinecraftLaunch.Modules.Utils;
+using System.Net.Http;
+using Natsurainko.FluentCore.Module.Launcher;
+using MinecraftLaunch.Modules.Models.Install;
 
 namespace YMCL.Pages
 {
@@ -32,34 +35,32 @@ namespace YMCL.Pages
     /// </summary>
     public partial class LaunchPage : Page
     {
-
-        public static LaunchConfig launchConfig { get; } = new LaunchConfig();
-        public MinecraftLaunch.Modules.Models.Auth.Account UserInfo { get; private set; }
-
-        public static GameCoreUtil Core = new GameCoreUtil(JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json")).MinecraftPath);
+        List<GameCore> versions = new List<GameCore>();
+        class hitokotoClass
+        {
+            public string? id { get; set; }
+            public string? uuid { get; set; }
+            public string? hitokoto { get; set; }
+            public string? type { get; set; }
+            public string? from { get; set; }
+            public string? from_who { get; set; }
+            public string? creator { get; set; }
+            public string? creator_uid { get; set; }
+            public string? reviewer { get; set; }
+            public string? commit_from { get; set; }
+            public string? created_at { get; set; }
+            public string? length { get; set; }
+        }
 
         public LaunchPage()
         {
             InitializeComponent();
             var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json"));
-
+            
             #region
 
 
-                LoginNameText.Text = obj.LoginName;
 
-
-                LoginTypeText.Text = obj.LoginType;
-
-                JavaText.Text = obj.Java;
-
-
-
-                if (obj.DisplayInformation == "False")
-                {
-                    LoginBr.Visibility = Visibility.Hidden;
-                    JavaBr.Visibility = Visibility.Hidden;
-                }
 
 
             #endregion
@@ -71,7 +72,8 @@ namespace YMCL.Pages
                 directoryInfo.Create();
             }
 
-            Core.GetGameCores();
+            GetHitokoto();
+
         }
 
         private async void LaunchGame_Click(object sender, RoutedEventArgs e)
@@ -94,7 +96,28 @@ namespace YMCL.Pages
 
         }
 
-
+        private async void GetHitokoto()
+        {
+            await Task.Run(async() => {
+                try
+                {
+                    using (HttpClient client = new HttpClient())
+                    {
+                        string url = "https://v1.hitokoto.cn";
+                        HttpResponseMessage response = await client.GetAsync(url);
+                        response.EnsureSuccessStatusCode();
+                        string responseBody = await response.Content.ReadAsStringAsync();
+                        var obj = JsonConvert.DeserializeObject<hitokotoClass>(responseBody);
+                        var res = obj.hitokoto + "    ——「" + obj.from+"」";
+                        Dispatcher.BeginInvoke(() => { hitokoto.Text = res; });
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Dispatcher.BeginInvoke(() => { hitokoto.Text = $"请求失败: {ex.Message}"; });
+                }
+            });
+        }
 
 
 
@@ -104,75 +127,54 @@ namespace YMCL.Pages
 
         public void UpdateLogin()
         {
-            var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json"));
 
-            try {
-                LoginNameText.Text = System.IO.File.ReadAllText("./YMCL/Temp/LoginName.log");
-                LoginTypeText.Text = System.IO.File.ReadAllText("./YMCL/Temp/LoginType.log");
-                JavaText.Text = System.IO.File.ReadAllText("./YMCL/Temp/Java.log");
-            }
-            catch { }
-
-
-                if (obj.DisplayInformation == "False")
-                {
-                    LoginBr.Visibility = Visibility.Hidden;
-                    JavaBr.Visibility = Visibility.Hidden;
-                }
-                else
-                {
-                    LoginBr.Visibility = Visibility.Visible;
-                    JavaBr.Visibility = Visibility.Visible;
-                }
 
 
         }
 
 
-        public void GetVers()
+        private void GetVers()
         {
-            //VerListView.Items.Clear();
-            //var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json"));
-            //var Versionpath = obj.MinecraftPath + "\\versions";
-            //if (!Directory.Exists(Versionpath))
-            //{
-            //    System.IO.DirectoryInfo directoryInfo = new System.IO.DirectoryInfo(Versionpath);
-            //    directoryInfo.Create();
-            //}
-            //DirectoryInfo dir = new DirectoryInfo(Versionpath);
-            //DirectoryInfo[] dii = dir.GetDirectories();  //获取.minecraft\versions的所有子目录
-            //foreach (DirectoryInfo VersionDir in dii)
-            //{
-            //    var Index = VersionDir.FullName.Split(@"\");
-            //    var VersionName = Index[Index.Length - 1];
-            //    if (File.Exists(Versionpath + @"\" + VersionName + @"\" + VersionName + ".json"))  //检查是否符合mc版本
-            //    {
-            //        VerListView.Items.Add(VersionName);
-            //    }
-            //}
-
-            Core.GetGameCores();
+            GameCoreLocator Core = new GameCoreLocator(JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json")).MinecraftPath);
+            VerListView.ItemsSource = Core.GetGameCores();
         }
 
 
 
 
 
-        private void GameVerTextBlock_MouseDown(object sender, MouseButtonEventArgs e)
+
+
+
+
+
+
+
+
+
+
+
+
+
+        private void  GameVerTextBlock_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            hitokoto.Visibility = Visibility.Hidden;
             VerListBorder.Visibility = Visibility.Visible;
             GetVers();
         }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
+            hitokoto.Visibility = Visibility.Visible;
             VerListBorder.Visibility = Visibility.Hidden;
         }
 
         private void VerListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             VerListBorder.Visibility = Visibility.Hidden;
-            GameVerTextBlock.Text = VerListView.SelectedItem.ToString();
+            var id = VerListView.SelectedItem as Natsurainko.FluentCore.Model.Launch.GameCore;
+            GameVerTextBlock.Text = id.Id;
+            hitokoto.Visibility = Visibility.Visible;
         }
 
         private void Page_MouseEnter(object sender, MouseEventArgs e)
@@ -181,8 +183,18 @@ namespace YMCL.Pages
         }
 
 
+
         #endregion
 
+        private void hitokoto_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            GetHitokoto();
+        }
 
+        private void hitokoto_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            Clipboard.SetText(hitokoto.Text);
+            Toast.Show("已复制到剪切板", ToastPosition.Top);
+        }
     }
 }

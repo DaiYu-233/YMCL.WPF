@@ -113,7 +113,7 @@ namespace YMCL.Pages.SettingPages
                 obj.Theme = "Light";
                 File.WriteAllText(@"./YMCL/YMCL.Setting.json", JsonConvert.SerializeObject(obj, Newtonsoft.Json.Formatting.Indented));
             }
-            //Panuon.WPF.UI.Toast.Show("成功应用设置", ToastPosition.Top);
+            Panuon.WPF.UI.Toast.Show("已保存", ToastPosition.Top);
             //Toast.Show("成功应用设置", new ToastOptions { Icon = ToastIcons.Information, Time = 1500, Location = ToastLocation.OwnerTopCenter });
 
         } 

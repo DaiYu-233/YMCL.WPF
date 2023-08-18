@@ -58,13 +58,13 @@ namespace YMCL.Pages.SettingPages
             if (V == MessageBoxResult.OK)
             {
                 addacbro.Visibility = Visibility.Hidden;
-                mojangbro.Visibility = Visibility.Hidden;
+
                 lxdl.Visibility = Visibility.Hidden;
             }
             else
             {
                 addacbro.Visibility = Visibility.Hidden;
-                mojangbro.Visibility = Visibility.Hidden;
+
                 lxdl.Visibility = Visibility.Hidden;
                 return;
             }
@@ -72,14 +72,14 @@ namespace YMCL.Pages.SettingPages
             MicrosoftAuthenticator microsoftAuthenticator = new(MinecaftOAuth.Module.Enum.AuthType.Access) { ClientId = "c06d4d68-7751-4a8a-a2ff-d1b46688f428" };
             var code = await microsoftAuthenticator.GetDeviceInfo();
             Clipboard.SetText(code.UserCode);
-            MessageBoxX.Show(code.UserCode, "您的一次性访问代码(已复制到剪切板)"); 
+            MessageBoxX.Show(code.UserCode, "一次性访问代码(已复制到剪切板)"); 
             Debug.WriteLine("Link:{0} - Code:{1}", code.VerificationUrl, code.UserCode);
             if (V == MessageBoxResult.OK) { Process.Start(new ProcessStartInfo(code.VerificationUrl) { UseShellExecute = true, Verb = "open" }); }
             var token = await microsoftAuthenticator.GetTokenResponse(code);
             var user = await microsoftAuthenticator.AuthAsync(x => { Debug.WriteLine(x); });
             var a = JsonConvert.SerializeObject(user, Newtonsoft.Json.Formatting.Indented);
             MessageBoxX.Show(a,"账户Json信息");
-            System.IO.File.WriteAllText("./YMCL/Accounts/Microsoft-"+user.Name+".json",a);
+            System.IO.File.WriteAllText("./YMCL/Accounts/Microsoft-"+user.Name+".json",a); 
             accountInfos.Add(new AccountInfo() { AccountType = "微软登录", Name = user.Name.ToString(),AddTime = DateTime.Now.ToString()});
             WriteFile();
 
@@ -119,7 +119,6 @@ namespace YMCL.Pages.SettingPages
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             addacbro.Visibility = Visibility.Hidden;
-            mojangbro.Visibility = Visibility.Hidden;
             lxdl.Visibility = Visibility.Hidden;
         }
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -155,7 +154,6 @@ namespace YMCL.Pages.SettingPages
                 accountInfos.Add(new AccountInfo() { AccountType = "离线登录",Name = yhm2.Text, AddTime = DateTime.Now.ToString()});
                 WriteFile();
                 addacbro.Visibility = Visibility.Hidden;
-                mojangbro.Visibility = Visibility.Hidden;
                 lxdl.Visibility = Visibility.Hidden;
                 datagrid();
             }
@@ -171,22 +169,7 @@ namespace YMCL.Pages.SettingPages
             System.IO.File.WriteAllText(@".\YMCL\YMCL.Account.json", str);
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            if (yhm1.Text != string.Empty && mmk.Password != string.Empty)
-            {
-                accountInfos.Add(new AccountInfo() { AccountType = "Mojang", Name = yhm1.Text, AddTime=DateTime.Now.ToString() });
-                WriteFile();
-                addacbro.Visibility = Visibility.Hidden;
-                mojangbro.Visibility = Visibility.Hidden;
-                lxdl.Visibility = Visibility.Hidden;
-                datagrid();
-            }
-            else
-            {
-                MessageBoxX.Show("账户或密码为空！");
-            }
-        }
+
 
         private void DataGr_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

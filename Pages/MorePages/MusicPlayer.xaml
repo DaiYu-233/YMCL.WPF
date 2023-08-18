@@ -1,0 +1,48 @@
+﻿<Page x:Class="YMCL.Pages.MorePages.MusicPlayer"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:YMCL.Pages.MorePages"
+      mc:Ignorable="d"       xmlns:ui="http://schemas.modernwpf.com/2019" 
+
+      Title="Main" >
+    <Border Background="{DynamicResource ThemeBackground}" CornerRadius="0,0,8,0">
+        <Grid>
+            <Grid Margin="0,-35,5,0" HorizontalAlignment="Right" VerticalAlignment="Top">
+                <Slider Width="250" VerticalAlignment="Bottom" Margin="0,6,60,0" FontSize="14" HorizontalAlignment="Right" SmallChange="0" Visibility="Hidden"/>
+                <Button x:Name="PlayerBtn" Content="暂停" VerticalAlignment="Top" HorizontalAlignment="Right" Width="54" Height="30" Click="PlayerBtn_Click" IsEnabled="False"/>
+            </Grid>
+            <Border Visibility="Visible" Background="{DynamicResource ThemeContentBorderBackground}"  CornerRadius="3,3,3,3" Margin="10,10,10,10" >
+                <Grid>
+                    <TextBox x:Name="SearchTextBox"  VerticalAlignment="Top" Margin="175,5,54,0" FontFamily="MiSans Medium" FontSize="14" KeyDown="SearchTextBox_KeyDown"  />
+                    <Button x:Name="BackPageBtn" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,5,0,0" Click="BackPageBtn_Click">
+                        <ui:FontIcon Glyph="&#xE76B;" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FF7B7B7B" />
+                    </Button>
+                    <TextBox IsReadOnly="True" Margin="55,5,0,0" VerticalAlignment="Top" Text="" HorizontalAlignment="Left" Width="65" TextAlignment="Center" Height="32" >
+
+                    </TextBox>
+                    <TextBlock x:Name="PageText" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="61,12,0,0" Width="54" FontSize="14" Text="1" TextAlignment="Center" Foreground="{DynamicResource ThemeTextColor}"/>
+                    <Button x:Name="NextPageBtn" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="125,5,5,0" Click="NextPageBtn_Click">
+                        <ui:FontIcon Glyph="&#xE76C;" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FF7B7B7B" />
+                    </Button>
+                    <Button x:Name="SearchBtn" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,5,0" Click="SearchBtn_Click">
+                        <ui:FontIcon Glyph="&#xE721;" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FF7B7B7B" />
+                    </Button>
+                    <ListView x:Name="SongsListView" d:ItemsSource="{d:SampleData ItemCount=5}" FontFamily="MiSans Medium" Margin="0,40,0,0" SelectionChanged="SongsListView_SelectionChanged"   >
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <TextBlock ><Run  Text="{Binding SongName}" FontSize="15"/><Run Text=" "/><Run Text="{Binding Duration}"  FontSize="11" Foreground="#E48A8A8A"/></TextBlock>
+                                    <TextBlock  Margin="0,18,0,0" FontSize="12" Foreground="#E48A8A8A"><Run Text="{Binding Artists}"/><Run Text="  "/><Run Text="{Binding AlbumName}"/></TextBlock>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
+
+</Page>

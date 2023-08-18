@@ -6,14 +6,14 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:YMCL.Pages.SettingPages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="840"
+
       Title="Main" MouseDown="Page_MouseDown">
     <Border Background="{DynamicResource ThemeBackground}" CornerRadius="0,0,8,0">
         <Grid>
 
 
             <!--Java-->
-            <Border HorizontalAlignment="Center" Height="45" Margin="0,65,0,0" VerticalAlignment="Top" Width="820" Background="{DynamicResource ThemeContentBorderBackground}" CornerRadius="3,3,3,3">
+            <Border Height="45" Margin="10,65,10,0" VerticalAlignment="Top" Background="{DynamicResource ThemeContentBorderBackground}" CornerRadius="3,3,3,3">
                 <Grid>
                     <TextBlock FontFamily="MiSans Medium" Text="Java" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="18,0,0,0" FontSize="15" Foreground="{DynamicResource ThemeTextColor}"/>
                     <ComboBox x:Name="JavaCombo"  FontFamily="MiSans Medium" VerticalAlignment="Center" Margin="65,0,180,0" SelectedIndex="0" SelectionChanged="JavaCombo_SelectionChanged" HorizontalAlignment="Stretch" />
@@ -21,7 +21,7 @@
                     <Button x:Name="AutoJavaBtn" Content="扫描" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,115,0" FontFamily="MiSans Medium" Click="Button_Click" Height="32" Width="60"/>
                 </Grid>
             </Border>
-            <Border HorizontalAlignment="Center" Height="37" Margin="0,120,0,0" VerticalAlignment="Top" Width="820" Background="{DynamicResource ThemeContentBorderBackground}" CornerRadius="3,3,3,3">
+            <Border Height="37" Margin="10,120,10,0" VerticalAlignment="Top" Background="{DynamicResource ThemeContentBorderBackground}" CornerRadius="3,3,3,3">
                 <Grid>
                     <TextBlock FontFamily="MiSans Medium" Text="游戏内存" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="18,0,0,0" FontSize="15" Foreground="{DynamicResource ThemeTextColor}"/>
                     <Expander Visibility="Hidden" Header="内存信息" Margin="104,13,354,-67" FontFamily="MiSans Medium" Background="{x:Null}" Expanded="Expander_Expanded">
@@ -48,24 +48,23 @@
                             </Grid>
                         </Border>
                     </Expander>
-                    <TextBlock x:Name="SilderInfo" VerticalAlignment="Center" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Width="61" Height="16" Text="256G" FontFamily="MiSans Medium" TextAlignment="Center" Margin="754,0,0,0" Foreground="{DynamicResource ThemeTextColor}">
-                    </TextBlock>
-                    <Slider x:Name="SilderBox" HorizontalAlignment="Left" Margin="222,0,0,0" VerticalAlignment="Center" Width="525" SmallChange="1" Minimum="1" Value="1024" Maximum="2048" ValueChanged="Silder_ValueChanged"/>
+                    <TextBlock x:Name="SilderInfo" VerticalAlignment="Center" HorizontalAlignment="Right" RenderTransformOrigin="0.5,0.5" Width="61" Height="16" Text="256G" FontFamily="MiSans Medium" TextAlignment="Center" Foreground="{DynamicResource ThemeTextColor}" Margin="0,0,2,0"/>
+                    <Slider x:Name="SilderBox" Margin="200,0,60,0" VerticalAlignment="Center" SmallChange="1" Minimum="1" Value="1024" Maximum="2048" ValueChanged="Silder_ValueChanged"/>
                 </Grid>
             </Border>
-            <Button x:Name="SaveSettingBtn" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-35,5,0" Height="30" Width="161" FontFamily="MiSans Medium" Content="保存设置信息" Click="SaveSettingBtn_Click"/>
-            <Border HorizontalAlignment="Center" Height="40" Margin="0,167,0,0" VerticalAlignment="Top" Width="820" Background="{DynamicResource ThemeContentBorderBackground}" CornerRadius="3,3,3,3">
+            <Button x:Name="SaveSettingBtn" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-35,5,0" Height="30" Width="130" FontFamily="MiSans Medium" Content="应用更改" Click="SaveSettingBtn_Click"/>
+            <Border Height="40" Margin="10,167,10,0" VerticalAlignment="Top" Background="{DynamicResource ThemeContentBorderBackground}" CornerRadius="3,3,3,3">
                 <Grid>
                     <TextBlock FontFamily="MiSans Medium" Text="版本隔离" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="18,0,0,0" FontSize="15" Foreground="{DynamicResource ThemeTextColor}"/>
-                    <ui:ToggleSwitch x:Name="AloneCoreSwitch" FontFamily="MiSans Medium" IsOn="True" Margin="735,0,0,0" Width="85" Toggled="AloneCoreSwitch_Toggled"/>
+                    <ui:ToggleSwitch x:Name="AloneCoreSwitch" FontFamily="MiSans Medium" IsOn="True" Width="85" Toggled="AloneCoreSwitch_Toggled" HorizontalAlignment="Right"/>
                 </Grid>
             </Border>
-            <Border HorizontalAlignment="Center" Height="45" Margin="0,10,0,0" VerticalAlignment="Top" Width="820" Background="{DynamicResource ThemeContentBorderBackground}" CornerRadius="3,3,3,3">
+            <Border Height="45" Margin="10,10,10,0" VerticalAlignment="Top" Background="{DynamicResource ThemeContentBorderBackground}" CornerRadius="3,3,3,3">
                 <Grid>
                     <TextBlock FontFamily="MiSans Medium" Text="Minecraft文件夹" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="18,0,0,0" FontSize="15" Foreground="{DynamicResource ThemeTextColor}"/>
-                    <TextBox x:Name="MinecraftPathText" AutomationProperties.Name="multi-line TextBox"
-    TextWrapping="Wrap" AcceptsReturn="True"  MinWidth="400" Margin="150,0,115,0" VerticalAlignment="Center" Height="32" IsReadOnly="True" />
-                    <Button x:Name="OpenMinecraftFolder" Content="选择文件夹" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0" FontFamily="MiSans Medium" Width="100" Height="32" Click="OpenMinecraftFolder_Click"/>
+                    <ComboBox x:Name="MinecraftPathText"  MinWidth="400" Margin="150,0,180,0" VerticalAlignment="Center" Height="32" IsReadOnly="True" HorizontalAlignment="Stretch" />
+                    <Button x:Name="DelMinecraftFolder" Content="删除" FontFamily="MiSans Medium" Width="80" Height="32"  Margin="0,0,95,0" HorizontalAlignment="Right" Click="DelMinecraftFolder_Click"/>
+                    <Button x:Name="AddMinecraftFolder" Content="添加" FontFamily="MiSans Medium" Width="80" Height="32" Click="OpenMinecraftFolder_Click" Margin="0,0,10,0" HorizontalAlignment="Right"/>
                 </Grid>
             </Border>
         </Grid>

@@ -42,7 +42,7 @@
     </PackageReference>
     <PackageReference Include="MahApps.Metro.IconPacks" Version="4.11.0" />
     <PackageReference Include="MinecraftLaunch" Version="1.9.5-preview8" />
-    <PackageReference Include="MinecraftOAuth" Version="1.9.3" />
+    <PackageReference Include="MinecraftOAuth" Version="1.6.0" />
     <PackageReference Include="ModernWpfUI" Version="0.9.7-preview.2" />
     <PackageReference Include="Natsurainko.FluentCore" Version="2.0.6" />
     <PackageReference Include="Natsurainko.FluentCore.Extension.Windows" Version="2.0.6" />
@@ -53,11 +53,32 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Language\lang.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>lang.resx</DependentUpon>
+    </Compile>
     <Compile Update="Properties\Settings.Designer.cs">
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Update="UiResource.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>UiResource.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Language\lang.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>lang.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UiResource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>UiResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
