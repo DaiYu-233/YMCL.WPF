@@ -60,7 +60,8 @@ namespace YMCL
                     MainWindowHeight = 521,
                     MainWindowWidth = 900,
                     PlayerWindowHeight = 521,
-                    PlayerWindowWidth = 900
+                    PlayerWindowWidth = 900,
+                    PlayerVolume = 0.5
                 };
                 File.WriteAllText("./YMCL/YMCL.Setting.json", JsonConvert.SerializeObject(obj, Formatting.Indented));
             }

@@ -3,25 +3,20 @@ using Panuon.WPF.UI;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.DirectoryServices.ActiveDirectory;
 using System.IO;
 using System.Linq;
-using System.Media;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using YMCL.Class;
-using static YMCL.Pages.MorePages.MusicPlayer;
 
 namespace YMCL.Pages.Forms
 {
@@ -40,11 +35,20 @@ namespace YMCL.Pages.Forms
         double w;
         double h;
         bool IsPlayListViewGrClose = true;
+        bool IsVolumeSliderClose = true;
         bool IsPlaying = false;
         bool IsNoPlay = false;
+        bool IsMovingSlider = false;
         bool del = false;
         int Page = 1;
+        MediaPlayer player_for_duration = new MediaPlayer();
         MediaPlayer player = new MediaPlayer();//实例化绘图媒体
+        DispatcherTimer timer = new DispatcherTimer();
+        public class Response
+        {
+            public bool success { get; set; }
+            public string message { get; set; }
+        }
         public class WindowResizeAdorner : Adorner
         {
             //4条边
@@ -208,7 +212,8 @@ namespace YMCL.Pages.Forms
             public string? SongName { get; set; }
             public string? Artists { get; set; }
             public string? AlbumName { get; set; }
-            public string? Duration { get; set; }
+            public double Duration { get; set; }
+            public string? DisplayDuration { get; set; }
         }
         class PlayListClass
         {
@@ -216,10 +221,14 @@ namespace YMCL.Pages.Forms
             public string? Uri { get; set; }
             public string? SongName { get; set; }
             public string? Authors { get; set; }
-            public string? Duration { get; set; }
+            public double Duration { get; set; }
+            public string? DisplayDuration { get; set; }
             public string? Pic { get; set; }
         }
         List<PlayListClass> playList = new List<PlayListClass>();
+        string MaxPlayingTime = "";
+        string MusicLoop = "RepeatOff";  //RepeatOff RepeatOne RepeatAll
+        double MaxPlayingDuration = 0;
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
             this.Hide();
@@ -235,15 +244,61 @@ namespace YMCL.Pages.Forms
             w = Width;
             h = Height;
             RefreshPlayList();
+
+            timer.Tick += new EventHandler(timer_Tick);
+            timer.Interval = TimeSpan.FromSeconds(1);   //设置刷新的间隔时间
+
+            VolumeSlider.Value = obj.PlayerVolume;
+            player.Volume = obj.PlayerVolume;
         }
+
+        void timer_Tick(object sender, EventArgs e)
+        {
+            if (player.Position.TotalMilliseconds == MaxPlayingDuration)
+            {
+                if (MusicLoop == "RepeatOff")
+                {
+                    return;
+                }
+                else if (MusicLoop == "RepeatOne")
+                {
+                    player.Position = new TimeSpan(days: 0, hours: 0, minutes: 0, seconds: 0, milliseconds: 0);
+                }
+                else if (MusicLoop == "RepeatAll")
+                {
+                    var index = PlayListView.SelectedIndex;
+                    var count = PlayListView.Items.Count;
+                    if (index == count - 1)
+                    {
+                        PlayListView.SelectedItem = PlayListView.Items[0];
+                    }
+                    else
+                    {
+                        PlayListView.SelectedItem = PlayListView.Items[index + 1];
+                    }
+                }
+            }
+            var nowtime = Millisecond_to_minutes(player.Position.TotalMilliseconds);
+            TimeText.Text = $"{nowtime.Split(".")[0]}/{MaxPlayingTime}";
+            if (!IsMovingSlider)
+            {
+                PlaySlider.Value = player.Position.TotalMilliseconds;
+            }
+        }
+
+
         void RefreshPlayList()
         {
             playList.Clear();
             PlayListView.Items.Clear();
             var list = JsonConvert.DeserializeObject<List<PlayListClass>>(File.ReadAllText("./YMCL/YMCL.PlayList.json"));
+            if (list == null)
+            {
+                return;
+            }
             list.ForEach(x =>
             {
-                playList.Add(new PlayListClass() { Authors = x.Authors, Duration = x.Duration, Type = x.Type, Pic = x.Pic, SongName = x.SongName, Uri = x.Uri });
+                playList.Add(new PlayListClass() { Authors = x.Authors, Duration = x.Duration, Type = x.Type, Pic = x.Pic, SongName = x.SongName, Uri = x.Uri, DisplayDuration = x.DisplayDuration });
             });
             playList.ForEach(y =>
             {
@@ -338,6 +393,29 @@ namespace YMCL.Pages.Forms
             }
         }
 
+        string Millisecond_to_minutes(double time)
+        {
+            double getsecond = time * 1.0 / 1000;
+            double getdoubleminuth = Math.Floor(getsecond / 60);
+            string minuthTIme = string.Empty;
+            string secondTime = string.Empty;
+            string resultShow = string.Empty;
+            if (getdoubleminuth >= 1)
+            {
+                minuthTIme = getdoubleminuth >= 10 ? $"{getdoubleminuth}" : $"0{getdoubleminuth}";
+                double getmtemp = getdoubleminuth * 60;
+                double getmtemp2 = getsecond - getmtemp;
+                double timemiao = Math.Floor(getmtemp2);
+                secondTime = $"{(timemiao >= 10 ? timemiao.ToString() : "0" + timemiao)}";
+                resultShow = $"{minuthTIme}:{secondTime}";
+            }
+            else
+            {
+                secondTime = getsecond >= 10 ? getsecond.ToString() : ("0" + getsecond);
+                resultShow = $"00:{secondTime}";
+            }
+            return resultShow;
+        }
 
         private void AddLocalFileBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -351,13 +429,28 @@ namespace YMCL.Pages.Forms
 
             string[] Array = openFileDialog.FileName.Split(@"\");
 
+            player_for_duration.Open(new Uri(openFileDialog.FileName));
+
+            bool HasTimeSpan = false;
+            while (!HasTimeSpan)
+            {
+                if (player_for_duration.NaturalDuration.HasTimeSpan)
+                {
+                    HasTimeSpan = true;
+                }
+            }
+
+            var time = player_for_duration.NaturalDuration.TimeSpan.TotalMilliseconds;
+
+
             playList.Add(new PlayListClass()
             {
                 Uri = openFileDialog.FileName,
-                SongName = Array[Array.Length - 1],
+                SongName = Array[Array.Length - 1].Split(".")[0],
                 Type = "本地",
                 Authors = "",
-                Duration = "",
+                Duration = time,
+                DisplayDuration = Millisecond_to_minutes(time),
                 Pic = ""
             });
             string str = JsonConvert.SerializeObject(playList, Newtonsoft.Json.Formatting.Indented);
@@ -369,14 +462,17 @@ namespace YMCL.Pages.Forms
         {
             if (IsPlaying)
             {
-                PlayIcon.Visibility = Visibility.Visible;
-                PauseIcon.Visibility = Visibility.Hidden;
+                PlayIcon.Visibility = Visibility.Hidden;
+                PauseIcon.Visibility = Visibility.Visible;
+                player.Pause();
                 IsPlaying = false;
             }
             else
             {
-                PlayIcon.Visibility = Visibility.Hidden;
-                PauseIcon.Visibility = Visibility.Visible;
+                PlayIcon.Visibility = Visibility.Visible;
+                PauseIcon.Visibility = Visibility.Hidden;
+                player.Play();
+                timer.Start();
                 IsPlaying = true;
             }
         }
@@ -389,6 +485,12 @@ namespace YMCL.Pages.Forms
             System.IO.File.WriteAllText(@".\YMCL\YMCL.PlayList.json", str);
             RefreshPlayList();
             player.Close();
+            timer.Stop();
+            PlaySlider.Value = 0;
+            PlaySlider.Maximum = 0;
+            PlayingSongAuthors.Text = "";
+            PlayingSongName.Text = "";
+            TimeText.Text = "00:00/00:00";
         }
 
         private void PlayListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -472,7 +574,6 @@ namespace YMCL.Pages.Forms
                             foreach (var song in root.result.songs)
                             {
                                 string artists_str = "";
-                                string time = "";
                                 //Debug.WriteLine("Song ID: " + song.id);
                                 //Debug.WriteLine("Song Name: " + song.name);
 
@@ -491,26 +592,6 @@ namespace YMCL.Pages.Forms
                                 //Debug.WriteLine("Duration: " + song.duration);
                                 // 其他歌曲属性...
 
-                                double getsecond = song.duration * 1.0 / 1000;
-                                double getdoubleminuth = Math.Floor(getsecond / 60);
-                                string minuthTIme = string.Empty;
-                                string secondTime = string.Empty;
-                                string resultShow = string.Empty;
-                                if (getdoubleminuth >= 1)
-                                {
-                                    minuthTIme = getdoubleminuth >= 10 ? $"{getdoubleminuth}" : $"0{getdoubleminuth}";
-                                    double getmtemp = getdoubleminuth * 60;
-                                    double getmtemp2 = getsecond - getmtemp;
-                                    double timemiao = Math.Floor(getmtemp2);
-                                    secondTime = $"{(timemiao >= 10 ? timemiao.ToString() : "0" + timemiao)}";
-                                    resultShow = $"{minuthTIme}:{secondTime}";
-                                }
-                                else
-                                {
-                                    secondTime = getsecond >= 10 ? getsecond.ToString() : ("0" + getsecond);
-                                    resultShow = $"00:{secondTime}";
-                                }
-                                time = resultShow;
 
                                 await Dispatcher.BeginInvoke(() =>
                                 {
@@ -520,7 +601,8 @@ namespace YMCL.Pages.Forms
                                         SongName = song.name,
                                         Artists = artists_str,
                                         AlbumName = song.album.name,
-                                        Duration = time
+                                        Duration = song.duration,
+                                        DisplayDuration = Millisecond_to_minutes(song.duration)
                                     });
                                 });
                             }
@@ -549,7 +631,7 @@ namespace YMCL.Pages.Forms
         void Play()
         {
             PlayListClass song = PlayListView.SelectedItem as PlayListClass;
-            if (song==null)
+            if (song == null)
             {
                 return;
             }
@@ -570,16 +652,23 @@ namespace YMCL.Pages.Forms
                 PlayingSongAuthors.Text = song.Authors;
                 Player();
             }
+
         }
-        void Player()
+        async void Player()
         {
+            string time;
             PlayListClass song = PlayListView.SelectedItem as PlayListClass;
+            MaxPlayingTime = song.DisplayDuration;
             player.Open(new Uri(song.Uri));
             IsPlaying = true;
+            MaxPlayingDuration = song.Duration;
+            PlaySlider.Maximum = song.Duration;
             player.Play();//播放媒体
+            timer.Start();
             SearchBox.IsEnabled = true;
             PlayIcon.Visibility = Visibility.Visible;
             PauseIcon.Visibility = Visibility.Hidden;
+
         }
         private void AutoSuggestBox_QuerySubmitted(ModernWpf.Controls.AutoSuggestBox sender, ModernWpf.Controls.AutoSuggestBoxQuerySubmittedEventArgs args)
         {
@@ -598,6 +687,7 @@ namespace YMCL.Pages.Forms
             if (IsPlaying)
             {
                 player.Close();
+                timer.Stop();
                 PlayIcon.Visibility = Visibility.Visible;
                 PauseIcon.Visibility = Visibility.Hidden;
             }
@@ -650,6 +740,7 @@ namespace YMCL.Pages.Forms
                             Type = "网易云",
                             Authors = song.Artists,
                             Duration = song.Duration,
+                            DisplayDuration = Millisecond_to_minutes(song.Duration)
                         });
 
                     }
@@ -668,6 +759,7 @@ namespace YMCL.Pages.Forms
                 string str = JsonConvert.SerializeObject(playList, Newtonsoft.Json.Formatting.Indented);
                 System.IO.File.WriteAllText(@".\YMCL\YMCL.PlayList.json", str);
                 RefreshPlayList();
+                PlayListView.SelectedItem = PlayListView.Items[PlayListView.Items.Count - 1];
             }
 
         }
@@ -689,5 +781,170 @@ namespace YMCL.Pages.Forms
             PageText.Text = Page.ToString();
             Search();
         }
+
+        private void PlaySlider_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            player.Position = new TimeSpan(days: 0, hours: 0, minutes: 0, seconds: 0, milliseconds: (int)PlaySlider.Value);
+            IsMovingSlider = false;
+        }
+
+        private void PlaySlider_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            IsMovingSlider = true;
+        }
+
+        private void DownloadIcon_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            PlayListClass song = PlayListView.SelectedItem as PlayListClass;
+            if (song == null)
+            {
+                return;
+            }
+            var SaveFileName = song.SongName;
+            System.Windows.Forms.SaveFileDialog save = new System.Windows.Forms.SaveFileDialog();
+            save.Title = "保存音频文件";
+            save.Filter = "音频文件 (*.mp3)|*.mp3|音频文件 (*.wav)|*.wav|All Files (*.*)|*.*";
+            save.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+            save.FileName = SaveFileName;
+            save.ShowDialog();
+            if (save.FileName == SaveFileName)
+            {
+                Panuon.WPF.UI.Toast.Show("已取消保存", ToastPosition.Top);
+                return;
+            }
+            if (song.Type == "本地")
+            {
+                if (!File.Exists(song.Uri))
+                {
+                    Panuon.WPF.UI.Toast.Show("源文件不存在", ToastPosition.Top);
+                    return;
+                }
+                string sourceFile = song.Uri;
+                string destinationFile = save.FileName;
+                try
+                {
+                    System.IO.File.Copy(sourceFile, destinationFile, true);
+                }
+                catch (Exception ex)
+                {
+                    Panuon.WPF.UI.Toast.Show("复制文件失败：" + ex, ToastPosition.Top);
+                }
+            }
+            else
+            {
+                try
+                {
+                    Panuon.WPF.UI.Toast.Show("开始下载", ToastPosition.Top);
+                    Task.Run(async () =>
+                    {
+                        using (var client = new HttpClient())
+                        {
+                            var response = await client.GetAsync(song.Uri);
+                            using (var fs = new FileStream(save.FileName, FileMode.CreateNew))
+                            {
+                                await response.Content.CopyToAsync(fs);
+                            }
+                        }
+                    });
+                    Panuon.WPF.UI.Toast.Show("下载完成", ToastPosition.Top);
+                }
+                catch (Exception ex)
+                {
+                    Panuon.WPF.UI.Toast.Show("下载失败：" + ex, ToastPosition.Top);
+                }
+            }
+        }
+
+        private void VolumeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            player.Volume = VolumeSlider.Value;
+
+        }
+
+        private void VolumeSlider_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            Panuon.WPF.UI.Toast.Show(Math.Round(VolumeSlider.Value * 100, 0).ToString() + "%", ToastPosition.Top);
+            var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json"));
+            obj.PlayerVolume = VolumeSlider.Value;
+            File.WriteAllText(@"./YMCL/YMCL.Setting.json", JsonConvert.SerializeObject(obj, Newtonsoft.Json.Formatting.Indented));
+        }
+
+        private void Volume_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (IsVolumeSliderClose)
+            {
+                ThicknessAnimation Comein = new ThicknessAnimation()
+                {
+                    To = new Thickness(350, 0, 0, 0),
+                    From = new Thickness(350, 70, 0, 0),
+                    Duration = TimeSpan.Parse("0:0:0.3")
+                };
+                VolumeSlider.BeginAnimation(MarginProperty, Comein);
+                IsVolumeSliderClose = false;
+            }
+            else
+            {
+                IsVolumeSliderClose = true;
+                ThicknessAnimation Comeout = new ThicknessAnimation()
+                {
+                    From = new Thickness(350, 0, 0, 0),
+                    To = new Thickness(350, 70, 0, 0),
+                    Duration = TimeSpan.Parse("0:0:0.3")
+                };
+                VolumeSlider.BeginAnimation(MarginProperty, Comeout);
+            }
+        }
+
+        private void NextMusic_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var index = PlayListView.SelectedIndex;
+            var count = PlayListView.Items.Count;
+            if (index == count - 1)
+            {
+                PlayListView.SelectedItem = PlayListView.Items[0];
+            }
+            else
+            {
+                PlayListView.SelectedItem = PlayListView.Items[index + 1];
+            }
+        }
+
+        private void BackMusic_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var index = PlayListView.SelectedIndex;
+            var count = PlayListView.Items.Count;
+            if (index == 0)
+            {
+                PlayListView.SelectedItem = PlayListView.Items[count - 1];
+            }
+            else
+            {
+                PlayListView.SelectedItem = PlayListView.Items[index - 1];
+            }
+        }
+
+        private void LoopIcon_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (MusicLoop == "RepeatOff")
+            {
+                MusicLoop = "RepeatOne";
+                Panuon.WPF.UI.Toast.Show("单曲循环", ToastPosition.Top);
+                LoopIcon.Glyph = "\uE8ED";
+            }
+            else if (MusicLoop == "RepeatOne")
+            {
+                MusicLoop = "RepeatAll";
+                Panuon.WPF.UI.Toast.Show("顺序播放", ToastPosition.Top); 
+                LoopIcon.Glyph = "\uE8EE";
+            }
+            else if (MusicLoop == "RepeatAll")
+            {
+                MusicLoop = "RepeatOff";
+                Panuon.WPF.UI.Toast.Show("不循环", ToastPosition.Top);
+                LoopIcon.Glyph = "\uF5E7";
+            }
+        }
     }
 }
+
+

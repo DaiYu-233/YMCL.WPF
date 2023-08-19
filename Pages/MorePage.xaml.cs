@@ -25,7 +25,7 @@ namespace YMCL.Pages
     public partial class MorePage : Page
     {
         Frame aboutp = new Frame() { Content = new Pages.MorePages.About() };
-        Frame musicpage = new Frame() { Content = new Pages.MorePages.MusicPlayer() };
+
         Forms.MusicPlayer musicPlayer = new Forms.MusicPlayer();
         public MorePage()
         {

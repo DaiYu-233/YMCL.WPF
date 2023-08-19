@@ -25,6 +25,7 @@ namespace YMCL.Class
         public double MainWindowHeight { get; set; }
         public double PlayerWindowWidth { get; set; }
         public double PlayerWindowHeight { get; set; }
+        public double PlayerVolume { get; set; }
 
         public string? DownloadSoure { get; set; }
         public string? MaxDownloadThreads { get; set; }

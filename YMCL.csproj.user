@@ -27,9 +27,6 @@
     <Compile Update="Pages\MorePages\About.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Pages\MorePages\MusicPlayer.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="Pages\SettingPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -66,9 +63,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\MorePages\About.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Pages\MorePages\MusicPlayer.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\SettingPage.xaml">

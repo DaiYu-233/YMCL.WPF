@@ -8,10 +8,8 @@
         xmlns:ui="http://schemas.modernwpf.com/2019" WindowStyle="None" pu:WindowXCaption.Height="0"
         ui:WindowHelper.UseModernWindowStyle="False" Background="Transparent" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" OpacityMask="White" AllowsTransparency="True" Title="YMCL" Loaded="WindowX_Loaded" SizeChanged="WindowX_SizeChanged" MouseMove="WindowX_MouseMove" >
     
-    <Border CornerRadius="8,8,8,8"  Background="{DynamicResource SecundaryBackgroundColor}">
-        <Border.Effect>
-            <DropShadowEffect Color="#FFAAAAAA" ShadowDepth="0" BlurRadius="10" Opacity="0.4"/>
-        </Border.Effect>
+    <Border CornerRadius="8,8,8,8"  Background="{DynamicResource SecundaryBackgroundColor}" >
+
 
         <Grid >
 

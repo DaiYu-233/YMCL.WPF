@@ -282,9 +282,7 @@ namespace YMCL
             var layer = AdornerLayer.GetAdornerLayer(c);
             layer.Add(new WindowResizeAdorner(c));
 
-            //StreamResourceInfo sri = Application.GetResourceStream(new Uri("pack://application:,,,/YMCL;component/Styles/x1.cur"));
-            //Cursor customCursor = new Cursor(sri.Stream);
-            //this.Cursor = customCursor;
+
         }
 
         private void WindowX_SizeChanged(object sender, SizeChangedEventArgs e)
