@@ -46,13 +46,13 @@ namespace YMCL
             {
                 var obj = new SettingInfo()
                 {
-                    AloneCore = "True",
+                    AloneCore = true,
                     DisplayInformation = "True",
                     Java = "Null",
                     LoginIndex = "0",
                     LoginName = "Steve",
                     LoginType = "离线登录",
-                    MaxMem = "1024",
+                    MaxMem = 1024,
                     Theme = "Light",
                     DownloadSoure = "Mcbbs",
                     MaxDownloadThreads = "64",

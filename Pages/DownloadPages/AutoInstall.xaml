@@ -20,14 +20,14 @@
                             </ui:AutoSuggestBox>
                             <!--<ui:FontIcon Glyph="&#xE721;" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,510,0" Foreground="#FF7B7B7B" />-->
                         </Grid>
-                        <ui:ListView x:Name="VerListView" SelectedValuePath="Id" d:ItemsSource="{d:SampleData ItemCount=5}" FontFamily="MiSans Medium" Margin="0,40,0,0" SelectionChanged="VerListView_SelectionChanged"  >
+                        <ui:ListView FontFamily="MiSans Medium"  x:Name="VerListView" SelectedValuePath="Id" d:ItemsSource="{d:SampleData ItemCount=5}"  Margin="0,40,0,0" SelectionChanged="VerListView_SelectionChanged"  >
                             <ui:ListView.ItemTemplate>
                                 <DataTemplate>
                                     <Grid>
-                                        <TextBlock Text="{Binding Id}" FontSize="16"/>
+                                        <TextBlock FontFamily="MiSans Medium"  Text="{Binding Id}" FontSize="16"/>
                                         <TextBlock  Margin="0,18,0,0" FontSize="12" Foreground="#E48A8A8A">
-                                            <Run Text="{Binding ReleaseTime}"/>
-                                            <Run Text="{Binding Type}"/>
+                                            <Run  FontFamily="MiSans Medium" Text="{Binding ReleaseTime}"/>
+                                            <Run FontFamily="MiSans Medium"  Text="{Binding Type}"/>
                                         </TextBlock>
                                     </Grid>
                                 </DataTemplate>

@@ -25,13 +25,7 @@ namespace YMCL.Pages.Forms
     /// </summary>
     public partial class MusicPlayer : WindowX
     {
-        string VarSongID = "";
-        string VarSongName = "";
-        string VarArtists = "";
-        string VarAlbumName = "";
-        string VarDuration = "";
-        string VarPic = "";
-        string SongUrl = "";
+        string SongUri = "";
         double w;
         double h;
         bool IsPlayListViewGrClose = true;
@@ -219,6 +213,7 @@ namespace YMCL.Pages.Forms
         {
             public string? Type { get; set; }
             public string? Uri { get; set; }
+            public string? SongID { get; set; }
             public string? SongName { get; set; }
             public string? Authors { get; set; }
             public double Duration { get; set; }
@@ -298,7 +293,7 @@ namespace YMCL.Pages.Forms
             }
             list.ForEach(x =>
             {
-                playList.Add(new PlayListClass() { Authors = x.Authors, Duration = x.Duration, Type = x.Type, Pic = x.Pic, SongName = x.SongName, Uri = x.Uri, DisplayDuration = x.DisplayDuration });
+                playList.Add(new PlayListClass() { Authors = x.Authors, Duration = x.Duration, Type = x.Type, Pic = x.Pic, SongName = x.SongName, Uri = x.Uri, DisplayDuration = x.DisplayDuration, SongID = x.SongID });
             });
             playList.ForEach(y =>
             {
@@ -448,10 +443,11 @@ namespace YMCL.Pages.Forms
                 Uri = openFileDialog.FileName,
                 SongName = Array[Array.Length - 1].Split(".")[0],
                 Type = "本地",
-                Authors = "",
+                Authors = "." + Array[Array.Length - 1].Split(".")[1],
                 Duration = time,
                 DisplayDuration = Millisecond_to_minutes(time),
-                Pic = ""
+                Pic = null,
+                SongID = null
             });
             string str = JsonConvert.SerializeObject(playList, Newtonsoft.Json.Formatting.Indented);
             System.IO.File.WriteAllText(@".\YMCL\YMCL.PlayList.json", str);
@@ -628,7 +624,7 @@ namespace YMCL.Pages.Forms
             BackPageBtn.IsEnabled = true;
         }
 
-        void Play()
+        async void Play()
         {
             PlayListClass song = PlayListView.SelectedItem as PlayListClass;
             if (song == null)
@@ -642,15 +638,69 @@ namespace YMCL.Pages.Forms
                     Panuon.WPF.UI.Toast.Show($"此文件不存在，它可能被移动、重命名或删除", ToastPosition.Top);
                     return;
                 }
+                SongUri = song.Uri;
                 PlayingSongName.Text = song.SongName;
                 PlayingSongAuthors.Text = song.Authors;
                 Player();
             }
             else
             {
-                PlayingSongName.Text = song.SongName;
-                PlayingSongAuthors.Text = song.Authors;
-                Player();
+                bool isPlay;
+                isPlay = true;
+                var SearchText = song.SongID;
+                Panuon.WPF.UI.Toast.Show($"正在获取音乐...", ToastPosition.Top);
+                await Task.Run(async () =>
+                {
+                    string checkurl = $"https://music.api.daiyu.fun/check/music?id={SearchText}";
+                    using (HttpClient client = new HttpClient())
+                    {
+                        HttpResponseMessage response = await client.GetAsync(checkurl);
+
+                        string responseData = await response.Content.ReadAsStringAsync();
+
+                        Response res = JsonConvert.DeserializeObject<Response>(responseData);
+
+                        if (res.success == false)
+                        {
+                            Dispatcher.BeginInvoke(() => { Panuon.WPF.UI.Toast.Show("请求失败，网易云音乐返回信息：" + res.message, ToastPosition.Top); });
+                            isPlay = false;
+                        }
+
+                    }
+                    if (!isPlay)
+                    {
+                        return;
+                    }
+                    string url = $"https://music.api.daiyu.fun/song/url?id={SearchText}";
+                    using (HttpClient client = new HttpClient())
+                    {
+                        HttpResponseMessage response = await client.GetAsync(url);
+
+                        if (response.IsSuccessStatusCode)
+                        {
+                            string responseData = await response.Content.ReadAsStringAsync();
+
+                            YMCL.Class.NeteasyCloudMusicUrl.Root root = JsonConvert.DeserializeObject<YMCL.Class.NeteasyCloudMusicUrl.Root>(responseData);
+                            if (root.code != 200)
+                            {
+                                Dispatcher.BeginInvoke(() => { Panuon.WPF.UI.Toast.Show("请求错误", ToastPosition.Top); });
+                                return;
+                            }
+                            SongUri = root.data[0].url;
+                        }
+                        else
+                        {
+                            Dispatcher.BeginInvoke(() => { Panuon.WPF.UI.Toast.Show("请求失败：" + response.StatusCode, ToastPosition.Top); });
+                        }
+                    }
+                });
+                if (isPlay)
+                {
+                    PlayingSongName.Text = song.SongName;
+                    PlayingSongAuthors.Text = song.Authors;
+                    Player();
+                }
+
             }
 
         }
@@ -659,7 +709,7 @@ namespace YMCL.Pages.Forms
             string time;
             PlayListClass song = PlayListView.SelectedItem as PlayListClass;
             MaxPlayingTime = song.DisplayDuration;
-            player.Open(new Uri(song.Uri));
+            player.Open(new Uri(SongUri));
             IsPlaying = true;
             MaxPlayingDuration = song.Duration;
             PlaySlider.Maximum = song.Duration;
@@ -716,39 +766,16 @@ namespace YMCL.Pages.Forms
                 {
                     return;
                 }
-                string url = $"https://music.api.daiyu.fun/song/url?id={SearchText}";
-                using (HttpClient client = new HttpClient())
+                playList.Add(new PlayListClass()
                 {
-                    HttpResponseMessage response = await client.GetAsync(url);
-
-                    if (response.IsSuccessStatusCode)
-                    {
-                        string responseData = await response.Content.ReadAsStringAsync();
-
-                        YMCL.Class.NeteasyCloudMusicUrl.Root root = JsonConvert.DeserializeObject<YMCL.Class.NeteasyCloudMusicUrl.Root>(responseData);
-                        if (root.code != 200)
-                        {
-                            Dispatcher.BeginInvoke(() => { Panuon.WPF.UI.Toast.Show("请求错误", ToastPosition.Top); });
-                            return;
-                        }
-                        SongUrl = root.data[0].url;
-
-                        playList.Add(new PlayListClass()
-                        {
-                            Uri = SongUrl,
-                            SongName = song.SongName,
-                            Type = "网易云",
-                            Authors = song.Artists,
-                            Duration = song.Duration,
-                            DisplayDuration = Millisecond_to_minutes(song.Duration)
-                        });
-
-                    }
-                    else
-                    {
-                        Dispatcher.BeginInvoke(() => { Panuon.WPF.UI.Toast.Show("请求失败：" + response.StatusCode, ToastPosition.Top); });
-                    }
-                }
+                    Uri = null,
+                    SongName = song.SongName,
+                    Type = "网易云",
+                    SongID = song.SongID,
+                    Authors = song.Artists,
+                    Duration = song.Duration,
+                    DisplayDuration = Millisecond_to_minutes(song.Duration)
+                });
             });
             if (IsNoPlay)
             {
@@ -934,7 +961,7 @@ namespace YMCL.Pages.Forms
             else if (MusicLoop == "RepeatOne")
             {
                 MusicLoop = "RepeatAll";
-                Panuon.WPF.UI.Toast.Show("顺序播放", ToastPosition.Top); 
+                Panuon.WPF.UI.Toast.Show("顺序播放", ToastPosition.Top);
                 LoopIcon.Glyph = "\uE8EE";
             }
             else if (MusicLoop == "RepeatAll")

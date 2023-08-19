@@ -56,14 +56,8 @@ namespace YMCL.Pages
         {
             InitializeComponent();
             var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json"));
-            
+
             #region
-
-
-
-
-
-            #endregion
 
 
             if (!Directory.Exists(obj.MinecraftPath))
@@ -74,10 +68,28 @@ namespace YMCL.Pages
 
             GetHitokoto();
 
+
+
+
+            #endregion
+
+
         }
 
         private async void LaunchGame_Click(object sender, RoutedEventArgs e)
         {
+            var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json"));
+            LaunchConfig lc = new()
+            {
+                JvmConfig = new JvmConfig(obj.Java)
+                {
+                    MaxMemory = obj.MaxMem,
+                    MinMemory = 128
+                },
+                NativesFolder = null, //一般可以无视这个选项
+                IsEnableIndependencyCore = obj.AloneCore//是否启用版本隔离
+            };
+
             if (VerListView.SelectedIndex >= 0)
             {
                 LaunchGame.IsEnabled = false;
@@ -98,7 +110,8 @@ namespace YMCL.Pages
 
         private async void GetHitokoto()
         {
-            await Task.Run(async() => {
+            await Task.Run(async () =>
+            {
                 try
                 {
                     using (HttpClient client = new HttpClient())
@@ -108,7 +121,7 @@ namespace YMCL.Pages
                         response.EnsureSuccessStatusCode();
                         string responseBody = await response.Content.ReadAsStringAsync();
                         var obj = JsonConvert.DeserializeObject<hitokotoClass>(responseBody);
-                        var res = obj.hitokoto + "    ——「" + obj.from+"」";
+                        var res = obj.hitokoto + "    ——「" + obj.from + "」";
                         Dispatcher.BeginInvoke(() => { hitokoto.Text = res; });
                     }
                 }
@@ -156,7 +169,7 @@ namespace YMCL.Pages
 
 
 
-        private void  GameVerTextBlock_MouseDown(object sender, MouseButtonEventArgs e)
+        private void GameVerTextBlock_MouseDown(object sender, MouseButtonEventArgs e)
         {
             hitokoto.Visibility = Visibility.Hidden;
             VerListBorder.Visibility = Visibility.Visible;

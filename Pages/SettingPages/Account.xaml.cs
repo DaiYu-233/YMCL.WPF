@@ -6,7 +6,6 @@ using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Xml;
-using MinecaftOAuth;
 using Newtonsoft.Json;
 using Panuon.WPF.UI;
 using YMCL.Class;
@@ -38,14 +37,14 @@ namespace YMCL.Pages.SettingPages
             var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json"));
 
             datagrid();
-            if((accountInfos.Count) == 0)
+            if ((accountInfos.Count) == 0)
             {
                 System.IO.File.WriteAllText(@".\YMCL\YMCL.Account.json", "[{\"AccountType\": \"离线登录\",\"Name\": \"Steve\",\"AddTime\": \"Null\"}]");
                 string tstr = System.IO.File.ReadAllText(@".\YMCL\YMCL.Account.json");
                 accountInfos = JsonConvert.DeserializeObject<List<AccountInfo>>(tstr);
             }
             AccountsListView.SelectedItem = AccountsListView.Items[Convert.ToInt32(obj.LoginIndex)];
-            
+
 
 
             System.IO.File.WriteAllText(@".\YMCL\Temp\LoginName.log", accountInfos[AccountsListView.SelectedIndex].Name.ToString());
@@ -54,7 +53,8 @@ namespace YMCL.Pages.SettingPages
         }
         private async void MicrosoftLogin()
         {
-            var V = MessageBoxX.Show("确定开始验证您的账户\n需要打开浏览器进行登录", "验证", MessageBoxButton.OKCancel);
+            string Token = "";
+            var V = MessageBoxX.Show("确定开始验证账户", "验证", MessageBoxButton.OKCancel);
             if (V == MessageBoxResult.OK)
             {
                 addacbro.Visibility = Visibility.Hidden;
@@ -69,21 +69,56 @@ namespace YMCL.Pages.SettingPages
                 return;
             }
 
-            MicrosoftAuthenticator microsoftAuthenticator = new(MinecaftOAuth.Module.Enum.AuthType.Access) { ClientId = "c06d4d68-7751-4a8a-a2ff-d1b46688f428" };
-            var code = await microsoftAuthenticator.GetDeviceInfo();
-            Clipboard.SetText(code.UserCode);
-            MessageBoxX.Show(code.UserCode, "一次性访问代码(已复制到剪切板)"); 
-            Debug.WriteLine("Link:{0} - Code:{1}", code.VerificationUrl, code.UserCode);
-            if (V == MessageBoxResult.OK) { Process.Start(new ProcessStartInfo(code.VerificationUrl) { UseShellExecute = true, Verb = "open" }); }
-            var token = await microsoftAuthenticator.GetTokenResponse(code);
-            var user = await microsoftAuthenticator.AuthAsync(x => { Debug.WriteLine(x); });
-            var a = JsonConvert.SerializeObject(user, Newtonsoft.Json.Formatting.Indented);
-            MessageBoxX.Show(a,"账户Json信息");
-            System.IO.File.WriteAllText("./YMCL/Accounts/Microsoft-"+user.Name+".json",a); 
-            accountInfos.Add(new AccountInfo() { AccountType = "微软登录", Name = user.Name.ToString(),AddTime = DateTime.Now.ToString()});
-            WriteFile();
+            try
+            {
+                MinecraftOAuth.Authenticator.MicrosoftAuthenticator microsoftAuthenticator = new(MinecraftOAuth.Module.Enum.AuthType.Access)
+                {
+                    ClientId = "c06d4d68-7751-4a8a-a2ff-d1b46688f428"
+                };
+                var deviceInfo = await microsoftAuthenticator.GetDeviceInfo();
+                Clipboard.SetText(deviceInfo.UserCode);
+                MessageBoxX.Show(deviceInfo.UserCode, "一次性访问代码(已复制到剪切板)");
+                var token = await microsoftAuthenticator.GetTokenResponse(deviceInfo);
+                var userProfile = await microsoftAuthenticator.AuthAsync(x =>
+                {
+                    MessageBoxX.Show(x);
+                });
+            }
+            catch (Exception ex)
+            {
+                Panuon.WPF.UI.Toast.Show("Access登录失败：" + ex, ToastPosition.Top);
+            }
 
-            datagrid();
+            try
+            {
+                MinecraftOAuth.Authenticator.MicrosoftAuthenticator microsoftAuthenticator = new(MinecraftOAuth.Module.Enum.AuthType.Refresh)
+                {
+                    ClientId = "c06d4d68-7751-4a8a-a2ff-d1b46688f428",
+                    RefreshToken = Token
+                };
+                var result = await microsoftAuthenticator.AuthAsync(x =>
+                {
+                    MessageBoxX.Show(x);
+                    Debug.WriteLine(x);
+                });
+
+            }
+            catch (Exception ex)
+            {
+                Panuon.WPF.UI.Toast.Show("Refresh登录失败：" + ex, ToastPosition.Top);
+            }
+
+            //Debug.WriteLine("Link:{0} - Code:{1}", deviceInfo.VerificationUrl, deviceInfo.UserCode);
+            //if (V == MessageBoxResult.OK) { Process.Start(new ProcessStartInfo(deviceInfo.VerificationUrl) { UseShellExecute = true, Verb = "open" }); }
+            //var token = await microsoftAuthenticator.GetTokenResponse(code);
+            //var user = await microsoftAuthenticator.AuthAsync(x => { Debug.WriteLine(x); });
+            //var a = JsonConvert.SerializeObject(user, Newtonsoft.Json.Formatting.Indented);
+            //MessageBoxX.Show(a, "账户Json信息");
+            //System.IO.File.WriteAllText("./YMCL/Accounts/Microsoft-" + user.Name + ".json", a);
+            //accountInfos.Add(new AccountInfo() { AccountType = "微软登录", Name = user.Name.ToString(), AddTime = DateTime.Now.ToString() });
+            //WriteFile();
+
+            //datagrid();
 
 
         }
@@ -143,15 +178,16 @@ namespace YMCL.Pages.SettingPages
             }
             else
             {
-                MessageBoxX.Show("请选择登录方式");
+                Panuon.WPF.UI.Toast.Show("请选择登录方式", ToastPosition.Top);
+                //MessageBoxX.Show("请选择登录方式");
             }
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            if(yhm2.Text != string.Empty)
+            if (yhm2.Text != string.Empty)
             {
-                accountInfos.Add(new AccountInfo() { AccountType = "离线登录",Name = yhm2.Text, AddTime = DateTime.Now.ToString()});
+                accountInfos.Add(new AccountInfo() { AccountType = "离线登录", Name = yhm2.Text, AddTime = DateTime.Now.ToString() });
                 WriteFile();
                 addacbro.Visibility = Visibility.Hidden;
                 lxdl.Visibility = Visibility.Hidden;
@@ -159,7 +195,8 @@ namespace YMCL.Pages.SettingPages
             }
             else
             {
-                MessageBoxX.Show("用户名为空！");
+                Panuon.WPF.UI.Toast.Show("用户名不可为空", ToastPosition.Top);
+                //MessageBoxX.Show("用户名为空！");
             }
 
         }
@@ -177,7 +214,7 @@ namespace YMCL.Pages.SettingPages
             {
 
                 Del.IsEnabled = true;
-                NowLoginType.Text = accountInfos[DataGr.SelectedIndex].AccountType.ToString()+" - "+accountInfos[DataGr.SelectedIndex].Name.ToString();
+                NowLoginType.Text = accountInfos[DataGr.SelectedIndex].AccountType.ToString() + " - " + accountInfos[DataGr.SelectedIndex].Name.ToString();
                 System.IO.File.WriteAllText(@".\YMCL\Temp\LoginName.log", accountInfos[DataGr.SelectedIndex].Name.ToString());
                 System.IO.File.WriteAllText(@".\YMCL\Temp\LoginType.log", accountInfos[DataGr.SelectedIndex].AccountType.ToString());
 
@@ -185,7 +222,7 @@ namespace YMCL.Pages.SettingPages
                 obj.LoginIndex = DataGr.SelectedIndex.ToString();
                 obj.LoginName = accountInfos[DataGr.SelectedIndex].Name.ToString();
                 obj.LoginType = accountInfos[DataGr.SelectedIndex].AccountType.ToString();
-                System.IO.File.WriteAllText(@"./YMCL/YMCL.Setting.json",JsonConvert.SerializeObject(obj, Newtonsoft.Json.Formatting.Indented) );
+                System.IO.File.WriteAllText(@"./YMCL/YMCL.Setting.json", JsonConvert.SerializeObject(obj, Newtonsoft.Json.Formatting.Indented));
 
             }
             else
@@ -209,7 +246,7 @@ namespace YMCL.Pages.SettingPages
                 string tstr = System.IO.File.ReadAllText(@".\YMCL\YMCL.Account.json");
                 accountInfos = JsonConvert.DeserializeObject<List<AccountInfo>>(tstr);
             }
-            
+
             WriteFile();
             datagrid();
             AccountsListView.SelectedItem = AccountsListView.Items[0];

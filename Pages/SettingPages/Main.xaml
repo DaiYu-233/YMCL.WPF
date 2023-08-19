@@ -62,7 +62,7 @@
             <Border Height="45" Margin="10,10,10,0" VerticalAlignment="Top" Background="{DynamicResource ThemeContentBorderBackground}" CornerRadius="3,3,3,3">
                 <Grid>
                     <TextBlock FontFamily="MiSans Medium" Text="Minecraft文件夹" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="18,0,0,0" FontSize="15" Foreground="{DynamicResource ThemeTextColor}"/>
-                    <ComboBox x:Name="MinecraftPathText"  MinWidth="400" Margin="150,0,180,0" VerticalAlignment="Center" Height="32" IsReadOnly="True" HorizontalAlignment="Stretch" />
+                    <ComboBox x:Name="MinecraftPathText"  MinWidth="400" Margin="150,0,180,0" VerticalAlignment="Center" Height="32" IsReadOnly="True" HorizontalAlignment="Stretch" FontFamily="MiSans Medium" />
                     <Button x:Name="DelMinecraftFolder" Content="删除" FontFamily="MiSans Medium" Width="80" Height="32"  Margin="0,0,95,0" HorizontalAlignment="Right" Click="DelMinecraftFolder_Click"/>
                     <Button x:Name="AddMinecraftFolder" Content="添加" FontFamily="MiSans Medium" Width="80" Height="32" Click="OpenMinecraftFolder_Click" Margin="0,0,10,0" HorizontalAlignment="Right"/>
                 </Grid>

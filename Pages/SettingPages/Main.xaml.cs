@@ -85,7 +85,7 @@ namespace YMCL.Pages.SettingPages
         private void SettingInitialization()
         {
             var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json"));
-            if (obj.AloneCore == "True")
+            if (obj.AloneCore)
             {
                 AloneCoreSwitch.IsOn = true;
             }
@@ -199,15 +199,15 @@ namespace YMCL.Pages.SettingPages
         {
             var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json"));
             obj.Java = (string?)JavaCombo.SelectedItem;
-            obj.MaxMem = SilderBox.Value.ToString();
+            obj.MaxMem = (int)SilderBox.Value;
             obj.MinecraftPath = MinecraftPathText.Text;
             if (AloneCoreSwitch.IsOn == true)
             {
-                obj.AloneCore = "True";
+                obj.AloneCore = true;
             }
             else
             {
-                obj.AloneCore = "False";
+                obj.AloneCore = false;
             }
             File.WriteAllText(@"./YMCL/YMCL.Setting.json", JsonConvert.SerializeObject(obj, Newtonsoft.Json.Formatting.Indented));
             File.WriteAllText("./YMCL/YMCL.MinecraftPath.json", JsonConvert.SerializeObject(MinecraftPathList, Newtonsoft.Json.Formatting.Indented));

@@ -9,10 +9,10 @@
       Title="LaunchPage" MouseEnter="Page_MouseEnter">
     <Border Background="{DynamicResource ThemeBackground}" CornerRadius="0,0,8,0">
         <Grid  >
-            <TextBlock x:Name="hitokoto" VerticalAlignment="Top" Margin="10,5,10,0" Text="" FontSize="13" Foreground="{DynamicResource ThemeTextColor}" TextAlignment="Center" MouseLeftButtonUp="hitokoto_MouseLeftButtonUp" MouseRightButtonUp="hitokoto_MouseRightButtonUp" />
+            <TextBlock x:Name="hitokoto" VerticalAlignment="Top" Margin="10,5,10,0" Text="" FontSize="13" Foreground="{DynamicResource ThemeTextColor}" TextAlignment="Center" MouseLeftButtonUp="hitokoto_MouseLeftButtonUp" MouseRightButtonUp="hitokoto_MouseRightButtonUp" FontFamily="MiSans Medium" />
             <Border Height="45" VerticalAlignment="Bottom" Background="{DynamicResource ThemeContentBorderBackground}" CornerRadius="3,3,3,3" Margin="10,0,10,10">
                 <Grid>
-                    <Button x:Name="LaunchGame" Content="启动" Width="136" FontFamily="MiSans Medium" VerticalAlignment="Stretch" Margin="0,5,5,5" HorizontalAlignment="Right" Click="LaunchGame_Click" FontSize="15" />
+                    <Button x:Name="LaunchGame" Content="启动" Width="117" FontFamily="MiSans Medium" VerticalAlignment="Stretch" Margin="0,7,7,7" HorizontalAlignment="Right" Click="LaunchGame_Click" FontSize="15" />
 
                     <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Width="84" Margin="6,4,0,0" Text="当前启动核心" FontFamily="MiSans Medium" Foreground="{DynamicResource ThemeTextColor}"/>
                     <TextBlock x:Name="GameVerTextBlock" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="7,18,0,0" Text="None" FontFamily="MiSans Medium" Height="26" FontSize="18" Foreground="#FF00D6FF" MouseDown="GameVerTextBlock_MouseDown"/>

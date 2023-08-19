@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:YMCL.Pages.Forms" FontFamily="MiSans Medium"
         mc:Ignorable="d" Height="538" Width="918" 
         xmlns:ui="http://schemas.modernwpf.com/2019" WindowStyle="None" pu:WindowXCaption.Height="0"
-        ui:WindowHelper.UseModernWindowStyle="False" Background="Transparent" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"  AllowsTransparency="True" Title="YMCL" Loaded="WindowX_Loaded" MouseMove="WindowX_MouseMove">
+        ui:WindowHelper.UseModernWindowStyle="False" Background="Transparent" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"  AllowsTransparency="True" Title="YMCL Player" Loaded="WindowX_Loaded" MouseMove="WindowX_MouseMove">
     <Border CornerRadius="8,8,8,8"  Background="{DynamicResource ThemeBackground}">
  
         <Grid >
@@ -14,7 +14,7 @@
 
             <Border VerticalAlignment="Top" Height="30" Background="{DynamicResource SecundaryBackgroundColor}" CornerRadius="8,8,0,0" MouseLeftButtonDown="Border_MouseLeftButtonDown">
                 <Grid VerticalAlignment="Top" Height="30">
-                    <TextBlock HorizontalAlignment="Left" Text="YMCL Player" VerticalAlignment="Center" FontSize="14" Foreground="#FF68E7FF" Margin="6,0,0,0"/>
+                    <TextBlock HorizontalAlignment="Left" Visibility="Hidden" Text="YMCL Player" VerticalAlignment="Center" FontSize="14" Foreground="#FF5FE6FF" Margin="8.5,0,0,0"/>
                     <Button x:Name="btnMinimize" Style="{DynamicResource IconButtonsStyle}" Content="{DynamicResource minimize}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,30,0" Click="btnMinimize_Click"/>
                     <Button x:Name="btnClose" Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Tag="IsCloseButton" HorizontalAlignment="Right" Margin="0,0,3,0" Click="btnClose_Click"/>
                 </Grid>
@@ -23,7 +23,7 @@
 
                 <Border x:Name="SearchGr" Visibility="Visible" Background="{DynamicResource ThemeContentBorderBackground}"  CornerRadius="3,3,3,3" Margin="10,10,10,13" >
                     <Grid>
-                        <ui:AutoSuggestBox x:Name="SearchBox" QueryIcon="Zoom" Margin="5,5,5,0" QuerySubmitted="AutoSuggestBox_QuerySubmitted"/>
+                        <ui:AutoSuggestBox x:Name="SearchBox" QueryIcon="Zoom" Margin="5,5,5,0"  FontFamily="MiSans Medium"  QuerySubmitted="AutoSuggestBox_QuerySubmitted"/>
                         <TextBox IsReadOnly="True" Margin="55,5,0,0" VerticalAlignment="Top" Text="" HorizontalAlignment="Left" Width="65" TextAlignment="Center" Height="32" Visibility="Hidden" />
                         <TextBlock x:Name="PageText" VerticalAlignment="Top" Margin="61,12,0,0" Width="54" FontSize="14" Text="1" TextAlignment="Center" Foreground="{DynamicResource ThemeTextColor}" HorizontalAlignment="Left" Visibility="Hidden"/>
                         <Button x:Name="NextPageBtn" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="125,5,5,0" Click="NextPageBtn_Click" Width="45" Visibility="Hidden">
@@ -32,12 +32,12 @@
                         <Button x:Name="BackPageBtn" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,5,0,0" Click="BackPageBtn_Click" Width="45" Visibility="Hidden">
                             <ui:FontIcon Glyph="&#xE76B;" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FF7B7B7B" />
                         </Button>
-                        <ui:ListView x:Name="SongsListView" d:ItemsSource="{d:SampleData ItemCount=5}" FontFamily="MiSans Medium" Margin="0,40,0,0" SelectionChanged="SongsListView_SelectionChanged"   >
+                        <ui:ListView x:Name="SongsListView"  FontFamily="MiSans Medium" d:ItemsSource="{d:SampleData ItemCount=5}"  Margin="0,40,0,0" SelectionChanged="SongsListView_SelectionChanged"   >
                             <ui:ListView.ItemTemplate>
                                 <DataTemplate>
                                     <Grid>
-                                        <TextBlock ><Run  Text="{Binding SongName}" FontSize="13"/><Run Text=" "/><Run Text="{Binding DisplayDuration}"  FontSize="10" Foreground="#E48A8A8A"/></TextBlock>
-                                        <TextBlock  Margin="0,17,0,0" FontSize="12" Foreground="#E48A8A8A"><Run Text="{Binding Artists}" FontSize="11"/><Run Text="  "/></TextBlock>
+                                        <TextBlock ><Run  Text="{Binding SongName}"  FontFamily="MiSans Medium"  FontSize="13"/><Run Text=" "/><Run Text="{Binding DisplayDuration}" FontFamily="MiSans Medium"   FontSize="10" Foreground="#E48A8A8A"/></TextBlock>
+                                        <TextBlock  Margin="0,17,0,0" FontSize="12" Foreground="#E48A8A8A"><Run FontFamily="MiSans Medium"  Text="{Binding Artists}" FontSize="11"/><Run Text="  "/></TextBlock>
                                     </Grid>
                                 </DataTemplate>
                             </ui:ListView.ItemTemplate>
@@ -50,16 +50,16 @@
 
                 <Grid>
                     <Grid VerticalAlignment="Top" Height="40">
-                        <Button x:Name="AddLocalFileBtn" Height="30" HorizontalAlignment="Stretch" Margin="8,8,115,0" Content="添加本地音频文件" Click="AddLocalFileBtn_Click"/>
-                        <Button x:Name="DelObjBtn" Height="30" HorizontalAlignment="Stretch" Margin="170,8,8,0" Content="删除选中项" Click="DelObjBtn_Click" IsEnabled="False"/>
+                        <Button FontFamily="MiSans Medium"  x:Name="AddLocalFileBtn" Height="30" HorizontalAlignment="Stretch" Margin="8,8,115,0" Content="添加本地音频文件" Click="AddLocalFileBtn_Click"/>
+                        <Button FontFamily="MiSans Medium"  x:Name="DelObjBtn" Height="30" HorizontalAlignment="Stretch" Margin="170,8,8,0" Content="删除选中项" Click="DelObjBtn_Click" IsEnabled="False"/>
                     </Grid>
                     <!--<TextBlock Text="播放列表" FontSize="16"/>-->
-                    <ui:ListView x:Name="PlayListView"  d:ItemsSource="{d:SampleData ItemCount=10}" Margin="0,45,0,10" SelectionChanged="PlayListView_SelectionChanged" >
+                    <ui:ListView x:Name="PlayListView"   FontFamily="MiSans Medium" d:ItemsSource="{d:SampleData ItemCount=10}" Margin="0,45,0,10" SelectionChanged="PlayListView_SelectionChanged" >
                         <ui:ListView.ItemTemplate>
                             <DataTemplate>
                                 <Grid>
-                                    <TextBlock ><Run  Text="{Binding SongName}" FontSize="13"/><Run Text=" "/><Run Text="{Binding DisplayDuration}"  FontSize="10" Foreground="#E48A8A8A"/></TextBlock>
-                                    <TextBlock  Margin="0,18,0,0" FontSize="11" Foreground="#E48A8A8A"><Run Text="{Binding Type}"/><Run Text="  "/><Run Text="{Binding Authors}"/></TextBlock>
+                                    <TextBlock ><Run  FontFamily="MiSans Medium"  Text="{Binding SongName}" FontSize="13"/><Run Text=" "/><Run FontFamily="MiSans Medium"  Text="{Binding DisplayDuration}"  FontSize="10" Foreground="#E48A8A8A"/></TextBlock>
+                                    <TextBlock  Margin="0,18,0,0" FontSize="11" Foreground="#E48A8A8A"><Run FontFamily="MiSans Medium"  Text="{Binding Type}"/><Run Text="  "/><Run FontFamily="MiSans Medium"  Text="{Binding Authors}"/></TextBlock>
                                 </Grid>
                             </DataTemplate>
                         </ui:ListView.ItemTemplate>

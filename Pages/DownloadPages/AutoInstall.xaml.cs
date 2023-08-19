@@ -582,7 +582,7 @@ namespace YMCL.Pages.DownloadPages
             #endregion
             ResourceInstaller.MaxDownloadThreads = Convert.ToInt32(obj.MaxDownloadThreads);
             ResourceDownloader.MaxDownloadThreads = Convert.ToInt32(obj.MaxDownloadThreads); //下载最大线程数
-            Panuon.WPF.UI.Toast.Show($"开始安装{InsVerName}  下载源：{obj.DownloadSoure}  最大线程：{obj.MaxDownloadThreads}", ToastPosition.Top);
+            Panuon.WPF.UI.Toast.Show($"开始安装{InsVerName}", ToastPosition.Top);
             #region UI
             DownloadInfo.Visibility = Visibility.Visible;
 

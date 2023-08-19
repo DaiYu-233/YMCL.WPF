@@ -1,6 +1,6 @@
 ﻿<Page x:Class="YMCL.Pages.SettingPages.Account"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"  xmlns:ui="http://schemas.modernwpf.com/2019" 
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:YMCL.Pages.SettingPages"
@@ -15,17 +15,17 @@
             <Border Margin="10,44,10,10" Background="{DynamicResource ThemeContentBorderBackground}" CornerRadius="3,3,3,3">
                 <Grid>
                     <DataGrid x:Name="DataGr" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="5,5,5,5" FontFamily="MiSans Medium" SelectionChanged="DataGr_SelectionChanged" IsReadOnly="True" CanUserSortColumns="False" Visibility="Hidden"/>
-                    <ListView x:Name="AccountsListView" Margin="5,5,5,5" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="AccountsListView_SelectionChanged">
-                        <ListView.ItemTemplate>
+                    <ui:ListView x:Name="AccountsListView" Margin="5,5,5,5" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="AccountsListView_SelectionChanged">
+                        <ui:ListView.ItemTemplate>
                             <DataTemplate>
                                 <Grid>
                                     <TextBlock Text="{Binding Name}" FontSize="14" FontFamily="MiSans Medium"/>
-                                    <TextBlock Text="{Binding AccountType}" Margin="0,15,0,0" FontSize="11" Foreground="#E48A8A8A" FontFamily="MiSans Medium"></TextBlock>
-                                    <TextBlock Text="{Binding AddTime}" FontSize="11" Foreground="#E48A8A8A" Margin="51,15,0,0" FontFamily="MiSans Medium"/>
+                                    <TextBlock  Text="{Binding AccountType}" Margin="0,15,0,0" FontSize="11" Foreground="#E48A8A8A" FontFamily="MiSans Medium"></TextBlock>
+                                    <TextBlock  Text="{Binding AddTime}" FontSize="11" Foreground="#E48A8A8A" Margin="51,15,0,0" FontFamily="MiSans Medium"/>
                                 </Grid>
                             </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                        </ui:ListView.ItemTemplate>
+                    </ui:ListView>
                 </Grid>
             </Border>
             <Border x:Name="addacbro" Background="{DynamicResource ThemeContentContentBorderBackground}" CornerRadius="3,3,3,3" HorizontalAlignment="Center" Width="396" Height="108" VerticalAlignment="Center" Visibility="Hidden">

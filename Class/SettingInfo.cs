@@ -9,14 +9,14 @@ namespace YMCL.Class
     public class SettingInfo
     {
 
-            public string? Java { get; set; }
-            public string? MaxMem { get; set; }
-            public string? AloneCore { get; set; }
-            public string? MinecraftPath { get; set; }
+        public string? Java { get; set; }
+        public int MaxMem { get; set; }
+        public bool AloneCore { get; set; }
+        public string? MinecraftPath { get; set; }
 
-            public string? LoginIndex { get; set; }
-            public string? LoginName { get; set; }
-            public string? LoginType { get; set; }
+        public string? LoginIndex { get; set; }
+        public string? LoginName { get; set; }
+        public string? LoginType { get; set; }
 
 
         public string? Theme { get; set; }

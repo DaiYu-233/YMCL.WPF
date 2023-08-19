@@ -41,8 +41,8 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="MahApps.Metro.IconPacks" Version="4.11.0" />
-    <PackageReference Include="MinecraftLaunch" Version="1.9.5-preview8" />
-    <PackageReference Include="MinecraftOAuth" Version="1.6.0" />
+    <PackageReference Include="MinecraftLaunch" Version="1.9.6-preview2" />
+    <PackageReference Include="MinecraftOAuth" Version="1.9.6-preview1" />
     <PackageReference Include="ModernWpfUI" Version="0.9.7-preview.2" />
     <PackageReference Include="Natsurainko.FluentCore" Version="2.0.6" />
     <PackageReference Include="Natsurainko.FluentCore.Extension.Windows" Version="2.0.6" />
