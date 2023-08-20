@@ -32,6 +32,7 @@ namespace YMCL.Pages.Forms
         bool IsVolumeSliderClose = true;
         bool IsPlaying = false;
         bool IsNoPlay = false;
+        bool IsGettingMusic = false;
         bool IsMovingSlider = false;
         bool del = false;
         int Page = 1;
@@ -241,38 +242,45 @@ namespace YMCL.Pages.Forms
             RefreshPlayList();
 
             timer.Tick += new EventHandler(timer_Tick);
-            timer.Interval = TimeSpan.FromSeconds(1);   //设置刷新的间隔时间
+            timer.Interval = TimeSpan.FromSeconds(0.2);   //设置刷新的间隔时间
 
             VolumeSlider.Value = obj.PlayerVolume;
             player.Volume = obj.PlayerVolume;
+
+            player.MediaEnded += Player_MediaEnded;
+        }
+
+        private void Player_MediaEnded(object? sender, EventArgs e)
+        {
+            if (IsGettingMusic)
+            {
+                return;
+            }
+            if (MusicLoop == "RepeatOff")
+            {
+                return;
+            }
+            else if (MusicLoop == "RepeatOne")
+            {
+                player.Position = new TimeSpan(0);
+            }
+            else if (MusicLoop == "RepeatAll")
+            {
+                var index = PlayListView.SelectedIndex;
+                var count = PlayListView.Items.Count;
+                if (index == count - 1)
+                {
+                    PlayListView.SelectedItem = PlayListView.Items[0];
+                }
+                else
+                {
+                    PlayListView.SelectedItem = PlayListView.Items[index + 1];
+                }
+            }
         }
 
         void timer_Tick(object sender, EventArgs e)
         {
-            if (player.Position.TotalMilliseconds == MaxPlayingDuration)
-            {
-                if (MusicLoop == "RepeatOff")
-                {
-                    return;
-                }
-                else if (MusicLoop == "RepeatOne")
-                {
-                    player.Position = new TimeSpan(days: 0, hours: 0, minutes: 0, seconds: 0, milliseconds: 0);
-                }
-                else if (MusicLoop == "RepeatAll")
-                {
-                    var index = PlayListView.SelectedIndex;
-                    var count = PlayListView.Items.Count;
-                    if (index == count - 1)
-                    {
-                        PlayListView.SelectedItem = PlayListView.Items[0];
-                    }
-                    else
-                    {
-                        PlayListView.SelectedItem = PlayListView.Items[index + 1];
-                    }
-                }
-            }
             var nowtime = Millisecond_to_minutes(player.Position.TotalMilliseconds);
             TimeText.Text = $"{nowtime.Split(".")[0]}/{MaxPlayingTime}";
             if (!IsMovingSlider)
@@ -360,8 +368,8 @@ namespace YMCL.Pages.Forms
                 };
                 ThicknessAnimation SearchGrComein = new ThicknessAnimation()
                 {
-                    To = new Thickness(10, 10, 300, 13),
-                    From = new Thickness(10, 10, 10, 13),
+                    To = new Thickness(10, 50, 300, 13),
+                    From = new Thickness(10, 50, 10, 13),
                     Duration = TimeSpan.Parse("0:0:0.3")
                 };
                 PlayListViewGr.BeginAnimation(MarginProperty, Comein);
@@ -379,8 +387,8 @@ namespace YMCL.Pages.Forms
                 };
                 ThicknessAnimation SearchGrComeout = new ThicknessAnimation()
                 {
-                    From = new Thickness(10, 10, 300, 13),
-                    To = new Thickness(10, 10, 10, 13),
+                    From = new Thickness(10, 50, 300, 13),
+                    To = new Thickness(10, 50, 10, 13),
                     Duration = TimeSpan.Parse("0:0:0.3")
                 };
                 PlayListViewGr.BeginAnimation(MarginProperty, Comeout);
@@ -635,7 +643,7 @@ namespace YMCL.Pages.Forms
             {
                 if (!File.Exists(song.Uri))
                 {
-                    Panuon.WPF.UI.Toast.Show($"此文件不存在，它可能被移动、重命名或删除", ToastPosition.Top);
+                    Panuon.WPF.UI.Toast.Show($"源文件不存在，它可能被移动、重命名或删除", ToastPosition.Top);
                     return;
                 }
                 SongUri = song.Uri;
@@ -646,6 +654,7 @@ namespace YMCL.Pages.Forms
             else
             {
                 bool isPlay;
+                IsGettingMusic = true;
                 isPlay = true;
                 var SearchText = song.SongID;
                 Panuon.WPF.UI.Toast.Show($"正在获取音乐...", ToastPosition.Top);
@@ -663,12 +672,14 @@ namespace YMCL.Pages.Forms
                         if (res.success == false)
                         {
                             Dispatcher.BeginInvoke(() => { Panuon.WPF.UI.Toast.Show("请求失败，网易云音乐返回信息：" + res.message, ToastPosition.Top); });
-                            isPlay = false;
+                            isPlay = false; 
+                            IsGettingMusic = false;
                         }
 
                     }
                     if (!isPlay)
                     {
+                        IsGettingMusic = false;
                         return;
                     }
                     string url = $"https://music.api.daiyu.fun/song/url?id={SearchText}";
@@ -684,6 +695,7 @@ namespace YMCL.Pages.Forms
                             if (root.code != 200)
                             {
                                 Dispatcher.BeginInvoke(() => { Panuon.WPF.UI.Toast.Show("请求错误", ToastPosition.Top); });
+                                IsGettingMusic = false;
                                 return;
                             }
                             SongUri = root.data[0].url;
@@ -691,6 +703,7 @@ namespace YMCL.Pages.Forms
                         else
                         {
                             Dispatcher.BeginInvoke(() => { Panuon.WPF.UI.Toast.Show("请求失败：" + response.StatusCode, ToastPosition.Top); });
+                            IsGettingMusic = false;
                         }
                     }
                 });
@@ -699,6 +712,7 @@ namespace YMCL.Pages.Forms
                     PlayingSongName.Text = song.SongName;
                     PlayingSongAuthors.Text = song.Authors;
                     Player();
+
                 }
 
             }
@@ -710,6 +724,15 @@ namespace YMCL.Pages.Forms
             PlayListClass song = PlayListView.SelectedItem as PlayListClass;
             MaxPlayingTime = song.DisplayDuration;
             player.Open(new Uri(SongUri));
+            bool HasTimeSpan = false;
+            while (!HasTimeSpan)
+            {
+                if (player.NaturalDuration.HasTimeSpan)
+                {
+                    HasTimeSpan = true;
+                }
+            }
+            IsGettingMusic = false;
             IsPlaying = true;
             MaxPlayingDuration = song.Duration;
             PlaySlider.Maximum = song.Duration;
@@ -820,7 +843,7 @@ namespace YMCL.Pages.Forms
             IsMovingSlider = true;
         }
 
-        private void DownloadIcon_MouseDown(object sender, MouseButtonEventArgs e)
+        private async void DownloadIcon_MouseDown(object sender, MouseButtonEventArgs e)
         {
             PlayListClass song = PlayListView.SelectedItem as PlayListClass;
             if (song == null)
@@ -862,11 +885,11 @@ namespace YMCL.Pages.Forms
                 try
                 {
                     Panuon.WPF.UI.Toast.Show("开始下载", ToastPosition.Top);
-                    Task.Run(async () =>
+                    await Task.Run(async () =>
                     {
                         using (var client = new HttpClient())
                         {
-                            var response = await client.GetAsync(song.Uri);
+                            var response = await client.GetAsync(SongUri);
                             using (var fs = new FileStream(save.FileName, FileMode.CreateNew))
                             {
                                 await response.Content.CopyToAsync(fs);

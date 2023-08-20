@@ -21,9 +21,10 @@
             </Border>
             <Grid Margin="0,30,0,67">
 
-                <Border x:Name="SearchGr" Visibility="Visible" Background="{DynamicResource ThemeContentBorderBackground}"  CornerRadius="3,3,3,3" Margin="10,10,10,13" >
+                <Border x:Name="SearchGr" Visibility="Visible" Background="{DynamicResource ThemeContentBorderBackground}"  CornerRadius="3,3,3,3" Margin="10,50,10,13" >
                     <Grid>
-                        <ui:AutoSuggestBox x:Name="SearchBox" QueryIcon="Zoom" Margin="5,5,5,0"  FontFamily="MiSans Medium"  QuerySubmitted="AutoSuggestBox_QuerySubmitted"/>
+                        <ui:AutoSuggestBox x:Name="SearchBox" QueryIcon="Zoom" Margin="0,-40,0,0"  FontFamily="MiSans Medium"  QuerySubmitted="AutoSuggestBox_QuerySubmitted"/>
+
                         <TextBox IsReadOnly="True" Margin="55,5,0,0" VerticalAlignment="Top" Text="" HorizontalAlignment="Left" Width="65" TextAlignment="Center" Height="32" Visibility="Hidden" />
                         <TextBlock x:Name="PageText" VerticalAlignment="Top" Margin="61,12,0,0" Width="54" FontSize="14" Text="1" TextAlignment="Center" Foreground="{DynamicResource ThemeTextColor}" HorizontalAlignment="Left" Visibility="Hidden"/>
                         <Button x:Name="NextPageBtn" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="125,5,5,0" Click="NextPageBtn_Click" Width="45" Visibility="Hidden">
@@ -32,7 +33,7 @@
                         <Button x:Name="BackPageBtn" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,5,0,0" Click="BackPageBtn_Click" Width="45" Visibility="Hidden">
                             <ui:FontIcon Glyph="&#xE76B;" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FF7B7B7B" />
                         </Button>
-                        <ui:ListView x:Name="SongsListView"  FontFamily="MiSans Medium" d:ItemsSource="{d:SampleData ItemCount=5}"  Margin="0,40,0,0" SelectionChanged="SongsListView_SelectionChanged"   >
+                        <ui:ListView x:Name="SongsListView"  FontFamily="MiSans Medium" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="SongsListView_SelectionChanged" Margin="0,5,0,0"   >
                             <ui:ListView.ItemTemplate>
                                 <DataTemplate>
                                     <Grid>
