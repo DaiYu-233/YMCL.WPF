@@ -1,6 +1,5 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:YMCL.Styles">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     
     <!-- Start: Button | Minimize | Maximize | Close -->
     <FontFamily x:Key="IconFont">
@@ -175,7 +174,7 @@
                             <Setter TargetName="Icon" Property="Fill" Value="{DynamicResource PrimaryBlueColor}"/>
                             <Setter TargetName="Indicator" Property="Fill" Value="{DynamicResource PrimaryBlueColor}"/>
                             <Setter TargetName="Indicator" Property="Height" Value="20"/>
-                            <Setter TargetName="btnSelected" Property="Background" Value="{DynamicResource SecundaryGrayColor}"/>
+                            <Setter TargetName="btnSelected" Property="Background" Value="{DynamicResource ThemeNavigationBackground}"/>
                             <Setter TargetName="txtName" Property="Foreground" Value="{DynamicResource PrimaryBlueColor}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>

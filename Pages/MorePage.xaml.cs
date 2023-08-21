@@ -41,9 +41,9 @@ namespace YMCL.Pages
             }
             else if (Music.IsSelected)
             {
-                var _musicplayer = Application.Current.Windows
-            .Cast<WindowX>()
-            .FirstOrDefault(window => window is MusicPlayer) as MusicPlayer;
+            //    var _musicplayer = Application.Current.Windows
+            //.Cast<WindowX>()
+            //.FirstOrDefault(window => window is MusicPlayer) as MusicPlayer;
 
                 Music.IsSelected = false;
                 about.IsSelected = true;
@@ -55,7 +55,7 @@ namespace YMCL.Pages
                     // 用于踢掉其他的在上层的窗口
                     musicPlayer.Topmost = true;
                     musicPlayer.Topmost = false;
-                    Toast.Show(window: _musicplayer, $"主窗口已最小化", ToastPosition.Top);
+                    Toast.Show(Global.form_musicplayer, $"主窗口已最小化", ToastPosition.Top);
                 }
                 else
                 {
@@ -67,7 +67,7 @@ namespace YMCL.Pages
                     // 用于踢掉其他的在上层的窗口
                     musicPlayer.Topmost = true;
                     musicPlayer.Topmost = false;
-                    Toast.Show(window: _musicplayer, $"主窗口已最小化", ToastPosition.Top);
+                    Toast.Show(window: Global.form_musicplayer, $"主窗口已最小化", ToastPosition.Top);
                 }
 
             }

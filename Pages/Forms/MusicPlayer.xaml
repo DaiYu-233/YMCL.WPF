@@ -47,7 +47,7 @@
                     </Grid>
                 </Border>
             </Grid>
-            <Border x:Name="PlayListViewGr" SnapsToDevicePixels="False" HorizontalAlignment="Right" Width="280" Margin="0,40,-290,80" Visibility="Visible" Background="#FFF8F8F8" CornerRadius="3,3,3,3">
+            <Border x:Name="PlayListViewGr" SnapsToDevicePixels="False" HorizontalAlignment="Right" Width="280" Margin="0,40,-290,80" Visibility="Visible" Background="{DynamicResource ThemePlayerBorderBackground}" CornerRadius="3,3,3,3">
 
                 <Grid>
                     <Grid VerticalAlignment="Top" Height="40">
@@ -67,7 +67,7 @@
                     </ui:ListView>
                 </Grid>
             </Border>
-            <Border VerticalAlignment="Bottom" Height="65" Background="#FFF8F8F8" CornerRadius="0,0,8,8" BorderBrush="#FFE0E0E0">
+            <Border VerticalAlignment="Bottom" Height="65" Background="{DynamicResource ThemePlayerBorderBackground}" CornerRadius="0,0,8,8" BorderBrush="#FFE0E0E0">
                 <Grid>
 
                     <Grid>
@@ -79,8 +79,8 @@
                             </Border>
 
                             <StackPanel Margin="10,0,0,0" VerticalAlignment="Center">
-                                <TextBlock x:Name="PlayingSongName" Text="" FontSize="13" />
-                                <TextBlock x:Name="PlayingSongAuthors" Text=""
+                                <TextBlock x:Name="PlayingSongName" Text="" FontSize="13" Foreground="{DynamicResource ThemeTextColor}" />
+                                <TextBlock x:Name="PlayingSongAuthors" Text="" Foreground="{DynamicResource ThemeTextColor}"
                                    Opacity="0.6" FontSize="11" />
                             </StackPanel>
                         </StackPanel>
@@ -88,21 +88,21 @@
                         <!-- 播放控制 -->
                         <Slider x:Name="PlaySlider" VerticalAlignment="Top" Margin="0,-17,0,0" Value="-15" Maximum="0" PreviewMouseLeftButtonUp="PlaySlider_PreviewMouseLeftButtonUp" PreviewMouseLeftButtonDown="PlaySlider_PreviewMouseLeftButtonDown"/>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,30,0"/>
-                        <ui:FontIcon Glyph="&#xE7BC;" HorizontalAlignment="Right" Margin="0,0,25,0" VerticalAlignment="Center" FontSize="19" MouseDown="FontIcon_MouseDown" Cursor="Hand" />
-                        <ui:FontIcon Glyph="&#xF2B7;" HorizontalAlignment="Right" Margin="0,0,60,0" VerticalAlignment="Center" FontSize="19" Cursor="Hand" />
-                        <ui:FontIcon x:Name="DownloadIcon" Glyph="&#xE896;" HorizontalAlignment="Right" Margin="0,0,95,0" VerticalAlignment="Center" FontSize="19" Cursor="Hand" MouseDown="DownloadIcon_MouseDown" />
-                        <TextBlock x:Name="TimeText" Text="00:00/00:00" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,135,0" MouseDown="TextBlock_MouseDown"/>
+                        <ui:FontIcon Glyph="&#xE7BC;" HorizontalAlignment="Right" Margin="0,0,25,0" VerticalAlignment="Center" FontSize="19" MouseDown="FontIcon_MouseDown" Cursor="Hand" Foreground="{DynamicResource ThemeTextColor}" />
+                        <ui:FontIcon Glyph="&#xF2B7;" HorizontalAlignment="Right" Margin="0,0,60,0" VerticalAlignment="Center" FontSize="19" Foreground="{DynamicResource ThemeTextColor}"  Cursor="Hand" />
+                        <ui:FontIcon x:Name="DownloadIcon" Glyph="&#xE896;" HorizontalAlignment="Right" Margin="0,0,95,0" VerticalAlignment="Center" Foreground="{DynamicResource ThemeTextColor}" FontSize="19" Cursor="Hand" MouseDown="DownloadIcon_MouseDown" />
+                        <TextBlock x:Name="TimeText" Text="00:00/00:00" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,135,0" Foreground="{DynamicResource ThemeTextColor}" MouseDown="TextBlock_MouseDown"/>
                         <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Border Background="#FF16E9B8" HorizontalAlignment="Center" VerticalAlignment="Center" Width="48" Height="48" CornerRadius="9999999,9999999,9999999,9999999" Cursor="Hand" MouseDown="Border_MouseDown">
                                 <Grid>
-                                    <ui:FontIcon x:Name="PauseIcon" Glyph="&#xF5B0;" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2,0,0,0" FontSize="27" />
-                                    <ui:FontIcon x:Name="PlayIcon" Glyph="&#xF8AE;" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="27" Visibility="Hidden" />
+                                    <ui:FontIcon x:Name="PauseIcon" Glyph="&#xF5B0;" HorizontalAlignment="Center" Foreground="{DynamicResource ThemeTextColor}"  VerticalAlignment="Center" Margin="2,0,0,0" FontSize="27" />
+                                    <ui:FontIcon x:Name="PlayIcon" Glyph="&#xF8AE;" HorizontalAlignment="Center" Foreground="{DynamicResource ThemeTextColor}" VerticalAlignment="Center" FontSize="27" Visibility="Hidden" />
                                 </Grid>
                             </Border>
-                            <ui:FontIcon x:Name="LoopIcon" Glyph="&#xF5E7;" Margin="0,0,190,0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="17" Cursor="Hand" PreviewMouseLeftButtonDown="LoopIcon_PreviewMouseLeftButtonDown" />
-                            <ui:FontIcon x:Name="Volume" Glyph="&#xE994;" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="190,0,0,0" Cursor="Hand" PreviewMouseLeftButtonDown="Volume_PreviewMouseLeftButtonDown" />
-                            <ui:FontIcon x:Name="NextMusic" Glyph="&#xF8AD;" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="95,0,0,0" Cursor="Hand" PreviewMouseLeftButtonDown="NextMusic_PreviewMouseLeftButtonDown" />
-                            <ui:FontIcon x:Name="BackMusic" Glyph="&#xF8AC;" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,95,0" Cursor="Hand" PreviewMouseLeftButtonDown="BackMusic_PreviewMouseLeftButtonDown" />
+                            <ui:FontIcon x:Name="LoopIcon" Foreground="{DynamicResource ThemeTextColor}" Glyph="&#xF5E7;" Margin="0,0,190,0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="17" Cursor="Hand" PreviewMouseLeftButtonDown="LoopIcon_PreviewMouseLeftButtonDown" />
+                            <ui:FontIcon x:Name="Volume" Foreground="{DynamicResource ThemeTextColor}" Glyph="&#xE994;" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="190,0,0,0" Cursor="Hand" PreviewMouseLeftButtonDown="Volume_PreviewMouseLeftButtonDown" />
+                            <ui:FontIcon x:Name="NextMusic" Foreground="{DynamicResource ThemeTextColor}" Glyph="&#xF8AD;" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="95,0,0,0" Cursor="Hand" PreviewMouseLeftButtonDown="NextMusic_PreviewMouseLeftButtonDown" />
+                            <ui:FontIcon x:Name="BackMusic" Foreground="{DynamicResource ThemeTextColor}" Glyph="&#xF8AC;" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,95,0" Cursor="Hand" PreviewMouseLeftButtonDown="BackMusic_PreviewMouseLeftButtonDown" />
                             <Slider x:Name="VolumeSlider" HorizontalAlignment="Center" Maximum="1" LargeChange="0.1" ValueChanged="VolumeSlider_ValueChanged" PreviewMouseLeftButtonUp="VolumeSlider_PreviewMouseLeftButtonUp" Width="105" VerticalAlignment="Center" Margin="350,70,0,0" Value="0.5"/>
 
 

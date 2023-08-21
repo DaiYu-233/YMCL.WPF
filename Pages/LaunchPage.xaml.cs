@@ -92,7 +92,7 @@ namespace YMCL.Pages
 
             if (VerListView.SelectedIndex >= 0)
             {
-                LaunchGame.IsEnabled = false;
+                //LaunchGame.IsEnabled = false;
                 if (File.ReadAllText("./YMCL/Temp/LoginType.log") == "离线登录")
                 {
                 }
@@ -103,7 +103,7 @@ namespace YMCL.Pages
             else
             {
                 //MessageBoxX.Show("请选择游戏核心");
-                Toast.Show("请选择游戏核心", ToastPosition.Top);
+                Toast.Show(Global.form_main,"请选择游戏核心", ToastPosition.Top);
             }
 
         }
@@ -207,7 +207,7 @@ namespace YMCL.Pages
         private void hitokoto_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
             Clipboard.SetText(hitokoto.Text);
-            Toast.Show("已复制到剪切板", ToastPosition.Top);
+            Toast.Show(Global.form_main,"已复制到剪切板", ToastPosition.Top);
         }
     }
 }

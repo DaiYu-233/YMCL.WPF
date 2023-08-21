@@ -4,11 +4,12 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:YMCL.Pages.SettingPages"
-      mc:Ignorable="d" 
+      mc:Ignorable="d"  xmlns:pu="https://opensource.panuon.com/wpf-ui"
 
       Title="Account" Loaded="Page_Loaded">
     <Border Background="{DynamicResource ThemeBackground}" CornerRadius="0,0,8,0">
         <Grid  >
+      
             <Button x:Name="AddAcount" Content="添加新账户" Height="29" Margin="10,10,0,0" VerticalAlignment="Top" Width="161" FontFamily="MiSans Medium" Click="AddAcount_Click"/>
             <Button x:Name="Del" Content="删除此账户" Height="29" Margin="176,10,0,0" VerticalAlignment="Top" Width="134" FontFamily="MiSans Medium" IsEnabled="False" Click="Button_Click_3" />
 
@@ -28,39 +29,34 @@
                     </ui:ListView>
                 </Grid>
             </Border>
-            <Border x:Name="addacbro" Background="{DynamicResource ThemeContentContentBorderBackground}" CornerRadius="3,3,3,3" HorizontalAlignment="Center" Width="396" Height="108" VerticalAlignment="Center" Visibility="Hidden">
-                <Grid>
-                    <Grid VerticalAlignment="Top" Height="25">
-                        <Button Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Tag="IsCloseButton" HorizontalAlignment="Right" Click="btnClose_Click" VerticalAlignment="Center"/>
-                        <TextBlock FontFamily="MiSans Medium" Text="添加新账户" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0" Foreground="{DynamicResource ThemeTextColor}"/>
-                    </Grid>
-                    <Grid Margin="0,25,0,0">
-                        <ComboBox x:Name="LoginTypeComboBox" Margin="18,10,0,0" Width="324" SelectionChanged="ComboBox_SelectionChanged" FontFamily="MiSans Medium" Height="26" SelectedIndex="0" FontSize="12">
-                            <ComboBoxItem Content="离线登录"/>
-                            <ComboBoxItem Content="微软登录"/>
-                            <ComboBoxItem Content="Mojang迁移"/>
-                        </ComboBox>
-                        <Button VerticalAlignment="Bottom" Height="29" Width="74" FontFamily="MiSans Medium" Content="下一步" IsEnabled="True" Click="Button_Click" HorizontalAlignment="Right" Margin="0,0,5,5" />
 
-                    </Grid>
-                </Grid>
-            </Border>
-            <Border x:Name="lxdl" Background="{DynamicResource ThemeContentContentBorderBackground}" CornerRadius="3,3,3,3" HorizontalAlignment="Center" Width="492" VerticalAlignment="Center" Height="130" Visibility="Hidden">
-                <Grid>
-                    <Grid VerticalAlignment="Top" Height="25">
-                        <Button Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Tag="IsCloseButton" HorizontalAlignment="Right" Click="btnClose_Click" VerticalAlignment="Center"/>
-                        <TextBlock FontFamily="MiSans Medium" Text="离线登录" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0" Foreground="{DynamicResource ThemeTextColor}"/>
-                    </Grid>
-                    <Grid Margin="0,25,0,0">
-                        <TextBox x:Name="yhm2" Width="444" HorizontalAlignment="Center" FontFamily="MiSans Medium" FontSize="16" VerticalAlignment="Top" Height="26" Margin="0,23,0,0"  />
-                        <Button VerticalAlignment="Bottom" Height="29" Width="74" FontFamily="MiSans Medium" Content="确定" IsEnabled="True" Click="Button_Click_1" HorizontalAlignment="Right" Margin="0,0,5,5" />
-                    </Grid>
-                </Grid>
-            </Border>
+            
             
             <TextBlock TextWrapping="Wrap" Text="当前登录方式：" Margin="318,20,0,0" FontFamily="MiSans Medium" Foreground="DimGray" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             <TextBlock x:Name="NowLoginType" TextWrapping="Wrap" Text="1" Margin="398,20,0,0" FontFamily="MiSans Medium" Foreground="DimGray" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
+
+            <ui:ContentDialog x:Name="loginTypeSelectionDialog">
+                <Grid>
+                    <ComboBox x:Name="LoginTypeComboBox" Width="324" SelectionChanged="ComboBox_SelectionChanged" FontFamily="MiSans Medium" SelectedIndex="0" FontSize="12">
+                        <ComboBoxItem Content="离线登录"/>
+                        <ComboBoxItem Content="微软登录"/>
+                        <ComboBoxItem Content="Mojang迁移"/>
+                    </ComboBox>
+                    <Button VerticalAlignment="Bottom" Height="29" Width="95" FontFamily="MiSans Medium"  Style="{StaticResource AccentButtonStyle}" Content="下一步" IsEnabled="True" Click="Button_Click" HorizontalAlignment="Right" Margin="0,0,5,5" />
+                    <Button x:Name="CancelAddAccountBtn" VerticalAlignment="Bottom" Height="29" Width="80" FontFamily="MiSans Medium" Content="取消" IsEnabled="True" Click="CancelAddAccountBtn_Click" HorizontalAlignment="Right" Margin="0,0,105,5" />
+
+                </Grid>
+            </ui:ContentDialog>
+            <ui:ContentDialog x:Name="loginOfflineDialog">
+                <Grid>
+                    <TextBox x:Name="offlineUserNameTextBox" FontFamily="MiSans Medium" FontSize="16" VerticalAlignment="Top" Width="390"  />
+
+                    <Button x:Name="offlineAccountAddBtn" VerticalAlignment="Bottom" Height="29" Width="95" FontFamily="MiSans Medium"  Style="{StaticResource AccentButtonStyle}" Content="确定" IsEnabled="True" Click="offlineAccountAddBtn_Click" HorizontalAlignment="Right" Margin="0,0,5,5" />
+                    <Button VerticalAlignment="Bottom" Height="29" Width="80" FontFamily="MiSans Medium" Content="取消" IsEnabled="True" Click="CancelAddAccountBtn_Click" HorizontalAlignment="Right" Margin="0,0,105,5" />
+
+                </Grid>
+            </ui:ContentDialog>
         </Grid>
     </Border>
 </Page>

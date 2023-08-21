@@ -7,8 +7,10 @@
     <SolidColorBrush x:Key="ThemeContentBorderBackground" Color="#ededed"/>
     <SolidColorBrush x:Key="ThemeContentContentBorderBackground" Color="#d6d6d6"/>
     <SolidColorBrush x:Key="ThemeTextColor" Color="#000000"/>
+    <SolidColorBrush x:Key="ThemePlayerBorderBackground" Color="#FFF8F8F8"/>
 
-    
+
+
     <!-- Background Colors -->
     <SolidColorBrush x:Key="PrimaryBackgroundColor" Color="#f3f3f3"/>
     <SolidColorBrush x:Key="SecundaryBackgroundColor" Color="#f9f9f9"/>

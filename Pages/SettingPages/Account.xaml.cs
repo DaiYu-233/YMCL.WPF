@@ -6,9 +6,11 @@ using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Xml;
+using ModernWpf.Controls;
 using Newtonsoft.Json;
 using Panuon.WPF.UI;
 using YMCL.Class;
+using Page = System.Windows.Controls.Page;
 
 namespace YMCL.Pages.SettingPages
 {
@@ -57,16 +59,9 @@ namespace YMCL.Pages.SettingPages
             var V = MessageBoxX.Show("确定开始验证账户", "验证", MessageBoxButton.OKCancel);
             if (V == MessageBoxResult.OK)
             {
-                addacbro.Visibility = Visibility.Hidden;
-
-                lxdl.Visibility = Visibility.Hidden;
             }
             else
             {
-                addacbro.Visibility = Visibility.Hidden;
-
-                lxdl.Visibility = Visibility.Hidden;
-                return;
             }
 
             try
@@ -86,7 +81,7 @@ namespace YMCL.Pages.SettingPages
             }
             catch (Exception ex)
             {
-                Panuon.WPF.UI.Toast.Show("Access登录失败：" + ex, ToastPosition.Top);
+                Panuon.WPF.UI.Toast.Show(Global.form_main,"Access登录失败：" + ex, ToastPosition.Top);
             }
 
             try
@@ -105,7 +100,7 @@ namespace YMCL.Pages.SettingPages
             }
             catch (Exception ex)
             {
-                Panuon.WPF.UI.Toast.Show("Refresh登录失败：" + ex, ToastPosition.Top);
+                Panuon.WPF.UI.Toast.Show(Global.form_main,"Refresh登录失败：" + ex, ToastPosition.Top);
             }
 
             //Debug.WriteLine("Link:{0} - Code:{1}", deviceInfo.VerificationUrl, deviceInfo.UserCode);
@@ -149,13 +144,9 @@ namespace YMCL.Pages.SettingPages
         }
         private void AddAcount_Click(object sender, RoutedEventArgs e)
         {
-            addacbro.Visibility = Visibility.Visible;
+            loginTypeSelectionDialog.ShowAsync();
         }
-        private void btnClose_Click(object sender, RoutedEventArgs e)
-        {
-            addacbro.Visibility = Visibility.Hidden;
-            lxdl.Visibility = Visibility.Hidden;
-        }
+
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
         }
@@ -164,42 +155,28 @@ namespace YMCL.Pages.SettingPages
         {
             if (LoginTypeComboBox.SelectedItem.ToString() == "System.Windows.Controls.ComboBoxItem: 离线登录")
             {
-                lxdl.Visibility = Visibility.Visible;
-                addacbro.Visibility = Visibility.Hidden;
+                offlineUserNameTextBox.Text = string.Empty;
+                loginTypeSelectionDialog.Hide();
+                loginOfflineDialog.ShowAsync();
             }
             else if (LoginTypeComboBox.SelectedItem.ToString() == "System.Windows.Controls.ComboBoxItem: Mojang迁移")
             {
+                loginTypeSelectionDialog.Hide();
                 Process.Start("explorer.exe", "https://www.minecraft.net/zh-hans/account-security");
-                addacbro.Visibility = Visibility.Hidden;
             }
             else if (LoginTypeComboBox.SelectedItem.ToString() == "System.Windows.Controls.ComboBoxItem: 微软登录")
             {
+                loginTypeSelectionDialog.Hide();
                 MicrosoftLogin();
             }
             else
             {
-                Panuon.WPF.UI.Toast.Show("请选择登录方式", ToastPosition.Top);
+                Panuon.WPF.UI.Toast.Show(Global.form_main,"请选择登录方式", ToastPosition.Top);
                 //MessageBoxX.Show("请选择登录方式");
             }
+          
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            if (yhm2.Text != string.Empty)
-            {
-                accountInfos.Add(new AccountInfo() { AccountType = "离线登录", Name = yhm2.Text, AddTime = DateTime.Now.ToString() });
-                WriteFile();
-                addacbro.Visibility = Visibility.Hidden;
-                lxdl.Visibility = Visibility.Hidden;
-                datagrid();
-            }
-            else
-            {
-                Panuon.WPF.UI.Toast.Show("用户名不可为空", ToastPosition.Top);
-                //MessageBoxX.Show("用户名为空！");
-            }
-
-        }
         private void WriteFile()
         {
             string str = JsonConvert.SerializeObject(accountInfos, Newtonsoft.Json.Formatting.Indented);
@@ -255,7 +232,7 @@ namespace YMCL.Pages.SettingPages
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            //Toast.Show("启动逻辑尚未完善,建议使用离线模式", ToastPosition.Top);
+            //Toast.Show(Global.form_main,"启动逻辑尚未完善,建议使用离线模式", ToastPosition.Top);
         }
 
         private void AccountsListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -285,6 +262,29 @@ namespace YMCL.Pages.SettingPages
                 }
                 AccountsListView.SelectedItem = DataGr.Items[0];
             }
+        }
+
+        private void CancelAddAccountBtn_Click(object sender, RoutedEventArgs e)
+        {
+            loginTypeSelectionDialog.Hide();
+            loginOfflineDialog.Hide();
+        }
+
+        private void offlineAccountAddBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (offlineUserNameTextBox.Text != string.Empty)
+            {
+                accountInfos.Add(new AccountInfo() { AccountType = "离线登录", Name = offlineUserNameTextBox.Text, AddTime = DateTime.Now.ToString() });
+                WriteFile();
+                datagrid();
+                loginOfflineDialog.Hide();
+            }
+            else
+            {
+                Panuon.WPF.UI.Toast.Show(Global.form_main, "用户名不可为空", ToastPosition.Top);
+                //MessageBoxX.Show("用户名为空！");
+            }
+            
         }
     }
 }

@@ -43,35 +43,43 @@ namespace YMCL.Pages.SettingPages
             var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json"));
             #region 初始化
 
-                if (obj.DisplayInformation == "False")
-                {
-                    displayinf.IsOn = false;
-                }
-                else
-                {
-                    displayinf.IsOn = true;
-                }
+            if (obj.DisplayInformation == "False")
+            {
+                displayinf.IsOn = false;
+            }
+            else
+            {
+                displayinf.IsOn = true;
+            }
 
-            
+
 
             if (obj.Theme == "Dark")
-                {
-                    DarkThemeSwitch.IsOn = true;
-                    ThemeManager.Current.ApplicationTheme = ApplicationTheme.Dark;
-                    Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/YMCL;component/Styles/Dark.xaml") });
-                }
-                else
-                {
-                    DarkThemeSwitch.IsOn = false;
-                    Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/YMCL;component/Styles/Light.xaml") });
-                    ThemeManager.Current.ApplicationTheme = ApplicationTheme.Light;
-                }
-            
+            {
+                DarkThemeSwitch.IsOn = true;
+                ThemeManager.Current.ApplicationTheme = ApplicationTheme.Dark;
+                Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/YMCL;component/Styles/Dark.xaml") });
+            }
+            else
+            {
+                DarkThemeSwitch.IsOn = false;
+                Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/YMCL;component/Styles/Light.xaml") });
+                ThemeManager.Current.ApplicationTheme = ApplicationTheme.Light;
+
+            }
+
+            ThemeManager.Current.AccentColor = obj.ThemeColor;
+            ColorPicker.SelectedColor = obj.ThemeColor;
             #endregion
+
+
         }
 
 
-
+        void ChangeThemeColor(Color target)
+        {
+            
+        }
 
 
 
@@ -88,17 +96,23 @@ namespace YMCL.Pages.SettingPages
                 Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/YMCL;component/Styles/Light.xaml") });
                 ThemeManager.Current.ApplicationTheme = ApplicationTheme.Light;
             }
+            ThemeManager.Current.AccentColor = ColorPicker.SelectedColor;
+            JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json"))
+                .ThemeColor = ColorPicker.SelectedColor;
 
             if (displayinf.IsOn == true)
             {
                 var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json"));
                 obj.DisplayInformation = "True";
+                obj.ThemeColor = ColorPicker.SelectedColor;
                 File.WriteAllText(@"./YMCL/YMCL.Setting.json", JsonConvert.SerializeObject(obj, Newtonsoft.Json.Formatting.Indented));
+                
             }
             else
             {
                 var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json"));
                 obj.DisplayInformation = "False";
+                obj.ThemeColor = ColorPicker.SelectedColor;
                 File.WriteAllText(@"./YMCL/YMCL.Setting.json", JsonConvert.SerializeObject(obj, Newtonsoft.Json.Formatting.Indented));
             }
             if (DarkThemeSwitch.IsOn == true)
@@ -113,10 +127,10 @@ namespace YMCL.Pages.SettingPages
                 obj.Theme = "Light";
                 File.WriteAllText(@"./YMCL/YMCL.Setting.json", JsonConvert.SerializeObject(obj, Newtonsoft.Json.Formatting.Indented));
             }
-            Panuon.WPF.UI.Toast.Show("已保存", ToastPosition.Top);
-            //Toast.Show("成功应用设置", new ToastOptions { Icon = ToastIcons.Information, Time = 1500, Location = ToastLocation.OwnerTopCenter });
+            Panuon.WPF.UI.Toast.Show(Global.form_main, "已保存", ToastPosition.Top);
+            //Toast.Show(Global.form_main,"成功应用设置", new ToastOptions { Icon = ToastIcons.Information, Time = 1500, Location = ToastLocation.OwnerTopCenter });
 
-        } 
+        }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -127,7 +141,7 @@ namespace YMCL.Pages.SettingPages
                 return;
             }
             try { Registry.ClassesRoot.DeleteSubKey("YMCL"); } catch { }
-            try 
+            try
             {
                 RegistryKey keyRoot = Registry.ClassesRoot.CreateSubKey("YMCL", true);
                 keyRoot.SetValue("", "Yu Minecraft Launcher");
@@ -139,12 +153,12 @@ namespace YMCL.Pages.SettingPages
             }
             catch (Exception rf)
             {
-                MessageBoxX.Show($"写入注册表失败\n\n错误信息: {rf}","Yu Minecraft Launcher");
+                MessageBoxX.Show($"写入注册表失败\n\n错误信息: {rf}", "Yu Minecraft Launcher");
                 return;
             }
             finally
             {
-                Panuon.WPF.UI.Toast.Show("写入成功！", ToastPosition.Top);
+                Panuon.WPF.UI.Toast.Show(Global.form_main, "写入成功！", ToastPosition.Top);
                 //MessageBoxX.Show($"写入成功！","Yu Minecraft Launcher");
             }
         }

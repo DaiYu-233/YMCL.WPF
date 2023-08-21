@@ -9,10 +9,10 @@
       Title="LaunchPage" MouseEnter="Page_MouseEnter">
     <Border Background="{DynamicResource ThemeBackground}" CornerRadius="0,0,8,0">
         <Grid  >
+
             <TextBlock x:Name="hitokoto" VerticalAlignment="Top" Margin="10,5,10,0" Text="" FontSize="13" Foreground="{DynamicResource ThemeTextColor}" TextAlignment="Center" MouseLeftButtonUp="hitokoto_MouseLeftButtonUp" MouseRightButtonUp="hitokoto_MouseRightButtonUp" FontFamily="MiSans Medium" />
-            <Border Height="45" VerticalAlignment="Bottom" Background="{DynamicResource ThemeContentBorderBackground}" CornerRadius="3,3,3,3" Margin="10,0,10,10">
+            <Border Height="45" VerticalAlignment="Bottom" Background="{DynamicResource ThemeContentBorderBackground}" CornerRadius="3,3,3,3" Margin="10,0,188,10" Visibility="Hidden">
                 <Grid>
-                    <Button x:Name="LaunchGame" Content="启动" Width="117" FontFamily="MiSans Medium" VerticalAlignment="Stretch" Margin="0,7,7,7" HorizontalAlignment="Right" Click="LaunchGame_Click" FontSize="15" />
 
                     <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Width="84" Margin="6,4,0,0" Text="当前启动核心" FontFamily="MiSans Medium" Foreground="{DynamicResource ThemeTextColor}"/>
                     <TextBlock x:Name="GameVerTextBlock" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="7,18,0,0" Text="None" FontFamily="MiSans Medium" Height="26" FontSize="18" Foreground="#FF00D6FF" MouseDown="GameVerTextBlock_MouseDown"/>
@@ -27,6 +27,21 @@
                     <ListView DisplayMemberPath="Id" SelectedValuePath="Id" x:Name="VerListView" d:ItemsSource="{d:SampleData ItemCount=5}" FontFamily="MiSans Medium" Margin="0,30,0,0" SelectionChanged="VerListView_SelectionChanged" />
                 </Grid>
             </Border>
+            <ui:SplitButton x:Name="myColorButton" Height="45" Width="206" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,30,30">
+                <Grid>
+                    <TextBlock Text="启动游戏" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-12,0,0" FontSize="14"/>
+                    <TextBlock Text="&lt;游戏核心&gt;" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,17.5,0,0" FontSize="11"/>
+                </Grid>
+                <ui:SplitButton.Flyout>
+                    <ui:MenuFlyout Placement="Bottom">
+                        <ui:MenuFlyout.Items>
+
+                            <MenuItem Header="下载游戏"/>
+                        </ui:MenuFlyout.Items>
+
+                    </ui:MenuFlyout>
+                </ui:SplitButton.Flyout>
+            </ui:SplitButton>
         </Grid>
     </Border>
 </Page>

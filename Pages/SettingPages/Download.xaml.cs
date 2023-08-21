@@ -70,17 +70,15 @@ namespace YMCL.Pages.SettingPages
             
         }
 
-        private void SilderBox_MouseLeave(object sender, MouseEventArgs e)
+        private void SilderBox_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             if (SilderBox.Value >= 128)
             {
-                Panuon.WPF.UI.Toast.Show("下载线程过大，可能会导致卡顿", ToastPosition.Top);
+                Panuon.WPF.UI.Toast.Show(Global.form_main, "下载线程过大，可能会导致卡顿", ToastPosition.Top);
             }
             var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json"));
             obj.MaxDownloadThreads = SilderInfo.Text;
             File.WriteAllText(@"./YMCL/YMCL.Setting.json", JsonConvert.SerializeObject(obj, Newtonsoft.Json.Formatting.Indented));
         }
-
-
     }
 }

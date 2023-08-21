@@ -15,6 +15,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Resources;
@@ -193,12 +194,22 @@ namespace YMCL
         Frame download = new Frame() { Content = new Pages.DownloadPage() };
         Frame more = new Frame() { Content = new Pages.MorePage() };
 
-
+        void Comein()
+        {
+            //var h = MainFrame.Height;
+            //ThicknessAnimation Comein = new ThicknessAnimation()
+            //{
+            //    From = new Thickness(60, 30 + h, -h, 0),
+            //    To = new Thickness(60, 30, 0, 0),
+            //    Duration = TimeSpan.Parse("0:0:1")
+            //};
+            //MainFrame.BeginAnimation(MarginProperty, Comein);
+        }
 
         public MainWindow()
         {
             InitializeComponent();
-            string path = System.AppDomain.CurrentDomain.BaseDirectory+"YMCL.exe";
+            string path = System.AppDomain.CurrentDomain.BaseDirectory + "YMCL.exe";
             if (System.IO.Directory.Exists("./YMCL")) { }
             else
             {
@@ -206,7 +217,8 @@ namespace YMCL
                 directoryInfo.Create();
             }
 
-            if (System.IO.Directory.Exists("./YMCL")) { } else
+            if (System.IO.Directory.Exists("./YMCL")) { }
+            else
             {
                 System.IO.DirectoryInfo directoryInfo = new System.IO.DirectoryInfo("./YMCL");
                 directoryInfo.Create();
@@ -238,8 +250,9 @@ namespace YMCL
         {
             if (ToLaunch.IsSelected)
             {
-                MainFrame.Content=launch;
-            }else if(ToSetting.IsSelected)
+                MainFrame.Content = launch;
+            }
+            else if (ToSetting.IsSelected)
             {
                 MainFrame.Content = setting;
             }
@@ -257,22 +270,23 @@ namespace YMCL
         private void rdLaunch_Checked(object sender, RoutedEventArgs e)
         {
             MainFrame.Content = launch;
+            Comein();
             launch.UpdateLogin();
         }
 
         private void rdSetting_Checked(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = setting;
+            MainFrame.Content = setting; Comein();
         }
 
         private void rdDownload_Checked(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = download;
+            MainFrame.Content = download; Comein();
         }
 
         private void rdMore_Checked(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = more;
+            MainFrame.Content = more; Comein();
         }
 
         private void WindowX_Loaded(object sender, RoutedEventArgs e)
@@ -292,7 +306,7 @@ namespace YMCL
 
         private void WindowX_MouseMove(object sender, MouseEventArgs e)
         {
-            if(w == Width && h == Height)
+            if (w == Width && h == Height)
             {
                 return;
             }

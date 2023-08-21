@@ -9,6 +9,10 @@
       Title="Main" >
     <Border Background="{DynamicResource ThemeBackground}" CornerRadius="0,0,8,0">
         <Grid>
+            <ScrollViewer VerticalScrollBarVisibility="Auto" >
+                
+            
+        <Grid Height="112" VerticalAlignment="Top">
 
 
             <!--Java-->
@@ -27,9 +31,11 @@
                     <TextBlock FontFamily="MiSans Medium" Text="最大下载线程" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="18,0,0,0" FontSize="15" Foreground="{DynamicResource ThemeTextColor}"/>
                     
                     <TextBlock x:Name="SilderInfo" VerticalAlignment="Center" HorizontalAlignment="Right" RenderTransformOrigin="0.5,0.5" Width="61" Height="16" Text="256G" FontFamily="MiSans Medium" TextAlignment="Center" Foreground="{DynamicResource ThemeTextColor}"/>
-                    <Slider x:Name="SilderBox" VerticalAlignment="Center" SmallChange="1" Minimum="1" Value="64" Maximum="512" ValueChanged="SilderBox_ValueChanged" MouseLeave="SilderBox_MouseLeave" Margin="200,0,60,0"/>
+                    <Slider x:Name="SilderBox" VerticalAlignment="Center" SmallChange="1" Minimum="1" Value="64" Maximum="512" ValueChanged="SilderBox_ValueChanged" Margin="200,0,60,0" PreviewMouseLeftButtonUp="SilderBox_PreviewMouseLeftButtonUp"/>
                 </Grid>
             </Border>
+                </Grid>
+            </ScrollViewer>
         </Grid>
     </Border>
 

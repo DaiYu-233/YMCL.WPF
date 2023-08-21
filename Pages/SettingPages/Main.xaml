@@ -10,6 +10,10 @@
       Title="Main" MouseDown="Page_MouseDown">
     <Border Background="{DynamicResource ThemeBackground}" CornerRadius="0,0,8,0">
         <Grid>
+            <Button x:Name="SaveSettingBtn" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-35,5,0" Height="30" Width="130" FontFamily="MiSans Medium" Content="应用更改" Click="SaveSettingBtn_Click"/>
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto" >
+            <Grid Height="217" VerticalAlignment="Top">
 
 
             <!--Java-->
@@ -52,7 +56,6 @@
                     <Slider x:Name="SilderBox" Margin="200,0,60,0" VerticalAlignment="Center" SmallChange="1" Minimum="1" Value="1024" Maximum="2048" ValueChanged="Silder_ValueChanged"/>
                 </Grid>
             </Border>
-            <Button x:Name="SaveSettingBtn" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-35,5,0" Height="30" Width="130" FontFamily="MiSans Medium" Content="应用更改" Click="SaveSettingBtn_Click"/>
             <Border Height="40" Margin="10,167,10,0" VerticalAlignment="Top" Background="{DynamicResource ThemeContentBorderBackground}" CornerRadius="3,3,3,3">
                 <Grid>
                     <TextBlock FontFamily="MiSans Medium" Text="版本隔离" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="18,0,0,0" FontSize="15" Foreground="{DynamicResource ThemeTextColor}"/>
@@ -62,11 +65,13 @@
             <Border Height="45" Margin="10,10,10,0" VerticalAlignment="Top" Background="{DynamicResource ThemeContentBorderBackground}" CornerRadius="3,3,3,3">
                 <Grid>
                     <TextBlock FontFamily="MiSans Medium" Text="Minecraft文件夹" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="18,0,0,0" FontSize="15" Foreground="{DynamicResource ThemeTextColor}"/>
-                    <ComboBox x:Name="MinecraftPathText"  MinWidth="400" Margin="150,0,180,0" VerticalAlignment="Center" Height="32" IsReadOnly="True" HorizontalAlignment="Stretch" FontFamily="MiSans Medium" />
+                    <ComboBox x:Name="MinecraftPathText" Margin="150,0,180,0" VerticalAlignment="Center" Height="32" IsReadOnly="True" HorizontalAlignment="Stretch" FontFamily="MiSans Medium" />
                     <Button x:Name="DelMinecraftFolder" Content="删除" FontFamily="MiSans Medium" Width="80" Height="32"  Margin="0,0,95,0" HorizontalAlignment="Right" Click="DelMinecraftFolder_Click"/>
                     <Button x:Name="AddMinecraftFolder" Content="添加" FontFamily="MiSans Medium" Width="80" Height="32" Click="OpenMinecraftFolder_Click" Margin="0,0,10,0" HorizontalAlignment="Right"/>
                 </Grid>
             </Border>
+        </Grid>
+            </ScrollViewer>
         </Grid>
     </Border>
 

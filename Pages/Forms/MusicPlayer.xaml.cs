@@ -519,12 +519,12 @@ namespace YMCL.Pages.Forms
             SongsListView.Items.Clear();
             if (string.IsNullOrWhiteSpace(SearchBox.Text))
             {
-                Panuon.WPF.UI.Toast.Show($"搜索内容不可为空", ToastPosition.Top);
+                Panuon.WPF.UI.Toast.Show(Global.form_musicplayer,$"搜索内容不可为空", ToastPosition.Top);
                 return;
             }
             NextPageBtn.IsEnabled = false;
             BackPageBtn.IsEnabled = false;
-            Panuon.WPF.UI.Toast.Show($"搜索中...", ToastPosition.Top);
+            Panuon.WPF.UI.Toast.Show(Global.form_musicplayer,$"搜索中...", ToastPosition.Top);
             var SearchText = SearchBox.Text;
             var offset = (Page - 1) * 30;
             await Task.Run(async () =>
@@ -539,7 +539,7 @@ namespace YMCL.Pages.Forms
                     }
                     catch (Exception ex)
                     {
-                        Dispatcher.BeginInvoke(() => { Panuon.WPF.UI.Toast.Show("请求失败：" + ex, ToastPosition.Top); });
+                        Dispatcher.BeginInvoke(() => { Panuon.WPF.UI.Toast.Show(Global.form_musicplayer,"请求失败：" + ex, ToastPosition.Top); });
                         return;
                     }
 
@@ -552,7 +552,7 @@ namespace YMCL.Pages.Forms
                         }
                         catch (Exception ex)
                         {
-                            Dispatcher.BeginInvoke(() => { Panuon.WPF.UI.Toast.Show("请求失败：" + ex, ToastPosition.Top); });
+                            Dispatcher.BeginInvoke(() => { Panuon.WPF.UI.Toast.Show(Global.form_musicplayer,"请求失败：" + ex, ToastPosition.Top); });
                             return;
                         }
 
@@ -567,12 +567,12 @@ namespace YMCL.Pages.Forms
 
                             if (root.code != 200)
                             {
-                                Dispatcher.BeginInvoke(() => { Panuon.WPF.UI.Toast.Show("请求错误", ToastPosition.Top); });
+                                Dispatcher.BeginInvoke(() => { Panuon.WPF.UI.Toast.Show(Global.form_musicplayer,"请求错误", ToastPosition.Top); });
                                 return;
                             }
                             if (root.result.songCount == 0)
                             {
-                                Dispatcher.BeginInvoke(() => { Panuon.WPF.UI.Toast.Show("搜索无结果", ToastPosition.Top); });
+                                Dispatcher.BeginInvoke(() => { Panuon.WPF.UI.Toast.Show(Global.form_musicplayer,"搜索无结果", ToastPosition.Top); });
                                 return;
                             }
                             foreach (var song in root.result.songs)
@@ -613,14 +613,14 @@ namespace YMCL.Pages.Forms
                         }
                         catch (Exception ex)
                         {
-                            Dispatcher.BeginInvoke(() => { Panuon.WPF.UI.Toast.Show("解析错误：" + ex, ToastPosition.Top); });
+                            Dispatcher.BeginInvoke(() => { Panuon.WPF.UI.Toast.Show(Global.form_musicplayer,"解析错误：" + ex, ToastPosition.Top); });
                             return;
                         }
 
                     }
                     else
                     {
-                        Dispatcher.BeginInvoke(() => { Panuon.WPF.UI.Toast.Show("请求失败：" + response.StatusCode, ToastPosition.Top); });
+                        Dispatcher.BeginInvoke(() => { Panuon.WPF.UI.Toast.Show(Global.form_musicplayer,"请求失败：" + response.StatusCode, ToastPosition.Top); });
                     }
                 }
             });
@@ -643,7 +643,7 @@ namespace YMCL.Pages.Forms
             {
                 if (!File.Exists(song.Uri))
                 {
-                    Panuon.WPF.UI.Toast.Show($"源文件不存在，它可能被移动、重命名或删除", ToastPosition.Top);
+                    Panuon.WPF.UI.Toast.Show(Global.form_musicplayer,$"源文件不存在，它可能被移动、重命名或删除", ToastPosition.Top);
                     return;
                 }
                 SongUri = song.Uri;
@@ -657,7 +657,7 @@ namespace YMCL.Pages.Forms
                 IsGettingMusic = true;
                 isPlay = true;
                 var SearchText = song.SongID;
-                Panuon.WPF.UI.Toast.Show($"正在获取音乐...", ToastPosition.Top);
+                Panuon.WPF.UI.Toast.Show(Global.form_musicplayer,$"正在获取音乐...", ToastPosition.Top);
                 await Task.Run(async () =>
                 {
                     string checkurl = $"https://music.api.daiyu.fun/check/music?id={SearchText}";
@@ -671,7 +671,7 @@ namespace YMCL.Pages.Forms
 
                         if (res.success == false)
                         {
-                            Dispatcher.BeginInvoke(() => { Panuon.WPF.UI.Toast.Show("请求失败，网易云音乐返回信息：" + res.message, ToastPosition.Top); });
+                            Dispatcher.BeginInvoke(() => { Panuon.WPF.UI.Toast.Show(Global.form_musicplayer,"请求失败，网易云音乐返回信息：" + res.message, ToastPosition.Top); });
                             isPlay = false; 
                             IsGettingMusic = false;
                         }
@@ -694,7 +694,7 @@ namespace YMCL.Pages.Forms
                             YMCL.Class.NeteasyCloudMusicUrl.Root root = JsonConvert.DeserializeObject<YMCL.Class.NeteasyCloudMusicUrl.Root>(responseData);
                             if (root.code != 200)
                             {
-                                Dispatcher.BeginInvoke(() => { Panuon.WPF.UI.Toast.Show("请求错误", ToastPosition.Top); });
+                                Dispatcher.BeginInvoke(() => { Panuon.WPF.UI.Toast.Show(Global.form_musicplayer,"请求错误", ToastPosition.Top); });
                                 IsGettingMusic = false;
                                 return;
                             }
@@ -702,7 +702,7 @@ namespace YMCL.Pages.Forms
                         }
                         else
                         {
-                            Dispatcher.BeginInvoke(() => { Panuon.WPF.UI.Toast.Show("请求失败：" + response.StatusCode, ToastPosition.Top); });
+                            Dispatcher.BeginInvoke(() => { Panuon.WPF.UI.Toast.Show(Global.form_musicplayer,"请求失败：" + response.StatusCode, ToastPosition.Top); });
                             IsGettingMusic = false;
                         }
                     }
@@ -766,7 +766,7 @@ namespace YMCL.Pages.Forms
             }
             DisplaySongs song = SongsListView.SelectedItem as DisplaySongs;
             var SearchText = song.SongID;
-            Panuon.WPF.UI.Toast.Show($"正在获取音乐...", ToastPosition.Top);
+            Panuon.WPF.UI.Toast.Show(Global.form_musicplayer,$"正在获取音乐...", ToastPosition.Top);
             await Task.Run(async () =>
             {
                 string checkurl = $"https://music.api.daiyu.fun/check/music?id={SearchText}";
@@ -780,7 +780,7 @@ namespace YMCL.Pages.Forms
 
                     if (res.success == false)
                     {
-                        Dispatcher.BeginInvoke(() => { Panuon.WPF.UI.Toast.Show("请求失败，网易云音乐返回信息：" + res.message, ToastPosition.Top); });
+                        Dispatcher.BeginInvoke(() => { Panuon.WPF.UI.Toast.Show(Global.form_musicplayer,"请求失败，网易云音乐返回信息：" + res.message, ToastPosition.Top); });
                         IsNoPlay = true;
                     }
 
@@ -859,14 +859,14 @@ namespace YMCL.Pages.Forms
             save.ShowDialog();
             if (save.FileName == SaveFileName)
             {
-                Panuon.WPF.UI.Toast.Show("已取消保存", ToastPosition.Top);
+                Panuon.WPF.UI.Toast.Show(Global.form_musicplayer,"已取消保存", ToastPosition.Top);
                 return;
             }
             if (song.Type == "本地")
             {
                 if (!File.Exists(song.Uri))
                 {
-                    Panuon.WPF.UI.Toast.Show("源文件不存在", ToastPosition.Top);
+                    Panuon.WPF.UI.Toast.Show(Global.form_musicplayer,"源文件不存在", ToastPosition.Top);
                     return;
                 }
                 string sourceFile = song.Uri;
@@ -877,14 +877,14 @@ namespace YMCL.Pages.Forms
                 }
                 catch (Exception ex)
                 {
-                    Panuon.WPF.UI.Toast.Show("复制文件失败：" + ex, ToastPosition.Top);
+                    Panuon.WPF.UI.Toast.Show(Global.form_musicplayer,"复制文件失败：" + ex, ToastPosition.Top);
                 }
             }
             else
             {
                 try
                 {
-                    Panuon.WPF.UI.Toast.Show("开始下载", ToastPosition.Top);
+                    Panuon.WPF.UI.Toast.Show(Global.form_musicplayer,"开始下载", ToastPosition.Top);
                     await Task.Run(async () =>
                     {
                         using (var client = new HttpClient())
@@ -896,11 +896,11 @@ namespace YMCL.Pages.Forms
                             }
                         }
                     });
-                    Panuon.WPF.UI.Toast.Show("下载完成", ToastPosition.Top);
+                    Panuon.WPF.UI.Toast.Show(Global.form_musicplayer,"下载完成", ToastPosition.Top);
                 }
                 catch (Exception ex)
                 {
-                    Panuon.WPF.UI.Toast.Show("下载失败：" + ex, ToastPosition.Top);
+                    Panuon.WPF.UI.Toast.Show(Global.form_musicplayer,"下载失败：" + ex, ToastPosition.Top);
                 }
             }
         }
@@ -913,7 +913,7 @@ namespace YMCL.Pages.Forms
 
         private void VolumeSlider_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            Panuon.WPF.UI.Toast.Show(Math.Round(VolumeSlider.Value * 100, 0).ToString() + "%", ToastPosition.Top);
+            Panuon.WPF.UI.Toast.Show(Global.form_musicplayer,Math.Round(VolumeSlider.Value * 100, 0).ToString() + "%", ToastPosition.Top);
             var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json"));
             obj.PlayerVolume = VolumeSlider.Value;
             File.WriteAllText(@"./YMCL/YMCL.Setting.json", JsonConvert.SerializeObject(obj, Newtonsoft.Json.Formatting.Indented));
@@ -978,19 +978,19 @@ namespace YMCL.Pages.Forms
             if (MusicLoop == "RepeatOff")
             {
                 MusicLoop = "RepeatOne";
-                Panuon.WPF.UI.Toast.Show("单曲循环", ToastPosition.Top);
+                Panuon.WPF.UI.Toast.Show(Global.form_musicplayer,"单曲循环", ToastPosition.Top);
                 LoopIcon.Glyph = "\uE8ED";
             }
             else if (MusicLoop == "RepeatOne")
             {
                 MusicLoop = "RepeatAll";
-                Panuon.WPF.UI.Toast.Show("顺序播放", ToastPosition.Top);
+                Panuon.WPF.UI.Toast.Show(Global.form_musicplayer,"顺序播放", ToastPosition.Top);
                 LoopIcon.Glyph = "\uE8EE";
             }
             else if (MusicLoop == "RepeatAll")
             {
                 MusicLoop = "RepeatOff";
-                Panuon.WPF.UI.Toast.Show("不循环", ToastPosition.Top);
+                Panuon.WPF.UI.Toast.Show(Global.form_musicplayer,"不循环", ToastPosition.Top);
                 LoopIcon.Glyph = "\uF5E7";
             }
         }

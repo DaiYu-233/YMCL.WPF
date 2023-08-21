@@ -140,9 +140,9 @@ namespace YMCL.Pages.SettingPages
             {
                 JavaCombo.Items.Add(item);
             }
-            Panuon.WPF.UI.Toast.Show("扫描成功,已发现" + JavaCombo.Items.Count.ToString() + "个Java", ToastPosition.Top);
-            //Toast.Show("扫描成功,已发现" + JavaCombo.Items.Count.ToString() + "个Java", new ToastOptions { Icon = ToastIcons.Information, Time = 1500, Location = ToastLocation.OwnerTopCenter });
-            //Toast.Show("扫描成功,已发现"+ JavaCombo.Items.Count.ToString() + "个Java", new ToastOptions { Icon = ToastIcons.Information, ToastMargin = new Thickness(10), Time = 5000, Location = ToastLocation.OwnerTopCenter });
+            Panuon.WPF.UI.Toast.Show(Global.form_main,"扫描成功,已发现" + JavaCombo.Items.Count.ToString() + "个Java", ToastPosition.Top);
+            //Toast.Show(Global.form_main,"扫描成功,已发现" + JavaCombo.Items.Count.ToString() + "个Java", new ToastOptions { Icon = ToastIcons.Information, Time = 1500, Location = ToastLocation.OwnerTopCenter });
+            //Toast.Show(Global.form_main,"扫描成功,已发现"+ JavaCombo.Items.Count.ToString() + "个Java", new ToastOptions { Icon = ToastIcons.Information, ToastMargin = new Thickness(10), Time = 5000, Location = ToastLocation.OwnerTopCenter });
             if (JavaCombo.Items.Count >= 1)
             {
                 JavaCombo.SelectedItem = JavaCombo.Items[0];
@@ -179,7 +179,7 @@ namespace YMCL.Pages.SettingPages
 
         private void Expander_Expanded(object sender, RoutedEventArgs e)
         {
-            //Toast.Show("点击任意处可刷新内存信息", new ToastOptions { Icon = ToastIcons.Warning, ToastMargin = new Thickness(10), Time = 5000, Location = ToastLocation.OwnerTopCenter });
+            //Toast.Show(Global.form_main,"点击任意处可刷新内存信息", new ToastOptions { Icon = ToastIcons.Warning, ToastMargin = new Thickness(10), Time = 5000, Location = ToastLocation.OwnerTopCenter });
             UpdateMem();
         }
 
@@ -211,8 +211,8 @@ namespace YMCL.Pages.SettingPages
             }
             File.WriteAllText(@"./YMCL/YMCL.Setting.json", JsonConvert.SerializeObject(obj, Newtonsoft.Json.Formatting.Indented));
             File.WriteAllText("./YMCL/YMCL.MinecraftPath.json", JsonConvert.SerializeObject(MinecraftPathList, Newtonsoft.Json.Formatting.Indented));
-            Panuon.WPF.UI.Toast.Show("已保存", ToastPosition.Top);
-            //Toast.Show("已保存设置", new ToastOptions { Icon = ToastIcons.Information, Time = 1500, Location = ToastLocation.OwnerTopCenter });
+            Panuon.WPF.UI.Toast.Show(Global.form_main,"已保存", ToastPosition.Top);
+            //Toast.Show(Global.form_main,"已保存设置", new ToastOptions { Icon = ToastIcons.Information, Time = 1500, Location = ToastLocation.OwnerTopCenter });
 
         }
 
@@ -240,7 +240,7 @@ namespace YMCL.Pages.SettingPages
                 string[] Array = path.Split(@"\");
                 if (Array[Array.Length - 1] != ".minecraft")
                 {
-                    Toast.Show("需选择 .minecraft 文件夹", ToastPosition.Top);
+                    Toast.Show(Global.form_main,"需选择 .minecraft 文件夹", ToastPosition.Top);
                     return;
                 }
                 MinecraftPathList.Add(path);

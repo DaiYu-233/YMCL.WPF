@@ -153,7 +153,7 @@ namespace YMCL.Pages.MorePages
             }
             else
             {
-                Panuon.WPF.UI.Toast.Show("当前已是最新版本", ToastPosition.Top);
+                Panuon.WPF.UI.Toast.Show(Global.form_main,"当前已是最新版本", ToastPosition.Top);
                 //MessageBoxX.Show("当前已是最新版本", "Yu Minecraft Launcher");
             }
         }

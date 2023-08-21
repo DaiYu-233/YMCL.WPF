@@ -20,6 +20,7 @@ namespace YMCL.Class
 
 
         public string? Theme { get; set; }
+        public System.Windows.Media.Color? ThemeColor { get; set; }
         public string? DisplayInformation { get; set; }
         public double MainWindowWidth { get; set; }
         public double MainWindowHeight { get; set; }
