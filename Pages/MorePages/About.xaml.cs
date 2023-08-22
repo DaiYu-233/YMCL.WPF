@@ -28,7 +28,7 @@ namespace YMCL.Pages.MorePages
     /// </summary>
     public partial class About : Page
     {
-        string NowVersion = "1.0.0.20230805_Alpha";
+        string NowVersion = "1.0.0.20230822_Alpha";
         string NowVersionType = "内部测试版";
 
 
@@ -73,8 +73,8 @@ namespace YMCL.Pages.MorePages
                     CheckUpdateBtn.IsEnabled = false;
                     if (!File.Exists("./YMCL-Updater.exe"))
                     {
-                        string UpUrl = "https://ymcl.daiyu.fun/Up.exe";
-                        string UpsSavePath = "./Up.exe";
+                        string UpUrl = "https://ymcl.daiyu.fun/YMCL-Updater.exe";
+                        string UpsSavePath = "./YMCL-Updater.exe";
                         using (HttpClient client = new HttpClient())
                         {
                             using (HttpResponseMessage response = await client.GetAsync(UpUrl, HttpCompletionOption.ResponseHeadersRead))
@@ -147,7 +147,7 @@ namespace YMCL.Pages.MorePages
                     }
                     DownloadInfo.Visibility = Visibility.Hidden;
 
-                    Process.Start("./Up.exe");
+                    Process.Start("./YMCL-Updater.exe");
                     System.Environment.Exit(0);
                 }
             }

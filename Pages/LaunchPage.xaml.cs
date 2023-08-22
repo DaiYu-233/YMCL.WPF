@@ -86,6 +86,12 @@ namespace YMCL.Pages
                     MaxMemory = obj.MaxMem,
                     MinMemory = 128
                 },
+                GameWindowConfig = new GameWindowConfig()
+                {
+                    Width = 999,
+                    Height = 999,
+                    IsFullscreen = false
+                },
                 NativesFolder = null, //一般可以无视这个选项
                 IsEnableIndependencyCore = obj.AloneCore//是否启用版本隔离
             };

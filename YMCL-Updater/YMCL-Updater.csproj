@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>YMCL_Updater</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <ApplicationIcon>YMCL-Icon.ico</ApplicationIcon>
+    <PackageIcon>YMCL-Icon.png</PackageIcon>
+    <PackageProjectUrl>ymcl.daiyu.fun</PackageProjectUrl>
+    <Copyright>By 呆鱼</Copyright>
+    <Company>DaiYu</Company>
+    <Authors>DaiYu</Authors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="YMCL-Icon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\YMCL-Icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>

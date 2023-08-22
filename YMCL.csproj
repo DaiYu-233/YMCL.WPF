@@ -26,9 +26,13 @@
 
   <ItemGroup>
     <Compile Remove="Widgets\**" />
+    <Compile Remove="YMCL-Updater\**" />
     <EmbeddedResource Remove="Widgets\**" />
+    <EmbeddedResource Remove="YMCL-Updater\**" />
     <None Remove="Widgets\**" />
+    <None Remove="YMCL-Updater\**" />
     <Page Remove="Widgets\**" />
+    <Page Remove="YMCL-Updater\**" />
   </ItemGroup>
 
   <ItemGroup>
