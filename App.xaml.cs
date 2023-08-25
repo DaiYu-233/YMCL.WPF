@@ -21,10 +21,16 @@ namespace YMCL
     /// </summary>
     public class Global
     {
+    
+
         public static MusicPlayer form_musicplayer = Application.Current.Windows.Cast<WindowX>()
         .FirstOrDefault(window => window is MusicPlayer) as MusicPlayer; 
         public static MainWindow form_main = Application.Current.Windows.Cast<WindowX>()
         .FirstOrDefault(window => window is MainWindow) as MainWindow;
+
+        //public static string path_appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+
+
     }
     public partial class App : Application
     {
@@ -36,25 +42,25 @@ namespace YMCL
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            
+            var basePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData); 
             //入口点
-            if (!Directory.Exists("./YMCL"))
+            if (!Directory.Exists(basePath + "\\YMCL"))
             {
-                System.IO.DirectoryInfo directoryInfo = new System.IO.DirectoryInfo("./YMCL");
+                System.IO.DirectoryInfo directoryInfo = new System.IO.DirectoryInfo(basePath + "\\YMCL");
                 directoryInfo.Create();
             }
-            if (!Directory.Exists("./YMCL/Temp"))
+            if (!Directory.Exists(basePath + "\\YMCL\\Temp"))
             {
-                System.IO.DirectoryInfo directoryInfo = new System.IO.DirectoryInfo("./YMCL/Temp");
+                System.IO.DirectoryInfo directoryInfo = new System.IO.DirectoryInfo(basePath + "\\YMCL\\Temp");
                 directoryInfo.Create();
             }
-            if (!Directory.Exists("./YMCL/Accounts"))
+            if (!Directory.Exists(basePath + "\\YMCL\\Accounts"))
             {
-                System.IO.DirectoryInfo directoryInfo = new System.IO.DirectoryInfo("./YMCL/Accounts");
+                System.IO.DirectoryInfo directoryInfo = new System.IO.DirectoryInfo(basePath + "\\YMCL\\Accounts");
                 directoryInfo.Create();
             }
 
-            if (!File.Exists("./YMCL/YMCL.Setting.json"))
+            if (!File.Exists(basePath + "\\YMCL\\YMCL.Setting.json"))
             {
                 var obj = new SettingInfo()
                 {
@@ -76,17 +82,18 @@ namespace YMCL
                     PlayerVolume = 0.5,
                     ThemeColor = Color.FromArgb(255, 0, 120, 215)
                 };
-                File.WriteAllText("./YMCL/YMCL.Setting.json", JsonConvert.SerializeObject(obj, Formatting.Indented));
+                File.WriteAllText(basePath + "\\YMCL\\YMCL.Setting.json", JsonConvert.SerializeObject(obj, Formatting.Indented));
             }
-            if (!File.Exists("./YMCL/YMCL.MinecraftPath.json"))
+            if (!File.Exists(basePath + "\\YMCL\\YMCL.MinecraftPath.json"))
             {
                 List<string> MinecraftPathList = new List<string> { ".minecraft" };
-                File.WriteAllText("./YMCL/YMCL.MinecraftPath.json", JsonConvert.SerializeObject(MinecraftPathList, Formatting.Indented));
+                File.WriteAllText(basePath + "\\YMCL\\YMCL.MinecraftPath.json", JsonConvert.SerializeObject(MinecraftPathList, Formatting.Indented));
             }
-            if (!File.Exists("./YMCL/YMCL.PlayList.json"))
+            if (!File.Exists(basePath + "\\YMCL\\YMCL.PlayList.json"))
             {
-                File.WriteAllText("./YMCL/YMCL.PlayList.json", "");
+                File.WriteAllText(basePath + "\\YMCL\\YMCL.PlayList.json", "");
             }
+
         }
     }
 }

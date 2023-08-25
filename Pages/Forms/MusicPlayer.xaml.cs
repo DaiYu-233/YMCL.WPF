@@ -234,7 +234,7 @@ namespace YMCL.Pages.Forms
         public MusicPlayer()
         {
             InitializeComponent();
-            var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json"));
+            var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText(        Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\YMCL\\YMCL.Setting.json"));
             Width = obj.PlayerWindowWidth;
             Height = obj.PlayerWindowHeight;
             w = Width;
@@ -294,7 +294,7 @@ namespace YMCL.Pages.Forms
         {
             playList.Clear();
             PlayListView.Items.Clear();
-            var list = JsonConvert.DeserializeObject<List<PlayListClass>>(File.ReadAllText("./YMCL/YMCL.PlayList.json"));
+            var list = JsonConvert.DeserializeObject<List<PlayListClass>>(File.ReadAllText(      Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\YMCL\\YMCL.PlayList.json"));
             if (list == null)
             {
                 return;
@@ -323,10 +323,10 @@ namespace YMCL.Pages.Forms
             {
                 return;
             }
-            var obj = JsonConvert.DeserializeObject<Class.SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json"));
+            var obj = JsonConvert.DeserializeObject<Class.SettingInfo>(File.ReadAllText(        Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\YMCL\\YMCL.Setting.json"));
             obj.PlayerWindowWidth = Width;
             obj.PlayerWindowHeight = Height;
-            File.WriteAllText(@"./YMCL/YMCL.Setting.json", JsonConvert.SerializeObject(obj, Newtonsoft.Json.Formatting.Indented));
+            File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\YMCL\\YMCL.Setting.json", JsonConvert.SerializeObject(obj, Newtonsoft.Json.Formatting.Indented));
         }
 
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -458,7 +458,7 @@ namespace YMCL.Pages.Forms
                 SongID = null
             });
             string str = JsonConvert.SerializeObject(playList, Newtonsoft.Json.Formatting.Indented);
-            System.IO.File.WriteAllText(@".\YMCL\YMCL.PlayList.json", str);
+            System.IO.File.WriteAllText(      Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\YMCL\\YMCL.PlayList.json", str);
             RefreshPlayList();
         }
 
@@ -486,7 +486,7 @@ namespace YMCL.Pages.Forms
             var index = PlayListView.SelectedIndex;
             playList.RemoveAt(PlayListView.SelectedIndex);
             string str = JsonConvert.SerializeObject(playList, Newtonsoft.Json.Formatting.Indented);
-            System.IO.File.WriteAllText(@".\YMCL\YMCL.PlayList.json", str);
+            System.IO.File.WriteAllText(      Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\YMCL\\YMCL.PlayList.json", str);
             RefreshPlayList();
             player.Close();
             timer.Stop();
@@ -807,7 +807,7 @@ namespace YMCL.Pages.Forms
             else
             {
                 string str = JsonConvert.SerializeObject(playList, Newtonsoft.Json.Formatting.Indented);
-                System.IO.File.WriteAllText(@".\YMCL\YMCL.PlayList.json", str);
+                System.IO.File.WriteAllText(      Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\YMCL\\YMCL.PlayList.json", str);
                 RefreshPlayList();
                 PlayListView.SelectedItem = PlayListView.Items[PlayListView.Items.Count - 1];
             }
@@ -914,9 +914,9 @@ namespace YMCL.Pages.Forms
         private void VolumeSlider_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             Panuon.WPF.UI.Toast.Show(Global.form_musicplayer,Math.Round(VolumeSlider.Value * 100, 0).ToString() + "%", ToastPosition.Top);
-            var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json"));
+            var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText(        Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\YMCL\\YMCL.Setting.json"));
             obj.PlayerVolume = VolumeSlider.Value;
-            File.WriteAllText(@"./YMCL/YMCL.Setting.json", JsonConvert.SerializeObject(obj, Newtonsoft.Json.Formatting.Indented));
+            File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\YMCL\\YMCL.Setting.json", JsonConvert.SerializeObject(obj, Newtonsoft.Json.Formatting.Indented));
         }
 
         private void Volume_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)

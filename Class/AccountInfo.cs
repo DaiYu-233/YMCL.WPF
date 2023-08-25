@@ -14,6 +14,6 @@ namespace YMCL.Class
 
         public string? AddTime { get; set; }
 
-
+        public string? Data { get; set; }
     }
 }

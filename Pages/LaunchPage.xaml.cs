@@ -55,7 +55,7 @@ namespace YMCL.Pages
         public LaunchPage()
         {
             InitializeComponent();
-            var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json"));
+            var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText(        Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\YMCL\\YMCL.Setting.json"));
 
             #region
 
@@ -78,7 +78,7 @@ namespace YMCL.Pages
 
         private async void LaunchGame_Click(object sender, RoutedEventArgs e)
         {
-            var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json"));
+            var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText(        Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\YMCL\\YMCL.Setting.json"));
             LaunchConfig lc = new()
             {
                 JvmConfig = new JvmConfig(obj.Java)
@@ -99,10 +99,10 @@ namespace YMCL.Pages
             if (VerListView.SelectedIndex >= 0)
             {
                 //LaunchGame.IsEnabled = false;
-                if (File.ReadAllText("./YMCL/Temp/LoginType.log") == "离线登录")
+                if (File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\YMCL\Temp\LoginType.log") == "离线登录")
                 {
                 }
-                else if (File.ReadAllText("./YMCL/Temp/LoginType.log") == "微软登录")
+                else if (File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\YMCL\Temp\LoginType.log") == "微软登录")
                 {
                 }
             }
@@ -154,7 +154,7 @@ namespace YMCL.Pages
 
         private void GetVers()
         {
-            GameCoreLocator Core = new GameCoreLocator(JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json")).MinecraftPath);
+            GameCoreLocator Core = new GameCoreLocator(JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText(        Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\YMCL\\YMCL.Setting.json")).MinecraftPath);
             VerListView.ItemsSource = Core.GetGameCores();
         }
 

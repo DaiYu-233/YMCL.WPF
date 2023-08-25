@@ -562,7 +562,7 @@ namespace YMCL.Pages.DownloadPages
                 return;
             }
             #endregion
-            var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json"));
+            var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText(        Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\YMCL\\YMCL.Setting.json"));
             #region 下载源
             if (obj.DownloadSoure == "Mcbbs")
             {

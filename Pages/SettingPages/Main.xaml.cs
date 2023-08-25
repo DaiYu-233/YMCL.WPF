@@ -50,7 +50,7 @@ namespace YMCL.Pages.SettingPages
         static extern bool GlobalMemoryStatusEx(ref MEMORYSTATUSEX LpBuffer);
         public Main()
         {
-            var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json"));
+            var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText(        Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\YMCL\\YMCL.Setting.json"));
 
             InitializeComponent();
 
@@ -66,11 +66,11 @@ namespace YMCL.Pages.SettingPages
                 {
                     obj.Java = (string?)JavaCombo.SelectedItem;
 
-                    File.WriteAllText(@"./YMCL/YMCL.Setting.json", JsonConvert.SerializeObject(obj, Newtonsoft.Json.Formatting.Indented));
+                    File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\YMCL\\YMCL.Setting.json", JsonConvert.SerializeObject(obj, Newtonsoft.Json.Formatting.Indented));
                 }
             }
 
-            MinecraftPathList = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText("./YMCL/YMCL.MinecraftPath.json"));
+            MinecraftPathList = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(        Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\YMCL\\YMCL.MinecraftPath.json"));
             MinecraftPathList.ForEach(x =>
             {
                 MinecraftPathText.Items.Add(x);
@@ -84,7 +84,7 @@ namespace YMCL.Pages.SettingPages
 
         private void SettingInitialization()
         {
-            var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json"));
+            var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText(        Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\YMCL\\YMCL.Setting.json"));
             if (obj.AloneCore)
             {
                 AloneCoreSwitch.IsOn = true;
@@ -152,7 +152,7 @@ namespace YMCL.Pages.SettingPages
         private void JavaCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
-            System.IO.File.WriteAllText(@".\YMCL\Temp\Java.log", (string?)JavaCombo.SelectedItem);
+            System.IO.File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\YMCL\Temp\Java.log", (string?)JavaCombo.SelectedItem);
         }
 
         private void AddCustomJavaBtn_Click(object sender, RoutedEventArgs e)
@@ -192,12 +192,12 @@ namespace YMCL.Pages.SettingPages
         {
             SilderBox.Value = Math.Round(SilderBox.Value, 0);
             SilderInfo.Text = SilderBox.Value.ToString() + "M";
-            System.IO.File.WriteAllText(@".\YMCL\Temp\MaxMem.log", SilderBox.Value.ToString());
+            System.IO.File.WriteAllText(@Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\YMCL\Temp\MaxMem.log", SilderBox.Value.ToString());
         }
 
         private void SaveSettingBtn_Click(object sender, RoutedEventArgs e)
         {
-            var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json"));
+            var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText(        Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\YMCL\\YMCL.Setting.json"));
             obj.Java = (string?)JavaCombo.SelectedItem;
             obj.MaxMem = (int)SilderBox.Value;
             obj.MinecraftPath = MinecraftPathText.Text;
@@ -209,8 +209,8 @@ namespace YMCL.Pages.SettingPages
             {
                 obj.AloneCore = false;
             }
-            File.WriteAllText(@"./YMCL/YMCL.Setting.json", JsonConvert.SerializeObject(obj, Newtonsoft.Json.Formatting.Indented));
-            File.WriteAllText("./YMCL/YMCL.MinecraftPath.json", JsonConvert.SerializeObject(MinecraftPathList, Newtonsoft.Json.Formatting.Indented));
+            File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\YMCL\\YMCL.Setting.json", JsonConvert.SerializeObject(obj, Newtonsoft.Json.Formatting.Indented));
+            File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\YMCL\\YMCL.MinecraftPath.json", JsonConvert.SerializeObject(MinecraftPathList, Newtonsoft.Json.Formatting.Indented));
             Panuon.WPF.UI.Toast.Show(Global.form_main,"已保存", ToastPosition.Top);
             //Toast.Show(Global.form_main,"已保存设置", new ToastOptions { Icon = ToastIcons.Information, Time = 1500, Location = ToastLocation.OwnerTopCenter });
 
@@ -221,11 +221,11 @@ namespace YMCL.Pages.SettingPages
 
             if (AloneCoreSwitch.IsOn == true)
             {
-                File.WriteAllText("./YMCL/Temp/AloneCore.log", "True");
+                File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)+@"\YMCL\Temp\AloneCore.log", "True");
             }
             else
             {
-                File.WriteAllText("./YMCL/Temp/AloneCore.log", "False");
+                File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\YMCL\Temp\AloneCore.log", "False");
             }
         }
 

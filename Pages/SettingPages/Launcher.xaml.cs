@@ -40,7 +40,7 @@ namespace YMCL.Pages.SettingPages
         public Launcher()
         {
             InitializeComponent();
-            var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json"));
+            var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText(        Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\YMCL\\YMCL.Setting.json"));
             #region 初始化
 
             if (obj.DisplayInformation == "False")
@@ -97,35 +97,35 @@ namespace YMCL.Pages.SettingPages
                 ThemeManager.Current.ApplicationTheme = ApplicationTheme.Light;
             }
             ThemeManager.Current.AccentColor = ColorPicker.SelectedColor;
-            JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json"))
+            JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText(        Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\YMCL\\YMCL.Setting.json"))
                 .ThemeColor = ColorPicker.SelectedColor;
 
             if (displayinf.IsOn == true)
             {
-                var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json"));
+                var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText(        Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\YMCL\\YMCL.Setting.json"));
                 obj.DisplayInformation = "True";
                 obj.ThemeColor = ColorPicker.SelectedColor;
-                File.WriteAllText(@"./YMCL/YMCL.Setting.json", JsonConvert.SerializeObject(obj, Newtonsoft.Json.Formatting.Indented));
+                File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\YMCL\\YMCL.Setting.json", JsonConvert.SerializeObject(obj, Newtonsoft.Json.Formatting.Indented));
                 
             }
             else
             {
-                var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json"));
+                var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText(        Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\YMCL\\YMCL.Setting.json"));
                 obj.DisplayInformation = "False";
                 obj.ThemeColor = ColorPicker.SelectedColor;
-                File.WriteAllText(@"./YMCL/YMCL.Setting.json", JsonConvert.SerializeObject(obj, Newtonsoft.Json.Formatting.Indented));
+                File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\YMCL\\YMCL.Setting.json", JsonConvert.SerializeObject(obj, Newtonsoft.Json.Formatting.Indented));
             }
             if (DarkThemeSwitch.IsOn == true)
             {
-                var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json"));
+                var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText(        Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\YMCL\\YMCL.Setting.json"));
                 obj.Theme = "Dark";
-                File.WriteAllText(@"./YMCL/YMCL.Setting.json", JsonConvert.SerializeObject(obj, Newtonsoft.Json.Formatting.Indented));
+                File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\YMCL\\YMCL.Setting.json", JsonConvert.SerializeObject(obj, Newtonsoft.Json.Formatting.Indented));
             }
             else
             {
-                var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json"));
+                var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText(        Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\YMCL\\YMCL.Setting.json"));
                 obj.Theme = "Light";
-                File.WriteAllText(@"./YMCL/YMCL.Setting.json", JsonConvert.SerializeObject(obj, Newtonsoft.Json.Formatting.Indented));
+                File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\YMCL\\YMCL.Setting.json", JsonConvert.SerializeObject(obj, Newtonsoft.Json.Formatting.Indented));
             }
             Panuon.WPF.UI.Toast.Show(Global.form_main, "已保存", ToastPosition.Top);
             //Toast.Show(Global.form_main,"成功应用设置", new ToastOptions { Icon = ToastIcons.Information, Time = 1500, Location = ToastLocation.OwnerTopCenter });
@@ -134,7 +134,7 @@ namespace YMCL.Pages.SettingPages
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            File.WriteAllText(@"./YMCL/YMCL.bat", $"{path[0]}:\ncd {AppDomain.CurrentDomain.BaseDirectory}\nstart ./YMCL.exe");
+            File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)+"/YMCL/YMCL.bat", $"{path[0]}:\ncd {AppDomain.CurrentDomain.BaseDirectory}\nstart ./YMCL.exe");
             if (!IsAdministrator())
             {
                 MessageBoxX.Show("需要管理员权限以写入注册表\n请使用管理员权限运行", "Yu Minecraft Launcher");

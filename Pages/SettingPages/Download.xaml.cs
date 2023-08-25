@@ -29,7 +29,7 @@ namespace YMCL.Pages.SettingPages
         {
             InitializeComponent();
 
-            var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json"));
+            var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText(        Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\YMCL\\YMCL.Setting.json"));
             if (obj.DownloadSoure=="Mcbbs")
             {
                 DownloadSourseCombo.SelectedItem = DownloadSourseCombo.Items[0];
@@ -45,7 +45,7 @@ namespace YMCL.Pages.SettingPages
 
         private void DownloadSourseCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json"));
+            var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText(        Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\YMCL\\YMCL.Setting.json"));
             if (DownloadSourseCombo.SelectedIndex == 0)
             {
                 obj.DownloadSoure = "Mcbbs";
@@ -58,7 +58,7 @@ namespace YMCL.Pages.SettingPages
             {
                 obj.DownloadSoure = "Mojang";
             }
-                File.WriteAllText(@"./YMCL/YMCL.Setting.json", JsonConvert.SerializeObject(obj, Newtonsoft.Json.Formatting.Indented));
+                File.WriteAllText(        Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\YMCL\\YMCL.Setting.json", JsonConvert.SerializeObject(obj, Newtonsoft.Json.Formatting.Indented));
         }
 
         private void SilderBox_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -76,9 +76,9 @@ namespace YMCL.Pages.SettingPages
             {
                 Panuon.WPF.UI.Toast.Show(Global.form_main, "下载线程过大，可能会导致卡顿", ToastPosition.Top);
             }
-            var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json"));
+            var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText(        Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\YMCL\\YMCL.Setting.json"));
             obj.MaxDownloadThreads = SilderInfo.Text;
-            File.WriteAllText(@"./YMCL/YMCL.Setting.json", JsonConvert.SerializeObject(obj, Newtonsoft.Json.Formatting.Indented));
+            File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\YMCL\\YMCL.Setting.json", JsonConvert.SerializeObject(obj, Newtonsoft.Json.Formatting.Indented));
         }
     }
 }

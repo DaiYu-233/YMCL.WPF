@@ -210,23 +210,11 @@ namespace YMCL
         {
             InitializeComponent();
             string path = System.AppDomain.CurrentDomain.BaseDirectory + "YMCL.exe";
-            if (System.IO.Directory.Exists("./YMCL")) { }
-            else
-            {
-                System.IO.DirectoryInfo directoryInfo = new System.IO.DirectoryInfo("./YMCL");
-                directoryInfo.Create();
-            }
 
-            if (System.IO.Directory.Exists("./YMCL")) { }
-            else
-            {
-                System.IO.DirectoryInfo directoryInfo = new System.IO.DirectoryInfo("./YMCL");
-                directoryInfo.Create();
-            }
             ServicePointManager.DefaultConnectionLimit = 512;
             MainFrame.Content = launch;
 
-            var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json"));
+            var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText(        Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\YMCL\\YMCL.Setting.json"));
             Width = obj.MainWindowWidth;
             Height = obj.MainWindowHeight;
             w = Width;
@@ -310,10 +298,10 @@ namespace YMCL
             {
                 return;
             }
-            var obj = JsonConvert.DeserializeObject<Class.SettingInfo>(File.ReadAllText("./YMCL/YMCL.Setting.json"));
+            var obj = JsonConvert.DeserializeObject<Class.SettingInfo>(File.ReadAllText(        Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\YMCL\\YMCL.Setting.json"));
             obj.MainWindowWidth = Width;
             obj.MainWindowHeight = Height;
-            File.WriteAllText(@"./YMCL/YMCL.Setting.json", JsonConvert.SerializeObject(obj, Newtonsoft.Json.Formatting.Indented));
+            File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\YMCL\\YMCL.Setting.json", JsonConvert.SerializeObject(obj, Newtonsoft.Json.Formatting.Indented));
         }
     }
 }
