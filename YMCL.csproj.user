@@ -80,8 +80,5 @@
     <Page Update="Pages\SettingPages\Main.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Style.xaml">
-      <SubType>Designer</SubType>
-    </Page>
   </ItemGroup>
 </Project>

@@ -1,8 +1,11 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    
-    <!--YMCL.Theme-->
+
+    <!--YMCL.Theme--> 
     <SolidColorBrush x:Key="ThemeBackground" Color="#ffffff"/>
+    <SolidColorBrush x:Key="ThemeTitleBarBackground" Color="#f9f9f9"/>
+
+    <SolidColorBrush x:Key="ThemeLightBackground" Color="#FFF3F3F3"/>
     <SolidColorBrush x:Key="ThemeNavigationBackground" Color="#f2f2f2"/>
     <SolidColorBrush x:Key="ThemeContentBorderBackground" Color="#ededed"/>
     <SolidColorBrush x:Key="ThemeContentContentBorderBackground" Color="#d6d6d6"/>

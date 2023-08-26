@@ -529,7 +529,7 @@ namespace YMCL.Pages.Forms
             var offset = (Page - 1) * 30;
             await Task.Run(async () =>
             {
-                string url = $"https://music.api.daiyu.fun/search?keywords={SearchText}&type=1&offset={offset}";
+                string url = $"https://music.api.daiyu.fun/search?keywords={SearchText}&type=1&limit=100";
                 using (HttpClient client = new HttpClient())
                 {
                     HttpResponseMessage response;
@@ -752,6 +752,7 @@ namespace YMCL.Pages.Forms
 
         private async void SongsListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            IsNoPlay = false;
             SearchBox.IsEnabled = false;
             if (SongsListView.SelectedIndex < 0)
             {
@@ -766,7 +767,7 @@ namespace YMCL.Pages.Forms
             }
             DisplaySongs song = SongsListView.SelectedItem as DisplaySongs;
             var SearchText = song.SongID;
-            Panuon.WPF.UI.Toast.Show(Global.form_musicplayer,$"正在获取音乐...", ToastPosition.Top);
+            Panuon.WPF.UI.Toast.Show(Global.form_musicplayer, $"正在检查音乐可用性...", ToastPosition.Top);
             await Task.Run(async () =>
             {
                 string checkurl = $"https://music.api.daiyu.fun/check/music?id={SearchText}";

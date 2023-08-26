@@ -12,16 +12,16 @@
         <Grid >
 
 
-            <Border VerticalAlignment="Top" Height="30" Background="{DynamicResource SecundaryBackgroundColor}" CornerRadius="8,8,0,0" MouseLeftButtonDown="Border_MouseLeftButtonDown">
+            <Border VerticalAlignment="Top" Height="30" Background="{DynamicResource ThemeTitleBarBackground}" CornerRadius="8,8,0,0" MouseLeftButtonDown="Border_MouseLeftButtonDown">
                 <Grid VerticalAlignment="Top" Height="30">
                     <TextBlock HorizontalAlignment="Left" Visibility="Hidden" Text="YMCL Player" VerticalAlignment="Center" FontSize="14" Foreground="#FF5FE6FF" Margin="8.5,0,0,0"/>
                     <Button x:Name="btnMinimize" Style="{DynamicResource IconButtonsStyle}" Content="{DynamicResource minimize}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,30,0" Click="btnMinimize_Click"/>
                     <Button x:Name="btnClose" Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Tag="IsCloseButton" HorizontalAlignment="Right" Margin="0,0,3,0" Click="btnClose_Click"/>
                 </Grid>
             </Border>
-            <Grid Margin="0,30,0,67">
+            <Grid Margin="0,30,0,67" Background="{DynamicResource ThemeLightBackground}">
 
-                <Border x:Name="SearchGr" Visibility="Visible" Background="{DynamicResource ThemeContentBorderBackground}"  CornerRadius="3,3,3,3" Margin="10,50,10,13" >
+                <Border x:Name="SearchGr" Visibility="Visible" Background="{DynamicResource ThemePlayerBorderBackground}"  CornerRadius="3,3,3,3" Margin="10,50,10,13" >
                     <Grid>
                         <ui:AutoSuggestBox x:Name="SearchBox" QueryIcon="Zoom" Margin="0,-40,0,0"  FontFamily="MiSans Medium"  QuerySubmitted="AutoSuggestBox_QuerySubmitted"/>
 
