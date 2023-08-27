@@ -11,6 +11,7 @@ using ModernWpf.Controls;
 using Newtonsoft.Json;
 using Panuon.WPF.UI;
 using YMCL.Class;
+using static YMCL.Class.NeteasyCloudMusic;
 using Page = System.Windows.Controls.Page;
 
 namespace YMCL.Pages.SettingPages
@@ -169,6 +170,13 @@ namespace YMCL.Pages.SettingPages
             }
             else if (LoginTypeComboBox.SelectedItem.ToString() == "System.Windows.Controls.ComboBoxItem: 第三方登录")
             {
+                loginTypeSelectionDialog.Hide();
+                loginYggdrasilDialog.ShowAsync();
+                isLittleSkin.IsChecked = false;
+                YggdrasilServerUrlTextBox.IsEnabled = true;
+                YggdrasilServerUrlTextBox.Text = "";
+                YggdrasilEmailTextBox.Text = "";
+                YggdrasilPasswordTextBox.Text = "";
 
             }
             else
@@ -293,9 +301,9 @@ namespace YMCL.Pages.SettingPages
             loginMicrosoftDialog.Hide();
         }
 
-        private void YggdrasilAccountAddBtn_Click(object sender, RoutedEventArgs e)
+        private async void YggdrasilAccountAddBtn_Click(object sender, RoutedEventArgs e)
         {
-            if(YggdrasilServerUrlTextBox.Text == string.Empty)
+            if (YggdrasilServerUrlTextBox.Text == string.Empty)
             {
                 Panuon.WPF.UI.Toast.Show(Global.form_main, "验证服务器不可为空", ToastPosition.Top);
                 return;
@@ -309,6 +317,73 @@ namespace YMCL.Pages.SettingPages
             {
                 Panuon.WPF.UI.Toast.Show(Global.form_main, "密码不可为空", ToastPosition.Top);
                 return;
+            }
+
+            try
+            {
+                if (isLittleSkin.IsChecked == true)
+                {
+                    MinecraftOAuth.Authenticator.YggdrasilAuthenticator authenticator
+                        = new(true, YggdrasilEmailTextBox.Text, YggdrasilPasswordTextBox.Text);
+                    var result = await authenticator.AuthAsync();
+                    var json = result.ToJson();
+                    var list = JsonConvert.DeserializeObject<List<YggdrasilAccount>>(json);
+                    list.ForEach(x =>
+                    {
+                        accountInfos.Add(new AccountInfo()
+                        {
+                            Data = json,
+                            AccountType = "第三方登录",
+                            Name = x.Name,
+                            AddTime = DateTime.Now.ToString()
+                        });
+                    });
+                }
+                else
+                {
+                    MinecraftOAuth.Authenticator.YggdrasilAuthenticator authenticator
+                        = new(YggdrasilServerUrlTextBox.Text, YggdrasilEmailTextBox.Text, YggdrasilPasswordTextBox.Text);
+                    var result = await authenticator.AuthAsync();
+                    var json = result.ToJson();
+                    var list = JsonConvert.DeserializeObject<List<YggdrasilAccount>>(json);
+                    list.ForEach(x =>
+                    {
+                        accountInfos.Add(new AccountInfo()
+                        {
+                            Data = json,
+                            AccountType = "第三方登录",
+                            Name = x.Name,
+                            AddTime = DateTime.Now.ToString()
+                        });
+                    });
+                }
+                WriteFile();
+                datagrid();
+                loginYggdrasilDialog.Hide();
+                Panuon.WPF.UI.Toast.Show(Global.form_main, "登录完成", ToastPosition.Top);
+
+            }
+            catch (Exception ex)
+            {
+                Panuon.WPF.UI.Toast.Show(Global.form_main, "登录失败："+ex.Message, ToastPosition.Top);
+                //MessageBoxX.Show(ex.Message);
+            }
+
+
+            //result.ToJson();
+        }
+
+        private void isLittleSkin_Click(object sender, RoutedEventArgs e)
+        {
+            if (isLittleSkin.IsChecked == true)
+            {
+                YggdrasilServerUrlTextBox.IsEnabled = false;
+                YggdrasilServerUrlTextBox.Text = "{LittleSkin}";
+            }
+            else
+            {
+                YggdrasilServerUrlTextBox.IsEnabled = true;
+                YggdrasilServerUrlTextBox.Text = "";
             }
         }
     }

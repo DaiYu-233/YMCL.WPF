@@ -21,7 +21,7 @@
                                 <Grid>
                                     <TextBlock Text="{Binding Name}" FontSize="14" FontFamily="MiSans Medium"/>
                                     <TextBlock  Text="{Binding AccountType}" Margin="0,15,0,0" FontSize="11" Foreground="#E48A8A8A" FontFamily="MiSans Medium"></TextBlock>
-                                    <TextBlock  Text="{Binding AddTime}" FontSize="11" Foreground="#E48A8A8A" Margin="51,15,0,0" FontFamily="MiSans Medium"/>
+                                    <TextBlock  Text="{Binding AddTime}" FontSize="11" Foreground="#E48A8A8A" Margin="62,15,0,0" FontFamily="MiSans Medium"/>
                                 </Grid>
                             </DataTemplate>
                         </ui:ListView.ItemTemplate>
@@ -59,16 +59,17 @@
             </ui:ContentDialog>
             <ui:ContentDialog x:Name="loginYggdrasilDialog">
                 <Grid Width="429" Height="185">
-                    <TextBox x:Name="YggdrasilServerUrlTextBox" FontFamily="MiSans Medium" FontSize="16" VerticalAlignment="Top"  Width="420"  ui:ControlHelper.PlaceholderText="认证服务器地址"/>
-                    <TextBox x:Name="YggdrasilEmailTextBox" FontFamily="MiSans Medium" FontSize="16" VerticalAlignment="Top"  Width="420"  ui:ControlHelper.PlaceholderText="邮箱地址" Margin="0,45,0,0"/>
-                    <TextBox x:Name="YggdrasilPasswordTextBox" FontFamily="MiSans Medium" FontSize="16" VerticalAlignment="Top"  Width="420"  ui:ControlHelper.PlaceholderText="账户密码" Margin="0,90,0,0"/>
+                    <TextBox x:Name="YggdrasilServerUrlTextBox" FontFamily="MiSans Medium" FontSize="15" VerticalAlignment="Top"  Width="420"  ui:ControlHelper.PlaceholderText="认证服务器地址" Height="30"/>
+                    <TextBox x:Name="YggdrasilEmailTextBox" FontFamily="MiSans Medium" FontSize="15" VerticalAlignment="Top"  Width="420"  ui:ControlHelper.PlaceholderText="邮箱地址" Margin="0,39,0,0" Height="23"/>
+                    <TextBox x:Name="YggdrasilPasswordTextBox" FontFamily="MiSans Medium" FontSize="15" VerticalAlignment="Top"  Width="420"  ui:ControlHelper.PlaceholderText="账户密码" Margin="0,78,0,0" Height="19"/>
 
                     <Button x:Name="YggdrasilAccountAddBtn" VerticalAlignment="Bottom" Height="29" Width="95" FontFamily="MiSans Medium"  Style="{StaticResource AccentButtonStyle}" Content="确定" IsEnabled="True" HorizontalAlignment="Right" Margin="0,0,5,5" Click="YggdrasilAccountAddBtn_Click" />
                     <Button VerticalAlignment="Bottom" Height="29" Width="80" FontFamily="MiSans Medium" Content="取消" IsEnabled="True" Click="CancelAddAccountBtn_Click" HorizontalAlignment="Right" Margin="0,0,105,5" />
 
+                    <CheckBox x:Name="isLittleSkin" VerticalAlignment="Bottom" Margin="10,0,0,2" Content="LittleSkin" Click="isLittleSkin_Click"/>
                 </Grid>
             </ui:ContentDialog>
-            <ui:ContentDialog x:Name="loginMicrosoftDialog" CornerRadius="0">
+            <ui:ContentDialog x:Name="loginMicrosoftDialog" >
                 <Grid>
                     <TextBlock Text="验证代码" FontFamily="MiSans Medium" VerticalAlignment="Top" HorizontalAlignment="Center" Foreground="#E4B3B3B3" FontSize="13"/>
                     <TextBlock x:Name="LoginCodeText" Text="加载中..." FontFamily="MiSans Medium" VerticalAlignment="Top" HorizontalAlignment="Center" Foreground="{DynamicResource ThemeTextColor}" Margin="0,16,0,0" FontSize="16"/>
