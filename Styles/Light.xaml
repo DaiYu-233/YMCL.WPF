@@ -9,7 +9,7 @@
     <SolidColorBrush x:Key="ThemeNavigationBackground" Color="#f2f2f2"/>
     <SolidColorBrush x:Key="ThemeContentBorderBackground" Color="#ededed"/>
     <SolidColorBrush x:Key="ThemeContentContentBorderBackground" Color="#d6d6d6"/>
-    <SolidColorBrush x:Key="ThemeTextColor" Color="#000000"/>
+    <SolidColorBrush x:Key="ThemeTextColor" Color="#333333"/>
     <SolidColorBrush x:Key="ThemePlayerBorderBackground" Color="#FFF8F8F8"/>
 
 

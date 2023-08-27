@@ -50,7 +50,7 @@ namespace YMCL.Class
             public int mvid { get; set; }
             public int fee { get; set; }
             public object rUrl { get; set; }
-            public int mark { get; set; }
+            public double mark { get; set; }
         }
 
         public class Result

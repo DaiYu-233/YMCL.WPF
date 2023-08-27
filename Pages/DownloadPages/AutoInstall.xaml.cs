@@ -67,7 +67,7 @@ namespace YMCL.Pages.DownloadPages
         #region GetGame
         private async void ReGetVer()
         {
-
+            vers.Clear();
             try
             {
                 vers.Clear();
@@ -99,6 +99,7 @@ namespace YMCL.Pages.DownloadPages
             catch
             {
                 Panuon.WPF.UI.Toast.Show(Global.form_main,$"可安装版本列表失败，这可能是网络原因", ToastPosition.Top);
+                RefreshVerListBtn.IsEnabled = true;
             }
 
 

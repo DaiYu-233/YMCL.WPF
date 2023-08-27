@@ -153,7 +153,7 @@ namespace YMCL.Pages.SettingPages
             }
             catch (Exception rf)
             {
-                MessageBoxX.Show($"写入注册表失败\n\n错误信息: {rf}", "Yu Minecraft Launcher");
+                MessageBoxX.Show($"写入注册表失败\n\n错误信息: {rf.Message}", "Yu Minecraft Launcher");
                 return;
             }
             finally

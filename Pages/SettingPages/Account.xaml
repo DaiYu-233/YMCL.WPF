@@ -5,8 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:YMCL.Pages.SettingPages"
       mc:Ignorable="d"  xmlns:pu="https://opensource.panuon.com/wpf-ui"
-
-      Title="Account" Loaded="Page_Loaded">
+      Title="Account" >
     <Border Background="{DynamicResource ThemeBackground}" CornerRadius="0,0,8,0">
         <Grid  >
       
@@ -41,6 +40,7 @@
                     <ComboBox x:Name="LoginTypeComboBox" Width="324" SelectionChanged="ComboBox_SelectionChanged" FontFamily="MiSans Medium" SelectedIndex="0" FontSize="12">
                         <ComboBoxItem Content="离线登录"/>
                         <ComboBoxItem Content="微软登录"/>
+                        <ComboBoxItem Content="第三方登录"/>
                         <ComboBoxItem Content="Mojang迁移"/>
                     </ComboBox>
                     <Button VerticalAlignment="Bottom" Height="29" Width="95" FontFamily="MiSans Medium"  Style="{StaticResource AccentButtonStyle}" Content="下一步" IsEnabled="True" Click="Button_Click" HorizontalAlignment="Right" Margin="0,0,5,5" />
@@ -50,10 +50,31 @@
             </ui:ContentDialog>
             <ui:ContentDialog x:Name="loginOfflineDialog">
                 <Grid>
-                    <TextBox x:Name="offlineUserNameTextBox" FontFamily="MiSans Medium" FontSize="16" VerticalAlignment="Top" Width="390"  />
-
+                    <TextBox x:Name="offlineUserNameTextBox" FontFamily="MiSans Medium" FontSize="16" VerticalAlignment="Top"  Width="390" ui:ControlHelper.PlaceholderText="游戏用户名"  />
+                    
                     <Button x:Name="offlineAccountAddBtn" VerticalAlignment="Bottom" Height="29" Width="95" FontFamily="MiSans Medium"  Style="{StaticResource AccentButtonStyle}" Content="确定" IsEnabled="True" Click="offlineAccountAddBtn_Click" HorizontalAlignment="Right" Margin="0,0,5,5" />
                     <Button VerticalAlignment="Bottom" Height="29" Width="80" FontFamily="MiSans Medium" Content="取消" IsEnabled="True" Click="CancelAddAccountBtn_Click" HorizontalAlignment="Right" Margin="0,0,105,5" />
+
+                </Grid>
+            </ui:ContentDialog>
+            <ui:ContentDialog x:Name="loginYggdrasilDialog">
+                <Grid Width="429" Height="185">
+                    <TextBox x:Name="YggdrasilServerUrlTextBox" FontFamily="MiSans Medium" FontSize="16" VerticalAlignment="Top"  Width="420"  ui:ControlHelper.PlaceholderText="认证服务器地址"/>
+                    <TextBox x:Name="YggdrasilEmailTextBox" FontFamily="MiSans Medium" FontSize="16" VerticalAlignment="Top"  Width="420"  ui:ControlHelper.PlaceholderText="邮箱地址" Margin="0,45,0,0"/>
+                    <TextBox x:Name="YggdrasilPasswordTextBox" FontFamily="MiSans Medium" FontSize="16" VerticalAlignment="Top"  Width="420"  ui:ControlHelper.PlaceholderText="账户密码" Margin="0,90,0,0"/>
+
+                    <Button x:Name="YggdrasilAccountAddBtn" VerticalAlignment="Bottom" Height="29" Width="95" FontFamily="MiSans Medium"  Style="{StaticResource AccentButtonStyle}" Content="确定" IsEnabled="True" HorizontalAlignment="Right" Margin="0,0,5,5" Click="YggdrasilAccountAddBtn_Click" />
+                    <Button VerticalAlignment="Bottom" Height="29" Width="80" FontFamily="MiSans Medium" Content="取消" IsEnabled="True" Click="CancelAddAccountBtn_Click" HorizontalAlignment="Right" Margin="0,0,105,5" />
+
+                </Grid>
+            </ui:ContentDialog>
+            <ui:ContentDialog x:Name="loginMicrosoftDialog" CornerRadius="0">
+                <Grid>
+                    <TextBlock Text="验证代码" FontFamily="MiSans Medium" VerticalAlignment="Top" HorizontalAlignment="Center" Foreground="#E4B3B3B3" FontSize="13"/>
+                    <TextBlock x:Name="LoginCodeText" Text="加载中..." FontFamily="MiSans Medium" VerticalAlignment="Top" HorizontalAlignment="Center" Foreground="{DynamicResource ThemeTextColor}" Margin="0,16,0,0" FontSize="16"/>
+
+                    <Button x:Name="CopyCodeAndOpenBrowserBtn" VerticalAlignment="Bottom" Height="29" Width="170" FontFamily="MiSans Medium"  Style="{StaticResource AccentButtonStyle}" Content="复制代码并打开浏览器" IsEnabled="True" Click="CopyCodeAndOpenBrowserBtn_Click" HorizontalAlignment="Right" Margin="0,0,5,5" />
+                    <Button x:Name="CancelAddMicrosoftAccountBtn" VerticalAlignment="Bottom" Height="29" Width="80" FontFamily="MiSans Medium" Content="取消" IsEnabled="True" Click="CancelAddAccountBtn_Click" HorizontalAlignment="Right" Margin="0,0,180,5" />
 
                 </Grid>
             </ui:ContentDialog>

@@ -539,7 +539,7 @@ namespace YMCL.Pages.Forms
                     }
                     catch (Exception ex)
                     {
-                        Dispatcher.BeginInvoke(() => { Panuon.WPF.UI.Toast.Show(Global.form_musicplayer,"请求失败：" + ex, ToastPosition.Top); });
+                        Dispatcher.BeginInvoke(() => { Panuon.WPF.UI.Toast.Show(Global.form_musicplayer,"请求失败：" + ex.Message, ToastPosition.Top); });
                         return;
                     }
 
@@ -552,7 +552,7 @@ namespace YMCL.Pages.Forms
                         }
                         catch (Exception ex)
                         {
-                            Dispatcher.BeginInvoke(() => { Panuon.WPF.UI.Toast.Show(Global.form_musicplayer,"请求失败：" + ex, ToastPosition.Top); });
+                            Dispatcher.BeginInvoke(() => { Panuon.WPF.UI.Toast.Show(Global.form_musicplayer,"请求失败：" + ex.Message, ToastPosition.Top); });
                             return;
                         }
 
@@ -613,7 +613,9 @@ namespace YMCL.Pages.Forms
                         }
                         catch (Exception ex)
                         {
-                            Dispatcher.BeginInvoke(() => { Panuon.WPF.UI.Toast.Show(Global.form_musicplayer,"解析错误：" + ex, ToastPosition.Top); });
+                            Dispatcher.BeginInvoke(() => { Panuon.WPF.UI.Toast.Show(Global.form_musicplayer,"解析错误：" + ex.Message, ToastPosition.Top);
+                                MessageBoxX.Show(ex.Message); 
+                            });
                             return;
                         }
 
@@ -658,55 +660,64 @@ namespace YMCL.Pages.Forms
                 isPlay = true;
                 var SearchText = song.SongID;
                 Panuon.WPF.UI.Toast.Show(Global.form_musicplayer,$"正在获取音乐...", ToastPosition.Top);
-                await Task.Run(async () =>
+                try
                 {
-                    string checkurl = $"https://music.api.daiyu.fun/check/music?id={SearchText}";
-                    using (HttpClient client = new HttpClient())
+                    await Task.Run(async () =>
                     {
-                        HttpResponseMessage response = await client.GetAsync(checkurl);
-
-                        string responseData = await response.Content.ReadAsStringAsync();
-
-                        Response res = JsonConvert.DeserializeObject<Response>(responseData);
-
-                        if (res.success == false)
+                        string checkurl = $"https://music.api.daiyu.fun/check/music?id={SearchText}";
+                        using (HttpClient client = new HttpClient())
                         {
-                            Dispatcher.BeginInvoke(() => { Panuon.WPF.UI.Toast.Show(Global.form_musicplayer,"请求失败，网易云音乐返回信息：" + res.message, ToastPosition.Top); });
-                            isPlay = false; 
-                            IsGettingMusic = false;
-                        }
+                            HttpResponseMessage response = await client.GetAsync(checkurl);
 
-                    }
-                    if (!isPlay)
-                    {
-                        IsGettingMusic = false;
-                        return;
-                    }
-                    string url = $"https://music.api.daiyu.fun/song/url?id={SearchText}";
-                    using (HttpClient client = new HttpClient())
-                    {
-                        HttpResponseMessage response = await client.GetAsync(url);
-
-                        if (response.IsSuccessStatusCode)
-                        {
                             string responseData = await response.Content.ReadAsStringAsync();
 
-                            YMCL.Class.NeteasyCloudMusicUrl.Root root = JsonConvert.DeserializeObject<YMCL.Class.NeteasyCloudMusicUrl.Root>(responseData);
-                            if (root.code != 200)
+                            Response res = JsonConvert.DeserializeObject<Response>(responseData);
+
+                            if (res.success == false)
                             {
-                                Dispatcher.BeginInvoke(() => { Panuon.WPF.UI.Toast.Show(Global.form_musicplayer,"请求错误", ToastPosition.Top); });
+                                Dispatcher.BeginInvoke(() => { Panuon.WPF.UI.Toast.Show(Global.form_musicplayer, "请求失败，网易云音乐返回信息：" + res.message, ToastPosition.Top); });
+                                isPlay = false;
                                 IsGettingMusic = false;
-                                return;
                             }
-                            SongUri = root.data[0].url;
+
                         }
-                        else
+                        if (!isPlay)
                         {
-                            Dispatcher.BeginInvoke(() => { Panuon.WPF.UI.Toast.Show(Global.form_musicplayer,"请求失败：" + response.StatusCode, ToastPosition.Top); });
                             IsGettingMusic = false;
+                            return;
                         }
-                    }
-                });
+                        string url = $"https://music.api.daiyu.fun/song/url?id={SearchText}";
+                        using (HttpClient client = new HttpClient())
+                        {
+                            HttpResponseMessage response = await client.GetAsync(url);
+
+                            if (response.IsSuccessStatusCode)
+                            {
+                                string responseData = await response.Content.ReadAsStringAsync();
+
+                                YMCL.Class.NeteasyCloudMusicUrl.Root root = JsonConvert.DeserializeObject<YMCL.Class.NeteasyCloudMusicUrl.Root>(responseData);
+                                if (root.code != 200)
+                                {
+                                    Dispatcher.BeginInvoke(() => { Panuon.WPF.UI.Toast.Show(Global.form_musicplayer, "请求错误", ToastPosition.Top); });
+                                    IsGettingMusic = false;
+                                    return;
+                                }
+                                SongUri = root.data[0].url;
+                            }
+                            else
+                            {
+                                Dispatcher.BeginInvoke(() => { Panuon.WPF.UI.Toast.Show(Global.form_musicplayer, "请求失败：" + response.StatusCode, ToastPosition.Top); });
+                                IsGettingMusic = false;
+                            }
+                        }
+                    });
+                }
+                catch (Exception ex)
+                {
+                    Panuon.WPF.UI.Toast.Show(Global.form_musicplayer, "请求失败：" + ex.Message, ToastPosition.Top);
+                    return;
+                }
+                
                 if (isPlay)
                 {
                     PlayingSongName.Text = song.SongName;
@@ -768,39 +779,48 @@ namespace YMCL.Pages.Forms
             DisplaySongs song = SongsListView.SelectedItem as DisplaySongs;
             var SearchText = song.SongID;
             Panuon.WPF.UI.Toast.Show(Global.form_musicplayer, $"正在检查音乐可用性...", ToastPosition.Top);
-            await Task.Run(async () =>
+            try
             {
-                string checkurl = $"https://music.api.daiyu.fun/check/music?id={SearchText}";
-                using (HttpClient client = new HttpClient())
+                await Task.Run(async () =>
                 {
-                    HttpResponseMessage response = await client.GetAsync(checkurl);
-
-                    string responseData = await response.Content.ReadAsStringAsync();
-
-                    Response res = JsonConvert.DeserializeObject<Response>(responseData);
-
-                    if (res.success == false)
+                    string checkurl = $"https://music.api.daiyu.fun/check/music?id={SearchText}";
+                    using (HttpClient client = new HttpClient())
                     {
-                        Dispatcher.BeginInvoke(() => { Panuon.WPF.UI.Toast.Show(Global.form_musicplayer,"请求失败，网易云音乐返回信息：" + res.message, ToastPosition.Top); });
-                        IsNoPlay = true;
-                    }
+                        HttpResponseMessage response = await client.GetAsync(checkurl);
 
-                }
-                if (IsNoPlay)
-                {
-                    return;
-                }
-                playList.Add(new PlayListClass()
-                {
-                    Uri = null,
-                    SongName = song.SongName,
-                    Type = "网易云",
-                    SongID = song.SongID,
-                    Authors = song.Artists,
-                    Duration = song.Duration,
-                    DisplayDuration = Millisecond_to_minutes(song.Duration)
+                        string responseData = await response.Content.ReadAsStringAsync();
+
+                        Response res = JsonConvert.DeserializeObject<Response>(responseData);
+
+                        if (res.success == false)
+                        {
+                            Dispatcher.BeginInvoke(() => { Panuon.WPF.UI.Toast.Show(Global.form_musicplayer, "音乐不可用，网易云音乐返回信息：" + res.message, ToastPosition.Top); });
+                            IsNoPlay = true;
+                        }
+
+                    }
+                    if (IsNoPlay)
+                    {
+                        return;
+                    }
+                    playList.Add(new PlayListClass()
+                    {
+                        Uri = null,
+                        SongName = song.SongName,
+                        Type = "网易云",
+                        SongID = song.SongID,
+                        Authors = song.Artists,
+                        Duration = song.Duration,
+                        DisplayDuration = Millisecond_to_minutes(song.Duration)
+                    });
                 });
-            });
+            }
+            catch (Exception ex)
+            {
+                Panuon.WPF.UI.Toast.Show(Global.form_musicplayer, "请求失败：" + ex.Message, ToastPosition.Top);
+            }
+            
+            
             if (IsNoPlay)
             {
                 return;
@@ -878,7 +898,7 @@ namespace YMCL.Pages.Forms
                 }
                 catch (Exception ex)
                 {
-                    Panuon.WPF.UI.Toast.Show(Global.form_musicplayer,"复制文件失败：" + ex, ToastPosition.Top);
+                    Panuon.WPF.UI.Toast.Show(Global.form_musicplayer,"复制文件失败：" + ex.Message, ToastPosition.Top);
                 }
             }
             else
@@ -901,7 +921,7 @@ namespace YMCL.Pages.Forms
                 }
                 catch (Exception ex)
                 {
-                    Panuon.WPF.UI.Toast.Show(Global.form_musicplayer,"下载失败：" + ex, ToastPosition.Top);
+                    Panuon.WPF.UI.Toast.Show(Global.form_musicplayer,"下载失败：" + ex.Message, ToastPosition.Top);
                 }
             }
         }

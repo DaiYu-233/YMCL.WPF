@@ -28,6 +28,7 @@ namespace YMCL.Pages.SettingPages
 
         }
         public int indexAnd;
+        string loginUrl;
         public List<AccountInfo> accountInfos = new List<AccountInfo>();
         List<AccountsList> accounts = new List<AccountsList>();
 
@@ -57,23 +58,22 @@ namespace YMCL.Pages.SettingPages
 
         private async void MicrosoftLogin()
         {
+            CopyCodeAndOpenBrowserBtn.IsEnabled = false;
             string refreshToken = string.Empty;
-            var V = MessageBoxX.Show("确定开始验证账户", "验证", MessageBoxButton.OKCancel);
-            if (V != MessageBoxResult.OK)
-            {
-                return;
-            }
+            loginMicrosoftDialog.ShowAsync();
 
             try
             {
+                LoginCodeText.Text = "加载中...";
                 MinecraftOAuth.Authenticator.MicrosoftAuthenticator microsoftAuthenticator = new(MinecraftOAuth.Module.Enum.AuthType.Access)
                 {
                     ClientId = "c06d4d68-7751-4a8a-a2ff-d1b46688f428"
                 };
                 var deviceInfo = await microsoftAuthenticator.GetDeviceInfo();
-                Clipboard.SetText(deviceInfo.UserCode);
-                MessageBoxX.Show(deviceInfo.UserCode, "一次性访问代码(已复制到剪切板)");
-                System.Diagnostics.Process.Start("explorer.exe", deviceInfo.VerificationUrl);
+                //Clipboard.SetText(deviceInfo.UserCode);
+                LoginCodeText.Text = deviceInfo.UserCode;
+                loginUrl = deviceInfo.VerificationUrl;
+                CopyCodeAndOpenBrowserBtn.IsEnabled = true;
                 var token = await microsoftAuthenticator.GetTokenResponse(deviceInfo);
                 var userProfile = await microsoftAuthenticator.AuthAsync(x =>
                 {
@@ -83,8 +83,8 @@ namespace YMCL.Pages.SettingPages
             }
             catch (Exception ex)
             {
-                // Panuon.WPF.UI.Toast.Show(Global.form_main,"Access登录失败：" + ex, ToastPosition.Top);
-                MessageBoxX.Show("Access登录失败：\n" + ex, "Yu Minecraft Launcher");
+                MessageBoxX.Show("Access登录失败：\n" + ex.Message, "Yu Minecraft Launcher");
+                return;
             }
 
             try
@@ -109,7 +109,7 @@ namespace YMCL.Pages.SettingPages
             }
             catch (Exception ex)
             {
-                MessageBoxX.Show("Refresh登录失败：\n" + ex, "Yu Minecraft Launcher");
+                MessageBoxX.Show("Refresh登录失败：\n" + ex.Message, "Yu Minecraft Launcher");
             }
 
 
@@ -166,6 +166,10 @@ namespace YMCL.Pages.SettingPages
             {
                 loginTypeSelectionDialog.Hide();
                 MicrosoftLogin();
+            }
+            else if (LoginTypeComboBox.SelectedItem.ToString() == "System.Windows.Controls.ComboBoxItem: 第三方登录")
+            {
+
             }
             else
             {
@@ -228,10 +232,6 @@ namespace YMCL.Pages.SettingPages
         }
 
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            //Toast.Show(Global.form_main,"启动逻辑尚未完善,建议使用离线模式", ToastPosition.Top);
-        }
 
         private void AccountsListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -266,6 +266,8 @@ namespace YMCL.Pages.SettingPages
         {
             loginTypeSelectionDialog.Hide();
             loginOfflineDialog.Hide();
+            loginMicrosoftDialog.Hide();
+            loginYggdrasilDialog.Hide();
         }
 
         private void offlineAccountAddBtn_Click(object sender, RoutedEventArgs e)
@@ -283,6 +285,31 @@ namespace YMCL.Pages.SettingPages
                 //MessageBoxX.Show("用户名为空！");
             }
 
+        }
+
+        private void CopyCodeAndOpenBrowserBtn_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("explorer.exe", loginUrl);
+            loginMicrosoftDialog.Hide();
+        }
+
+        private void YggdrasilAccountAddBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if(YggdrasilServerUrlTextBox.Text == string.Empty)
+            {
+                Panuon.WPF.UI.Toast.Show(Global.form_main, "验证服务器不可为空", ToastPosition.Top);
+                return;
+            }
+            if (YggdrasilEmailTextBox.Text == string.Empty)
+            {
+                Panuon.WPF.UI.Toast.Show(Global.form_main, "邮箱不可为空", ToastPosition.Top);
+                return;
+            }
+            if (YggdrasilPasswordTextBox.Text == string.Empty)
+            {
+                Panuon.WPF.UI.Toast.Show(Global.form_main, "密码不可为空", ToastPosition.Top);
+                return;
+            }
         }
     }
 }
