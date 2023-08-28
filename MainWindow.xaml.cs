@@ -214,11 +214,21 @@ namespace YMCL
             ServicePointManager.DefaultConnectionLimit = 512;
             MainFrame.Content = launch;
 
-            var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText(        Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\YMCL\\YMCL.Setting.json"));
+            var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\YMCL\\YMCL.Setting.json"));
             Width = obj.MainWindowWidth;
             Height = obj.MainWindowHeight;
             w = Width;
             h = Height;
+
+            //Trigger trigger = new Trigger();
+            //trigger.Property = RadioButton.IsCheckedProperty;
+            //trigger.Value = true;
+            //Setter setter1 = new Setter();
+            //setter1.TargetName = "txtName";
+            //setter1.Property = RadioButton.ForegroundProperty;
+            //setter1.Value = obj.ThemeColor;
+            //trigger.Setters.Add(setter1);
+            //rdLaunch.Style.Triggers.Add(trigger);
         }
 
 
@@ -259,7 +269,7 @@ namespace YMCL
         {
             MainFrame.Content = launch;
             Comein();
-            launch.UpdateLogin();
+            launch.VerListBorder.Visibility = Visibility.Hidden;
         }
 
         private void rdSetting_Checked(object sender, RoutedEventArgs e)

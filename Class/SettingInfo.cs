@@ -13,6 +13,7 @@ namespace YMCL.Class
         public int MaxMem { get; set; }
         public bool AloneCore { get; set; }
         public string? MinecraftPath { get; set; }
+        public int SelectedGameCoreIndex { get; set; }
 
         public string? LoginIndex { get; set; }
         public string? LoginName { get; set; }

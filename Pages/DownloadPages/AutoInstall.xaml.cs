@@ -98,7 +98,7 @@ namespace YMCL.Pages.DownloadPages
             }
             catch
             {
-                Panuon.WPF.UI.Toast.Show(Global.form_main,$"可安装版本列表失败，这可能是网络原因", ToastPosition.Top);
+                Panuon.WPF.UI.Toast.Show(GlobalWindow.form_main,$"可安装版本列表失败，这可能是网络原因", ToastPosition.Top);
                 RefreshVerListBtn.IsEnabled = true;
             }
 
@@ -376,7 +376,7 @@ namespace YMCL.Pages.DownloadPages
 
             if (IsQuilt || IsFabric)
             {
-                Panuon.WPF.UI.Toast.Show(Global.form_main,$"不兼容！", ToastPosition.Top);
+                Panuon.WPF.UI.Toast.Show(GlobalWindow.form_main,$"不兼容！", ToastPosition.Top);
                 //MessageBoxX.Show("不兼容!", "Yu Minecraft Launcher");
             }
             else
@@ -427,7 +427,7 @@ namespace YMCL.Pages.DownloadPages
 
             if (IsFabric || IsQuilt)
             {
-                Panuon.WPF.UI.Toast.Show(Global.form_main,$"不兼容！", ToastPosition.Top);
+                Panuon.WPF.UI.Toast.Show(GlobalWindow.form_main,$"不兼容！", ToastPosition.Top);
                 //MessageBoxX.Show("不兼容!", "Yu Minecraft Launcher");
                 return;
             }
@@ -463,7 +463,7 @@ namespace YMCL.Pages.DownloadPages
 
             if (IsForge || IsQuilt || IsOptiFine)
             {
-                Panuon.WPF.UI.Toast.Show(Global.form_main,$"不兼容！", ToastPosition.Top);
+                Panuon.WPF.UI.Toast.Show(GlobalWindow.form_main,$"不兼容！", ToastPosition.Top);
                 //MessageBoxX.Show("不兼容!", "Yu Minecraft Launcher");
             }
             else
@@ -498,7 +498,7 @@ namespace YMCL.Pages.DownloadPages
 
             if (IsFabric || IsForge || IsOptiFine)
             {
-                Panuon.WPF.UI.Toast.Show(Global.form_main,$"不兼容！", ToastPosition.Top);
+                Panuon.WPF.UI.Toast.Show(GlobalWindow.form_main,$"不兼容！", ToastPosition.Top);
                 //MessageBoxX.Show("不兼容!", "Yu Minecraft Launcher");
             }
             else
@@ -533,7 +533,7 @@ namespace YMCL.Pages.DownloadPages
             #region 版本名称判断
             if (VersionName.Text == string.Empty)
             {
-                Panuon.WPF.UI.Toast.Show(Global.form_main,$"版本名称不可为空", ToastPosition.Top);
+                Panuon.WPF.UI.Toast.Show(GlobalWindow.form_main,$"版本名称不可为空", ToastPosition.Top);
                 return;
             }
             //制定出非法字符串
@@ -554,12 +554,12 @@ namespace YMCL.Pages.DownloadPages
             }
             if (res > 0)
             {
-                Panuon.WPF.UI.Toast.Show(Global.form_main,$"存在非法字符 {UserMsg} ", ToastPosition.Top); //返回非法字符串
+                Panuon.WPF.UI.Toast.Show(GlobalWindow.form_main,$"存在非法字符 {UserMsg} ", ToastPosition.Top); //返回非法字符串
                 return;
             }
             if (Directory.Exists("./.minecraft/versions/" + VersionName.Text))
             {
-                Panuon.WPF.UI.Toast.Show(Global.form_main,$"不可与现有文件夹重名", ToastPosition.Top);
+                Panuon.WPF.UI.Toast.Show(GlobalWindow.form_main,$"不可与现有文件夹重名", ToastPosition.Top);
                 return;
             }
             #endregion
@@ -583,7 +583,7 @@ namespace YMCL.Pages.DownloadPages
             #endregion
             ResourceInstaller.MaxDownloadThreads = Convert.ToInt32(obj.MaxDownloadThreads);
             ResourceDownloader.MaxDownloadThreads = Convert.ToInt32(obj.MaxDownloadThreads); //下载最大线程数
-            Panuon.WPF.UI.Toast.Show(Global.form_main,$"开始安装{InsVerName}", ToastPosition.Top);
+            Panuon.WPF.UI.Toast.Show(GlobalWindow.form_main,$"开始安装{InsVerName}", ToastPosition.Top);
             #region UI
             DownloadInfo.Visibility = Visibility.Visible;
 
@@ -617,7 +617,7 @@ namespace YMCL.Pages.DownloadPages
                 };
                 var result = await installer.InstallAsync();
             });
-            Panuon.WPF.UI.Toast.Show(Global.form_main,$"Vanllia {InsVer} 安装完成", ToastPosition.Top);
+            Panuon.WPF.UI.Toast.Show(GlobalWindow.form_main,$"Vanllia {InsVer} 安装完成", ToastPosition.Top);
 
 
 
@@ -656,7 +656,7 @@ namespace YMCL.Pages.DownloadPages
                     var result = await installer.InstallAsync();
                 });
                 DownloadText.Text = DownloadText.Text + $"[{DateTime.Now.ToString()}]    安装完成：Forge-{forgeversion}\n";
-                Panuon.WPF.UI.Toast.Show(Global.form_main,$"Forge {forgeversion} 安装完成", ToastPosition.Top);
+                Panuon.WPF.UI.Toast.Show(GlobalWindow.form_main,$"Forge {forgeversion} 安装完成", ToastPosition.Top);
             }
 
             if (IsOptiFine)
@@ -691,7 +691,7 @@ namespace YMCL.Pages.DownloadPages
                     var result = await installer.InstallAsync();
                 });
                 DownloadText.Text = DownloadText.Text + $"[{DateTime.Now.ToString()}]    安装完成：OptiFine-{optifineversion}\n";
-                Panuon.WPF.UI.Toast.Show(Global.form_main,$"OptiFine {optifineversion} 安装完成", ToastPosition.Top);
+                Panuon.WPF.UI.Toast.Show(GlobalWindow.form_main,$"OptiFine {optifineversion} 安装完成", ToastPosition.Top);
             }
 
             if (IsFabric)
@@ -712,7 +712,7 @@ namespace YMCL.Pages.DownloadPages
                     var fabricres = fabricinstaller.Install();
                 });
                 DownloadText.Text = DownloadText.Text + $"[{DateTime.Now.ToString()}]    安装完成：Fabric-{fabricversion}\n";
-                Panuon.WPF.UI.Toast.Show(Global.form_main,$"Fabric {fabricversion} 安装完成", ToastPosition.Top);
+                Panuon.WPF.UI.Toast.Show(GlobalWindow.form_main,$"Fabric {fabricversion} 安装完成", ToastPosition.Top);
             }
 
             if (IsQuilt)
@@ -733,7 +733,7 @@ namespace YMCL.Pages.DownloadPages
                     var quiltres = quiltinstaller.Install();
                 });
                 DownloadText.Text = DownloadText.Text + $"[{DateTime.Now.ToString()}]    安装完成：Quilt-{quiltversion}\n";
-                Panuon.WPF.UI.Toast.Show(Global.form_main,$"Quilt {quiltversion} 安装完成", ToastPosition.Top);
+                Panuon.WPF.UI.Toast.Show(GlobalWindow.form_main,$"Quilt {quiltversion} 安装完成", ToastPosition.Top);
             }
 
             DownloadText.Text = DownloadText.Text + $"[{DateTime.Now.ToString()}]    游戏核心 {InsVerName} 安装完成";

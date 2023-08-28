@@ -7,15 +7,13 @@
       mc:Ignorable="d"  xmlns:pu="https://opensource.panuon.com/wpf-ui"
       Title="Account" >
     <Border Background="{DynamicResource ThemeBackground}" CornerRadius="0,0,8,0">
-        <Grid  >
-      
-            <Button x:Name="AddAcount" Content="添加新账户" Height="29" Margin="10,10,0,0" VerticalAlignment="Top" Width="161" FontFamily="MiSans Medium" Click="AddAcount_Click"/>
-            <Button x:Name="Del" Content="删除此账户" Height="29" Margin="176,10,0,0" VerticalAlignment="Top" Width="134" FontFamily="MiSans Medium" IsEnabled="False" Click="Button_Click_3" />
-
-            <Border Margin="10,44,10,10" Background="{DynamicResource ThemeContentBorderBackground}" CornerRadius="3,3,3,3">
+        <Grid>
+            <Border Margin="10,10,10,10" Background="{DynamicResource ThemeContentBorderBackground}" CornerRadius="3,3,3,3">
                 <Grid>
-                    <DataGrid x:Name="DataGr" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="5,5,5,5" FontFamily="MiSans Medium" SelectionChanged="DataGr_SelectionChanged" IsReadOnly="True" CanUserSortColumns="False" Visibility="Hidden"/>
-                    <ui:ListView x:Name="AccountsListView" Margin="5,5,5,5" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="AccountsListView_SelectionChanged">
+                <Button x:Name="AddAcount" Content="添加新账户" Height="30" Margin="5,5,0,0" VerticalAlignment="Top" Width="150" FontFamily="MiSans Medium" Click="AddAcount_Click"/>
+                <Button x:Name="Del" Content="删除选中账户" Height="30" Margin="160,5,0,0" VerticalAlignment="Top" Width="124" FontFamily="MiSans Medium" IsEnabled="False" Click="Button_Click_3" />
+                <DataGrid x:Name="DataGr" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="5,5,5,5" FontFamily="MiSans Medium" SelectionChanged="DataGr_SelectionChanged" IsReadOnly="True" CanUserSortColumns="False" Visibility="Hidden"/>
+                    <ui:ListView x:Name="AccountsListView" Margin="5,40,5,5" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="AccountsListView_SelectionChanged">
                         <ui:ListView.ItemTemplate>
                             <DataTemplate>
                                 <Grid>
@@ -29,13 +27,13 @@
                 </Grid>
             </Border>
 
-            
-            
-            <TextBlock TextWrapping="Wrap" Text="当前登录方式：" Margin="318,20,0,0" FontFamily="MiSans Medium" Foreground="DimGray" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <TextBlock x:Name="NowLoginType" TextWrapping="Wrap" Text="1" Margin="398,20,0,0" FontFamily="MiSans Medium" Foreground="DimGray" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
 
-            <ui:ContentDialog x:Name="loginTypeSelectionDialog">
+            <TextBlock TextWrapping="Wrap" Text="当前登录方式：" Margin="324,28,0,0" FontFamily="MiSans Medium" Foreground="DimGray" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Hidden"/>
+            <TextBlock x:Name="NowLoginType" TextWrapping="Wrap" Text="1" Margin="400,28,0,0" FontFamily="MiSans Medium" Foreground="DimGray" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Hidden"/>
+
+
+            <ui:ContentDialog x:Name="loginTypeSelectionDialog" BorderThickness="0,0,0,0">
                 <Grid>
                     <ComboBox x:Name="LoginTypeComboBox" Width="324" SelectionChanged="ComboBox_SelectionChanged" FontFamily="MiSans Medium" SelectedIndex="0" FontSize="12">
                         <ComboBoxItem Content="离线登录"/>
@@ -48,16 +46,26 @@
 
                 </Grid>
             </ui:ContentDialog>
-            <ui:ContentDialog x:Name="loginOfflineDialog">
+            <ui:ContentDialog x:Name="loginOfflineDialog" BorderThickness="0,0,0,0">
                 <Grid>
-                    <TextBox x:Name="offlineUserNameTextBox" FontFamily="MiSans Medium" FontSize="16" VerticalAlignment="Top"  Width="390" ui:ControlHelper.PlaceholderText="游戏用户名"  />
-                    
+                    <TextBox x:Name="offlineUserNameTextBox" FontFamily="MiSans Medium" FontSize="15" VerticalAlignment="Top"  Width="393" ui:ControlHelper.PlaceholderText="游戏用户名" Height="20"  />
+
                     <Button x:Name="offlineAccountAddBtn" VerticalAlignment="Bottom" Height="29" Width="95" FontFamily="MiSans Medium"  Style="{StaticResource AccentButtonStyle}" Content="确定" IsEnabled="True" Click="offlineAccountAddBtn_Click" HorizontalAlignment="Right" Margin="0,0,5,5" />
                     <Button VerticalAlignment="Bottom" Height="29" Width="80" FontFamily="MiSans Medium" Content="取消" IsEnabled="True" Click="CancelAddAccountBtn_Click" HorizontalAlignment="Right" Margin="0,0,105,5" />
 
                 </Grid>
             </ui:ContentDialog>
-            <ui:ContentDialog x:Name="loginYggdrasilDialog">
+            <ui:ContentDialog x:Name="loginMicrosoftDialog" BorderThickness="0,0,0,0" IsShadowEnabled="True" >
+                <Grid>
+                    <TextBlock Text="验证代码" FontFamily="MiSans Medium" VerticalAlignment="Top" HorizontalAlignment="Center" Foreground="#E4B3B3B3" FontSize="13"/>
+                    <TextBlock x:Name="LoginCodeText" Text="加载中..." FontFamily="MiSans Medium" VerticalAlignment="Top" HorizontalAlignment="Center" Foreground="{DynamicResource ThemeTextColor}" Margin="0,16,0,0" FontSize="16"/>
+
+                    <Button x:Name="CopyCodeAndOpenBrowserBtn" VerticalAlignment="Bottom" Height="29" Width="170" FontFamily="MiSans Medium"  Style="{StaticResource AccentButtonStyle}" Content="复制代码并打开浏览器" IsEnabled="True" Click="CopyCodeAndOpenBrowserBtn_Click" HorizontalAlignment="Right" Margin="0,0,5,5" />
+                    <Button x:Name="CancelAddMicrosoftAccountBtn" VerticalAlignment="Bottom" Height="29" Width="80" FontFamily="MiSans Medium" Content="取消" IsEnabled="True" Click="CancelAddAccountBtn_Click" HorizontalAlignment="Right" Margin="0,0,180,5" />
+
+                </Grid>
+            </ui:ContentDialog>
+            <ui:ContentDialog x:Name="loginYggdrasilDialog"  BorderThickness="0,0,0,0">
                 <Grid Width="429" Height="185">
                     <TextBox x:Name="YggdrasilServerUrlTextBox" FontFamily="MiSans Medium" FontSize="15" VerticalAlignment="Top"  Width="420"  ui:ControlHelper.PlaceholderText="认证服务器地址" Height="30"/>
                     <TextBox x:Name="YggdrasilEmailTextBox" FontFamily="MiSans Medium" FontSize="15" VerticalAlignment="Top"  Width="420"  ui:ControlHelper.PlaceholderText="邮箱地址" Margin="0,39,0,0" Height="23"/>
@@ -67,16 +75,6 @@
                     <Button VerticalAlignment="Bottom" Height="29" Width="80" FontFamily="MiSans Medium" Content="取消" IsEnabled="True" Click="CancelAddAccountBtn_Click" HorizontalAlignment="Right" Margin="0,0,105,5" />
 
                     <CheckBox x:Name="isLittleSkin" VerticalAlignment="Bottom" Margin="10,0,0,2" Content="LittleSkin" Click="isLittleSkin_Click"/>
-                </Grid>
-            </ui:ContentDialog>
-            <ui:ContentDialog x:Name="loginMicrosoftDialog" >
-                <Grid>
-                    <TextBlock Text="验证代码" FontFamily="MiSans Medium" VerticalAlignment="Top" HorizontalAlignment="Center" Foreground="#E4B3B3B3" FontSize="13"/>
-                    <TextBlock x:Name="LoginCodeText" Text="加载中..." FontFamily="MiSans Medium" VerticalAlignment="Top" HorizontalAlignment="Center" Foreground="{DynamicResource ThemeTextColor}" Margin="0,16,0,0" FontSize="16"/>
-
-                    <Button x:Name="CopyCodeAndOpenBrowserBtn" VerticalAlignment="Bottom" Height="29" Width="170" FontFamily="MiSans Medium"  Style="{StaticResource AccentButtonStyle}" Content="复制代码并打开浏览器" IsEnabled="True" Click="CopyCodeAndOpenBrowserBtn_Click" HorizontalAlignment="Right" Margin="0,0,5,5" />
-                    <Button x:Name="CancelAddMicrosoftAccountBtn" VerticalAlignment="Bottom" Height="29" Width="80" FontFamily="MiSans Medium" Content="取消" IsEnabled="True" Click="CancelAddAccountBtn_Click" HorizontalAlignment="Right" Margin="0,0,180,5" />
-
                 </Grid>
             </ui:ContentDialog>
         </Grid>

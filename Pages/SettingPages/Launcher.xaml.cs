@@ -127,8 +127,8 @@ namespace YMCL.Pages.SettingPages
                 obj.Theme = "Light";
                 File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\YMCL\\YMCL.Setting.json", JsonConvert.SerializeObject(obj, Newtonsoft.Json.Formatting.Indented));
             }
-            Panuon.WPF.UI.Toast.Show(Global.form_main, "已保存", ToastPosition.Top);
-            //Toast.Show(Global.form_main,"成功应用设置", new ToastOptions { Icon = ToastIcons.Information, Time = 1500, Location = ToastLocation.OwnerTopCenter });
+            Panuon.WPF.UI.Toast.Show(GlobalWindow.form_main, "已保存", ToastPosition.Top);
+            //Toast.Show(GlobalWindow.form_main,"成功应用设置", new ToastOptions { Icon = ToastIcons.Information, Time = 1500, Location = ToastLocation.OwnerTopCenter });
 
         }
 
@@ -158,7 +158,7 @@ namespace YMCL.Pages.SettingPages
             }
             finally
             {
-                Panuon.WPF.UI.Toast.Show(Global.form_main, "写入成功！", ToastPosition.Top);
+                Panuon.WPF.UI.Toast.Show(GlobalWindow.form_main, "写入成功！", ToastPosition.Top);
                 //MessageBoxX.Show($"写入成功！","Yu Minecraft Launcher");
             }
         }

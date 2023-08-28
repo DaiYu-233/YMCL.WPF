@@ -55,7 +55,7 @@ namespace YMCL.Pages
                     // 用于踢掉其他的在上层的窗口
                     musicPlayer.Topmost = true;
                     musicPlayer.Topmost = false;
-                    Toast.Show(Global.form_musicplayer, $"主窗口已最小化", ToastPosition.Top);
+                    Toast.Show(GlobalWindow.form_musicplayer, $"主窗口已最小化", ToastPosition.Top);
                 }
                 else
                 {
@@ -67,7 +67,7 @@ namespace YMCL.Pages
                     // 用于踢掉其他的在上层的窗口
                     musicPlayer.Topmost = true;
                     musicPlayer.Topmost = false;
-                    Toast.Show(window: Global.form_musicplayer, $"主窗口已最小化", ToastPosition.Top);
+                    Toast.Show(window: GlobalWindow.form_musicplayer, $"主窗口已最小化", ToastPosition.Top);
                 }
 
             }
