@@ -78,7 +78,7 @@ namespace YMCL.Pages.SettingPages
                 var token = await microsoftAuthenticator.GetTokenResponse(deviceInfo);
                 var userProfile = await microsoftAuthenticator.AuthAsync(x =>
                 {
-                    Panuon.WPF.UI.Toast.Show(Global.form_main, "Access：" + x, ToastPosition.Top);
+                    Panuon.WPF.UI.Toast.Show(GlobalWindow.form_main, "Access：" + x, ToastPosition.Top);
                 });
                 refreshToken = userProfile.RefreshToken;
             }
@@ -97,7 +97,7 @@ namespace YMCL.Pages.SettingPages
                 };
                 var result = await microsoftAuthenticator.AuthAsync(x =>
                 {
-                    Panuon.WPF.UI.Toast.Show(Global.form_main, "Refresh：" + x, ToastPosition.Top);
+                    Panuon.WPF.UI.Toast.Show(GlobalWindow.form_main, "Refresh：" + x, ToastPosition.Top);
                 });
 
                 //MessageBoxX.Show(result.ToJson(), "账户Json信息");
@@ -106,7 +106,7 @@ namespace YMCL.Pages.SettingPages
                 WriteFile();
 
                 datagrid();
-                Panuon.WPF.UI.Toast.Show(Global.form_main, "登录完成", ToastPosition.Top);
+                Panuon.WPF.UI.Toast.Show(GlobalWindow.form_main, "登录完成", ToastPosition.Top);
             }
             catch (Exception ex)
             {
@@ -181,7 +181,7 @@ namespace YMCL.Pages.SettingPages
             }
             else
             {
-                Panuon.WPF.UI.Toast.Show(Global.form_main, "请选择登录方式", ToastPosition.Top);
+                Panuon.WPF.UI.Toast.Show(GlobalWindow.form_main, "请选择登录方式", ToastPosition.Top);
                 //MessageBoxX.Show("请选择登录方式");
             }
 
@@ -289,7 +289,7 @@ namespace YMCL.Pages.SettingPages
             }
             else
             {
-                Panuon.WPF.UI.Toast.Show(Global.form_main, "用户名不可为空", ToastPosition.Top);
+                Panuon.WPF.UI.Toast.Show(GlobalWindow.form_main, "用户名不可为空", ToastPosition.Top);
                 //MessageBoxX.Show("用户名为空！");
             }
 
@@ -305,17 +305,17 @@ namespace YMCL.Pages.SettingPages
         {
             if (YggdrasilServerUrlTextBox.Text == string.Empty)
             {
-                Panuon.WPF.UI.Toast.Show(Global.form_main, "验证服务器不可为空", ToastPosition.Top);
+                Panuon.WPF.UI.Toast.Show(GlobalWindow.form_main, "验证服务器不可为空", ToastPosition.Top);
                 return;
             }
             if (YggdrasilEmailTextBox.Text == string.Empty)
             {
-                Panuon.WPF.UI.Toast.Show(Global.form_main, "邮箱不可为空", ToastPosition.Top);
+                Panuon.WPF.UI.Toast.Show(GlobalWindow.form_main, "邮箱不可为空", ToastPosition.Top);
                 return;
             }
             if (YggdrasilPasswordTextBox.Text == string.Empty)
             {
-                Panuon.WPF.UI.Toast.Show(Global.form_main, "密码不可为空", ToastPosition.Top);
+                Panuon.WPF.UI.Toast.Show(GlobalWindow.form_main, "密码不可为空", ToastPosition.Top);
                 return;
             }
 
@@ -360,12 +360,12 @@ namespace YMCL.Pages.SettingPages
                 WriteFile();
                 datagrid();
                 loginYggdrasilDialog.Hide();
-                Panuon.WPF.UI.Toast.Show(Global.form_main, "登录完成", ToastPosition.Top);
+                Panuon.WPF.UI.Toast.Show(GlobalWindow.form_main, "登录完成", ToastPosition.Top);
 
             }
             catch (Exception ex)
             {
-                Panuon.WPF.UI.Toast.Show(Global.form_main, "登录失败："+ex.Message, ToastPosition.Top);
+                Panuon.WPF.UI.Toast.Show(GlobalWindow.form_main, "登录失败："+ex.Message, ToastPosition.Top);
                 //MessageBoxX.Show(ex.Message);
             }
 

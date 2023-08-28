@@ -19,12 +19,12 @@ namespace YMCL
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
-    public class Global
+    public class GlobalWindow
     {
-    
+
 
         public static MusicPlayer form_musicplayer = Application.Current.Windows.Cast<WindowX>()
-        .FirstOrDefault(window => window is MusicPlayer) as MusicPlayer; 
+        .FirstOrDefault(window => window is MusicPlayer) as MusicPlayer;
         public static MainWindow form_main = Application.Current.Windows.Cast<WindowX>()
         .FirstOrDefault(window => window is MainWindow) as MainWindow;
 
@@ -34,7 +34,7 @@ namespace YMCL
     }
     public partial class App : Application
     {
-        
+
         class MinecraftPathCalss
         {
             public string? MCPath;
@@ -42,7 +42,7 @@ namespace YMCL
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            var basePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData); 
+            var basePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             //入口点
             if (!Directory.Exists(basePath + "\\YMCL"))
             {
@@ -52,11 +52,6 @@ namespace YMCL
             if (!Directory.Exists(basePath + "\\YMCL\\Temp"))
             {
                 System.IO.DirectoryInfo directoryInfo = new System.IO.DirectoryInfo(basePath + "\\YMCL\\Temp");
-                directoryInfo.Create();
-            }
-            if (!Directory.Exists(basePath + "\\YMCL\\Accounts"))
-            {
-                System.IO.DirectoryInfo directoryInfo = new System.IO.DirectoryInfo(basePath + "\\YMCL\\Accounts");
                 directoryInfo.Create();
             }
 
@@ -78,6 +73,7 @@ namespace YMCL
                     MainWindowHeight = 521,
                     MainWindowWidth = 900,
                     PlayerWindowHeight = 521,
+                    SelectedGameCoreIndex = -1,
                     PlayerWindowWidth = 900,
                     PlayerVolume = 0.5,
                     ThemeColor = Color.FromArgb(255, 0, 120, 215)
@@ -92,6 +88,10 @@ namespace YMCL
             if (!File.Exists(basePath + "\\YMCL\\YMCL.PlayList.json"))
             {
                 File.WriteAllText(basePath + "\\YMCL\\YMCL.PlayList.json", "");
+            }
+            if (!File.Exists(basePath + "\\YMCL\\YMCL.Account.json"))
+            {
+                File.WriteAllText(basePath + "\\YMCL\\YMCL.Account.json", "[{\"AccountType\": \"离线登录\",\"Data\": \"Null\",\"Name\": \"Steve\",\"AddTime\": \"Null\"}]");
             }
 
         }

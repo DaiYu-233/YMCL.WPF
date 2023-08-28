@@ -74,7 +74,7 @@ namespace YMCL.Pages.SettingPages
         {
             if (SilderBox.Value >= 128)
             {
-                Panuon.WPF.UI.Toast.Show(Global.form_main, "下载线程过大，可能会导致卡顿", ToastPosition.Top);
+                Panuon.WPF.UI.Toast.Show(GlobalWindow.form_main, "下载线程过大，可能会导致卡顿", ToastPosition.Top);
             }
             var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText(        Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\YMCL\\YMCL.Setting.json"));
             obj.MaxDownloadThreads = SilderInfo.Text;

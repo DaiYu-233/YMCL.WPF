@@ -8,14 +8,14 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <!--<ResourceDictionary>
-                    <pu:GlobalSettings x:Key="settings">
-                        <pu:GlobalSettings.Themes>
+                    <pu:GlobalWindowSettings x:Key="settings">
+                        <pu:GlobalWindowSettings.Themes>
                             <pu:ApplicationTheme Key="Light"
                                                  ResourceDictionary="Styles/WPF-UI-Light.xaml" />
                             <pu:ApplicationTheme Key="Dark"
                                                  ResourceDictionary="Styles/WPF-UI-Dark.xaml" />
-                        </pu:GlobalSettings.Themes>
-                    </pu:GlobalSettings>
+                        </pu:GlobalWindowSettings.Themes>
+                    </pu:GlobalWindowSettings>
                    
                 </ResourceDictionary>-->
                 <ui:ThemeResources RequestedTheme="Light"/>
