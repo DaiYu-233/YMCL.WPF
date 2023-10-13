@@ -1,20 +1,23 @@
-﻿using MinecraftLaunch.Launch;
-using MinecraftLaunch.Modules.Enum;
-using MinecraftLaunch.Modules.Models.Launch;
-using MinecraftLaunch.Modules.Utils;
-using Natsurainko.FluentCore.Module.Launcher;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Panuon.WPF.UI;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
-using YMCL.Class;
-using static PInvoke.Kernel32;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 
 namespace YMCL.Pages
 {
@@ -23,237 +26,181 @@ namespace YMCL.Pages
     /// </summary>
     public partial class LaunchPage : Page
     {
-        List<GameCore> versions = new List<GameCore>();
-        class hitokotoClass
-        {
-            public string? id { get; set; }
-            public string? uuid { get; set; }
-            public string? hitokoto { get; set; }
-            public string? type { get; set; }
-            public string? from { get; set; }
-            public string? from_who { get; set; }
-            public string? creator { get; set; }
-            public string? creator_uid { get; set; }
-            public string? reviewer { get; set; }
-            public string? commit_from { get; set; }
-            public string? created_at { get; set; }
-            public string? length { get; set; }
-        }
-
         public LaunchPage()
         {
             InitializeComponent();
-            GetVers();
-            var obj = JsonConvert.DeserializeObject<SettingInfo>
-                (File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\YMCL\\YMCL.Setting.json"));
-            if (obj.SelectedGameCoreIndex > VerListView.Items.Count - 1 || obj.SelectedGameCoreIndex == -1)
+            hitokoto();
+            LoadMinecraftFolders();
+
+            HitokotoTextBlock.MouseRightButtonDown += (sender, e) =>
             {
-                VerListView.SelectedIndex = -1;
-            }
-            else
-            {
-                VerListView.SelectedItem = VerListView.Items[obj.SelectedGameCoreIndex];
-            }
-
-            #region
-
-
-            if (!Directory.Exists(obj.MinecraftPath))
-            {
-                System.IO.DirectoryInfo directoryInfo = new System.IO.DirectoryInfo(obj.MinecraftPath);
-                directoryInfo.Create();
-            }
-
-            GetHitokoto();
-
-
-
-
-            #endregion
+                System.Windows.Clipboard.SetText(HitokotoTextBlock.Text);
+                Toast.Show("已复制到剪切板", ToastPosition.Top);
+            };
         }
 
-        private async void GetHitokoto()
+        private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            await Task.Run(async () =>
+            MinecraftVersionBorderCloseButton_Click(sender, e);
+        }
+
+        #region MinecraftFolder
+        List<string> minecraftFolders = new();
+        void LoadMinecraftFolders()
+        {
+            MinecraftPathComboBox.Items.Clear();
+            minecraftFolders = JsonConvert.DeserializeObject<List<string>>
+                (File.ReadAllText(Const.YMCLMinecraftFolderDataPath));
+            var setting = JsonConvert.DeserializeObject<Class.Setting>(File.ReadAllText(Const.YMCLSettingDataPath));
+            foreach (var item in minecraftFolders)
             {
-                try
+                MinecraftPathComboBox.Items.Add(item);
+            }
+            MinecraftPathComboBox.SelectedItem = setting.MinecraftPath;
+        }
+
+        private void AddMinecraftFolder_Click(object sender, RoutedEventArgs e)
+        {
+            FolderBrowserDialog dialog = new FolderBrowserDialog();
+            string path = string.Empty;
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                path = dialog.SelectedPath;//获取选中文件路径
+                string[] array = path.Split(@"\");
+                if (array[array.Length - 1] != ".minecraft")
                 {
-                    using (HttpClient client = new HttpClient())
+                    Toast.Show(Const.Window.main, "需选择 .minecraft 文件夹", ToastPosition.Top);
+                    return;
+                }
+                var isIncludePath = false;
+                var dataArray = JsonConvert.DeserializeObject<string[]>(File.ReadAllText(Const.YMCLMinecraftFolderDataPath));
+                if (dataArray != null)
+                {
+                    foreach (var item in dataArray)
                     {
-                        string url = "https://v1.hitokoto.cn";
-                        HttpResponseMessage response = await client.GetAsync(url);
-                        response.EnsureSuccessStatusCode();
-                        string responseBody = await response.Content.ReadAsStringAsync();
-                        var obj = JsonConvert.DeserializeObject<hitokotoClass>(responseBody);
-                        var res = obj.hitokoto + "    ——「" + obj.from + "」";
-                        Dispatcher.BeginInvoke(() => { hitokoto.Text = res; });
+                        if (item == path)
+                        {
+                            isIncludePath = true;
+                        }
+                    }
+                    if (isIncludePath)
+                    {
+                        Toast.Show(Const.Window.main, "已存在此文件夹", ToastPosition.Top);
+                        MinecraftPathComboBox.SelectedItem = path;
+                    }
+                    else
+                    {
+                        minecraftFolders.Add(path);
+                        File.WriteAllText(Const.YMCLMinecraftFolderDataPath, JsonConvert.SerializeObject(minecraftFolders, Formatting.Indented));
+                        MinecraftPathComboBox.Items.Add(path);
+                        MinecraftPathComboBox.SelectedItem = path;
                     }
                 }
-                catch (Exception ex)
+                else
                 {
-                    Dispatcher.BeginInvoke(() => { hitokoto.Text = $"请求失败: {ex.Message}"; });
+                    var obj = new List<string>()
+                    {
+                        ".minecraft"
+                    };
+                    var data = JsonConvert.SerializeObject(obj, Formatting.Indented);
+                    File.WriteAllText(Const.YMCLMinecraftFolderDataPath, data);
                 }
+            }
+        }
+
+        private void DelMinecraftFolder_Click(object sender, RoutedEventArgs e)
+        {
+            var index = MinecraftPathComboBox.SelectedIndex;
+            minecraftFolders.RemoveAt(index);
+            MinecraftPathComboBox.Items.RemoveAt(index);
+            if (minecraftFolders.Count == 0)
+            {
+                minecraftFolders.Add(".minecraft");
+                MinecraftPathComboBox.Items.Add(".minecraft");
+            }
+            MinecraftPathComboBox.SelectedIndex = 0;
+            File.WriteAllText(Const.YMCLMinecraftFolderDataPath, JsonConvert.SerializeObject(minecraftFolders, Formatting.Indented));
+        }
+
+        private void MinecraftPathComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var item = MinecraftPathComboBox.SelectedItem as string;
+            var setting = JsonConvert.DeserializeObject<Class.Setting>(File.ReadAllText(Const.YMCLSettingDataPath));
+            setting.MinecraftPath = item;
+            File.WriteAllText(Const.YMCLSettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+            LoadMinecraftVersion();
+        }
+        #endregion
+        #region MinecreaftVersion
+
+        void LoadMinecraftVersion()
+        {
+            VersionListView.Items.Clear();
+            List<string> gameCores = new();
+            var setting = JsonConvert.DeserializeObject<Class.Setting>(File.ReadAllText(Const.YMCLSettingDataPath));
+            MinecraftLaunch.Modules.Utils.GameCoreUtil gameCoreUtil = new(setting.MinecraftPath);
+            gameCoreUtil.GetGameCores().ToList().ForEach(gameCore =>
+            {
+                gameCores.Add(gameCore.Id);
+            });
+            gameCores.ForEach(gameCore =>
+            {
+                VersionListView.Items.Add(gameCore);
             });
         }
-        #region
 
-
-
-        private void GetVers()
+        private void ToVersionList_Click(object sender, RoutedEventArgs e)
         {
-            GameCoreLocator Core = new GameCoreLocator(JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\YMCL\\YMCL.Setting.json")).MinecraftPath);
-            VerListView.ItemsSource = Core.GetGameCores();
-        }
-
-        private void GameVerTextBlock_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            hitokoto.Visibility = Visibility.Hidden;
             VerListBorder.Visibility = Visibility.Visible;
-            GetVers();
+            HitokotoTextBlock.Visibility = Visibility.Hidden;
+            LoadMinecraftVersion();
         }
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
+
+        private void MinecraftVersionBorderCloseButton_Click(object sender, RoutedEventArgs e)
         {
-            hitokoto.Visibility = Visibility.Hidden;
-            VerListBorder.Visibility = Visibility.Visible;
-            GetVers();
-        }
-        private void btnClose_Click(object sender, RoutedEventArgs e)
-        {
-            hitokoto.Visibility = Visibility.Visible;
             VerListBorder.Visibility = Visibility.Hidden;
+            HitokotoTextBlock.Visibility = Visibility.Visible;
         }
 
-        private void VerListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void VersionListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (VerListView.SelectedIndex == -1)
-            {
-                GameCoreText.Text = "<游戏核心>";
-                hitokoto.Visibility = Visibility.Visible;
-                VerListBorder.Visibility = Visibility.Hidden;
-                return;
-            }
-            VerListBorder.Visibility = Visibility.Hidden;
-            var id = VerListView.SelectedItem as Natsurainko.FluentCore.Model.Launch.GameCore;
-            GameCoreText.Text = id.Id;
-            hitokoto.Visibility = Visibility.Visible;
-            var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\YMCL\\YMCL.Setting.json"));
-            obj.SelectedGameCoreIndex = VerListView.SelectedIndex;
-            File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\YMCL\\YMCL.Setting.json", JsonConvert.SerializeObject(obj, Newtonsoft.Json.Formatting.Indented));
+            MinecraftVersionBorderCloseButton_Click(sender, e);
         }
-
-
-
-        private void hitokoto_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            GetHitokoto();
-        }
-
-        private void hitokoto_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            Clipboard.SetText(hitokoto.Text);
-            Toast.Show(GlobalWindow.form_main, "已复制到剪切板", ToastPosition.Top);
-        }
-
 
 
         #endregion
 
-        private async void LaunchGame_Click(ModernWpf.Controls.SplitButton sender, ModernWpf.Controls.SplitButtonClickEventArgs args)
+
+        //获取一言(https://hitokoto.cn/)
+        public async void hitokoto(object? sender = null, MouseButtonEventArgs? e = null)
         {
-            LaunchGame.IsEnabled = false;
-            var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\YMCL\\YMCL.Setting.json"));
-            LaunchConfig launchConfig = new()
+            try
             {
-                JvmConfig = new JvmConfig(obj.Java)
+                using (HttpClient httpClient = new HttpClient())
                 {
-                    MaxMemory = obj.MaxMem,
-                    MinMemory = 128
-                },
-                //GameWindowConfig = new GameWindowConfig()
-                //{
-                //    Width = 999,
-                //    Height = 999,
-                //    IsFullscreen = false
-                //},
-                NativesFolder = null, //一般可以无视这个选项
-                IsEnableIndependencyCore = obj.AloneCore//是否启用版本隔离
-            };
-
-            if (VerListView.SelectedIndex >= 0)
-            {
-                //LaunchGame.IsEnabled = false;
-                if (File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\YMCL\Temp\LoginType.log") == "离线登录")
-                {
-                    launchConfig.Account = new MinecraftOAuth.Authenticator.OfflineAuthenticator
-                        (File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\YMCL\Temp\LoginName.log")).Auth();
-                }
-                else if (File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\YMCL\Temp\LoginType.log") == "微软登录")
-                { 
-                    var index = obj.LoginIndex;
-                    var list = JsonConvert.DeserializeObject<List<AccountInfo>>
-                        (File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\YMCL\YMCL.Account.json"));
-                    var data = list[Convert.ToInt32(index)].Data;
-                    var auth = JsonConvert.DeserializeObject<MinecraftLaunch.Modules.Models.Auth.MicrosoftAccount>(data);
-                    launchConfig.Account = auth;
-                }
-                else if (File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\YMCL\Temp\LoginType.log") == "第三方登录")
-                {
-                    var index = obj.LoginIndex;
-                    var list = JsonConvert.DeserializeObject<List<AccountInfo>>
-                        (File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\YMCL\YMCL.Account.json"));
-                    var data = list[Convert.ToInt32(index)].Data;
-                    var auth = JsonConvert.DeserializeObject<MinecraftLaunch.Modules.Models.Auth.YggdrasilAccount>(data);
-                    launchConfig.Account = auth;
-                }
-                else
-                {
-                    Toast.Show(GlobalWindow.form_main, "登录错误", ToastPosition.Top);
-                    LaunchGame.IsEnabled = true;
-                    return;
-                }
-
-                GameCoreUtil gameCoreUtil = new(obj.MinecraftPath);
-                JavaMinecraftLauncher javaMinecraftLauncher = new JavaMinecraftLauncher(launchConfig, gameCoreUtil);
-                var launchId = GameCoreText.Text;
-
-                await Task.Run(async () =>
-                {
-                    using var res = await javaMinecraftLauncher.LaunchTaskAsync(launchId , x =>
+                    string url = "https://v1.hitokoto.cn";
+                    HttpResponseMessage response = await httpClient.GetAsync(url);
+                    response.EnsureSuccessStatusCode();
+                    string data = await response.Content.ReadAsStringAsync();
+                    var obj = JsonConvert.DeserializeObject<Class.Hitokoto.Root>(data);
+                    if (obj != null)
                     {
-                        Dispatcher.BeginInvoke(() =>
+                        var res = string.Empty;
+                        if (obj.from_who != null)
                         {
-                            Toast.Show(GlobalWindow.form_main, $"{x.Item1*100}% - {x.Item2}", ToastPosition.Top);
-                        });
-                    });
-                    if (res.State is LaunchState.Succeess)
-                    {
-                        Dispatcher.BeginInvoke(() =>
+                            res = obj.hitokoto + $"    ——「{obj.from} ({obj.from_who})」";
+                        }
+                        else
                         {
-                            Toast.Show(GlobalWindow.form_main, $"启动完成，等待游戏窗口出现", ToastPosition.Top);
-                        });
-                        res.Process.WaitForInputIdle();
-                        Dispatcher.BeginInvoke(() =>
-                        {
-                            Toast.Show(GlobalWindow.form_main, $"启动成功", ToastPosition.Top);
-                        });
+                            res = obj.hitokoto + "    ——「" + obj.from + "」";
+                        }
+                        await Dispatcher.BeginInvoke(() => { HitokotoTextBlock.Text = res; });
                     }
-                    else
-                    {
-                        await Dispatcher.BeginInvoke(() =>
-                        {
-                            MessageBoxX.Show("启动失败：" + res.Exception.Message);
-                        });
-                        
-                    }
-                    
-                });
-                LaunchGame.IsEnabled = true;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                //MessageBoxX.Show("请选择游戏核心");
-                Toast.Show(GlobalWindow.form_main, "未选择游戏核心", ToastPosition.Top);
-                LaunchGame.IsEnabled = true;
+                await Dispatcher.BeginInvoke(() => { HitokotoTextBlock.Text = ex.Message; });
             }
         }
 

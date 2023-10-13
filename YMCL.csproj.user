@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <_LastSelectedProfileId>D:\Desktop\YMCL\Properties\PublishProfiles\FolderProfile.pubxml</_LastSelectedProfileId>
+    <_LastSelectedProfileId>D:\桌面\YMCL\Properties\PublishProfiles\FolderProfile.pubxml</_LastSelectedProfileId>
   </PropertyGroup>
   <ItemGroup>
     <ApplicationDefinition Update="App.xaml">
@@ -9,37 +9,25 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Pages\DownloadPage.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Pages\DownloadPages\AutoInstall.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Pages\Forms\MusicPlayer.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="Pages\LaunchPage.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Pages\MorePage.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Pages\MorePages\About.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Pages\SettingPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Pages\SettingPages\Account.xaml.cs">
+    <Compile Update="Pages\SettingPages\AccountSettingPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Pages\SettingPages\Download.xaml.cs">
+    <Compile Update="Pages\SettingPages\DownloadSettingPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Pages\SettingPages\Launcher.xaml.cs">
+    <Compile Update="Pages\SettingPages\LauncherSettingPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Pages\SettingPages\Main.xaml.cs">
+    <Compile Update="Pages\SettingPages\LaunchSettingPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\ToolsWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -47,37 +35,34 @@
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Pages\DownloadPage.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Pages\DownloadPages\AutoInstall.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Pages\Forms\MusicPlayer.xaml">
-      <SubType>Designer</SubType>
-    </Page>
     <Page Update="Pages\LaunchPage.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Pages\MorePage.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Pages\MorePages\About.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\SettingPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Pages\SettingPages\Account.xaml">
+    <Page Update="Pages\SettingPages\AccountSettingPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Pages\SettingPages\Download.xaml">
+    <Page Update="Pages\SettingPages\DownloadSettingPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Pages\SettingPages\Launcher.xaml">
+    <Page Update="Pages\SettingPages\LauncherSettingPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Pages\SettingPages\Main.xaml">
+    <Page Update="Pages\SettingPages\LaunchSettingPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\ToolsWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Styles\DarkTheme.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Styles\LightTheme.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Styles\MainStyle.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

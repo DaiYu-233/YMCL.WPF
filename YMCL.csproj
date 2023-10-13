@@ -1,108 +1,45 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
-    <UseWindowsForms>true</UseWindowsForms>
-    <Nullable>enable</Nullable>
-    <UseWPF>true</UseWPF>
-    <ApplicationIcon>YMCL-Icon.ico</ApplicationIcon>
-    <Authors>呆鱼</Authors>
-    <Company>DaiYu</Company>
-    <Product>YMCL</Product>
-    <PackageIcon>YMCL-Icon.png</PackageIcon>
-    <ApplicationManifest></ApplicationManifest>
-    <Copyright>呆鱼 - DaiYu</Copyright>
-    <RepositoryUrl>https://github.com/DaiYu-233/YMCL</RepositoryUrl>
-    <Platforms>AnyCPU;x86</Platforms>
-  </PropertyGroup>
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net6.0-windows</TargetFramework>
+		<Nullable>enable</Nullable>
+		<UseWPF>true</UseWPF>
+		<ApplicationIcon>YMCL-Icon.ico</ApplicationIcon>
+		<PackageId>YMCL</PackageId>
+		<Title>YMCL</Title>
+		<Version>1.0.0</Version>
+		<Authors>DaiYu | 呆鱼</Authors>
+		<Company>DaiYu | 呆鱼</Company>
+		<Product>Yu Minecraft Launcher</Product>
+		<PackageIcon>YMCL-Icon.png</PackageIcon>
+		<PackageProjectUrl>https://ymcl.daiyu.fun/</PackageProjectUrl>
+		<Copyright>DaiYu | 呆鱼  ~  https://ymcl.daiyu.fun/</Copyright>
+		<RepositoryUrl>https://github.com/DaiYu-233/YMCL</RepositoryUrl>
+		<UseWindowsForms>True</UseWindowsForms>
+	</PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DebugType>embedded</DebugType>
-  </PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="Costura.Fody" Version="5.8.0-alpha0098">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="MinecraftLaunch" Version="1.9.6-preview7" />
+		<PackageReference Include="MinecraftOAuth" Version="1.9.6-preview5" />
+		<PackageReference Include="ModernWpfUI" Version="0.9.7-preview.2" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		<PackageReference Include="Panuon.WPF.UI" Version="1.1.16.2" />
+	</ItemGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
-    <DebugType>embedded</DebugType>
-  </PropertyGroup>
+	<ItemGroup>
+		<Content Include="./Assets/Font.ttf" />
+		<Content Include="YMCL-Icon.ico" />
+	</ItemGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DebugType>embedded</DebugType>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
-    <DebugType>embedded</DebugType>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="Widgets\**" />
-    <Compile Remove="YMCL-Updater\**" />
-    <EmbeddedResource Remove="Widgets\**" />
-    <EmbeddedResource Remove="YMCL-Updater\**" />
-    <None Remove="Widgets\**" />
-    <None Remove="YMCL-Updater\**" />
-    <Page Remove="Widgets\**" />
-    <Page Remove="YMCL-Updater\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="YMCL-Icon.ico" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Costura.Fody" Version="5.7.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="MahApps.Metro.IconPacks" Version="4.11.0" />
-    <PackageReference Include="MinecraftLaunch" Version="1.9.6-preview2" />
-    <PackageReference Include="MinecraftOAuth" Version="1.9.6-preview1" />
-    <PackageReference Include="ModernWpfUI" Version="0.9.7-preview.2" />
-    <PackageReference Include="Natsurainko.FluentCore" Version="2.0.6" />
-    <PackageReference Include="Natsurainko.FluentCore.Extension.Windows" Version="2.0.6" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="OneMinecraftLauncher.Core" Version="1.1.6" />
-    <PackageReference Include="Panuon.WPF.UI" Version="1.1.15.1" />
-    <PackageReference Include="UpdateD" Version="1.0.6" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="Language\lang.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>lang.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Properties\Settings.Designer.cs">
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-    </Compile>
-    <Compile Update="UiResource.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>UiResource.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Update="Language\lang.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>lang.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="UiResource.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>UiResource.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <None Update="YMCL-Icon.png">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-  </ItemGroup>
-
+	<ItemGroup>
+	  <None Update="YMCL-Icon.png">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
+	</ItemGroup>
 </Project>

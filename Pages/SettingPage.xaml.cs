@@ -1,5 +1,8 @@
-﻿using System;
+﻿using ModernWpf.Controls;
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +15,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using YMCL.Pages.SettingPages;
+using Page = System.Windows.Controls.Page;
 
 namespace YMCL.Pages
 {
@@ -20,32 +25,37 @@ namespace YMCL.Pages
     /// </summary>
     public partial class SettingPage : Page
     {
-        Frame main = new Frame() { Content = new Pages.SettingPages.Main() };
-        Frame qdqq = new Frame() { Content = new Pages.SettingPages.Launcher() };
-        Frame account = new Frame() { Content = new Pages.SettingPages.Account() };
-        Frame down = new Frame() { Content = new Pages.SettingPages.Download() };
         public SettingPage()
         {
             InitializeComponent();
-            MainFrame.Content = main;
+            SettingPageFrame.Content = launchSettingPage;
         }
+
+        //SunPages
+        LaunchSettingPage launchSettingPage = new();
+        AccountSettingPage accountSettingPage = new();
+        LauncherSettingPage launcherSettingPage = new();
+        DownloadSettingPage downloadSettingPage = new();
 
         private void NavigationView_SelectionChanged(ModernWpf.Controls.NavigationView sender, ModernWpf.Controls.NavigationViewSelectionChangedEventArgs args)
         {
-            if (ty.IsSelected)
+            var items = Navigation.MenuItems;
+            var item = args.SelectedItem;
+            if (item == items[0])
             {
-                MainFrame.Content = main;
+                SettingPageFrame.Content = launchSettingPage;
             }
-            else if (zh.IsSelected)
+            else if (item == items[1])
             {
-                MainFrame.Content = account;
+                SettingPageFrame.Content = accountSettingPage;
             }
-            else if (qdq.IsSelected)
+            else if (item == items[2])
             {
-                MainFrame.Content = qdqq;
-            }else if (download.IsSelected)
+                SettingPageFrame.Content = downloadSettingPage;
+            }
+            else if (item == items[3])
             {
-                MainFrame.Content = down;
+                SettingPageFrame.Content = launcherSettingPage;
             }
         }
     }

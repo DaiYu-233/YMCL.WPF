@@ -8,92 +8,63 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows.Shapes;
-using YMCL.Class;
-using YMCL.Pages.Forms;
 
 namespace YMCL
 {
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
-    public class GlobalWindow
-    {
-
-
-        public static MusicPlayer form_musicplayer = Application.Current.Windows.Cast<WindowX>()
-        .FirstOrDefault(window => window is MusicPlayer) as MusicPlayer;
-        public static MainWindow form_main = Application.Current.Windows.Cast<WindowX>()
-        .FirstOrDefault(window => window is MainWindow) as MainWindow;
-
-        //public static string path_appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-
-
-    }
     public partial class App : Application
     {
-
-        class MinecraftPathCalss
+        public App()
         {
-            public string? MCPath;
+            Startup += App_Startup;
+            DispatcherUnhandledException += App_DispatcherUnhandledException;
         }
-        protected override void OnStartup(StartupEventArgs e)
+
+        //入口点
+        private void App_Startup(object sender, StartupEventArgs e)
         {
-            base.OnStartup(e);
-            var basePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            //入口点
-            if (!Directory.Exists(basePath + "\\YMCL"))
+            if (!Directory.Exists(Const.YMCLDataRoot))
             {
-                System.IO.DirectoryInfo directoryInfo = new System.IO.DirectoryInfo(basePath + "\\YMCL");
+                DirectoryInfo directoryInfo = new(Const.YMCLDataRoot);
                 directoryInfo.Create();
             }
-            if (!Directory.Exists(basePath + "\\YMCL\\Temp"))
+            if (!Directory.Exists(Const.YMCLDataRoot + "\\Temp"))
             {
-                System.IO.DirectoryInfo directoryInfo = new System.IO.DirectoryInfo(basePath + "\\YMCL\\Temp");
+                System.IO.DirectoryInfo directoryInfo = new System.IO.DirectoryInfo(Const.YMCLDataRoot + "\\Temp");
                 directoryInfo.Create();
             }
 
-            if (!File.Exists(basePath + "\\YMCL\\YMCL.Setting.json"))
+            if (!File.Exists(Const.YMCLMinecraftFolderDataPath))
             {
-                var obj = new SettingInfo()
+                var obj = new List<string>()
                 {
-                    AloneCore = true,
-                    DisplayInformation = "True",
-                    Java = "Null",
-                    LoginIndex = "0",
-                    LoginName = "Steve",
-                    LoginType = "离线登录",
-                    MaxMem = 1024,
-                    Theme = "Light",
-                    DownloadSoure = "Mcbbs",
-                    MaxDownloadThreads = "64",
-                    MinecraftPath = ".minecraft",
-                    MainWindowHeight = 521,
-                    MainWindowWidth = 900,
-                    PlayerWindowHeight = 521,
-                    SelectedGameCoreIndex = -1,
-                    PlayerWindowWidth = 900,
-                    PlayerVolume = 0.5,
-                    ThemeColor = Color.FromArgb(255, 0, 120, 215)
+                    ".minecraft"
                 };
-                File.WriteAllText(basePath + "\\YMCL\\YMCL.Setting.json", JsonConvert.SerializeObject(obj, Formatting.Indented));
+                var data = JsonConvert.SerializeObject(obj, Formatting.Indented);
+                File.WriteAllText(Const.YMCLMinecraftFolderDataPath, data);
             }
-            if (!File.Exists(basePath + "\\YMCL\\YMCL.MinecraftPath.json"))
+            if (!File.Exists(Const.YMCLSettingDataPath))
             {
-                List<string> MinecraftPathList = new List<string> { ".minecraft" };
-                File.WriteAllText(basePath + "\\YMCL\\YMCL.MinecraftPath.json", JsonConvert.SerializeObject(MinecraftPathList, Formatting.Indented));
+                var obj = new Class.Setting()
+                {
+                    MinecraftPath = ".minecraft"
+                };
+                var data = JsonConvert.SerializeObject(obj, Formatting.Indented);
+                File.WriteAllText(Const.YMCLSettingDataPath, data);
             }
-            if (!File.Exists(basePath + "\\YMCL\\YMCL.PlayList.json"))
+            if (!File.Exists(Const.YMCLJavaDataPath))
             {
-                File.WriteAllText(basePath + "\\YMCL\\YMCL.PlayList.json", "");
+                File.WriteAllText(Const.YMCLJavaDataPath, "[]");
             }
-            if (!File.Exists(basePath + "\\YMCL\\YMCL.Account.json"))
-            {
-                File.WriteAllText(basePath + "\\YMCL\\YMCL.Account.json", "[{\"AccountType\": \"离线登录\",\"Data\": \"Null\",\"Name\": \"Steve\",\"AddTime\": \"Null\"}]");
-            }
+        }
 
+
+        //全局异常处理
+        private void App_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+        {
+            MessageBoxX.Show($"\n{e.Exception.Message}\n\n详细信息：\n{e.Exception.ToString()}","Yu Minecraft Launcher - 异常");
         }
     }
 }

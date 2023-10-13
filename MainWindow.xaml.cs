@@ -1,5 +1,4 @@
 ﻿using Microsoft.Win32;
-using Newtonsoft.Json;
 using Panuon.WPF.UI;
 using System;
 using System.Collections.Generic;
@@ -20,15 +19,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Resources;
 using System.Windows.Shapes;
-using YMCL.Class;
+using YMCL.Pages;
+
 
 namespace YMCL
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : WindowX
     {
+        #region Resize
         public class WindowResizeAdorner : Adorner
         {
             //4条边
@@ -186,132 +184,73 @@ namespace YMCL
                 return fef;
             }
         }
-
-        double w;
-        double h;
-        Pages.LaunchPage launch = new Pages.LaunchPage();
-        Frame setting = new Frame() { Content = new Pages.SettingPage() };
-        Frame download = new Frame() { Content = new Pages.DownloadPage() };
-        Frame more = new Frame() { Content = new Pages.MorePage() };
-
-        void Comein()
-        {
-            //var h = MainFrame.Height;
-            //ThicknessAnimation Comein = new ThicknessAnimation()
-            //{
-            //    From = new Thickness(60, 30 + h, -h, 0),
-            //    To = new Thickness(60, 30, 0, 0),
-            //    Duration = TimeSpan.Parse("0:0:1")
-            //};
-            //MainFrame.BeginAnimation(MarginProperty, Comein);
-        }
-
-        public MainWindow()
-        {
-            InitializeComponent();
-            string path = System.AppDomain.CurrentDomain.BaseDirectory + "YMCL.exe";
-
-            ServicePointManager.DefaultConnectionLimit = 512;
-            MainFrame.Content = launch;
-
-            var obj = JsonConvert.DeserializeObject<SettingInfo>(File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\YMCL\\YMCL.Setting.json"));
-            Width = obj.MainWindowWidth;
-            Height = obj.MainWindowHeight;
-            w = Width;
-            h = Height;
-
-            //Trigger trigger = new Trigger();
-            //trigger.Property = RadioButton.IsCheckedProperty;
-            //trigger.Value = true;
-            //Setter setter1 = new Setter();
-            //setter1.TargetName = "txtName";
-            //setter1.Property = RadioButton.ForegroundProperty;
-            //setter1.Value = obj.ThemeColor;
-            //trigger.Setters.Add(setter1);
-            //rdLaunch.Style.Triggers.Add(trigger);
-        }
-
-
+        #endregion
+        #region WindowState
 
         private void btnMinimize_Click(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Minimized;
         }
+        private void btnMaximize_Click(object sender, RoutedEventArgs e)
+        {
+            if (WindowState == WindowState.Maximized)
+            {
+                this.WindowState = WindowState.Normal;
 
+            }
+            else
+            {
+                this.WindowState = WindowState.Maximized;
+
+            }
+        }
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             Hide();
             System.Environment.Exit(0);
         }
-
-        private void NavigationView_SelectionChanged(ModernWpf.Controls.NavigationView sender, ModernWpf.Controls.NavigationViewSelectionChangedEventArgs args)
-        {
-            if (ToLaunch.IsSelected)
-            {
-                MainFrame.Content = launch;
-            }
-            else if (ToSetting.IsSelected)
-            {
-                MainFrame.Content = setting;
-            }
-            else if (ToDownload.IsSelected)
-            {
-                MainFrame.Content = download;
-            }
-        }
-
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             DragMove();
         }
-
-        private void rdLaunch_Checked(object sender, RoutedEventArgs e)
+        #endregion`
+        #region SwitchPages
+        private void ToLaunch_Checked(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = launch;
-            Comein();
-            launch.VerListBorder.Visibility = Visibility.Hidden;
+            MainFrame.Content = launchPage;
+        }
+        private void ToSetting_Checked(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = settingPage;
         }
 
-        private void rdSetting_Checked(object sender, RoutedEventArgs e)
+        private void ToDownload_Checked(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = setting; Comein();
+
         }
 
-        private void rdDownload_Checked(object sender, RoutedEventArgs e)
+        private void ToMore_Checked(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = download; Comein();
-        }
 
-        private void rdMore_Checked(object sender, RoutedEventArgs e)
+        }
+        #endregion
+
+        //SubPages
+        Pages.LaunchPage launchPage = new();
+        Pages.SettingPage settingPage = new();
+
+        public MainWindow()
         {
-            MainFrame.Content = more; Comein();
+            InitializeComponent();
+            MainFrame.Content = launchPage;
         }
 
         private void WindowX_Loaded(object sender, RoutedEventArgs e)
         {
-            //将装饰器添加到窗口的Content控件上
+            //将装饰器添加到窗口的Content控件上(Resize)
             var c = this.Content as UIElement;
             var layer = AdornerLayer.GetAdornerLayer(c);
             layer.Add(new WindowResizeAdorner(c));
-
-
-        }
-
-        private void WindowX_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-
-        }
-
-        private void WindowX_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (w == Width && h == Height)
-            {
-                return;
-            }
-            var obj = JsonConvert.DeserializeObject<Class.SettingInfo>(File.ReadAllText(        Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\YMCL\\YMCL.Setting.json"));
-            obj.MainWindowWidth = Width;
-            obj.MainWindowHeight = Height;
-            File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\YMCL\\YMCL.Setting.json", JsonConvert.SerializeObject(obj, Newtonsoft.Json.Formatting.Indented));
         }
     }
 }
