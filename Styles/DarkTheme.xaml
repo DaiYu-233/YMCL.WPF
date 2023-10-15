@@ -7,8 +7,9 @@
     <SolidColorBrush x:Key="TextColor" Color="#ffffff"/>
     <SolidColorBrush x:Key="BackgroundColor" Color="#1e1e1e"/>
     <SolidColorBrush x:Key="WindowStateButtonBg" Color="#ffffff"/>
-    <SolidColorBrush x:Key="1xBg" Color="#323232"/>
-    
+    <SolidColorBrush x:Key="Gray" Color="#E48A8A8A"/>
+    <SolidColorBrush x:Key="1xBg" Color="#232323"/>
+    <SolidColorBrush x:Key="2xBg" Color="#282828"/>
     <!--Other-->
     <SolidColorBrush x:Key="SecundaryBackgroundColor" Color="#f9f9f9"/>
     <SolidColorBrush x:Key="SecundaryGridColor" Color="White"/>

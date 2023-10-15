@@ -5,10 +5,11 @@
     <SolidColorBrush x:Key="TitleBarColor" Color="#f2f2f2"/>
     <SolidColorBrush x:Key="LightBlue" Color="#d7e4f2"/>
     <SolidColorBrush x:Key="TextColor" Color="#333333"/>
-    <SolidColorBrush x:Key="BackgroundColor" Color="#f9f9f9"/>
+    <SolidColorBrush x:Key="BackgroundColor" Color="#fafafa"/>
     <SolidColorBrush x:Key="WindowStateButtonBg" Color="#434344"/>
-    <SolidColorBrush x:Key="1xBg" Color="#ededed"/>
-    
+    <SolidColorBrush x:Key="Gray" Color="#E48A8A8A"/>
+    <SolidColorBrush x:Key="1xBg" Color="#f5f5f5"/>
+    <SolidColorBrush x:Key="2xBg" Color="#f0f0f0"/>
     <!--Other-->
     <SolidColorBrush x:Key="SecundaryBackgroundColor" Color="#f9f9f9"/>
     <SolidColorBrush x:Key="SecundaryGridColor" Color="White"/>

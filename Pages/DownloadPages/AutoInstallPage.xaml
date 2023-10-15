@@ -1,0 +1,140 @@
+﻿<Page x:Class="YMCL.Pages.DownloadPages.AutoInstallPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:ui="http://schemas.modernwpf.com/2019" 
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:YMCL.Pages.DownloadPages"
+      mc:Ignorable="d" 
+      Title="AutoInstallPage" Loaded="Page_Loaded">
+    <!--页面切换动画-->
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="Page.Loaded">
+            <EventTrigger.Actions>
+                <BeginStoryboard>
+                    <Storyboard>
+                        <!--<ThicknessAnimation Duration="0:0:.85" Storyboard.TargetProperty="Margin" From="900,0,-900,0" To="0" DecelerationRatio=".9" />-->
+                        <ThicknessAnimation Duration="0:0:.20" Storyboard.TargetProperty="Margin" From="0,50,0,-50" To="0" DecelerationRatio=".9" />
+                        <DoubleAnimation Duration="0:0:.35" Storyboard.TargetProperty="Opacity" From="0" To="1" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Page.Triggers>
+    <Grid>
+        <Border Padding="10,10,10,10">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" >
+                <StackPanel VerticalAlignment="Top">
+                    <Border CornerRadius="3" Background="{DynamicResource 1xBg}" >
+                        <StackPanel>
+                            <TextBlock Text="最新版本" FontFamily="{StaticResource Font}" Foreground="{DynamicResource TextColor}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,7,0,0" FontSize="14"/>
+                            <Border Margin="10,10,10,0" Height="45" CornerRadius="4,4,4,4" Background="{DynamicResource 2xBg}">
+                                <Grid HorizontalAlignment="Left" VerticalAlignment="Center" Margin="4,0,0,0">
+                                    <TextBlock x:Name="ReleaseLatestIdTextBlock" FontFamily="MiSans Medium" FontSize="16" Margin="3,0,0,0"/>
+                                    <TextBlock x:Name="ReleaseLatestTimeTextBlock"  Margin="2,18,0,0" FontSize="12" Foreground="{DynamicResource Gray}" FontFamily="{DynamicResource Font}"/>
+                                </Grid>
+                            </Border>
+                            <Border Background="{DynamicResource 2xBg}" Margin="10,10,10,10" Height="40" CornerRadius="4,4,4,4">
+                                <Grid HorizontalAlignment="Left" VerticalAlignment="Center" Margin="4,0,0,0">
+                                    <TextBlock x:Name="SnapshotLatestIdTextBlock" FontFamily="MiSans Medium" FontSize="16" Margin="3,0,0,0"/>
+                                    <TextBlock x:Name="SnapshotLatestTimeTextBlock"  Margin="2,18,0,0" FontSize="12" Foreground="{DynamicResource Gray}" FontFamily="{DynamicResource Font}"/>
+                                </Grid>
+                            </Border>
+                        </StackPanel>
+                    </Border>
+                    <Border CornerRadius="3" Background="{DynamicResource 1xBg}" Padding="10,10,10,10" Margin="0,10,0,0">
+                        <Expander Foreground="{DynamicResource TextColor}" FontFamily="{DynamicResource Font}" Header="所有版本" Background="{DynamicResource 1xBg}" >
+                            <Grid>
+                                <ui:AutoSuggestBox x:Name="SearBox"  VerticalAlignment="Top" Height="30" FontFamily="MiSans Medium" FontSize="14" QueryIcon="Zoom" TextChanged="SearBox_TextChanged" Margin="0,5,0,0" />
+                                <Border Background="{DynamicResource 2xBg}" Height="484" CornerRadius="4,4,4,4" Margin="0,42,0,0" Padding="4,4,4,4">
+                                    <ui:ListView x:Name="AllVerList" FontFamily="MiSans Medium" SelectedValuePath="Id" d:ItemsSource="{d:SampleData ItemCount=5}"  Background="{DynamicResource 2xBg}"  >
+                                        <ui:ListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid>
+                                                    <TextBlock FontFamily="MiSans Medium"  Text="{Binding Id}" FontSize="16"/>
+                                                    <TextBlock  Margin="0,18,0,0" FontSize="12" Foreground="{DynamicResource Gray}"><Run  FontFamily="MiSans Medium" Text="{Binding ReleaseTime}"/></TextBlock>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ui:ListView.ItemTemplate>
+                                    </ui:ListView>
+
+                                </Border>
+
+                            </Grid>
+                        </Expander>
+                    </Border>
+                    <Border Margin="0,10,0,0" CornerRadius="3" Background="{DynamicResource 1xBg}" Padding="10,10,10,10">
+                        <Expander Foreground="{DynamicResource TextColor}" FontFamily="{DynamicResource Font}" Header="正式版" Background="{DynamicResource 1xBg}" >
+                            <Border Background="{DynamicResource 2xBg}" Height="484" CornerRadius="4,4,4,4" Margin="0,5,0,0" Padding="4,4,4,4">
+                                <ui:ListView x:Name="ReleaseVerList" FontFamily="MiSans Medium" SelectedValuePath="Id" d:ItemsSource="{d:SampleData ItemCount=5}"  Background="{DynamicResource 2xBg}"  >
+                                    <ui:ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <TextBlock FontFamily="MiSans Medium"  Text="{Binding Id}" FontSize="16"/>
+                                                <TextBlock  Margin="0,18,0,0" FontSize="12" Foreground="{DynamicResource Gray}">
+                                            <Run  FontFamily="MiSans Medium" Text="{Binding ReleaseTime}"/>
+                                                </TextBlock>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ui:ListView.ItemTemplate>
+                                </ui:ListView>
+
+                            </Border>
+                        </Expander>
+                    </Border>
+                    <Border CornerRadius="3" Background="{DynamicResource 1xBg}" Padding="10,10,10,10" Margin="0,10,0,0">
+                        <Expander Foreground="{DynamicResource TextColor}" FontFamily="{DynamicResource Font}" Header="预览版" Background="{DynamicResource 1xBg}" >
+                            <Border Background="{DynamicResource 2xBg}" Height="484" CornerRadius="4,4,4,4" Margin="0,5,0,0" Padding="4,4,4,4">
+                                <ui:ListView x:Name="SnapshotVerList" FontFamily="MiSans Medium" SelectedValuePath="Id" d:ItemsSource="{d:SampleData ItemCount=5}"  Background="{DynamicResource 2xBg}"  >
+                                    <ui:ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <TextBlock FontFamily="MiSans Medium"  Text="{Binding Id}" FontSize="16"/>
+                                                <TextBlock  Margin="0,18,0,0" FontSize="12" Foreground="{DynamicResource Gray}"><Run  FontFamily="MiSans Medium" Text="{Binding ReleaseTime}"/></TextBlock>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ui:ListView.ItemTemplate>
+                                </ui:ListView>
+
+                            </Border>
+                        </Expander>
+                    </Border>
+                    <Border CornerRadius="3" Background="{DynamicResource 1xBg}" Padding="10,10,10,10" Margin="0,10,0,0">
+                        <Expander Foreground="{DynamicResource TextColor}" FontFamily="{DynamicResource Font}" Header="远古版" Background="{DynamicResource 1xBg}" >
+                            <Border Background="{DynamicResource 2xBg}" Height="484" CornerRadius="4,4,4,4" Margin="0,5,0,0" Padding="4,4,4,4">
+                                <ui:ListView x:Name="OldVerList" FontFamily="MiSans Medium" SelectedValuePath="Id" d:ItemsSource="{d:SampleData ItemCount=5}"  Background="{DynamicResource 2xBg}"  >
+                                    <ui:ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <TextBlock FontFamily="MiSans Medium"  Text="{Binding Id}" FontSize="16"/>
+                                                <TextBlock  Margin="0,18,0,0" FontSize="12" Foreground="{DynamicResource Gray}"><Run  FontFamily="MiSans Medium" Text="{Binding ReleaseTime}"/></TextBlock>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ui:ListView.ItemTemplate>
+                                </ui:ListView>
+
+                            </Border>
+                        </Expander>
+                    </Border>
+                    <Border CornerRadius="3" Background="{DynamicResource 1xBg}" Padding="10,10,10,10" Margin="0,10,0,0">
+                        <Expander Foreground="{DynamicResource TextColor}" FontFamily="{DynamicResource Font}" Header="愚人节版" Background="{DynamicResource 1xBg}" >
+                            <Border Background="{DynamicResource 2xBg}" Height="484" CornerRadius="4,4,4,4" Margin="0,5,0,0" Padding="4,4,4,4">
+                                <ui:ListView x:Name="FoolVerList" FontFamily="MiSans Medium" SelectedValuePath="Id" d:ItemsSource="{d:SampleData ItemCount=5}"  Background="{DynamicResource 2xBg}"  >
+                                    <ui:ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <TextBlock FontFamily="MiSans Medium"  Text="{Binding Id}" FontSize="16"/>
+                                                <TextBlock  Margin="0,18,0,0" FontSize="12" Foreground="{DynamicResource Gray}"><Run  FontFamily="MiSans Medium" Text="{Binding ReleaseTime}"/></TextBlock>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ui:ListView.ItemTemplate>
+                                </ui:ListView>
+
+                            </Border>
+                        </Expander>
+                    </Border>
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+    </Grid>
+</Page>
+

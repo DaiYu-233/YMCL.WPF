@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -26,11 +27,13 @@ namespace YMCL.Pages.SettingPages
     {
         public LaunchSettingPage()
         {
+            var value = JsonConvert.DeserializeObject<Class.Setting>(File.ReadAllText(Const.YMCLSettingDataPath)).MamMem;
             InitializeComponent();
             LoadJavas();
+            LoadMem(value);
         }
 
-        
+
         #region Java
         List<string> javas = new();
 
@@ -96,7 +99,7 @@ namespace YMCL.Pages.SettingPages
             foreach (var java in MinecraftLaunch.Modules.Utils.JavaUtil.GetJavas())
             {
                 var isInclude = false;
-                
+
 
                 if (java.JavaPath == backItem)
                 {
@@ -138,8 +141,41 @@ namespace YMCL.Pages.SettingPages
             setting.Java = item;
             File.WriteAllText(Const.YMCLSettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
         }
-        #endregion
 
+        #endregion
+        #region MaxMem
+        struct MEMORYSTATUSEX
+        {
+            public int dwLength;
+            public int dwMemoryLoad;
+            public ulong ullTotalPhys;
+            public ulong ullAvailPhys;
+            public ulong ullTotalPageFile;
+            public ulong ullAvailPageFile;
+            public ulong ullTotalVirtual;
+            public ulong ullAvailVirtual;
+            public ulong ullAvailExtendedVirtual;
+        };
+        [DllImport("kernel32.dll")]
+        static extern bool GlobalMemoryStatusEx(ref MEMORYSTATUSEX LpBuffer);
+
+        void LoadMem(double value)
+        {
+            MEMORYSTATUSEX status = new MEMORYSTATUSEX();
+            status.dwLength = 0x40;
+            GlobalMemoryStatusEx(ref status);
+            SilderBox.Maximum = status.ullTotalPhys / 1024 / 1024;
+            SilderBox.Value = value;
+        }
+        private void SilderBox_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            SilderBox.Value = Math.Round(SilderBox.Value);
+            SilderInfo.Text = SilderBox.Value.ToString() + "M";
+            var setting = JsonConvert.DeserializeObject<Class.Setting>(File.ReadAllText(Const.YMCLSettingDataPath));
+            setting.MamMem = SilderBox.Value;
+            File.WriteAllText(Const.YMCLSettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+        }
+        #endregion
 
     }
 }

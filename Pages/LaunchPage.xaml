@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" Loaded="Page_Loaded"
       xmlns:local="clr-namespace:YMCL.Pages" FontFamily="{StaticResource Font}"
-      mc:Ignorable="d" xmlns:ui="http://schemas.modernwpf.com/2019" 
+      mc:Ignorable="d" xmlns:ui="http://schemas.modernwpf.com/2019" x:Name="Root"
       Title="LaunchPage">
     <!--页面切换动画-->
     <Page.Triggers>
@@ -20,10 +20,10 @@
             </EventTrigger.Actions>
         </EventTrigger>
     </Page.Triggers>
-    <Grid >
+    <Grid x:Name="RootGrid" >
         <TextBlock Name="HitokotoTextBlock" HorizontalAlignment="Center" Foreground="{DynamicResource TextColor}" Margin="0,5,0,0" FontSize="13" MouseLeftButtonDown="hitokoto" VerticalAlignment="Top"/>
 
-        <ui:SplitButton x:Name="LaunchGame" Height="45" Width="205" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,30,30" BorderThickness="1,1,1,1">
+        <ui:SplitButton x:Name="LaunchGame" Height="50" Width="225" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,30,30" BorderThickness="1,1,1,1" Click="LaunchGame_Click">
             <ui:SplitButton.Flyout>
                 <ui:MenuFlyout Placement="Bottom">
                     <MenuItem x:Name="ToVersionList"  Header=" 版本列表" FontFamily="{StaticResource Font}" Click="ToVersionList_Click"/>
@@ -33,7 +33,7 @@
             </ui:SplitButton.Flyout>
             <Grid>
                 <TextBlock Text="启动游戏" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-12,0,0" FontSize="14" FontFamily="MiSans Medium"/>
-                <TextBlock x:Name="GameCoreText" Text="&lt;游戏核心&gt;" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,17.5,0,0" FontSize="11" FontFamily="MiSans Medium"/>
+                <TextBlock x:Name="GameCoreText" Text="&lt;未选择游戏核心&gt;" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,17.5,0,0" FontSize="11" FontFamily="MiSans Medium"/>
             </Grid>
         </ui:SplitButton>
 
@@ -41,19 +41,20 @@
             <Grid>
                 <Border VerticalAlignment="Top" Height="30" Background="{DynamicResource TitleBarColor}" CornerRadius="5,5,0,0">
                     <Grid VerticalAlignment="Top" Height="30">
-                        <TextBlock Text="版本列表" FontFamily="{StaticResource Font}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="9,0,0,0"/>
+                        <TextBlock Text="版本列表" FontFamily="{StaticResource Font}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="9,0,0,0" Foreground="{DynamicResource TextColor}"/>
                         <Button x:Name="MinecraftVersionBorderCloseButton" Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource Close}" Tag="IsCloseButton" HorizontalAlignment="Right" Margin="0,0,3,0" Click="MinecraftVersionBorderCloseButton_Click"/>
 
                     </Grid>
                 </Border>
                 <Grid VerticalAlignment="Top" Margin="5,35,5,0">
-                    <ComboBox x:Name="MinecraftPathComboBox" Margin="5,0,175,0" VerticalAlignment="Center" Height="32" IsReadOnly="True" HorizontalAlignment="Stretch" FontFamily="{StaticResource Font}" SelectionChanged="MinecraftPathComboBox_SelectionChanged" />
+                    <ComboBox x:Name="MinecraftPathComboBox" Margin="5,0,305,0" VerticalAlignment="Center" Height="32" IsReadOnly="True" HorizontalAlignment="Stretch" FontFamily="{StaticResource Font}" SelectionChanged="MinecraftPathComboBox_SelectionChanged" />
                     <Button x:Name="DelMinecraftFolder" Content="删除" FontFamily="{StaticResource Font}" Width="80" Height="32"  Margin="0,0,90,0" HorizontalAlignment="Right" Click="DelMinecraftFolder_Click"/>
                     <Button x:Name="AddMinecraftFolder" Content="添加" FontFamily="{StaticResource Font}" Width="80" Height="32" Margin="0,0,5,0" HorizontalAlignment="Right" Click="AddMinecraftFolder_Click"/>
+                    <Button x:Name="ImportModPackBtn" Content="导入整合包" FontFamily="{StaticResource Font}" Width="125" Height="32" Click="ImportModPackBtn_Click" HorizontalAlignment="Right" Margin="0,0,175,0"/>
                 </Grid>
                 <ui:ListView x:Name="VersionListView" Margin="0,75,0,0" SelectionChanged="VersionListView_SelectionChanged" >
                     <ui:ListView.ItemTemplate>
-                    <DataTemplate>
+                        <DataTemplate>
                             <TextBlock Text="{Binding}" FontFamily="{StaticResource Font}"/>
                         </DataTemplate>
                     </ui:ListView.ItemTemplate>

@@ -1,26 +1,17 @@
-﻿using Microsoft.Win32;
+﻿using Newtonsoft.Json;
 using Panuon.WPF.UI;
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Net;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Resources;
 using System.Windows.Shapes;
-using YMCL.Pages;
-
+using Toast = Panuon.WPF.UI.Toast;
 
 namespace YMCL
 {
@@ -226,7 +217,7 @@ namespace YMCL
 
         private void ToDownload_Checked(object sender, RoutedEventArgs e)
         {
-
+            MainFrame.Content = downloadPage;
         }
 
         private void ToMore_Checked(object sender, RoutedEventArgs e)
@@ -234,23 +225,65 @@ namespace YMCL
 
         }
         #endregion
-
+        bool isLoadComplete = false;
         //SubPages
         Pages.LaunchPage launchPage = new();
         Pages.SettingPage settingPage = new();
+        Pages.DownloadPage downloadPage = new();
 
         public MainWindow()
         {
             InitializeComponent();
             MainFrame.Content = launchPage;
+            SetupArg();
         }
 
         private void WindowX_Loaded(object sender, RoutedEventArgs e)
         {
+            isLoadComplete = true;
             //将装饰器添加到窗口的Content控件上(Resize)
             var c = this.Content as UIElement;
             var layer = AdornerLayer.GetAdornerLayer(c);
             layer.Add(new WindowResizeAdorner(c));
+        }
+
+        async void SetupArg()
+        {
+            while(!isLoadComplete)
+            {
+                await Task.Run(() =>
+                {
+                    Thread.Sleep(100);
+                });
+            }
+            var arg = File.ReadAllText(Const.YMCLTempSetupArgsDataPath);
+            if (arg == null || string.IsNullOrWhiteSpace(arg))
+            {
+                return;
+            }
+            var data = arg.Split("!&");
+            foreach (var item in data)
+            {
+                try
+                {
+                    var title = item.Split(":")[0].Substring(1);
+                    var itemArg = item.Substring(2+title.Length).Split(",");
+                    switch (title)
+                    {
+                        case "l":
+                            launchPage.LaunchAssignMC(itemArg[0], itemArg[1]); 
+                            break;
+                        case "ins-pack-http":
+                            launchPage.InstallAssignPack(itemArg[0]);
+                            break;
+                    }
+                }
+                catch
+                {
+                    Panuon.WPF.UI.Toast.Show(Const.Window.main, "参数错误", ToastPosition.Top);
+                    continue;
+                }
+            }
         }
     }
 }
