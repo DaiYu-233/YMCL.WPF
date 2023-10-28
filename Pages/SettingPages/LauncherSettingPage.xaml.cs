@@ -33,7 +33,6 @@ namespace YMCL.Pages.SettingPages
             var color = JsonConvert.DeserializeObject<Class.Setting>(File.ReadAllText(Const.YMCLSettingDataPath)).ThemeColor;
             InitializeComponent();
             LoadThemeComboBox();
-            UpdateTheme();
             ColorPicker.SelectedColor = color;
             timer.Tick += Timer_Tick;
             timer.Interval = TimeSpan.FromSeconds(2);   //设置刷新的间隔时间
@@ -70,14 +69,14 @@ namespace YMCL.Pages.SettingPages
             var index = -1;
             switch (setting.Theme)
             {
-                case "跟随系统":
+                case "System":
                     index = 0; break;
-                case "浅色":
+                case "Light":
                     index = 1; break;
-                case "深色":
+                case "Dark":
                     index = 2; break;
             }
-            ThemeComBox.SelectedIndex = index;
+            ThemeComBox.SelectedItem = ThemeComBox.Items[index];
         }
 
         private void ThemeComBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -88,13 +87,23 @@ namespace YMCL.Pages.SettingPages
         void UpdateTheme()
         {
             var setting = JsonConvert.DeserializeObject<Class.Setting>(File.ReadAllText(Const.YMCLSettingDataPath));
-            var item = ThemeComBox.SelectedItem.ToString().Replace("System.Windows.Controls.ComboBoxItem: ", "");
-            setting.Theme = item;
+            var item = ThemeComBox.SelectedIndex;
+            switch (item)
+            {
+                case 0:
+                    setting.Theme = "System"; break;
+                case 1:
+                    setting.Theme = "Light"; break;
+                case 2:
+                    setting.Theme = "Dark"; break;
+            }
+            
+                
             File.WriteAllText(Const.YMCLSettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
 
             switch (setting.Theme)
             {
-                case "跟随系统":
+                case "System":
                     RegistryKey key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize");
                     if (key != null)
                     {
@@ -111,12 +120,12 @@ namespace YMCL.Pages.SettingPages
                     }
 
                     break;
-                case "浅色":
+                case "Light":
                     timer.Stop();
                     Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/YMCL;component/Styles/LightTheme.xaml") });
                     ThemeManager.Current.ApplicationTheme = ApplicationTheme.Light;
                     break;
-                case "深色":
+                case "Dark":
                     timer.Stop();
                     ThemeManager.Current.ApplicationTheme = ApplicationTheme.Dark;
                     Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/YMCL;component/Styles/DarkTheme.xaml") });

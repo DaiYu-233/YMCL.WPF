@@ -9,7 +9,13 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Pages\DisplayProgressWindow.xaml.cs">
+    <Compile Update="Pages\MorePage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\MorePages\ToolsPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\Windows\DisplayProgressWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Pages\DownloadPage.xaml.cs">
@@ -36,7 +42,7 @@
     <Compile Update="Pages\SettingPages\LaunchSettingPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Pages\ToolsWindow.xaml.cs">
+    <Compile Update="Pages\Windows\MusicPlayerWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -44,7 +50,13 @@
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Pages\DisplayProgressWindow.xaml">
+    <Page Update="Pages\MorePage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\MorePages\ToolsPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\Windows\DisplayProgressWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\DownloadPage.xaml">
@@ -71,7 +83,7 @@
     <Page Update="Pages\SettingPages\LaunchSettingPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Pages\ToolsWindow.xaml">
+    <Page Update="Pages\Windows\MusicPlayerWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Styles\DarkTheme.xaml">

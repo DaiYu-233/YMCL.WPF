@@ -21,7 +21,7 @@
         </EventTrigger>
     </Page.Triggers>
     <Grid x:Name="RootGrid" >
-        <TextBlock Name="HitokotoTextBlock" HorizontalAlignment="Center" Foreground="{DynamicResource TextColor}" Margin="0,5,0,0" FontSize="13" MouseLeftButtonDown="hitokoto" VerticalAlignment="Top"/>
+        <TextBlock Name="HitokotoTextBlock" Foreground="{DynamicResource TextColor}" Margin="5,5,5,0" FontSize="13" MouseLeftButtonDown="hitokoto" VerticalAlignment="Top" TextAlignment="Center"/>
 
         <ui:SplitButton x:Name="LaunchGame" Height="50" Width="225" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,30,30" BorderThickness="1,1,1,1" Click="LaunchGame_Click">
             <ui:SplitButton.Flyout>
@@ -37,7 +37,7 @@
             </Grid>
         </ui:SplitButton>
 
-        <Border x:Name="VerListBorder" Background="{DynamicResource 1xBg}" CornerRadius="5,5,5,5" Margin="10,10,10,10" Visibility="Visible">
+        <Border x:Name="VerListBorder" Background="{DynamicResource 1xBg}" CornerRadius="5,5,5,5" Margin="10,10,10,10" Visibility="Hidden">
             <Grid>
                 <Border VerticalAlignment="Top" Height="30" Background="{DynamicResource TitleBarColor}" CornerRadius="5,5,0,0">
                     <Grid VerticalAlignment="Top" Height="30">

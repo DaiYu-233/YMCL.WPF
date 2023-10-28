@@ -1,6 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using MinecraftLaunch.Modules.Models.Download;
 using Panuon.WPF.UI;
-using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,7 +10,6 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using Toast = Panuon.WPF.UI.Toast;
 
 namespace YMCL
 {
@@ -222,7 +220,7 @@ namespace YMCL
 
         private void ToMore_Checked(object sender, RoutedEventArgs e)
         {
-
+            MainFrame.Content = morePage;
         }
         #endregion
         bool isLoadComplete = false;
@@ -230,7 +228,7 @@ namespace YMCL
         Pages.LaunchPage launchPage = new();
         Pages.SettingPage settingPage = new();
         Pages.DownloadPage downloadPage = new();
-
+        Pages.MorePage morePage = new();
         public MainWindow()
         {
             InitializeComponent();
@@ -249,7 +247,8 @@ namespace YMCL
 
         async void SetupArg()
         {
-            while(!isLoadComplete)
+            APIManager.Current = APIManager.Mcbbs;
+            while (!isLoadComplete)
             {
                 await Task.Run(() =>
                 {
@@ -267,21 +266,23 @@ namespace YMCL
                 try
                 {
                     var title = item.Split(":")[0].Substring(1);
-                    var itemArg = item.Substring(2+title.Length).Split(",");
+                    var itemArg = item.Substring(2 + title.Length).Split(",");
                     switch (title)
                     {
                         case "l":
-                            launchPage.LaunchAssignMC(itemArg[0], itemArg[1]); 
+                            launchPage.LaunchAssignMC(itemArg[0], itemArg[1]);
                             break;
                         case "ins-pack-http":
                             launchPage.InstallAssignPack(itemArg[0]);
+                            break;
+                        default:
+                            MessageBoxX.Show($"参数错误：'{title}' ", "Yu Minecraft Launcher", MessageBoxIcon.Error);
                             break;
                     }
                 }
                 catch
                 {
-                    Panuon.WPF.UI.Toast.Show(Const.Window.main, "参数错误", ToastPosition.Top);
-                    continue;
+                    MessageBoxX.Show($"参数错误：'{arg}' ", "Yu Minecraft Launcher", MessageBoxIcon.Error); continue;
                 }
             }
         }

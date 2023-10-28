@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using static System.Windows.Forms.LinkLabel;
 
-namespace YMCL.Pages
+namespace YMCL.Pages.Windows
 {
     /// <summary>
     /// DisplayProgressWindow.xaml 的交互逻辑
@@ -43,7 +43,7 @@ namespace YMCL.Pages
 
         private void TaskProgressText_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (TaskProgressTextBox.LineCount >= 23)
+            if (TaskProgressTextBox.LineCount >= 17)
             {
                 TaskProgressTextBox.Text = string.Empty;
             }

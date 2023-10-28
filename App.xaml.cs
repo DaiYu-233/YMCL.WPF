@@ -5,10 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Drawing.Text;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Runtime.InteropServices;
+using System.Security.Principal;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
@@ -21,6 +24,12 @@ namespace YMCL
     /// </summary>
     public partial class App : Application
     {
+        [DllImport("kernel32.dll", SetLastError = true)]
+        public static extern int WriteProfileString(string lpszSection, string lpszKeyName, string lpszString);
+
+        [DllImport("gdi32")]
+        public static extern int AddFontResource(string lpFileName);
+
         public App()
         {
             Startup += App_Startup;
@@ -30,13 +39,7 @@ namespace YMCL
         //入口点
         private async void App_Startup(object sender, StartupEventArgs e)
         {
-            var obj = new Class.Setting()
-            {
-                MinecraftPath = AppDomain.CurrentDomain.BaseDirectory + ".minecraft",
-                Theme = "Light",
-                MamMem = 1024,
-                ThemeColor = Color.FromArgb(255, 0, 120, 215)
-            };
+            var obj = new Setting();
             var initalize = PendingBox.Show("正在初始化...", "Yu Minecraft Launcher");
             if (!Directory.Exists(Const.YMCLDataRoot))
             {
@@ -46,6 +49,11 @@ namespace YMCL
             if (!Directory.Exists(Const.YMCLDataRoot + "\\Temp"))
             {
                 DirectoryInfo directoryInfo = new DirectoryInfo(Const.YMCLDataRoot + "\\Temp");
+                directoryInfo.Create();
+            }
+            if (!Directory.Exists(Const.YMCLPublicDataRoot))
+            {
+                DirectoryInfo directoryInfo = new DirectoryInfo(Const.YMCLPublicDataRoot);
                 directoryInfo.Create();
             }
             if (!File.Exists(Const.YMCLMinecraftFolderDataPath))
@@ -78,7 +86,11 @@ namespace YMCL
             {
                 File.WriteAllText(Const.YMCLJavaDataPath, "[]");
             }
-            if (!File.Exists(Const.YMCLFontPath))
+            if (!File.Exists(Const.YMCLSongPlayListDataPath))
+            {
+                File.WriteAllText(Const.YMCLSongPlayListDataPath, "[]");
+            }
+            if (!File.Exists(Const.YMCLPublicDataRoot + "\\YMCLMiSans.ttf"))
             {
                 try
                 {
@@ -91,7 +103,7 @@ namespace YMCL
 
                             using (var downloadStream = await response.Content.ReadAsStreamAsync())
                             {
-                                using (var fileStream = new FileStream(Const.YMCLFontPath, FileMode.Create, FileAccess.Write))
+                                using (var fileStream = new FileStream(Const.YMCLPublicDataRoot + "\\YMCLMiSans.ttf", FileMode.Create, FileAccess.Write))
                                 {
                                     byte[] buffer = new byte[8192];
                                     int bytesRead;
@@ -114,6 +126,7 @@ namespace YMCL
                         }
                     });
                     System.Windows.Forms.Application.Restart();
+                    initalize.Close();
                     Application.Current.Shutdown();
                 }
                 catch (Exception)
@@ -121,6 +134,56 @@ namespace YMCL
 
                 }
             }
+            if (!File.Exists(Const.YMCLPublicDataRoot + "\\InstalledFont"))
+            {
+                WindowsIdentity current = WindowsIdentity.GetCurrent();
+                WindowsPrincipal windowsPrincipal = new WindowsPrincipal(current);
+                if (!windowsPrincipal.IsInRole(WindowsBuiltInRole.Administrator))
+                {
+                    var message = MessageBoxX.Show("需要管理员权限以安装字体\n点击确定使用管理员权限重启程序", "Yu Minecraft Launcher", MessageBoxButton.OKCancel, MessageBoxIcon.Error);
+                    if (message == MessageBoxResult.OK)
+                    {
+                        //获取当前登陆的windows用户
+                        //获取当前Windows用户的WindowsIdentity对象
+                        WindowsIdentity identity = WindowsIdentity.GetCurrent();
+                        //创建可以代码访问的windows组成员对象
+                        WindowsPrincipal principal = new WindowsPrincipal(identity);
+                        //判断是否为管理员
+
+                        //创建启动对象
+                        //指定启动进程时的信息
+                        System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+                        startInfo.UseShellExecute = true;
+                        startInfo.WorkingDirectory = Environment.CurrentDirectory;//设置当前工作目录的完全路径
+                        startInfo.FileName = System.Windows.Forms.Application.ExecutablePath;//获取当前执行文件的路径
+                        startInfo.Verb = "runas";
+                        System.Diagnostics.Process.Start(startInfo);
+                        //退出当前，使用新打开的程序
+                        initalize.Close();
+                        Application.Current.Shutdown();
+                    }
+                }
+                else
+                {
+                    var fontFilePath = Const.YMCLPublicDataRoot + "\\YMCLMiSans.ttf";
+                    string fontPath = Path.Combine(System.Environment.GetEnvironmentVariable("WINDIR"), "fonts", Path.GetFileName(fontFilePath));
+                    if (!File.Exists(fontPath))
+                    {
+                        File.Copy(fontFilePath, fontPath);
+                        AddFontResource(fontPath);
+
+                        WriteProfileString("fonts", Path.GetFileNameWithoutExtension(fontFilePath) + "(TrueType)", Path.GetFileName(fontFilePath));
+
+                        File.WriteAllText(Const.YMCLPublicDataRoot + "\\InstalledFont", "");
+
+                        System.Windows.Forms.Application.Restart();
+                        initalize.Close();
+                        Application.Current.Shutdown();
+                    }
+
+                }
+            }
+
             initalize.Close();
 
             if (e.Args.Length > 0)

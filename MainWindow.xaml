@@ -8,7 +8,7 @@
         xmlns:ui="http://schemas.modernwpf.com/2019" WindowStyle="None" pu:WindowXCaption.Height="0"
         ui:WindowHelper.UseModernWindowStyle="False" Background="Transparent" ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen" OpacityMask="White" AllowsTransparency="True" Title="YMCL" Loaded="WindowX_Loaded"   >
 
-    <Border x:Name="MainBorder" CornerRadius="8,8,8,8"  Background="{DynamicResource BackgroundColor}" >
+    <Border x:Name="MainBorder" CornerRadius="8,8,8,8"  Background="{DynamicResource BackgroundColor}" BorderThickness="2,2,2,2" BorderBrush="{DynamicResource TitleBarColor}" >
         <Grid >
             <!--TitleBar 标题栏-->
             <Border VerticalAlignment="Top" Height="30" Background="{DynamicResource TitleBarColor}" CornerRadius="8,8,0,8" MouseLeftButtonDown="Border_MouseLeftButtonDown">

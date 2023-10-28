@@ -11,20 +11,14 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Forms;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using YMCL.Pages.Windows;
 using YMCL.Class;
 
 namespace YMCL.Pages
@@ -34,13 +28,14 @@ namespace YMCL.Pages
     /// </summary>
     public partial class LaunchPage : Page
     {
-        
+
         public LaunchPage()
         {
             InitializeComponent();
             hitokoto();
             LoadMinecraftFolders();
 
+            HitokotoTextBlock.Visibility = Visibility.Visible;
             HitokotoTextBlock.MouseRightButtonDown += (sender, e) =>
             {
                 System.Windows.Clipboard.SetText(HitokotoTextBlock.Text);
@@ -182,17 +177,20 @@ namespace YMCL.Pages
 
         private void MinecraftVersionBorderCloseButton_Click(object sender, RoutedEventArgs e)
         {
-            var height = Root.ActualHeight;
-            ThicknessAnimation animation = new ThicknessAnimation()
+            if (VerListBorder.Margin.Top == 10)
             {
-                From = new Thickness(10, 10, 10, 10),
-                To = new Thickness(10, height, 0, 10),
-                Duration = TimeSpan.Parse("0:0:0.10")
-            };
-            //VerListBorder.BeginAnimation(OpacityProperty, doubleAnimation);
-            VerListBorder.BeginAnimation(MarginProperty, animation);
+                var height = Root.ActualHeight;
+                ThicknessAnimation animation = new ThicknessAnimation()
+                {
+                    From = new Thickness(10, 10, 10, 10),
+                    To = new Thickness(10, height, 0, 10),
+                    Duration = TimeSpan.Parse("0:0:0.10")
+                };
+                //VerListBorder.BeginAnimation(OpacityProperty, doubleAnimation);
+                VerListBorder.BeginAnimation(MarginProperty, animation);
 
-            HitokotoTextBlock.Visibility = Visibility.Visible;
+                HitokotoTextBlock.Visibility = Visibility.Visible;
+            }
         }
 
         private async void VersionListView_SelectionChanged(object sender, SelectionChangedEventArgs e)

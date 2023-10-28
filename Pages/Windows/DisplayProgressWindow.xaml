@@ -1,4 +1,4 @@
-﻿<pu:WindowX x:Class="YMCL.Pages.DisplayProgressWindow"
+﻿<pu:WindowX x:Class="YMCL.Pages.Windows.DisplayProgressWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:ui="http://schemas.modernwpf.com/2019" 
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" ResizeMode="NoResize"
@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:YMCL.Pages"
         mc:Ignorable="d" FontFamily="{StaticResource Font}" ui:ThemeManager.IsThemeAware="True" WindowStyle="None" pu:WindowXCaption.Height="0"
         ui:WindowHelper.UseModernWindowStyle="False" Background="Transparent" WindowStartupLocation="CenterScreen" OpacityMask="White" AllowsTransparency="True" 
-        Title="DisplayProgressWindow" Height="450" Width="800">
+        Title="任务进度" Height="450" Width="800">
     <Grid>
-        <Border x:Name="MainBorder" CornerRadius="8,8,8,8"  Background="{DynamicResource BackgroundColor}" >
+        <Border x:Name="MainBorder" CornerRadius="8,8,8,8" BorderThickness="2,2,2,2" BorderBrush="{DynamicResource TitleBarColor}" Background="{DynamicResource BackgroundColor}" >
             <Grid >
                 <!--TitleBar 标题栏-->
                 <Border VerticalAlignment="Top" Height="30" Background="{DynamicResource TitleBarColor}" CornerRadius="8,8,0,0" MouseLeftButtonDown="Border_MouseLeftButtonDown">
@@ -21,7 +21,7 @@
                 <Grid Margin="5,35,5,5">
                     <Grid VerticalAlignment="Top" Height="25">
                         <TextBlock VerticalAlignment="Center" FontFamily="{DynamicResource Font}" Text="当前步骤: " HorizontalAlignment="Left" Margin="10,0,0,0" Foreground="{DynamicResource TextColor}"/>
-                        <TextBlock x:Name="CurrentStepTextBlock" VerticalAlignment="Center" FontFamily="{DynamicResource Font}" Text="Vanllia" HorizontalAlignment="Left" Margin="65,0,0,0" Foreground="{DynamicResource TextColor}"/>
+                        <TextBlock x:Name="CurrentStepTextBlock" VerticalAlignment="Center" FontFamily="{DynamicResource Font}" HorizontalAlignment="Left" Margin="65,0,0,0" Foreground="{DynamicResource TextColor}"/>
 
                     </Grid>
                     <ProgressBar x:Name="TaskProBar" VerticalAlignment="Top" Margin="10,30,10,0" Background="#4D8A8A8A" FontFamily="MiSans Medium" />

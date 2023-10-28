@@ -1,20 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace YMCL.Class
 {
     public class Setting
     {
         public string? Java { get; set; }
-        public string? MinecraftPath { get; set; }
-        public double MamMem { get; set; }
+        public string? MinecraftPath { get; set; } = AppDomain.CurrentDomain.BaseDirectory + ".minecraft";
+        public double MamMem { get; set; } = 1024;
+        public double Volume { get; set; } = 0;
         public string? SelectedVersion { get; set; }
         public int AccountSelectionIndex { get; set; }
-        public string? Theme { get; set; }
-        public System.Windows.Media.Color? ThemeColor { get; set; }
+        public string? Theme { get; set; } = "System";
+        public string? MusicLoopType { get; set; } = "RepeatOff";
+        public Color? ThemeColor { get; set; } = Color.FromArgb(255, 0, 120, 215);
     }
 
 }

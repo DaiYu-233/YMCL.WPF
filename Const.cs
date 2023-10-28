@@ -8,29 +8,27 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using YMCL.Pages;
+using YMCL.Pages.Windows;
 
 namespace YMCL
 {
     public class Const
     {
-        public class Font : ResourceDictionary
-        {
-            public Font()
-            {
-                Add("Font", YMCLFontPath + "#MiSans Medium");
-            }
-        }
         public class Window
         {
             public static MainWindow main { get; set; }
+            public static MusicPlayerWindow musicPlayer { get; set; }
             static Window()
             {
                 foreach (System.Windows.Window window in Application.Current.Windows)
                 {
                     if (window.GetType() == typeof(MainWindow))//使用窗体类进行匹配查找
                     {
-#pragma warning disable CS8601
                         main = window as MainWindow;
+                    }
+                    if (window.GetType() == typeof(MusicPlayerWindow))//使用窗体类进行匹配查找
+                    {
+                        musicPlayer = window as MusicPlayerWindow;
                     }
                 }
             }
@@ -38,11 +36,12 @@ namespace YMCL
 
         //Path
         public static string YMCLDataRoot { get; } = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\DaiYu.YMCL";
-        public static string YMCLFontPath { get; } = "C:\\ProgramData\\MiSans.ttf";
+        public static string YMCLPublicDataRoot { get; } = "C:\\ProgramData\\YMCL";
         public static string YMCLSettingDataPath { get; } = YMCLDataRoot + "\\YMCL.Setting.DaiYu";
         public static string YMCLAccountDataPath { get; } = YMCLDataRoot + "\\YMCL.Account.DaiYu";
         public static string YMCLMinecraftFolderDataPath { get; } = YMCLDataRoot + "\\YMCL.MinecraftFolder.DaiYu";
         public static string YMCLJavaDataPath { get; } = YMCLDataRoot + "\\YMCL.Java.DaiYu";
+        public static string YMCLSongPlayListDataPath { get; } = YMCLDataRoot + "\\YMCL.SongPlayList.DaiYu";
 
 
         //Temp
