@@ -139,6 +139,10 @@ namespace YMCL.Pages.SettingPages
         {
             var setting = JsonConvert.DeserializeObject<Class.Setting>(File.ReadAllText(Const.YMCLSettingDataPath));
             setting.ThemeColor = ColorPicker.SelectedColor;
+            if (LyricColorPicker != null)
+            {
+                setting.DesktopLyricColor = LyricColorPicker.SelectedColor;
+            }
             File.WriteAllText(Const.YMCLSettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
             UpdateTheme();
         }

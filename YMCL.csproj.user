@@ -15,6 +15,9 @@
     <Compile Update="Pages\MorePages\ToolsPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Pages\Windows\DesktopLyric.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Pages\Windows\DisplayProgressWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -54,6 +57,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\MorePages\ToolsPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\Windows\DesktopLyric.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\Windows\DisplayProgressWindow.xaml">

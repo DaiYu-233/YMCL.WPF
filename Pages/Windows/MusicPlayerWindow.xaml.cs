@@ -476,6 +476,7 @@ namespace YMCL.Pages.Windows
         }
         private async void PlayListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            PlaySlider.IsEnabled = false;
             LyricBlock.Text = "";
             isGettingMusic = true;
             var item = PlayListView.SelectedItem as Class.PlayMusicListItem;
@@ -593,7 +594,7 @@ namespace YMCL.Pages.Windows
                     }
 
                     timer1 = new DispatcherTimer();
-                    timer1.Interval = TimeSpan.FromSeconds(1);
+                    timer1.Interval = TimeSpan.FromSeconds(0.2);
                     timer1.Tick += Timer1_Tick; ;
                     timer1.Start();
 
@@ -621,26 +622,40 @@ namespace YMCL.Pages.Windows
 
         private void Timer1_Tick(object? sender, EventArgs e)
         {
+            
             // 获取当前播放的歌曲进度
             TimeSpan currentTime = TimeSpan.FromMilliseconds(PlaySlider.Value);
-
+            var setting = JsonConvert.DeserializeObject<Class.Setting>(File.ReadAllText(Const.YMCLSettingDataPath));
+            desktopLyric.Lyric.Foreground = new SolidColorBrush((Color)setting.DesktopLyricColor);
             // 找到当前应该显示的歌词
             for (int i = 0; i < lyrics.Count; i++)
             {
                 LyricBlock.BeginAnimation(MarginProperty, new ThicknessAnimation()
                 {
                     From = LyricBlock.Margin,
-                    To = new Thickness(0, MainGrid.ActualHeight / 2 - i * 26, 0, 0),
+                    To = new Thickness(0, MainGrid.ActualHeight / 2 - i * 26 + 26, 0, 0),
                     Duration = TimeSpan.Parse("0:0:0.2")
                 });
+                if (isMovingSilder)
+                {
+                    lyricRuns.ForEach(x =>
+                    {
+                        x.Foreground = Brushes.Black;
+                        x.FontWeight = FontWeights.Normal;
+                    });
+                }
                 if (lyrics[i].Time > currentTime)
                 {
                     // 更新Run元素的样式
-                    lyricRuns[i - 1].Foreground = Brushes.Black;
-                    lyricRuns[i - 1].FontWeight = FontWeights.Normal;
+                    if (i - 2 >= 0)
+                    {
+                        lyricRuns[i - 2].Foreground = Brushes.Black;
+                        lyricRuns[i - 2].FontWeight = FontWeights.Normal;
+                    }
 
-                    lyricRuns[i].Foreground = Brushes.Red;
-                    lyricRuns[i].FontWeight = FontWeights.Normal;
+                    desktopLyric.Lyric.Text = lyricRuns[i - 1].Text;
+                    lyricRuns[i - 1].Foreground = Brushes.Red;
+                    lyricRuns[i - 1].FontWeight = FontWeights.Normal;
                     break;
                 }
             }
@@ -733,6 +748,7 @@ namespace YMCL.Pages.Windows
             var setting = JsonConvert.DeserializeObject<Class.Setting>(File.ReadAllText(Const.YMCLSettingDataPath));
             setting.Volume = VolumeSlider.Value;
             File.WriteAllText(Const.YMCLSettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+            player.Volume = VolumeSlider.Value;
         }
 
 
@@ -920,6 +936,7 @@ namespace YMCL.Pages.Windows
             PlaySlider.Value = 0;
             PlayingSongAuthors.Text = authors;
             PlayingSongName.Text = name;
+            PlaySlider.IsEnabled = true;
         }
 
         bool isOpenLyric = true;
@@ -977,6 +994,26 @@ namespace YMCL.Pages.Windows
             var seconds = int.Parse(secondsAndMilliseconds[0]);
             var milliseconds = int.Parse(secondsAndMilliseconds[1]);
             return new TimeSpan(0, 0, minutes, seconds, milliseconds);
+        }
+
+        DesktopLyric desktopLyric = new();
+        bool isOpenDesktopLyric = false;
+        private void OpenLyricIcon_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (isOpenDesktopLyric)
+            {
+                desktopLyric.Hide();
+                isOpenDesktopLyric = false;
+            }
+            else
+            {
+                desktopLyric.Show();
+                desktopLyric.Activate();
+                desktopLyric.WindowState = WindowState.Normal;
+                desktopLyric.Topmost = true;
+                desktopLyric.Topmost = false;
+                isOpenDesktopLyric = true;
+            }
         }
     }
 }

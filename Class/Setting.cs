@@ -14,6 +14,7 @@ namespace YMCL.Class
         public string? Theme { get; set; } = "System";
         public string? MusicLoopType { get; set; } = "RepeatOff";
         public Color? ThemeColor { get; set; } = Color.FromArgb(255, 0, 120, 215);
+        public Color? DesktopLyricColor { get; set; } = Color.FromArgb(255, 255, 255, 255);
     }
 
 }

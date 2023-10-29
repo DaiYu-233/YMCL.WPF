@@ -31,6 +31,7 @@ namespace YMCL.Pages.MorePages
         {
             musicPlayerWindow.Show();
             musicPlayerWindow.Activate();
+            musicPlayerWindow.WindowState = WindowState.Normal;
             musicPlayerWindow.Topmost = true;
             musicPlayerWindow.Topmost = false;
         }

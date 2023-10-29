@@ -1,5 +1,5 @@
 ﻿<Page x:Class="YMCL.Pages.DownloadPages.AutoInstallPage"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:pu="https://opensource.panuon.com/wpf-ui"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:ui="http://schemas.modernwpf.com/2019" 
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
@@ -21,7 +21,7 @@
         </EventTrigger>
     </Page.Triggers>
     <Grid>
-        <Border Padding="10,10,10,10">
+        <Border Padding="10,10,10,10" x:Name="VersionView">
             <ScrollViewer VerticalScrollBarVisibility="Auto" >
                 <StackPanel VerticalAlignment="Top">
                     <Border CornerRadius="3" Background="{DynamicResource 1xBg}" >
@@ -29,13 +29,13 @@
                             <TextBlock Text="最新版本" FontFamily="{StaticResource Font}" Foreground="{DynamicResource TextColor}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,7,0,0" FontSize="14"/>
                             <Border Margin="10,10,10,0" Height="45" CornerRadius="4,4,4,4" Background="{DynamicResource 2xBg}">
                                 <Grid HorizontalAlignment="Left" VerticalAlignment="Center" Margin="4,0,0,0">
-                                    <TextBlock x:Name="ReleaseLatestIdTextBlock" FontFamily="MiSans Medium" FontSize="16" Margin="3,0,0,0" Foreground="{DynamicResource TextColor}"/>
+                                    <TextBlock x:Name="ReleaseLatestIdTextBlock" FontFamily="{DynamicResource Font}" FontSize="16" Margin="3,0,0,0" Foreground="{DynamicResource TextColor}"/>
                                     <TextBlock x:Name="ReleaseLatestTimeTextBlock"  Margin="2,18,0,0" FontSize="12" Foreground="{DynamicResource Gray}" FontFamily="{DynamicResource Font}"/>
                                 </Grid>
                             </Border>
                             <Border Background="{DynamicResource 2xBg}" Margin="10,10,10,10" Height="40" CornerRadius="4,4,4,4">
                                 <Grid HorizontalAlignment="Left" VerticalAlignment="Center" Margin="4,0,0,0">
-                                    <TextBlock x:Name="SnapshotLatestIdTextBlock" FontFamily="MiSans Medium" FontSize="16" Margin="3,0,0,0" Foreground="{DynamicResource TextColor}"/>
+                                    <TextBlock x:Name="SnapshotLatestIdTextBlock" FontFamily="{DynamicResource Font}" FontSize="16" Margin="3,0,0,0" Foreground="{DynamicResource TextColor}"/>
                                     <TextBlock x:Name="SnapshotLatestTimeTextBlock"  Margin="2,18,0,0" FontSize="12" Foreground="{DynamicResource Gray}" FontFamily="{DynamicResource Font}"/>
                                 </Grid>
                             </Border>
@@ -44,14 +44,14 @@
                     <Border CornerRadius="3" Background="{DynamicResource 1xBg}" Padding="10,10,10,10" Margin="0,10,0,0">
                         <Expander Foreground="{DynamicResource TextColor}" FontFamily="{DynamicResource Font}" Header="所有版本" Background="{DynamicResource 1xBg}" >
                             <Grid>
-                                <ui:AutoSuggestBox x:Name="SearBox"  VerticalAlignment="Top" Height="30" FontFamily="MiSans Medium" FontSize="14" QueryIcon="Zoom" TextChanged="SearBox_TextChanged" Margin="0,5,0,0" />
+                                <ui:AutoSuggestBox x:Name="SearBox"  VerticalAlignment="Top" Height="30" FontFamily="{DynamicResource Font}" FontSize="14" QueryIcon="Zoom" TextChanged="SearBox_TextChanged" Margin="0,5,0,0" />
                                 <Border Background="{DynamicResource 2xBg}" Height="484" CornerRadius="4,4,4,4" Margin="0,42,0,0" Padding="4,4,4,4">
-                                    <ui:ListView x:Name="AllVerList" FontFamily="MiSans Medium" SelectedValuePath="Id" d:ItemsSource="{d:SampleData ItemCount=5}"  Background="{DynamicResource 2xBg}"  >
+                                    <ui:ListView x:Name="AllVerList" FontFamily="{DynamicResource Font}" SelectedValuePath="Id" d:ItemsSource="{d:SampleData ItemCount=5}"  Background="{DynamicResource 2xBg}" SelectionChanged="VerList_SelectionChanged"  >
                                         <ui:ListView.ItemTemplate>
                                             <DataTemplate>
                                                 <Grid>
-                                                    <TextBlock FontFamily="MiSans Medium"  Text="{Binding Id}" FontSize="16"/>
-                                                    <TextBlock  Margin="0,18,0,0" FontSize="12" Foreground="{DynamicResource Gray}"><Run  FontFamily="MiSans Medium" Text="{Binding ReleaseTime}"/></TextBlock>
+                                                    <TextBlock FontFamily="{DynamicResource Font}"  Text="{Binding Id}" FontSize="16"/>
+                                                    <TextBlock  Margin="0,18,0,0" FontSize="12" Foreground="{DynamicResource Gray}"><Run  FontFamily="{DynamicResource Font}" Text="{Binding ReleaseTime}"/></TextBlock>
                                                 </Grid>
                                             </DataTemplate>
                                         </ui:ListView.ItemTemplate>
@@ -65,13 +65,13 @@
                     <Border Margin="0,10,0,0" CornerRadius="3" Background="{DynamicResource 1xBg}" Padding="10,10,10,10">
                         <Expander Foreground="{DynamicResource TextColor}" FontFamily="{DynamicResource Font}" Header="正式版" Background="{DynamicResource 1xBg}" >
                             <Border Background="{DynamicResource 2xBg}" Height="484" CornerRadius="4,4,4,4" Margin="0,5,0,0" Padding="4,4,4,4">
-                                <ui:ListView x:Name="ReleaseVerList" FontFamily="MiSans Medium" SelectedValuePath="Id" d:ItemsSource="{d:SampleData ItemCount=5}"  Background="{DynamicResource 2xBg}"  >
+                                <ui:ListView x:Name="ReleaseVerList" FontFamily="{DynamicResource Font}" SelectedValuePath="Id" d:ItemsSource="{d:SampleData ItemCount=5}"  Background="{DynamicResource 2xBg}" SelectionChanged="VerList_SelectionChanged"  >
                                     <ui:ListView.ItemTemplate>
                                         <DataTemplate>
                                             <Grid>
-                                                <TextBlock FontFamily="MiSans Medium"  Text="{Binding Id}" FontSize="16"/>
+                                                <TextBlock FontFamily="{DynamicResource Font}"  Text="{Binding Id}" FontSize="16"/>
                                                 <TextBlock  Margin="0,18,0,0" FontSize="12" Foreground="{DynamicResource Gray}">
-                                            <Run  FontFamily="MiSans Medium" Text="{Binding ReleaseTime}"/>
+                                            <Run  FontFamily="{DynamicResource Font}" Text="{Binding ReleaseTime}"/>
                                                 </TextBlock>
                                             </Grid>
                                         </DataTemplate>
@@ -84,12 +84,12 @@
                     <Border CornerRadius="3" Background="{DynamicResource 1xBg}" Padding="10,10,10,10" Margin="0,10,0,0">
                         <Expander Foreground="{DynamicResource TextColor}" FontFamily="{DynamicResource Font}" Header="预览版" Background="{DynamicResource 1xBg}" >
                             <Border Background="{DynamicResource 2xBg}" Height="484" CornerRadius="4,4,4,4" Margin="0,5,0,0" Padding="4,4,4,4">
-                                <ui:ListView x:Name="SnapshotVerList" FontFamily="MiSans Medium" SelectedValuePath="Id" d:ItemsSource="{d:SampleData ItemCount=5}"  Background="{DynamicResource 2xBg}"  >
+                                <ui:ListView x:Name="SnapshotVerList" FontFamily="{DynamicResource Font}" SelectedValuePath="Id" d:ItemsSource="{d:SampleData ItemCount=5}"  Background="{DynamicResource 2xBg}" SelectionChanged="VerList_SelectionChanged"  >
                                     <ui:ListView.ItemTemplate>
                                         <DataTemplate>
                                             <Grid>
-                                                <TextBlock FontFamily="MiSans Medium"  Text="{Binding Id}" FontSize="16"/>
-                                                <TextBlock  Margin="0,18,0,0" FontSize="12" Foreground="{DynamicResource Gray}"><Run  FontFamily="MiSans Medium" Text="{Binding ReleaseTime}"/></TextBlock>
+                                                <TextBlock FontFamily="{DynamicResource Font}"  Text="{Binding Id}" FontSize="16"/>
+                                                <TextBlock  Margin="0,18,0,0" FontSize="12" Foreground="{DynamicResource Gray}"><Run  FontFamily="{DynamicResource Font}" Text="{Binding ReleaseTime}"/></TextBlock>
                                             </Grid>
                                         </DataTemplate>
                                     </ui:ListView.ItemTemplate>
@@ -101,12 +101,12 @@
                     <Border CornerRadius="3" Background="{DynamicResource 1xBg}" Padding="10,10,10,10" Margin="0,10,0,0">
                         <Expander Foreground="{DynamicResource TextColor}" FontFamily="{DynamicResource Font}" Header="远古版" Background="{DynamicResource 1xBg}" >
                             <Border Background="{DynamicResource 2xBg}" Height="484" CornerRadius="4,4,4,4" Margin="0,5,0,0" Padding="4,4,4,4">
-                                <ui:ListView x:Name="OldVerList" FontFamily="MiSans Medium" SelectedValuePath="Id" d:ItemsSource="{d:SampleData ItemCount=5}"  Background="{DynamicResource 2xBg}"  >
+                                <ui:ListView x:Name="OldVerList" FontFamily="{DynamicResource Font}" SelectedValuePath="Id" d:ItemsSource="{d:SampleData ItemCount=5}"  Background="{DynamicResource 2xBg}" SelectionChanged="VerList_SelectionChanged"  >
                                     <ui:ListView.ItemTemplate>
                                         <DataTemplate>
                                             <Grid>
-                                                <TextBlock FontFamily="MiSans Medium"  Text="{Binding Id}" FontSize="16"/>
-                                                <TextBlock  Margin="0,18,0,0" FontSize="12" Foreground="{DynamicResource Gray}"><Run  FontFamily="MiSans Medium" Text="{Binding ReleaseTime}"/></TextBlock>
+                                                <TextBlock FontFamily="{DynamicResource Font}"  Text="{Binding Id}" FontSize="16"/>
+                                                <TextBlock  Margin="0,18,0,0" FontSize="12" Foreground="{DynamicResource Gray}"><Run  FontFamily="{DynamicResource Font}" Text="{Binding ReleaseTime}"/></TextBlock>
                                             </Grid>
                                         </DataTemplate>
                                     </ui:ListView.ItemTemplate>
@@ -118,12 +118,12 @@
                     <Border CornerRadius="3" Background="{DynamicResource 1xBg}" Padding="10,10,10,10" Margin="0,10,0,0">
                         <Expander Foreground="{DynamicResource TextColor}" FontFamily="{DynamicResource Font}" Header="愚人节版" Background="{DynamicResource 1xBg}" >
                             <Border Background="{DynamicResource 2xBg}" Height="484" CornerRadius="4,4,4,4" Margin="0,5,0,0" Padding="4,4,4,4">
-                                <ui:ListView x:Name="FoolVerList" FontFamily="MiSans Medium" SelectedValuePath="Id" d:ItemsSource="{d:SampleData ItemCount=5}"  Background="{DynamicResource 2xBg}"  >
+                                <ui:ListView x:Name="FoolVerList" FontFamily="{DynamicResource Font}" SelectedValuePath="Id" d:ItemsSource="{d:SampleData ItemCount=5}"  Background="{DynamicResource 2xBg}" SelectionChanged="VerList_SelectionChanged"  >
                                     <ui:ListView.ItemTemplate>
                                         <DataTemplate>
                                             <Grid>
-                                                <TextBlock FontFamily="MiSans Medium"  Text="{Binding Id}" FontSize="16"/>
-                                                <TextBlock  Margin="0,18,0,0" FontSize="12" Foreground="{DynamicResource Gray}"><Run  FontFamily="MiSans Medium" Text="{Binding ReleaseTime}"/></TextBlock>
+                                                <TextBlock FontFamily="{DynamicResource Font}"  Text="{Binding Id}" FontSize="16"/>
+                                                <TextBlock  Margin="0,18,0,0" FontSize="12" Foreground="{DynamicResource Gray}"><Run  FontFamily="{DynamicResource Font}" Text="{Binding ReleaseTime}"/></TextBlock>
                                             </Grid>
                                         </DataTemplate>
                                     </ui:ListView.ItemTemplate>
@@ -135,6 +135,101 @@
                 </StackPanel>
             </ScrollViewer>
         </Border>
+        <Border x:Name="InstallPreview" Visibility="Hidden" Background="{DynamicResource 1xBg}" CornerRadius="3,3,3,3" Margin="10,10,10,10" >
+            <Grid>
+                <ScrollViewer>
+                    <StackPanel>
+                        <Border VerticalAlignment="Top" Margin="5,5,5,0" Height="85"  Background="{DynamicResource 2xBg}"  CornerRadius="3,3,3,3">
+                            <Grid>
+                                <TextBox x:Name="CustomIdInput" Height="30" VerticalAlignment="Bottom" Margin="5,0,5,5" FontFamily="{DynamicResource Font}" />
+                                <TextBlock x:Name="InstallVerBlock" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,7,0,0" FontFamily="{DynamicResource Font}" Text="InstallVerText" FontSize="16" Foreground="{DynamicResource TextColor}"/>
+                                <TextBlock x:Name="AdditionInstallBlock" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,29,0,0" FontFamily="{DynamicResource Font}" Text="无附加安装" Foreground="#FF717171"/>
+                                <Button x:Name="StartInstallBtn" Height="30" Width="120" Content="开始安装" FontFamily="{DynamicResource Font}" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Click="StartInstallBtn_Click"/>
+                                <Button x:Name="ReturnBtn" Height="30" Width="90" Content="←  返回" FontFamily="{DynamicResource Font}" HorizontalAlignment="Right" Margin="135,10,250,0" Click="ReturnBtn_Click" VerticalAlignment="Top"/>
+                                <Button x:Name="CancelAddition" Height="30" Width="110" Content="取消附加安装" FontFamily="{DynamicResource Font}" HorizontalAlignment="Right" Margin="0,10,135,0" VerticalAlignment="Top" IsCancel="True" Click="CancelAddition_Click"/>
+                            </Grid>
+                        </Border>
+
+                        <Border CornerRadius="3" Background="{DynamicResource 2xBg}" Padding="10,10,10,10" Margin="5,10,5,0">
+                            <Expander x:Name="ForgeExpander" Foreground="{DynamicResource TextColor}" FontFamily="{DynamicResource Font}" Header="Forge" Background="{DynamicResource 2xBg}" >
+                                <Grid>
+
+                                    <Border Background="{DynamicResource 2xBg}" Height="250" CornerRadius="4,4,4,4" Padding="4,4,4,4">
+                                        <ui:ListView x:Name="ForgeList" FontFamily="{DynamicResource Font}" SelectedValuePath="Id" d:ItemsSource="{d:SampleData ItemCount=5}"  Background="{DynamicResource 2xBg}" SelectionChanged="AdditionList_SelectionChanged"  >
+                                            <ui:ListView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid>
+                                                        <TextBlock FontFamily="{DynamicResource Font}"  Text="{Binding ForgeVersion}" FontSize="16"/>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ui:ListView.ItemTemplate>
+                                        </ui:ListView>
+
+                                    </Border>
+                                    <ui:ProgressRing x:Name="ForgeLoading" Width="50" Height="50" IsActive="True" />
+                                </Grid>
+                            </Expander>
+                        </Border>
+                        <Border Margin="5,10,5,0" CornerRadius="3" Background="{DynamicResource 2xBg}" Padding="10,10,10,10">
+                            <Expander x:Name="OptifineExpander" Foreground="{DynamicResource TextColor}" FontFamily="{DynamicResource Font}" Header="Optifine" Background="{DynamicResource 2xBg}" >
+                                <Border Background="{DynamicResource 2xBg}" Height="250" CornerRadius="4,4,4,4" Margin="0,5,0,0" Padding="4,4,4,4">
+                                    <Grid>
+                                        <ui:ListView x:Name="OptifineList" FontFamily="{DynamicResource Font}" SelectedValuePath="Id" d:ItemsSource="{d:SampleData ItemCount=5}"  Background="{DynamicResource 2xBg}" SelectionChanged="AdditionList_SelectionChanged"  >
+                                            <ui:ListView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid>
+                                                        <TextBlock FontFamily="{DynamicResource Font}"  Text="{Binding FileName}" FontSize="16"/>
+
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ui:ListView.ItemTemplate>
+                                        </ui:ListView>
+                                        <ui:ProgressRing x:Name="OptifineLoading" Width="50" Height="50" IsActive="True" />
+                                    </Grid>
+                                </Border>
+                            </Expander>
+                        </Border>
+                        <Border CornerRadius="3" Background="{DynamicResource 2xBg}" Padding="10,10,10,10" Margin="5,10,5,0">
+                            <Expander x:Name="FabricExpander" Foreground="{DynamicResource TextColor}" FontFamily="{DynamicResource Font}" Header="Fabric" Background="{DynamicResource 2xBg}" >
+                                <Border Background="{DynamicResource 2xBg}" Height="250" CornerRadius="4,4,4,4" Margin="0,5,0,0" Padding="4,4,4,4">
+                                    <Grid>
+                                        <ui:ListView x:Name="FabricList" FontFamily="{DynamicResource Font}" SelectedValuePath="Id" d:ItemsSource="{d:SampleData ItemCount=5}"  Background="{DynamicResource 2xBg}" SelectionChanged="AdditionList_SelectionChanged"  >
+                                            <ui:ListView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid>
+                                                        <TextBlock FontFamily="{DynamicResource Font}"  Text="{Binding Loader.Version}" FontSize="16"/>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ui:ListView.ItemTemplate>
+                                        </ui:ListView>
+                                        <ui:ProgressRing x:Name="FabricLoading" Width="50" Height="50" IsActive="True" />
+                                    </Grid>
+                                </Border>
+                            </Expander>
+                        </Border>
+                        <Border CornerRadius="3" Background="{DynamicResource 2xBg}" Padding="10,10,10,10" Margin="5,10,5,0">
+                            <Expander x:Name="QuileExpander" Foreground="{DynamicResource TextColor}" FontFamily="{DynamicResource Font}" Header="Quile" Background="{DynamicResource 2xBg}" >
+                                <Border Background="{DynamicResource 2xBg}" Height="250" CornerRadius="4,4,4,4" Margin="0,5,0,0" Padding="4,4,4,4">
+                                    <Grid>
+                                        <ui:ListView x:Name="QuileList"  FontFamily="{DynamicResource Font}" SelectedValuePath="Id" d:ItemsSource="{d:SampleData ItemCount=5}"  Background="{DynamicResource 2xBg}" SelectionChanged="AdditionList_SelectionChanged"  >
+                                            <ui:ListView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid>
+                                                        <TextBlock FontFamily="{DynamicResource Font}"  Text="{Binding Loader.Version}" FontSize="16"/>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ui:ListView.ItemTemplate>
+                                        </ui:ListView>
+                                        <ui:ProgressRing x:Name="QuileLoading" Width="50" Height="50" IsActive="True" />
+                                    </Grid>
+                                </Border>
+                            </Expander>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+        </Border>
+
     </Grid>
 </Page>
 
