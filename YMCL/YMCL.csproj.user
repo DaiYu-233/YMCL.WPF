@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_LastSelectedProfileId>D:\桌面\YMCL\YMCL\Properties\PublishProfiles\FolderProfile.pubxml</_LastSelectedProfileId>
+  </PropertyGroup>
+  <ItemGroup>
+    <ApplicationDefinition Update="App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Pages\MorePage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\MorePages\ToolsPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\SettingPages\AboutPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\Windows\DesktopLyric.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\Windows\DisplayProgressWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\DownloadPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\DownloadPages\AutoInstallPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\LaunchPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\SettingPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\SettingPages\AccountSettingPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\SettingPages\DownloadSettingPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\SettingPages\LauncherSettingPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\SettingPages\LaunchSettingPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\Windows\MusicPlayerWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\MorePage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\MorePages\ToolsPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\SettingPages\AboutPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\Windows\DesktopLyric.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\Windows\DisplayProgressWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\DownloadPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\DownloadPages\AutoInstallPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\LaunchPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\SettingPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\SettingPages\AccountSettingPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\SettingPages\DownloadSettingPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\SettingPages\LauncherSettingPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\SettingPages\LaunchSettingPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\Windows\MusicPlayerWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Styles\DarkTheme.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Styles\LightTheme.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Styles\MainStyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+</Project>

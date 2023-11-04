@@ -1,0 +1,2 @@
+D:\桌面\YMCL\Updater\bin\Release\net6.0\publish\win-x86\YMCLUpdater.pdb
+D:\桌面\YMCL\Updater\bin\Release\net6.0\publish\win-x86\YMCLUpdater.exe
