@@ -38,6 +38,7 @@ namespace YMCL
         public static string YMCLDataRoot { get; } = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\DaiYu.YMCL";
         public static string YMCLPublicDataRoot { get; } = "C:\\ProgramData\\YMCL";
         public static string YMCLSettingDataPath { get; } = YMCLDataRoot + "\\YMCL.Setting.DaiYu";
+        public static string YMCLAssetsPath { get; } = YMCLDataRoot + "\\Assets";
         public static string YMCLAccountDataPath { get; } = YMCLDataRoot + "\\YMCL.Account.DaiYu";
         public static string YMCLMinecraftFolderDataPath { get; } = YMCLDataRoot + "\\YMCL.MinecraftFolder.DaiYu";
         public static string YMCLJavaDataPath { get; } = YMCLDataRoot + "\\YMCL.Java.DaiYu";

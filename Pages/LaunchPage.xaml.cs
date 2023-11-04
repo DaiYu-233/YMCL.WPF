@@ -2,7 +2,6 @@
 using MinecraftLaunch.Modules.Enum;
 using MinecraftLaunch.Modules.Installer;
 using MinecraftLaunch.Modules.Models.Launch;
-using MinecraftLaunch.Modules.Utils;
 using Newtonsoft.Json;
 using Panuon.WPF.UI;
 using System;
@@ -20,6 +19,8 @@ using System.Windows.Input;
 using System.Windows.Media.Animation;
 using YMCL.Pages.Windows;
 using YMCL.Class;
+using MinecraftLaunch.Modules.Utilities;
+using System.Windows.Markup;
 
 namespace YMCL.Pages
 {
@@ -39,7 +40,7 @@ namespace YMCL.Pages
             HitokotoTextBlock.MouseRightButtonDown += (sender, e) =>
             {
                 System.Windows.Clipboard.SetText(HitokotoTextBlock.Text);
-                Toast.Show("已复制到剪切板", ToastPosition.Top);
+                Toast.Show(Const.Window.main, "已复制到剪切板", ToastPosition.Top);
             };
         }
 
@@ -152,12 +153,20 @@ namespace YMCL.Pages
         {
             List<string> gameCores = new();
             var setting = JsonConvert.DeserializeObject<Class.Setting>(File.ReadAllText(Const.YMCLSettingDataPath));
-            MinecraftLaunch.Modules.Utils.GameCoreUtil gameCoreUtil = new(setting.MinecraftPath);
-            gameCoreUtil.GetGameCores().ToList().ForEach(gameCore =>
+            GameCoreUtil gameCoreUtil = new(setting.MinecraftPath);
+            try
             {
-                gameCores.Add(gameCore.Id);
-            });
-            VersionListView.ItemsSource = gameCores;
+                gameCoreUtil.GetGameCores().ToList().ForEach(gameCore =>
+                {
+                    gameCores.Add(gameCore.Id);
+                });
+                VersionListView.ItemsSource = gameCores;
+            }
+            catch (Exception)
+            {
+                Toast.Show(Const.Window.main, "获取版本列表发生错误", ToastPosition.Top);
+            }
+
         }
 
         private void ToVersionList_Click(object sender, RoutedEventArgs e)
@@ -334,6 +343,10 @@ namespace YMCL.Pages
             {
                 case "离线模式":
                     launchConfig.Account = new MinecraftOAuth.Authenticator.OfflineAuthenticator(account.Name).Auth();
+                    break;
+                case "微软登录":
+                    var auth = JsonConvert.DeserializeObject<MinecraftLaunch.Modules.Models.Auth.MicrosoftAccount>(account.Data);
+                    launchConfig.Account = auth;
                     break;
             }
             GameCoreUtil gameCoreUtil = new(mcPath);

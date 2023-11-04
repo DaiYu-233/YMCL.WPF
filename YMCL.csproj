@@ -24,15 +24,15 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="MinecraftLaunch" Version="1.9.6-preview7" />
-		<PackageReference Include="MinecraftOAuth" Version="1.9.6-preview5" />
+		<PackageReference Include="MinecraftLaunch" Version="2.0.1" />
+		<PackageReference Include="MinecraftLaunch.Skin" Version="1.0.0" />
+		<PackageReference Include="MinecraftOAuth" Version="2.0.1" />
 		<PackageReference Include="ModernWpfUI" Version="0.9.7-preview.2" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="Panuon.WPF.UI" Version="1.1.16.2" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<Content Include="./Assets/Font.ttf" />
 		<Content Include="YMCL-Icon.ico" />
 	</ItemGroup>
 

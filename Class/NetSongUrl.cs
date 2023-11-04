@@ -115,7 +115,7 @@ namespace YMCL.Class
         /// <summary>
         /// 
         /// </summary>
-        public string freeTrialInfo { get; set; }
+        //public freeTrialInfo { get; set; }
         /// <summary>
         /// 
         /// </summary>

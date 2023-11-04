@@ -1,26 +1,16 @@
 ﻿using MinecraftLaunch.Modules.Installer;
+using MinecraftLaunch.Modules.Models.Download;
 using MinecraftLaunch.Modules.Models.Install;
-using MinecraftLaunch.Modules.Utils;
 using Newtonsoft.Json;
 using Panuon.WPF.UI;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Runtime.ConstrainedExecution;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Forms;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using YMCL.Pages.Windows;
 
 namespace YMCL.Pages.DownloadPages
@@ -33,7 +23,21 @@ namespace YMCL.Pages.DownloadPages
         string version = string.Empty;
         public AutoInstallPage()
         {
+            var setting = JsonConvert.DeserializeObject<Class.Setting>(File.ReadAllText(Const.YMCLSettingDataPath));
+            var thread = setting.DownloadThread;
             InitializeComponent();
+            switch (setting.DownloadSource)
+            {
+                case "Mcbbs":
+                    APIManager.Current = APIManager.Mcbbs;
+                    break;
+                case "BMCLApi":
+                    APIManager.Current = APIManager.Bmcl;
+                    break;
+                case "Mojang":
+                    APIManager.Current = APIManager.Mojang;
+                    break;
+            }
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(AllVerList.Items);
             view.Filter = UserFilter;
         }
@@ -130,8 +134,21 @@ namespace YMCL.Pages.DownloadPages
             {
                 return;
             }
+            ForgeList.SelectedIndex = -1;
+            OptifineList.SelectedIndex = -1;
+            QuiltList.SelectedIndex = -1;
+            FabricList.SelectedIndex = -1;
+            ForgeList.IsEnabled = true;
+            OptifineList.IsEnabled = true;
+            FabricList.IsEnabled = true;
+            QuiltList.IsEnabled = true;
+            AdditionInstallBlock.Text = "无附加安装";
             id = version.Id;
             CustomIdInput.Text = id;
+            ForgeList.Items.Clear();
+            OptifineList.Items.Clear();
+            FabricList.Items.Clear();
+            QuiltList.Items.Clear();
             InstallVerBlock.Text = id;
             VersionView.Visibility = Visibility.Hidden;
             InstallPreview.Visibility = Visibility.Visible;
@@ -141,71 +158,79 @@ namespace YMCL.Pages.DownloadPages
             OptifineExpander.Header = "Optifine";
             FabricLoading.Visibility = Visibility.Visible;
             FabricExpander.Header = "Fabric";
-            QuileLoading.Visibility = Visibility.Visible;
-            QuileExpander.Header = "Quile";
+            QuiltLoading.Visibility = Visibility.Visible;
+            QuiltExpander.Header = "Quilt";
             GetAddition();
         }
 
         async void GetAddition()
         {
-            ForgeList.Items.Clear();
-            await Task.Run(async () =>
-            {
-                var builds = (await ForgeInstaller.GetForgeBuildsOfVersionAsync(id)).ToList();
-                builds.ForEach(async x =>
-                {
-                    await Dispatcher.BeginInvoke(() => { ForgeList.Items.Add(x); });
-                });
-            });
-            ForgeLoading.Visibility = Visibility.Hidden;
-            if (ForgeList.Items.Count <= 0)
-            {
-                ForgeExpander.Header = "Forge (无可用版本)";
-            }
+            List<ForgeInstallEntity> forges = new List<ForgeInstallEntity>();
+            List<OptiFineInstallEntity> optifines = new List<OptiFineInstallEntity>();
+            List<FabricInstallBuild> fabrics = new List<FabricInstallBuild>();
+            List<QuiltInstallBuild> quilts = new List<QuiltInstallBuild>();
 
-            OptifineList.Items.Clear();
             await Task.Run(async () =>
             {
-                var res = (await OptiFineInstaller.GetOptiFineBuildsFromMcVersionAsync(id)).ToList();
-                res.ForEach(async x =>
+                forges = (await ForgeInstaller.GetForgeBuildsOfVersionAsync(id)).ToList();
+                await Dispatcher.BeginInvoke(() =>
                 {
-                    await Dispatcher.BeginInvoke(() => { OptifineList.Items.Add(x); });
+                    forges.ForEach(x =>
+                    {
+                        ForgeList.Items.Add(x);
+                    });
+                    ForgeLoading.Visibility = Visibility.Hidden;
+                });
+                optifines = (await OptiFineInstaller.GetOptiFineBuildsFromMcVersionAsync(id)).ToList();
+                await Dispatcher.BeginInvoke(() =>
+                {
+                    optifines.ForEach(x =>
+                    {
+                        OptifineList.Items.Add(x);
+                    });
+                    OptifineLoading.Visibility = Visibility.Hidden;
+                });
+                fabrics = (await FabricInstaller.GetFabricBuildsByVersionAsync(id)).ToList();
+                await Dispatcher.BeginInvoke(() =>
+                {
+                    fabrics.ForEach(x =>
+                    {
+                        FabricList.Items.Add(x);
+                    });
+                    FabricLoading.Visibility = Visibility.Hidden;
+                });
+                quilts = (await QuiltInstaller.GetQuiltBuildsByVersionAsync(id)).ToList();
+                await Dispatcher.BeginInvoke(() =>
+                {
+                    quilts.ForEach(x =>
+                    {
+                        QuiltList.Items.Add(x);
+                    });
+                    QuiltLoading.Visibility = Visibility.Hidden;
                 });
             });
-            OptifineLoading.Visibility = Visibility.Hidden;
-            if (OptifineList.Items.Count <= 0)
-            {
-                OptifineExpander.Header = "Optifine (无可用版本)";
-            }
 
-            FabricList.Items.Clear();
-            await Task.Run(async () =>
+
+
+
+
+
+
+            if (quilts.Count == 0)
             {
-                var res = (await FabricInstaller.GetFabricBuildsByVersionAsync(id)).ToList();
-                res.ForEach(async x =>
-                {
-                    await Dispatcher.BeginInvoke(() => { FabricList.Items.Add(x); });
-                });
-            });
-            FabricLoading.Visibility = Visibility.Hidden;
-            if (FabricList.Items.Count <= 0)
+                QuiltExpander.Header = "Quilt (无可用版本)";
+            }
+            if (fabrics.Count == 0)
             {
                 FabricExpander.Header = "Fabric (无可用版本)";
             }
-
-            QuileList.Items.Clear();
-            await Task.Run(async () =>
+            if (optifines.Count == 0)
             {
-                var res = (await QuiltInstaller.GetQuiltBuildsByVersionAsync(id)).ToList();
-                res.ForEach(async x =>
-                {
-                    await Dispatcher.BeginInvoke(() => { QuileList.Items.Add(x); });
-                });
-            });
-            QuileLoading.Visibility = Visibility.Hidden;
-            if (QuileList.Items.Count <= 0)
+                OptifineExpander.Header = "Optifine (无可用版本)";
+            }
+            if (forges.Count == 0)
             {
-                QuileExpander.Header = "Quile (无可用版本)";
+                ForgeExpander.Header = "Forge (无可用版本)";
             }
         }
 
@@ -222,62 +247,70 @@ namespace YMCL.Pages.DownloadPages
             ForgeList.IsEnabled = true;
             OptifineList.IsEnabled = true;
             FabricList.IsEnabled = true;
-            QuileList.IsEnabled = true;
+            QuiltList.IsEnabled = true;
+            var forgeItem = ForgeList.SelectedItem as ForgeInstallEntity;
+            var optifineItem = OptifineList.SelectedItem as OptiFineInstallEntity;
+            var FabricItem = FabricList.SelectedItem as FabricInstallBuild;
+            var QuiltItem = QuiltList.SelectedItem as QuiltInstallBuild;
             switch (senderObj.Name)
             {
                 case "ForgeList":
-                    var forgeItem = ForgeList.SelectedItem as ForgeInstallEntity;
+
                     FabricList.IsEnabled = false;
-                    QuileList.IsEnabled = false;
+                    QuiltList.IsEnabled = false;
                     FabricList.SelectedIndex = -1;
-                    QuileList.SelectedIndex = -1;
-                    if (ForgeList.SelectedIndex != -1)
-                        AdditionInstallBlock.Text = AdditionInstallBlock.Text + $"Forge {forgeItem.ForgeVersion}  ";
+                    QuiltList.SelectedIndex = -1;
+
                     break;
                 case "OptifineList":
-                    var optifineItem = OptifineList.SelectedItem as OptiFineInstallEntity;
+
                     FabricList.IsEnabled = false;
-                    QuileList.IsEnabled = false;
+                    QuiltList.IsEnabled = false;
                     FabricList.SelectedIndex = -1;
-                    QuileList.SelectedIndex = -1;
-                    if (OptifineList.SelectedIndex != -1)
-                        AdditionInstallBlock.Text = AdditionInstallBlock.Text + $"Optifine {optifineItem.FileName}  ";
+                    QuiltList.SelectedIndex = -1;
+
                     break;
                 case "FabricList":
-                    var FabricItem = FabricList.SelectedItem as FabricInstallBuild;
+
                     ForgeList.IsEnabled = false;
                     OptifineList.IsEnabled = false;
-                    QuileList.IsEnabled = false;
+                    QuiltList.IsEnabled = false;
                     ForgeList.SelectedIndex = -1;
                     OptifineList.SelectedIndex = -1;
-                    QuileList.SelectedIndex = -1;
-                    if (FabricList.SelectedIndex != -1)
-                        AdditionInstallBlock.Text = AdditionInstallBlock.Text + $"Fabric {FabricItem.Loader.Version}  ";
+                    QuiltList.SelectedIndex = -1;
+
                     break;
-                case "QuileList":
-                    var QuileItem = QuileList.SelectedItem as QuiltInstallBuild;
+                case "QuiltList":
+
                     ForgeList.IsEnabled = false;
                     OptifineList.IsEnabled = false;
                     FabricList.IsEnabled = false;
                     ForgeList.SelectedIndex = -1;
                     OptifineList.SelectedIndex = -1;
                     FabricList.SelectedIndex = -1;
-                    if (QuileList.SelectedIndex != -1)
-                        AdditionInstallBlock.Text = AdditionInstallBlock.Text + $"Quilt {QuileItem.Loader.Version}  ";
+
                     break;
             }
+            if (QuiltList.SelectedIndex != -1)
+                AdditionInstallBlock.Text = AdditionInstallBlock.Text + $"Quilt {QuiltItem.Loader.Version}  ";
+            if (ForgeList.SelectedIndex != -1)
+                AdditionInstallBlock.Text = AdditionInstallBlock.Text + $"Forge {forgeItem.ForgeVersion}  ";
+            if (FabricList.SelectedIndex != -1)
+                AdditionInstallBlock.Text = AdditionInstallBlock.Text + $"Fabric {FabricItem.Loader.Version}  ";
+            if (OptifineList.SelectedIndex != -1)
+                AdditionInstallBlock.Text = AdditionInstallBlock.Text + $"Optifine {optifineItem.FileName}  ";
         }
 
         private void CancelAddition_Click(object sender, RoutedEventArgs e)
         {
             ForgeList.SelectedIndex = -1;
             OptifineList.SelectedIndex = -1;
-            QuileList.SelectedIndex = -1;
+            QuiltList.SelectedIndex = -1;
             FabricList.SelectedIndex = -1;
             ForgeList.IsEnabled = true;
             OptifineList.IsEnabled = true;
             FabricList.IsEnabled = true;
-            QuileList.IsEnabled = true;
+            QuiltList.IsEnabled = true;
             AdditionInstallBlock.Text = "无附加安装";
         }
 
@@ -321,6 +354,28 @@ namespace YMCL.Pages.DownloadPages
             DisplayProgressWindow displayProgressWindow = new DisplayProgressWindow();
             displayProgressWindow.Show();
             displayProgressWindow.CurrentStepTextBlock.Text = "Vanllia";
+            displayProgressWindow.TaskProgressTextBox.Text += $"[{DateTime.Now.ToString()}]     开始安装 Vanllia {id}   下载源 {setting.DownloadSource}   最大下载线程 {setting.DownloadThread}\n";
+            bool forge = false;
+            bool optifine = false;
+            bool fabric = false;
+            bool quilt = false;
+            if (QuiltList.SelectedIndex > -1)
+                quilt = true;
+            else
+                quilt = false;
+            if (FabricList.SelectedIndex > -1)
+                fabric = true;
+            else
+                fabric = false;
+            if (OptifineList.SelectedIndex > -1)
+                optifine = true;
+            else
+                optifine = false;
+            if (ForgeList.SelectedIndex > -1)
+                forge = true;
+            else 
+                forge = false; 
+
             await Task.Run(async () =>
             {
                 GameCoreInstaller installer = new(setting.MinecraftPath, id, customId);
@@ -334,9 +389,141 @@ namespace YMCL.Pages.DownloadPages
                     });
                 };
                 var result = await installer.InstallAsync();
+
+                await Dispatcher.BeginInvoke(() =>
+                {
+                    Toast.Show(Const.Window.main, $"Vanllia {id} 安装完成", ToastPosition.Top);
+                    displayProgressWindow.TaskProgressTextBox.Text = "";
+                });
+
+
+                if (forge)
+                {
+                    ForgeInstallEntity forgebuild = new();
+
+                    await Dispatcher.BeginInvoke(() =>
+                    {
+                        displayProgressWindow.TaskProgressTextBox.Text += $"[{DateTime.Now.ToString()}]     开始安装 Forge \n";
+                        displayProgressWindow.CurrentStepTextBlock.Text = "Forge";
+                        forgebuild = ForgeList.SelectedItem as ForgeInstallEntity;
+                    });
+
+                    ForgeInstaller forgeinstaller = new(setting.MinecraftPath, forgebuild, setting.Java, customId);
+                    installer.ProgressChanged += (_, x) =>
+                    {
+                        Dispatcher.BeginInvoke(() =>
+                        {
+                            displayProgressWindow.TaskProText.Text = $"{x.Progress * 100:0.00}%";
+                            displayProgressWindow.TaskProBar.Value = Math.Round(x.Progress * 100, 1);
+                            displayProgressWindow.TaskProgressTextBox.Text += $"[{DateTime.Now.ToString()}]     {x.ProgressDescription}\n";
+                        });
+                    };
+                    var forgeresult = await forgeinstaller.InstallAsync();
+
+                    await Dispatcher.BeginInvoke(() =>
+                    {
+                        Toast.Show(Const.Window.main, $"Forge 安装完成", ToastPosition.Top);
+                    });
+
+                }
+
+
+                if (optifine)
+                {
+                    OptiFineInstallEntity opbuild = new();
+                    await Dispatcher.BeginInvoke(() =>
+                    {
+                        displayProgressWindow.TaskProgressTextBox.Text += $"[{DateTime.Now.ToString()}]     开始安装 Optifine \n";
+                        displayProgressWindow.CurrentStepTextBlock.Text = "Optifine";
+                        opbuild = OptifineList.SelectedItem as OptiFineInstallEntity;
+                    });
+
+
+
+                    OptiFineInstaller opinstaller = new(setting.MinecraftPath, opbuild, setting.Java, customId: customId);
+                    installer.ProgressChanged += (_, x) =>
+                    {
+                        Dispatcher.BeginInvoke(() =>
+                        {
+                            displayProgressWindow.TaskProText.Text = $"{x.Progress * 100:0.00}%";
+                            displayProgressWindow.TaskProBar.Value = Math.Round(x.Progress * 100, 1);
+                            displayProgressWindow.TaskProgressTextBox.Text += $"[{DateTime.Now.ToString()}]     {x.ProgressDescription}\n";
+                        });
+                    };
+                    await opinstaller.InstallAsync();
+
+                    await Dispatcher.BeginInvoke(() =>
+                    {
+                        Toast.Show(Const.Window.main, $"Optifine 安装完成", ToastPosition.Top);
+                    });
+
+                }
+
+
+                if (fabric)
+                {
+                    FabricInstallBuild fabuild = new();
+                    await Dispatcher.BeginInvoke(() =>
+                    {
+                        displayProgressWindow.TaskProgressTextBox.Text += $"[{DateTime.Now.ToString()}]     开始安装 Fabric \n";
+                        displayProgressWindow.CurrentStepTextBlock.Text = "Fabric";
+                        var fabuild = FabricList.SelectedItem as FabricInstallBuild;
+                    });
+
+
+                    FabricInstaller fainstaller = new(setting.MinecraftPath, fabuild, customId: customId);
+                    installer.ProgressChanged += (_, x) =>
+                    {
+                        Dispatcher.BeginInvoke(() =>
+                        {
+                            displayProgressWindow.TaskProText.Text = $"{x.Progress * 100:0.00}%";
+                            displayProgressWindow.TaskProBar.Value = Math.Round(x.Progress * 100, 1);
+                            displayProgressWindow.TaskProgressTextBox.Text += $"[{DateTime.Now.ToString()}]     {x.ProgressDescription}\n";
+                        });
+                    };
+                    await fainstaller.InstallAsync();
+
+                    await Dispatcher.BeginInvoke(() =>
+                    {
+                        Toast.Show(Const.Window.main, $"Fabric 安装完成", ToastPosition.Top);
+                    });
+
+                }
+
+                if (quilt)
+                {
+                    QuiltInstallBuild build = new();
+                    await Dispatcher.BeginInvoke(() =>
+                    {
+                        displayProgressWindow.TaskProgressTextBox.Text += $"[{DateTime.Now.ToString()}]     开始安装 Quilt \n";
+                        displayProgressWindow.CurrentStepTextBlock.Text = "Quilt";
+                        build = QuiltList.SelectedItem as QuiltInstallBuild;
+                    });
+
+                    QuiltInstaller qinstaller = new(setting.MinecraftPath, build, customId: customId);
+                    installer.ProgressChanged += (_, x) =>
+                    {
+                        Dispatcher.BeginInvoke(() =>
+                        {
+                            displayProgressWindow.TaskProText.Text = $"{x.Progress * 100:0.00}%";
+                            displayProgressWindow.TaskProBar.Value = Math.Round(x.Progress * 100, 1);
+                            displayProgressWindow.TaskProgressTextBox.Text += $"[{DateTime.Now.ToString()}]     {x.ProgressDescription}\n";
+                        });
+                    };
+                    await qinstaller.InstallAsync();
+
+                    await Dispatcher.BeginInvoke(() =>
+                    {
+                        Toast.Show(Const.Window.main, $"Quilt 安装完成", ToastPosition.Top);
+                    });
+                }
+
+
             });
+
             displayProgressWindow.Hide();
-            Toast.Show(Const.Window.main, $"Vanllia {id} 安装完成", ToastPosition.Top);
+            VersionView.Visibility = Visibility.Visible;
+            InstallPreview.Visibility = Visibility.Hidden;
         }
     }
 }

@@ -10,6 +10,8 @@ namespace YMCL.Class
         public double MamMem { get; set; } = 1024;
         public double Volume { get; set; } = 0;
         public string? SelectedVersion { get; set; }
+        public string? DownloadSource { get; set; } = "Mcbbs";
+        public int DownloadThread { get; set; } = 32;
         public int AccountSelectionIndex { get; set; }
         public string? Theme { get; set; } = "System";
         public string? MusicLoopType { get; set; } = "RepeatOff";

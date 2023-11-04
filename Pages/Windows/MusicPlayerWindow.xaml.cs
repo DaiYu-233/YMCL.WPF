@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.Text.RegularExpressions;
 using YMCL.Class;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace YMCL.Pages.Windows
 {
@@ -589,8 +590,12 @@ namespace YMCL.Pages.Windows
                     foreach (var lyric in lyrics)
                     {
                         var run = new Run(lyric.Text + "\n");
+                        long milliseconds = (long)lyric.Time.TotalMilliseconds;
+                        run.Tag = milliseconds;
+                        run.MouseDown += Run_MouseDown;
                         LyricBlock.Inlines.Add(run);
                         lyricRuns.Add(run);
+                        
                     }
 
                     timer1 = new DispatcherTimer();
@@ -620,9 +625,35 @@ namespace YMCL.Pages.Windows
             }
         }
 
+        private void Run_MouseDown(object send, MouseButtonEventArgs e)
+        {
+            var sender = send as Run;
+            var res = Convert.ToUInt64(sender.Tag.ToString());
+            PlaySlider.Value = res;
+            var item = PlayListView.SelectedItem as Class.PlayMusicListItem;
+            player.Position = new TimeSpan(0, 0, 0, 0, milliseconds: (int)PlaySlider.Value);
+            lyricRuns.ForEach(x =>
+            {
+                x.Foreground = Brushes.Black;
+                x.FontWeight = FontWeights.Normal;
+            });
+        }
+
         private void Timer1_Tick(object? sender, EventArgs e)
         {
-            
+            if (PlayListView.SelectedIndex == -1)
+            {
+                player.Close();
+                timer.Stop();
+                PlayBtnIcon.Glyph = "\uF5B0";
+                PlayBtnIcon.Margin = new Thickness(0, 0, -2, 0);
+                isPlaying = false;
+                PlaySlider.Maximum = 0;
+                TimeText.Text = $"00:00/00:00";
+                PlaySlider.Value = 0;
+                PlayingSongAuthors.Text = "";
+                PlayingSongName.Text = "";
+            }
             // 获取当前播放的歌曲进度
             TimeSpan currentTime = TimeSpan.FromMilliseconds(PlaySlider.Value);
             var setting = JsonConvert.DeserializeObject<Class.Setting>(File.ReadAllText(Const.YMCLSettingDataPath));

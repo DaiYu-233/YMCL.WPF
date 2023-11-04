@@ -31,9 +31,11 @@ namespace YMCL.Pages.SettingPages
         public LauncherSettingPage()
         {
             var color = JsonConvert.DeserializeObject<Class.Setting>(File.ReadAllText(Const.YMCLSettingDataPath)).ThemeColor;
+            var color1 = JsonConvert.DeserializeObject<Class.Setting>(File.ReadAllText(Const.YMCLSettingDataPath)).DesktopLyricColor;
             InitializeComponent();
             LoadThemeComboBox();
             ColorPicker.SelectedColor = color;
+            LyricColorPicker.SelectedColor = color1;
             timer.Tick += Timer_Tick;
             timer.Interval = TimeSpan.FromSeconds(2);   //设置刷新的间隔时间
         }

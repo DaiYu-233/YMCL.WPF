@@ -96,7 +96,7 @@ namespace YMCL.Pages.SettingPages
         {
             var backItem = string.Empty;
             var includeItem = 0;
-            foreach (var java in MinecraftLaunch.Modules.Utils.JavaUtil.GetJavas())
+            foreach (var java in MinecraftLaunch.Modules.Utilities.JavaUtil.GetJavas())
             {
                 var isInclude = false;
 

@@ -29,9 +29,13 @@
                         <ui:ListView.ItemTemplate>
                             <DataTemplate>
                                 <Grid>
-                                    <TextBlock Text="{Binding Name}" FontSize="14" FontFamily="{DynamicResource Font}"/>
-                                    <TextBlock  Text="{Binding AccountType}" Margin="0,15,0,0" FontSize="11" Foreground="{DynamicResource Gray}" FontFamily="{DynamicResource Font}"></TextBlock>
-                                    <TextBlock  Text="{Binding AddTime}" FontSize="11" Foreground="{DynamicResource Gray}" Margin="62,15,0,0" FontFamily="{DynamicResource Font}"/>
+                                    <Image HorizontalAlignment="Left" Height="28" Width="28" Margin="2,0,0,0" Source="{Binding SkinBase64}"></Image>
+                                    <Grid Margin="35,0,0,0">
+                                        <TextBlock Text="{Binding Name}" FontSize="14" FontFamily="{DynamicResource Font}"/>
+                                        <TextBlock  Text="{Binding AccountType}" Margin="0,17,0,0" FontSize="11" Foreground="{DynamicResource Gray}" FontFamily="{DynamicResource Font}"></TextBlock>
+                                        <TextBlock  Text="{Binding AddTime}" FontSize="11" Foreground="{DynamicResource Gray}" Margin="62,17,0,0" FontFamily="{DynamicResource Font}"/>
+                                    </Grid>
+                                   
                                 </Grid>
                             </DataTemplate>
                         </ui:ListView.ItemTemplate>
@@ -78,10 +82,10 @@
                     <TextBox x:Name="YggdrasilEmailTextBox" FontFamily="{DynamicResource Font}" FontSize="15" VerticalAlignment="Top"  Width="420"  ui:ControlHelper.PlaceholderText="邮箱地址" Margin="0,39,0,0" Height="23"/>
                     <TextBox x:Name="YggdrasilPasswordTextBox" FontFamily="{DynamicResource Font}" FontSize="15" VerticalAlignment="Top"  Width="420"  ui:ControlHelper.PlaceholderText="账户密码" Margin="0,78,0,0" Height="19"/>
 
-                    <Button x:Name="YggdrasilAccountAddBtn" VerticalAlignment="Bottom" Height="29" Width="95" FontFamily="{DynamicResource Font}"  Style="{StaticResource AccentButtonStyle}" Content="确定" IsEnabled="True" HorizontalAlignment="Right" Margin="0,0,5,5" IsDefault="True" />
+                    <Button x:Name="YggdrasilAccountAddBtn" VerticalAlignment="Bottom" Height="29" Width="95" FontFamily="{DynamicResource Font}"  Style="{StaticResource AccentButtonStyle}" Content="确定" IsEnabled="True" HorizontalAlignment="Right" Margin="0,0,5,5" IsDefault="True" Click="YggdrasilAccountAddBtn_Click" />
                     <Button VerticalAlignment="Bottom" Height="29" Width="80" FontFamily="{DynamicResource Font}" Content="取消" IsEnabled="True" Click="CancelAddAccountBtn_Click" HorizontalAlignment="Right" Margin="0,0,105,5" IsCancel="True" />
 
-                    <CheckBox x:Name="isLittleSkin" VerticalAlignment="Bottom" Margin="10,0,0,2" Content="LittleSkin"/>
+                    <CheckBox x:Name="isLittleSkin" VerticalAlignment="Bottom" Margin="10,0,0,2" Content="LittleSkin" FontFamily="{DynamicResource Font}" Click="isLittleSkin_Click"/>
                 </Grid>
             </ui:ContentDialog>
         </Grid>
