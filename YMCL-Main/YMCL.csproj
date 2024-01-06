@@ -1,0 +1,64 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>True</UseWindowsForms>
+    <StartupObject>YMCL.App</StartupObject>
+    <AssemblyName>YMCL</AssemblyName>
+    <RootNamespace>YMCL</RootNamespace>
+    <ApplicationIcon>YMCL-Icon.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <PackageId>YMCL</PackageId>
+    <Title>Yu Minecraft Launcher</Title>
+    <Authors>DaiYu | daiyu.fun</Authors>
+    <Description>DaiYu | ymcl.daiyu.fun</Description>
+    <Copyright>DaiYu | ymcl.daiyu.fun</Copyright>
+    <PackageProjectUrl>ymcl.daiyu.fun</PackageProjectUrl>
+    <PackageIcon>YMCL-Icon.png</PackageIcon>
+    <RepositoryUrl>https://github.com/DaiYu-233/YMCL</RepositoryUrl>
+    <Product>Yu Minecraft Launcher</Product>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Remove="app.manifest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="YMCL-Icon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\Assets\YMCL-Icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ModernWpfUI" Version="0.9.7-preview.2" />
+    <PackageReference Include="Panuon.WPF.UI" Version="1.1.16.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="UI\Lang\Main.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Main.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="UI\Lang\Main.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Main.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UI\Lang\Main.zh-CN.resx">
+      <Generator></Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

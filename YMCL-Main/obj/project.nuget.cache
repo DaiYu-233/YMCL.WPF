@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "Ppjl8j3L5jDisEGRBTsA/5c5oKAc7kgScdZBJvhUf9Gek1YvYQUOJ5Syyuku8manEO37mmuuPzZ4gRw+xuBq5Q==",
+  "success": true,
+  "projectFilePath": "D:\\Desktop\\YMCL-Desktop\\YMCL-Main\\YMCL.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Administrator.WIN-2309082102\\.nuget\\packages\\modernwpfui\\0.9.7-preview.2\\modernwpfui.0.9.7-preview.2.nupkg.sha512",
+    "C:\\Users\\Administrator.WIN-2309082102\\.nuget\\packages\\panuon.wpf\\1.0.3\\panuon.wpf.1.0.3.nupkg.sha512",
+    "C:\\Users\\Administrator.WIN-2309082102\\.nuget\\packages\\panuon.wpf.ui\\1.1.16.5\\panuon.wpf.ui.1.1.16.5.nupkg.sha512"
+  ],
+  "logs": []
+}

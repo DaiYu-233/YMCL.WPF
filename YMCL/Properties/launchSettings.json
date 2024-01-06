@@ -1,9 +1,0 @@
-{
-  "profiles": {
-    "YMCL": {
-      "commandName": "Project",
-      "remoteDebugEnabled": false,
-      "authenticationMode": "None"
-    }
-  }
-}

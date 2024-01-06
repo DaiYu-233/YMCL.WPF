@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "Updater": {
-      "commandName": "Project",
-      "commandLineArgs": "gh rrr"
-    }
-  }
-}
