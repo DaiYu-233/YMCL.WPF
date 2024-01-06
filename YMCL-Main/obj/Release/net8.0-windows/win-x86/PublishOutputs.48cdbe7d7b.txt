@@ -1,2 +1,0 @@
-D:\Desktop\YMCL\YMCL-Main\bin\Release\net8.0-windows\publish\win-x86\YMCL.pdb
-D:\Desktop\YMCL\YMCL-Main\bin\Release\net8.0-windows\publish\win-x86\YMCL.exe
