@@ -118,12 +118,33 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="InitializeWindow_Title" xml:space="preserve">
-    <value>YMCL初始化</value>
-  </data>
-  <data name="InitializeWindow_NextSetpBtn" xml:space="preserve">
-    <value>下一步</value>
+    <value>Инициализация YMCL</value>
   </data>
   <data name="InitializeWindow_Title_Download" xml:space="preserve">
-    <value>YMCL初始化 - 下载资源</value>
+    <value>YMCL - Загрузите ресурсы</value>
+  </data>
+  <data name="InitializeWindow_NextSetpBtn" xml:space="preserve">
+    <value>Cледующий шаг</value>
+  </data>
+  <data name="InitializeWindow_DownloadFinish" xml:space="preserve">
+    <value>Загрузка завершена</value>
+  </data>
+  <data name="InitializeWindow_Download_AdministratorPermissionRequired" xml:space="preserve">
+    <value>Для инициализации YMCL требуются права администратора, Нажмите OK, чтобы перезапустить программу с правами администратора</value>
+  </data>
+  <data name="InitializeWindow_DownloadWaiting" xml:space="preserve">
+    <value>Ожидание</value>
+  </data>
+  <data name="InitializeWindow_InitializeFinish" xml:space="preserve">
+    <value>Инициализация YMCL завершена</value>
+  </data>
+  <data name="InitializeWindow_Connecting" xml:space="preserve">
+    <value>Соединение</value>
+  </data>
+  <data name="InitializeWindow_ConnectionFailed" xml:space="preserve">
+    <value>Не удалось подключить</value>
+  </data>
+  <data name="InitializeWindow_ConnectionTimeout" xml:space="preserve">
+    <value>Истекло время ожидания ответа</value>
   </data>
 </root>

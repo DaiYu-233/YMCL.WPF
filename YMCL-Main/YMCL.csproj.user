@@ -17,11 +17,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Update="UI\Lang\Main.zh-CN.resx">
+    <Page Update="Public\Style\LightTheme.xaml">
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
+    </Page>
     <Page Update="UI\Initialize\InitializeWindow.xaml">
       <SubType>Designer</SubType>
     </Page>

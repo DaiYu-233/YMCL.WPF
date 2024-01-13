@@ -104,6 +104,45 @@
     <value>YMCL - 下载资源</value>
   </data>
   <data name="InitializeWindow_NextSetpBtn" xml:space="preserve">
-    <value>下一步</value>
+    <value>下一步 →</value>
+  </data>
+  <data name="InitializeWindow_DownloadFinish" xml:space="preserve">
+    <value>下载完成</value>
+  </data>
+  <data name="InitializeWindow_Download_AdministratorPermissionRequired" xml:space="preserve">
+    <value>需要管理员权限以初始化YMCL，点击确定使用管理员权限重启程序</value>
+  </data>
+  <data name="InitializeWindow_DownloadWaiting" xml:space="preserve">
+    <value>等待中</value>
+  </data>
+  <data name="InitializeWindow_InitializeFinish" xml:space="preserve">
+    <value>YMCL初始化完成</value>
+  </data>
+  <data name="InitializeWindow_Connecting" xml:space="preserve">
+    <value>连接中</value>
+  </data>
+  <data name="InitializeWindow_ConnectionFailed" xml:space="preserve">
+    <value>连接失败</value>
+  </data>
+  <data name="InitializeWindow_ConnectionTimeout" xml:space="preserve">
+    <value>连接超时</value>
+  </data>
+  <data name="MainWindow_Title" xml:space="preserve">
+    <value>YMCL</value>
+  </data>
+  <data name="InitializeWindow_FailedToObtainAdministratorPrivileges" xml:space="preserve">
+    <value>获取管理员权限失败，YMCL初始化失败</value>
+  </data>
+  <data name="MainWindow_NavigationLaunch" xml:space="preserve">
+    <value>   启动</value>
+  </data>
+  <data name="MainWindow_NavigationSetting" xml:space="preserve">
+    <value>   设置</value>
+  </data>
+  <data name="MainWindow_NavigationDownload" xml:space="preserve">
+    <value>   下载</value>
+  </data>
+  <data name="MainWindow_NavigationMore" xml:space="preserve">
+    <value>   更多</value>
   </data>
 </root>

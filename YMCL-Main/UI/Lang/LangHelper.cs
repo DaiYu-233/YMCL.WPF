@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -34,13 +36,26 @@ namespace YMCL.UI.Lang
             this.RaisePropertyChanged("Resources");
         }
 
-        public string GetText(string name,CultureInfo culture = null)
+        public string GetText(string name, string culture = null)
         {
+            var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.SettingDataPath));
+            CultureInfo cultureInfo;
             if (culture == null)
             {
-                culture = Const.culture;
+                if (setting.Language == "zh-CN" || setting.Language == null)
+                {
+                    cultureInfo = CultureInfo.GetCultureInfo("");
+                }
+                else
+                {
+                    cultureInfo = CultureInfo.GetCultureInfo(setting.Language);
+                }
             }
-            var res = Main.ResourceManager.GetObject(name, culture).ToString();
+            else
+            {
+                cultureInfo = CultureInfo.GetCultureInfo(culture);
+            }
+            var res = Main.ResourceManager.GetObject(name, cultureInfo).ToString();
             if (res == null)
             {
                 return "Null";

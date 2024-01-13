@@ -61,7 +61,79 @@ namespace YMCL.UI.Lang {
         }
         
         /// <summary>
-        ///   查找类似 下一步 的本地化字符串。
+        ///   查找类似 连接中 的本地化字符串。
+        /// </summary>
+        public static string InitializeWindow_Connecting {
+            get {
+                return ResourceManager.GetString("InitializeWindow_Connecting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 连接失败 的本地化字符串。
+        /// </summary>
+        public static string InitializeWindow_ConnectionFailed {
+            get {
+                return ResourceManager.GetString("InitializeWindow_ConnectionFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 连接超时 的本地化字符串。
+        /// </summary>
+        public static string InitializeWindow_ConnectionTimeout {
+            get {
+                return ResourceManager.GetString("InitializeWindow_ConnectionTimeout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 需要管理员权限以初始化YMCL，点击确定使用管理员权限重启程序 的本地化字符串。
+        /// </summary>
+        public static string InitializeWindow_Download_AdministratorPermissionRequired {
+            get {
+                return ResourceManager.GetString("InitializeWindow_Download_AdministratorPermissionRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 下载完成 的本地化字符串。
+        /// </summary>
+        public static string InitializeWindow_DownloadFinish {
+            get {
+                return ResourceManager.GetString("InitializeWindow_DownloadFinish", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 等待中 的本地化字符串。
+        /// </summary>
+        public static string InitializeWindow_DownloadWaiting {
+            get {
+                return ResourceManager.GetString("InitializeWindow_DownloadWaiting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 获取管理员权限失败，YMCL初始化失败 的本地化字符串。
+        /// </summary>
+        public static string InitializeWindow_FailedToObtainAdministratorPrivileges {
+            get {
+                return ResourceManager.GetString("InitializeWindow_FailedToObtainAdministratorPrivileges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 YMCL初始化完成 的本地化字符串。
+        /// </summary>
+        public static string InitializeWindow_InitializeFinish {
+            get {
+                return ResourceManager.GetString("InitializeWindow_InitializeFinish", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 下一步 → 的本地化字符串。
         /// </summary>
         public static string InitializeWindow_NextSetpBtn {
             get {
@@ -84,6 +156,51 @@ namespace YMCL.UI.Lang {
         public static string InitializeWindow_Title_Download {
             get {
                 return ResourceManager.GetString("InitializeWindow_Title_Download", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似    下载 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_NavigationDownload {
+            get {
+                return ResourceManager.GetString("MainWindow_NavigationDownload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似    启动 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_NavigationLaunch {
+            get {
+                return ResourceManager.GetString("MainWindow_NavigationLaunch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似    更多 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_NavigationMore {
+            get {
+                return ResourceManager.GetString("MainWindow_NavigationMore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似    设置 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_NavigationSetting {
+            get {
+                return ResourceManager.GetString("MainWindow_NavigationSetting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 YMCL 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_Title {
+            get {
+                return ResourceManager.GetString("MainWindow_Title", resourceCulture);
             }
         }
     }

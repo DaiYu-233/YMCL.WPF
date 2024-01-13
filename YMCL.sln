@@ -22,5 +22,6 @@ Global
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		RESX_PrefixTranslations = False
 		SolutionGuid = {9C4F0F2E-B60D-4045-89EF-5D86D405E2E3}
+		RESX_NeutralResourcesLanguage = zh-CN
 	EndGlobalSection
 EndGlobal

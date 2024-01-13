@@ -118,33 +118,33 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="InitializeWindow_Title" xml:space="preserve">
-    <value>YMCL Initialization</value>
+    <value>YMCL初期化</value>
   </data>
   <data name="InitializeWindow_Title_Download" xml:space="preserve">
-    <value>YMCL Initialization - Download Resources</value>
+    <value>YMCL -リソースをダウンロード</value>
   </data>
   <data name="InitializeWindow_NextSetpBtn" xml:space="preserve">
-    <value>Next Step</value>
+    <value>次へ</value>
   </data>
   <data name="InitializeWindow_DownloadFinish" xml:space="preserve">
-    <value>Download completed</value>
+    <value>ダウンロードが完了しました</value>
   </data>
   <data name="InitializeWindow_Download_AdministratorPermissionRequired" xml:space="preserve">
-    <value>Administrator privileges are required to initialize YMCL, Click OK to restart the program with administrator privileges</value>
+    <value>YMCLを初期化するには管理者権限が必要です，[OK]をクリックして、管理者権限でプログラムを再起動してください</value>
   </data>
   <data name="InitializeWindow_DownloadWaiting" xml:space="preserve">
-    <value>Waiting</value>
+    <value>待っています</value>
   </data>
   <data name="InitializeWindow_InitializeFinish" xml:space="preserve">
-    <value>YMCL initialization complete</value>
+    <value>YMCLの初期化が完了しました</value>
   </data>
   <data name="InitializeWindow_Connecting" xml:space="preserve">
-    <value>Connecting</value>
+    <value>接続しています</value>
   </data>
   <data name="InitializeWindow_ConnectionFailed" xml:space="preserve">
-    <value>Connection Failed</value>
+    <value>接続に失敗しました</value>
   </data>
   <data name="InitializeWindow_ConnectionTimeout" xml:space="preserve">
-    <value>Connection Timeout</value>
+    <value>接続がタイムアウトしました。再接続してください</value>
   </data>
 </root>

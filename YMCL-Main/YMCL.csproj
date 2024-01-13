@@ -40,6 +40,7 @@
 
   <ItemGroup>
     <PackageReference Include="ModernWpfUI" Version="0.9.7-preview.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Panuon.WPF.UI" Version="1.1.16.5" />
   </ItemGroup>
 
@@ -55,9 +56,6 @@
     <EmbeddedResource Update="UI\Lang\Main.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Main.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="UI\Lang\Main.zh-CN.resx">
-      <Generator></Generator>
     </EmbeddedResource>
   </ItemGroup>
 
