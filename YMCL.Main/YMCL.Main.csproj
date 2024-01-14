@@ -1,0 +1,78 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>True</UseWindowsForms>
+    <StartupObject>YMCL.Main.App</StartupObject>
+    <ApplicationIcon>YMCL-Icon.ico</ApplicationIcon>
+    <PackageId>YMCL</PackageId>
+    <Title>Yu Minecraft Launcher</Title>
+    <Authors>DaiYu | http://daiyu.fun</Authors>
+    <Product>Yu Minecraft Launcher</Product>
+    <Description>Yu Minecraft Launcher</Description>
+    <Copyright>DaiYu | http://daiyu.fun</Copyright>
+    <PackageProjectUrl>http://ymcl.daiyu.fun</PackageProjectUrl>
+    <PackageIcon>YMCL-Icon.png</PackageIcon>
+    <RepositoryUrl>https://github.com/DaiYu-233/YMCL</RepositoryUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Page Remove="Public\Text\LaunchPage.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="YMCL-Icon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Public\Text\LaunchPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\Assets\YMCL-Icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Costura.Fody" Version="5.8.0-alpha0098">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="iNKORE.UI.WPF.Modern" Version="0.9.25.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Panuon.WPF.UI" Version="1.1.16.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="UI\Language\MainLang.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MainLang.resx</DependentUpon>
+    </Compile>
+    <Compile Update="UI\Lang\MainLang.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MainLang.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="UI\Language\MainLang.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MainLang.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UI\Lang\MainLang.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MainLang.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>
