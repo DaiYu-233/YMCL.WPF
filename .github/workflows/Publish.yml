@@ -5,6 +5,7 @@ on:
     branches: [ "**" ]
 env:
   compile-flags: "-c Release"
+  TagName: ""
 jobs:
   main:
     runs-on: windows-latest
@@ -22,9 +23,9 @@ jobs:
     #     mv ./YMCL.Main/bin/Release/net8.0-windows/win-x86/publish/YMCL.Main.exe ./YMCL.Main/bin/Release/net8.0-windows/win-x86/publish/YMCL.Main.x86.exe
     #     mv ./YMCL.Main/bin/Release/net8.0-windows/win-x64/publish/YMCL.Main.exe ./YMCL.Main/bin/Release/net8.0-windows/win-x64/publish/YMCL.Main.x64.exe
     - name: Set
-      run: echo "NAME=${{ github.event.commits[0].timestamp }}" >> $GITHUB_ENV
+      run: echo "TagName=1.0.0" >> $GITHUB_ENV
     - name: Read the value
-      run: echo "The value of NAME is $NAME"
+      run: echo "fff ${{ env.TagName }}"
     # - name: Tag 
     #   uses: rickstaa/action-create-tag@v1
     #   id: "tag_create"
