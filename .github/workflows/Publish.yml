@@ -7,7 +7,7 @@ env:
   compile-flags: "-c Release"
   TagName: " ${{ github.event.commits[0].timestamp }} "
 jobs:
-  create-tag:
+  tag:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -15,7 +15,7 @@ jobs:
           fetch-depth: 0
       - uses: rickstaa/action-create-tag@v1
         with:
-          tag: "Github Actions - ${{ github.event.commits[0].timestamp }}"
+          tag: "AutoRelease-${{ github.event.commits[0].timestamp }}"
           
   # main:
   #   runs-on: windows-latest
