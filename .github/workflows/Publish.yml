@@ -5,7 +5,7 @@ on:
     branches: [ "**" ]
 env:
   compile-flags: "-c Release"
-  TagName: " ${{ env.TagName }} "
+  TagName: " ${{ github.event.commits[0].timestamp }} "
 jobs:
   main:
     runs-on: windows-latest
