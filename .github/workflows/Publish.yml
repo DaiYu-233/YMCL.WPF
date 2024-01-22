@@ -22,12 +22,13 @@ jobs:
         mv ./YMCL.Main/bin/Release/net8.0-windows/win-x86/publish/YMCL.Main.exe ./YMCL.Main/bin/Release/net8.0-windows/win-x86/publish/YMCL.Main.x86.exe
         mv ./YMCL.Main/bin/Release/net8.0-windows/win-x64/publish/YMCL.Main.exe ./YMCL.Main/bin/Release/net8.0-windows/win-x64/publish/YMCL.Main.x64.exe
     - name: Publish
-      uses: ncipollo/release-action@v1
+      uses: marvinpinto/action-automatic-releases@latest
       with:
-        token: ${{ secrets.TOKEN }}
-        allowUpdates: true # 覆盖文件
-        prerelease: true # 预发布 别人可以看到 版本号会继续加
-        tag: ${{ github.event.commits[0].timestamp }}
-        body: Release By Github Actions - ${{ github.event.commits[0].timestamp }}
-        artifacts: "./YMCL.Main/bin/Release/net8.0-windows/win-x64/publish/*,./YMCL.Main/bin/Release/net8.0-windows/win-x86/publish/*"
+        repo_token: "${{ secrets.TOKEN }}"
+        title: "Release By Github Actions - ${{ github.event.commits[0].timestamp }}"
+        automatic_release_tag: "${{ github.event.commits[0].timestamp }}"
+        prerelease: true
+        files: |
+          YMCL.Main/bin/Release/net8.0-windows/win-x86/publish/*
+          YMCL.Main/bin/Release/net8.0-windows/win-x64/publish/*
         
