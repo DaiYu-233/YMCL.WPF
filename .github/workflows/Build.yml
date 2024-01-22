@@ -6,12 +6,23 @@ on:
 env:
   compile-flags: "-c Release"
 jobs:
-  build:
+  main:
     runs-on: windows-latest
     steps:
     - name: Checkout
       uses: actions/checkout@v3
       with:
         fetch-depth: 0
-    - name: Build
-      run: dotnet build YMCL.Main/YMCL.Main.csproj
+    - name: Publish
+      run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+      # run: dotnet publish YMCL.Main/YMCL.Main.csproj -r win-x86 --self-contained false
+    # - name: Create GitHub Release
+    #   uses: marvinpinto/action-automatic-releases@latest
+    #   with:
+    #     repo_token: "${{ secrets.GITHUB_TOKEN }}"
+    #     automatic_release_tag: ${{ env.ReleaseVersion }}
+    #     title: ${{ env.ReleaseVersion }}
+    #     prerelease: true
+    #     files: |
+    #       artifacts/packages/*
+
