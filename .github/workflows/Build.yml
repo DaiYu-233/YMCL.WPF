@@ -21,7 +21,7 @@ jobs:
     - name: Create GitHub Release
       uses: marvinpinto/action-automatic-releases@latest
       with:
-        repo_token: "${{ secrets.GITHUB_TOKEN }}"
+        repo_token: "${{ secrets.TOKEN }}"
         title: "Release By Github Actions - $env:TIME"
         prerelease: true
         files: |
