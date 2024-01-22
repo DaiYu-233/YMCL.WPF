@@ -13,16 +13,17 @@ jobs:
       uses: actions/checkout@v3
       with:
         fetch-depth: 0
+    - name: Get Time
+      run: |
+        echo "TIME=$(Get-Date -Format "yyyy-MM-ddTHH:mm:sszzz")" >> $env:GITHUB_ENV
     - name: Publish
-      run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
-      # run: dotnet publish YMCL.Main/YMCL.Main.csproj -r win-x86 --self-contained false
-    # - name: Create GitHub Release
-    #   uses: marvinpinto/action-automatic-releases@latest
-    #   with:
-    #     repo_token: "${{ secrets.GITHUB_TOKEN }}"
-    #     automatic_release_tag: ${{ env.ReleaseVersion }}
-    #     title: ${{ env.ReleaseVersion }}
-    #     prerelease: true
-    #     files: |
-    #       artifacts/packages/*
+      run: dotnet publish YMCL.Main/YMCL.Main.csproj -r win-x86 --self-contained false
+    - name: Create GitHub Release
+      uses: marvinpinto/action-automatic-releases@latest
+      with:
+        repo_token: "${{ secrets.GITHUB_TOKEN }}"
+        title: "Release By Github Actions - $env:TIME"
+        prerelease: true
+        files: |
+          YMCL.Main/bin/Release/net8.0-windows/win-x86/publish/*
 
