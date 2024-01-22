@@ -5,7 +5,7 @@ on:
     branches: [ "**" ]
 env:
   compile-flags: "-c Release"
-  TagName: ""
+  TagName: " ${{ env.TagName }} "
 jobs:
   main:
     runs-on: windows-latest
