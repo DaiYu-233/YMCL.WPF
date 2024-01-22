@@ -5,7 +5,7 @@ on:
     branches: [ "**" ]
 env:
   compile-flags: "-c Release"
-  TagName: " ${{ github.event.commits[0].timestamp }} "
+  
 jobs:
   main:
     runs-on: windows-latest
@@ -22,12 +22,13 @@ jobs:
       run: |
         mv ./YMCL.Main/bin/Release/net8.0-windows/win-x86/publish/YMCL.Main.exe ./YMCL.Main/bin/Release/net8.0-windows/win-x86/publish/YMCL.Main.x86.exe
         mv ./YMCL.Main/bin/Release/net8.0-windows/win-x64/publish/YMCL.Main.exe ./YMCL.Main/bin/Release/net8.0-windows/win-x64/publish/YMCL.Main.x64.exe
+        echo "current_time=$(Get-Date -Format 'yyyy-MM-dd.HH-mm-ss')" >> $GITHUB_ENV
     - name: Publish
       uses: marvinpinto/action-automatic-releases@latest
       with:
         repo_token: "${{ secrets.TOKEN }}"
         title: "Release By Github Actions - ${{ github.event.commits[0].timestamp }}"
-        automatic_release_tag: "AutoRelease-${{Get-Date -Format 'yyyy-MM-dd.HH-mm-ss'}}"
+        automatic_release_tag: "AutoRelease-${{ env.current_time }}"
         prerelease: true
         files: |
           YMCL.Main/bin/Release/net8.0-windows/win-x86/publish/*
