@@ -19,8 +19,8 @@ jobs:
         dotnet publish YMCL.Main/YMCL.Main.csproj -r win-x64 --self-contained false
     - name: Rename
       run: |
-        mv ./YMCL/YMCL.Main/bin/Release/net8.0-windows/win-x86/publish/YMCL.Main.exe ./YMCL/YMCL.Main/bin/Release/net8.0-windows/win-x86/publish/YMCL.Main.x86.exe
-        mv ./YMCL/YMCL.Main/bin/Release/net8.0-windows/win-x64/publish/YMCL.Main.exe ./YMCL/YMCL.Main/bin/Release/net8.0-windows/win-x64/publish/YMCL.Main.x64.exe
+        mv ./YMCL.Main/bin/Release/net8.0-windows/win-x86/publish/YMCL.Main.exe ./YMCL.Main/bin/Release/net8.0-windows/win-x86/publish/YMCL.Main.x86.exe
+        mv ./YMCL.Main/bin/Release/net8.0-windows/win-x64/publish/YMCL.Main.exe ./YMCL.Main/bin/Release/net8.0-windows/win-x64/publish/YMCL.Main.x64.exe
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
@@ -39,7 +39,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./YMCL/YMCL.Main/bin/Release/net8.0-windows/win-x86/publish
+        asset_path: ./YMCL.Main/bin/Release/net8.0-windows/win-x86/publish
         asset_name: YMCL.Main.x86.exe
         asset_content_type: application/octet-stream
 
@@ -49,7 +49,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./YMCL/YMCL.Main/bin/Release/net8.0-windows/win-x64/publish
+        asset_path: ./YMCL.Main/bin/Release/net8.0-windows/win-x64/publish
         asset_name: YMCL.Main.x64.exe
         asset_content_type: application/octet-stream
 
