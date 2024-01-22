@@ -26,7 +26,7 @@ jobs:
       with:
         repo_token: "${{ secrets.TOKEN }}"
         title: "Release By Github Actions - ${{ github.event.commits[0].timestamp }}"
-        automatic_release_tag: "${{ github.event.commits[0].timestamp }}"
+        # automatic_release_tag: "${{ github.event.commits[0].timestamp }}"
         prerelease: true
         files: |
           YMCL.Main/bin/Release/net8.0-windows/win-x86/publish/*
