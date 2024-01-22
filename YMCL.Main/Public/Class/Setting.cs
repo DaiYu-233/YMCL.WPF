@@ -10,5 +10,9 @@ namespace YMCL.Main.Public.Class
     {
         public string? Language { get; set; }
         public bool UseCustomHomePage { get; set; } = false;
+        public string? MinecraftFolder { get; set; } = null;
+        public string? Java { get; set; } = null;
+        public int AccountSelectionIndex { get; set; } = 0;
+        public double MaxMem { get; set; } = 1024;
     }
 }

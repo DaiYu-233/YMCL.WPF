@@ -183,13 +183,118 @@
   <data name="Launcher_SettingItem_Language" xml:space="preserve">
     <value>язык</value>
   </data>
-  <data name="App_UnhandledException" xml:space="preserve">
-    <value>У YMCL есть необработанное исключение</value>
-  </data>
   <data name="Launcher_SettingItem_CustomMainPage" xml:space="preserve">
     <value>Настройте домашний экран</value>
   </data>
   <data name="Launcher_SettingItem_EditCustomHomePage" xml:space="preserve">
     <value>редактор</value>
+  </data>
+  <data name="App_UnhandledException" xml:space="preserve">
+    <value>Необработанное исключение произошло в YMCL, произойдет сбой и выход</value>
+  </data>
+  <data name="Launcher_UseCustomHomePageToggle_Toggled_On_Info" xml:space="preserve">
+    <value>Пользовательские страницы будут включены, YMCL не гарантирует безопасность пользовательского контента, небезопасный пользовательский контент может привести к атаке на устройства и т. д</value>
+  </data>
+  <data name="Launch_Launch_CustomPageSourceError" xml:space="preserve">
+    <value>Ошибка исходного кода пользовательской страницы (XAML)</value>
+  </data>
+  <data name="Launch_MinecraftFolder" xml:space="preserve">
+    <value>Папка Minecraft</value>
+  </data>
+  <data name="Launch_AddMinecraftFolder" xml:space="preserve">
+    <value>Добавить папку</value>
+  </data>
+  <data name="Launch_DelMinecraftFolder" xml:space="preserve">
+    <value>Удалить выбранное</value>
+  </data>
+  <data name="Launch_AddMinecraftFolder_Click_NeedMinecraftFolder" xml:space="preserve">
+    <value>Необходимо выбрать папку .minecraft</value>
+  </data>
+  <data name="Launch_AddMinecraftFolder_Click_ExistsMinecraftFolder" xml:space="preserve">
+    <value>Эта папка уже существует</value>
+  </data>
+  <data name="Launch_AutoFindJava" xml:space="preserve">
+    <value>Автоматическое сканирование</value>
+  </data>
+  <data name="Launch_ManualAddJava" xml:space="preserve">
+    <value>Добавить вручную</value>
+  </data>
+  <data name="Launch_ManualAddJava_Click_ExistsJava" xml:space="preserve">
+    <value>Эта Java уже существует</value>
+  </data>
+  <data name="Launch_AutoFindJava_Click_ScanCompleted" xml:space="preserve">
+    <value>Сканирование завершено: {|} Java найдена, из которых {|} уже существуют в списке</value>
+  </data>
+  <data name="Account_AddAccount" xml:space="preserve">
+    <value>Добавить новую учетную запись</value>
+  </data>
+  <data name="Account_DelAccount" xml:space="preserve">
+    <value>Удалите выбранную учетную запись</value>
+  </data>
+  <data name="Account_Cancel" xml:space="preserve">
+    <value>Отменить</value>
+  </data>
+  <data name="Account_Offline" xml:space="preserve">
+    <value>Войти в автономном режиме</value>
+  </data>
+  <data name="Account_Microsoft" xml:space="preserve">
+    <value>Microsoft Login</value>
+  </data>
+  <data name="Account_Third_Party" xml:space="preserve">
+    <value>Сторонний вход</value>
+  </data>
+  <data name="Account_UserName" xml:space="preserve">
+    <value>Имя пользователя игры</value>
+  </data>
+  <data name="Account_Sure" xml:space="preserve">
+    <value>Подтвердить</value>
+  </data>
+  <data name="Account_VerificationCode" xml:space="preserve">
+    <value>Проверьте код</value>
+  </data>
+  <data name="Account_Loading" xml:space="preserve">
+    <value>Загрузка...</value>
+  </data>
+  <data name="Account_CopyCodeAndOpenBrowser" xml:space="preserve">
+    <value>Скопируйте код и откройте браузер</value>
+  </data>
+  <data name="Account_Password" xml:space="preserve">
+    <value>Пароль учетной записи</value>
+  </data>
+  <data name="Account_ServerUrl" xml:space="preserve">
+    <value>Адрес сервера аутентификации</value>
+  </data>
+  <data name="Account_Email" xml:space="preserve">
+    <value>E-mail</value>
+  </data>
+  <data name="Account_OfflineAccountAddBtn_Click_OfflineUserNameNull" xml:space="preserve">
+    <value>Имя пользователя не может быть пустым</value>
+  </data>
+  <data name="Launch_MaxMem" xml:space="preserve">
+    <value>Максимальный объем оперативной памяти</value>
+  </data>
+  <data name="Launch_ImportPack" xml:space="preserve">
+    <value>Импортируйте интеграционный пакет</value>
+  </data>
+  <data name="Launch_Refresh" xml:space="preserve">
+    <value>Обновить</value>
+  </data>
+  <data name="Launch_VersionList" xml:space="preserve">
+    <value>Список версий</value>
+  </data>
+  <data name="Launch_ToVersionList" xml:space="preserve">
+    <value> Список версий </value>
+  </data>
+  <data name="Launch_ToVersionSetting" xml:space="preserve">
+    <value> Настройки версии </value>
+  </data>
+  <data name="Launch_LaunchGame" xml:space="preserve">
+    <value>Запустите игру</value>
+  </data>
+  <data name="Launch_NoChooseGame" xml:space="preserve">
+    <value>&lt; Ядро игры не выбрано &gt;</value>
+  </data>
+  <data name="Launch_LoadMinecraftVersion_GetVersionListError" xml:space="preserve">
+    <value>Ошибка при получении списка версий</value>
   </data>
 </root>

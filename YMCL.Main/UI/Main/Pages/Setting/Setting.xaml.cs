@@ -9,6 +9,7 @@ namespace YMCL.Main.UI.Main.Pages.Setting
 
         Pages.Launcher.Launcher launcher = new();
         Pages.Launch.Launch launch = new();
+        Pages.Account.Account account = new();
 
         public Setting()
         {
@@ -21,6 +22,14 @@ namespace YMCL.Main.UI.Main.Pages.Setting
             if (Launcher.IsSelected)
             {
                 MainFrame.Content = launcher;
+            }
+            if (Launch.IsSelected)
+            {
+                MainFrame.Content = launch;
+            }
+            if (Account.IsSelected)
+            {
+                MainFrame.Content = account;
             }
         }
     }

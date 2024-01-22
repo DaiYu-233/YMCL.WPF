@@ -4,17 +4,16 @@ using System.IO;
 using System.Reflection;
 using System.Windows;
 using YMCL.Main.Public;
-using YMCL.Main.Public;
 using YMCL.Main.Public.Class;
 using YMCL.Main.UI.Lang;
-using Application = System.Windows.Application;
+using static System.Windows.Forms.DataFormats;
 
 namespace YMCL.Main
 {
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
-    public partial class App : Application
+    public partial class App : System.Windows.Application
     {
         public static string[] StartupArgs;
         protected override void OnStartup(StartupEventArgs e)
@@ -49,16 +48,42 @@ namespace YMCL.Main
 
             if (!File.Exists(Const.LaunchPageXamlPath) || File.ReadAllText(Const.LaunchPageXamlPath) == null)
             {
-                Type type = MethodBase.GetCurrentMethod().DeclaringType;
-                string _namespace = type.Namespace;
-                Assembly _assembly = Assembly.GetExecutingAssembly();
-                string resourceName = _namespace + ".Public.Text.LaunchPage.xaml";
-                Stream stream = _assembly.GetManifestResourceStream(resourceName);
-                using (StreamReader reader = new StreamReader(stream))
+                //Type type = MethodBase.GetCurrentMethod().DeclaringType;
+                //string _namespace = type.Namespace;
+                //Assembly _assembly = Assembly.GetExecutingAssembly();
+                //string resourceName = _namespace + ".Public.Text.LaunchPage.xaml";
+                //Stream stream = _assembly.GetManifestResourceStream(resourceName);
+                //using (StreamReader reader = new StreamReader(stream))
+                //{
+                //    string result = reader.ReadToEnd();
+                //    File.WriteAllText(Const.LaunchPageXamlPath, result);
+                //}
+            }
+
+            if (!File.Exists(Const.MinecraftFolderDataPath))
+            {
+                var minecraftFolder = new List<string>()
                 {
-                    string result = reader.ReadToEnd();
-                    File.WriteAllText(Const.LaunchPageXamlPath, result);
-                }
+                    Path.Combine(System.Windows.Forms.Application.StartupPath , ".minecraft")
+                };
+                File.WriteAllText(Const.MinecraftFolderDataPath, JsonConvert.SerializeObject(minecraftFolder, Formatting.Indented));
+            }
+
+            if (!File.Exists(Const.JavaDataPath))
+            {
+                File.WriteAllText(Const.JavaDataPath, "[]");
+            }
+
+            if (!File.Exists(Const.AccountDataPath))
+            {
+                DateTime now = DateTime.Now;
+                File.WriteAllText(Const.AccountDataPath, JsonConvert.SerializeObject(new List<AccountInfo>() { new AccountInfo
+                {
+                    AccountType = "Offline",
+                    AddTime = now.ToString("yyyy-MM-ddTHH:mm:sszzz"),
+                    Data = null,
+                    Name = "Steve"
+                }}, Formatting.Indented));
             }
         }
 

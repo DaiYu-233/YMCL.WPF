@@ -183,13 +183,118 @@
   <data name="Launcher_SettingItem_Language" xml:space="preserve">
     <value>言語</value>
   </data>
-  <data name="App_UnhandledException" xml:space="preserve">
-    <value>YMCLには未処理の例外があります</value>
-  </data>
   <data name="Launcher_SettingItem_CustomMainPage" xml:space="preserve">
     <value>ホーム画面をカスタマイズ</value>
   </data>
   <data name="Launcher_SettingItem_EditCustomHomePage" xml:space="preserve">
     <value>編集</value>
+  </data>
+  <data name="App_UnhandledException" xml:space="preserve">
+    <value>YMCLで未処理の例外が発生しました。クラッシュして終了します</value>
+  </data>
+  <data name="Launcher_UseCustomHomePageToggle_Toggled_On_Info" xml:space="preserve">
+    <value>カスタムページが有効になります。YMCLはカスタムコンテンツのセキュリティを保証しません。安全でないカスタムコンテンツは、デバイスが攻撃される可能性があります</value>
+  </data>
+  <data name="Launch_Launch_CustomPageSourceError" xml:space="preserve">
+    <value>カスタムページ（ Xaml ）ソースコードエラー</value>
+  </data>
+  <data name="Launch_MinecraftFolder" xml:space="preserve">
+    <value>Minecraftフォルダー</value>
+  </data>
+  <data name="Launch_AddMinecraftFolder" xml:space="preserve">
+    <value>フォルダーを追加</value>
+  </data>
+  <data name="Launch_DelMinecraftFolder" xml:space="preserve">
+    <value>選択したものを削除</value>
+  </data>
+  <data name="Launch_AddMinecraftFolder_Click_NeedMinecraftFolder" xml:space="preserve">
+    <value> .minecraft フォルダーを選択する必要があります</value>
+  </data>
+  <data name="Launch_AddMinecraftFolder_Click_ExistsMinecraftFolder" xml:space="preserve">
+    <value>このフォルダーは既に存在します</value>
+  </data>
+  <data name="Launch_AutoFindJava" xml:space="preserve">
+    <value>自動スキャン</value>
+  </data>
+  <data name="Launch_ManualAddJava" xml:space="preserve">
+    <value>手動で追加してください</value>
+  </data>
+  <data name="Launch_ManualAddJava_Click_ExistsJava" xml:space="preserve">
+    <value>このJavaはすでに存在します</value>
+  </data>
+  <data name="Launch_AutoFindJava_Click_ScanCompleted" xml:space="preserve">
+    <value>スキャン完了：{|} 個のJavaが見つかりました。そのうち {|} 個は既にリストに存在しています</value>
+  </data>
+  <data name="Account_AddAccount" xml:space="preserve">
+    <value>新しいアカウントを追加</value>
+  </data>
+  <data name="Account_DelAccount" xml:space="preserve">
+    <value>選択したアカウントを削除します</value>
+  </data>
+  <data name="Account_Cancel" xml:space="preserve">
+    <value>キャンセル</value>
+  </data>
+  <data name="Account_Offline" xml:space="preserve">
+    <value>オフラインでログイン</value>
+  </data>
+  <data name="Account_Microsoft" xml:space="preserve">
+    <value>Microsoftログイン</value>
+  </data>
+  <data name="Account_Third_Party" xml:space="preserve">
+    <value>サードパーティのログイン</value>
+  </data>
+  <data name="Account_UserName" xml:space="preserve">
+    <value>ゲームユーザー名</value>
+  </data>
+  <data name="Account_Sure" xml:space="preserve">
+    <value>確認</value>
+  </data>
+  <data name="Account_VerificationCode" xml:space="preserve">
+    <value>コードを確認してください</value>
+  </data>
+  <data name="Account_Loading" xml:space="preserve">
+    <value>読み込み中...</value>
+  </data>
+  <data name="Account_CopyCodeAndOpenBrowser" xml:space="preserve">
+    <value>コードをコピーしてブラウザを開きます</value>
+  </data>
+  <data name="Account_Password" xml:space="preserve">
+    <value>アカウントパスワード</value>
+  </data>
+  <data name="Account_ServerUrl" xml:space="preserve">
+    <value>認証サーバーアドレス</value>
+  </data>
+  <data name="Account_Email" xml:space="preserve">
+    <value>メールアドレス</value>
+  </data>
+  <data name="Account_OfflineAccountAddBtn_Click_OfflineUserNameNull" xml:space="preserve">
+    <value>ユーザー名を空にすることはできません</value>
+  </data>
+  <data name="Launch_MaxMem" xml:space="preserve">
+    <value>最大実行メモリ</value>
+  </data>
+  <data name="Launch_ImportPack" xml:space="preserve">
+    <value>インテグレーションパッケージをインポート</value>
+  </data>
+  <data name="Launch_Refresh" xml:space="preserve">
+    <value>リフレッシュ</value>
+  </data>
+  <data name="Launch_VersionList" xml:space="preserve">
+    <value>バージョンリスト</value>
+  </data>
+  <data name="Launch_ToVersionList" xml:space="preserve">
+    <value> バージョンリスト </value>
+  </data>
+  <data name="Launch_ToVersionSetting" xml:space="preserve">
+    <value> バージョン設定 </value>
+  </data>
+  <data name="Launch_LaunchGame" xml:space="preserve">
+    <value>ゲームを起動してください</value>
+  </data>
+  <data name="Launch_NoChooseGame" xml:space="preserve">
+    <value>&lt;ゲームコアが選択されていません&gt;</value>
+  </data>
+  <data name="Launch_LoadMinecraftVersion_GetVersionListError" xml:space="preserve">
+    <value>バージョンリストの取得中にエラーが発生しました</value>
   </data>
 </root>

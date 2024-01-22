@@ -183,13 +183,118 @@
   <data name="Launcher_SettingItem_Language" xml:space="preserve">
     <value>語言</value>
   </data>
-  <data name="App_UnhandledException" xml:space="preserve">
-    <value>YMCL發生未處理的異常</value>
-  </data>
   <data name="Launcher_SettingItem_CustomMainPage" xml:space="preserve">
     <value>自訂主介面</value>
   </data>
   <data name="Launcher_SettingItem_EditCustomHomePage" xml:space="preserve">
     <value>編輯</value>
+  </data>
+  <data name="App_UnhandledException" xml:space="preserve">
+    <value>YMCL發生未處理的異常，將崩潰退出</value>
+  </data>
+  <data name="Launcher_UseCustomHomePageToggle_Toggled_On_Info" xml:space="preserve">
+    <value>將啟用自訂頁面，YMCL不保證自訂內容安全性，不安全的自訂內容可能會導致裝置遭受攻擊等</value>
+  </data>
+  <data name="Launch_Launch_CustomPageSourceError" xml:space="preserve">
+    <value>自訂頁面 (Xaml) 原始碼錯誤</value>
+  </data>
+  <data name="Launch_MinecraftFolder" xml:space="preserve">
+    <value>Minecraft資料夾</value>
+  </data>
+  <data name="Launch_AddMinecraftFolder" xml:space="preserve">
+    <value>新增資料夾</value>
+  </data>
+  <data name="Launch_DelMinecraftFolder" xml:space="preserve">
+    <value>移除選取項目</value>
+  </data>
+  <data name="Launch_AddMinecraftFolder_Click_NeedMinecraftFolder" xml:space="preserve">
+    <value>需選擇 .minecraft 資料夾</value>
+  </data>
+  <data name="Launch_AddMinecraftFolder_Click_ExistsMinecraftFolder" xml:space="preserve">
+    <value>已存在此資料夾</value>
+  </data>
+  <data name="Launch_AutoFindJava" xml:space="preserve">
+    <value>自動掃描</value>
+  </data>
+  <data name="Launch_ManualAddJava" xml:space="preserve">
+    <value>手動添加</value>
+  </data>
+  <data name="Launch_ManualAddJava_Click_ExistsJava" xml:space="preserve">
+    <value>已存在此Java</value>
+  </data>
+  <data name="Launch_AutoFindJava_Click_ScanCompleted" xml:space="preserve">
+    <value>掃描完成：發現 {|} 個Java，其中已有 {|} 個存在列表中</value>
+  </data>
+  <data name="Account_AddAccount" xml:space="preserve">
+    <value>新增帳戶</value>
+  </data>
+  <data name="Account_DelAccount" xml:space="preserve">
+    <value>刪除選取帳戶</value>
+  </data>
+  <data name="Account_Cancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="Account_Offline" xml:space="preserve">
+    <value>離線登入</value>
+  </data>
+  <data name="Account_Microsoft" xml:space="preserve">
+    <value>微軟登入</value>
+  </data>
+  <data name="Account_Third_Party" xml:space="preserve">
+    <value>第三方登入</value>
+  </data>
+  <data name="Account_UserName" xml:space="preserve">
+    <value>遊戲用戶名</value>
+  </data>
+  <data name="Account_Sure" xml:space="preserve">
+    <value>確定</value>
+  </data>
+  <data name="Account_VerificationCode" xml:space="preserve">
+    <value>驗證程式碼</value>
+  </data>
+  <data name="Account_Loading" xml:space="preserve">
+    <value>載入中...</value>
+  </data>
+  <data name="Account_CopyCodeAndOpenBrowser" xml:space="preserve">
+    <value>複製程式碼並開啟瀏覽器</value>
+  </data>
+  <data name="Account_Password" xml:space="preserve">
+    <value>帳戶密碼</value>
+  </data>
+  <data name="Account_ServerUrl" xml:space="preserve">
+    <value>認證伺服器位址</value>
+  </data>
+  <data name="Account_Email" xml:space="preserve">
+    <value>信箱地址</value>
+  </data>
+  <data name="Account_OfflineAccountAddBtn_Click_OfflineUserNameNull" xml:space="preserve">
+    <value>使用者名稱不可為空</value>
+  </data>
+  <data name="Launch_MaxMem" xml:space="preserve">
+    <value>最大運行記憶體</value>
+  </data>
+  <data name="Launch_ImportPack" xml:space="preserve">
+    <value>導入整合包</value>
+  </data>
+  <data name="Launch_Refresh" xml:space="preserve">
+    <value>刷新</value>
+  </data>
+  <data name="Launch_VersionList" xml:space="preserve">
+    <value>版本列表</value>
+  </data>
+  <data name="Launch_ToVersionList" xml:space="preserve">
+    <value> 版本列表 </value>
+  </data>
+  <data name="Launch_ToVersionSetting" xml:space="preserve">
+    <value> 版本設定 </value>
+  </data>
+  <data name="Launch_LaunchGame" xml:space="preserve">
+    <value>啟動遊戲</value>
+  </data>
+  <data name="Launch_NoChooseGame" xml:space="preserve">
+    <value>&lt;未選擇遊戲核心&gt;</value>
+  </data>
+  <data name="Launch_LoadMinecraftVersion_GetVersionListError" xml:space="preserve">
+    <value>取得版本清單發生錯誤</value>
   </data>
 </root>

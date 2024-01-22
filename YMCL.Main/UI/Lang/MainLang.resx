@@ -104,7 +104,7 @@
     <value>YMCL - 下载资源</value>
   </data>
   <data name="InitializeWindow_NextSetpBtn" xml:space="preserve">
-    <value>下一步 →</value>
+    <value>下一步</value>
   </data>
   <data name="InitializeWindow_DownloadFinish" xml:space="preserve">
     <value>下载完成</value>
@@ -164,12 +164,117 @@
     <value>语言</value>
   </data>
   <data name="App_UnhandledException" xml:space="preserve">
-    <value>YMCL发生未处理的异常</value>
+    <value>YMCL发生未处理的异常，将崩溃退出</value>
   </data>
   <data name="Launcher_SettingItem_CustomMainPage" xml:space="preserve">
     <value>自定义主界面</value>
   </data>
   <data name="Launcher_SettingItem_EditCustomHomePage" xml:space="preserve">
     <value>编辑</value>
+  </data>
+  <data name="Launcher_UseCustomHomePageToggle_Toggled_On_Info" xml:space="preserve">
+    <value>将启用自定义页面，YMCL不保证自定义内容安全性，不安全的自定义内容可能会导致设备遭受攻击等</value>
+  </data>
+  <data name="Launch_Launch_CustomPageSourceError" xml:space="preserve">
+    <value>自定义页面 (Xaml) 源代码错误</value>
+  </data>
+  <data name="Launch_MinecraftFolder" xml:space="preserve">
+    <value>Minecraft文件夹</value>
+  </data>
+  <data name="Launch_AddMinecraftFolder" xml:space="preserve">
+    <value>添加文件夹</value>
+  </data>
+  <data name="Launch_DelMinecraftFolder" xml:space="preserve">
+    <value>移除选中项</value>
+  </data>
+  <data name="Launch_AddMinecraftFolder_Click_NeedMinecraftFolder" xml:space="preserve">
+    <value>需选择 .minecraft 文件夹</value>
+  </data>
+  <data name="Launch_AddMinecraftFolder_Click_ExistsMinecraftFolder" xml:space="preserve">
+    <value>已存在此文件夹</value>
+  </data>
+  <data name="Launch_AutoFindJava" xml:space="preserve">
+    <value>自动扫描</value>
+  </data>
+  <data name="Launch_ManualAddJava" xml:space="preserve">
+    <value>手动添加</value>
+  </data>
+  <data name="Launch_ManualAddJava_Click_ExistsJava" xml:space="preserve">
+    <value>已存在此Java</value>
+  </data>
+  <data name="Launch_AutoFindJava_Click_ScanCompleted" xml:space="preserve">
+    <value>扫描完成：发现{|}个Java，其中已有{|}个存在列表中</value>
+  </data>
+  <data name="Account_AddAccount" xml:space="preserve">
+    <value>添加新账户</value>
+  </data>
+  <data name="Account_DelAccount" xml:space="preserve">
+    <value>删除选中账户</value>
+  </data>
+  <data name="Account_Cancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="Account_Offline" xml:space="preserve">
+    <value>离线登录</value>
+  </data>
+  <data name="Account_Microsoft" xml:space="preserve">
+    <value>微软登录</value>
+  </data>
+  <data name="Account_Third_Party" xml:space="preserve">
+    <value>第三方登录</value>
+  </data>
+  <data name="Account_UserName" xml:space="preserve">
+    <value>游戏用户名</value>
+  </data>
+  <data name="Account_Sure" xml:space="preserve">
+    <value>确定</value>
+  </data>
+  <data name="Account_VerificationCode" xml:space="preserve">
+    <value>验证代码</value>
+  </data>
+  <data name="Account_Loading" xml:space="preserve">
+    <value>加载中...</value>
+  </data>
+  <data name="Account_CopyCodeAndOpenBrowser" xml:space="preserve">
+    <value>复制代码并打开浏览器</value>
+  </data>
+  <data name="Account_Password" xml:space="preserve">
+    <value>账户密码</value>
+  </data>
+  <data name="Account_ServerUrl" xml:space="preserve">
+    <value>认证服务器地址</value>
+  </data>
+  <data name="Account_Email" xml:space="preserve">
+    <value>邮箱地址</value>
+  </data>
+  <data name="Account_OfflineAccountAddBtn_Click_OfflineUserNameNull" xml:space="preserve">
+    <value>用户名不可为空</value>
+  </data>
+  <data name="Launch_MaxMem" xml:space="preserve">
+    <value>最大运行内存</value>
+  </data>
+  <data name="Launch_ImportPack" xml:space="preserve">
+    <value>导入整合包</value>
+  </data>
+  <data name="Launch_Refresh" xml:space="preserve">
+    <value>刷新</value>
+  </data>
+  <data name="Launch_VersionList" xml:space="preserve">
+    <value>版本列表</value>
+  </data>
+  <data name="Launch_ToVersionList" xml:space="preserve">
+    <value> 版本列表 </value>
+  </data>
+  <data name="Launch_ToVersionSetting" xml:space="preserve">
+    <value> 版本设置 </value>
+  </data>
+  <data name="Launch_LaunchGame" xml:space="preserve">
+    <value>启动游戏</value>
+  </data>
+  <data name="Launch_NoChooseGame" xml:space="preserve">
+    <value>&lt;未选择游戏核心&gt;</value>
+  </data>
+  <data name="Launch_LoadMinecraftVersion_GetVersionListError" xml:space="preserve">
+    <value>获取版本列表发生错误</value>
   </data>
 </root>

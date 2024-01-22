@@ -61,7 +61,142 @@ namespace YMCL.Main.UI.Lang {
         }
         
         /// <summary>
-        ///   查找类似 YMCL发生未处理的异常 的本地化字符串。
+        ///   查找类似 添加新账户 的本地化字符串。
+        /// </summary>
+        public static string Account_AddAccount {
+            get {
+                return ResourceManager.GetString("Account_AddAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 取消 的本地化字符串。
+        /// </summary>
+        public static string Account_Cancel {
+            get {
+                return ResourceManager.GetString("Account_Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 复制代码并打开浏览器 的本地化字符串。
+        /// </summary>
+        public static string Account_CopyCodeAndOpenBrowser {
+            get {
+                return ResourceManager.GetString("Account_CopyCodeAndOpenBrowser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 删除选中账户 的本地化字符串。
+        /// </summary>
+        public static string Account_DelAccount {
+            get {
+                return ResourceManager.GetString("Account_DelAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 邮箱地址 的本地化字符串。
+        /// </summary>
+        public static string Account_Email {
+            get {
+                return ResourceManager.GetString("Account_Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 加载中... 的本地化字符串。
+        /// </summary>
+        public static string Account_Loading {
+            get {
+                return ResourceManager.GetString("Account_Loading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 微软登录 的本地化字符串。
+        /// </summary>
+        public static string Account_Microsoft {
+            get {
+                return ResourceManager.GetString("Account_Microsoft", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 离线登录 的本地化字符串。
+        /// </summary>
+        public static string Account_Offline {
+            get {
+                return ResourceManager.GetString("Account_Offline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 用户名不可为空 的本地化字符串。
+        /// </summary>
+        public static string Account_OfflineAccountAddBtn_Click_OfflineUserNameNull {
+            get {
+                return ResourceManager.GetString("Account_OfflineAccountAddBtn_Click_OfflineUserNameNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 账户密码 的本地化字符串。
+        /// </summary>
+        public static string Account_Password {
+            get {
+                return ResourceManager.GetString("Account_Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 认证服务器地址 的本地化字符串。
+        /// </summary>
+        public static string Account_ServerUrl {
+            get {
+                return ResourceManager.GetString("Account_ServerUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 确定 的本地化字符串。
+        /// </summary>
+        public static string Account_Sure {
+            get {
+                return ResourceManager.GetString("Account_Sure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 第三方登录 的本地化字符串。
+        /// </summary>
+        public static string Account_Third_Party {
+            get {
+                return ResourceManager.GetString("Account_Third_Party", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 游戏用户名 的本地化字符串。
+        /// </summary>
+        public static string Account_UserName {
+            get {
+                return ResourceManager.GetString("Account_UserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 验证代码 的本地化字符串。
+        /// </summary>
+        public static string Account_VerificationCode {
+            get {
+                return ResourceManager.GetString("Account_VerificationCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 YMCL发生未处理的异常，将崩溃退出 的本地化字符串。
         /// </summary>
         public static string App_UnhandledException {
             get {
@@ -142,7 +277,7 @@ namespace YMCL.Main.UI.Lang {
         }
         
         /// <summary>
-        ///   查找类似 下一步 → 的本地化字符串。
+        ///   查找类似 下一步 的本地化字符串。
         /// </summary>
         public static string InitializeWindow_NextSetpBtn {
             get {
@@ -165,6 +300,177 @@ namespace YMCL.Main.UI.Lang {
         public static string InitializeWindow_Title_Download {
             get {
                 return ResourceManager.GetString("InitializeWindow_Title_Download", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 添加文件夹 的本地化字符串。
+        /// </summary>
+        public static string Launch_AddMinecraftFolder {
+            get {
+                return ResourceManager.GetString("Launch_AddMinecraftFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 已存在此文件夹 的本地化字符串。
+        /// </summary>
+        public static string Launch_AddMinecraftFolder_Click_ExistsMinecraftFolder {
+            get {
+                return ResourceManager.GetString("Launch_AddMinecraftFolder_Click_ExistsMinecraftFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 需选择 .minecraft 文件夹 的本地化字符串。
+        /// </summary>
+        public static string Launch_AddMinecraftFolder_Click_NeedMinecraftFolder {
+            get {
+                return ResourceManager.GetString("Launch_AddMinecraftFolder_Click_NeedMinecraftFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 自动扫描 的本地化字符串。
+        /// </summary>
+        public static string Launch_AutoFindJava {
+            get {
+                return ResourceManager.GetString("Launch_AutoFindJava", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 扫描完成：发现{|}个Java，其中已有{|}个存在列表中 的本地化字符串。
+        /// </summary>
+        public static string Launch_AutoFindJava_Click_ScanCompleted {
+            get {
+                return ResourceManager.GetString("Launch_AutoFindJava_Click_ScanCompleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 移除选中项 的本地化字符串。
+        /// </summary>
+        public static string Launch_DelMinecraftFolder {
+            get {
+                return ResourceManager.GetString("Launch_DelMinecraftFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 导入整合包 的本地化字符串。
+        /// </summary>
+        public static string Launch_ImportPack {
+            get {
+                return ResourceManager.GetString("Launch_ImportPack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 自定义页面 (Xaml) 源代码错误 的本地化字符串。
+        /// </summary>
+        public static string Launch_Launch_CustomPageSourceError {
+            get {
+                return ResourceManager.GetString("Launch_Launch_CustomPageSourceError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 启动游戏 的本地化字符串。
+        /// </summary>
+        public static string Launch_LaunchGame {
+            get {
+                return ResourceManager.GetString("Launch_LaunchGame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 获取版本列表发生错误 的本地化字符串。
+        /// </summary>
+        public static string Launch_LoadMinecraftVersion_GetVersionListError {
+            get {
+                return ResourceManager.GetString("Launch_LoadMinecraftVersion_GetVersionListError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 手动添加 的本地化字符串。
+        /// </summary>
+        public static string Launch_ManualAddJava {
+            get {
+                return ResourceManager.GetString("Launch_ManualAddJava", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 已存在此Java 的本地化字符串。
+        /// </summary>
+        public static string Launch_ManualAddJava_Click_ExistsJava {
+            get {
+                return ResourceManager.GetString("Launch_ManualAddJava_Click_ExistsJava", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 最大运行内存 的本地化字符串。
+        /// </summary>
+        public static string Launch_MaxMem {
+            get {
+                return ResourceManager.GetString("Launch_MaxMem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Minecraft文件夹 的本地化字符串。
+        /// </summary>
+        public static string Launch_MinecraftFolder {
+            get {
+                return ResourceManager.GetString("Launch_MinecraftFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 &lt;未选择游戏核心&gt; 的本地化字符串。
+        /// </summary>
+        public static string Launch_NoChooseGame {
+            get {
+                return ResourceManager.GetString("Launch_NoChooseGame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 刷新 的本地化字符串。
+        /// </summary>
+        public static string Launch_Refresh {
+            get {
+                return ResourceManager.GetString("Launch_Refresh", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  版本列表  的本地化字符串。
+        /// </summary>
+        public static string Launch_ToVersionList {
+            get {
+                return ResourceManager.GetString("Launch_ToVersionList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  版本设置  的本地化字符串。
+        /// </summary>
+        public static string Launch_ToVersionSetting {
+            get {
+                return ResourceManager.GetString("Launch_ToVersionSetting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 版本列表 的本地化字符串。
+        /// </summary>
+        public static string Launch_VersionList {
+            get {
+                return ResourceManager.GetString("Launch_VersionList", resourceCulture);
             }
         }
         
@@ -192,6 +498,15 @@ namespace YMCL.Main.UI.Lang {
         public static string Launcher_SettingItem_Language {
             get {
                 return ResourceManager.GetString("Launcher_SettingItem_Language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 将启用自定义页面，YMCL不保证自定义内容安全性，不安全的自定义内容可能会导致设备遭受攻击等 的本地化字符串。
+        /// </summary>
+        public static string Launcher_UseCustomHomePageToggle_Toggled_On_Info {
+            get {
+                return ResourceManager.GetString("Launcher_UseCustomHomePageToggle_Toggled_On_Info", resourceCulture);
             }
         }
         

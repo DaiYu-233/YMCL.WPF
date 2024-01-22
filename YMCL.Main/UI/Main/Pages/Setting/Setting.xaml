@@ -5,9 +5,20 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:YMCL.Main.UI.Main.Pages.Setting"
       mc:Ignorable="d"  >
-
-    <ScrollViewer>
-        <Grid>
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="Page.Loaded">
+            <EventTrigger.Actions>
+                <BeginStoryboard>
+                    <Storyboard>
+                        <!--<ThicknessAnimation Duration="0:0:.85" Storyboard.TargetProperty="Margin" From="900,0,-900,0" To="0" DecelerationRatio=".9" />-->
+                        <ThicknessAnimation Duration="0:0:.45" Storyboard.TargetProperty="Margin" From="-50,0,50,0" To="0" DecelerationRatio=".9" />
+                        <DoubleAnimation Duration="0:0:.35" Storyboard.TargetProperty="Opacity" From="0" To="1" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Page.Triggers>
+    <Grid>
             <Grid VerticalAlignment="Top" Height="40" Background="{DynamicResource TitleBarColor}">
                 <ui:NavigationView x:Name="Navigation" IsSettingsVisible="False" PaneDisplayMode="Top" IsBackButtonVisible="Collapsed" SelectionChanged="Navigation_SelectionChanged" >
                     <ui:NavigationView.MenuItems>
@@ -41,5 +52,4 @@
             </Grid>
             <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" Margin="0,40,0,0" />
         </Grid>
-    </ScrollViewer>
 </Page>

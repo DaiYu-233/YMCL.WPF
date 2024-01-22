@@ -31,7 +31,7 @@ namespace YMCL.Main.UI.Initialize
     /// <summary>
     /// InitializeWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class InitializeWindow : Window
+    public partial class InitializeWindow : WindowX
     {
         [DllImport("kernel32.dll", SetLastError = true)]
         static extern int WriteProfileString(string lpszSection, string lpszKeyName, string lpszString);

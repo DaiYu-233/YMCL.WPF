@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Windows.Controls;
 using YMCL.Main.Public;
+using Application = System.Windows.Forms.Application;
 
 namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launcher
 {
@@ -31,7 +32,7 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launcher
                 }
             });
 
-            UseCustomHomePageToggle.IsOn = setting.UseCustomHomePage;
+            //UseCustomHomePageToggle.IsOn = setting.UseCustomHomePage;
         }
 
         private void LanguageComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -53,20 +54,29 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launcher
 
         private void UseCustomHomePageToggle_Toggled(object sender, System.Windows.RoutedEventArgs e)
         {
-            var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
-            if (UseCustomHomePageToggle.IsOn == setting.UseCustomHomePage)
-            {
-                return;
-            }
-            setting.UseCustomHomePage = UseCustomHomePageToggle.IsOn;
-            File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting));
-            ProcessStartInfo startInfo = new ProcessStartInfo
-            {
-                WorkingDirectory = Environment.CurrentDirectory,
-                FileName = Application.ExecutablePath,
-            };
-            Process.Start(startInfo);
-            System.Windows.Application.Current.Shutdown();
+            //var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
+            //if (UseCustomHomePageToggle.IsOn == setting.UseCustomHomePage)
+            //{
+            //    return;
+            //}
+            //if (UseCustomHomePageToggle.IsOn)
+            //{
+            //    var message = MessageBoxX.Show(LangHelper.Current.GetText("Launcher_UseCustomHomePageToggle_Toggled_On_Info"), "Yu Minecraft Launcher", MessageBoxButton.OKCancel, MessageBoxIcon.Info);
+            //    if (message == MessageBoxResult.Cancel)
+            //    {
+            //        UseCustomHomePageToggle.IsOn = false;
+            //        return;
+            //    }
+            //}
+            //setting.UseCustomHomePage = UseCustomHomePageToggle.IsOn;
+            //File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting));
+            //ProcessStartInfo startInfo = new ProcessStartInfo
+            //{
+            //    WorkingDirectory = Environment.CurrentDirectory,
+            //    FileName = Application.ExecutablePath,
+            //};
+            //Process.Start(startInfo);
+            //System.Windows.Application.Current.Shutdown();
         }
 
         private void EditCustomHomePageBtn_Click(object sender, System.Windows.RoutedEventArgs e)

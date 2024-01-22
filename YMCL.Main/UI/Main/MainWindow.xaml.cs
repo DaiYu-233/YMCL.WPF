@@ -24,7 +24,7 @@ namespace YMCL.Main.UI.Main
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : WindowX
     {
         #region UIResize
         private void TitleBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

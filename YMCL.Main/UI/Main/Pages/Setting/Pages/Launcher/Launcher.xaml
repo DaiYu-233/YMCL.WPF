@@ -5,7 +5,19 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:YMCL.Main.UI.Main.Pages.Setting.Pages.Launcher"
       mc:Ignorable="d" >
-
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="Page.Loaded">
+            <EventTrigger.Actions>
+                <BeginStoryboard>
+                    <Storyboard>
+                        <!--<ThicknessAnimation Duration="0:0:.85" Storyboard.TargetProperty="Margin" From="900,0,-900,0" To="0" DecelerationRatio=".9" />-->
+                        <ThicknessAnimation Duration="0:0:.20" Storyboard.TargetProperty="Margin" From="0,50,0,-50" To="0" DecelerationRatio=".9" />
+                        <DoubleAnimation Duration="0:0:.35" Storyboard.TargetProperty="Opacity" From="0" To="1" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Page.Triggers>
     <ScrollViewer Margin="10,10,5,0">
         <StackPanel Margin="0,0,5,0">
             <Border CornerRadius="5" Background="{DynamicResource 1x}" Height="45" Margin="0,0,0,10" >
@@ -14,7 +26,7 @@
                     <ComboBox  Margin="18,0,6.5,0" Height="32" x:Name="LanguageComboBox" FontFamily="{DynamicResource Font}" SelectionChanged="LanguageComboBox_SelectionChanged" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                 </DockPanel>
             </Border>
-            <Border CornerRadius="5" Background="{DynamicResource 1x}" Height="45" Margin="0,0,0,10" >
+            <!--<Border CornerRadius="5" Background="{DynamicResource 1x}" Height="45" Margin="0,0,0,10" >
                 <DockPanel>
                     <Label HorizontalAlignment="Left" VerticalAlignment="Center" Margin="18,0,0,0" FontSize="15" Foreground="{DynamicResource TextColor}" FontFamily="{DynamicResource Font}" Content="{x:Static properties:MainLang.Launcher_SettingItem_CustomMainPage}"/>
                     <ui:ToggleSwitch x:Name="UseCustomHomePageToggle" Margin="18,0,0,0" HorizontalAlignment="Left" FontFamily="{DynamicResource Font}" Toggled="UseCustomHomePageToggle_Toggled"/>
@@ -25,7 +37,8 @@
                         </StackPanel>
                     </ui:HyperlinkButton>
                 </DockPanel>
-            </Border>
+            </Border>-->
+            
             
         </StackPanel>
     </ScrollViewer>
