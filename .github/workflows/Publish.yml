@@ -22,15 +22,11 @@ jobs:
     #   run: |
     #     mv ./YMCL.Main/bin/Release/net8.0-windows/win-x86/publish/YMCL.Main.exe ./YMCL.Main/bin/Release/net8.0-windows/win-x86/publish/YMCL.Main.x86.exe
     #     mv ./YMCL.Main/bin/Release/net8.0-windows/win-x64/publish/YMCL.Main.exe ./YMCL.Main/bin/Release/net8.0-windows/win-x64/publish/YMCL.Main.x64.exe
-    - name: Set
-      run: echo "TagName=1.0.0" >> $GITHUB_ENV
-    - name: Read the value
-      run: echo "fff ${{ env.TagName }}"
-    # - name: Tag 
-    #   uses: rickstaa/action-create-tag@v1
-    #   id: "tag_create"
-    #   with:
-    #     tag: "Github Actions - ${{ github.event.commits[0].timestamp }}"
+    - name: Tag 
+      uses: rickstaa/action-create-tag@v1
+      id: "tag_create"
+      with:
+        tag: "Github Actions - ${{ github.event.commits[0].timestamp }}"
     # - name: Publish
     #   uses: marvinpinto/action-automatic-releases@latest
     #   with:
