@@ -10,6 +10,8 @@ using MinecraftLaunch.Components.Authenticator;
 using MinecraftLaunch.Classes.Models.Auth;
 using System.Diagnostics;
 using System;
+using System.Globalization;
+using System.Windows.Data;
 
 namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Account
 {
@@ -18,6 +20,22 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Account
     /// </summary>
     public partial class Account : Page
     {
+        public class WidthAndHeightToRectConverter : IMultiValueConverter
+        {
+            public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+            {
+                double width = (double)values[0];
+                double height = (double)values[1];
+                return new Rect(0, 0, width, height);
+            }
+
+            public object[] ConvertBack(object value, Type[] targetTypes, object parameter, System.Globalization.CultureInfo culture)
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+
         List<AccountInfo> accounts = JsonConvert.DeserializeObject<List<AccountInfo>>(File.ReadAllText(Const.AccountDataPath));
         public Account()
         {
@@ -158,11 +176,11 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Account
         DeviceCodeResponse deviceInfo;
         public async void MicrosoftLogin()
         {
-            authenticator = new MicrosoftAuthenticator("c06d4d68-7751-4a8a-a2ff-d1b46688f428");
-            await authenticator.DeviceFlowAuthAsync(dc => {
-                //在获取到一次性代码后要执行的代码
-                Console.WriteLine(dc.UserCode);
-            });
+            //MicrosoftAuthenticator authenticator = new("c06d4d68-7751-4a8a-a2ff-d1b46688f428");
+            //await authenticator.DeviceFlowAuthAsync(dc => {
+            //    //在获取到一次性代码后要执行的代码
+            //    Console.WriteLine(dc.UserCode);
+            //});
         }
 
         private void CopyCodeAndOpenBrowserBtn_Click(object sender, RoutedEventArgs e)
@@ -172,4 +190,7 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Account
             System.Windows.Clipboard.SetText(LoginCodeText.Text);
         }
     }
+
+    
+
 }

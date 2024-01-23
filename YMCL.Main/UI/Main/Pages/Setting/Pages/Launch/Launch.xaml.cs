@@ -1,4 +1,5 @@
-﻿using MinecraftLaunch.Components.Fetcher;
+﻿using MinecraftLaunch.Classes.Models.Game;
+using MinecraftLaunch.Components.Fetcher;
 using Newtonsoft.Json;
 using Panuon.WPF.UI;
 using System.IO;
@@ -6,6 +7,7 @@ using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
 using YMCL.Main.Public;
+using YMCL.Main.Public.Class;
 using YMCL.Main.UI.Lang;
 
 namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launch
@@ -16,13 +18,20 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launch
     public partial class Launch : Page
     {
         List<string> minecraftFolder = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(Const.MinecraftFolderDataPath));
-        List<string> javas = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(Const.JavaDataPath));
+        List<JavaEntry> javas = JsonConvert.DeserializeObject<List<JavaEntry>>(File.ReadAllText(Const.JavaDataPath));
+        List<string> javasPath = new();
         public Launch()
         {
             InitializeComponent();
             var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
             LoadJavas();
             LoadMem(setting.MaxMem);
+            AloneCoreToggle.IsOn = setting.AloneCore;
+
+            foreach (var item in javas)
+            {
+                javasPath.Add(item.JavaPath);
+            }
         }
 
         void LoadMinecraftFolder()
@@ -46,11 +55,22 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launch
         {
             var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
             JavaComboBox.Items.Clear();
+            JavaComboBox.Items.Add(new JavaEntry()
+            {
+                JavaPath= LangHelper.Current.GetText("Launch_AutoSelectJava")
+            });
             foreach (var item in javas)
             {
                 JavaComboBox.Items.Add(item);
             }
-            JavaComboBox.SelectedItem = setting.Java;
+            if (setting.Java == "<Auto>" || setting.Java == null || setting.Java == string.Empty)
+            {
+                JavaComboBox.SelectedIndex = 0;
+            }
+            else
+            {
+                JavaComboBox.SelectedItem = setting.Java;
+            }
             if (setting.MinecraftFolder == null || !minecraftFolder.Contains(setting.MinecraftFolder))
             {
                 JavaComboBox.SelectedIndex = 0;
@@ -142,26 +162,27 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launch
         {
             JavaFetcher javaFetcher = new JavaFetcher();
             var includeItem = 0;
-            var temp = new List<string>();
+            var temp = new List<JavaEntry>();
             var java = javaFetcher.Fetch().ToList();
             java = java.Distinct().ToList();
             foreach (var item in java)
             {
-                if (javas.Contains(item.JavaPath))
+                if (javasPath.Contains(item.JavaPath))
                 {
                     includeItem++;
                 }
                 else
                 {
-                    temp.Add(item.JavaPath);
+                    temp.Add(item);
                 }
             }
             var str = LangHelper.Current.GetText("Launch_AutoFindJava_Click_ScanCompleted").Split("{|}");
             Toast.Show(Const.Window.mainWindow, $"{str[0]}{javas.Count}{str[1]}{includeItem}{str[2]}", ToastPosition.Top);
-            temp.ForEach(item =>
+            temp.ForEach(javas.Add);
+            foreach (var item in javas)
             {
-                javas.Add(item);
-            });
+                javasPath.Add(item.JavaPath);
+            }
             File.WriteAllText(Const.JavaDataPath, JsonConvert.SerializeObject(javas, Formatting.Indented));
             LoadJavas();
             if (javas.Count > 0) { JavaComboBox.SelectedIndex = 0; }
@@ -174,7 +195,18 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launch
             {
                 return;
             }
-            setting.Java = JavaComboBox.SelectedItem.ToString();
+            if (JavaComboBox.SelectedIndex == 0 && setting.Java == "<Auto>")
+            {
+                return;
+            }
+            if (JavaComboBox.SelectedIndex == 0)
+            {
+                setting.Java = "<Auto>";
+            }
+            else
+            {
+                setting.Java = JavaComboBox.SelectedItem.ToString();
+            }
             File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
         }
 
@@ -195,12 +227,12 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launch
             string path = openFileDialog.FileName;
 
             var isIncludePath = false;
-            var dataArray = JsonConvert.DeserializeObject<string[]>(File.ReadAllText(Const.JavaDataPath));
+            var dataArray = JsonConvert.DeserializeObject<List<JavaEntry>>(File.ReadAllText(Const.JavaDataPath));
             if (dataArray != null)
             {
                 foreach (var item in dataArray)
                 {
-                    if (item == path)
+                    if (item.JavaPath == path)
                     {
                         isIncludePath = true;
                     }
@@ -212,7 +244,11 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launch
                 }
                 else
                 {
-                    javas.Add(path);
+                    javas.Add(new JavaEntry()
+                    {
+                        JavaPath = path,
+                        JavaSlugVersion = -1
+                    });
                     File.WriteAllText(Const.JavaDataPath, JsonConvert.SerializeObject(javas, Formatting.Indented));
                     JavaComboBox.Items.Add(path);
                     JavaComboBox.SelectedItem = path;
@@ -260,6 +296,17 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launch
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             LoadMinecraftFolder();
+        }
+
+        private void AloneCoreToggle_Toggled(object sender, RoutedEventArgs e)
+        {
+            var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
+            if (AloneCoreToggle.IsOn == setting.AloneCore)
+            {
+                return;
+            }
+            setting.AloneCore = AloneCoreToggle.IsOn;
+            File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
         }
     }
 }

@@ -50,6 +50,12 @@ namespace YMCL.Main.UI.Initialize
                     Url="https://ymcl.daiyu.fun/MiSans.ttf",
                     MD5="61729D264686DD2DCA5038648EA8C9FE"
                 },
+            new InitializeFile()
+                {
+                    Name="FluentIcons.ttf",
+                    Url="https://ymcl.daiyu.fun/FluentIcons.ttf",
+                    MD5="460A1FFA29FBC20E97861B497601C552"
+                },
                 new InitializeFile()
                 {
                     Name="YMCL-Updater.exe",
@@ -438,7 +444,7 @@ namespace YMCL.Main.UI.Initialize
                         lines[i].Text = LangHelper.Current.GetText("InitializeWindow_DownloadFinish");
                     }
 
-                    if (item.Name == "MiSans.ttf")
+                    if (item.Name == "MiSans.ttf" || item.Name == "FluentIcons.ttf")
                     {
                         needInstallFont = true;
                     }
@@ -486,10 +492,17 @@ namespace YMCL.Main.UI.Initialize
                 else
                 {
                     var fontFilePath = "C:\\ProgramData\\DaiYu.YMCL\\MiSans.ttf";
-                    string fontPath = Path.Combine(System.Environment.GetEnvironmentVariable("WINDIR"), "fonts", $"YMCL_{Function.GetTimeStamp()}_" + Path.GetFileName(fontFilePath));
+                    string fontPath = Path.Combine(Environment.GetEnvironmentVariable("WINDIR"), "fonts", $"YMCL_{Function.GetTimeStamp()}_" + Path.GetFileName(fontFilePath));
                     File.Copy(fontFilePath, fontPath, true); //font是程序目录下放字体的文件夹
                     AddFontResource(fontPath);
                     WriteProfileString("fonts", Path.GetFileNameWithoutExtension(fontFilePath) + "(TrueType)", $"YMCL_{Function.GetTimeStamp()}_" + Path.GetFileName(fontFilePath));
+
+
+                    var fontFilePath1 = "C:\\ProgramData\\DaiYu.YMCL\\FluentIcons.ttf";
+                    string fontPath1 = Path.Combine(Environment.GetEnvironmentVariable("WINDIR"), "fonts", $"YMCL_{Function.GetTimeStamp()}_" + Path.GetFileName(fontFilePath1));
+                    File.Copy(fontFilePath1, fontPath1, true); //font是程序目录下放字体的文件夹
+                    AddFontResource(fontPath1);
+                    WriteProfileString("fonts", Path.GetFileNameWithoutExtension(fontFilePath1) + "(TrueType)", $"YMCL_{Function.GetTimeStamp()}_" + Path.GetFileName(fontFilePath1));
 
                     File.WriteAllText(Path.Combine(Const.PublicDataRootPath, "FontHasBeenInstalled"), "");
                 }

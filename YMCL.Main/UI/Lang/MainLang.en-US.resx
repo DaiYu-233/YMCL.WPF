@@ -297,4 +297,28 @@
   <data name="Launch_LoadMinecraftVersion_GetVersionListError" xml:space="preserve">
     <value>Error fetching version list</value>
   </data>
+  <data name="Launch_AutoSelectJava" xml:space="preserve">
+    <value>Let YMCL choose the right Java</value>
+  </data>
+  <data name="InitializeWindow_DownloadHelp" xml:space="preserve">
+    <value>Can't finish downloading? Click for help</value>
+  </data>
+  <data name="Launch_LaunchGame_Click_AccountError" xml:space="preserve">
+    <value>Account Error</value>
+  </data>
+  <data name="Launch_LaunchGame_Click_NoChooseGame" xml:space="preserve">
+    <value>No game core selected</value>
+  </data>
+  <data name="Launch_LaunchGame_Click_JavaError" xml:space="preserve">
+    <value>Java Error</value>
+  </data>
+  <data name="Launch_AloneCore" xml:space="preserve">
+    <value>Version Isolated</value>
+  </data>
+  <data name="Launch_LaunchGame_Click_Launched" xml:space="preserve">
+    <value>Startup complete</value>
+  </data>
+  <data name="Launch_LaunchGame_Click_CannotFandRightJava" xml:space="preserve">
+    <value>YMCL can't find the Java you need right now: Java</value>
+  </data>
 </root>

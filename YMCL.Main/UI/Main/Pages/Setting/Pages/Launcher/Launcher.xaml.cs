@@ -31,8 +31,12 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launcher
                     LanguageComboBox.SelectedItem = lang;
                 }
             });
-
-            //UseCustomHomePageToggle.IsOn = setting.UseCustomHomePage;
+            if (setting.Language == null || setting.Language == string.Empty)
+            {
+                LanguageComboBox.SelectedItem = "zh-CN 简体中文";
+                setting.Language = "zh-CN";
+                File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+            }
         }
 
         private void LanguageComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

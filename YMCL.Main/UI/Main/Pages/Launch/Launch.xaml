@@ -19,36 +19,46 @@
         </EventTrigger>
     </Page.Triggers>
     <Grid>
-        <ui:SplitButton MinWidth="205" Height="50" Margin="0,0,30,30" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+        <ui:SplitButton x:Name="LaunchGame" MinWidth="220" Height="55" Margin="0,0,30,30" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="LaunchGame_Click">
             <ui:SplitButton.Flyout>
                 <ui:MenuFlyout>
                     <MenuItem x:Name="OpenVersionList" Header="{x:Static properties:MainLang.Launch_ToVersionList}" FontFamily="{DynamicResource Font}" Click="OpenVersionList_Click"/>
                     <MenuItem Header="{x:Static properties:MainLang.Launch_ToVersionSetting}" FontFamily="{DynamicResource Font}"/>
                 </ui:MenuFlyout>
             </ui:SplitButton.Flyout>
-            <Grid>
-                <TextBlock Text="{x:Static properties:MainLang.Launch_LaunchGame}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-12,0,0" FontSize="14" FontFamily="{DynamicResource Font}"/>
-                <TextBlock x:Name="GameCoreText" Text="{x:Static properties:MainLang.Launch_NoChooseGame}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,17.5,0,0" FontSize="11" FontFamily="{DynamicResource Font}"/>
-            </Grid>
+            <StackPanel>
+                <TextBlock Text="{x:Static properties:MainLang.Launch_LaunchGame}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" FontFamily="{DynamicResource Font}"/>
+                <TextBlock x:Name="GameCoreText" Text="{x:Static properties:MainLang.Launch_NoChooseGame}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12" FontFamily="{DynamicResource Font}"/>
+            </StackPanel>
         </ui:SplitButton>
 
         <Border x:Name="VersionListBorder" Background="{DynamicResource 1x}" CornerRadius="5,5,5,5" Margin="10,10,10,10" Visibility="Hidden">
-            <StackPanel>
-                <DockPanel VerticalAlignment="Top" Margin="5,10,5,0">
+            <DockPanel>
+                <DockPanel VerticalAlignment="Top" Margin="5,10,5,0" DockPanel.Dock="Top">
                     <Button x:Name="DelMinecraftFolder" Content="{x:Static properties:MainLang.Launch_DelMinecraftFolder}" FontFamily="{StaticResource Font}" Height="32"  Margin="0,0,5,0" HorizontalAlignment="Right" DockPanel.Dock="Right" Click="DelMinecraftFolder_Click"/>
                     <Button x:Name="AddMinecraftFolder" Content="{x:Static properties:MainLang.Launch_AddMinecraftFolder}" FontFamily="{StaticResource Font}" Height="32" Margin="0,0,6.5,0" HorizontalAlignment="Right" DockPanel.Dock="Right" Click="AddMinecraftFolder_Click"/>
                     <Button x:Name="ImportModPackBtn" Content="{x:Static properties:MainLang.Launch_ImportPack}" FontFamily="{StaticResource Font}" Height="32" HorizontalAlignment="Right" Margin="0,0,6.5,0" DockPanel.Dock="Right"/>
                     <Button x:Name="Refresh" Content="{x:Static properties:MainLang.Launch_Refresh}" FontFamily="{StaticResource Font}" DockPanel.Dock="Right" Margin="0,0,6.5,0" Click="Refresh_Click"/>
-                    <ComboBox x:Name="MinecraftFolderComboBox" Margin="5,0,6.5,0" VerticalAlignment="Center" Height="32" IsReadOnly="True" HorizontalAlignment="Stretch" FontFamily="{StaticResource Font}" />
+                    <ComboBox x:Name="MinecraftFolderComboBox" Margin="5,0,6.5,0" VerticalAlignment="Center" Height="32" IsReadOnly="True" HorizontalAlignment="Stretch" FontFamily="{StaticResource Font}" SelectionChanged="MinecraftFolderComboBox_SelectionChanged" />
                 </DockPanel>
-                <ui:ListView x:Name="VersionListView" Margin="0,75,0,0"  >
+                <ui:ListView x:Name="VersionListView" d:ItemsSource="{d:SampleData ItemCount=5}" ScrollViewer.CanContentScroll="True" Margin="5,5,5,5" SelectionChanged="VersionListView_SelectionChanged">
                     <ui:ListView.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding}" FontFamily="{StaticResource Font}"/>
+                            <Border BorderThickness="4,4,0,4">
+                                <Grid Margin="0,0,0,0">
+                                    <TextBlock Text="{Binding Id}" FontSize="14" FontFamily="{DynamicResource Font}"/>
+                                    <StackPanel Orientation="Horizontal" Margin="0,15,0,0">
+                                        <TextBlock  Text="{Binding Version}" Margin="0,0,0,0" FontSize="11" Foreground="{DynamicResource Gray}" FontFamily="{DynamicResource Font}"/>
+                                        <TextBlock  Text="{Binding MainLoaderType}" FontSize="11" Foreground="{DynamicResource Gray}" Margin="5,0,0,0" FontFamily="{DynamicResource Font}"/>
+                                        <TextBlock  Text="Java" FontSize="11" Foreground="{DynamicResource Gray}" Margin="5,0,0,0" FontFamily="{DynamicResource Font}"/>
+                                        <TextBlock  Text="{Binding JavaVersion}" FontSize="11" Foreground="{DynamicResource Gray}" FontFamily="{DynamicResource Font}"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
                         </DataTemplate>
                     </ui:ListView.ItemTemplate>
                 </ui:ListView>
-            </StackPanel>
+            </DockPanel>
         </Border>
         <StackPanel x:Name="ReturnPanel" Margin="0,-60,80,0" VerticalAlignment="Top" Height="30" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button x:Name="ReturnHomePage" Style="{DynamicResource SvgButtonsStyle}" Content="{DynamicResource Return}" HorizontalAlignment="Right" VerticalAlignment="Center"  Cursor="Hand" Margin="0,0,3,0" Click="ReturnHomePage_Click" />

@@ -44,11 +44,11 @@
                 </ui:ListView>
             </Grid>
         </Border>
-        <ui:ClippingBorder CornerRadius="8,8,8,8">
+        <ui:ClippingBorder CornerRadius="8,8,8,8" Visibility="Hidden" >
             <Grid>
-                <ui:ContentDialog x:Name="LoginTypeSelectionDialog" BorderThickness="8" FontFamily="{DynamicResource Font}" Visibility="Hidden" >
+                <ui:ContentDialog x:Name="LoginTypeSelectionDialog" BorderThickness="8" FontFamily="{DynamicResource Font}" CornerRadius="8,8,8,8" >
                     <Grid>
-                        <ComboBox x:Name="LoginTypeComboBox" Width="324" FontFamily="{DynamicResource Font}" SelectedIndex="0" FontSize="14">
+                        <ComboBox x:Name="LoginTypeComboBox" Width="320" FontFamily="{DynamicResource Font}" SelectedIndex="0" FontSize="14">
                             <ComboBoxItem Content="{x:Static properties:MainLang.Account_Offline}"/>
                             <ComboBoxItem Content="{x:Static properties:MainLang.Account_Microsoft}"/>
                             <ComboBoxItem Content="{x:Static properties:MainLang.Account_Third_Party}"/>
@@ -74,7 +74,7 @@
                         <TextBlock x:Name="LoginCodeText" Text="{x:Static properties:MainLang.Account_Loading}" FontFamily="{DynamicResource Font}" VerticalAlignment="Top" HorizontalAlignment="Center" Foreground="{DynamicResource TextColor}" Margin="0,20,0,0" FontSize="16"/>
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right">
                             <Button x:Name="CancelAddMicrosoftAccountBtn" VerticalAlignment="Bottom" Height="29" FontFamily="{DynamicResource Font}" Content="{x:Static properties:MainLang.Account_Cancel}" IsEnabled="True" HorizontalAlignment="Right" Margin="0,0,6.5,5" IsCancel="True" Click="Cancel_Login" />
-                            <Button x:Name="CopyCodeAndOpenBrowserBtn" VerticalAlignment="Bottom" Height="29" FontFamily="{DynamicResource Font}"  Style="{StaticResource AccentButtonStyle}" Content="{x:Static properties:MainLang.Account_CopyCodeAndOpenBrowser}" IsEnabled="True" HorizontalAlignment="Right" Margin="0,0,5,5" IsDefault="True" Click="CopyCodeAndOpenBrowserBtn_Click" />
+                            <Button x:Name="CopyCodeAndOpenBrowserBtn" VerticalAlignment="Bottom" Height="29" FontFamily="{DynamicResource Font}"  Style="{StaticResource AccentButtonStyle}" Content="{x:Static properties:MainLang.Account_CopyCodeAndOpenBrowser}" IsEnabled="False" HorizontalAlignment="Right" Margin="0,0,5,5" IsDefault="True" Click="CopyCodeAndOpenBrowserBtn_Click" />
                         </StackPanel>
                     </Grid>
                 </ui:ContentDialog>

@@ -1,12 +1,15 @@
 ﻿using Newtonsoft.Json;
 using Panuon.WPF.UI;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using System.Security.Principal;
 using System.Windows;
 using YMCL.Main.Public;
 using YMCL.Main.Public.Class;
 using YMCL.Main.UI.Lang;
 using static System.Windows.Forms.DataFormats;
+using MessageBoxIcon = Panuon.WPF.UI.MessageBoxIcon;
 
 namespace YMCL.Main
 {
@@ -66,6 +69,37 @@ namespace YMCL.Main
                 {
                     Path.Combine(System.Windows.Forms.Application.StartupPath , ".minecraft")
                 };
+                try
+                {
+                    Function.CreateFolder(Path.Combine(System.Windows.Forms.Application.StartupPath, ".minecraft"));
+                    Function.CreateFolder(Path.Combine(System.Windows.Forms.Application.StartupPath, ".minecraft", "versions"));
+                }
+                catch (Exception ex)
+                {
+                    WindowsIdentity identity = WindowsIdentity.GetCurrent();
+                    WindowsPrincipal principal = new WindowsPrincipal(identity);
+                    if (!principal.IsInRole(WindowsBuiltInRole.Administrator))
+                    {
+                        var message = MessageBoxX.Show(LangHelper.Current.GetText("InitializeWindow_Download_AdministratorPermissionRequired"), "Yu Minecraft Launcher", MessageBoxButton.OKCancel, MessageBoxIcon.Info);
+                        if (message == MessageBoxResult.OK)
+                        {
+                            ProcessStartInfo startInfo = new ProcessStartInfo
+                            {
+                                UseShellExecute = true,
+                                WorkingDirectory = Environment.CurrentDirectory,
+                                FileName = System.Windows.Forms.Application.ExecutablePath,
+                                Verb = "runas"
+                            };
+                            Process.Start(startInfo);
+                            Current.Shutdown();
+                        }
+                        else
+                        {
+                            MessageBoxX.Show(LangHelper.Current.GetText("InitializeWindow_FailedToObtainAdministratorPrivileges"), "Yu Minecraft Launcher", MessageBoxIcon.Error);
+                            Current.Shutdown();
+                        }
+                    }
+                }
                 File.WriteAllText(Const.MinecraftFolderDataPath, JsonConvert.SerializeObject(minecraftFolder, Formatting.Indented));
             }
 

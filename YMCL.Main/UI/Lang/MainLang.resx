@@ -277,4 +277,28 @@
   <data name="Launch_LoadMinecraftVersion_GetVersionListError" xml:space="preserve">
     <value>获取版本列表发生错误</value>
   </data>
+  <data name="Launch_AutoSelectJava" xml:space="preserve">
+    <value>让YMCL选择合适的Java</value>
+  </data>
+  <data name="InitializeWindow_DownloadHelp" xml:space="preserve">
+    <value>无法完成下载？点击查看帮助</value>
+  </data>
+  <data name="Launch_LaunchGame_Click_AccountError" xml:space="preserve">
+    <value>账户错误</value>
+  </data>
+  <data name="Launch_LaunchGame_Click_NoChooseGame" xml:space="preserve">
+    <value>未选择游戏核心</value>
+  </data>
+  <data name="Launch_LaunchGame_Click_JavaError" xml:space="preserve">
+    <value>Java错误</value>
+  </data>
+  <data name="Launch_AloneCore" xml:space="preserve">
+    <value>版本隔离</value>
+  </data>
+  <data name="Launch_LaunchGame_Click_Launched" xml:space="preserve">
+    <value>启动完成</value>
+  </data>
+  <data name="Launch_LaunchGame_Click_CannotFandRightJava" xml:space="preserve">
+    <value>YMCL无法找到当前需要的Java：Java</value>
+  </data>
 </root>

@@ -250,6 +250,15 @@ namespace YMCL.Main.UI.Lang {
         }
         
         /// <summary>
+        ///   查找类似 无法完成下载？点击查看帮助 的本地化字符串。
+        /// </summary>
+        public static string InitializeWindow_DownloadHelp {
+            get {
+                return ResourceManager.GetString("InitializeWindow_DownloadHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 等待中 的本地化字符串。
         /// </summary>
         public static string InitializeWindow_DownloadWaiting {
@@ -331,6 +340,15 @@ namespace YMCL.Main.UI.Lang {
         }
         
         /// <summary>
+        ///   查找类似 版本隔离 的本地化字符串。
+        /// </summary>
+        public static string Launch_AloneCore {
+            get {
+                return ResourceManager.GetString("Launch_AloneCore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 自动扫描 的本地化字符串。
         /// </summary>
         public static string Launch_AutoFindJava {
@@ -345,6 +363,15 @@ namespace YMCL.Main.UI.Lang {
         public static string Launch_AutoFindJava_Click_ScanCompleted {
             get {
                 return ResourceManager.GetString("Launch_AutoFindJava_Click_ScanCompleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 让YMCL选择合适的Java 的本地化字符串。
+        /// </summary>
+        public static string Launch_AutoSelectJava {
+            get {
+                return ResourceManager.GetString("Launch_AutoSelectJava", resourceCulture);
             }
         }
         
@@ -381,6 +408,51 @@ namespace YMCL.Main.UI.Lang {
         public static string Launch_LaunchGame {
             get {
                 return ResourceManager.GetString("Launch_LaunchGame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 账户错误 的本地化字符串。
+        /// </summary>
+        public static string Launch_LaunchGame_Click_AccountError {
+            get {
+                return ResourceManager.GetString("Launch_LaunchGame_Click_AccountError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 YMCL无法找到当前需要的Java：Java 的本地化字符串。
+        /// </summary>
+        public static string Launch_LaunchGame_Click_CannotFandRightJava {
+            get {
+                return ResourceManager.GetString("Launch_LaunchGame_Click_CannotFandRightJava", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Java错误 的本地化字符串。
+        /// </summary>
+        public static string Launch_LaunchGame_Click_JavaError {
+            get {
+                return ResourceManager.GetString("Launch_LaunchGame_Click_JavaError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 启动完成 的本地化字符串。
+        /// </summary>
+        public static string Launch_LaunchGame_Click_Launched {
+            get {
+                return ResourceManager.GetString("Launch_LaunchGame_Click_Launched", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 未选择游戏核心 的本地化字符串。
+        /// </summary>
+        public static string Launch_LaunchGame_Click_NoChooseGame {
+            get {
+                return ResourceManager.GetString("Launch_LaunchGame_Click_NoChooseGame", resourceCulture);
             }
         }
         
