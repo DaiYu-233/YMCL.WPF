@@ -321,4 +321,13 @@
   <data name="Launch_LaunchGame_Click_CannotFandRightJava" xml:space="preserve">
     <value>YMCL не может найти нужную вам Java прямо сейчас: Java</value>
   </data>
+  <data name="Launch_LaunchGame_Click_FinishLaunch" xml:space="preserve">
+    <value>Запуск завершен, ждем появления игрового окна</value>
+  </data>
+  <data name="Launch_LaunchGame_Click_GameExit" xml:space="preserve">
+    <value>Игра завершена</value>
+  </data>
+  <data name="Launch_LaunchGame_Click_LaunchSuccess" xml:space="preserve">
+    <value>Успешно запущено</value>
+  </data>
 </root>

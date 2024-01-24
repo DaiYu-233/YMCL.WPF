@@ -319,6 +319,15 @@
     <value>スタートアップが完了しました</value>
   </data>
   <data name="Launch_LaunchGame_Click_CannotFandRightJava" xml:space="preserve">
-    <value>YMCLは現在必要なJavaを見つけることができません： Java </value>
+    <value>YMCLは現在必要なJavaを見つけることができません： Java</value>
+  </data>
+  <data name="Launch_LaunchGame_Click_FinishLaunch" xml:space="preserve">
+    <value>起動が完了し、ゲームウィンドウが表示されるのを待っています</value>
+  </data>
+  <data name="Launch_LaunchGame_Click_GameExit" xml:space="preserve">
+    <value>ゲームが終了しました</value>
+  </data>
+  <data name="Launch_LaunchGame_Click_LaunchSuccess" xml:space="preserve">
+    <value>正常に開始しました</value>
   </data>
 </root>

@@ -54,7 +54,7 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launcher
                 Process.Start(startInfo);
                 System.Windows.Application.Current.Shutdown();
             }
-        }
+        } 
 
         private void UseCustomHomePageToggle_Toggled(object sender, System.Windows.RoutedEventArgs e)
         {

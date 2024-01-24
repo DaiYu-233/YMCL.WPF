@@ -301,4 +301,13 @@
   <data name="Launch_LaunchGame_Click_CannotFandRightJava" xml:space="preserve">
     <value>YMCL无法找到当前需要的Java：Java</value>
   </data>
+  <data name="Launch_LaunchGame_Click_FinishLaunch" xml:space="preserve">
+    <value>启动完成，等待游戏窗口出现</value>
+  </data>
+  <data name="Launch_LaunchGame_Click_GameExit" xml:space="preserve">
+    <value>游戏已退出</value>
+  </data>
+  <data name="Launch_LaunchGame_Click_LaunchSuccess" xml:space="preserve">
+    <value>启动成功</value>
+  </data>
 </root>

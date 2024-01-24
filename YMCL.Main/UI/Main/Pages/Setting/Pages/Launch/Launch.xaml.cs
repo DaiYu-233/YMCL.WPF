@@ -57,13 +57,13 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launch
             JavaComboBox.Items.Clear();
             JavaComboBox.Items.Add(new JavaEntry()
             {
-                JavaPath= LangHelper.Current.GetText("Launch_AutoSelectJava")
+                JavaPath = LangHelper.Current.GetText("Launch_AutoSelectJava")
             });
             foreach (var item in javas)
             {
                 JavaComboBox.Items.Add(item);
             }
-            if (setting.Java == "<Auto>" || setting.Java == null || setting.Java == string.Empty)
+            if (setting.Java == null || setting.Java.JavaPath == "<Auto>" || setting.Java.JavaPath == string.Empty)
             {
                 JavaComboBox.SelectedIndex = 0;
             }
@@ -195,17 +195,20 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launch
             {
                 return;
             }
-            if (JavaComboBox.SelectedIndex == 0 && setting.Java == "<Auto>")
+            if (JavaComboBox.SelectedIndex == 0 && setting.Java.JavaPath == "<Auto>")
             {
                 return;
             }
             if (JavaComboBox.SelectedIndex == 0)
             {
-                setting.Java = "<Auto>";
+                setting.Java = new JavaEntry()
+                {
+                    JavaPath = "<Auto>"
+                };
             }
             else
             {
-                setting.Java = JavaComboBox.SelectedItem.ToString();
+                setting.Java = JavaComboBox.SelectedItem as JavaEntry;
             }
             File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
         }

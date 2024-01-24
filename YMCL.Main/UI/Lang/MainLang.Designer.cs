@@ -430,6 +430,24 @@ namespace YMCL.Main.UI.Lang {
         }
         
         /// <summary>
+        ///   查找类似 启动完成，等待游戏窗口出现 的本地化字符串。
+        /// </summary>
+        public static string Launch_LaunchGame_Click_FinishLaunch {
+            get {
+                return ResourceManager.GetString("Launch_LaunchGame_Click_FinishLaunch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 游戏已退出 的本地化字符串。
+        /// </summary>
+        public static string Launch_LaunchGame_Click_GameExit {
+            get {
+                return ResourceManager.GetString("Launch_LaunchGame_Click_GameExit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Java错误 的本地化字符串。
         /// </summary>
         public static string Launch_LaunchGame_Click_JavaError {
@@ -444,6 +462,15 @@ namespace YMCL.Main.UI.Lang {
         public static string Launch_LaunchGame_Click_Launched {
             get {
                 return ResourceManager.GetString("Launch_LaunchGame_Click_Launched", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 启动成功 的本地化字符串。
+        /// </summary>
+        public static string Launch_LaunchGame_Click_LaunchSuccess {
+            get {
+                return ResourceManager.GetString("Launch_LaunchGame_Click_LaunchSuccess", resourceCulture);
             }
         }
         

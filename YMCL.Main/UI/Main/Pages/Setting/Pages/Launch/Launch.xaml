@@ -46,7 +46,7 @@
             <Border CornerRadius="5" Background="{DynamicResource 1x}" Height="45" Margin="0,0,0,10" >
                 <DockPanel LastChildFill="False">
                     <Label HorizontalAlignment="Left" VerticalAlignment="Center" Margin="18,0,0,0" FontSize="15" Foreground="{DynamicResource TextColor}" FontFamily="{DynamicResource Font}" Content="{x:Static properties:MainLang.Launch_AloneCore}"/>
-                    <ui:ToggleSwitch x:Name="AloneCoreToggle" DockPanel.Dock="Right" HorizontalAlignment="Right" FontFamily="{DynamicResource Font}" Toggled="AloneCoreToggle_Toggled" >
+                    <ui:ToggleSwitch x:Name="AloneCoreToggle" HorizontalAlignment="Right" FontFamily="{DynamicResource Font}" Toggled="AloneCoreToggle_Toggled" DockPanel.Dock="Right" >
                         <ui:ToggleSwitch.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>

@@ -189,15 +189,15 @@ namespace YMCL.Main.UI.Main.Pages.Launch
             {
                 VersionListView.Items.Add(version);
                 list.Add(version.Id);
-                if (version.Id == setting.MinecraftVersion)
+                if (version.Id == setting.MinecraftVersionId)
                 {
                     VersionListView.SelectedItem = version;
                     GameCoreText.Text = version.Id;
                 }
             });
-            if (!list.Contains(setting.MinecraftVersion))
+            if (!list.Contains(setting.MinecraftVersionId))
             {
-                setting.MinecraftVersion = null;
+                setting.MinecraftVersionId = null;
                 File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
             }
         }
@@ -281,7 +281,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
             {
                 GameCoreText.Text = version.Id;
             }
-            if (version == null || version.Id == setting.MinecraftVersion)
+            if (version == null || version.Id == setting.MinecraftVersionId)
             {
                 return;
             }
@@ -302,7 +302,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
             VersionListBorder.BeginAnimation(MarginProperty, animation);
             ReturnPanel.BeginAnimation(MarginProperty, animation1);
 
-            setting.MinecraftVersion = version.Id;
+            setting.MinecraftVersionId = version.Id;
             File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
         }
 
@@ -341,21 +341,22 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                     string javaPath = null;
                     var version = VersionListView.SelectedItem as GameEntry;
 
-                    if (setting.Java == "<Auto>" || setting.Java == null || setting.Java == string.Empty)
+                    if (setting.Java.JavaPath == "<Auto>" || setting.Java == null || setting.Java.JavaPath == string.Empty)
                     {
                         JavaFetcher javaFetcher = new JavaFetcher();
                         var javas = JsonConvert.DeserializeObject<List<JavaEntry>>(File.ReadAllText(Const.JavaDataPath));
-                        javas.ForEach(item =>
+                        foreach (var item in javas)
                         {
                             if (item.JavaSlugVersion == version.JavaVersion)
                             {
                                 javaPath = item.JavaPath;
+                                break;
                             }
-                        });
+                        }
                     }
                     else
                     {
-                        javaPath = setting.Java;
+                        javaPath = setting.Java.JavaPath;
                     }
 
                     if (!string.IsNullOrEmpty(javaPath))
@@ -378,24 +379,38 @@ namespace YMCL.Main.UI.Main.Pages.Launch
 
                         await Task.Run(async () =>
                         {
-                            var gameProcessWatcher = await launcher.LaunchAsync(version.Id);
+                            var gameProcessWatcher = new IGameProcessWatcher();
+                            gameProcessWatcher = await launcher.LaunchAsync(version.Id);
 
-
-                            await Dispatcher.BeginInvoke(() =>
+                            gameProcessWatcher.Exited += (sender, args) =>
                             {
-                                gameProcessWatcher.Exited += (sender, args) =>
-                                {
-                                    MessageBoxX.Show(args.ToString(), "Yu Minecraft Launcher");
-                                };
+                                Dispatcher.BeginInvoke(() =>
+                               {
+                                   Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_GameExit"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+                               });
+                            };
 
-                                Toast.Show(message: "Finish", position: ToastPosition.Top, window: Const.Window.mainWindow);
+                            gameProcessWatcher.OutputLogReceived += (sender, args) =>
+                            {
+                                Debug.WriteLine(args.Text);
+                            };
+
+                            await Dispatcher.BeginInvoke(async () =>
+                            {
+                                Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_FinishLaunch"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+
+                                await gameProcessWatcher.Process.WaitForExitAsync();
+
+                                Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_FinishLaunch"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+
+                                Debug.WriteLine("-------------------------------- Launched");
                             });
 
                         });
                     }
                     else
                     {
-                        if (setting.Java == "<Auto>" || setting.Java == null || setting.Java == string.Empty)
+                        if (setting.Java.JavaPath == "<Auto>" || setting.Java == null || setting.Java.JavaPath == string.Empty)
                         {
                             Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_CannotFandRightJava") + version.JavaVersion, position: ToastPosition.Top, window: Const.Window.mainWindow);
                         }
@@ -415,6 +430,14 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                 Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_AccountError"), position: ToastPosition.Top, window: Const.Window.mainWindow);
             }
 
+        }
+
+        private void Process_Exited(object? sender, EventArgs e)
+        {
+            Dispatcher.BeginInvoke(() =>
+            {
+                Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_GameExit"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+            });
         }
     }
 }

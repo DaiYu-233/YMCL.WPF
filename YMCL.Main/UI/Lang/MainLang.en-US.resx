@@ -321,4 +321,13 @@
   <data name="Launch_LaunchGame_Click_CannotFandRightJava" xml:space="preserve">
     <value>YMCL can't find the Java you need right now: Java</value>
   </data>
+  <data name="Launch_LaunchGame_Click_FinishLaunch" xml:space="preserve">
+    <value>Launch complete, waiting for the game window to appear</value>
+  </data>
+  <data name="Launch_LaunchGame_Click_GameExit" xml:space="preserve">
+    <value>Game exited</value>
+  </data>
+  <data name="Launch_LaunchGame_Click_LaunchSuccess" xml:space="preserve">
+    <value>Launch successfully</value>
+  </data>
 </root>
