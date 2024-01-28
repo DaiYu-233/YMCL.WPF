@@ -7,9 +7,10 @@ namespace YMCL.Main.UI.Main.Pages.Setting
     public partial class Setting : Page
     {
 
-        Pages.Launcher.Launcher launcher = new();
+        Pages.Personalize.Personalize launcher = new();
         Pages.Launch.Launch launch = new();
         Pages.Account.Account account = new();
+        Pages.Launcher.Launcher about = new();
 
         public Setting()
         {
@@ -30,6 +31,10 @@ namespace YMCL.Main.UI.Main.Pages.Setting
             if (Account.IsSelected)
             {
                 MainFrame.Content = account;
+            }
+            if(About.IsSelected)
+            {
+                MainFrame.Content= about;
             }
         }
     }

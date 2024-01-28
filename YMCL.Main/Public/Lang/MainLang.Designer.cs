@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace YMCL.Main.UI.Lang {
+namespace YMCL.Main.Public.Lang {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace YMCL.Main.UI.Lang {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("YMCL.Main.UI.Lang.MainLang", typeof(MainLang).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("YMCL.Main.Public.Lang.MainLang", typeof(MainLang).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -205,6 +205,132 @@ namespace YMCL.Main.UI.Lang {
         }
         
         /// <summary>
+        ///   查找类似 参数错误 的本地化字符串。
+        /// </summary>
+        public static string ArgsError {
+            get {
+                return ResourceManager.GetString("ArgsError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 开始下载更新 的本地化字符串。
+        /// </summary>
+        public static string BeginUpdate {
+            get {
+                return ResourceManager.GetString("BeginUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 检查更新 的本地化字符串。
+        /// </summary>
+        public static string CheckUpdate {
+            get {
+                return ResourceManager.GetString("CheckUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 检查更新失败 的本地化字符串。
+        /// </summary>
+        public static string CheckUpdateFailed {
+            get {
+                return ResourceManager.GetString("CheckUpdateFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 深色 的本地化字符串。
+        /// </summary>
+        public static string Dark {
+            get {
+                return ResourceManager.GetString("Dark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 色彩模式 的本地化字符串。
+        /// </summary>
+        public static string DisplayTheme {
+            get {
+                return ResourceManager.GetString("DisplayTheme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 下载失败 的本地化字符串。
+        /// </summary>
+        public static string DownloadFail {
+            get {
+                return ResourceManager.GetString("DownloadFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 下载源 的本地化字符串。
+        /// </summary>
+        public static string DownloadSource {
+            get {
+                return ResourceManager.GetString("DownloadSource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 下载更新 的本地化字符串。
+        /// </summary>
+        public static string DownloadUpdate {
+            get {
+                return ResourceManager.GetString("DownloadUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 发现新版本，是否下载更新？ 的本地化字符串。
+        /// </summary>
+        public static string DownloadUpdateQuestion {
+            get {
+                return ResourceManager.GetString("DownloadUpdateQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 发现新版本 的本地化字符串。
+        /// </summary>
+        public static string FindNewVersion {
+            get {
+                return ResourceManager.GetString("FindNewVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 更新下载完成 的本地化字符串。
+        /// </summary>
+        public static string FinishUpdate {
+            get {
+                return ResourceManager.GetString("FinishUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 跟随系统 的本地化字符串。
+        /// </summary>
+        public static string FollowSystem {
+            get {
+                return ResourceManager.GetString("FollowSystem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 YMCL 以 GPL-3.0 协议开放源代码，可以修改且分发，但不得删除原作品的标记，修改后的作品必须也采用 GPL 协议进行开源 的本地化字符串。
+        /// </summary>
+        public static string GPL3Text {
+            get {
+                return ResourceManager.GetString("GPL3Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 连接中 的本地化字符串。
         /// </summary>
         public static string InitializeWindow_Connecting {
@@ -309,6 +435,15 @@ namespace YMCL.Main.UI.Lang {
         public static string InitializeWindow_Title_Download {
             get {
                 return ResourceManager.GetString("InitializeWindow_Title_Download", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 当前已是最新版本 的本地化字符串。
+        /// </summary>
+        public static string LatestVersion {
+            get {
+                return ResourceManager.GetString("LatestVersion", resourceCulture);
             }
         }
         
@@ -475,7 +610,7 @@ namespace YMCL.Main.UI.Lang {
         }
         
         /// <summary>
-        ///   查找类似 未选择游戏核心 的本地化字符串。
+        ///   查找类似 未选择游戏版本或未找到此版本 的本地化字符串。
         /// </summary>
         public static string Launch_LaunchGame_Click_NoChooseGame {
             get {
@@ -610,6 +745,15 @@ namespace YMCL.Main.UI.Lang {
         }
         
         /// <summary>
+        ///   查找类似 浅色 的本地化字符串。
+        /// </summary>
+        public static string Light {
+            get {
+                return ResourceManager.GetString("Light", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似    下载 的本地化字符串。
         /// </summary>
         public static string MainWindow_NavigationDownload {
@@ -655,7 +799,25 @@ namespace YMCL.Main.UI.Lang {
         }
         
         /// <summary>
-        ///   查找类似 关于 的本地化字符串。
+        ///   查找类似 最大下载线程 的本地化字符串。
+        /// </summary>
+        public static string MaximumDownloadThread {
+            get {
+                return ResourceManager.GetString("MaximumDownloadThread", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 开源项目使用表 的本地化字符串。
+        /// </summary>
+        public static string OpenSourceProjectUsageTable {
+            get {
+                return ResourceManager.GetString("OpenSourceProjectUsageTable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 启动器 的本地化字符串。
         /// </summary>
         public static string Setting_Navigation_About {
             get {
@@ -691,11 +853,29 @@ namespace YMCL.Main.UI.Lang {
         }
         
         /// <summary>
-        ///   查找类似 启动器 的本地化字符串。
+        ///   查找类似 个性化 的本地化字符串。
         /// </summary>
         public static string Setting_Navigation_Launcher {
             get {
                 return ResourceManager.GetString("Setting_Navigation_Launcher", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 任务进度 的本地化字符串。
+        /// </summary>
+        public static string TaskProgressWindow_Title {
+            get {
+                return ResourceManager.GetString("TaskProgressWindow_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 更新内容 的本地化字符串。
+        /// </summary>
+        public static string UpdateInfo {
+            get {
+                return ResourceManager.GetString("UpdateInfo", resourceCulture);
             }
         }
     }

@@ -118,216 +118,276 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="InitializeWindow_Title" xml:space="preserve">
-    <value>Инициализация YMCL</value>
+    <value>YMCL初期化</value>
   </data>
   <data name="InitializeWindow_Title_Download" xml:space="preserve">
-    <value>YMCL - Загрузите ресурсы</value>
+    <value>YMCL -リソースをダウンロード</value>
   </data>
   <data name="InitializeWindow_NextSetpBtn" xml:space="preserve">
-    <value>Cледующий шаг</value>
+    <value>次へ</value>
   </data>
   <data name="InitializeWindow_DownloadFinish" xml:space="preserve">
-    <value>Загрузка завершена</value>
+    <value>ダウンロードが完了しました</value>
   </data>
   <data name="InitializeWindow_Download_AdministratorPermissionRequired" xml:space="preserve">
-    <value>Для инициализации YMCL требуются права администратора, Нажмите OK, чтобы перезапустить программу с правами администратора</value>
+    <value>YMCLを初期化するには管理者権限が必要です，[OK]をクリックして、管理者権限でプログラムを再起動してください</value>
   </data>
   <data name="InitializeWindow_DownloadWaiting" xml:space="preserve">
-    <value>Ожидание</value>
+    <value>待っています</value>
   </data>
   <data name="InitializeWindow_InitializeFinish" xml:space="preserve">
-    <value>Инициализация YMCL завершена</value>
+    <value>YMCLの初期化が完了しました</value>
   </data>
   <data name="InitializeWindow_Connecting" xml:space="preserve">
-    <value>Соединение</value>
+    <value>接続しています</value>
   </data>
   <data name="InitializeWindow_ConnectionFailed" xml:space="preserve">
-    <value>Не удалось подключить</value>
+    <value>接続に失敗しました</value>
   </data>
   <data name="InitializeWindow_ConnectionTimeout" xml:space="preserve">
-    <value>Истекло время ожидания ответа</value>
+    <value>接続がタイムアウトしました。再接続してください</value>
   </data>
   <data name="MainWindow_Title" xml:space="preserve">
     <value>YMCL</value>
   </data>
   <data name="InitializeWindow_FailedToObtainAdministratorPrivileges" xml:space="preserve">
-    <value>Не удалось получить права администратора, не удалось инициализировать YMCL</value>
+    <value>管理者権限の取得に失敗しました。YMCLの初期化に失敗しました</value>
   </data>
   <data name="MainWindow_NavigationLaunch" xml:space="preserve">
-    <value>   Пуск</value>
+    <value>   起動</value>
   </data>
   <data name="MainWindow_NavigationSetting" xml:space="preserve">
-    <value>   устанавливать</value>
+    <value>   設定</value>
   </data>
   <data name="MainWindow_NavigationDownload" xml:space="preserve">
-    <value>   загружать</value>
+    <value>   ダウンロード</value>
   </data>
   <data name="MainWindow_NavigationMore" xml:space="preserve">
-    <value>   Больше</value>
+    <value>   より多く</value>
   </data>
   <data name="Setting_Navigation_Launch" xml:space="preserve">
-    <value>Пуск</value>
+    <value>起動</value>
   </data>
   <data name="Setting_Navigation_Account" xml:space="preserve">
-    <value>Аккаунты</value>
+    <value>アカウント</value>
   </data>
   <data name="Setting_Navigation_Download" xml:space="preserve">
-    <value>загружать</value>
-  </data>
-  <data name="Setting_Navigation_Launcher" xml:space="preserve">
-    <value>Пусковая установка</value>
-  </data>
-  <data name="Setting_Navigation_About" xml:space="preserve">
-    <value>относительно</value>
+    <value>ダウンロード</value>
   </data>
   <data name="Launcher_SettingItem_Language" xml:space="preserve">
-    <value>язык</value>
+    <value>言語</value>
   </data>
   <data name="Launcher_SettingItem_CustomMainPage" xml:space="preserve">
-    <value>Настройте домашний экран</value>
+    <value>ホーム画面をカスタマイズ</value>
   </data>
   <data name="Launcher_SettingItem_EditCustomHomePage" xml:space="preserve">
-    <value>редактор</value>
+    <value>編集</value>
   </data>
   <data name="App_UnhandledException" xml:space="preserve">
-    <value>Необработанное исключение произошло в YMCL, произойдет сбой и выход</value>
+    <value>YMCLで未処理の例外が発生しました。クラッシュして終了します</value>
   </data>
   <data name="Launcher_UseCustomHomePageToggle_Toggled_On_Info" xml:space="preserve">
-    <value>Пользовательские страницы будут включены, YMCL не гарантирует безопасность пользовательского контента, небезопасный пользовательский контент может привести к атаке на устройства и т. д</value>
+    <value>カスタムページが有効になります。YMCLはカスタムコンテンツのセキュリティを保証しません。安全でないカスタムコンテンツは、デバイスが攻撃される可能性があります</value>
   </data>
   <data name="Launch_Launch_CustomPageSourceError" xml:space="preserve">
-    <value>Ошибка исходного кода пользовательской страницы (XAML)</value>
+    <value>カスタムページ（ Xaml ）ソースコードエラー</value>
   </data>
   <data name="Launch_MinecraftFolder" xml:space="preserve">
-    <value>Папка Minecraft</value>
+    <value>Minecraftフォルダー</value>
   </data>
   <data name="Launch_AddMinecraftFolder" xml:space="preserve">
-    <value>Добавить папку</value>
+    <value>フォルダーを追加</value>
   </data>
   <data name="Launch_DelMinecraftFolder" xml:space="preserve">
-    <value>Удалить выбранное</value>
+    <value>選択したものを削除</value>
   </data>
   <data name="Launch_AddMinecraftFolder_Click_NeedMinecraftFolder" xml:space="preserve">
-    <value>Необходимо выбрать папку .minecraft</value>
+    <value> .minecraft フォルダーを選択する必要があります</value>
   </data>
   <data name="Launch_AddMinecraftFolder_Click_ExistsMinecraftFolder" xml:space="preserve">
-    <value>Эта папка уже существует</value>
+    <value>このフォルダーは既に存在します</value>
   </data>
   <data name="Launch_AutoFindJava" xml:space="preserve">
-    <value>Автоматическое сканирование</value>
+    <value>自動スキャン</value>
   </data>
   <data name="Launch_ManualAddJava" xml:space="preserve">
-    <value>Добавить вручную</value>
+    <value>手動で追加してください</value>
   </data>
   <data name="Launch_ManualAddJava_Click_ExistsJava" xml:space="preserve">
-    <value>Эта Java уже существует</value>
+    <value>このJavaはすでに存在します</value>
   </data>
   <data name="Launch_AutoFindJava_Click_ScanCompleted" xml:space="preserve">
-    <value>Сканирование завершено: {|} Java найдена, из которых {|} уже существуют в списке</value>
+    <value>スキャン完了：{|} 個のJavaが見つかりました。そのうち {|} 個は既にリストに存在しています</value>
   </data>
   <data name="Account_AddAccount" xml:space="preserve">
-    <value>Добавить новую учетную запись</value>
+    <value>新しいアカウントを追加</value>
   </data>
   <data name="Account_DelAccount" xml:space="preserve">
-    <value>Удалите выбранную учетную запись</value>
+    <value>選択したアカウントを削除します</value>
   </data>
   <data name="Account_Cancel" xml:space="preserve">
-    <value>Отменить</value>
+    <value>キャンセル</value>
   </data>
   <data name="Account_Offline" xml:space="preserve">
-    <value>Войти в автономном режиме</value>
+    <value>オフラインでログイン</value>
   </data>
   <data name="Account_Microsoft" xml:space="preserve">
-    <value>Microsoft Login</value>
+    <value>Microsoftログイン</value>
   </data>
   <data name="Account_Third_Party" xml:space="preserve">
-    <value>Сторонний вход</value>
+    <value>サードパーティのログイン</value>
   </data>
   <data name="Account_UserName" xml:space="preserve">
-    <value>Имя пользователя игры</value>
+    <value>ゲームユーザー名</value>
   </data>
   <data name="Account_Sure" xml:space="preserve">
-    <value>Подтвердить</value>
+    <value>確認</value>
   </data>
   <data name="Account_VerificationCode" xml:space="preserve">
-    <value>Проверьте код</value>
+    <value>コードを確認してください</value>
   </data>
   <data name="Account_Loading" xml:space="preserve">
-    <value>Загрузка...</value>
+    <value>読み込み中...</value>
   </data>
   <data name="Account_CopyCodeAndOpenBrowser" xml:space="preserve">
-    <value>Скопируйте код и откройте браузер</value>
+    <value>コードをコピーしてブラウザを開きます</value>
   </data>
   <data name="Account_Password" xml:space="preserve">
-    <value>Пароль учетной записи</value>
+    <value>アカウントパスワード</value>
   </data>
   <data name="Account_ServerUrl" xml:space="preserve">
-    <value>Адрес сервера аутентификации</value>
+    <value>認証サーバーアドレス</value>
   </data>
   <data name="Account_Email" xml:space="preserve">
-    <value>E-mail</value>
+    <value>メールアドレス</value>
   </data>
   <data name="Account_OfflineAccountAddBtn_Click_OfflineUserNameNull" xml:space="preserve">
-    <value>Имя пользователя не может быть пустым</value>
+    <value>ユーザー名を空にすることはできません</value>
   </data>
   <data name="Launch_MaxMem" xml:space="preserve">
-    <value>Максимальный объем оперативной памяти</value>
+    <value>最大実行メモリ</value>
   </data>
   <data name="Launch_ImportPack" xml:space="preserve">
-    <value>Импортируйте интеграционный пакет</value>
+    <value>インテグレーションパッケージをインポート</value>
   </data>
   <data name="Launch_Refresh" xml:space="preserve">
-    <value>Обновить</value>
+    <value>リフレッシュ</value>
   </data>
   <data name="Launch_VersionList" xml:space="preserve">
-    <value>Список версий</value>
+    <value>バージョンリスト</value>
   </data>
   <data name="Launch_ToVersionList" xml:space="preserve">
-    <value> Список версий </value>
+    <value> バージョンリスト </value>
   </data>
   <data name="Launch_ToVersionSetting" xml:space="preserve">
-    <value> Настройки версии </value>
+    <value> バージョン設定 </value>
   </data>
   <data name="Launch_LaunchGame" xml:space="preserve">
-    <value>Запустите игру</value>
+    <value>ゲームを起動してください</value>
   </data>
   <data name="Launch_NoChooseGame" xml:space="preserve">
-    <value>&lt; Ядро игры не выбрано &gt;</value>
+    <value>&lt;ゲームコアが選択されていません&gt;</value>
   </data>
   <data name="Launch_LoadMinecraftVersion_GetVersionListError" xml:space="preserve">
-    <value>Ошибка при получении списка версий</value>
+    <value>バージョンリストの取得中にエラーが発生しました</value>
   </data>
   <data name="Launch_AutoSelectJava" xml:space="preserve">
-    <value>Пусть YMCL выберет правильную Java</value>
+    <value>YMCLに適切なJavaを選ばせましょう</value>
   </data>
   <data name="InitializeWindow_DownloadHelp" xml:space="preserve">
-    <value>Не можете завершить загрузку? Нажмите, чтобы получить помощь</value>
+    <value>ダウンロードを完了できませんか？ヘルプをクリックしてください</value>
   </data>
   <data name="Launch_LaunchGame_Click_AccountError" xml:space="preserve">
-    <value>Ошибка аккаунта</value>
-  </data>
-  <data name="Launch_LaunchGame_Click_NoChooseGame" xml:space="preserve">
-    <value>Ядро игры не выбрано</value>
+    <value>アカウントエラー</value>
   </data>
   <data name="Launch_LaunchGame_Click_JavaError" xml:space="preserve">
-    <value>Ошибка Java</value>
+    <value>Javaエラー</value>
   </data>
   <data name="Launch_AloneCore" xml:space="preserve">
-    <value>Версия изолирована</value>
+    <value>バージョンが分離されました</value>
   </data>
   <data name="Launch_LaunchGame_Click_Launched" xml:space="preserve">
-    <value>Запуск завершен</value>
+    <value>スタートアップが完了しました</value>
   </data>
   <data name="Launch_LaunchGame_Click_CannotFandRightJava" xml:space="preserve">
-    <value>YMCL не может найти нужную вам Java прямо сейчас: Java</value>
+    <value>YMCLは現在必要なJavaを見つけることができません： Java</value>
   </data>
   <data name="Launch_LaunchGame_Click_FinishLaunch" xml:space="preserve">
-    <value>Запуск завершен, ждем появления игрового окна</value>
+    <value>起動が完了し、ゲームウィンドウが表示されるのを待っています</value>
   </data>
   <data name="Launch_LaunchGame_Click_GameExit" xml:space="preserve">
-    <value>Игра завершена</value>
+    <value>ゲームが終了しました</value>
   </data>
   <data name="Launch_LaunchGame_Click_LaunchSuccess" xml:space="preserve">
-    <value>Успешно запущено</value>
+    <value>正常に開始しました</value>
+  </data>
+  <data name="OpenSourceProjectUsageTable" xml:space="preserve">
+    <value>オープンソースプロジェクト使用シート</value>
+  </data>
+  <data name="CheckUpdate" xml:space="preserve">
+    <value>アップデートを確認する</value>
+  </data>
+  <data name="GPL3Text" xml:space="preserve">
+    <value>YMCLはGPL-3.0プロトコルの下でオープンソースです。変更および配布することはできますが、元の作品のマークは削除してはなりません。変更された作品もGPLの下でオープンソースでなければなりません</value>
+  </data>
+  <data name="FindNewVersion" xml:space="preserve">
+    <value>新しいバージョンを発見する</value>
+  </data>
+  <data name="LatestVersion" xml:space="preserve">
+    <value>あなたは現在最新です</value>
+  </data>
+  <data name="UpdateInfo" xml:space="preserve">
+    <value>コンテンツの更新</value>
+  </data>
+  <data name="DownloadUpdateQuestion" xml:space="preserve">
+    <value>新しいバージョンが見つかりました。アップデートをダウンロードしますか？</value>
+  </data>
+  <data name="TaskProgressWindow_Title" xml:space="preserve">
+    <value>ミッションの進行状況</value>
+  </data>
+  <data name="DownloadUpdate" xml:space="preserve">
+    <value>アップデートをダウンロード</value>
+  </data>
+  <data name="CheckUpdateFailed" xml:space="preserve">
+    <value>アップデートの確認に失敗しました</value>
+  </data>
+  <data name="BeginUpdate" xml:space="preserve">
+    <value>アップデートのダウンロードを開始しましょう</value>
+  </data>
+  <data name="FinishUpdate" xml:space="preserve">
+    <value>アップデートのダウンロードが完了しました</value>
+  </data>
+  <data name="DownloadFail" xml:space="preserve">
+    <value>ダウンロード失敗</value>
+  </data>
+  <data name="Setting_Navigation_Launcher" xml:space="preserve">
+    <value>パーソナライズ</value>
+  </data>
+  <data name="Setting_Navigation_About" xml:space="preserve">
+    <value>ランチャー</value>
+  </data>
+  <data name="DisplayTheme" xml:space="preserve">
+    <value>カラーモード</value>
+  </data>
+  <data name="FollowSystem" xml:space="preserve">
+    <value>システムに従う</value>
+  </data>
+  <data name="Light" xml:space="preserve">
+    <value>薄い色</value>
+  </data>
+  <data name="Dark" xml:space="preserve">
+    <value>深い色合い</value>
+  </data>
+  <data name="DownloadSource" xml:space="preserve">
+    <value>ソースをダウンロード</value>
+  </data>
+  <data name="MaximumDownloadThread" xml:space="preserve">
+    <value>最大ダウンロードスレッド数</value>
+  </data>
+  <data name="Launch_LaunchGame_Click_NoChooseGame" xml:space="preserve">
+    <value>ゲームバージョンが選択されていないか、このバージョンが見つかりません</value>
+  </data>
+  <data name="ArgsError" xml:space="preserve">
+    <value>パラメータエラー</value>
   </data>
 </root>

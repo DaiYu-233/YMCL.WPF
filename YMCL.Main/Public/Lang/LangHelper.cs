@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using YMCL.Main.Public;
 using YMCL.Main.Public.Class;
 
-namespace YMCL.Main.UI.Lang
+namespace YMCL.Main.Public.Lang
 {
     public class LangHelper : INotifyPropertyChanged
     {

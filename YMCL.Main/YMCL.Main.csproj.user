@@ -9,18 +9,39 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="UI\Main\Pages\Setting\Pages\Download\Download.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UI\Main\Pages\Setting\Pages\Launcher\Launcher.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UI\Main\Pages\Setting\Pages\Account\Account.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UI\Main\Pages\Setting\Pages\Launch\Launch.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UI\TaskProgress\TaskProgressWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Public\Style\Dark.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\Main\Pages\Setting\Pages\Download\Download.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\Main\Pages\Setting\Pages\Launcher\Launcher.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="UI\Main\Pages\Setting\Pages\Account\Account.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UI\Main\Pages\Setting\Pages\Launch\Launch.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\TaskProgress\TaskProgressWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

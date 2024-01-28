@@ -31,6 +31,10 @@ namespace YMCL.Main.Public
             }
         }
 
+        public static string Version { get; } = "1.0.0.20240125_Alpha";
+        public static string UpdaterId { get; } = "97B62D3AD1724EFA9AFC7A8D8971BBB1";
+
+
         //Path
         public static string DataRootPath { get; } = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\DaiYu.YMCL";
         public static string PublicDataRootPath { get; } = "C:\\ProgramData\\DaiYu.YMCL";
@@ -39,5 +43,7 @@ namespace YMCL.Main.Public
         public static string AccountDataPath { get; } = DataRootPath + "\\YMCL.Account.DaiYu";
         public static string MinecraftFolderDataPath { get; } = DataRootPath + "\\YMCL.MinecraftFolder.DaiYu";
         public static string LaunchPageXamlPath { get; } = DataRootPath + "\\CustomPage\\YMCL.LaunchPageXaml.DaiYu";
+        public static string YMCLPathData { get; } = DataRootPath + "\\YMCLPath.DaiYu";
+        public static string YMCLBat { get; } = PublicDataRootPath + "\\launch.bat";
     }
 }

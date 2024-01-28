@@ -1,12 +1,12 @@
-﻿using Microsoft.CodeAnalysis.CSharp.Scripting;
-using Microsoft.CodeAnalysis.Scripting;
-using MinecraftLaunch.Classes.Interfaces;
+﻿using MinecraftLaunch.Classes.Interfaces;
 using MinecraftLaunch.Classes.Models.Game;
 using MinecraftLaunch.Classes.Models.Launch;
 using MinecraftLaunch.Components.Authenticator;
 using MinecraftLaunch.Components.Fetcher;
 using MinecraftLaunch.Components.Launcher;
 using MinecraftLaunch.Components.Resolver;
+using MinecraftLaunch.Components.Watcher;
+using MinecraftLaunch.Extensions;
 using Newtonsoft.Json;
 using Panuon.WPF.UI;
 using System;
@@ -20,8 +20,9 @@ using System.Windows.Markup;
 using System.Windows.Media.Animation;
 using YMCL.Main.Public;
 using YMCL.Main.UI.Initialize;
-using YMCL.Main.UI.Lang;
+using YMCL.Main.Public.Lang;
 using MessageBoxIcon = Panuon.WPF.UI.MessageBoxIcon;
+using YMCL.Main.Public.Class;
 
 namespace YMCL.Main.UI.Main.Pages.Launch
 {
@@ -318,14 +319,35 @@ namespace YMCL.Main.UI.Main.Pages.Launch
             LoadMinecraftVersion();
         }
 
-        private async void LaunchGame_Click(iNKORE.UI.WPF.Modern.Controls.SplitButton sender, iNKORE.UI.WPF.Modern.Controls.SplitButtonClickEventArgs args)
+
+
+        private void LaunchGame_Click(iNKORE.UI.WPF.Modern.Controls.SplitButton sender, iNKORE.UI.WPF.Modern.Controls.SplitButtonClickEventArgs args)
         {
+            var version = VersionListView.SelectedItem as GameEntry;
+            if (version == null)
+            {
+                Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_NoChooseGame"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+                GameCoreText.Text = LangHelper.Current.GetText("Launch_NoChooseGame");
+                return;
+            }
+            LaunchClient(version.Id);
+        }
+
+        public async void LaunchClient(string versionId, string minecraftPath = "")
+        {
+            var mcPath = minecraftPath;
+            if (string.IsNullOrEmpty(versionId))
+            {
+                Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_NoChooseGame"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+                GameCoreText.Text = LangHelper.Current.GetText("Launch_NoChooseGame");
+                return;
+            }
             var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
             var accountJson = JsonConvert.DeserializeObject<List<Public.Class.AccountInfo>>(File.ReadAllText(Const.AccountDataPath))[setting.AccountSelectionIndex];
             MinecraftLaunch.Classes.Models.Auth.Account account = null;
             if (accountJson != null)
             {
-                if (accountJson.AccountType == "Offline")
+                if (accountJson.AccountType == SettingItem.AccountType.Offline)
                 {
                     if (accountJson.Name != null && accountJson.Name != string.Empty)
                     {
@@ -336,10 +358,21 @@ namespace YMCL.Main.UI.Main.Pages.Launch
             }
             if (account != null)
             {
-                if (VersionListView.SelectedItem != null)
+                if (!string.IsNullOrEmpty(mcPath))
+                {
+                    mcPath = setting.MinecraftFolder;
+                }
+                var VersionReadied = false;
+                var idList = new List<string>();
+                var resolver = new GameResolver(mcPath);
+                resolver.GetGameEntitys().ToList().ForEach(ver =>
+                {
+                    idList.Add(ver.Id);
+                });
+                if (idList.Contains(versionId))
                 {
                     string javaPath = null;
-                    var version = VersionListView.SelectedItem as GameEntry;
+                    var version = resolver.GetGameEntity(versionId);
 
                     if (setting.Java.JavaPath == "<Auto>" || setting.Java == null || setting.Java.JavaPath == string.Empty)
                     {
@@ -374,7 +407,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                             },
                             IsEnableIndependencyCore = setting.AloneCore
                         };
-                        var resolver = new GameResolver(setting.MinecraftFolder);
+
                         Launcher launcher = new(resolver, config);
 
                         await Task.Run(async () =>
@@ -385,9 +418,9 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                             gameProcessWatcher.Exited += (sender, args) =>
                             {
                                 Dispatcher.BeginInvoke(() =>
-                               {
-                                   Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_GameExit"), position: ToastPosition.Top, window: Const.Window.mainWindow);
-                               });
+                                {
+                                    Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_GameExit"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+                                });
                             };
 
                             gameProcessWatcher.OutputLogReceived += (sender, args) =>
@@ -398,12 +431,6 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                             await Dispatcher.BeginInvoke(async () =>
                             {
                                 Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_FinishLaunch"), position: ToastPosition.Top, window: Const.Window.mainWindow);
-
-                                await gameProcessWatcher.Process.WaitForExitAsync();
-
-                                Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_FinishLaunch"), position: ToastPosition.Top, window: Const.Window.mainWindow);
-
-                                Debug.WriteLine("-------------------------------- Launched");
                             });
 
                         });
@@ -423,13 +450,13 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                 else
                 {
                     Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_NoChooseGame"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+                    GameCoreText.Text = LangHelper.Current.GetText("Launch_NoChooseGame");
                 }
             }
             else
             {
                 Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_AccountError"), position: ToastPosition.Top, window: Const.Window.mainWindow);
             }
-
         }
 
         private void Process_Exited(object? sender, EventArgs e)

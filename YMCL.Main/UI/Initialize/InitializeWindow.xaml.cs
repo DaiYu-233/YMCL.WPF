@@ -7,7 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using YMCL.Main.Public;
-using YMCL.Main.UI.Lang;
+using YMCL.Main.Public.Lang;
 using YMCL.Main.Public.Class;
 using YMCL.Main.UI.Main;
 using Application = System.Windows.Application;
@@ -25,6 +25,8 @@ using System.Timers;
 using Path = System.IO.Path;
 using Cursors = System.Windows.Input.Cursors;
 using Size = System.Windows.Size;
+using Microsoft.Win32;
+using System.Windows.Shapes;
 
 namespace YMCL.Main.UI.Initialize
 {
@@ -370,6 +372,24 @@ namespace YMCL.Main.UI.Initialize
                         }
                     }
                 }
+
+                var bat = "set /p ymcl=<%USERPROFILE%\\AppData\\Roaming\\DaiYu.YMCL\\YMCLPath.DaiYu\r\necho %ymcl%\r\necho %1\r\nstart %ymcl% %1";
+                File.WriteAllText(Const.YMCLBat, bat);
+
+                try { Registry.ClassesRoot.DeleteSubKey("YMCL"); } catch { }
+                try
+                {
+                    RegistryKey keyRoot = Registry.ClassesRoot.CreateSubKey("YMCL", true);
+                    keyRoot.SetValue("", "Yu Minecraft Launcher");
+                    keyRoot.SetValue("URL Protocol", Const.YMCLBat);
+                    RegistryKey registryKeya = Registry.ClassesRoot.OpenSubKey("YMCL", true).CreateSubKey("DefaultIcon");
+                    registryKeya.SetValue("", Const.YMCLBat);
+                    RegistryKey registryKeyb = Registry.ClassesRoot.OpenSubKey("YMCL", true).CreateSubKey(@"shell\open\command");
+                    registryKeyb.SetValue("", $"\"{Const.YMCLBat}\" \"%1\"");
+                }
+                catch { }
+
+
                 if (File.Exists(Path.Combine(Const.PublicDataRootPath, item.Name)) && md5 == item.MD5)
                 {
                     lines[i].Text = LangHelper.Current.GetText("InitializeWindow_DownloadFinish");

@@ -5,7 +5,7 @@ using YMCL.Main.Public.Class;
 using YMCL.Main.Public;
 using System.IO;
 using Panuon.WPF.UI;
-using YMCL.Main.UI.Lang;
+using YMCL.Main.Public.Lang;
 using MinecraftLaunch.Components.Authenticator;
 using MinecraftLaunch.Classes.Models.Auth;
 using System.Diagnostics;
@@ -75,7 +75,7 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Account
                 DateTime now = DateTime.Now;
                 File.WriteAllText(Const.AccountDataPath, JsonConvert.SerializeObject(new List<AccountInfo>() { new AccountInfo
                 {
-                    AccountType = "Offline",
+                    AccountType = SettingItem.AccountType.Offline,
                     AddTime = now.ToString("yyyy-MM-ddTHH:mm:sszzz"),
                     Data = null,
                     Name = "Steve"
@@ -143,7 +143,7 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Account
                 DateTime now = DateTime.Now;
                 accounts.Add(new AccountInfo
                 {
-                    AccountType = "Offline",
+                    AccountType = SettingItem.AccountType.Offline,
                     AddTime = now.ToString("yyyy-MM-ddTHH:mm:sszzz"),
                     Data = null,
                     Name = OfflineUserNameTextBox.Text
@@ -161,7 +161,7 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Account
             {
                 accounts.Add(new AccountInfo()
                 {
-                    AccountType = "Offline",
+                    AccountType = SettingItem.AccountType.Offline,
                     AddTime = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:sszzz"),
                     Name = "Steve",
                     Data = null,
@@ -176,11 +176,13 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Account
         DeviceCodeResponse deviceInfo;
         public async void MicrosoftLogin()
         {
-            //MicrosoftAuthenticator authenticator = new("c06d4d68-7751-4a8a-a2ff-d1b46688f428");
-            //await authenticator.DeviceFlowAuthAsync(dc => {
-            //    //在获取到一次性代码后要执行的代码
-            //    Console.WriteLine(dc.UserCode);
-            //});
+            MicrosoftAuthenticator authenticator = new("c06d4d68-7751-4a8a-a2ff-d1b46688f428");
+            await authenticator.DeviceFlowAuthAsync(dc =>
+            {
+                Debug.WriteLine(dc.UserCode);
+            });
+
+            var userProfile = await authenticator.AuthenticateAsync();
         }
 
         private void CopyCodeAndOpenBrowserBtn_Click(object sender, RoutedEventArgs e)

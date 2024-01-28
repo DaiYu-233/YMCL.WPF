@@ -118,216 +118,276 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="InitializeWindow_Title" xml:space="preserve">
-    <value>YMCL初始化</value>
+    <value>YMCL Initialization</value>
   </data>
   <data name="InitializeWindow_Title_Download" xml:space="preserve">
-    <value>YMCL - 下載資源</value>
+    <value>YMCL Initialization - Download Resources</value>
   </data>
   <data name="InitializeWindow_NextSetpBtn" xml:space="preserve">
-    <value>下一步</value>
+    <value>Next Step</value>
   </data>
   <data name="InitializeWindow_DownloadFinish" xml:space="preserve">
-    <value>下載完成</value>
+    <value>Download completed</value>
   </data>
   <data name="InitializeWindow_Download_AdministratorPermissionRequired" xml:space="preserve">
-    <value>需要管理員權限以初始化YMCL，點選確定使用管理員權限重新啟動程式</value>
+    <value>Administrator privileges are required to initialize YMCL, Click OK to restart the program with administrator privileges</value>
   </data>
   <data name="InitializeWindow_DownloadWaiting" xml:space="preserve">
-    <value>等待中</value>
+    <value>Waiting</value>
   </data>
   <data name="InitializeWindow_InitializeFinish" xml:space="preserve">
-    <value>YMCL初始化完成</value>
+    <value>YMCL initialization complete</value>
   </data>
   <data name="InitializeWindow_Connecting" xml:space="preserve">
-    <value>連接中</value>
+    <value>Connecting</value>
   </data>
   <data name="InitializeWindow_ConnectionFailed" xml:space="preserve">
-    <value>連線失敗</value>
+    <value>Connection Failed</value>
   </data>
   <data name="InitializeWindow_ConnectionTimeout" xml:space="preserve">
-    <value>連線逾時</value>
+    <value>Connection Timeout</value>
   </data>
   <data name="MainWindow_Title" xml:space="preserve">
     <value>YMCL</value>
   </data>
   <data name="InitializeWindow_FailedToObtainAdministratorPrivileges" xml:space="preserve">
-    <value>取得管理員權限失敗，YMCL初始化失敗</value>
+    <value>Failed to get administrator privileges, YMCL initialization failed</value>
   </data>
   <data name="MainWindow_NavigationLaunch" xml:space="preserve">
-    <value>   啟動</value>
+    <value>   Launch</value>
   </data>
   <data name="MainWindow_NavigationSetting" xml:space="preserve">
-    <value>   設置</value>
+    <value>   Settings</value>
   </data>
   <data name="MainWindow_NavigationDownload" xml:space="preserve">
-    <value>   下載</value>
+    <value>   Download</value>
   </data>
   <data name="MainWindow_NavigationMore" xml:space="preserve">
-    <value>   更多</value>
+    <value>   More</value>
   </data>
   <data name="Setting_Navigation_Launch" xml:space="preserve">
-    <value>啟動</value>
+    <value>Launch</value>
   </data>
   <data name="Setting_Navigation_Account" xml:space="preserve">
-    <value>帳戶</value>
+    <value>Account</value>
   </data>
   <data name="Setting_Navigation_Download" xml:space="preserve">
-    <value>下載</value>
-  </data>
-  <data name="Setting_Navigation_Launcher" xml:space="preserve">
-    <value>啟動器</value>
-  </data>
-  <data name="Setting_Navigation_About" xml:space="preserve">
-    <value>關於</value>
+    <value>Download</value>
   </data>
   <data name="Launcher_SettingItem_Language" xml:space="preserve">
-    <value>語言</value>
+    <value>Language</value>
   </data>
   <data name="Launcher_SettingItem_CustomMainPage" xml:space="preserve">
-    <value>自訂主介面</value>
+    <value>Customize the home screen</value>
   </data>
   <data name="Launcher_SettingItem_EditCustomHomePage" xml:space="preserve">
-    <value>編輯</value>
+    <value>Edit</value>
   </data>
   <data name="App_UnhandledException" xml:space="preserve">
-    <value>YMCL發生未處理的異常，將崩潰退出</value>
+    <value>Unhandled exception occurred in YMCL, will crash and exit</value>
   </data>
   <data name="Launcher_UseCustomHomePageToggle_Toggled_On_Info" xml:space="preserve">
-    <value>將啟用自訂頁面，YMCL不保證自訂內容安全性，不安全的自訂內容可能會導致裝置遭受攻擊等</value>
+    <value>Custom pages will be enabled, YMCL does not guarantee the security of custom content, insecure custom content may cause devices to be attacked, etc</value>
   </data>
   <data name="Launch_Launch_CustomPageSourceError" xml:space="preserve">
-    <value>自訂頁面 (Xaml) 原始碼錯誤</value>
+    <value>Custom page (Xaml) source code error</value>
   </data>
   <data name="Launch_MinecraftFolder" xml:space="preserve">
-    <value>Minecraft資料夾</value>
+    <value>Minecraft Folder</value>
   </data>
   <data name="Launch_AddMinecraftFolder" xml:space="preserve">
-    <value>新增資料夾</value>
+    <value>Add Folder</value>
   </data>
   <data name="Launch_DelMinecraftFolder" xml:space="preserve">
-    <value>移除選取項目</value>
+    <value>Remove Selected</value>
   </data>
   <data name="Launch_AddMinecraftFolder_Click_NeedMinecraftFolder" xml:space="preserve">
-    <value>需選擇 .minecraft 資料夾</value>
+    <value>Need to select the .minecraft folder</value>
   </data>
   <data name="Launch_AddMinecraftFolder_Click_ExistsMinecraftFolder" xml:space="preserve">
-    <value>已存在此資料夾</value>
+    <value>This folder already exists</value>
   </data>
   <data name="Launch_AutoFindJava" xml:space="preserve">
-    <value>自動掃描</value>
+    <value>Automatic Scan</value>
   </data>
   <data name="Launch_ManualAddJava" xml:space="preserve">
-    <value>手動添加</value>
+    <value>Added manually</value>
   </data>
   <data name="Launch_ManualAddJava_Click_ExistsJava" xml:space="preserve">
-    <value>已存在此Java</value>
+    <value>This Java already exists</value>
   </data>
   <data name="Launch_AutoFindJava_Click_ScanCompleted" xml:space="preserve">
-    <value>掃描完成：發現 {|} 個Java，其中已有 {|} 個存在列表中</value>
+    <value>Scan Complete: {|} Java found, of which {|} already exist in the list</value>
   </data>
   <data name="Account_AddAccount" xml:space="preserve">
-    <value>新增帳戶</value>
+    <value>Add New Account</value>
   </data>
   <data name="Account_DelAccount" xml:space="preserve">
-    <value>刪除選取帳戶</value>
+    <value>Delete the selected account</value>
   </data>
   <data name="Account_Cancel" xml:space="preserve">
-    <value>取消</value>
+    <value>Cancel</value>
   </data>
   <data name="Account_Offline" xml:space="preserve">
-    <value>離線登入</value>
+    <value>Offline Login</value>
   </data>
   <data name="Account_Microsoft" xml:space="preserve">
-    <value>微軟登入</value>
+    <value>Microsoft Login</value>
   </data>
   <data name="Account_Third_Party" xml:space="preserve">
-    <value>第三方登入</value>
+    <value>The Third-Party Login</value>
   </data>
   <data name="Account_UserName" xml:space="preserve">
-    <value>遊戲用戶名</value>
+    <value>Game username</value>
   </data>
   <data name="Account_Sure" xml:space="preserve">
-    <value>確定</value>
+    <value>OK</value>
   </data>
   <data name="Account_VerificationCode" xml:space="preserve">
-    <value>驗證程式碼</value>
+    <value>Verification Code</value>
   </data>
   <data name="Account_Loading" xml:space="preserve">
-    <value>載入中...</value>
+    <value>Loading...</value>
   </data>
   <data name="Account_CopyCodeAndOpenBrowser" xml:space="preserve">
-    <value>複製程式碼並開啟瀏覽器</value>
+    <value>Copy the code and open your browser</value>
   </data>
   <data name="Account_Password" xml:space="preserve">
-    <value>帳戶密碼</value>
+    <value>Password</value>
   </data>
   <data name="Account_ServerUrl" xml:space="preserve">
-    <value>認證伺服器位址</value>
+    <value>Authentication server</value>
   </data>
   <data name="Account_Email" xml:space="preserve">
-    <value>信箱地址</value>
+    <value>Email</value>
   </data>
   <data name="Account_OfflineAccountAddBtn_Click_OfflineUserNameNull" xml:space="preserve">
-    <value>使用者名稱不可為空</value>
+    <value>Username cannot be empty</value>
   </data>
   <data name="Launch_MaxMem" xml:space="preserve">
-    <value>最大運行記憶體</value>
+    <value>Maximum Running Memory</value>
   </data>
   <data name="Launch_ImportPack" xml:space="preserve">
-    <value>導入整合包</value>
+    <value>Import Package</value>
   </data>
   <data name="Launch_Refresh" xml:space="preserve">
-    <value>刷新</value>
+    <value>Refresh</value>
   </data>
   <data name="Launch_VersionList" xml:space="preserve">
-    <value>版本列表</value>
+    <value>Version List</value>
   </data>
   <data name="Launch_ToVersionList" xml:space="preserve">
-    <value> 版本列表 </value>
+    <value> Version List </value>
   </data>
   <data name="Launch_ToVersionSetting" xml:space="preserve">
-    <value> 版本設定 </value>
+    <value> Version Settings </value>
   </data>
   <data name="Launch_LaunchGame" xml:space="preserve">
-    <value>啟動遊戲</value>
+    <value>Launch</value>
   </data>
   <data name="Launch_NoChooseGame" xml:space="preserve">
-    <value>&lt;未選擇遊戲核心&gt;</value>
+    <value>&lt; No game core selected &gt;</value>
   </data>
   <data name="Launch_LoadMinecraftVersion_GetVersionListError" xml:space="preserve">
-    <value>取得版本清單發生錯誤</value>
+    <value>Error fetching version list</value>
   </data>
   <data name="Launch_AutoSelectJava" xml:space="preserve">
-    <value>讓YMCL選擇合適的Java</value>
+    <value>Let YMCL choose the right Java</value>
   </data>
   <data name="InitializeWindow_DownloadHelp" xml:space="preserve">
-    <value>無法完成下載？點擊查看幫助</value>
+    <value>Can't finish downloading? Click for help</value>
   </data>
   <data name="Launch_LaunchGame_Click_AccountError" xml:space="preserve">
-    <value>帳戶錯誤</value>
-  </data>
-  <data name="Launch_LaunchGame_Click_NoChooseGame" xml:space="preserve">
-    <value>未選擇遊戲核心</value>
+    <value>Account Error</value>
   </data>
   <data name="Launch_LaunchGame_Click_JavaError" xml:space="preserve">
-    <value>Java錯誤</value>
+    <value>Java Error</value>
   </data>
   <data name="Launch_AloneCore" xml:space="preserve">
-    <value>版本隔離</value>
+    <value>Version Isolated</value>
   </data>
   <data name="Launch_LaunchGame_Click_Launched" xml:space="preserve">
-    <value>啟動完成</value>
+    <value>Startup complete</value>
   </data>
   <data name="Launch_LaunchGame_Click_CannotFandRightJava" xml:space="preserve">
-    <value>YMCL無法找到目前需要的Java：Java</value>
+    <value>YMCL can't find the Java you need right now: Java</value>
   </data>
   <data name="Launch_LaunchGame_Click_FinishLaunch" xml:space="preserve">
-    <value>啟動完成，等待遊戲視窗出現</value>
+    <value>Launch complete, waiting for the game window to appear</value>
   </data>
   <data name="Launch_LaunchGame_Click_GameExit" xml:space="preserve">
-    <value>遊戲已退出</value>
+    <value>Game exited</value>
   </data>
   <data name="Launch_LaunchGame_Click_LaunchSuccess" xml:space="preserve">
-    <value>啟動成功</value>
+    <value>Launch successfully</value>
+  </data>
+  <data name="OpenSourceProjectUsageTable" xml:space="preserve">
+    <value>Open Source Project Usage Sheet</value>
+  </data>
+  <data name="CheckUpdate" xml:space="preserve">
+    <value>Check updates now</value>
+  </data>
+  <data name="GPL3Text" xml:space="preserve">
+    <value>The YMCL is open source under the GPL-3.0 protocol. It can be modified and distributed, but the mark of the original work must not be deleted. The modified work must also be open-sourced under the GPL</value>
+  </data>
+  <data name="FindNewVersion" xml:space="preserve">
+    <value>Found new version</value>
+  </data>
+  <data name="LatestVersion" xml:space="preserve">
+    <value>Is currently the latest version</value>
+  </data>
+  <data name="UpdateInfo" xml:space="preserve">
+    <value>Update of Content</value>
+  </data>
+  <data name="DownloadUpdateQuestion" xml:space="preserve">
+    <value>New version found, would you like to download the update?</value>
+  </data>
+  <data name="TaskProgressWindow_Title" xml:space="preserve">
+    <value>Task Progress</value>
+  </data>
+  <data name="DownloadUpdate" xml:space="preserve">
+    <value>Download Update</value>
+  </data>
+  <data name="CheckUpdateFailed" xml:space="preserve">
+    <value>Check update failed</value>
+  </data>
+  <data name="BeginUpdate" xml:space="preserve">
+    <value>Start downloading update</value>
+  </data>
+  <data name="FinishUpdate" xml:space="preserve">
+    <value>Update Download Completed</value>
+  </data>
+  <data name="DownloadFail" xml:space="preserve">
+    <value>Download failed</value>
+  </data>
+  <data name="Setting_Navigation_Launcher" xml:space="preserve">
+    <value>Personalize</value>
+  </data>
+  <data name="Setting_Navigation_About" xml:space="preserve">
+    <value>Launcher</value>
+  </data>
+  <data name="DisplayTheme" xml:space="preserve">
+    <value>Color Mode</value>
+  </data>
+  <data name="FollowSystem" xml:space="preserve">
+    <value>Follow System</value>
+  </data>
+  <data name="Light" xml:space="preserve">
+    <value>Light</value>
+  </data>
+  <data name="Dark" xml:space="preserve">
+    <value>Dark</value>
+  </data>
+  <data name="DownloadSource" xml:space="preserve">
+    <value>Download Source</value>
+  </data>
+  <data name="MaximumDownloadThread" xml:space="preserve">
+    <value>Max Download Threads</value>
+  </data>
+  <data name="Launch_LaunchGame_Click_NoChooseGame" xml:space="preserve">
+    <value>No game version selected or this version not found</value>
+  </data>
+  <data name="ArgsError" xml:space="preserve">
+    <value>Parameter error</value>
   </data>
 </root>

@@ -7,7 +7,7 @@ using System.Security.Principal;
 using System.Windows;
 using YMCL.Main.Public;
 using YMCL.Main.Public.Class;
-using YMCL.Main.UI.Lang;
+using YMCL.Main.Public.Lang;
 using static System.Windows.Forms.DataFormats;
 using MessageBoxIcon = Panuon.WPF.UI.MessageBoxIcon;
 
@@ -37,9 +37,7 @@ namespace YMCL.Main
                 var data = JsonConvert.SerializeObject(obj, Formatting.Indented);
                 File.WriteAllText(Const.SettingDataPath, data);
             }
-
             var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.SettingDataPath));
-
             if (setting.Language == null || setting.Language == "zh-CN")
             {
                 LangHelper.Current.ChangedCulture("");
@@ -48,7 +46,6 @@ namespace YMCL.Main
             {
                 LangHelper.Current.ChangedCulture(setting.Language);
             }
-
             if (!File.Exists(Const.LaunchPageXamlPath) || File.ReadAllText(Const.LaunchPageXamlPath) == null)
             {
                 //Type type = MethodBase.GetCurrentMethod().DeclaringType;
@@ -62,7 +59,6 @@ namespace YMCL.Main
                 //    File.WriteAllText(Const.LaunchPageXamlPath, result);
                 //}
             }
-
             if (!File.Exists(Const.MinecraftFolderDataPath))
             {
                 var minecraftFolder = new List<string>()
@@ -102,23 +98,22 @@ namespace YMCL.Main
                 }
                 File.WriteAllText(Const.MinecraftFolderDataPath, JsonConvert.SerializeObject(minecraftFolder, Formatting.Indented));
             }
-
             if (!File.Exists(Const.JavaDataPath))
             {
                 File.WriteAllText(Const.JavaDataPath, "[]");
             }
-
             if (!File.Exists(Const.AccountDataPath))
             {
                 DateTime now = DateTime.Now;
                 File.WriteAllText(Const.AccountDataPath, JsonConvert.SerializeObject(new List<AccountInfo>() { new AccountInfo
                 {
-                    AccountType = "Offline",
+                    AccountType = SettingItem.AccountType.Offline,
                     AddTime = now.ToString("yyyy-MM-ddTHH:mm:sszzz"),
                     Data = null,
                     Name = "Steve"
                 }}, Formatting.Indented));
             }
+            File.WriteAllText(Const.YMCLPathData, System.Windows.Forms.Application.ExecutablePath);
         }
 
         private void App_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)

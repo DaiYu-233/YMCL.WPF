@@ -49,19 +49,19 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="iNKORE.UI.WPF.Modern" Version="0.9.25.1" />
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Scripting" Version="4.9.0-2.final" />
     <PackageReference Include="MinecraftLaunch" Version="3.0.0-preview8" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="Panuon.WPF.UI" Version="1.1.16.5" />
+    <PackageReference Include="Panuon.WPF.UI" Version="1.1.16.7" />
+    <PackageReference Include="UpdateD" Version="1.0.6" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="UI\Language\MainLang.Designer.cs">
+    <Compile Update="Public\Lang\MainLang.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>MainLang.resx</DependentUpon>
     </Compile>
-    <Compile Update="UI\Lang\MainLang.Designer.cs">
+    <Compile Update="UI\Language\MainLang.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>MainLang.resx</DependentUpon>
@@ -73,7 +73,7 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>MainLang.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="UI\Lang\MainLang.resx">
+    <EmbeddedResource Update="Public\Lang\MainLang.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>MainLang.Designer.cs</LastGenOutput>
     </EmbeddedResource>

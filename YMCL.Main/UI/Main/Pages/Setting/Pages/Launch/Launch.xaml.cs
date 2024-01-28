@@ -8,7 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using YMCL.Main.Public;
 using YMCL.Main.Public.Class;
-using YMCL.Main.UI.Lang;
+using YMCL.Main.Public.Lang;
 
 namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launch
 {

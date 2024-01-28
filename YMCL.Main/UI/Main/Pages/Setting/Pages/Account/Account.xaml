@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:ui="http://schemas.inkore.net/lib/ui/wpf/modern" xmlns:pu="https://opensource.panuon.com/wpf-ui"
       xmlns:local="clr-namespace:YMCL.Main.UI.Main.Pages.Setting.Pages.Account"
-      mc:Ignorable="d" xmlns:properties="clr-namespace:YMCL.Main.UI.Lang"
+      mc:Ignorable="d" xmlns:properties="clr-namespace:YMCL.Main.Public.Lang"
       Title="Account">
     <Page.Triggers>
         <EventTrigger RoutedEvent="Page.Loaded">
@@ -46,8 +46,8 @@
         </Border>
         <ui:ClippingBorder CornerRadius="8,8,8,8" Visibility="Hidden" >
             <Grid>
-                <ui:ContentDialog x:Name="LoginTypeSelectionDialog" BorderThickness="8" FontFamily="{DynamicResource Font}" CornerRadius="8,8,8,8" >
-                    <Grid>
+                <ui:ContentDialog x:Name="LoginTypeSelectionDialog" FontFamily="{DynamicResource Font}" CornerRadius="8,8,8,8" Background="{x:Null}" >
+                    <Grid Visibility="Visible">
                         <ComboBox x:Name="LoginTypeComboBox" Width="320" FontFamily="{DynamicResource Font}" SelectedIndex="0" FontSize="14">
                             <ComboBoxItem Content="{x:Static properties:MainLang.Account_Offline}"/>
                             <ComboBoxItem Content="{x:Static properties:MainLang.Account_Microsoft}"/>

@@ -1,11 +1,12 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    
-    <SolidColorBrush x:Key="TextColor" Color="#333333"/>
-    <SolidColorBrush x:Key="BackgroundColor" Color="#f6fafd"/>
-    <SolidColorBrush x:Key="TitleBarColor" Color="#e7f5ff"/>
+
+    <SolidColorBrush x:Key="TextColor" Color="#ffffff"/>
+    <SolidColorBrush x:Key="BackgroundColor" Color="#1d1d1d"/>
+    <SolidColorBrush x:Key="TitleBarColor" Color="#1a1a1a"/>
     <SolidColorBrush x:Key="Gray" Color="#7e7e7e"/>
-    <SolidColorBrush x:Key="1x" Color="#FFE9F6FF"/>
+    <SolidColorBrush x:Key="ButtonHover" Color="#7e878f"/>
+    <SolidColorBrush x:Key="1x" Color="#2c2c2c"/>
     
     <SolidColorBrush x:Key="IconBlue" Color="#00a0e9"/>
     <SolidColorBrush x:Key="NavigationButtonColor" Color="#BFBFC4"/>

@@ -2,7 +2,7 @@
 {
     public class AccountInfo
     {
-        public string? AccountType { get; set; }
+        public SettingItem.AccountType AccountType { get; set; }
 
         public string? Name { get; set; }
 

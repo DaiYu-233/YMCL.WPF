@@ -1,91 +1,132 @@
 ﻿using Newtonsoft.Json;
+using Panuon.WPF.UI;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
+using System.Linq;
+using System.Net.Http;
+using System.Security.Principal;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using UpdateD;
 using YMCL.Main.Public;
-using Application = System.Windows.Forms.Application;
+using YMCL.Main.Public.Lang;
+using YMCL.Main.UI.TaskProgress;
 
 namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launcher
 {
     /// <summary>
-    /// Launcher.xaml 的交互逻辑
+    /// About.xaml 的交互逻辑
     /// </summary>
     public partial class Launcher : Page
     {
+        public class CPU
+        {
+            public string? X64 { get; set; }
+            public string? X86 { get; set; }
+        }
         public Launcher()
         {
             InitializeComponent();
 
-            var langs = new List<string>() { "zh-CN 简体中文", "zh-Hant 繁體中文", "en-US English", "ja-JP 日本語", "ru-RU Русский язык" };
-            var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
-            bool added = false;
-            langs.ForEach(lang =>
+            Version.Text = "YMCL-" + Const.Version;
+        }
+
+        private async void CheckUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            Update updater = new();
+            var url = string.Empty;
+            var json = string.Empty;
+            try
             {
-                LanguageComboBox.Items.Add(lang);
-            });
-            langs.ForEach(lang =>
+                json = updater.GetUpdateFile(Const.UpdaterId);
+            }
+            catch
             {
-                var arr = lang.Split(' ');
-                if (arr[0] == setting.Language)
+                Toast.Show(message: LangHelper.Current.GetText("CheckUpdateFailed"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+                return;
+            }
+
+            if (Environment.Is64BitProcess)
+            {
+                url = JsonConvert.DeserializeObject<CPU>(json).X64;
+            }
+            else
+            {
+                url = JsonConvert.DeserializeObject<CPU>(json).X86;
+            }
+
+            if (updater.GetUpdate(Const.UpdaterId, Const.Version) == true)
+            {
+                var V = MessageBoxX.Show(LangHelper.Current.GetText("DownloadUpdateQuestion") + "\n\n" + LangHelper.Current.GetText("UpdateInfo") + "：| \n    " + updater.GetUpdateRem(Const.UpdaterId), LangHelper.Current.GetText("FindNewVersion") + " - " + updater.GetVersionInternet(Const.UpdaterId), MessageBoxButton.OKCancel);
+                if (V == MessageBoxResult.OK)
                 {
-                    LanguageComboBox.SelectedItem = lang;
+                    TaskProgressWindow taskProgress = new TaskProgressWindow(LangHelper.Current.GetText("DownloadUpdate"));
+                    taskProgress.Show();
+
+                    DateTime now = DateTime.Now;
+                    var savePath = $"{Const.PublicDataRootPath}\\{now.ToString("yyyy-MM-dd-HH-mm-ss")}--YMCL.exe";
+
+                    taskProgress.InsertProgressText(LangHelper.Current.GetText("BeginUpdate"));
+
+                    try
+                    {
+                        using (HttpClient client = new HttpClient())
+                        {
+                            using (HttpResponseMessage response = await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead))
+                            {
+                                response.EnsureSuccessStatusCode();
+
+                                using (var downloadStream = await response.Content.ReadAsStreamAsync())
+                                {
+                                    using (var fileStream = new System.IO.FileStream(savePath, System.IO.FileMode.Create, System.IO.FileAccess.Write))
+                                    {
+                                        byte[] buffer = new byte[8192];
+                                        int bytesRead;
+                                        long totalBytesRead = 0;
+                                        long totalBytes = response.Content.Headers.ContentLength.HasValue ? response.Content.Headers.ContentLength.Value : -1;
+
+                                        while ((bytesRead = await downloadStream.ReadAsync(buffer, 0, buffer.Length)) > 0)
+                                        {
+                                            await fileStream.WriteAsync(buffer, 0, bytesRead);
+                                            totalBytesRead += bytesRead;
+
+                                            if (totalBytes > 0)
+                                            {
+                                                double progress = ((double)totalBytesRead / totalBytes) * 100;
+                                                taskProgress.TaskProgressBar.Value = progress;
+                                                taskProgress.TaskProgressBarText.Content = $"{Math.Round(progress, 1)}%";
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBoxX.Show(LangHelper.Current.GetText("DownloadFail") + "：" + ex.Message + "\n\n" + ex.ToString(), "Yu Minecraft Launcher");
+                    }
+
+
+
+                    taskProgress.InsertProgressText(LangHelper.Current.GetText("FinishUpdate"));
+                    taskProgress.Hide();
                 }
-            });
-            if (setting.Language == null || setting.Language == string.Empty)
-            {
-                LanguageComboBox.SelectedItem = "zh-CN 简体中文";
-                setting.Language = "zh-CN";
-                File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
             }
-        }
-
-        private void LanguageComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
-            if (LanguageComboBox.SelectedItem.ToString().Split(' ')[0] != setting.Language)
+            else
             {
-                setting.Language = LanguageComboBox.SelectedItem.ToString().Split(' ')[0];
-                File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting));
-                ProcessStartInfo startInfo = new ProcessStartInfo
-                {
-                    WorkingDirectory = Environment.CurrentDirectory,
-                    FileName = Application.ExecutablePath,
-                };
-                Process.Start(startInfo);
-                System.Windows.Application.Current.Shutdown();
+                Toast.Show(Const.Window.mainWindow, LangHelper.Current.GetText("LatestVersion"), ToastPosition.Top);
             }
-        } 
-
-        private void UseCustomHomePageToggle_Toggled(object sender, System.Windows.RoutedEventArgs e)
-        {
-            //var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
-            //if (UseCustomHomePageToggle.IsOn == setting.UseCustomHomePage)
-            //{
-            //    return;
-            //}
-            //if (UseCustomHomePageToggle.IsOn)
-            //{
-            //    var message = MessageBoxX.Show(LangHelper.Current.GetText("Launcher_UseCustomHomePageToggle_Toggled_On_Info"), "Yu Minecraft Launcher", MessageBoxButton.OKCancel, MessageBoxIcon.Info);
-            //    if (message == MessageBoxResult.Cancel)
-            //    {
-            //        UseCustomHomePageToggle.IsOn = false;
-            //        return;
-            //    }
-            //}
-            //setting.UseCustomHomePage = UseCustomHomePageToggle.IsOn;
-            //File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting));
-            //ProcessStartInfo startInfo = new ProcessStartInfo
-            //{
-            //    WorkingDirectory = Environment.CurrentDirectory,
-            //    FileName = Application.ExecutablePath,
-            //};
-            //Process.Start(startInfo);
-            //System.Windows.Application.Current.Shutdown();
-        }
-
-        private void EditCustomHomePageBtn_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            Process.Start("notepad.exe", Const.LaunchPageXamlPath);
         }
     }
 }

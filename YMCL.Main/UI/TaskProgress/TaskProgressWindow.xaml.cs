@@ -1,65 +1,23 @@
-﻿using Newtonsoft.Json;
-using Panuon.WPF.UI;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using Panuon.WPF.UI;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Xml.Linq;
-using YMCL.Main.Public;
+using System.Windows;
 using YMCL.Main.Public.Lang;
-using Cursors = System.Windows.Input.Cursors;
+using System.Windows.Controls.Primitives;
+using System.Windows.Media;
 using Size = System.Windows.Size;
+using Cursors = System.Windows.Input.Cursors;
+using System.Windows.Documents;
+using YMCL.Main.Public;
 
-namespace YMCL.Main.UI.Main
+namespace YMCL.Main.UI.TaskProgress
 {
     /// <summary>
-    /// MainWindow.xaml 的交互逻辑
+    /// TaskProgressWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : WindowX
+    public partial class TaskProgressWindow : WindowX
     {
-        #region UI
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            //将装饰器添加到窗口的Content控件上(Resize)
-            var c = this.Content as UIElement;
-            var layer = AdornerLayer.GetAdornerLayer(c);
-            layer.Add(new WindowResizeAdorner(c));
-        }
-
-        bool isMouseDown = false;
-        private void WindowX_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            if (isMouseDown)
-            {
-                var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
-                setting.MainWidth = ActualWidth;
-                setting.MainHeight = ActualHeight;
-                File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
-            }
-        }
-
-        private void WindowX_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            isMouseDown = true;
-        }
-
-        private void WindowX_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            isMouseDown = false;
-        }
+        #region UIResize
         private void TitleBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             DragMove();
@@ -70,11 +28,6 @@ namespace YMCL.Main.UI.Main
             WindowState = WindowState.Minimized;
         }
 
-        private void btnClose_Click(object sender, RoutedEventArgs e)
-        {
-            Hide();
-            Environment.Exit(0);
-        }
         #endregion
         #region Resize
         public class WindowResizeAdorner : Adorner
@@ -235,62 +188,44 @@ namespace YMCL.Main.UI.Main
             }
         }
         #endregion
-        #region Pages
-        Pages.Launch.Launch launch = new();
-        Pages.Setting.Setting setting = new();
-        Pages.Download.Download download = new();
-        Pages.More.More more = new();
-        #endregion
-        #region TurnPage
-        private void ToLaunch_Checked(object sender, RoutedEventArgs e)
-        {
-            MainFrame.Content = launch;
-        }
 
-        private void ToSetting_Checked(object sender, RoutedEventArgs e)
-        {
-            MainFrame.Content = setting;
-        }
-
-        private void ToDownload_Checked(object sender, RoutedEventArgs e)
-        {
-            MainFrame.Content = download;
-        }
-
-        private void ToMore_Checked(object sender, RoutedEventArgs e)
-        {
-            MainFrame.Content = more;
-        }
-        #endregion
-        public MainWindow()
+        public TaskProgressWindow(string taskName)
         {
             InitializeComponent();
-            var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
-            Width = setting.MainWidth;
-            Height = setting.MainHeight;
-            ParameterProcessing();
+
+            Title.Text = LangHelper.Current.GetText("TaskProgressWindow_Title") + " - " + taskName;
         }
 
-        void ParameterProcessing()
+        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
-            if (App.StartupArgs.Length > 0)
+            e.Cancel = true;
+        }
+
+        public void InsertProgressText(string text)
+        {
+            DateTime now = DateTime.Now;
+            TaskProgressTextBox.Text += $"[{now.ToString("HH:mm:ss")}] {text}\n";
+        }
+
+        private void TaskProgressText_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (TaskProgressTextBox.LineCount >= 17)
             {
-                var args = System.Web.HttpUtility.UrlDecode(App.StartupArgs[0]);
-                args = args.Substring(7, args.Length - 8);
-                var actions = args.Split("--| ").ToList();
-                actions.RemoveAt(0);
-                foreach (var item in actions)
-                {
-                    var action = item.Trim();
-                    var arg = action.Split(' ');
-                    switch (arg[0])
-                    {
-                        case "launch":
-                            MessageBoxX.Show(arg[1]);
-                            break;
-                    }
-                }
+                TaskProgressTextBox.Text = string.Empty;
             }
+        }
+
+        private void WindowX_Loaded(object sender, RoutedEventArgs e)
+        {
+            //将装饰器添加到窗口的Content控件上(Resize)
+            var c = this.Content as UIElement;
+            var layer = AdornerLayer.GetAdornerLayer(c);
+            layer.Add(new WindowResizeAdorner(c));
+        }
+
+        private void T(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+
         }
     }
 }
