@@ -27,6 +27,9 @@ using System.Windows.Interop;
 using YMCL.Main.UI.TaskProgress;
 using MinecraftLaunch.Classes.Models.Auth;
 using YMCL.Main.UI.Main.Pages.Setting.Pages.Account;
+using iNKORE.UI.WPF.Modern.Controls.Primitives;
+using System.Text;
+using YMCL.Main.UI.Main.Pages.Setting;
 
 namespace YMCL.Main.UI.Main.Pages.Launch
 {
@@ -624,6 +627,36 @@ namespace YMCL.Main.UI.Main.Pages.Launch
             setting.AccountSelectionIndex = AccountComboBox.SelectedIndex;
             File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
             LoadAccounts();
+        }
+
+        private void SkinHeadImage_PreviewMouseRightButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
+        }
+
+        private void SaveSkinBtn_Click(object sender, RoutedEventArgs e)
+        {
+            accounts = JsonConvert.DeserializeObject<List<AccountInfo>>(File.ReadAllText(Const.AccountDataPath));
+            var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Title = LangHelper.Current.GetText("SaveSkin");
+            dialog.FileName = accounts[setting.AccountSelectionIndex].Name;
+            dialog.Filter = "SkinFile | *.png";
+            dialog.ShowDialog();
+            string path = dialog.FileName;
+
+            if (path == accounts[setting.AccountSelectionIndex].Name)
+            {
+                Toast.Show(message: LangHelper.Current.GetText("SaveCancel"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+                return;
+            }
+
+            using (FileStream stream = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write))
+            {
+                var bytes = Convert.FromBase64String(accounts[setting.AccountSelectionIndex].Skin);
+                stream.Write(bytes, 0, bytes.Length);
+                Toast.Show(message: LangHelper.Current.GetText("SaveSuccess"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+            }
         }
     }
 }

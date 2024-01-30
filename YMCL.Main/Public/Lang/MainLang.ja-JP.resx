@@ -426,4 +426,40 @@
   <data name="VerifyingAccount" xml:space="preserve">
     <value>アカウントを認証しています</value>
   </data>
+  <data name="Launch_LaunchBtn" xml:space="preserve">
+    <value>ゲームを起動してください</value>
+  </data>
+  <data name="Launch_LaunchBtn_Click_AccountError" xml:space="preserve">
+    <value>アカウントエラー</value>
+  </data>
+  <data name="Launch_LaunchBtn_Click_NoChooseGame" xml:space="preserve">
+    <value>ゲームコアが選択されていないか、ゲームが見つかりません</value>
+  </data>
+  <data name="Launch_LaunchBtn_Click_JavaError" xml:space="preserve">
+    <value>Javaエラー</value>
+  </data>
+  <data name="Launch_LaunchBtn_Click_Launched" xml:space="preserve">
+    <value>開始しました</value>
+  </data>
+  <data name="Launch_LaunchBtn_Click_CannotFandRightJava" xml:space="preserve">
+    <value>正しいJavaが見つかりませんでした：</value>
+  </data>
+  <data name="Launch_LaunchBtn_Click_FinishLaunch" xml:space="preserve">
+    <value>起動が完了し、ゲームウィンドウが表示されるのを待っています</value>
+  </data>
+  <data name="Launch_LaunchBtn_Click_GameExit" xml:space="preserve">
+    <value>ゲームが終了しました</value>
+  </data>
+  <data name="Launch_LaunchBtn_Click_LaunchSuccess" xml:space="preserve">
+    <value>正常に開始しました</value>
+  </data>
+  <data name="SaveCancel" xml:space="preserve">
+    <value>保存がキャンセルされました</value>
+  </data>
+  <data name="SaveSuccess" xml:space="preserve">
+    <value>保存成功</value>
+  </data>
+  <data name="SaveSkin" xml:space="preserve">
+    <value>スキンファイルを保存</value>
+  </data>
 </root>

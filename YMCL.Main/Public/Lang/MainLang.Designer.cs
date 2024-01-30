@@ -594,6 +594,87 @@ namespace YMCL.Main.Public.Lang {
         /// <summary>
         ///   查找类似 启动游戏 的本地化字符串。
         /// </summary>
+        public static string Launch_LaunchBtn {
+            get {
+                return ResourceManager.GetString("Launch_LaunchBtn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 账户错误 的本地化字符串。
+        /// </summary>
+        public static string Launch_LaunchBtn_Click_AccountError {
+            get {
+                return ResourceManager.GetString("Launch_LaunchBtn_Click_AccountError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 无法找到正确Java： 的本地化字符串。
+        /// </summary>
+        public static string Launch_LaunchBtn_Click_CannotFandRightJava {
+            get {
+                return ResourceManager.GetString("Launch_LaunchBtn_Click_CannotFandRightJava", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 启动完成，等待游戏窗口出现 的本地化字符串。
+        /// </summary>
+        public static string Launch_LaunchBtn_Click_FinishLaunch {
+            get {
+                return ResourceManager.GetString("Launch_LaunchBtn_Click_FinishLaunch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 游戏已退出 的本地化字符串。
+        /// </summary>
+        public static string Launch_LaunchBtn_Click_GameExit {
+            get {
+                return ResourceManager.GetString("Launch_LaunchBtn_Click_GameExit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Java错误 的本地化字符串。
+        /// </summary>
+        public static string Launch_LaunchBtn_Click_JavaError {
+            get {
+                return ResourceManager.GetString("Launch_LaunchBtn_Click_JavaError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 已启动 的本地化字符串。
+        /// </summary>
+        public static string Launch_LaunchBtn_Click_Launched {
+            get {
+                return ResourceManager.GetString("Launch_LaunchBtn_Click_Launched", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 启动成功 的本地化字符串。
+        /// </summary>
+        public static string Launch_LaunchBtn_Click_LaunchSuccess {
+            get {
+                return ResourceManager.GetString("Launch_LaunchBtn_Click_LaunchSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 未选择游戏核心或未找到游戏 的本地化字符串。
+        /// </summary>
+        public static string Launch_LaunchBtn_Click_NoChooseGame {
+            get {
+                return ResourceManager.GetString("Launch_LaunchBtn_Click_NoChooseGame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 启动游戏 的本地化字符串。
+        /// </summary>
         public static string Launch_LaunchGame {
             get {
                 return ResourceManager.GetString("Launch_LaunchGame", resourceCulture);
@@ -912,6 +993,33 @@ namespace YMCL.Main.Public.Lang {
         public static string OpenSourceProjectUsageTable {
             get {
                 return ResourceManager.GetString("OpenSourceProjectUsageTable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 已取消保存 的本地化字符串。
+        /// </summary>
+        public static string SaveCancel {
+            get {
+                return ResourceManager.GetString("SaveCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 保存皮肤文件 的本地化字符串。
+        /// </summary>
+        public static string SaveSkin {
+            get {
+                return ResourceManager.GetString("SaveSkin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 保存成功 的本地化字符串。
+        /// </summary>
+        public static string SaveSuccess {
+            get {
+                return ResourceManager.GetString("SaveSuccess", resourceCulture);
             }
         }
         

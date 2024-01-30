@@ -426,4 +426,40 @@
   <data name="VerifyingAccount" xml:space="preserve">
     <value>Подтверждение аккаунта</value>
   </data>
+  <data name="Launch_LaunchBtn" xml:space="preserve">
+    <value>Запустите игру</value>
+  </data>
+  <data name="Launch_LaunchBtn_Click_AccountError" xml:space="preserve">
+    <value>Ошибка аккаунта</value>
+  </data>
+  <data name="Launch_LaunchBtn_Click_NoChooseGame" xml:space="preserve">
+    <value>Не выбрано игровое ядро или игра не найдена</value>
+  </data>
+  <data name="Launch_LaunchBtn_Click_JavaError" xml:space="preserve">
+    <value>Ошибка Java</value>
+  </data>
+  <data name="Launch_LaunchBtn_Click_Launched" xml:space="preserve">
+    <value>Начато</value>
+  </data>
+  <data name="Launch_LaunchBtn_Click_CannotFandRightJava" xml:space="preserve">
+    <value>Не удалось найти правильную Java：</value>
+  </data>
+  <data name="Launch_LaunchBtn_Click_FinishLaunch" xml:space="preserve">
+    <value>Запуск завершен, ждем появления игрового окна</value>
+  </data>
+  <data name="Launch_LaunchBtn_Click_GameExit" xml:space="preserve">
+    <value>Игра завершена</value>
+  </data>
+  <data name="Launch_LaunchBtn_Click_LaunchSuccess" xml:space="preserve">
+    <value>Успешно запущено</value>
+  </data>
+  <data name="SaveCancel" xml:space="preserve">
+    <value>Сохраненные данные отменены</value>
+  </data>
+  <data name="SaveSuccess" xml:space="preserve">
+    <value>Сохранение выполнено успешно</value>
+  </data>
+  <data name="SaveSkin" xml:space="preserve">
+    <value>Сохранить файл скина</value>
+  </data>
 </root>

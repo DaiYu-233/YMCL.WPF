@@ -426,4 +426,40 @@
   <data name="VerifyingAccount" xml:space="preserve">
     <value>正在驗證帳戶</value>
   </data>
+  <data name="Launch_LaunchBtn" xml:space="preserve">
+    <value>啟動遊戲</value>
+  </data>
+  <data name="Launch_LaunchBtn_Click_AccountError" xml:space="preserve">
+    <value>帳戶錯誤</value>
+  </data>
+  <data name="Launch_LaunchBtn_Click_NoChooseGame" xml:space="preserve">
+    <value>未選擇遊戲核心或未找到遊戲</value>
+  </data>
+  <data name="Launch_LaunchBtn_Click_JavaError" xml:space="preserve">
+    <value>Java錯誤</value>
+  </data>
+  <data name="Launch_LaunchBtn_Click_Launched" xml:space="preserve">
+    <value>已啟動</value>
+  </data>
+  <data name="Launch_LaunchBtn_Click_CannotFandRightJava" xml:space="preserve">
+    <value>無法找到正確Java：</value>
+  </data>
+  <data name="Launch_LaunchBtn_Click_FinishLaunch" xml:space="preserve">
+    <value>啟動完成，等待遊戲視窗出現</value>
+  </data>
+  <data name="Launch_LaunchBtn_Click_GameExit" xml:space="preserve">
+    <value>遊戲已退出</value>
+  </data>
+  <data name="Launch_LaunchBtn_Click_LaunchSuccess" xml:space="preserve">
+    <value>啟動成功</value>
+  </data>
+  <data name="SaveCancel" xml:space="preserve">
+    <value>已取消儲存</value>
+  </data>
+  <data name="SaveSuccess" xml:space="preserve">
+    <value>保存成功</value>
+  </data>
+  <data name="SaveSkin" xml:space="preserve">
+    <value>保存皮膚文件</value>
+  </data>
 </root>

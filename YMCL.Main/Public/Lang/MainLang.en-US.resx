@@ -426,4 +426,40 @@
   <data name="VerifyingAccount" xml:space="preserve">
     <value>Verifying Account</value>
   </data>
+  <data name="Launch_LaunchBtn" xml:space="preserve">
+    <value>Launch</value>
+  </data>
+  <data name="Launch_LaunchBtn_Click_AccountError" xml:space="preserve">
+    <value>Account Error</value>
+  </data>
+  <data name="Launch_LaunchBtn_Click_NoChooseGame" xml:space="preserve">
+    <value>No choose game core or game not found</value>
+  </data>
+  <data name="Launch_LaunchBtn_Click_JavaError" xml:space="preserve">
+    <value>Java Error</value>
+  </data>
+  <data name="Launch_LaunchBtn_Click_Launched" xml:space="preserve">
+    <value>Launched</value>
+  </data>
+  <data name="Launch_LaunchBtn_Click_CannotFandRightJava" xml:space="preserve">
+    <value>Could not find correct Java：</value>
+  </data>
+  <data name="Launch_LaunchBtn_Click_FinishLaunch" xml:space="preserve">
+    <value>Launch complete, waiting for the game window to appear</value>
+  </data>
+  <data name="Launch_LaunchBtn_Click_GameExit" xml:space="preserve">
+    <value>Game exited</value>
+  </data>
+  <data name="Launch_LaunchBtn_Click_LaunchSuccess" xml:space="preserve">
+    <value>Launch successfully</value>
+  </data>
+  <data name="SaveCancel" xml:space="preserve">
+    <value>Saved canceled</value>
+  </data>
+  <data name="SaveSuccess" xml:space="preserve">
+    <value>Save successfully</value>
+  </data>
+  <data name="SaveSkin" xml:space="preserve">
+    <value>Save skin file</value>
+  </data>
 </root>
