@@ -53,10 +53,11 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Account
             {
                 AccountsListView.Items.Add(new
                 {
-                    Name = x.Name,
-                    AccountType = x.AccountType,
-                    AddTime = x.AddTime,
-                    Data = x.Data,
+                    x.Name,
+                    x.AccountType,
+                    x.AddTime,
+                    x.Data,
+                    Skin=Function.Base64ToImage(x.Skin)
                 });
             });
 
@@ -189,13 +190,19 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Account
 
             var userProfile = await authenticator.AuthenticateAsync();
 
+            MinecraftLaunch.Skin.Class.Fetchers.MicrosoftSkinFetcher skinFetcher = new(userProfile.Uuid.ToString());
+            var bytes = await skinFetcher.GetSkinAsync();
+            MinecraftLaunch.Skin.SkinResolver skinResolver = new(bytes);
+            var skin = MinecraftLaunch.Skin.ImageHelper.ConvertToByteArray(skinResolver.CropSkinHeadBitmap());
+
             DateTime now = DateTime.Now;
             accounts.Add(new AccountInfo
             {
                 AccountType = SettingItem.AccountType.Microsoft,
                 AddTime = now.ToString("yyyy-MM-ddTHH:mm:sszzz"),
                 Data = JsonConvert.SerializeObject(userProfile, formatting: Formatting.Indented),
-                Name = userProfile.Name
+                Name = userProfile.Name,
+                Skin = Function.BytesToBase64(skin)
             });
 
             LoadAccounts();

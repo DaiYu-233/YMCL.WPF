@@ -31,13 +31,16 @@
                     <ui:ListView.ItemTemplate>
                         <DataTemplate>
                             <Border BorderThickness="4,4,0,4">
-                                <Grid Margin="0,0,0,0">
-                                    <TextBlock Text="{Binding Name}" FontSize="14" FontFamily="{DynamicResource Font}"/>
-                                    <StackPanel Orientation="Horizontal" Margin="0,17,0,0">
-                                        <TextBlock  Text="{Binding AccountType}" Margin="0,0,0,0" FontSize="11" Foreground="{DynamicResource Gray}" FontFamily="{DynamicResource Font}"/>
-                                        <TextBlock  Text="{Binding AddTime}" FontSize="11" Foreground="{DynamicResource Gray}" Margin="5,0,0,0" FontFamily="{DynamicResource Font}"/>
-                                    </StackPanel>
-                                </Grid>
+                                <DockPanel>
+                                    <Image Height="28" Width="28" Margin="2,0,6.5,0" Source="{Binding Skin}"/>
+                                    <Grid>
+                                        <TextBlock Text="{Binding Name}" FontSize="14" FontFamily="{DynamicResource Font}"/>
+                                        <StackPanel Orientation="Horizontal" Margin="0,17,0,0">
+                                            <TextBlock  Text="{Binding AccountType}" Margin="0,0,0,0" FontSize="11" Foreground="{DynamicResource Gray}" FontFamily="{DynamicResource Font}"/>
+                                            <TextBlock  Text="{Binding AddTime}" FontSize="11" Foreground="{DynamicResource Gray}" Margin="5,0,0,0" FontFamily="{DynamicResource Font}"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </DockPanel>
                             </Border>
                         </DataTemplate>
                     </ui:ListView.ItemTemplate>
