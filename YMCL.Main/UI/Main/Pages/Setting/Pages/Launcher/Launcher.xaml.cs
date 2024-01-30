@@ -103,8 +103,7 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launcher
                                             if (totalBytes > 0)
                                             {
                                                 double progress = ((double)totalBytesRead / totalBytes) * 100;
-                                                taskProgress.TaskProgressBar.Value = progress;
-                                                taskProgress.TaskProgressBarText.Content = $"{Math.Round(progress, 1)}%";
+                                                taskProgress.UpdateProgress(progress);
                                             }
                                         }
                                     }

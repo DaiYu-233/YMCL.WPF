@@ -390,4 +390,40 @@
   <data name="ArgsError" xml:space="preserve">
     <value>参数错误</value>
   </data>
+  <data name="Launch_GameWindow" xml:space="preserve">
+    <value>游戏窗口</value>
+  </data>
+  <data name="Launch_DefaultSize" xml:space="preserve">
+    <value>默认大小</value>
+  </data>
+  <data name="Launch_FullScreen" xml:space="preserve">
+    <value>全屏</value>
+  </data>
+  <data name="Launch_CustomSize" xml:space="preserve">
+    <value>自定义</value>
+  </data>
+  <data name="Launch_OutputLogReceived" xml:space="preserve">
+    <value>显示输出日志</value>
+  </data>
+  <data name="LaunchFail" xml:space="preserve">
+    <value>启动失败</value>
+  </data>
+  <data name="GameExitLogWindow" xml:space="preserve">
+    <value>3s 后关闭此窗口</value>
+  </data>
+  <data name="BuildLaunchConfigError" xml:space="preserve">
+    <value>构建启动参数错误，检查启动设置是否有误</value>
+  </data>
+  <data name="Launch_TabItem_Overview" xml:space="preserve">
+    <value>概览</value>
+  </data>
+  <data name="Launch_TabItem_Settings" xml:space="preserve">
+    <value>设置</value>
+  </data>
+  <data name="Launch_TabItem_Mods" xml:space="preserve">
+    <value>Mods</value>
+  </data>
+  <data name="VerifyingAccount" xml:space="preserve">
+    <value>正在验证账户</value>
+  </data>
 </root>

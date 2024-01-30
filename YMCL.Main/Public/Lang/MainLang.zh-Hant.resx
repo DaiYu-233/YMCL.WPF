@@ -390,4 +390,40 @@
   <data name="ArgsError" xml:space="preserve">
     <value>參數錯誤</value>
   </data>
+  <data name="Launch_GameWindow" xml:space="preserve">
+    <value>遊戲視窗</value>
+  </data>
+  <data name="Launch_DefaultSize" xml:space="preserve">
+    <value>預設大小</value>
+  </data>
+  <data name="Launch_FullScreen" xml:space="preserve">
+    <value>全屏</value>
+  </data>
+  <data name="Launch_CustomSize" xml:space="preserve">
+    <value>自訂</value>
+  </data>
+  <data name="Launch_OutputLogReceived" xml:space="preserve">
+    <value>顯示輸出日誌</value>
+  </data>
+  <data name="LaunchFail" xml:space="preserve">
+    <value>啟動失敗</value>
+  </data>
+  <data name="GameExitLogWindow" xml:space="preserve">
+    <value>3s 後關閉此視窗</value>
+  </data>
+  <data name="BuildLaunchConfigError" xml:space="preserve">
+    <value>建置啟動參數錯誤，檢查啟動設定是否有誤</value>
+  </data>
+  <data name="Launch_TabItem_Overview" xml:space="preserve">
+    <value>概覽</value>
+  </data>
+  <data name="Launch_TabItem_Settings" xml:space="preserve">
+    <value>設置</value>
+  </data>
+  <data name="Launch_TabItem_Mods" xml:space="preserve">
+    <value>Mods</value>
+  </data>
+  <data name="VerifyingAccount" xml:space="preserve">
+    <value>正在驗證帳戶</value>
+  </data>
 </root>

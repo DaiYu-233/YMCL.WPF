@@ -10,7 +10,6 @@ namespace YMCL.Main.Public.Class
     public class Setting
     {
         public string? Language { get; set; }
-        public bool UseCustomHomePage { get; set; } = false;
         public string? MinecraftFolder { get; set; } = null;
         public string? MinecraftVersionId { get; set; } = null;
         public JavaEntry Java { get; set; } = new JavaEntry()
@@ -22,7 +21,11 @@ namespace YMCL.Main.Public.Class
         public bool AloneCore { get; set; } = true;
         public double MainWidth { get; set; } = 1050;
         public double MainHeight { get; set; } = 600;
+        public bool GetOutput { get; set; } = false;
+        public double GameWidth { get; set; } = 854;
+        public double GameHeight { get; set; } = 480;
         public SettingItem.Theme Theme { get; set; } = SettingItem.Theme.System;
+        public SettingItem.GameWindow GameWindow { get; set; } = SettingItem.GameWindow.Default;
     }
 
     public class SettingItem
@@ -38,6 +41,12 @@ namespace YMCL.Main.Public.Class
             Offline,
             Microsoft,
             ThirdParty
+        }
+        public enum GameWindow
+        {
+            Default,
+            FullScreen,
+            Custom
         }
     }
 }

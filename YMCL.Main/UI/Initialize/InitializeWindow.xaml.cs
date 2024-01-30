@@ -373,7 +373,7 @@ namespace YMCL.Main.UI.Initialize
                     }
                 }
 
-                var bat = "set /p ymcl=<%USERPROFILE%\\AppData\\Roaming\\DaiYu.YMCL\\YMCLPath.DaiYu\r\necho %ymcl%\r\necho %1\r\nstart %ymcl% %1";
+                var bat = "set /p ymcl=<%USERPROFILE%\\AppData\\Roaming\\DaiYu.YMCL\\YMCL.ExePath.DaiYu\r\necho %ymcl%\r\necho %1\r\nstart %ymcl% %1";
                 File.WriteAllText(Const.YMCLBat, bat);
 
                 try { Registry.ClassesRoot.DeleteSubKey("YMCL"); } catch { }

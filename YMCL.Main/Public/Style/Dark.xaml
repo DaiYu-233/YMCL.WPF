@@ -6,6 +6,7 @@
     <SolidColorBrush x:Key="TitleBarColor" Color="#1a1a1a"/>
     <SolidColorBrush x:Key="Gray" Color="#7e7e7e"/>
     <SolidColorBrush x:Key="ButtonHover" Color="#7e878f"/>
+    <SolidColorBrush x:Key="TabControlBackground" Color="#282828"/>
     <SolidColorBrush x:Key="1x" Color="#2c2c2c"/>
     
     <SolidColorBrush x:Key="IconBlue" Color="#00a0e9"/>

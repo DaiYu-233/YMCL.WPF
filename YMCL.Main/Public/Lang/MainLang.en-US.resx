@@ -390,4 +390,40 @@
   <data name="ArgsError" xml:space="preserve">
     <value>Parameter error</value>
   </data>
+  <data name="Launch_GameWindow" xml:space="preserve">
+    <value>Game Window</value>
+  </data>
+  <data name="Launch_DefaultSize" xml:space="preserve">
+    <value>Default Size</value>
+  </data>
+  <data name="Launch_FullScreen" xml:space="preserve">
+    <value>Full Screen</value>
+  </data>
+  <data name="Launch_CustomSize" xml:space="preserve">
+    <value>Custom</value>
+  </data>
+  <data name="Launch_OutputLogReceived" xml:space="preserve">
+    <value>Show Output Log</value>
+  </data>
+  <data name="LaunchFail" xml:space="preserve">
+    <value>Launch Fail</value>
+  </data>
+  <data name="GameExitLogWindow" xml:space="preserve">
+    <value>Close this window after 3s</value>
+  </data>
+  <data name="BuildLaunchConfigError" xml:space="preserve">
+    <value>Build launch parameter error, check launch settings for errors</value>
+  </data>
+  <data name="Launch_TabItem_Overview" xml:space="preserve">
+    <value>Overview</value>
+  </data>
+  <data name="Launch_TabItem_Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Launch_TabItem_Mods" xml:space="preserve">
+    <value>Mods</value>
+  </data>
+  <data name="VerifyingAccount" xml:space="preserve">
+    <value>Verifying Account</value>
+  </data>
 </root>

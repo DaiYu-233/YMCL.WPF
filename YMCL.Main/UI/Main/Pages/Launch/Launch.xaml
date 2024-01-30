@@ -19,11 +19,11 @@
         </EventTrigger>
     </Page.Triggers>
     <Grid>
-        <ui:SplitButton x:Name="LaunchGame" MinWidth="220" Height="55" Margin="0,0,30,30" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="LaunchGame_Click">
+        <ui:SplitButton x:Name="LaunchBtn" MinWidth="220" Height="55" Margin="0,0,30,30" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="LaunchBtn_Click">
             <ui:SplitButton.Flyout>
                 <ui:MenuFlyout>
                     <MenuItem x:Name="OpenVersionList" Header="{x:Static properties:MainLang.Launch_ToVersionList}" FontFamily="{DynamicResource Font}" Click="OpenVersionList_Click"/>
-                    <MenuItem Header="{x:Static properties:MainLang.Launch_ToVersionSetting}" FontFamily="{DynamicResource Font}"/>
+                    <MenuItem x:Name="OpenVersionSettings" Header="{x:Static properties:MainLang.Launch_ToVersionSetting}" FontFamily="{DynamicResource Font}" Click="OpenVersionSettings_Click"/>
                 </ui:MenuFlyout>
             </ui:SplitButton.Flyout>
             <StackPanel>
@@ -31,7 +31,6 @@
                 <TextBlock x:Name="GameCoreText" Text="{x:Static properties:MainLang.Launch_NoChooseGame}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12" FontFamily="{DynamicResource Font}" Margin="0,2,0,0"/>
             </StackPanel>
         </ui:SplitButton>
-
         <Border x:Name="VersionListBorder" Background="{DynamicResource 1x}" CornerRadius="5,5,5,5" Margin="10,10,10,10" Visibility="Hidden">
             <DockPanel>
                 <DockPanel VerticalAlignment="Top" Margin="5,10,5,0" DockPanel.Dock="Top">
@@ -60,10 +59,37 @@
                 </ui:ListView>
             </DockPanel>
         </Border>
+        <ui:ClippingBorder x:Name="VersionSettingBorder" Background="{DynamicResource 1x}" CornerRadius="5,5,5,5" Visibility="Hidden">
+            <TabControl ui:TabControlHelper.IsAddTabButtonVisible="False" Margin="0,5,0,0">
+                <TabItem Header="{x:Static properties:MainLang.Launch_TabItem_Overview}" Margin="1,0,0,0" FontFamily="{DynamicResource Font}">
+                    <ui:TabItemHelper.Icon>
+                        <ui:FontIcon Glyph="&#xE70A;" />
+                    </ui:TabItemHelper.Icon>
+                    <Grid Background="{DynamicResource TabControlBackground}"/>
+                </TabItem>
+                <TabItem Header="{x:Static properties:MainLang.Launch_TabItem_Settings}" Margin="1,0,0,0" FontFamily="{DynamicResource Font}">
+                    <ui:TabItemHelper.Icon>
+                        <ui:FontIcon Glyph="&#xE713;" />
+                    </ui:TabItemHelper.Icon>
+                    <Grid Background="{DynamicResource TabControlBackground}"/>
+                </TabItem>
+                <TabItem Header="{x:Static properties:MainLang.Launch_TabItem_Mods}" Margin="1,0,0,0" FontFamily="{DynamicResource Font}">
+                    <ui:TabItemHelper.Icon>
+                        <ui:FontIcon Glyph="&#xE74C;" />
+                    </ui:TabItemHelper.Icon>
+                    <Grid Background="{DynamicResource TabControlBackground}"/>
+                </TabItem>
+            </TabControl>
+
+        </ui:ClippingBorder>
+
         <StackPanel x:Name="ReturnPanel" Margin="0,-60,80,0" VerticalAlignment="Top" Height="30" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button x:Name="ReturnHomePage" Style="{DynamicResource SvgButtonsStyle}" Content="{DynamicResource Return}" HorizontalAlignment="Right" VerticalAlignment="Center"  Cursor="Hand" Margin="0,0,3,0" Click="ReturnHomePage_Click" />
-            <Label Content="{x:Static properties:MainLang.Launch_VersionList}" FontFamily="{DynamicResource Font}" Foreground="{DynamicResource TextColor}" Background="{x:Null}" VerticalAlignment="Center" />
+            <Label x:Name="ReturnHomePageLabel" Content="{x:Static properties:MainLang.Launch_VersionList}" FontFamily="{DynamicResource Font}" Foreground="{DynamicResource TextColor}" Background="{x:Null}" VerticalAlignment="Center" />
         </StackPanel>
-
+        <StackPanel x:Name="ReturnPanelSetting" Margin="0,-60,80,0" VerticalAlignment="Top" Height="30" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button x:Name="ReturnBtn" Style="{DynamicResource SvgButtonsStyle}" Content="{DynamicResource Return}" HorizontalAlignment="Right" VerticalAlignment="Center"  Cursor="Hand" Margin="0,0,3,0" Click="ReturnBtn_Click" />
+            <Label x:Name="ReturnBtnLabel" Content="{x:Static properties:MainLang.Launch_VersionList}" FontFamily="{DynamicResource Font}" Foreground="{DynamicResource TextColor}" Background="{x:Null}" VerticalAlignment="Center" />
+        </StackPanel>
     </Grid>
 </Page>

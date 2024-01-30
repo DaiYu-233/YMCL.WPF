@@ -100,36 +100,7 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Personalize
                 System.Windows.Application.Current.Shutdown();
             }
         }
-        private void UseCustomHomePageToggle_Toggled(object sender, System.Windows.RoutedEventArgs e)
-        {
-            //var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
-            //if (UseCustomHomePageToggle.IsOn == setting.UseCustomHomePage)
-            //{
-            //    return;
-            //}
-            //if (UseCustomHomePageToggle.IsOn)
-            //{
-            //    var message = MessageBoxX.Show(LangHelper.Current.GetText("Launcher_UseCustomHomePageToggle_Toggled_On_Info"), "Yu Minecraft Launcher", MessageBoxButton.OKCancel, MessageBoxIcon.Info);
-            //    if (message == MessageBoxResult.Cancel)
-            //    {
-            //        UseCustomHomePageToggle.IsOn = false;
-            //        return;
-            //    }
-            //}
-            //setting.UseCustomHomePage = UseCustomHomePageToggle.IsOn;
-            //File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting));
-            //ProcessStartInfo startInfo = new ProcessStartInfo
-            //{
-            //    WorkingDirectory = Environment.CurrentDirectory,
-            //    FileName = Application.ExecutablePath,
-            //};
-            //Process.Start(startInfo);
-            //System.Windows.Application.Current.Shutdown();
-        }
-        private void EditCustomHomePageBtn_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            Process.Start("notepad.exe", Const.LaunchPageXamlPath);
-        }
+
         private void ThemeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));

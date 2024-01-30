@@ -390,4 +390,40 @@
   <data name="ArgsError" xml:space="preserve">
     <value>パラメータエラー</value>
   </data>
+  <data name="Launch_GameWindow" xml:space="preserve">
+    <value>ゲームウィンドウ</value>
+  </data>
+  <data name="Launch_DefaultSize" xml:space="preserve">
+    <value>デフォルトサイズ</value>
+  </data>
+  <data name="Launch_FullScreen" xml:space="preserve">
+    <value>全ウィンドウ表示</value>
+  </data>
+  <data name="Launch_CustomSize" xml:space="preserve">
+    <value>ユーザ設定</value>
+  </data>
+  <data name="Launch_OutputLogReceived" xml:space="preserve">
+    <value>出力ログを表示</value>
+  </data>
+  <data name="LaunchFail" xml:space="preserve">
+    <value>起動に失敗しました</value>
+  </data>
+  <data name="GameExitLogWindow" xml:space="preserve">
+    <value>3秒後にこのウィンドウを閉じてください</value>
+  </data>
+  <data name="BuildLaunchConfigError" xml:space="preserve">
+    <value>ビルドスタートアップパラメータエラー。スタートアップ設定にエラーがないか確認してください</value>
+  </data>
+  <data name="Launch_TabItem_Overview" xml:space="preserve">
+    <value>概要</value>
+  </data>
+  <data name="Launch_TabItem_Settings" xml:space="preserve">
+    <value>設定</value>
+  </data>
+  <data name="Launch_TabItem_Mods" xml:space="preserve">
+    <value>Mods</value>
+  </data>
+  <data name="VerifyingAccount" xml:space="preserve">
+    <value>アカウントを認証しています</value>
+  </data>
 </root>

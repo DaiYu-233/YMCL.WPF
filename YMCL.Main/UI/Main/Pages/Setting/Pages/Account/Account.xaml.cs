@@ -12,6 +12,7 @@ using System.Diagnostics;
 using System;
 using System.Globalization;
 using System.Windows.Data;
+using System.Security.Principal;
 
 namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Account
 {
@@ -172,27 +173,43 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Account
             AccountsListView.SelectedIndex = 0;
         }
 
-        MicrosoftAuthenticator authenticator;
-        DeviceCodeResponse deviceInfo;
+        string verificationUrl;
         public async void MicrosoftLogin()
         {
-            MicrosoftAuthenticator authenticator = new("c06d4d68-7751-4a8a-a2ff-d1b46688f428");
-            await authenticator.DeviceFlowAuthAsync(dc =>
+            LoginCodeText.Text = LangHelper.Current.GetText("Account_Loading");
+            verificationUrl = string.Empty;
+            CopyCodeAndOpenBrowserBtn.IsEnabled = false;
+            MicrosoftAuthenticator authenticator = new(Const.AzureClientId, true);
+            await authenticator.DeviceFlowAuthAsync(device =>
             {
-                Debug.WriteLine(dc.UserCode);
+                LoginCodeText.Text = device.UserCode;
+                verificationUrl = device.VerificationUrl;
+                CopyCodeAndOpenBrowserBtn.IsEnabled = true;
             });
 
             var userProfile = await authenticator.AuthenticateAsync();
+
+            DateTime now = DateTime.Now;
+            accounts.Add(new AccountInfo
+            {
+                AccountType = SettingItem.AccountType.Microsoft,
+                AddTime = now.ToString("yyyy-MM-ddTHH:mm:sszzz"),
+                Data = JsonConvert.SerializeObject(userProfile, formatting: Formatting.Indented),
+                Name = userProfile.Name
+            });
+
+            LoadAccounts();
+            File.WriteAllText(Const.AccountDataPath, JsonConvert.SerializeObject(accounts, Formatting.Indented));
+            LoginMicrosoftDialog.Hide();
+            Const.Window.mainWindow.Activate();
+            AccountsListView.SelectedIndex = AccountsListView.Items.Count - 1;
         }
 
         private void CopyCodeAndOpenBrowserBtn_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start("explorer.exe", deviceInfo.VerificationUrl);
+            Process.Start("explorer.exe", verificationUrl);
             LoginMicrosoftDialog.Hide();
             System.Windows.Clipboard.SetText(LoginCodeText.Text);
         }
     }
-
-    
-
 }

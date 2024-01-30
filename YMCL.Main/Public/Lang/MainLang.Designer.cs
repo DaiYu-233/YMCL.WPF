@@ -223,6 +223,15 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
+        ///   查找类似 构建启动参数错误，检查启动设置是否有误 的本地化字符串。
+        /// </summary>
+        public static string BuildLaunchConfigError {
+            get {
+                return ResourceManager.GetString("BuildLaunchConfigError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 检查更新 的本地化字符串。
         /// </summary>
         public static string CheckUpdate {
@@ -318,6 +327,15 @@ namespace YMCL.Main.Public.Lang {
         public static string FollowSystem {
             get {
                 return ResourceManager.GetString("FollowSystem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 3s 后关闭此窗口 的本地化字符串。
+        /// </summary>
+        public static string GameExitLogWindow {
+            get {
+                return ResourceManager.GetString("GameExitLogWindow", resourceCulture);
             }
         }
         
@@ -511,11 +529,47 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
+        ///   查找类似 自定义 的本地化字符串。
+        /// </summary>
+        public static string Launch_CustomSize {
+            get {
+                return ResourceManager.GetString("Launch_CustomSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 默认大小 的本地化字符串。
+        /// </summary>
+        public static string Launch_DefaultSize {
+            get {
+                return ResourceManager.GetString("Launch_DefaultSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 移除选中项 的本地化字符串。
         /// </summary>
         public static string Launch_DelMinecraftFolder {
             get {
                 return ResourceManager.GetString("Launch_DelMinecraftFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 全屏 的本地化字符串。
+        /// </summary>
+        public static string Launch_FullScreen {
+            get {
+                return ResourceManager.GetString("Launch_FullScreen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 游戏窗口 的本地化字符串。
+        /// </summary>
+        public static string Launch_GameWindow {
+            get {
+                return ResourceManager.GetString("Launch_GameWindow", resourceCulture);
             }
         }
         
@@ -673,11 +727,47 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
+        ///   查找类似 显示输出日志 的本地化字符串。
+        /// </summary>
+        public static string Launch_OutputLogReceived {
+            get {
+                return ResourceManager.GetString("Launch_OutputLogReceived", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 刷新 的本地化字符串。
         /// </summary>
         public static string Launch_Refresh {
             get {
                 return ResourceManager.GetString("Launch_Refresh", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Mods 的本地化字符串。
+        /// </summary>
+        public static string Launch_TabItem_Mods {
+            get {
+                return ResourceManager.GetString("Launch_TabItem_Mods", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 概览 的本地化字符串。
+        /// </summary>
+        public static string Launch_TabItem_Overview {
+            get {
+                return ResourceManager.GetString("Launch_TabItem_Overview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 设置 的本地化字符串。
+        /// </summary>
+        public static string Launch_TabItem_Settings {
+            get {
+                return ResourceManager.GetString("Launch_TabItem_Settings", resourceCulture);
             }
         }
         
@@ -741,6 +831,15 @@ namespace YMCL.Main.Public.Lang {
         public static string Launcher_UseCustomHomePageToggle_Toggled_On_Info {
             get {
                 return ResourceManager.GetString("Launcher_UseCustomHomePageToggle_Toggled_On_Info", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 启动失败 的本地化字符串。
+        /// </summary>
+        public static string LaunchFail {
+            get {
+                return ResourceManager.GetString("LaunchFail", resourceCulture);
             }
         }
         
@@ -876,6 +975,15 @@ namespace YMCL.Main.Public.Lang {
         public static string UpdateInfo {
             get {
                 return ResourceManager.GetString("UpdateInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 正在验证账户 的本地化字符串。
+        /// </summary>
+        public static string VerifyingAccount {
+            get {
+                return ResourceManager.GetString("VerifyingAccount", resourceCulture);
             }
         }
     }

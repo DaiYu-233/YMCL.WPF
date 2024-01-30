@@ -2,6 +2,7 @@
 using MinecraftLaunch.Components.Fetcher;
 using Newtonsoft.Json;
 using Panuon.WPF.UI;
+using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows;
@@ -27,15 +28,19 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launch
             LoadJavas();
             LoadMem(setting.MaxMem);
             AloneCoreToggle.IsOn = setting.AloneCore;
+            OutputLogToggle.IsOn = setting.GetOutput;
 
             foreach (var item in javas)
             {
                 javasPath.Add(item.JavaPath);
             }
+
+            GameWindowComboBox.SelectedIndex = (int)setting.GameWindow;
         }
 
         void LoadMinecraftFolder()
         {
+            minecraftFolder = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(Const.MinecraftFolderDataPath));
             MinecraftFolderComboBox.Items.Clear();
             var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
             foreach (var item in minecraftFolder)
@@ -87,6 +92,10 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launch
             if (MinecraftFolderComboBox.SelectedItem == null || MinecraftFolderComboBox.SelectedItem.ToString() == setting.MinecraftFolder)
             {
                 return;
+            }
+            if (MinecraftFolderComboBox.SelectedItem.ToString() != setting.MinecraftFolder)
+            {
+                setting.MinecraftVersionId = null;
             }
             setting.MinecraftFolder = MinecraftFolderComboBox.SelectedItem.ToString();
             File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
@@ -299,6 +308,16 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launch
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             LoadMinecraftFolder();
+            if (GameWindowComboBox.SelectedIndex == 2)
+            {
+                CustomGameWindow.Visibility = Visibility.Visible;
+                GameWindowComboBox.Margin = new Thickness(18, 0, 0, 0);
+            }
+            else
+            {
+                CustomGameWindow.Visibility = Visibility.Hidden;
+                GameWindowComboBox.Margin = new Thickness(18, 0, -1 * CustomGameWindow.ActualWidth - 6.8, 0);
+            }
         }
 
         private void AloneCoreToggle_Toggled(object sender, RoutedEventArgs e)
@@ -309,6 +328,51 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launch
                 return;
             }
             setting.AloneCore = AloneCoreToggle.IsOn;
+            File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+        }
+
+        private void GameWindowComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (GameWindowComboBox.SelectedIndex == 2)
+            {
+                CustomGameWindow.Visibility = Visibility.Visible;
+                GameWindowComboBox.Margin = new Thickness(18, 0, 0, 0);
+            }
+            else
+            {
+                CustomGameWindow.Visibility = Visibility.Hidden;
+                GameWindowComboBox.Margin = new Thickness(18, 0, -1 * CustomGameWindow.ActualWidth - 6.8, 0);
+            }
+            var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
+            if (GameWindowComboBox.SelectedIndex != (int)setting.GameWindow)
+            {
+                setting.GameWindow = (SettingItem.GameWindow)GameWindowComboBox.SelectedIndex;
+                File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+            }
+        }
+
+        private void OutputLogToggle_Toggled(object sender, RoutedEventArgs e)
+        {
+            var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
+            if (OutputLogToggle.IsOn == setting.GetOutput)
+            {
+                return;
+            }
+            setting.GetOutput = OutputLogToggle.IsOn;
+            File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+        }
+
+        private void GameHeight_LostFocus(object sender, RoutedEventArgs e)
+        {
+            var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
+            setting.GameHeight = Convert.ToDouble(GameHeight.Text);
+            File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+        }
+
+        private void GameWidth_LostFocus(object sender, RoutedEventArgs e)
+        {
+            var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
+            setting.GameWidth = Convert.ToDouble(GameWidth.Text);
             File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
         }
     }

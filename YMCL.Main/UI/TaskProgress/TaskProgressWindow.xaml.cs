@@ -9,6 +9,7 @@ using Size = System.Windows.Size;
 using Cursors = System.Windows.Input.Cursors;
 using System.Windows.Documents;
 using YMCL.Main.Public;
+using System;
 
 namespace YMCL.Main.UI.TaskProgress
 {
@@ -189,11 +190,17 @@ namespace YMCL.Main.UI.TaskProgress
         }
         #endregion
 
-        public TaskProgressWindow(string taskName)
+        public TaskProgressWindow(string taskName,bool showProgressBar=true)
         {
             InitializeComponent();
 
             Title.Text = LangHelper.Current.GetText("TaskProgressWindow_Title") + " - " + taskName;
+
+            if(showProgressBar)
+            {
+                ProgressBorder.Visibility = Visibility.Visible;
+                TaskProgressTextBox.Margin=new Thickness(10, 0, 10, 10);
+            }
         }
 
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
@@ -204,15 +211,15 @@ namespace YMCL.Main.UI.TaskProgress
         public void InsertProgressText(string text)
         {
             DateTime now = DateTime.Now;
-            TaskProgressTextBox.Text += $"[{now.ToString("HH:mm:ss")}] {text}\n";
+            TaskProgressTextBox.AppendText($"[{now.ToString("HH:mm:ss")}] {text}\n");
+            TaskProgressTextBox.Focus();
+            TaskProgressTextBox.CaretIndex = TaskProgressTextBox.Text.Length;
+            TaskProgressTextBox.ScrollToEnd();
         }
-
-        private void TaskProgressText_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (TaskProgressTextBox.LineCount >= 17)
-            {
-                TaskProgressTextBox.Text = string.Empty;
-            }
+        public void UpdateProgress(double progress)
+        {        
+            TaskProgressBar.Value = progress;
+            TaskProgressBarText.Content = $"{Math.Round(progress, 1)}%";
         }
 
         private void WindowX_Loaded(object sender, RoutedEventArgs e)

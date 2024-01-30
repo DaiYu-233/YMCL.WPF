@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -275,18 +276,41 @@ namespace YMCL.Main.UI.Main
         {
             if (App.StartupArgs.Length > 0)
             {
-                var args = System.Web.HttpUtility.UrlDecode(App.StartupArgs[0]);
-                args = args.Substring(7, args.Length - 8);
-                var actions = args.Split("--| ").ToList();
+                var urlScheme = System.Web.HttpUtility.UrlDecode(App.StartupArgs[0]);
+                urlScheme = urlScheme.Substring(7, urlScheme.Length - 8);
+                var actions = urlScheme.Split("--| ").ToList();
                 actions.RemoveAt(0);
                 foreach (var item in actions)
                 {
                     var action = item.Trim();
-                    var arg = action.Split(' ');
-                    switch (arg[0])
+                    string[] temp = Regex.Split(action, "(?=(?:(?:[^\"]*\"){2})*[^\"]*$) ");
+                    var args = new List<string>();
+                    foreach (var arg in temp)
+                    {
+                        var a = arg.Trim();
+                        a = a.Trim('\"');
+                        a = a.Trim('\'');
+                        args.Add(a);
+                    }
+                    //MessageBoxX.Show(urlScheme);
+                    switch (args[0])
                     {
                         case "launch":
-                            MessageBoxX.Show(arg[1]);
+                            if (args.Count >= 3 && args[2] != null)
+                            {
+                                if (args.Count >= 4 && args[3] != null)
+                                {
+                                    launch.LaunchClient(args[1], args[2], false, args[3]);
+                                }
+                                else
+                                {
+                                    launch.LaunchClient(args[1], args[2], false);
+                                }
+                            }
+                            else
+                            {
+                                launch.LaunchClient(args[1], msg: false);
+                            }
                             break;
                     }
                 }

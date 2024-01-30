@@ -23,6 +23,9 @@ using YMCL.Main.UI.Initialize;
 using YMCL.Main.Public.Lang;
 using MessageBoxIcon = Panuon.WPF.UI.MessageBoxIcon;
 using YMCL.Main.Public.Class;
+using System.Windows.Interop;
+using YMCL.Main.UI.TaskProgress;
+using MinecraftLaunch.Classes.Models.Auth;
 
 namespace YMCL.Main.UI.Main.Pages.Launch
 {
@@ -34,35 +37,11 @@ namespace YMCL.Main.UI.Main.Pages.Launch
         public Launch()
         {
             InitializeComponent();
-
-            var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
-
-            if (setting.UseCustomHomePage)
-            {
-                LoadCustomPage();
-            }
-
-            LoadMinecraftVersion();
         }
-
-        async void LoadCustomPage()
-        {
-            try
-            {
-                FileStream fs = new FileStream(Const.LaunchPageXamlPath, FileMode.Open);
-                DependencyObject rootElement = (DependencyObject)XamlReader.Load(fs);
-                this.PageRoot.Content = rootElement;
-            }
-            catch (Exception ex)
-            {
-                MessageBoxX.Show($"\n{LangHelper.Current.GetText("Launch_Launch_CustomPageSourceError")}：{ex.Message}\n\n{ex.ToString()}", "Yu Minecraft Launcher");
-            }
-        }
-
-
         List<string> minecraftFolder = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(Const.MinecraftFolderDataPath));
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            minecraftFolder = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(Const.MinecraftFolderDataPath));
             MinecraftFolderComboBox.Items.Clear();
             var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
             foreach (var item in minecraftFolder)
@@ -77,36 +56,18 @@ namespace YMCL.Main.UI.Main.Pages.Launch
             {
                 MinecraftFolderComboBox.SelectedItem = setting.MinecraftFolder;
             }
-
-            try
+            LoadMinecraftVersion();
+            var version = VersionListView.SelectedItem as GameEntry;
+            if (version == null | setting.MinecraftVersionId == null)
             {
-                using (HttpClient httpClient = new HttpClient())
-                {
-                    string url = "https://v1.hitokoto.cn";
-                    HttpResponseMessage response = await httpClient.GetAsync(url);
-                    response.EnsureSuccessStatusCode();
-                    string data = await response.Content.ReadAsStringAsync();
-                    var obj = JsonConvert.DeserializeObject<Public.Class.Hitokoto.Root>(data);
-                    if (obj != null)
-                    {
-                        var res = string.Empty;
-                        if (obj.from_who != null)
-                        {
-                            res = obj.hitokoto + $"    ——「{obj.from} ({obj.from_who})」";
-                        }
-                        else
-                        {
-                            res = obj.hitokoto + "    ——「" + obj.from + "」";
-                        }
-                        await Dispatcher.BeginInvoke(() => { Toast.Show(message: obj.hitokoto, position: ToastPosition.Top, window: Const.Window.mainWindow); });
-                    }
-                }
+                GameCoreText.Text = LangHelper.Current.GetText("Launch_NoChooseGame");
+                File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
             }
-            catch (Exception ex) { }
         }
 
         private void OpenVersionList_Click(object sender, RoutedEventArgs e)
         {
+            ReturnHomePageLabel.Content = LangHelper.Current.GetText("Launch_VersionList");
             VersionListBorder.Visibility = Visibility.Visible;
             VersionListView.IsEnabled = true;
             ThicknessAnimation animation = new ThicknessAnimation()
@@ -321,8 +282,9 @@ namespace YMCL.Main.UI.Main.Pages.Launch
 
 
 
-        private void LaunchGame_Click(iNKORE.UI.WPF.Modern.Controls.SplitButton sender, iNKORE.UI.WPF.Modern.Controls.SplitButtonClickEventArgs args)
+        private async void LaunchBtn_Click(iNKORE.UI.WPF.Modern.Controls.SplitButton sender, iNKORE.UI.WPF.Modern.Controls.SplitButtonClickEventArgs args)
         {
+            //LaunchGame.IsEnabled = false;
             var version = VersionListView.SelectedItem as GameEntry;
             if (version == null)
             {
@@ -331,9 +293,11 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                 return;
             }
             LaunchClient(version.Id);
+            await Task.Delay(2000);
+            LaunchBtn.IsEnabled = true;
         }
 
-        public async void LaunchClient(string versionId, string minecraftPath = "")
+        public async void LaunchClient(string versionId, string minecraftPath = "", bool msg = true, string serverIP = "")
         {
             var mcPath = minecraftPath;
             if (string.IsNullOrEmpty(versionId))
@@ -344,7 +308,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
             }
             var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
             var accountJson = JsonConvert.DeserializeObject<List<Public.Class.AccountInfo>>(File.ReadAllText(Const.AccountDataPath))[setting.AccountSelectionIndex];
-            MinecraftLaunch.Classes.Models.Auth.Account account = null;
+            Account account = null;
             if (accountJson != null)
             {
                 if (accountJson.AccountType == SettingItem.AccountType.Offline)
@@ -355,10 +319,18 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                         account = authenticator.Authenticate();
                     }
                 }
+                else if (accountJson.AccountType == SettingItem.AccountType.Microsoft)
+                {
+                    Toast.Show(message: LangHelper.Current.GetText("VerifyingAccount"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+
+                    var profile = JsonConvert.DeserializeObject<MicrosoftAccount>(accountJson.Data);
+                    MicrosoftAuthenticator authenticator = new(profile, Const.AzureClientId, true);
+                    account = await authenticator.AuthenticateAsync();
+                }
             }
             if (account != null)
             {
-                if (!string.IsNullOrEmpty(mcPath))
+                if (string.IsNullOrEmpty(mcPath))
                 {
                     mcPath = setting.MinecraftFolder;
                 }
@@ -394,69 +366,155 @@ namespace YMCL.Main.UI.Main.Pages.Launch
 
                     if (!string.IsNullOrEmpty(javaPath))
                     {
-                        LaunchConfig config = new LaunchConfig
+                        bool launchError = false;
+                        LaunchConfig config = new();
+                        try
                         {
-                            Account = account, //账户信息的获取请使用验证器，使用方法请跳转至验证器文档查看
-                            GameWindowConfig = new GameWindowConfig
+                            var ip = string.Empty;
+                            var port = 0;
+                            string IP;
+                            if (serverIP == "")
                             {
-                                IsFullscreen = false
-                            },
-                            JvmConfig = new JvmConfig(javaPath)
+                                //IP = setting.AutoJoinServerIP;
+                            }
+                            else
                             {
-                                MaxMemory = Convert.ToInt32(setting.MaxMem)
-                            },
-                            IsEnableIndependencyCore = setting.AloneCore
-                        };
+                                IP = serverIP;
+                                var server = IP.Split(":");
+                                if (!string.IsNullOrEmpty(IP))
+                                {
+                                    ip = server[0];
+                                    if (server.Length > 1)
+                                    {
+                                        port = Convert.ToInt32(server[1]);
+                                    }
+                                    else
+                                    {
+                                        port = 25565;
+                                    }
+                                }
+                            }
+                            
+                            config = new LaunchConfig
+                            {
+                                Account = account, //账户信息的获取请使用验证器，使用方法请跳转至验证器文档查看
+                                GameWindowConfig = new GameWindowConfig
+                                {
+                                    Width = (int)setting.GameWidth,
+                                    Height = (int)setting.GameHeight,
+                                    IsFullscreen = setting.GameWindow == SettingItem.GameWindow.FullScreen
+                                },
+                                JvmConfig = new JvmConfig(javaPath)
+                                {
+                                    MaxMemory = Convert.ToInt32(setting.MaxMem)
+                                },
+                                ServerConfig = new(port, ip),
+                                IsEnableIndependencyCore = setting.AloneCore,
+                                LauncherName = "YMCL"
+                            };
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBoxX.Show($"{LangHelper.Current.GetText("BuildLaunchConfigError")}：{ex.Message}\n\n{ex.ToString()}", "Yu Minecraft Launcher");
+                            return;
+                        }
 
                         Launcher launcher = new(resolver, config);
 
                         await Task.Run(async () =>
                         {
-                            var gameProcessWatcher = new IGameProcessWatcher();
-                            gameProcessWatcher = await launcher.LaunchAsync(version.Id);
-
-                            gameProcessWatcher.Exited += (sender, args) =>
+                            try
                             {
-                                Dispatcher.BeginInvoke(() =>
+                                await Dispatcher.BeginInvoke(async () =>
                                 {
-                                    Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_GameExit"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+                                    TaskProgressWindow taskProgress = new TaskProgressWindow($"{version.JarPath} - {DateTime.Now.ToString("yyyy-MM-ddTHH:mm:sszzz")}", false);
+
+                                    if (setting.GetOutput)
+                                    {
+                                        taskProgress.Show();
+                                    }
+
+                                    var watcher = await launcher.LaunchAsync(version.Id);
+
+                                    watcher.Exited += (sender, args) =>
+                                    {
+                                        Dispatcher.BeginInvoke(async () =>
+                                        {
+                                            Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_GameExit"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+
+                                            if (setting.GetOutput)
+                                            {
+                                                //taskProgress.Activate();
+                                                //Toast.Show(message: LangHelper.Current.GetText("GameExitLogWindow"), position: ToastPosition.Top, window: taskProgress);
+                                                //await Task.Delay(3000);
+                                                taskProgress.Hide();
+                                            }
+                                        });
+                                    };
+                                    watcher.OutputLogReceived += async (sender, args) =>
+                                    {
+                                        Debug.WriteLine(args.Text);
+                                        await Dispatcher.BeginInvoke(async () =>
+                                        {
+                                            taskProgress.InsertProgressText(args.Text);
+                                        });
+                                    };
+                                    await Dispatcher.BeginInvoke(async () =>
+                                    {
+                                        Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_FinishLaunch"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+                                    });
+
                                 });
-                            };
-
-                            gameProcessWatcher.OutputLogReceived += (sender, args) =>
+                            }
+                            catch (Exception ex)
                             {
-                                Debug.WriteLine(args.Text);
-                            };
-
-                            await Dispatcher.BeginInvoke(async () =>
-                            {
-                                Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_FinishLaunch"), position: ToastPosition.Top, window: Const.Window.mainWindow);
-                            });
-
+                                await Dispatcher.BeginInvoke(async () =>
+                                {
+                                    MessageBoxX.Show($"{LangHelper.Current.GetText("LaunchFail")}：{ex.Message}\n\n{ex.ToString()}", "Yu Minecraft Launcher");
+                                });
+                            }
                         });
                     }
                     else
                     {
                         if (setting.Java.JavaPath == "<Auto>" || setting.Java == null || setting.Java.JavaPath == string.Empty)
                         {
-                            Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_CannotFandRightJava") + version.JavaVersion, position: ToastPosition.Top, window: Const.Window.mainWindow);
+                            LaunchBtn.IsEnabled = true;
+                            if (msg)
+                                Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_CannotFandRightJava") + version.JavaVersion, position: ToastPosition.Top, window: Const.Window.mainWindow);
+                            else
+                                MessageBoxX.Show(LangHelper.Current.GetText("Launch_LaunchGame_Click_CannotFandRightJava"), "Yu Minecraft Launcher");
                         }
                         else
                         {
-                            Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_JavaError"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+                            LaunchBtn.IsEnabled = true;
+                            if (msg)
+                                Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_JavaError"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+                            else
+                                MessageBoxX.Show(LangHelper.Current.GetText("Launch_LaunchGame_Click_JavaError"), "Yu Minecraft Launcher");
                         }
                     }
                 }
                 else
                 {
-                    Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_NoChooseGame"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+                    LaunchBtn.IsEnabled = true;
+                    if (msg)
+                        Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_NoChooseGame"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+                    else
+                        MessageBoxX.Show(LangHelper.Current.GetText("Launch_LaunchGame_Click_NoChooseGame"), "Yu Minecraft Launcher");
                     GameCoreText.Text = LangHelper.Current.GetText("Launch_NoChooseGame");
                 }
             }
             else
             {
-                Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_AccountError"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+                LaunchBtn.IsEnabled = true;
+                if (msg)
+                    Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_AccountError"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+                else
+                    MessageBoxX.Show(LangHelper.Current.GetText("Launch_LaunchGame_Click_AccountError"), "Yu Minecraft Launcher");
             }
+            await Task.Delay(2000);
+            LaunchBtn.IsEnabled = true;
         }
 
         private void Process_Exited(object? sender, EventArgs e)
@@ -465,6 +523,53 @@ namespace YMCL.Main.UI.Main.Pages.Launch
             {
                 Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_GameExit"), position: ToastPosition.Top, window: Const.Window.mainWindow);
             });
+        }
+
+
+        private void ReturnBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ThicknessAnimation animation = new ThicknessAnimation()
+            {
+                From = new Thickness(0),
+                To = new Thickness(0, PageRoot.ActualHeight, 0, 0),
+                Duration = TimeSpan.Parse("0:0:0.25")
+            };
+            ThicknessAnimation animation1 = new ThicknessAnimation()
+            {
+                From = new Thickness(0, -30, 80, 0),
+                To = new Thickness(0, -80, 80, 00),
+                Duration = TimeSpan.Parse("0:0:0.25")
+            };
+            VersionSettingBorder.BeginAnimation(MarginProperty, animation);
+            ReturnPanelSetting.BeginAnimation(MarginProperty, animation1);
+        }
+
+        private void OpenVersionSettings_Click(object sender, RoutedEventArgs e)
+        {
+            var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
+            if (setting.MinecraftVersionId == null)
+            {
+                Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_NoChooseGame"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+                GameCoreText.Text = LangHelper.Current.GetText("Launch_NoChooseGame");
+                return;
+            }
+            ReturnBtnLabel.Content = LangHelper.Current.GetText("Launch_ToVersionSetting") + " - " + GameCoreText.Text;
+            VersionSettingBorder.Visibility = Visibility.Visible;
+            VersionListView.IsEnabled = true;
+            ThicknessAnimation animation = new ThicknessAnimation()
+            {
+                To = new Thickness(0),
+                From = new Thickness(0, PageRoot.ActualHeight, 0, 0),
+                Duration = TimeSpan.Parse("0:0:0.25")
+            };
+            ThicknessAnimation animation1 = new ThicknessAnimation()
+            {
+                To = new Thickness(0, -30, 80, 0),
+                From = new Thickness(0, -80, 80, 00),
+                Duration = TimeSpan.Parse("0:0:0.25")
+            };
+            VersionSettingBorder.BeginAnimation(MarginProperty, animation);
+            ReturnPanelSetting.BeginAnimation(MarginProperty, animation1);
         }
     }
 }

@@ -44,18 +44,30 @@
                 </DockPanel>
             </Border>
             <Border CornerRadius="5" Background="{DynamicResource 1x}" Height="45" Margin="0,0,0,10" >
+                <DockPanel LastChildFill="True">
+                    <Label HorizontalAlignment="Left" VerticalAlignment="Center" Margin="18,0,0,0" FontSize="15" Foreground="{DynamicResource TextColor}" FontFamily="{DynamicResource Font}" Content="{x:Static properties:MainLang.Launch_GameWindow}"/>
+                    <DockPanel x:Name="CustomGameWindow" Visibility="Visible" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="6.5,0,6.5,0" VerticalAlignment="Center">
+                        <ui:NumberBox x:Name="GameWidth" HorizontalAlignment="Center" Text="854" SpinButtonPlacementMode="Compact" FontSize="15.5" LostFocus="GameWidth_LostFocus" />
+                        <ui:FontIcon Glyph="&#xE711;" Foreground="{DynamicResource TextColor}" FontSize="19" VerticalAlignment="Center" Margin="3,3,2,0" />
+                        <ui:NumberBox x:Name="GameHeight" HorizontalAlignment="Center" Text="480" SpinButtonPlacementMode="Compact" FontSize="15.5" LostFocus="GameHeight_LostFocus"/>
+                    </DockPanel>
+                    <ComboBox x:Name="GameWindowComboBox" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="18,0,0,0" SelectionChanged="GameWindowComboBox_SelectionChanged" FontFamily="{DynamicResource Font}">
+                        <ComboBoxItem Content="{x:Static properties:MainLang.Launch_DefaultSize}" FontFamily="{DynamicResource Font}"/>
+                        <ComboBoxItem Content="{x:Static properties:MainLang.Launch_FullScreen}" FontFamily="{DynamicResource Font}"/>
+                        <ComboBoxItem Content="{x:Static properties:MainLang.Launch_CustomSize}" FontFamily="{DynamicResource Font}"/>
+                    </ComboBox>
+                </DockPanel>
+            </Border>
+            <Border CornerRadius="5" Background="{DynamicResource 1x}" Height="45" Margin="0,0,0,10" >
                 <DockPanel LastChildFill="False">
                     <Label HorizontalAlignment="Left" VerticalAlignment="Center" Margin="18,0,0,0" FontSize="15" Foreground="{DynamicResource TextColor}" FontFamily="{DynamicResource Font}" Content="{x:Static properties:MainLang.Launch_AloneCore}"/>
-                    <ui:ToggleSwitch x:Name="AloneCoreToggle" HorizontalAlignment="Right" FontFamily="{DynamicResource Font}" Toggled="AloneCoreToggle_Toggled" DockPanel.Dock="Right" >
-                        <ui:ToggleSwitch.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </ui:ToggleSwitch.RenderTransform>
-                    </ui:ToggleSwitch>
+                    <ui:ToggleSwitch x:Name="AloneCoreToggle" HorizontalAlignment="Right" FontFamily="{DynamicResource Font}" Toggled="AloneCoreToggle_Toggled" DockPanel.Dock="Right" OffContent="Off" OnContent="On" Margin="0,0,-68,0" />
+                </DockPanel>
+            </Border>
+            <Border CornerRadius="5" Background="{DynamicResource 1x}" Height="45" Margin="0,0,0,10" >
+                <DockPanel LastChildFill="False">
+                    <Label HorizontalAlignment="Left" VerticalAlignment="Center" Margin="18,0,0,0" FontSize="15" Foreground="{DynamicResource TextColor}" FontFamily="{DynamicResource Font}" Content="{x:Static properties:MainLang.Launch_OutputLogReceived}"/>
+                    <ui:ToggleSwitch x:Name="OutputLogToggle" HorizontalAlignment="Right" FontFamily="{DynamicResource Font}" Toggled="OutputLogToggle_Toggled" DockPanel.Dock="Right" OffContent="Off" OnContent="On" Margin="0,0,-68,0" />
                 </DockPanel>
             </Border>
         </StackPanel>

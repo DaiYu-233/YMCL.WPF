@@ -46,19 +46,6 @@ namespace YMCL.Main
             {
                 LangHelper.Current.ChangedCulture(setting.Language);
             }
-            if (!File.Exists(Const.LaunchPageXamlPath) || File.ReadAllText(Const.LaunchPageXamlPath) == null)
-            {
-                //Type type = MethodBase.GetCurrentMethod().DeclaringType;
-                //string _namespace = type.Namespace;
-                //Assembly _assembly = Assembly.GetExecutingAssembly();
-                //string resourceName = _namespace + ".Public.Text.LaunchPage.xaml";
-                //Stream stream = _assembly.GetManifestResourceStream(resourceName);
-                //using (StreamReader reader = new StreamReader(stream))
-                //{
-                //    string result = reader.ReadToEnd();
-                //    File.WriteAllText(Const.LaunchPageXamlPath, result);
-                //}
-            }
             if (!File.Exists(Const.MinecraftFolderDataPath))
             {
                 var minecraftFolder = new List<string>()
