@@ -26,6 +26,7 @@ using YMCL.Main.Public.Class;
 using System.Windows.Interop;
 using YMCL.Main.UI.TaskProgress;
 using MinecraftLaunch.Classes.Models.Auth;
+using YMCL.Main.UI.Main.Pages.Setting.Pages.Account;
 
 namespace YMCL.Main.UI.Main.Pages.Launch
 {
@@ -63,6 +64,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                 GameCoreText.Text = LangHelper.Current.GetText("Launch_NoChooseGame");
                 File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
             }
+            LoadAccounts();
         }
 
         private void OpenVersionList_Click(object sender, RoutedEventArgs e)
@@ -84,10 +86,11 @@ namespace YMCL.Main.UI.Main.Pages.Launch
             };
             VersionListBorder.BeginAnimation(MarginProperty, animation);
             ReturnPanel.BeginAnimation(MarginProperty, animation1);
+
             LoadMinecraftVersion();
         }
 
-        private void ReturnHomePage_Click(object sender, RoutedEventArgs e)
+        private async void ReturnHomePage_Click(object sender, RoutedEventArgs e)
         {
             ThicknessAnimation animation = new ThicknessAnimation()
             {
@@ -103,6 +106,8 @@ namespace YMCL.Main.UI.Main.Pages.Launch
             };
             VersionListBorder.BeginAnimation(MarginProperty, animation);
             ReturnPanel.BeginAnimation(MarginProperty, animation1);
+            await Task.Delay(250);
+            VersionListBorder.Visibility = Visibility.Hidden;
         }
 
         void LoadMinecraftVersion()
@@ -280,23 +285,6 @@ namespace YMCL.Main.UI.Main.Pages.Launch
             LoadMinecraftVersion();
         }
 
-
-
-        private async void LaunchBtn_Click(iNKORE.UI.WPF.Modern.Controls.SplitButton sender, iNKORE.UI.WPF.Modern.Controls.SplitButtonClickEventArgs args)
-        {
-            //LaunchGame.IsEnabled = false;
-            var version = VersionListView.SelectedItem as GameEntry;
-            if (version == null)
-            {
-                Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_NoChooseGame"), position: ToastPosition.Top, window: Const.Window.mainWindow);
-                GameCoreText.Text = LangHelper.Current.GetText("Launch_NoChooseGame");
-                return;
-            }
-            LaunchClient(version.Id);
-            await Task.Delay(2000);
-            LaunchBtn.IsEnabled = true;
-        }
-
         public async void LaunchClient(string versionId, string minecraftPath = "", bool msg = true, string serverIP = "")
         {
             var mcPath = minecraftPath;
@@ -308,7 +296,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
             }
             var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
             var accountJson = JsonConvert.DeserializeObject<List<Public.Class.AccountInfo>>(File.ReadAllText(Const.AccountDataPath))[setting.AccountSelectionIndex];
-            Account account = null;
+            MinecraftLaunch.Classes.Models.Auth.Account account = null;
             if (accountJson != null)
             {
                 if (accountJson.AccountType == SettingItem.AccountType.Offline)
@@ -394,7 +382,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                                     }
                                 }
                             }
-                            
+
                             config = new LaunchConfig
                             {
                                 Account = account, //账户信息的获取请使用验证器，使用方法请跳转至验证器文档查看
@@ -444,9 +432,6 @@ namespace YMCL.Main.UI.Main.Pages.Launch
 
                                             if (setting.GetOutput)
                                             {
-                                                //taskProgress.Activate();
-                                                //Toast.Show(message: LangHelper.Current.GetText("GameExitLogWindow"), position: ToastPosition.Top, window: taskProgress);
-                                                //await Task.Delay(3000);
                                                 taskProgress.Hide();
                                             }
                                         });
@@ -513,7 +498,6 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                 else
                     MessageBoxX.Show(LangHelper.Current.GetText("Launch_LaunchGame_Click_AccountError"), "Yu Minecraft Launcher");
             }
-            await Task.Delay(2000);
             LaunchBtn.IsEnabled = true;
         }
 
@@ -525,8 +509,52 @@ namespace YMCL.Main.UI.Main.Pages.Launch
             });
         }
 
+        List<AccountInfo> accounts = JsonConvert.DeserializeObject<List<AccountInfo>>(File.ReadAllText(Const.AccountDataPath));
+        void LoadAccounts()
+        {
+            accounts = JsonConvert.DeserializeObject<List<AccountInfo>>(File.ReadAllText(Const.AccountDataPath));
+            AccountComboBox.Items.Clear();
+            var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
+            accounts.ForEach(x =>
+            {
+                AccountComboBox.Items.Add($"{x.AccountType} {x.Name}");
+            });
 
-        private void ReturnBtn_Click(object sender, RoutedEventArgs e)
+            if (AccountComboBox.Items.Count > 0)
+            {
+                if (setting.AccountSelectionIndex <= AccountComboBox.Items.Count)
+                {
+                    AccountComboBox.SelectedIndex = setting.AccountSelectionIndex;
+                }
+                else
+                {
+                    AccountComboBox.SelectedItem = AccountComboBox.Items[0];
+                }
+            }
+            else
+            {
+                DateTime now = DateTime.Now;
+                File.WriteAllText(Const.AccountDataPath, JsonConvert.SerializeObject(new List<AccountInfo>() { new AccountInfo
+                {
+                    AccountType = SettingItem.AccountType.Offline,
+                    AddTime = now.ToString("yyyy-MM-ddTHH:mm:sszzz"),
+                    Data = null,
+                    Name = "Steve"
+                }}, Formatting.Indented));
+                LoadAccounts();
+            }
+
+            if (setting.AccountSelectionIndex != -1)
+            {
+                MinecraftLaunch.Skin.SkinResolver SkinResolver = new(Convert.FromBase64String(accounts[setting.AccountSelectionIndex].Skin));
+                var bytes = MinecraftLaunch.Skin.ImageHelper.ConvertToByteArray(SkinResolver.CropSkinHeadBitmap());
+                var skin = Function.BytesToBase64(bytes);
+
+                SkinHeadImage.Source = Function.Base64ToImage(skin);
+            }
+        }
+
+        private async void ReturnBtn_Click(object sender, RoutedEventArgs e)
         {
             ThicknessAnimation animation = new ThicknessAnimation()
             {
@@ -542,6 +570,8 @@ namespace YMCL.Main.UI.Main.Pages.Launch
             };
             VersionSettingBorder.BeginAnimation(MarginProperty, animation);
             ReturnPanelSetting.BeginAnimation(MarginProperty, animation1);
+            await Task.Delay(250);
+            VersionSettingBorder.Visibility = Visibility.Hidden;
         }
 
         private void OpenVersionSettings_Click(object sender, RoutedEventArgs e)
@@ -570,6 +600,30 @@ namespace YMCL.Main.UI.Main.Pages.Launch
             };
             VersionSettingBorder.BeginAnimation(MarginProperty, animation);
             ReturnPanelSetting.BeginAnimation(MarginProperty, animation1);
+        }
+
+        private void LaunchBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var version = VersionListView.SelectedItem as GameEntry;
+            if (version == null)
+            {
+                Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_NoChooseGame"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+                GameCoreText.Text = LangHelper.Current.GetText("Launch_NoChooseGame");
+                return;
+            }
+            LaunchClient(version.Id);
+        }
+
+        private void AccountComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
+            if (AccountComboBox.SelectedIndex == setting.AccountSelectionIndex || AccountComboBox.SelectedIndex == -1)
+            {
+                return;
+            }
+            setting.AccountSelectionIndex = AccountComboBox.SelectedIndex;
+            File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+            LoadAccounts();
         }
     }
 }

@@ -47,29 +47,35 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Account
 
         void LoadAccounts()
         {
+            accounts = JsonConvert.DeserializeObject<List<AccountInfo>>(File.ReadAllText(Const.AccountDataPath));
             AccountsListView.Items.Clear();
             var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
             accounts.ForEach(x =>
             {
+                MinecraftLaunch.Skin.SkinResolver SkinResolver = new(Convert.FromBase64String(x.Skin));
+                var bytes = MinecraftLaunch.Skin.ImageHelper.ConvertToByteArray(SkinResolver.CropSkinHeadBitmap());
+                var skin = Function.BytesToBase64(bytes);
                 AccountsListView.Items.Add(new
                 {
                     x.Name,
                     x.AccountType,
                     x.AddTime,
                     x.Data,
-                    Skin=Function.Base64ToImage(x.Skin)
+                    Skin = Function.Base64ToImage(skin)
                 });
             });
 
             if (AccountsListView.Items.Count > 0)
             {
-                if (setting.AccountSelectionIndex <= AccountsListView.Items.Count)
+                if (setting.AccountSelectionIndex + 1 <= AccountsListView.Items.Count)
                 {
                     AccountsListView.SelectedIndex = setting.AccountSelectionIndex;
                 }
                 else
                 {
                     AccountsListView.SelectedItem = AccountsListView.Items[0];
+                    setting.AccountSelectionIndex = 0;
+                    File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
                 }
             }
             else
@@ -82,6 +88,15 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Account
                     Data = null,
                     Name = "Steve"
                 }}, Formatting.Indented));
+                setting.AccountSelectionIndex = 0;
+                File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+                LoadAccounts();
+            }
+            if (setting.AccountSelectionIndex == -1 && accounts.Count > 0)
+            {
+                setting.AccountSelectionIndex = 0;
+                File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+                LoadAccounts();
             }
         }
 
@@ -98,7 +113,7 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Account
             {
                 DelAccountButton.IsEnabled = true;
             }
-            if (AccountsListView.SelectedIndex == setting.AccountSelectionIndex)
+            if (AccountsListView.SelectedIndex == setting.AccountSelectionIndex || AccountsListView.SelectedIndex == -1)
             {
                 return;
             }
@@ -169,8 +184,8 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Account
                     Data = null,
                 });
             }
-            LoadAccounts();
             File.WriteAllText(Const.AccountDataPath, JsonConvert.SerializeObject(accounts, Formatting.Indented));
+            LoadAccounts();
             AccountsListView.SelectedIndex = 0;
         }
 
@@ -189,11 +204,11 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Account
             });
 
             var userProfile = await authenticator.AuthenticateAsync();
+            Toast.Show(message: LangHelper.Current.GetText("VerifyingAccount"), position: ToastPosition.Top, window: Const.Window.mainWindow);
 
             MinecraftLaunch.Skin.Class.Fetchers.MicrosoftSkinFetcher skinFetcher = new(userProfile.Uuid.ToString());
             var bytes = await skinFetcher.GetSkinAsync();
-            MinecraftLaunch.Skin.SkinResolver skinResolver = new(bytes);
-            var skin = MinecraftLaunch.Skin.ImageHelper.ConvertToByteArray(skinResolver.CropSkinHeadBitmap());
+            
 
             DateTime now = DateTime.Now;
             accounts.Add(new AccountInfo
@@ -202,11 +217,11 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Account
                 AddTime = now.ToString("yyyy-MM-ddTHH:mm:sszzz"),
                 Data = JsonConvert.SerializeObject(userProfile, formatting: Formatting.Indented),
                 Name = userProfile.Name,
-                Skin = Function.BytesToBase64(skin)
+                Skin = Function.BytesToBase64(bytes)
             });
 
-            LoadAccounts();
             File.WriteAllText(Const.AccountDataPath, JsonConvert.SerializeObject(accounts, Formatting.Indented));
+            LoadAccounts();
             LoginMicrosoftDialog.Hide();
             Const.Window.mainWindow.Activate();
             AccountsListView.SelectedIndex = AccountsListView.Items.Count - 1;
@@ -217,6 +232,11 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Account
             Process.Start("explorer.exe", verificationUrl);
             LoginMicrosoftDialog.Hide();
             System.Windows.Clipboard.SetText(LoginCodeText.Text);
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            LoadAccounts();
         }
     }
 }

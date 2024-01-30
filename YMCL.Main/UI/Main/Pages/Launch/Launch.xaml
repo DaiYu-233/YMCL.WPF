@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:properties="clr-namespace:YMCL.Main.Public.Lang"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:YMCL.Main.UI.Main.Pages.Launch"
-      mc:Ignorable="d" Loaded="Page_Loaded" x:Name="PageRoot" >
+      mc:Ignorable="d" Loaded="Page_Loaded" x:Name="PageRoot" d:DesignHeight="394.433" d:DesignWidth="695" >
     <Page.Triggers>
         <EventTrigger RoutedEvent="Page.Loaded">
             <EventTrigger.Actions>
@@ -19,18 +19,29 @@
         </EventTrigger>
     </Page.Triggers>
     <Grid>
-        <ui:SplitButton x:Name="LaunchBtn" MinWidth="220" Height="55" Margin="0,0,30,30" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="LaunchBtn_Click">
-            <ui:SplitButton.Flyout>
-                <ui:MenuFlyout>
-                    <MenuItem x:Name="OpenVersionList" Header="{x:Static properties:MainLang.Launch_ToVersionList}" FontFamily="{DynamicResource Font}" Click="OpenVersionList_Click"/>
-                    <MenuItem x:Name="OpenVersionSettings" Header="{x:Static properties:MainLang.Launch_ToVersionSetting}" FontFamily="{DynamicResource Font}" Click="OpenVersionSettings_Click"/>
-                </ui:MenuFlyout>
-            </ui:SplitButton.Flyout>
-            <StackPanel>
-                <TextBlock Text="{x:Static properties:MainLang.Launch_LaunchGame}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" FontFamily="{DynamicResource Font}"/>
-                <TextBlock x:Name="GameCoreText" Text="{x:Static properties:MainLang.Launch_NoChooseGame}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12" FontFamily="{DynamicResource Font}" Margin="0,2,0,0"/>
-            </StackPanel>
-        </ui:SplitButton>
+        <ui:ClippingBorder Background="{DynamicResource 1x}" HorizontalAlignment="Right" Margin="10,10,10,10" Width="257" CornerRadius="5,5,5,5" BorderThickness="2,2,2,2" BorderBrush="{DynamicResource TitleBarColor}">
+            <DockPanel>
+                <DockPanel VerticalAlignment="Bottom" Margin="10,0,10,10" DockPanel.Dock="Bottom">
+                    <ComboBox x:Name="AccountComboBox" DockPanel.Dock="Top" Margin="0,0,0,6.5" HorizontalAlignment="Stretch" FontFamily="{DynamicResource Font}" SelectionChanged="AccountComboBox_SelectionChanged"/>
+                    <Button x:Name="LaunchBtn" MinWidth="220" Margin="0,0,0,6.5" HorizontalAlignment="Stretch" VerticalAlignment="Top" Click="LaunchBtn_Click" DockPanel.Dock="Top">
+                        <StackPanel>
+                            <TextBlock Text="{x:Static properties:MainLang.Launch_LaunchGame}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="13" FontFamily="{DynamicResource Font}" Margin="0,3,0,0"/>
+                            <TextBlock x:Name="GameCoreText" Text="{x:Static properties:MainLang.Launch_NoChooseGame}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12" FontFamily="{DynamicResource Font}" Margin="0,2,0,3"/>
+                        </StackPanel>
+                    </Button>
+                    <UniformGrid DockPanel.Dock="Top" Rows="1" Columns="2" Height="34" >
+                        <Button Content="{x:Static properties:MainLang.Launch_ToVersionList}" FontFamily="{DynamicResource Font}" Click="OpenVersionList_Click"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,3.25,0"/>
+                        <Button Content="{x:Static properties:MainLang.Launch_ToVersionSetting}" FontFamily="{DynamicResource Font}" Click="OpenVersionSettings_Click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="3.25,0,0,0"/>
+                    </UniformGrid>
+                </DockPanel>
+                <Grid DockPanel.Dock="Top" >
+                    <ui:ClippingBorder HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="90" CornerRadius="5,5,5,5">
+                        <Image x:Name="SkinHeadImage"/>
+                    </ui:ClippingBorder>
+                </Grid>
+            </DockPanel>
+        </ui:ClippingBorder>
+
         <Border x:Name="VersionListBorder" Background="{DynamicResource 1x}" CornerRadius="5,5,5,5" Margin="10,10,10,10" Visibility="Hidden">
             <DockPanel>
                 <DockPanel VerticalAlignment="Top" Margin="5,10,5,0" DockPanel.Dock="Top">
