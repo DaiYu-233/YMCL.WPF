@@ -26,7 +26,7 @@
                     <Button x:Name="LaunchBtn" MinWidth="220" Margin="0,0,0,6.5" HorizontalAlignment="Stretch" VerticalAlignment="Top" Click="LaunchBtn_Click" DockPanel.Dock="Top">
                         <StackPanel>
                             <TextBlock Text="{x:Static properties:MainLang.Launch_LaunchGame}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="13" FontFamily="{DynamicResource Font}" Margin="0,3,0,0"/>
-                            <TextBlock x:Name="GameCoreText" Text="{x:Static properties:MainLang.Launch_NoChooseGame}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12" FontFamily="{DynamicResource Font}" Margin="0,2,0,3"/>
+                            <TextBlock x:Name="GameCoreText" Text="{x:Static properties:MainLang.Launch_NoChooseGame}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12" FontFamily="{DynamicResource Font}" Margin="0,2,0,3" TextWrapping="Wrap" TextAlignment="Center"/>
                         </StackPanel>
                     </Button>
                     <UniformGrid DockPanel.Dock="Top" Rows="1" Columns="2" Height="34" >

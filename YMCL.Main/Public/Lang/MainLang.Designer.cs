@@ -610,7 +610,7 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
-        ///   查找类似 无法找到正确Java： 的本地化字符串。
+        ///   查找类似 YMCL无法找到当前需要的Java：Java 的本地化字符串。
         /// </summary>
         public static string Launch_LaunchBtn_Click_CannotFandRightJava {
             get {

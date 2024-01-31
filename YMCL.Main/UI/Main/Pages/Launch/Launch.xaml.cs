@@ -561,7 +561,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
         {
             ThicknessAnimation animation = new ThicknessAnimation()
             {
-                From = new Thickness(0),
+                From = new Thickness(0, -20, 0, 0),
                 To = new Thickness(0, PageRoot.ActualHeight, 0, 0),
                 Duration = TimeSpan.Parse("0:0:0.25")
             };
@@ -591,7 +591,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
             VersionListView.IsEnabled = true;
             ThicknessAnimation animation = new ThicknessAnimation()
             {
-                To = new Thickness(0),
+                To = new Thickness(0, -20, 0, 0),
                 From = new Thickness(0, PageRoot.ActualHeight, 0, 0),
                 Duration = TimeSpan.Parse("0:0:0.25")
             };

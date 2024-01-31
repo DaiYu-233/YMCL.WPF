@@ -442,7 +442,7 @@
     <value>Java错误</value>
   </data>
   <data name="Launch_LaunchBtn_Click_CannotFandRightJava" xml:space="preserve">
-    <value>无法找到正确Java：</value>
+    <value>YMCL无法找到当前需要的Java：Java</value>
   </data>
   <data name="Launch_LaunchBtn_Click_FinishLaunch" xml:space="preserve">
     <value>启动完成，等待游戏窗口出现</value>

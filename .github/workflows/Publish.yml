@@ -1,10 +1,11 @@
 name: Publish
 on:
-  workflow_dispatch:
   push:
-    branches: [ "**" ]
-env:
-  compile-flags: "-c Release"
+    branches:
+      - main
+  release:
+    types:
+      - published
   
 jobs:
   main:

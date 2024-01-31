@@ -41,8 +41,7 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Account
         public Account()
         {
             InitializeComponent();
-            LoadAccounts();
-
+            //LoadAccounts();
         }
 
         void LoadAccounts()
@@ -165,8 +164,9 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Account
                     Data = null,
                     Name = OfflineUserNameTextBox.Text
                 });
-                LoadAccounts();
+                
                 File.WriteAllText(Const.AccountDataPath, JsonConvert.SerializeObject(accounts, Formatting.Indented));
+                LoadAccounts();
                 LoginOfflineDialog.Hide();
             }
         }

@@ -5,7 +5,12 @@ VisualStudioVersion = 17.8.34316.72
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YMCL.Main", "YMCL.Main\YMCL.Main.csproj", "{602316A5-AF22-4AEF-B45B-FCD3EC75572B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YMCL.Test", "YMCL.Test\YMCL.Test.csproj", "{1B3E3AC5-52FD-401E-927A-FB1E83C8C8D5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YMCL.Test", "YMCL.Test\YMCL.Test.csproj", "{1B3E3AC5-52FD-401E-927A-FB1E83C8C8D5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{43B99D52-5F82-43AF-8C8E-9C7D832BCD8F}"
+	ProjectSection(SolutionItems) = preProject
+		Resources.Designer.t4 = Resources.Designer.t4
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,7 +31,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {AA3DCF72-989A-4AF3-B1D8-E38534D8879A}
 		RESX_NeutralResourcesLanguage = zh-Hans
+		SolutionGuid = {AA3DCF72-989A-4AF3-B1D8-E38534D8879A}
 	EndGlobalSection
 EndGlobal
