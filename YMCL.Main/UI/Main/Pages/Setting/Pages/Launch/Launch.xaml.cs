@@ -37,7 +37,6 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launch
 
             GameWindowComboBox.SelectedIndex = (int)setting.GameWindow;
         }
-
         void LoadMinecraftFolder()
         {
             minecraftFolder = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(Const.MinecraftFolderDataPath));
@@ -85,7 +84,6 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launch
                 JavaComboBox.SelectedItem = setting.Java;
             }
         }
-
         private void MinecraftFolderComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
@@ -100,7 +98,6 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launch
             setting.MinecraftFolder = MinecraftFolderComboBox.SelectedItem.ToString();
             File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
         }
-
         private void AddMinecraftFolder_Click(object sender, RoutedEventArgs e)
         {
             FolderBrowserDialog dialog = new FolderBrowserDialog();
@@ -149,7 +146,6 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launch
                 }
             }
         }
-
         private void DelMinecraftFolder_Click(object sender, RoutedEventArgs e)
         {
             var index = MinecraftFolderComboBox.SelectedIndex;
@@ -166,7 +162,6 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launch
             setting.MinecraftFolder = MinecraftFolderComboBox.SelectedItem.ToString();
             File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
         }
-
         private void AutoFindJava_Click(object sender, RoutedEventArgs e)
         {
             JavaFetcher javaFetcher = new JavaFetcher();
@@ -186,17 +181,16 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launch
                 }
             }
             var str = LangHelper.Current.GetText("Launch_AutoFindJava_Click_ScanCompleted").Split("{|}");
-            Toast.Show(Const.Window.mainWindow, $"{str[0]}{javas.Count}{str[1]}{includeItem}{str[2]}", ToastPosition.Top);
             temp.ForEach(javas.Add);
             foreach (var item in javas)
             {
                 javasPath.Add(item.JavaPath);
             }
+            Toast.Show(Const.Window.mainWindow, $"{str[0]}{javas.Count}{str[1]}{includeItem}{str[2]}", ToastPosition.Top);
             File.WriteAllText(Const.JavaDataPath, JsonConvert.SerializeObject(javas, Formatting.Indented));
             LoadJavas();
             if (javas.Count > 0) { JavaComboBox.SelectedIndex = 0; }
         }
-
         private void JavaComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
@@ -221,7 +215,6 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launch
             }
             File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
         }
-
         private void ManualAddJava_Click(object sender, RoutedEventArgs e)
         {
             Microsoft.Win32.OpenFileDialog openFileDialog = new()
@@ -267,13 +260,11 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launch
                 }
             }
         }
-
         private void SilderBox_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             SilderBox.Value = Math.Round(SilderBox.Value);
             SilderInfo.Text = $"{SilderBox.Value}M";
         }
-
         struct MEMORYSTATUSEX
         {
             public int dwLength;
@@ -288,7 +279,6 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launch
         };
         [DllImport("kernel32.dll")]
         static extern bool GlobalMemoryStatusEx(ref MEMORYSTATUSEX LpBuffer);
-
         void LoadMem(double value)
         {
             MEMORYSTATUSEX status = new MEMORYSTATUSEX();
@@ -297,14 +287,12 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launch
             SilderBox.Maximum = status.ullTotalPhys / 1024 / 1024;
             SilderBox.Value = value;
         }
-
         private void SilderBox_PreviewMouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
             setting.MaxMem = Math.Round(SilderBox.Value);
             File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
         }
-
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             LoadMinecraftFolder();
@@ -319,7 +307,6 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launch
                 GameWindowComboBox.Margin = new Thickness(18, 0, -1 * CustomGameWindow.ActualWidth - 6.8, 0);
             }
         }
-
         private void AloneCoreToggle_Toggled(object sender, RoutedEventArgs e)
         {
             var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
@@ -330,7 +317,6 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launch
             setting.AloneCore = AloneCoreToggle.IsOn;
             File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
         }
-
         private void GameWindowComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (GameWindowComboBox.SelectedIndex == 2)
@@ -350,7 +336,6 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launch
                 File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
             }
         }
-
         private void OutputLogToggle_Toggled(object sender, RoutedEventArgs e)
         {
             var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
@@ -361,14 +346,12 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launch
             setting.GetOutput = OutputLogToggle.IsOn;
             File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
         }
-
         private void GameHeight_LostFocus(object sender, RoutedEventArgs e)
         {
             var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
             setting.GameHeight = Convert.ToDouble(GameHeight.Text);
             File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
         }
-
         private void GameWidth_LostFocus(object sender, RoutedEventArgs e)
         {
             var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));

@@ -462,4 +462,43 @@
   <data name="Launch_LaunchBtn_Click_CannotFandRightJava" xml:space="preserve">
     <value>YMCL не может найти нужную вам Java прямо сейчас: Java</value>
   </data>
+  <data name="Launch_VersionFolder" xml:space="preserve">
+    <value>Папка версий</value>
+  </data>
+  <data name="Launch_SavesFolder" xml:space="preserve">
+    <value>Архивировать папку</value>
+  </data>
+  <data name="Launch_ModFolder" xml:space="preserve">
+    <value>Папка модификаций</value>
+  </data>
+  <data name="Launch_ResourcePackFolder" xml:space="preserve">
+    <value>Папка пакета ресурсов</value>
+  </data>
+  <data name="Launch_ShaderPackFolder" xml:space="preserve">
+    <value>Папка Light Pack</value>
+  </data>
+  <data name="Launch_UseGlobalSettings" xml:space="preserve">
+    <value>Использовать общие настройки</value>
+  </data>
+  <data name="Launch_SelectAll" xml:space="preserve">
+    <value>Выбрать всё</value>
+  </data>
+  <data name="Launch_DeselectAll" xml:space="preserve">
+    <value>Не выбирайте ни одного</value>
+  </data>
+  <data name="Launch_DisableSelectedItem" xml:space="preserve">
+    <value>Отключить выбранное</value>
+  </data>
+  <data name="Launch_EnableSelectedItem" xml:space="preserve">
+    <value>Включить Проверено</value>
+  </data>
+  <data name="Launch_DeleteSelectedItem" xml:space="preserve">
+    <value>Удалить выбранное</value>
+  </data>
+  <data name="Launch_SelectedModCount" xml:space="preserve">
+    <value>Выбрано файлов: {|}</value>
+  </data>
+  <data name="SureDeleteMod" xml:space="preserve">
+    <value>Переместите следующие моды в корзину</value>
+  </data>
 </root>

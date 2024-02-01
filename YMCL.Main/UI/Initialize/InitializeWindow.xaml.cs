@@ -43,7 +43,6 @@ namespace YMCL.Main.UI.Initialize
         int page = 0;
         private System.Timers.Timer timer;
         private int countdown = 40;
-        private CancellationTokenSource cts;
         List<InitializeFile> files = new List<InitializeFile>()
             {
                 new InitializeFile()
@@ -332,7 +331,7 @@ namespace YMCL.Main.UI.Initialize
                 string strHashData = "";
                 byte[] arrbytHashValue;
                 FileStream oFileStream = null;
-                var oMD5Hasher = new MD5CryptoServiceProvider();
+                var oMD5Hasher = MD5.Create();
                 try
                 {
                     oFileStream = new System.IO.FileStream(Path.Combine(Const.PublicDataRootPath, item.Name), System.IO.FileMode.Open, System.IO.FileAccess.Read, System.IO.FileShare.ReadWrite);
@@ -342,7 +341,7 @@ namespace YMCL.Main.UI.Initialize
                     strHashData = strHashData.Replace("-", "");
                     md5 = strHashData;
                 }
-                catch (Exception ex) { }
+                catch (Exception) { }
                 #endregion
                 Debug.WriteLine(md5 == item.MD5);
                 if (File.Exists(Path.Combine(Const.PublicDataRootPath, item.Name)) && md5 != item.MD5)

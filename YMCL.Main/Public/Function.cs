@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,7 +27,6 @@ namespace YMCL.Main.Public
             TimeSpan ts = DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0);
             return Convert.ToInt64(ts.TotalSeconds).ToString();//精确到秒
         }
-
         public static BitmapImage Base64ToImage(string base64)
         {
             byte[] bytes = Convert.FromBase64String(base64);
@@ -37,7 +37,6 @@ namespace YMCL.Main.Public
             image.EndInit();
             return image;
         }
-
         public static string BytesToBase64(byte[] imageBytes)
         {
             string base64String = Convert.ToBase64String(imageBytes);

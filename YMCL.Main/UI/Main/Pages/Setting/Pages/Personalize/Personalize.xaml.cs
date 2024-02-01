@@ -24,7 +24,6 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Personalize
 
             var langs = new List<string>() { "zh-CN 简体中文", "zh-Hant 繁體中文", "en-US English", "ja-JP 日本語", "ru-RU Русский язык" };
             var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
-            bool added = false;
             langs.ForEach(lang =>
             {
                 LanguageComboBox.Items.Add(lang);

@@ -547,11 +547,47 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
+        ///   查找类似 删除选中项 的本地化字符串。
+        /// </summary>
+        public static string Launch_DeleteSelectedItem {
+            get {
+                return ResourceManager.GetString("Launch_DeleteSelectedItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 移除选中项 的本地化字符串。
         /// </summary>
         public static string Launch_DelMinecraftFolder {
             get {
                 return ResourceManager.GetString("Launch_DelMinecraftFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 全不选 的本地化字符串。
+        /// </summary>
+        public static string Launch_DeselectAll {
+            get {
+                return ResourceManager.GetString("Launch_DeselectAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 禁用选中项 的本地化字符串。
+        /// </summary>
+        public static string Launch_DisableSelectedItem {
+            get {
+                return ResourceManager.GetString("Launch_DisableSelectedItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 启用选中项 的本地化字符串。
+        /// </summary>
+        public static string Launch_EnableSelectedItem {
+            get {
+                return ResourceManager.GetString("Launch_EnableSelectedItem", resourceCulture);
             }
         }
         
@@ -799,6 +835,15 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
+        ///   查找类似 Mod 文件夹 的本地化字符串。
+        /// </summary>
+        public static string Launch_ModFolder {
+            get {
+                return ResourceManager.GetString("Launch_ModFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 &lt;未选择游戏核心&gt; 的本地化字符串。
         /// </summary>
         public static string Launch_NoChooseGame {
@@ -822,6 +867,51 @@ namespace YMCL.Main.Public.Lang {
         public static string Launch_Refresh {
             get {
                 return ResourceManager.GetString("Launch_Refresh", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 资源包文件夹 的本地化字符串。
+        /// </summary>
+        public static string Launch_ResourcePackFolder {
+            get {
+                return ResourceManager.GetString("Launch_ResourcePackFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 存档文件夹 的本地化字符串。
+        /// </summary>
+        public static string Launch_SavesFolder {
+            get {
+                return ResourceManager.GetString("Launch_SavesFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 全选 的本地化字符串。
+        /// </summary>
+        public static string Launch_SelectAll {
+            get {
+                return ResourceManager.GetString("Launch_SelectAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 已选择{|}个文件 的本地化字符串。
+        /// </summary>
+        public static string Launch_SelectedModCount {
+            get {
+                return ResourceManager.GetString("Launch_SelectedModCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 光影包文件夹 的本地化字符串。
+        /// </summary>
+        public static string Launch_ShaderPackFolder {
+            get {
+                return ResourceManager.GetString("Launch_ShaderPackFolder", resourceCulture);
             }
         }
         
@@ -867,6 +957,24 @@ namespace YMCL.Main.Public.Lang {
         public static string Launch_ToVersionSetting {
             get {
                 return ResourceManager.GetString("Launch_ToVersionSetting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 使用全局设置 的本地化字符串。
+        /// </summary>
+        public static string Launch_UseGlobalSettings {
+            get {
+                return ResourceManager.GetString("Launch_UseGlobalSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 版本文件夹 的本地化字符串。
+        /// </summary>
+        public static string Launch_VersionFolder {
+            get {
+                return ResourceManager.GetString("Launch_VersionFolder", resourceCulture);
             }
         }
         
@@ -1065,6 +1173,15 @@ namespace YMCL.Main.Public.Lang {
         public static string Setting_Navigation_Launcher {
             get {
                 return ResourceManager.GetString("Setting_Navigation_Launcher", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 将以下Mod移动到回收站 的本地化字符串。
+        /// </summary>
+        public static string SureDeleteMod {
+            get {
+                return ResourceManager.GetString("SureDeleteMod", resourceCulture);
             }
         }
         

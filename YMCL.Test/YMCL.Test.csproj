@@ -9,7 +9,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MinecraftLaunch" Version="3.0.0-preview8" />
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MinecraftLaunch" Version="3.0.0-preview11" />
     <PackageReference Include="MinecraftLaunch.Skin" Version="1.0.0" />
   </ItemGroup>
 

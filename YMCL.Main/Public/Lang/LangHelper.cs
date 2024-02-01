@@ -36,11 +36,11 @@ namespace YMCL.Main.Public.Lang
             this.RaisePropertyChanged("Resources");
         }
 
-        public string GetText(string name, string culture = null)
+        public string GetText(string name, string culture = "")
         {
             var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.SettingDataPath));
             CultureInfo cultureInfo;
-            if (culture == null)
+            if (culture == "")
             {
                 if (setting.Language == "zh-CN" || setting.Language == null)
                 {

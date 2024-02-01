@@ -271,7 +271,6 @@ namespace YMCL.Main.UI.Main
             Height = setting.MainHeight;
             ParameterProcessing();
         }
-
         void ParameterProcessing()
         {
             if (App.StartupArgs.Length > 0)

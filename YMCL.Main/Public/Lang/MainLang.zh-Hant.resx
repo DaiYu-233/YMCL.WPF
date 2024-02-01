@@ -462,4 +462,43 @@
   <data name="Launch_LaunchBtn_Click_CannotFandRightJava" xml:space="preserve">
     <value>YMCL無法找到目前需要的Java：Java</value>
   </data>
+  <data name="Launch_VersionFolder" xml:space="preserve">
+    <value>版本資料夾</value>
+  </data>
+  <data name="Launch_SavesFolder" xml:space="preserve">
+    <value>存檔資料夾</value>
+  </data>
+  <data name="Launch_ModFolder" xml:space="preserve">
+    <value>Mod 資料夾</value>
+  </data>
+  <data name="Launch_ResourcePackFolder" xml:space="preserve">
+    <value>資源包資料夾</value>
+  </data>
+  <data name="Launch_ShaderPackFolder" xml:space="preserve">
+    <value>光影包資料夾</value>
+  </data>
+  <data name="Launch_UseGlobalSettings" xml:space="preserve">
+    <value>使用全域設定</value>
+  </data>
+  <data name="Launch_SelectAll" xml:space="preserve">
+    <value>全選</value>
+  </data>
+  <data name="Launch_DeselectAll" xml:space="preserve">
+    <value>全不選</value>
+  </data>
+  <data name="Launch_DisableSelectedItem" xml:space="preserve">
+    <value>停用選取項目</value>
+  </data>
+  <data name="Launch_EnableSelectedItem" xml:space="preserve">
+    <value>啟用選取項目</value>
+  </data>
+  <data name="Launch_DeleteSelectedItem" xml:space="preserve">
+    <value>刪除選取項目</value>
+  </data>
+  <data name="Launch_SelectedModCount" xml:space="preserve">
+    <value>已選擇{|}個檔案</value>
+  </data>
+  <data name="SureDeleteMod" xml:space="preserve">
+    <value>將以下Mod移到回收站</value>
+  </data>
 </root>

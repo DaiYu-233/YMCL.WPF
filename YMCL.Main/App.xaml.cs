@@ -2,13 +2,11 @@
 using Panuon.WPF.UI;
 using System.Diagnostics;
 using System.IO;
-using System.Reflection;
 using System.Security.Principal;
 using System.Windows;
 using YMCL.Main.Public;
 using YMCL.Main.Public.Class;
 using YMCL.Main.Public.Lang;
-using static System.Windows.Forms.DataFormats;
 using MessageBoxIcon = Panuon.WPF.UI.MessageBoxIcon;
 
 namespace YMCL.Main
@@ -57,7 +55,7 @@ namespace YMCL.Main
                     Function.CreateFolder(Path.Combine(System.Windows.Forms.Application.StartupPath, ".minecraft"));
                     Function.CreateFolder(Path.Combine(System.Windows.Forms.Application.StartupPath, ".minecraft", "versions"));
                 }
-                catch (Exception ex)
+                catch
                 {
                     WindowsIdentity identity = WindowsIdentity.GetCurrent();
                     WindowsPrincipal principal = new WindowsPrincipal(identity);

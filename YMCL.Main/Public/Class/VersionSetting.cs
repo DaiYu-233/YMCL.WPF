@@ -9,7 +9,10 @@ namespace YMCL.Main.Public.Class
 {
     public class VersionSetting
     {
-        public JavaEntry Java { get; set; } = null;
+        public JavaEntry Java { get; set; } = new JavaEntry()
+        {
+            JavaPath = "Global"
+        };
         public double MaxMem { get; set; } = -1;
     }
 }

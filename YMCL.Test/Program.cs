@@ -1,11 +1,11 @@
-﻿namespace YMCL.Test
+﻿using MinecraftLaunch.Utilities;
+
+namespace YMCL.Test
 {
     internal class Program
     {
-        static async Task Main(string[] args)
+        static void Main(string[] args)
         {
-
-            MinecraftLaunch.Components.Resolver.LauncherProfileResolver
 
             Console.ReadKey();
         }

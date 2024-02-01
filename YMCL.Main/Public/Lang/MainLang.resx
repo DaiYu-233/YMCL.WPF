@@ -462,4 +462,43 @@
   <data name="SaveSuccess" xml:space="preserve">
     <value>保存成功</value>
   </data>
+  <data name="Launch_VersionFolder" xml:space="preserve">
+    <value>版本文件夹</value>
+  </data>
+  <data name="Launch_SavesFolder" xml:space="preserve">
+    <value>存档文件夹</value>
+  </data>
+  <data name="Launch_ModFolder" xml:space="preserve">
+    <value>Mod 文件夹</value>
+  </data>
+  <data name="Launch_ResourcePackFolder" xml:space="preserve">
+    <value>资源包文件夹</value>
+  </data>
+  <data name="Launch_ShaderPackFolder" xml:space="preserve">
+    <value>光影包文件夹</value>
+  </data>
+  <data name="Launch_UseGlobalSettings" xml:space="preserve">
+    <value>使用全局设置</value>
+  </data>
+  <data name="Launch_SelectAll" xml:space="preserve">
+    <value>全选</value>
+  </data>
+  <data name="Launch_DeselectAll" xml:space="preserve">
+    <value>全不选</value>
+  </data>
+  <data name="Launch_DisableSelectedItem" xml:space="preserve">
+    <value>禁用选中项</value>
+  </data>
+  <data name="Launch_EnableSelectedItem" xml:space="preserve">
+    <value>启用选中项</value>
+  </data>
+  <data name="Launch_DeleteSelectedItem" xml:space="preserve">
+    <value>删除选中项</value>
+  </data>
+  <data name="Launch_SelectedModCount" xml:space="preserve">
+    <value>已选择{|}个文件</value>
+  </data>
+  <data name="SureDeleteMod" xml:space="preserve">
+    <value>将以下Mod移动到回收站</value>
+  </data>
 </root>

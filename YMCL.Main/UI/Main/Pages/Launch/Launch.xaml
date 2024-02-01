@@ -79,24 +79,77 @@
             </DockPanel>
         </Border>
         <ui:ClippingBorder x:Name="VersionSettingBorder" Background="{DynamicResource 1x}" CornerRadius="5,5,5,5" Visibility="Hidden">
-            <TabControl ui:TabControlHelper.IsAddTabButtonVisible="False" Margin="0,5,0,0">
+            <TabControl ui:TabControlHelper.IsAddTabButtonVisible="False" Margin="0,2,0,0">
                 <TabItem Header="{x:Static properties:MainLang.Launch_TabItem_Overview}" Margin="1,0,0,0" FontFamily="{DynamicResource Font}">
                     <ui:TabItemHelper.Icon>
                         <ui:FontIcon Glyph="&#xE70A;" />
                     </ui:TabItemHelper.Icon>
-                    <Grid Background="{DynamicResource TabControlBackground}"/>
+                    <ScrollViewer>
+                        <StackPanel Background="{DynamicResource TabControlBackground}" Margin="10,10,10,10">
+                            <Border Background="{DynamicResource 1x}" CornerRadius="5,5,5,5" Margin="0,0,0,10">
+                                <StackPanel>
+                                    <TextBlock x:Name="VersionSettingPageVersionId" FontFamily="{DynamicResource Font}" Text="{}{VersionId}" Margin="10,6,0,0" HorizontalAlignment="Left"/>
+                                    <TextBlock Margin="11,-2,0,6" Foreground="{DynamicResource Gray}" FontSize="12" >
+                                        <Run x:Name="VersionSettingPageGameDescriptionVersion" Text="{}{Version}" />
+                                        <Run x:Name="VersionSettingPageGameDescriptionLoaderType" Text="{}{Loader}"/>
+                                        <Run Text="Java"/>
+                                        <Run x:Name="VersionSettingPageGameDescriptionJava" Text="{}{Java}" />
+                                    </TextBlock>
+                                </StackPanel>
+                            </Border>
+                            <Border Background="{DynamicResource 1x}" CornerRadius="5,5,5,5">
+                                <WrapPanel Margin="6.75,10,6.75,10">
+                                    <Button Content="{x:Static properties:MainLang.Launch_VersionFolder}" FontFamily="{DynamicResource Font}" FontSize="13" Margin="3.25,0,3.25,0" Click="OpenVersionFolder_Click" Tag=""/>
+                                    <Button Content="{x:Static properties:MainLang.Launch_SavesFolder}" FontFamily="{DynamicResource Font}" FontSize="13" Margin="3.25,0,3.25,0" Click="OpenVersionFolder_Click" Tag="saves"/>
+                                    <Button Content="{x:Static properties:MainLang.Launch_ModFolder}" FontFamily="{DynamicResource Font}" FontSize="13" Margin="3.25,0,3.25,0" Click="OpenVersionFolder_Click" Tag="mods"/>
+                                    <Button Content="{x:Static properties:MainLang.Launch_ResourcePackFolder}" FontFamily="{DynamicResource Font}" FontSize="13" Margin="3.25,0,3.25,0" Click="OpenVersionFolder_Click" Tag="resourcepacks"/>
+                                    <Button Content="{x:Static properties:MainLang.Launch_ShaderPackFolder}" FontFamily="{DynamicResource Font}" FontSize="13" Margin="3.25,0,3.25,0" Click="OpenVersionFolder_Click" Tag="shaderpacks"/>
+                                </WrapPanel>
+                            </Border>
+                        </StackPanel>
+                    </ScrollViewer>
                 </TabItem>
                 <TabItem Header="{x:Static properties:MainLang.Launch_TabItem_Settings}" Margin="1,0,0,0" FontFamily="{DynamicResource Font}">
                     <ui:TabItemHelper.Icon>
                         <ui:FontIcon Glyph="&#xE713;" />
                     </ui:TabItemHelper.Icon>
-                    <Grid Background="{DynamicResource TabControlBackground}"/>
+                    <ScrollViewer>
+                        <StackPanel Background="{DynamicResource TabControlBackground}" Margin="10,10,10,10"/>
+                    </ScrollViewer>
                 </TabItem>
                 <TabItem Header="{x:Static properties:MainLang.Launch_TabItem_Mods}" Margin="1,0,0,0" FontFamily="{DynamicResource Font}">
                     <ui:TabItemHelper.Icon>
                         <ui:FontIcon Glyph="&#xE74C;" />
                     </ui:TabItemHelper.Icon>
-                    <Grid Background="{DynamicResource TabControlBackground}"/>
+                    <Grid>
+                        <TextBlock x:Name="SelectedModCount" Foreground="{DynamicResource Gray}" Text="{x:Static properties:MainLang.Launch_SelectedModCount}" VerticalAlignment="Top" Margin="6.5,-19,4,0" FontSize="12" DockPanel.Dock="Right" HorizontalAlignment="Right"/>
+                        <DockPanel>
+                            <DockPanel VerticalAlignment="Top" Margin="10,10,6.5,0" DockPanel.Dock="Top">
+                                <Button x:Name="SelectAll" Content="{x:Static properties:MainLang.Launch_SelectAll}" FontFamily="{DynamicResource Font}" Margin="0,0,3.25,0" Click="SelectAll_Click" Height="32"/>
+                                <Button x:Name="DeselectAll" Content="{x:Static properties:MainLang.Launch_DeselectAll}" FontFamily="{DynamicResource Font}" Margin="3.25,0,3.25,0" Click="DeselectAll_Click" Height="32"/>
+                                <Button x:Name="DisableSelectedItem" Content="{x:Static properties:MainLang.Launch_DisableSelectedItem}" FontFamily="{DynamicResource Font}" Margin="3.25,0,3.25,0" Click="DisableSelectedItem_Click" Height="32"/>
+                                <Button x:Name="EnableSelectedItem" Content="{x:Static properties:MainLang.Launch_EnableSelectedItem}" FontFamily="{DynamicResource Font}" Margin="3.25,0,3.25,0" Click="EnableSelectedItem_Click" Height="32"/>
+                                <Button x:Name="DeleteSelectedItem" Content="{x:Static properties:MainLang.Launch_DeleteSelectedItem}" FontFamily="{DynamicResource Font}" Margin="3.25,0,3.25,0" Height="32" Click="DeleteSelectedItem_Click"/>
+                                <Button x:Name="RefreshMod" Content="{x:Static properties:MainLang.Launch_Refresh}" FontFamily="{DynamicResource Font}" Margin="3.25,0,3.25,0" Height="32" Click="RefreshMod_Click" />
+                                <ui:AutoSuggestBox x:Name="ModSearchBox" Margin="3.25,0,3.25,0" FontFamily="{DynamicResource Font}" TextChanged="ModSearchBox_TextChanged">
+                                    <ui:AutoSuggestBox.QueryIcon>
+                                        <ui:FontIcon Glyph="&#xF78B;" />
+                                    </ui:AutoSuggestBox.QueryIcon>
+                                </ui:AutoSuggestBox>
+                            </DockPanel>
+                            <ui:ListView SelectionMode="Multiple" x:Name="VersionModListView" Margin="5,6.5,5,5" d:ItemsSource="{d:SampleData ItemCount=5}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" DockPanel.Dock="Top" SelectionChanged="VersionModListView_SelectionChanged" >
+                                <ui:ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border BorderThickness="4,4,0,4" Margin="-12,0,0,0">
+                                            <DockPanel>
+                                                <TextBlock Text="{Binding Name}" FontSize="14" TextDecorations="{Binding Decorations}" FontFamily="{DynamicResource Font}" Foreground="{DynamicResource TextColor}"/>
+                                            </DockPanel>
+                                        </Border>
+                                    </DataTemplate>
+                                </ui:ListView.ItemTemplate>
+                            </ui:ListView>
+                        </DockPanel>
+                    </Grid>
                 </TabItem>
             </TabControl>
 
