@@ -29,7 +29,7 @@ jobs:
       uses: marvinpinto/action-automatic-releases@latest
       with:
         repo_token: "${{ secrets.TOKEN }}"
-        title: "Release By Github Actions - ${{ github.event.commits[0].timestamp }}"
+        title: "Release By Github Actions - ${{ github.event.commits[0].message }}"
         automatic_release_tag: "AutoRelease-${{ steps.date.outputs.date }}"
         prerelease: true
         files: |
