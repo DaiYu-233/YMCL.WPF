@@ -61,7 +61,7 @@ namespace YMCL.Main.UI.Initialize
                 {
                     Name="YMCL-Updater.exe",
                     Url="https://ymcl.daiyu.fun/YMCL-Updater.exe",
-                    MD5="2A526334DB2E669C02D9792357D5DD55"
+                    MD5="900A0AB9C8F52C25E995DFD6829E515C"
                 }
             };
         List<TextBlock> lines = new List<TextBlock>();

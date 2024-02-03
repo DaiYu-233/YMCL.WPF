@@ -3,6 +3,7 @@ using Panuon.WPF.UI;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Security.Principal;
@@ -109,6 +110,15 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launcher
                                     }
                                 }
                             }
+                            ProcessStartInfo startInfo = new ProcessStartInfo
+                            {
+                                UseShellExecute = true,
+                                WorkingDirectory = Environment.CurrentDirectory,
+                                FileName = System.IO.Path.Combine(Const.PublicDataRootPath, "YMCL-Updater.exe"),
+                                Arguments = $"{savePath} {System.Windows.Forms.Application.ExecutablePath}"
+                            };
+                            Process.Start(startInfo);
+                            App.Current.Shutdown();
                         }
                     }
                     catch (Exception ex)

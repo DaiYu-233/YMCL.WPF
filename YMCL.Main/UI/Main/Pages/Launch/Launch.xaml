@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:properties="clr-namespace:YMCL.Main.Public.Lang"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:YMCL.Main.UI.Main.Pages.Launch"
-      mc:Ignorable="d" Loaded="Page_Loaded" x:Name="PageRoot" d:DesignHeight="394.433" d:DesignWidth="695" >
+      mc:Ignorable="d" Loaded="Page_Loaded" x:Name="PageRoot" >
     <Page.Triggers>
         <EventTrigger RoutedEvent="Page.Loaded">
             <EventTrigger.Actions>

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "YMCL.Updater": {
+      "commandName": "Project",
+      "commandLineArgs": "a a"
+    }
+  }
+}
