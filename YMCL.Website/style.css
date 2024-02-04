@@ -1,0 +1,451 @@
+/* @font-face {
+    font-family: MiSans;
+    src: url(./font/MiSans.ttf);
+    font-display: swap;
+    font-weight: lighter;
+} */
+h1,
+p {
+  color: #4c4948;
+}
+a {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+body {
+  /* -ms-overflow-style: none;  IE and Edge 
+  scrollbar-width: none;  Firefox */
+}
+#DownloadBtnx86 {
+  color: #00ceff;
+  font-size: 15px;
+  position: relative;
+  cursor: url(./img/x2.cur), auto;
+  top: 40px;
+}
+@font-face {
+  font-family: ZhuZiAYuanJWD;
+  src: url(https://cdn.cbd.int/anzhiyu-blog@1.1.6/fonts/ZhuZiAWan.woff2);
+  font-display: swap;
+  font-weight: lighter;
+}
+/* ::-webkit-scrollbar{display: none;} */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: ZhuZiAYuanJWD;
+}
+
+footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.footer {
+  background-color: #f7f7f7;
+  display: flex;
+  justify-content: center;
+  /* height: 55px; */
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  background-color: #ffffff;
+  align-items: center;
+  z-index: 9;
+  position: fixed;
+  height: 42px;
+  box-shadow: 0 6px 7.5px -2px rgba(0, 0, 0, 0.075),
+    0 12.5px 19px 0 rgba(0, 0, 0, 0.023), 0 4.5px 25px 0 rgba(0, 0, 0, 0.023);
+}
+
+header {
+  width: 100vw;
+  height: 42px;
+  align-items: center;
+  display: flex;
+}
+
+header ul {
+  display: flex;
+  position: absolute;
+  right: 22px;
+  list-style: none;
+}
+
+header ul li {
+  margin: 0 5px;
+}
+header ul p {
+  margin: 0 10px;
+}
+
+header ul li a {
+  font-weight: 500;
+  color: #4c4948;
+}
+
+header ul li a:hover {
+  text-decoration: none;
+  font-weight: 500;
+  color: #d66376;
+}
+.logo img {
+  width: 32px;
+  height: 32px;
+}
+header .logo:hover {
+  text-decoration: none;
+}
+header .logo {
+  color: rgb(0, 174, 255);
+  font-size: 2em;
+  font-weight: 700;
+  position: relative;
+  display: flex;
+  width: 35px;
+  height: 35px;
+  left: 5px;
+  float: left;
+  align-items: center;
+}
+
+.img-right {
+  width: 53%;
+  max-width: 410px;
+}
+
+.pp {
+  -webkit-background-clip: text;
+  background-clip: text;
+  background-image: linear-gradient(to right, #a8edea 0%, #fed6e3 100%);
+
+  color: transparent;
+  display: inline;
+  font-style: normal !important;
+  font-weight: inherit !important;
+}
+.pp:hover {
+  background-image: linear-gradient(to right, #fa709a 0%, #fee140 100%);
+}
+.p {
+  font-size: 30px;
+  margin-right: 60px;
+  text-align: center;
+  position: relative;
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-family: ZhuZiAYuanJWD;
+  background-image: linear-gradient(90deg, #ffeb3b, #10ff00b8 33%, #00ecff);
+  color: transparent;
+  display: inline;
+  font-style: normal !important;
+  font-weight: inherit !important;
+  bottom: 30px;
+  user-select: none;
+}
+img{
+  user-select: none;
+}
+#clock {
+  position: absolute;
+  right: 27px;
+  color: #ffa700;
+  height: 22px;
+  width: 70px;
+}
+.div {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  height: 100vh;
+}
+
+.btn {
+  display: block;
+  line-height: 40px;
+  background: #0070ff;
+  border-radius: 4px;
+  color: #fff;
+  text-align: center;
+  font-size: 15px;
+  width: 200px;
+  height: 54px;
+  line-height: 54px;
+  border-radius: 8px;
+  font-size: 20px;
+  margin-right: 19px;
+  margin-bottom: 20px;
+  text-decoration: none !important;
+  font-weight: 500;
+}
+
+@media screen and (max-width: 670px) {
+  .img-right {
+    width: 53% !important;
+    margin-left: 0 !important;
+  }
+
+  .div {
+    flex-direction: column;
+  }
+
+  .btn {
+    top: 25px !important;
+  }
+  .p {
+    margin-right: 0;
+  }
+  .playground {
+    display: none;
+  }
+  .codediv p {
+    font-size: 12px;
+    margin: 0px 25px;
+  }
+  .dddd img {
+    width: 89%;
+  }
+  #DownloadBtnx86 {
+    color: #00ceff;
+    font-size: 15px;
+    position: relative;
+    cursor: url(./img/x2.cur), auto;
+    top: 20px;
+  }
+}
+
+.playground {
+  height: 4650px;
+}
+
+.container {
+  position: sticky;
+  background-color: #e4f1fe;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  justify-content: center;
+}
+
+.outer {
+  width: 904px;
+  height: 525px;
+  border: transparent solid 2px;
+}
+
+.inner {
+  height: 100%;
+
+  position: relative;
+  left: -3720px;
+  display: flex;
+}
+
+.inner img {
+  margin-right: 30px;
+}
+a {
+  cursor: pointer;
+}
+.codediv {
+  height: 300px;
+  display: flex;
+  background-color: #ffffff;
+  flex-direction: column;
+  scroll-snap-align: start;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.codediv h1 {
+  margin: 0;
+  font-size: 30px;
+  position: relative;
+  font-family: ZhuZiAYuanJWD;
+  font-style: normal !important;
+  font-weight: inherit !important;
+  margin-top: 33px;
+  height: 30px;
+  margin-bottom: 25px;
+}
+
+.dddd {
+  height: 300px;
+  display: flex;
+  background-color: #ffffff;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.inputBox {
+  position: relative;
+  width: 95%;
+  position: relative;
+  top: 20px;
+  left: 10px;
+}
+
+.inputBox input {
+  width: 100%;
+  padding: 10px 0 5px;
+  background: transparent;
+  outline: none;
+  box-shadow: none;
+  border: none;
+  color: #ff9800;
+  font-size: 1em;
+  letter-spacing: 0.1em;
+  transition: 0.5s;
+}
+
+.inputBox span {
+  position: absolute;
+  left: 0;
+  padding: 10px 0 5px;
+  padding-left: 2px;
+  pointer-events: none;
+  font-size: 1em;
+  color: #00000080;
+  /* text-transform: uppercase; */
+  /* 定义无小写字母，仅有大写字母 */
+  letter-spacing: 0.1em;
+  /* 是增加（值为正）或减少（值为负）字符间距 */
+  transition: 0.5s;
+}
+
+.inputBox input:valid~span,
+/* 表单元素的值需要根据指定条件验证时设置指定样式 */
+
+.inputBox input:focus~span
+
+/* 选择具有焦点的时候 */ {
+  color: #b0a4e3;
+  transform: translateY(-16px);
+  /* 将文字向Y轴（向上）平移16px */
+  font-size: 0.65em;
+}
+
+.inputBox i
+
+/* 可见的一个线 */ {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background: #838383;
+  overflow: hidden;
+}
+
+.inputBox i::before
+
+/* 在i标签的左边创建（伪元素）一个跟i等大的一条线，加上炫彩颜色 */ {
+  content: "";
+  position: absolute;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    #eebd89,
+    #d13abd,
+    #c973ff,
+    #6cc6cb,
+    #9fa5d5,
+    #ead6ee
+  );
+  animation: runing 1s linear infinite;
+  transition: 0.5s;
+}
+
+.inputBox input:valid ~ i::before,
+.inputBox input:focus ~ i::before {
+  left: 0;
+}
+
+/* 创建动画 */
+@keyframes runing {
+  0% {
+    background-position-x: 0;
+  }
+
+  100% {
+    background-position-x: 250px;
+  }
+}
+#svg {
+  width: 19px;
+  height: 19px;
+  display: flex;
+  position: absolute;
+  right: 25px;
+  list-style: none;
+  display: none;
+}
+/* #svg:hover{
+    background-color: #00ecff;
+    border-radius: 3px;
+} */
+.bar {
+  height: 100vh;
+  width: 100vw;
+  background-color: #f6f8fa;
+  position: fixed;
+  top: 0;
+  display: none;
+  padding: 0 10px;
+  z-index: 8;
+}
+
+.bar ul {
+  height: 100vh;
+  top: 45px;
+  position: relative;
+}
+.bar li {
+  display: block;
+  margin: 10px 0;
+  background-color: #fff281;
+  height: 30px;
+  border: #fff16e solid 2px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  padding-left: 5px;
+}
+
+::selection {
+  background: #23d5ab;
+  color: white;
+}
+::-moz-selection {
+  background: #23d5ab;
+  color: white;
+}
+::-webkit-selection {
+  background: #23d5ab;
+  color: white;
+}
+
+body {
+  cursor: url(./img/x1.cur), auto;
+}
+[type="button"]:not(:disabled),
+[type="reset"]:not(:disabled),
+[type="submit"]:not(:disabled),
+a,
+button:not(:disabled) {
+  cursor: url(./img/x2.cur), auto !important;
+}
+.footer {
+  padding: 20px 40px;
+}

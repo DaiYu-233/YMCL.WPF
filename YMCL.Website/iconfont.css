@@ -1,0 +1,41 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 3868453 */
+  src: url(./font/iconfont.woff2)
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-qiehuanyuyan:before {
+  content: "\e769";
+}
+
+.icon-fensizengchang-1:before {
+  content: "\e61f";
+}
+
+.icon-history:before {
+  content: "\e61c";
+}
+
+.icon-github-fill:before {
+  content: "\e885";
+}
+
+.icon-home:before {
+  content: "\e63f";
+}
+
+.icon-xiazai:before {
+  content: "\e600";
+}
+
+.icon-Chat:before {
+  content: "\e704";
+}
+
