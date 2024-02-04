@@ -1,188 +1,64 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-  <!-- 
-	
-	  Html By 呆鱼！
-
-	 -->
   <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="keywords"
-      content="YMCL,ymcl,Yu Minecraft Launcher,呆鱼,Minecraft Launcher,我的世界启动器" />
+    <meta name="keywords" content="YMCL,ymcl,Yu Minecraft Launcher,呆鱼,Minecraft Launcher,我的世界启动器" />
     <meta name="description" content="Yu Minecraft Launcher(YMCL)官网!" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="./img/YMCL-Icon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="./Assets/img/YMCL-Icon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="./Assets/web/style.css" />
     <title>Yu Minecraft Launcher · YMCL</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="./iconfont.css" />
     <meta name="referrer" content="no-referrer" />
-
-    <script
-      charset="UTF-8"
-      id="LA_COLLECT"
-      src="//sdk.51.la/js-sdk-pro.min.js"></script>
-    <script>
-      LA.init({ id: "KIJVLwHWaiNAjIGG", ck: "KIJVLwHWaiNAjIGG" });
+    <script type="text/javascript">
+      (function (c, l, a, r, i, t, y) {
+        c[a] =
+          c[a] ||
+          function () {
+            (c[a].q = c[a].q || []).push(arguments);
+          };
+        t = l.createElement(r);
+        t.async = 1;
+        t.src = "https://www.clarity.ms/tag/" + i;
+        y = l.getElementsByTagName(r)[0];
+        y.parentNode.insertBefore(t, y);
+      })(window, document, "clarity", "script", "kwkrckpcin");
     </script>
   </head>
 
   <body>
-    <section class="header">
-      <header>
-        <a href="/" class="logo">
-          <p style="font-size: 19px; margin-left: 10px">YMCL</p>
-        </a>
-        <ul>
-          <li><a id="yx">启动器无法运行</a></li>
-          <li><a id="csh">初始化无法完成</a></li>
-          <p> | </p>
-          <li><a id="git">查看源代码</a></li>
-          <li><a id="fk">意见反馈</a></li>
-        </ul>
-        <p id="clock" style="display: none"></p>
-        <svg
-          onclick="list()"
-          id="svg"
-          t="1689074727553"
-          class="icon"
-          viewBox="0 0 1024 1024"
-          version="1.1"
-          xmlns="http://www.w3.org/2000/svg"
-          p-id="5169"
-          width="200"
-          height="200">
-          <path
-            d="M170.666667 277.333333a85.333333 85.333333 0 1 0 0-170.666666 85.333333 85.333333 0 0 0 0 170.666666zM405.333333 128a64 64 0 1 0 0 128h469.333334a64 64 0 0 0 0-128h-469.333334zM341.333333 490.666667A64 64 0 0 1 405.333333 426.666667h469.333334a64 64 0 0 1 0 128h-469.333334A64 64 0 0 1 341.333333 490.666667z m0 298.666666A64 64 0 0 1 405.333333 725.333333h469.333334a64 64 0 0 1 0 128h-469.333334A64 64 0 0 1 341.333333 789.333333z m-85.333333-298.666666a85.333333 85.333333 0 1 1-170.666667 0 85.333333 85.333333 0 0 1 170.666667 0z m-85.333333 384a85.333333 85.333333 0 1 0 0-170.666667 85.333333 85.333333 0 0 0 0 170.666667z"
-            p-id="5170"></path>
-        </svg>
-      </header>
-    </section>
-
-    <div style="background-color: #ffffff">
-      <div class="div">
-        <p class="p">
+    <header>
+      <top>
+        <div id="LogoBar">
+          <a href="/"><img src="./Assets/img/YMCL-Icon.ico" id="Logo" alt="Logo" /></a>
+          <linkbutton onclick="window.location='/'">Yu Minecraft Launcher</linkbutton>
+        </div>
+        <nav id="PCNav">
+          <linkbutton onclick="window.open('https://support.qq.com/products/542108/blog-archive')">常见问题</linkbutton>
+          <linkbutton onclick="window.open('https://support.qq.com/products/542108/')">意见反馈</linkbutton>
+          <linkbutton onclick="window.open('https://github.com/DaiYu-233/YMCL')">浏览源代码</linkbutton>
+        </nav>
+        <nav id="MobileNav">
+          <linkbutton id="SideNavButton" onclick="TrunSideNav()">菜单</linkbutton>
+        </nav>
+      </top>
+      <menu id="SideNav">
+        <linkbutton onclick="window.open('https://support.qq.com/products/542108/blog-archive')">常见问题</linkbutton>
+        <linkbutton onclick="window.open('https://support.qq.com/products/542108/')">意见反馈</linkbutton>
+        <linkbutton onclick="window.open('https://github.com/DaiYu-233/YMCL')">浏览源代码</linkbutton>
+      </menu>
+    </header>
+    <main>
+      <div>
+        <label>
           Yu Minecraft Launcher
-          <a
-            href="javascript:"
-            id="DownloadBtn"
-            style="position: relative; top: 50px; margin: 0 auto"
-            class="btn"
-            >立即下载</a
-          >
-        </p>
-        <img src="./img/YMCL-Icon.svg" class="img-right" alt="img" />
+          <button type="button" id="DownloadButton" onclick="window.open('https://github.com/DaiYu-233/YMCL/releases')">立即下载</button>
+        </label>
+        <img src="./Assets/img/YMCL-Icon.svg" alt="logo" id="BigLogo" />
       </div>
-    </div>
-
-    <div class="playground">
-      <div class="container">
-        <div class="outer">
-          <div class="inner" id="innerr">
-            <img
-              src="https://article.biliimg.com/bfs/article/d78a20e603d7c28678b2ea0a136339b7546750981.png"
-              alt="pic" />
-            <img
-              src="https://article.biliimg.com/bfs/article/99ff10c234c6daa07f8b71d4b6477f13546750981.png"
-              alt="pic" />
-            <img
-              src="https://article.biliimg.com/bfs/article/83daaeac4f8262498b0cd92cafbbf08b546750981.png"
-              alt="pic" />
-            <img
-              src="https://article.biliimg.com/bfs/article/5b6fb4ff0488cbd99179246572420d41546750981.png"
-              alt="pic" />
-            <img
-              src="https://article.biliimg.com/bfs/article/e383e1429a5e50aed428cac756afcd6c546750981.png"
-              style="margin: 0"
-              alt="pic" />
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="codediv" style="background-color: #f7f7f7; height: 100vh">
-      <div class="aaa">
-        <h1 class="codep">外部启动</h1>
-        <p>Yu Minecraft Launcher 支持从外部启动。</p>
-        <p>
-          点击
-          <a style="color: #00d0ff" href="YMCL://">此处</a>
-          启动 Yu Minecraft Launcher。
-        </p>
-        <p>通过自定义某些参数可以实现导入启动器设置、一键安装整合包等操作。</p>
-        <div class="dddd" style="background-color: transparent">
-          <p>附带参数启动</p>
-          <p>
-            点击
-            <a style="color: #00d0ff" onclick="Launch()">此处</a>
-            附带参数启动 Yu Minecraft Launcher。
-          </p>
-          <div class="inputBox">
-            <input type="text" value="" id="keywords" required="required" />
-            <span>参数</span>
-            <i></i>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="bbb">
-      <div class="codediv" style="background-color: #ffffff; height: 100vh">
-        <div class="aaa"></div>
-        <h1 class="codep">开放源代码</h1>
-        <p>Yu Minecraft Launcher 根据 GPLv3 协议开放源代码，开放且自由。</p>
-        <p>访问 GitHub 仓库 以获得详细信息，可以在这里看到YMCL的代码。</p>
-        <div class="dddd">
-          <img
-            src="https://github-stats.ubrong.com/api/pin/?username=DaiYu-233&repo=YMCL&"
-            alt="GitHub"
-            style="cursor: pointer"
-            id="ck" />
-        </div>
-      </div>
-      <div class="codediv" style="background-color: #f7f7f7; height: 100vh">
-        <div class="aaa"></div>
-        <h1 class="codep">捐赠</h1>
-        <a href="https://afdian.net/a/DaiYu_" style="color: #49b1f5"
-          >https://afdian.net/a/DaiYu_</a
-        >
-        <p>Yu Minecraft Launcher 是一个免费、开源的 Minecraft 启动器。</p>
-        <div class="dddd" style="background-color: transparent">
-          <img
-            src="https://article.biliimg.com/bfs/article/ace57599853f60451e504ed706e9a3b1ef0808fb.png"
-            alt="pic" />
-        </div>
-      </div>
-    </div>
-    <div class="bar" id="barr">
-      <ul>
-        <li onclick="window.open('https://github.com/DaiYu-233/YMCL')">
-          Github
-        </li>
-        <li onclick="window.open('https://support.qq.com/product/542108')">
-          意见反馈
-        </li>
-      </ul>
-    </div>
-    <section class="footer">
-      <footer>
-        <a
-          href="https://icp.gov.moe/?keyword=20235012"
-          target="_blank"
-          style="color: #4c4948"
-          >萌ICP备20235012号</a
-        >
-        <p>
-          ©2023 By
-          <a style="color: #4c4948" onclick="window.open('https://daiyu.fun')"
-            >DaiYu</a
-          >
-        </p>
-      </footer>
-    </section>
-    <script src="script.js"></script>
+    </main>
+    <script src="./Assets/web/script.js"></script>
+    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
     <script>
-      console.log("Html   By 呆鱼");
-      console.log("JavaScript   By 呆鱼");
+      LA.init({ id: "KIJVLwHWaiNAjIGG", ck: "KIJVLwHWaiNAjIGG" });
     </script>
   </body>
 </html>

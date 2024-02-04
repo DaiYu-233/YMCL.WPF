@@ -48,19 +48,19 @@ namespace YMCL.Main.UI.Initialize
                 new InitializeFile()
                 {
                     Name="MiSans.ttf",
-                    Url="https://ymcl.daiyu.fun/MiSans.ttf",
+                    Url="https://ymcl.daiyu.fun/Assets/YMCL/MiSans.ttf",
                     MD5="61729D264686DD2DCA5038648EA8C9FE"
                 },
             new InitializeFile()
                 {
                     Name="FluentIcons.ttf",
-                    Url="https://ymcl.daiyu.fun/FluentIcons.ttf",
+                    Url="https://ymcl.daiyu.fun/Assets/YMCL/FluentIcons.ttf",
                     MD5="460A1FFA29FBC20E97861B497601C552"
                 },
                 new InitializeFile()
                 {
                     Name="YMCL-Updater.exe",
-                    Url="https://ymcl.daiyu.fun/YMCL-Updater.exe",
+                    Url="https://ymcl.daiyu.fun/Assets/YMCL/YMCL-Updater.exe",
                     MD5="900A0AB9C8F52C25E995DFD6829E515C"
                 }
             };
