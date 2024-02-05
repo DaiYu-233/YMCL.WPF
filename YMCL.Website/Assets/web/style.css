@@ -31,7 +31,7 @@ h1 {
 }
 function {
   width: calc(100vw - 15px);
-  height: 100vh;
+  height: 460px;
   display: flex;
   align-items: center;
   justify-content: center;
