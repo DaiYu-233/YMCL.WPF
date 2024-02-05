@@ -612,7 +612,8 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                 }
                 else if (accountJson.AccountType == SettingItem.AccountType.Microsoft)
                 {
-                    Toast.Show(message: LangHelper.Current.GetText("VerifyingAccount"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+                    if(msg)
+                        Toast.Show(message: LangHelper.Current.GetText("VerifyingAccount"), position: ToastPosition.Top, window: Const.Window.mainWindow);
 
                     var profile = JsonConvert.DeserializeObject<MicrosoftAccount>(accountJson.Data);
                     MicrosoftAuthenticator authenticator = new(profile, Const.AzureClientId, true);

@@ -292,25 +292,31 @@ namespace YMCL.Main.UI.Main
                         args.Add(a);
                     }
                     //MessageBoxX.Show(urlScheme);
-                    switch (args[0])
+                    try
                     {
-                        case "launch":
-                            if (args.Count >= 3 && args[2] != null)
-                            {
-                                if (args.Count >= 4 && args[3] != null)
+                        switch (args[0])
+                        {
+                            case "launch":
+                                if (args.Count >= 3 && args[2] != null)
                                 {
-                                    launch.LaunchClient(args[1], args[2], false, args[3]);
+                                    if (args.Count >= 4 && args[3] != null)
+                                    {
+                                        launch.LaunchClient(args[1], args[2], false, args[3]);
+                                    }
+                                    else
+                                    {
+                                        launch.LaunchClient(args[1], args[2], false);
+                                    }
                                 }
                                 else
                                 {
-                                    launch.LaunchClient(args[1], args[2], false);
+                                    launch.LaunchClient(args[1], msg: false);
                                 }
-                            }
-                            else
-                            {
-                                launch.LaunchClient(args[1], msg: false);
-                            }
-                            break;
+                                break;
+                        }
+                    }catch
+                    {
+                        MessageBoxX.Show(LangHelper.Current.GetText("ArgsError"),"Yu Minecraft Launcher");
                     }
                 }
             }
