@@ -1,8 +1,7 @@
 {
   "profiles": {
     "YMCL.Main": {
-      "commandName": "Project",
-      "commandLineArgs": "\"ymcl://--| launch 1.12.2/\""
+      "commandName": "Project"
     }
   }
 }

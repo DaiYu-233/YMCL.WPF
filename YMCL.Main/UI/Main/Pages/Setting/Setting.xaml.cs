@@ -11,6 +11,7 @@ namespace YMCL.Main.UI.Main.Pages.Setting
         Pages.Launch.Launch launch = new();
         Pages.Account.Account account = new();
         Pages.Launcher.Launcher about = new();
+        Pages.Download.Download download = new();
 
         public Setting()
         {
@@ -35,6 +36,10 @@ namespace YMCL.Main.UI.Main.Pages.Setting
             if(About.IsSelected)
             {
                 MainFrame.Content= about;
+            }
+            if(Download.IsSelected)
+            {
+                MainFrame.Content = download;
             }
         }
     }

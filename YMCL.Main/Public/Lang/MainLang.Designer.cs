@@ -286,6 +286,15 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
+        ///   查找类似 下载线程过大可能导致设备卡顿 的本地化字符串。
+        /// </summary>
+        public static string DownloadThreadTooBig {
+            get {
+                return ResourceManager.GetString("DownloadThreadTooBig", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 下载更新 的本地化字符串。
         /// </summary>
         public static string DownloadUpdate {
@@ -1042,6 +1051,15 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
+        ///   查找类似 登录失败 的本地化字符串。
+        /// </summary>
+        public static string LoginFail {
+            get {
+                return ResourceManager.GetString("LoginFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似    下载 的本地化字符串。
         /// </summary>
         public static string MainWindow_NavigationDownload {
@@ -1200,6 +1218,15 @@ namespace YMCL.Main.Public.Lang {
         public static string UpdateInfo {
             get {
                 return ResourceManager.GetString("UpdateInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 用户数据处理失败 的本地化字符串。
+        /// </summary>
+        public static string UserDataError {
+            get {
+                return ResourceManager.GetString("UserDataError", resourceCulture);
             }
         }
         

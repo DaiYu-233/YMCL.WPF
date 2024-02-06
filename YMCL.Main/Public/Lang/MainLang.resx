@@ -501,4 +501,13 @@
   <data name="SureDeleteMod" xml:space="preserve">
     <value>将以下Mod移动到回收站</value>
   </data>
+  <data name="LoginFail" xml:space="preserve">
+    <value>登录失败</value>
+  </data>
+  <data name="UserDataError" xml:space="preserve">
+    <value>用户数据处理失败</value>
+  </data>
+  <data name="DownloadThreadTooBig" xml:space="preserve">
+    <value>下载线程过大可能导致设备卡顿</value>
+  </data>
 </root>

@@ -24,7 +24,7 @@
             <Border CornerRadius="5" Background="{DynamicResource 1x}" Height="45" Margin="0,0,0,10" >
                 <DockPanel>
                     <Label HorizontalAlignment="Left" VerticalAlignment="Center" Margin="18,0,0,0" FontSize="15" Foreground="{DynamicResource TextColor}" FontFamily="{DynamicResource Font}" Content="{x:Static properties:MainLang.DownloadSource}"/>
-                    <ComboBox  Margin="18,0,6.5,0" Height="32" x:Name="MinecraftFolderComboBox" FontFamily="{DynamicResource Font}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <ComboBox  Margin="18,0,6.5,0" Height="32" x:Name="DownloadSourceComboBox" FontFamily="{DynamicResource Font}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="DownloadSourceComboBox_SelectionChanged">
                         <ComboBoxItem Content="Mojang"/>
                         <ComboBoxItem Content="BmclApi"/>
                         <ComboBoxItem Content="Mcbbs"/>
@@ -35,9 +35,10 @@
                 <DockPanel>
                     <Label HorizontalAlignment="Left" VerticalAlignment="Center" Margin="18,0,0,0" FontSize="15" Foreground="{DynamicResource TextColor}" FontFamily="{DynamicResource Font}" Content="{x:Static properties:MainLang.MaximumDownloadThread}"/>
                     <TextBlock x:Name="SilderInfo" VerticalAlignment="Center" HorizontalAlignment="Right" RenderTransformOrigin="0.5,0.5" Text="∞" FontFamily="MiSans Medium" TextAlignment="Center" Foreground="{DynamicResource TextColor}" Margin="0,0,18,0" FontSize="14" DockPanel.Dock="Right"/>
-                    <Slider x:Name="SilderBox" Margin="18,0,18,0" VerticalAlignment="Center" SmallChange="1" Minimum="1" Value="1024" Maximum="2048" />
+                    <Slider x:Name="SilderBox" Margin="18,0,18,0" VerticalAlignment="Center" SmallChange="1" Minimum="1" Value="16" Maximum="512" ValueChanged="SilderBox_ValueChanged" LostFocus="SilderBox_LostFocus" />
                 </DockPanel>
             </Border>
+            <ui:InfoBar x:Name="DownloadThreadTooBig" FontFamily="{DynamicResource Font}" Message="{x:Static properties:MainLang.DownloadThreadTooBig}" IsOpen="True" IsClosable="False" Severity="Warning" FontSize="14" CornerRadius="5,5,5,5" Loaded="DownloadThreadTooBig_Loaded" Height="50"/>
         </StackPanel>
     </ScrollViewer>
 </Page>

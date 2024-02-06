@@ -358,5 +358,12 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launch
             setting.GameWidth = Convert.ToDouble(GameWidth.Text);
             File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
         }
+
+        private void SilderBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
+            setting.MaxMem = Math.Round(SilderBox.Value);
+            File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+        }
     }
 }

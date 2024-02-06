@@ -21,22 +21,6 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Account
     /// </summary>
     public partial class Account : Page
     {
-        public class WidthAndHeightToRectConverter : IMultiValueConverter
-        {
-            public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
-            {
-                double width = (double)values[0];
-                double height = (double)values[1];
-                return new Rect(0, 0, width, height);
-            }
-
-            public object[] ConvertBack(object value, Type[] targetTypes, object parameter, System.Globalization.CultureInfo culture)
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-
         List<AccountInfo> accounts = JsonConvert.DeserializeObject<List<AccountInfo>>(File.ReadAllText(Const.AccountDataPath));
         public Account()
         {
@@ -164,7 +148,7 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Account
                     Data = null,
                     Name = OfflineUserNameTextBox.Text
                 });
-                
+
                 File.WriteAllText(Const.AccountDataPath, JsonConvert.SerializeObject(accounts, Formatting.Indented));
                 LoadAccounts();
                 LoginOfflineDialog.Hide();
@@ -192,39 +176,51 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Account
         string verificationUrl;
         public async void MicrosoftLogin()
         {
-            LoginCodeText.Text = LangHelper.Current.GetText("Account_Loading");
-            verificationUrl = string.Empty;
-            CopyCodeAndOpenBrowserBtn.IsEnabled = false;
-            MicrosoftAuthenticator authenticator = new(Const.AzureClientId, true);
-            await authenticator.DeviceFlowAuthAsync(device =>
+            MicrosoftAccount userProfile = new();
+            try
             {
-                LoginCodeText.Text = device.UserCode;
-                verificationUrl = device.VerificationUrl;
-                CopyCodeAndOpenBrowserBtn.IsEnabled = true;
-            });
-
-            var userProfile = await authenticator.AuthenticateAsync();
-            Toast.Show(message: LangHelper.Current.GetText("VerifyingAccount"), position: ToastPosition.Top, window: Const.Window.mainWindow);
-
-            MinecraftLaunch.Skin.Class.Fetchers.MicrosoftSkinFetcher skinFetcher = new(userProfile.Uuid.ToString());
-            var bytes = await skinFetcher.GetSkinAsync();
-            
-
-            DateTime now = DateTime.Now;
-            accounts.Add(new AccountInfo
+                LoginCodeText.Text = LangHelper.Current.GetText("Account_Loading");
+                verificationUrl = string.Empty;
+                CopyCodeAndOpenBrowserBtn.IsEnabled = false;
+                MicrosoftAuthenticator authenticator = new(Const.AzureClientId, true);
+                await authenticator.DeviceFlowAuthAsync(device =>
+                {
+                    LoginCodeText.Text = device.UserCode;
+                    verificationUrl = device.VerificationUrl;
+                    CopyCodeAndOpenBrowserBtn.IsEnabled = true;
+                });
+                userProfile = await authenticator.AuthenticateAsync();
+            }
+            catch (Exception ex)
             {
-                AccountType = SettingItem.AccountType.Microsoft,
-                AddTime = now.ToString("yyyy-MM-ddTHH:mm:sszzz"),
-                Data = JsonConvert.SerializeObject(userProfile, formatting: Formatting.Indented),
-                Name = userProfile.Name,
-                Skin = Function.BytesToBase64(bytes)
-            });
+                Toast.Show(message: LangHelper.Current.GetText("LoginFail"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+                return;
+            }
+            try
+            {
+                Toast.Show(message: LangHelper.Current.GetText("VerifyingAccount"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+                MinecraftLaunch.Skin.Class.Fetchers.MicrosoftSkinFetcher skinFetcher = new(userProfile.Uuid.ToString());
+                var bytes = await skinFetcher.GetSkinAsync();
+                DateTime now = DateTime.Now;
+                accounts.Add(new AccountInfo
+                {
+                    AccountType = SettingItem.AccountType.Microsoft,
+                    AddTime = now.ToString("yyyy-MM-ddTHH:mm:sszzz"),
+                    Data = JsonConvert.SerializeObject(userProfile, formatting: Formatting.Indented),
+                    Name = userProfile.Name,
+                    Skin = Function.BytesToBase64(bytes)
+                });
 
-            File.WriteAllText(Const.AccountDataPath, JsonConvert.SerializeObject(accounts, Formatting.Indented));
-            LoadAccounts();
-            LoginMicrosoftDialog.Hide();
-            Const.Window.mainWindow.Activate();
-            AccountsListView.SelectedIndex = AccountsListView.Items.Count - 1;
+                File.WriteAllText(Const.AccountDataPath, JsonConvert.SerializeObject(accounts, Formatting.Indented));
+                LoadAccounts();
+                LoginMicrosoftDialog.Hide();
+                Const.Window.mainWindow.Activate();
+                AccountsListView.SelectedIndex = AccountsListView.Items.Count - 1;
+            }
+            catch (Exception)
+            {
+                Toast.Show(message: LangHelper.Current.GetText("LoginFail"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+            }
         }
 
         private void CopyCodeAndOpenBrowserBtn_Click(object sender, RoutedEventArgs e)
