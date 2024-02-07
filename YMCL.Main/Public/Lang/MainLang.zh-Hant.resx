@@ -510,4 +510,19 @@
   <data name="DownloadThreadTooBig" xml:space="preserve">
     <value>下載線程過大可能導致設備卡頓</value>
   </data>
+  <data name="LoadVersionSettingFail" xml:space="preserve">
+    <value>載入版本設定失敗</value>
+  </data>
+  <data name="On" xml:space="preserve">
+    <value>開啟</value>
+  </data>
+  <data name="Off" xml:space="preserve">
+    <value>關閉</value>
+  </data>
+  <data name="UseGlobalSetting" xml:space="preserve">
+    <value>使用全域設定</value>
+  </data>
+  <data name="AutoJoinServer" xml:space="preserve">
+    <value>自動進入伺服器</value>
+  </data>
 </root>

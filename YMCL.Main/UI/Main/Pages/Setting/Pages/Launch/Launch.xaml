@@ -33,7 +33,7 @@
                     <Label HorizontalAlignment="Left" VerticalAlignment="Center" Margin="18,0,0,0" FontSize="15" Foreground="{DynamicResource TextColor}" FontFamily="{DynamicResource Font}" Content="Java"/>
                     <Button x:Name="ManualAddJava" Margin="0,0,6.5,0" Height="32" Content="{x:Static properties:MainLang.Launch_ManualAddJava}" FontFamily="{DynamicResource Font}" HorizontalAlignment="Right" DockPanel.Dock="Right" Click="ManualAddJava_Click"/>
                     <Button x:Name="AutoFindJava" Margin="0,0,6.5,0" Height="32" Content="{x:Static properties:MainLang.Launch_AutoFindJava}" FontFamily="{DynamicResource Font}" HorizontalAlignment="Right" DockPanel.Dock="Right" Click="AutoFindJava_Click"/>
-                    <ComboBox DisplayMemberPath="JavaPath" Margin="18,0,6.5,0" Height="32" x:Name="JavaComboBox" FontFamily="{DynamicResource Font}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="JavaComboBox_SelectionChanged" />
+                    <ComboBox SelectedValuePath="JavaPath" DisplayMemberPath="JavaPath" Margin="18,0,6.5,0" Height="32" x:Name="JavaComboBox" FontFamily="{DynamicResource Font}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="JavaComboBox_SelectionChanged" />
                 </DockPanel>
             </Border>
             <Border CornerRadius="5" Background="{DynamicResource 1x}" Height="45" Margin="0,0,0,10" >

@@ -510,4 +510,19 @@
   <data name="DownloadThreadTooBig" xml:space="preserve">
     <value>Поток загрузки слишком велик и может привести к сбою устройства</value>
   </data>
+  <data name="LoadVersionSettingFail" xml:space="preserve">
+    <value>Не удалось загрузить настройки версии</value>
+  </data>
+  <data name="On" xml:space="preserve">
+    <value>включать</value>
+  </data>
+  <data name="Off" xml:space="preserve">
+    <value>закрыть</value>
+  </data>
+  <data name="UseGlobalSetting" xml:space="preserve">
+    <value>Использовать общие настройки</value>
+  </data>
+  <data name="AutoJoinServer" xml:space="preserve">
+    <value>Автоматический вход на сервер</value>
+  </data>
 </root>

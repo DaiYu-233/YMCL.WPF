@@ -75,7 +75,7 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launch
             {
                 JavaComboBox.SelectedItem = setting.Java;
             }
-            if (setting.MinecraftFolder == null || !minecraftFolder.Contains(setting.MinecraftFolder))
+            if (setting.Java == null || !javas.Contains(setting.Java))
             {
                 JavaComboBox.SelectedIndex = 0;
             }
@@ -194,7 +194,7 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launch
         private void JavaComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
-            if (JavaComboBox.SelectedItem == null || JavaComboBox.SelectedItem.ToString() == setting.MinecraftFolder)
+            if (JavaComboBox.SelectedItem == null || JavaComboBox.SelectedItem.ToString() == setting.Java.JavaPath)
             {
                 return;
             }

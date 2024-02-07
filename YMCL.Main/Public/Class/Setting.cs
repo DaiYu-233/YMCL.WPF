@@ -27,6 +27,14 @@ namespace YMCL.Main.Public.Class
         public SettingItem.DownloadSource DownloadSource { get; set; } = SettingItem.DownloadSource.Mcbbs;
     }
 
+    public class VersionSetting
+    {
+        public SettingItem.VersionSettingAloneCore AloneCore { get; set; } = SettingItem.VersionSettingAloneCore.Global;
+        public JavaEntry Java { get; set; } = new JavaEntry() { JavaPath = "Global" };
+        public double MaxMem { get; set; } = -1; // -1 = Global
+        public string AutoJoinServerIp { get; set; } = "";
+    }
+
     public class SettingItem
     {
         public enum Theme
@@ -52,6 +60,12 @@ namespace YMCL.Main.Public.Class
             Mojang,
             BmclApi,
             Mcbbs
+        }
+        public enum VersionSettingAloneCore
+        {
+            Global,
+            Off,
+            On
         }
     }
 }

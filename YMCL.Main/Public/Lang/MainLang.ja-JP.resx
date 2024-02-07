@@ -510,4 +510,19 @@
   <data name="DownloadThreadTooBig" xml:space="preserve">
     <value>ダウンロードスレッドが大きすぎるため、デバイスがクラッシュする可能性があります</value>
   </data>
+  <data name="LoadVersionSettingFail" xml:space="preserve">
+    <value>バージョン設定の読み込みに失敗しました</value>
+  </data>
+  <data name="On" xml:space="preserve">
+    <value>開放する</value>
+  </data>
+  <data name="Off" xml:space="preserve">
+    <value>閉じる</value>
+  </data>
+  <data name="UseGlobalSetting" xml:space="preserve">
+    <value>グローバル設定を使用</value>
+  </data>
+  <data name="AutoJoinServer" xml:space="preserve">
+    <value>自動的にサーバーに入ります</value>
+  </data>
 </root>

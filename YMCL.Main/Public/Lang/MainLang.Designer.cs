@@ -214,6 +214,15 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
+        ///   查找类似 自动进入服务器 的本地化字符串。
+        /// </summary>
+        public static string AutoJoinServer {
+            get {
+                return ResourceManager.GetString("AutoJoinServer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 开始下载更新 的本地化字符串。
         /// </summary>
         public static string BeginUpdate {
@@ -1051,6 +1060,15 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
+        ///   查找类似 加载版本设置失败 的本地化字符串。
+        /// </summary>
+        public static string LoadVersionSettingFail {
+            get {
+                return ResourceManager.GetString("LoadVersionSettingFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 登录失败 的本地化字符串。
         /// </summary>
         public static string LoginFail {
@@ -1110,6 +1128,24 @@ namespace YMCL.Main.Public.Lang {
         public static string MaximumDownloadThread {
             get {
                 return ResourceManager.GetString("MaximumDownloadThread", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 关闭 的本地化字符串。
+        /// </summary>
+        public static string Off {
+            get {
+                return ResourceManager.GetString("Off", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 开启 的本地化字符串。
+        /// </summary>
+        public static string On {
+            get {
+                return ResourceManager.GetString("On", resourceCulture);
             }
         }
         
@@ -1218,6 +1254,15 @@ namespace YMCL.Main.Public.Lang {
         public static string UpdateInfo {
             get {
                 return ResourceManager.GetString("UpdateInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 使用全局设置 的本地化字符串。
+        /// </summary>
+        public static string UseGlobalSetting {
+            get {
+                return ResourceManager.GetString("UseGlobalSetting", resourceCulture);
             }
         }
         
