@@ -525,4 +525,22 @@
   <data name="AutoJoinServer" xml:space="preserve">
     <value>自動的にサーバーに入ります</value>
   </data>
+  <data name="AutoInstall" xml:space="preserve">
+    <value>自動インストール</value>
+  </data>
+  <data name="AllVersion" xml:space="preserve">
+    <value>すべてのバージョン</value>
+  </data>
+  <data name="ReleaseVersion" xml:space="preserve">
+    <value>正式版</value>
+  </data>
+  <data name="SnapshotVersion" xml:space="preserve">
+    <value>プレビュー版</value>
+  </data>
+  <data name="OldVersion" xml:space="preserve">
+    <value>古代バージョン</value>
+  </data>
+  <data name="InstallFinish" xml:space="preserve">
+    <value>インストールが完了しました</value>
+  </data>
 </root>

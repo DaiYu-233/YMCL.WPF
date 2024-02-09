@@ -39,7 +39,7 @@
                         </ui:NavigationViewItem>
                         <ui:NavigationViewItem x:Name="Launcher" FontFamily="{StaticResource Font}" Content="{x:Static properties:MainLang.Setting_Navigation_Launcher}" Tag="NavigationIndividuation" Background="{x:Null}" Height="40" Margin="0,-8,0,0" >
                             <ui:NavigationViewItem.Icon>
-                                <ui:FontIcon Glyph="&#xE756;" />
+                                <ui:FontIcon Glyph="&#xE771;" />
                             </ui:NavigationViewItem.Icon>
                         </ui:NavigationViewItem>
                         <ui:NavigationViewItem x:Name="About" FontFamily="{StaticResource Font}" Content="{x:Static properties:MainLang.Setting_Navigation_About}" Tag="NavigationAbout" Height="40" Margin="0,-8,0,0" >

@@ -525,4 +525,34 @@
   <data name="AutoJoinServer" xml:space="preserve">
     <value>自动进入服务器</value>
   </data>
+  <data name="AutoInstall" xml:space="preserve">
+    <value>自动安装</value>
+  </data>
+  <data name="AllVersion" xml:space="preserve">
+    <value>所有版本</value>
+  </data>
+  <data name="ReleaseVersion" xml:space="preserve">
+    <value>正式版</value>
+  </data>
+  <data name="SnapshotVersion" xml:space="preserve">
+    <value>预览版</value>
+  </data>
+  <data name="OldVersion" xml:space="preserve">
+    <value>远古版</value>
+  </data>
+  <data name="InstallFinish" xml:space="preserve">
+    <value>安装完成</value>
+  </data>
+  <data name="InstallPreview" xml:space="preserve">
+    <value>安装预览</value>
+  </data>
+  <data name="BeginInstall" xml:space="preserve">
+    <value>开始安装</value>
+  </data>
+  <data name="AdditionalInstall" xml:space="preserve">
+    <value>无附加安装</value>
+  </data>
+  <data name="Return" xml:space="preserve">
+    <value>返回</value>
+  </data>
 </root>

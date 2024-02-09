@@ -196,6 +196,24 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
+        ///   查找类似 无附加安装 的本地化字符串。
+        /// </summary>
+        public static string AdditionalInstall {
+            get {
+                return ResourceManager.GetString("AdditionalInstall", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 所有版本 的本地化字符串。
+        /// </summary>
+        public static string AllVersion {
+            get {
+                return ResourceManager.GetString("AllVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 YMCL发生未处理的异常，将崩溃退出 的本地化字符串。
         /// </summary>
         public static string App_UnhandledException {
@@ -214,11 +232,29 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
+        ///   查找类似 自动安装 的本地化字符串。
+        /// </summary>
+        public static string AutoInstall {
+            get {
+                return ResourceManager.GetString("AutoInstall", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 自动进入服务器 的本地化字符串。
         /// </summary>
         public static string AutoJoinServer {
             get {
                 return ResourceManager.GetString("AutoJoinServer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 开始安装 的本地化字符串。
+        /// </summary>
+        public static string BeginInstall {
+            get {
+                return ResourceManager.GetString("BeginInstall", resourceCulture);
             }
         }
         
@@ -471,6 +507,24 @@ namespace YMCL.Main.Public.Lang {
         public static string InitializeWindow_Title_Download {
             get {
                 return ResourceManager.GetString("InitializeWindow_Title_Download", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 安装完成 的本地化字符串。
+        /// </summary>
+        public static string InstallFinish {
+            get {
+                return ResourceManager.GetString("InstallFinish", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 安装预览 的本地化字符串。
+        /// </summary>
+        public static string InstallPreview {
+            get {
+                return ResourceManager.GetString("InstallPreview", resourceCulture);
             }
         }
         
@@ -1141,6 +1195,15 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
+        ///   查找类似 远古版 的本地化字符串。
+        /// </summary>
+        public static string OldVersion {
+            get {
+                return ResourceManager.GetString("OldVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 开启 的本地化字符串。
         /// </summary>
         public static string On {
@@ -1155,6 +1218,24 @@ namespace YMCL.Main.Public.Lang {
         public static string OpenSourceProjectUsageTable {
             get {
                 return ResourceManager.GetString("OpenSourceProjectUsageTable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 正式版 的本地化字符串。
+        /// </summary>
+        public static string ReleaseVersion {
+            get {
+                return ResourceManager.GetString("ReleaseVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 返回 的本地化字符串。
+        /// </summary>
+        public static string Return {
+            get {
+                return ResourceManager.GetString("Return", resourceCulture);
             }
         }
         
@@ -1227,6 +1308,15 @@ namespace YMCL.Main.Public.Lang {
         public static string Setting_Navigation_Launcher {
             get {
                 return ResourceManager.GetString("Setting_Navigation_Launcher", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 预览版 的本地化字符串。
+        /// </summary>
+        public static string SnapshotVersion {
+            get {
+                return ResourceManager.GetString("SnapshotVersion", resourceCulture);
             }
         }
         

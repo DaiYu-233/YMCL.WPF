@@ -48,11 +48,11 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="iNKORE.UI.WPF.Modern" Version="0.9.25.1" />
-    <PackageReference Include="MinecraftLaunch" Version="3.0.0-preview11" />
+    <PackageReference Include="iNKORE.UI.WPF.Modern" Version="0.9.26.1" />
+    <PackageReference Include="MinecraftLaunch" Version="3.0.0" />
     <PackageReference Include="MinecraftLaunch.Skin" Version="1.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="Panuon.WPF.UI" Version="1.1.16.7" />
+    <PackageReference Include="Panuon.WPF.UI" Version="1.1.16.8" />
     <PackageReference Include="UpdateD" Version="1.0.6" />
   </ItemGroup>
 

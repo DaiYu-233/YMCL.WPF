@@ -1,11 +1,10 @@
-﻿<Page x:Class="YMCL.Main.UI.Main.Pages.Download.Download"
+﻿<Page x:Class="YMCL.Main.UI.Main.Pages.Download.Download" xmlns:ui="http://schemas.inkore.net/lib/ui/wpf/modern" xmlns:properties="clr-namespace:YMCL.Main.Public.Lang" xmlns:pu="https://opensource.panuon.com/wpf-ui"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:YMCL.Main.UI.Main.Pages.Download"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
       Title="Download">
     <Page.Triggers>
         <EventTrigger RoutedEvent="Page.Loaded">
@@ -21,6 +20,17 @@
         </EventTrigger>
     </Page.Triggers>
     <Grid>
-        
+        <Grid VerticalAlignment="Top" Height="40" Background="{DynamicResource TitleBarColor}">
+            <ui:NavigationView x:Name="Navigation" IsSettingsVisible="False" PaneDisplayMode="Top" IsBackButtonVisible="Collapsed" SelectionChanged="Navigation_SelectionChanged" >
+                <ui:NavigationView.MenuItems>
+                    <ui:NavigationViewItem x:Name="AutoInstall" IsSelected="True" FontFamily="{StaticResource Font}"  Content="{x:Static properties:MainLang.AutoInstall}" Tag="NavigationLaunch" Height="40" Margin="0,-8,0,0" >
+                        <ui:NavigationViewItem.Icon>
+                            <ui:FontIcon Glyph="&#xE756;" />
+                        </ui:NavigationViewItem.Icon>
+                    </ui:NavigationViewItem>
+                </ui:NavigationView.MenuItems>
+            </ui:NavigationView>
+        </Grid>
+        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" Margin="0,40,0,0" />
     </Grid>
 </Page>

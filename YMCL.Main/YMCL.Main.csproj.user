@@ -9,6 +9,9 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="UI\Main\Pages\Download\Pages\AutoInstall.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UI\Main\Pages\Setting\Pages\Download\Download.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -27,6 +30,9 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="Public\Style\Dark.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\Main\Pages\Download\Pages\AutoInstall.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UI\Main\Pages\Setting\Pages\Download\Download.xaml">

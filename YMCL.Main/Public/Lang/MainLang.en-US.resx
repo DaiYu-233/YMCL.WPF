@@ -525,4 +525,22 @@
   <data name="AutoJoinServer" xml:space="preserve">
     <value>Automatically enter the server</value>
   </data>
+  <data name="AutoInstall" xml:space="preserve">
+    <value>Automatic installation</value>
+  </data>
+  <data name="AllVersion" xml:space="preserve">
+    <value>All versions</value>
+  </data>
+  <data name="ReleaseVersion" xml:space="preserve">
+    <value>formal edition</value>
+  </data>
+  <data name="SnapshotVersion" xml:space="preserve">
+    <value>preview edition</value>
+  </data>
+  <data name="OldVersion" xml:space="preserve">
+    <value>ancient version</value>
+  </data>
+  <data name="InstallFinish" xml:space="preserve">
+    <value>The installation is complete</value>
+  </data>
 </root>

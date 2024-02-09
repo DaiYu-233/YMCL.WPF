@@ -525,4 +525,22 @@
   <data name="AutoJoinServer" xml:space="preserve">
     <value>Автоматический вход на сервер</value>
   </data>
+  <data name="AutoInstall" xml:space="preserve">
+    <value>Автоматическая установка</value>
+  </data>
+  <data name="AllVersion" xml:space="preserve">
+    <value>Все версии</value>
+  </data>
+  <data name="ReleaseVersion" xml:space="preserve">
+    <value>официальное издание</value>
+  </data>
+  <data name="SnapshotVersion" xml:space="preserve">
+    <value>предварительное издание</value>
+  </data>
+  <data name="OldVersion" xml:space="preserve">
+    <value>древняя версия</value>
+  </data>
+  <data name="InstallFinish" xml:space="preserve">
+    <value>Установка завершена</value>
+  </data>
 </root>
