@@ -116,36 +116,48 @@
                     </DockPanel>
                 </ui:ClippingBorder>
                     <ui:ClippingBorder Background="{DynamicResource BackgroundColor}" CornerRadius="5" Margin="10,0,10,6.5" Padding="10" VerticalAlignment="Top">
-                    <Expander Header="Optifine" FontFamily="{DynamicResource Font}" >
-                        <Grid  Height="300">
-                            <ListView x:Name="OptifineListView" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,6.5,0,0" FontFamily="{DynamicResource Font}" />
-                                <ui:ProgressRing Name="OptifineLoading"/>
-                            </Grid>
-                    </Expander>
+                        <Grid>
+                            <Label x:Name="OptifineLabel" Content="Null" FontFamily="{DynamicResource Font}" Margin="6.5,0,6.5,0" HorizontalAlignment="Right"/>
+                            <Expander Header="Optifine" FontFamily="{DynamicResource Font}" >
+                                <Grid  Height="300">
+                                    <ListView x:Name="OptifineListView" Tag="Optifine" SelectionChanged="ModLaderListView_SelectionChanged" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,6.5,0,0" FontFamily="{DynamicResource Font}" />
+                                    <ui:ProgressRing Name="OptifineLoading"/>
+                                </Grid>
+                            </Expander>
+                        </Grid>
                 </ui:ClippingBorder>
                     <ui:ClippingBorder Background="{DynamicResource BackgroundColor}" CornerRadius="5" Margin="10,0,10,6.5" Padding="10" VerticalAlignment="Top">
-                        <Expander Header="Forge" FontFamily="{DynamicResource Font}" >
-                            <Grid  Height="300">
-                                <ListView x:Name="ForgeListView" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,6.5,0,0" FontFamily="{DynamicResource Font}" />
-                                <ui:ProgressRing Name="ForgeLoading"/>
-                            </Grid>
-                        </Expander>
+                        <Grid>
+                            <Label x:Name="ForgeLabel" Content="Null" FontFamily="{DynamicResource Font}" Margin="6.5,0,6.5,0" HorizontalAlignment="Right"/>
+                            <Expander Header="Forge" FontFamily="{DynamicResource Font}" >
+                                <Grid  Height="300">
+                                    <ListView x:Name="ForgeListView" Tag="Forge" SelectionChanged="ModLaderListView_SelectionChanged" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,6.5,0,0" FontFamily="{DynamicResource Font}" />
+                                    <ui:ProgressRing Name="ForgeLoading"/>
+                                </Grid>
+                            </Expander>
+                        </Grid>
                     </ui:ClippingBorder>
                     <ui:ClippingBorder Background="{DynamicResource BackgroundColor}" CornerRadius="5" Margin="10,0,10,6.5" Padding="10" VerticalAlignment="Top">
-                        <Expander Header="Fabric" FontFamily="{DynamicResource Font}" >
-                            <Grid  Height="300">
-                                <ListView DisplayMemberPath="BuildVersion" x:Name="FabricListView" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,6.5,0,0" FontFamily="{DynamicResource Font}" />
-                                <ui:ProgressRing Name="FabricLoading"/>
-                            </Grid>
-                        </Expander>
+                        <Grid>
+                            <Label x:Name="FabricLabel" Content="Null" FontFamily="{DynamicResource Font}" Margin="6.5,0,6.5,0" HorizontalAlignment="Right"/>
+                            <Expander Header="Fabric" FontFamily="{DynamicResource Font}" >
+                                <Grid  Height="300">
+                                    <ListView DisplayMemberPath="BuildVersion" Tag="Fabric" SelectionChanged="ModLaderListView_SelectionChanged" x:Name="FabricListView" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,6.5,0,0" FontFamily="{DynamicResource Font}" />
+                                    <ui:ProgressRing Name="FabricLoading"/>
+                                </Grid>
+                            </Expander>
+                        </Grid>
                     </ui:ClippingBorder>
                     <ui:ClippingBorder Background="{DynamicResource BackgroundColor}" CornerRadius="5" Margin="10,0,10,6.5" Padding="10" VerticalAlignment="Top">
-                        <Expander Header="Quilt" FontFamily="{DynamicResource Font}" >
-                            <Grid  Height="300">
-                                <ListView DisplayMemberPath="BuildVersion" x:Name="QuiltListView" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,6.5,0,0" FontFamily="{DynamicResource Font}" />
-                                <ui:ProgressRing Name="QuiltLoading"/>
-                            </Grid>
-                        </Expander>
+                        <Grid>
+                            <Label x:Name="QuiltLabel" Content="Null" FontFamily="{DynamicResource Font}" Margin="6.5,0,6.5,0" HorizontalAlignment="Right"/>
+                            <Expander Header="Quilt" FontFamily="{DynamicResource Font}" >
+                                <Grid  Height="300">
+                                    <ListView DisplayMemberPath="BuildVersion" Tag="Quilt" x:Name="QuiltListView" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,6.5,0,0" FontFamily="{DynamicResource Font}" SelectionChanged="ModLaderListView_SelectionChanged" />
+                                    <ui:ProgressRing Name="QuiltLoading"/>
+                                </Grid>
+                            </Expander>
+                        </Grid>
                     </ui:ClippingBorder>
                 </StackPanel>
         </ui:ClippingBorder>

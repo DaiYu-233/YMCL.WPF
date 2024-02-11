@@ -76,6 +76,10 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
             ForgeLoading.Visibility = Visibility.Visible;
             FabricLoading.Visibility = Visibility.Visible;
             QuiltLoading.Visibility = Visibility.Visible;
+            OptifineListView.SelectedIndex = -1;
+            ForgeListView.SelectedIndex = -1;
+            FabricListView.SelectedIndex = -1;
+            QuiltListView.SelectedIndex = -1;
 
             //_ = Task.Run(async () =>
             //{
@@ -86,7 +90,7 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
             //        {
 
             //        }
-            //          OptifineLoading.Visibility = Visibility.Hidden;
+            //        OptifineLoading.Visibility = Visibility.Hidden;
             //    });
             //});
             //_ = Task.Run(async () =>
@@ -179,7 +183,7 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
                     Dispatcher.BeginInvoke(() =>
                     {
                         taskProgress.InsertProgressText(x.ProgressStatus);
-                        taskProgress.UpdateProgress(x.Progress*100);
+                        taskProgress.UpdateProgress(x.Progress * 100);
                     });
                 };
 
@@ -196,5 +200,104 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
             });
         }
 
+        private void ModLaderListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var control = (System.Windows.Controls.ListView)sender;
+            var index = control.SelectedIndex;
+            switch (control.Tag)
+            {
+                case "Optifine":
+                    if (index >= 0)
+                    {
+                        OptifineLabel.Content = (control.SelectedItem as Object).ToString();
+                    }
+                    else
+                    {
+                        OptifineLabel.Content = "Null";
+                    }
+                    break;
+                case "Forge":
+                    if (index >= 0)
+                    {
+                        ForgeLabel.Content = (control.SelectedItem as ForgeInstallEntry).Build;
+                    }
+                    else
+                    {
+                        ForgeLabel.Content = "Null";
+                    }
+                    break;
+                case "Fabric":
+                    if (index >= 0)
+                    {
+                        FabricLabel.Content = (control.SelectedItem as FabricBuildEntry).BuildVersion;
+                    }
+                    else
+                    {
+                        FabricLabel.Content = "Null";
+                    }
+                    break;
+                case "Quilt":
+                    if (index >= 0)
+                    {
+                        QuiltLabel.Content = (control.SelectedItem as QuiltBuildEntry).BuildVersion;
+                    }
+                    else
+                    {
+                        QuiltLabel.Content = "Null";
+                    }
+                    break;
+                default:
+                    return;
+            }
+            if (control.SelectedIndex < 0)
+            {
+                return;
+            }
+            var str = string.Empty;
+            switch (control.Tag)
+            {
+                case "Optifine":
+                    FabricListView.SelectedIndex = -1;
+                    QuiltListView.SelectedIndex = -1;
+                    break;
+                case "Forge":
+                    FabricListView.SelectedIndex = -1;
+                    QuiltListView.SelectedIndex = -1;
+                    break;
+                case "Fabric":
+                    OptifineListView.SelectedIndex = -1;
+                    ForgeListView.SelectedIndex = -1;
+                    QuiltListView.SelectedIndex = -1;
+                    break;
+                case "Quilt":
+                    OptifineListView.SelectedIndex = -1;
+                    ForgeListView.SelectedIndex = -1;
+                    FabricListView.SelectedIndex = -1;
+                    break;
+                default:
+                    return;
+            }
+            if (ForgeListView.SelectedIndex >= 0)
+            {
+                var forge = control.SelectedItem as ForgeInstallEntry;
+                str += $"-Forge {forge.Build} ";
+            }
+            if (OptifineListView.SelectedIndex >= 0)
+            {
+                var optifine = control.SelectedItem as Object;
+                str += $"-Optifine {optifine.ToString()} ";
+            }
+            if (FabricListView.SelectedIndex >= 0)
+            {
+                var fabric = control.SelectedItem as FabricBuildEntry;
+                str += $"-Fabric {fabric.BuildVersion} ";
+            }
+            if (QuiltListView.SelectedIndex >= 0)
+            {
+                var quilt = control.SelectedItem as QuiltBuildEntry;
+                str += $"-Quilt {quilt.BuildVersion} ";
+            }
+            AdditionalInstallText.Text = str;
+        }
     }
 }
