@@ -555,4 +555,10 @@
   <data name="Return" xml:space="preserve">
     <value>返回</value>
   </data>
+  <data name="IncludeSpecialWord" xml:space="preserve">
+    <value>包含特殊字符</value>
+  </data>
+  <data name="FileExists" xml:space="preserve">
+    <value>文件夹已存在</value>
+  </data>
 </root>

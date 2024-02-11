@@ -31,6 +31,7 @@ namespace YMCL.Main.UI.Main
     /// </summary>
     public partial class MainWindow : WindowX
     {
+        bool _firstLoad = true;
         #region UI
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -38,6 +39,12 @@ namespace YMCL.Main.UI.Main
             var c = this.Content as UIElement;
             var layer = AdornerLayer.GetAdornerLayer(c);
             layer.Add(new WindowResizeAdorner(c));
+
+            if (_firstLoad)
+            {
+                _firstLoad = false;
+                ParameterProcessing();
+            }
         }
 
         bool isMouseDown = false;
@@ -269,7 +276,6 @@ namespace YMCL.Main.UI.Main
             var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
             Width = setting.MainWidth;
             Height = setting.MainHeight;
-            ParameterProcessing();
         }
         void ParameterProcessing()
         {
@@ -291,7 +297,6 @@ namespace YMCL.Main.UI.Main
                         a = a.Trim('\'');
                         args.Add(a);
                     }
-                    //MessageBoxX.Show(urlScheme);
                     try
                     {
                         switch (args[0])

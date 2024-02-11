@@ -522,6 +522,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
             File.WriteAllText(filePath, JsonConvert.SerializeObject(versionSetting, Formatting.Indented));
         }
         #endregion
+        #region Model
         struct MEMORYSTATUSEX
         {
             public int dwLength;
@@ -542,6 +543,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
             public string File { get; set; }
             public TextDecorationCollection Decorations { get; set; }
         }
+        #endregion
         public Launch()
         {
             InitializeComponent();
@@ -771,7 +773,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
             var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
             var versionSetting = LoadVersionSettings();
             var accountJson = JsonConvert.DeserializeObject<List<Public.Class.AccountInfo>>(File.ReadAllText(Const.AccountDataPath))[setting.AccountSelectionIndex];
-            MinecraftLaunch.Classes.Models.Auth.Account account = null;
+            Account account = null;
             if (accountJson != null)
             {
                 if (accountJson.AccountType == SettingItem.AccountType.Offline)
@@ -808,7 +810,6 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                 {
                     string javaPath = null;
                     var version = resolver.GetGameEntity(versionId);
-
                     if (versionSetting.Java.JavaPath == "Global")
                     {
                         if (setting.Java.JavaPath == "<Auto>" || setting.Java == null || setting.Java.JavaPath == string.Empty)
@@ -857,7 +858,6 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                             javaPath = versionSetting.Java.JavaPath;
                         }
                     }
-
                     if (!string.IsNullOrEmpty(javaPath))
                     {
                         LaunchConfig config = new();
@@ -887,7 +887,6 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                                     port = 25565;
                                 }
                             }
-
                             double maxMem = 0;
                             if (versionSetting.MaxMem == -1)
                             {
@@ -897,7 +896,6 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                             {
                                 maxMem = versionSetting.MaxMem;
                             }
-
                             bool aloneCore = true;
                             if (versionSetting.AloneCore == SettingItem.VersionSettingAloneCore.Global)
                             {
@@ -914,7 +912,6 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                                     aloneCore = true;
                                 }
                             }
-
                             config = new LaunchConfig
                             {
                                 Account = account,
@@ -938,7 +935,6 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                             MessageBoxX.Show($"{LangHelper.Current.GetText("BuildLaunchConfigError")}：{ex.Message}\n\n{ex.ToString()}", "Yu Minecraft Launcher");
                             return;
                         }
-
                         Launcher launcher = new(resolver, config);
 
                         await Task.Run(async () =>
@@ -956,19 +952,18 @@ namespace YMCL.Main.UI.Main.Pages.Launch
 
                                     var watcher = await launcher.LaunchAsync(version.Id);
 
-                                    watcher.Exited += (sender, args) =>
+                                    watcher.Exited += (_, args) =>
                                     {
                                         Dispatcher.BeginInvoke(() =>
                                         {
-                                            Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_GameExit"), position: ToastPosition.Top, window: Const.Window.mainWindow);
-
+                                            Toast.Show(message: $"{LangHelper.Current.GetText("Launch_LaunchGame_Click_GameExit")}：{args.ExitCode}", position: ToastPosition.Top, window: Const.Window.mainWindow);
                                             if (setting.GetOutput)
                                             {
                                                 taskProgress.Hide();
                                             }
                                         });
                                     };
-                                    watcher.OutputLogReceived += async (sender, args) =>
+                                    watcher.OutputLogReceived += async (_, args) =>
                                     {
                                         Debug.WriteLine(args.Text);
                                         await Dispatcher.BeginInvoke(() =>
@@ -976,8 +971,10 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                                             taskProgress.InsertProgressText(args.Text);
                                         });
                                     };
+
                                     await Dispatcher.BeginInvoke(() =>
                                     {
+                                        watcher.Process.WaitForInputIdle();
                                         Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_FinishLaunch"), position: ToastPosition.Top, window: Const.Window.mainWindow);
                                     });
 

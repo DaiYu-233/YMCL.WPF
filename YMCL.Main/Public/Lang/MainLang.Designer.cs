@@ -358,6 +358,15 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
+        ///   查找类似 文件夹已存在 的本地化字符串。
+        /// </summary>
+        public static string FileExists {
+            get {
+                return ResourceManager.GetString("FileExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 发现新版本 的本地化字符串。
         /// </summary>
         public static string FindNewVersion {
@@ -399,6 +408,15 @@ namespace YMCL.Main.Public.Lang {
         public static string GPL3Text {
             get {
                 return ResourceManager.GetString("GPL3Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 包含特殊字符 的本地化字符串。
+        /// </summary>
+        public static string IncludeSpecialWord {
+            get {
+                return ResourceManager.GetString("IncludeSpecialWord", resourceCulture);
             }
         }
         

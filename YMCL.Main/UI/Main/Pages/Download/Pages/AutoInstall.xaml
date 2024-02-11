@@ -25,8 +25,8 @@
                 <ui:ClippingBorder CornerRadius="5" Padding="10" Background="{DynamicResource 1x}" Margin="0,0,0,6.5">
                     <Expander Header="{x:Static properties:MainLang.ReleaseVersion}" FontFamily="{DynamicResource Font}" >
                         <Grid Height="300">
-                            <ui:ListView  x:Name="ReleaseVanlliaListView" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,6.5,0,0" SelectionChanged="VanlliaListView_SelectionChanged" >
-                                <ui:ListView.ItemTemplate>
+                            <ListView  x:Name="ReleaseVanlliaListView" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,6.5,0,0" SelectionChanged="VanlliaListView_SelectionChanged" >
+                                <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <Border BorderThickness="4,4,0,4" Margin="-12,0,0,0">
                                             <DockPanel>
@@ -40,8 +40,8 @@
                                             </DockPanel>
                                         </Border>
                                     </DataTemplate>
-                                </ui:ListView.ItemTemplate>
-                            </ui:ListView>
+                                </ListView.ItemTemplate>
+                            </ListView>
                             <ui:ProgressRing x:Name="ReleaseVanlliaLoading"/>
                         </Grid>
                     </Expander>
@@ -49,8 +49,8 @@
                 <ui:ClippingBorder CornerRadius="5" Padding="10" Background="{DynamicResource 1x}" Margin="0,0,0,6.5">
                     <Expander Header="{x:Static properties:MainLang.SnapshotVersion}" FontFamily="{DynamicResource Font}" >
                         <Grid  Height="300">
-                            <ui:ListView  x:Name="SnapshotVanlliaListView" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,6.5,0,0"  SelectionChanged="VanlliaListView_SelectionChanged" >
-                                <ui:ListView.ItemTemplate>
+                            <ListView  x:Name="SnapshotVanlliaListView" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,6.5,0,0"  SelectionChanged="VanlliaListView_SelectionChanged" >
+                                <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <Border BorderThickness="4,4,0,4" Margin="-12,0,0,0">
                                             <DockPanel>
@@ -64,8 +64,8 @@
                                             </DockPanel>
                                         </Border>
                                     </DataTemplate>
-                                </ui:ListView.ItemTemplate>
-                            </ui:ListView>
+                                </ListView.ItemTemplate>
+                            </ListView>
                             <ui:ProgressRing x:Name="SnapshotVanlliaLoading"/>
                         </Grid>
                     </Expander>
@@ -73,8 +73,8 @@
                 <ui:ClippingBorder CornerRadius="5" Padding="10" Background="{DynamicResource 1x}" MaxHeight="400">
                     <Expander Header="{x:Static properties:MainLang.OldVersion}" FontFamily="{DynamicResource Font}" >
                         <Grid  Height="300">
-                            <ui:ListView  x:Name="OldVanlliaListView" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,6.5,0,0"  SelectionChanged="VanlliaListView_SelectionChanged" >
-                                <ui:ListView.ItemTemplate>
+                            <ListView  x:Name="OldVanlliaListView" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,6.5,0,0"  SelectionChanged="VanlliaListView_SelectionChanged" >
+                                <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <Border BorderThickness="4,4,0,4" Margin="-12,0,0,0">
                                             <DockPanel>
@@ -88,8 +88,8 @@
                                             </DockPanel>
                                         </Border>
                                     </DataTemplate>
-                                </ui:ListView.ItemTemplate>
-                            </ui:ListView>
+                                </ListView.ItemTemplate>
+                            </ListView>
                             <ui:ProgressRing x:Name="OldVanlliaLoading"/>
                         </Grid>
                     </Expander>
@@ -105,7 +105,7 @@
                         <TextBlock x:Name="VersionId" FontFamily="{DynamicResource Font}" FontSize="14" Text="{}{Version}" Margin="10,20,0,0" Foreground="{DynamicResource TextColor}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                         <TextBlock FontFamily="{DynamicResource Font}" x:Name="AdditionalInstallText" Text="{x:Static properties:MainLang.AdditionalInstall}" Margin="10,38,0,0" Foreground="{DynamicResource Gray}" FontSize="11" VerticalAlignment="Top" HorizontalAlignment="Left"/>
                         <TextBox x:Name="CustomGameIdTextBox" VerticalAlignment="Bottom" Margin="5,55,5,5" FontFamily="{DynamicResource Font}"/>
-                        <Button Content="{x:Static properties:MainLang.BeginInstall}" FontFamily="{DynamicResource Font}" VerticalAlignment="Top" Margin="100,20,5,0" HorizontalAlignment="Right"/>
+                        <Button Content="{x:Static properties:MainLang.BeginInstall}" x:Name="InstallBtn" Click="InstallBtn_Click" FontFamily="{DynamicResource Font}" VerticalAlignment="Top" Margin="100,20,5,0" HorizontalAlignment="Right"/>
                     </Grid>
                 </ui:ClippingBorder>
                 <ui:ClippingBorder Background="{DynamicResource BackgroundColor}" CornerRadius="5" Margin="10,0,10,6.5" Padding="10" VerticalAlignment="Top">
@@ -118,28 +118,32 @@
                     <ui:ClippingBorder Background="{DynamicResource BackgroundColor}" CornerRadius="5" Margin="10,0,10,6.5" Padding="10" VerticalAlignment="Top">
                     <Expander Header="Optifine" FontFamily="{DynamicResource Font}" >
                         <Grid  Height="300">
-                            <ui:ListView x:Name="OptifineListView" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,6.5,0,0" FontFamily="{DynamicResource Font}" />
-                        </Grid>
+                            <ListView x:Name="OptifineListView" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,6.5,0,0" FontFamily="{DynamicResource Font}" />
+                                <ui:ProgressRing Name="OptifineLoading"/>
+                            </Grid>
                     </Expander>
                 </ui:ClippingBorder>
                     <ui:ClippingBorder Background="{DynamicResource BackgroundColor}" CornerRadius="5" Margin="10,0,10,6.5" Padding="10" VerticalAlignment="Top">
                         <Expander Header="Forge" FontFamily="{DynamicResource Font}" >
                             <Grid  Height="300">
-                                <ui:ListView x:Name="ForgeListView" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,6.5,0,0" FontFamily="{DynamicResource Font}" />
+                                <ListView x:Name="ForgeListView" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,6.5,0,0" FontFamily="{DynamicResource Font}" />
+                                <ui:ProgressRing Name="ForgeLoading"/>
                             </Grid>
                         </Expander>
                     </ui:ClippingBorder>
                     <ui:ClippingBorder Background="{DynamicResource BackgroundColor}" CornerRadius="5" Margin="10,0,10,6.5" Padding="10" VerticalAlignment="Top">
                         <Expander Header="Fabric" FontFamily="{DynamicResource Font}" >
                             <Grid  Height="300">
-                                <ui:ListView x:Name="FabricListView" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,6.5,0,0" FontFamily="{DynamicResource Font}" />
+                                <ListView DisplayMemberPath="BuildVersion" x:Name="FabricListView" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,6.5,0,0" FontFamily="{DynamicResource Font}" />
+                                <ui:ProgressRing Name="FabricLoading"/>
                             </Grid>
                         </Expander>
                     </ui:ClippingBorder>
                     <ui:ClippingBorder Background="{DynamicResource BackgroundColor}" CornerRadius="5" Margin="10,0,10,6.5" Padding="10" VerticalAlignment="Top">
                         <Expander Header="Quilt" FontFamily="{DynamicResource Font}" >
                             <Grid  Height="300">
-                                <ui:ListView x:Name="QuiltListView" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,6.5,0,0" FontFamily="{DynamicResource Font}" />
+                                <ListView DisplayMemberPath="BuildVersion" x:Name="QuiltListView" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,6.5,0,0" FontFamily="{DynamicResource Font}" />
+                                <ui:ProgressRing Name="QuiltLoading"/>
                             </Grid>
                         </Expander>
                     </ui:ClippingBorder>
