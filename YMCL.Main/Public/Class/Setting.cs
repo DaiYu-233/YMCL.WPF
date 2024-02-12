@@ -16,6 +16,7 @@ namespace YMCL.Main.Public.Class
         public string? Language { get; set; }
         public string? MinecraftFolder { get; set; } = null;
         public string? MinecraftVersionId { get; set; } = null;
+        public string? CustomHomePageNetFileUrl { get; set; } = string.Empty;
         public JavaEntry Java { get; set; } = new JavaEntry() { JavaPath = "<Auto>" };
         public int AccountSelectionIndex { get; set; } = 0;
         public double MaxMem { get; set; } = 1024;
@@ -23,6 +24,7 @@ namespace YMCL.Main.Public.Class
         public bool GetOutput { get; set; } = false;
         public double MaxDownloadThread { get; set; } = 16;
         public SettingItem.Theme Theme { get; set; } = SettingItem.Theme.System;
+        public SettingItem.CustomHomePage CustomHomePage { get; set; } = SettingItem.CustomHomePage.Disable;
         public SettingItem.GameWindow GameWindow { get; set; } = SettingItem.GameWindow.Default;
         public SettingItem.DownloadSource DownloadSource { get; set; } = SettingItem.DownloadSource.Mcbbs;
     }
@@ -37,6 +39,12 @@ namespace YMCL.Main.Public.Class
 
     public class SettingItem
     {
+        public enum CustomHomePage
+        {
+            Disable,
+            LocalFile,
+            NetFile
+        }
         public enum Theme
         {
             System,

@@ -25,7 +25,6 @@ namespace YMCL.Main
 
             Function.CreateFolder(Const.PublicDataRootPath);
             Function.CreateFolder(Const.DataRootPath);
-            Function.CreateFolder(Const.DataRootPath + "\\CustomPage");
 
             DispatcherUnhandledException += App_DispatcherUnhandledException;
 

@@ -22,13 +22,32 @@
     <Grid>
         <ScrollViewer x:Name="VanlliaScrollViewer" Margin="0,0,5,0">
             <StackPanel Margin="10,10,5,10">
+                <ui:ClippingBorder Background="{DynamicResource 1x}" CornerRadius="5" Margin="0,0,0,6.5" Padding="5" VerticalAlignment="Top">
+                    <Grid>
+                        <Label Content="{x:Static properties:MainLang.LatsetVersion}" FontFamily="{DynamicResource Font}" FontSize="13" Foreground="{DynamicResource TextColor}" Background="{x:Null}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,2,0,0"/>
+                        <DockPanel Margin="6.5,25,6.5,6.5">
+                            <ui:ClippingBorder x:Name="LatestReleaseBorder" Background="{DynamicResource BackgroundColor}" DockPanel.Dock="Top" CornerRadius="5" Cursor="Hand" PreviewMouseDown="LatestReleaseBorder_PreviewMouseDown">
+                                <StackPanel Margin="6.5,3.5,6.5,3.5">
+                                    <Label x:Name="LatestReleaseVersionId" FontFamily="{DynamicResource Font}" Content="{}{LatestReleaseId}" Foreground="{DynamicResource TextColor}" Margin="2,0,0,0" HorizontalAlignment="Left"/>
+                                    <Label x:Name="LatestReleaseVersionTime" FontFamily="{DynamicResource Font}" Content="{}{LatestReleaseTime}" FontSize="12" Foreground="{DynamicResource Gray}" Margin="3,0,0,0" HorizontalAlignment="Left"/>
+                                </StackPanel>
+                            </ui:ClippingBorder>
+                            <ui:ClippingBorder x:Name="LatestSnapshotBorder" Background="{DynamicResource BackgroundColor}" DockPanel.Dock="Top" CornerRadius="5" Margin="0,6.5,0,0" Cursor="Hand" PreviewMouseDown="LatestSnapshotBorder_PreviewMouseDown">
+                                <StackPanel Margin="6.5,3.5,6.5,3.5">
+                                    <Label x:Name="LatestSnapshotVersionId" FontFamily="{DynamicResource Font}" Content="{}{LatestSnapshotId}" Foreground="{DynamicResource TextColor}" Margin="2,0,0,0" HorizontalAlignment="Left"/>
+                                    <Label x:Name="LatestSnapshotVersionTime" FontFamily="{DynamicResource Font}" Content="{}{LatestSnapshotTime}" FontSize="12" Foreground="{DynamicResource Gray}" Margin="3,0,0,0" HorizontalAlignment="Left"/>
+                                </StackPanel>
+                            </ui:ClippingBorder>
+                        </DockPanel>
+                    </Grid>
+                </ui:ClippingBorder>
                 <ui:ClippingBorder CornerRadius="5" Padding="10" Background="{DynamicResource 1x}" Margin="0,0,0,6.5">
                     <Expander Header="{x:Static properties:MainLang.ReleaseVersion}" FontFamily="{DynamicResource Font}" >
                         <Grid Height="300">
-                            <ListView  x:Name="ReleaseVanlliaListView" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,6.5,0,0" SelectionChanged="VanlliaListView_SelectionChanged" >
+                            <ListView Tag="Release" x:Name="ReleaseVanlliaListView" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,6.5,0,0" SelectionChanged="VanlliaListView_SelectionChanged" >
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
-                                        <Border BorderThickness="4,4,0,4" Margin="-12,0,0,0">
+                                        <Border BorderThickness="4,4,0,4" Margin="0,0,0,0">
                                             <DockPanel>
                                                 <Grid>
                                                     <TextBlock Text="{Binding Id}" FontSize="14" FontFamily="{DynamicResource Font}"/>
@@ -49,10 +68,10 @@
                 <ui:ClippingBorder CornerRadius="5" Padding="10" Background="{DynamicResource 1x}" Margin="0,0,0,6.5">
                     <Expander Header="{x:Static properties:MainLang.SnapshotVersion}" FontFamily="{DynamicResource Font}" >
                         <Grid  Height="300">
-                            <ListView  x:Name="SnapshotVanlliaListView" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,6.5,0,0"  SelectionChanged="VanlliaListView_SelectionChanged" >
+                            <ListView Tag="Snapshot" x:Name="SnapshotVanlliaListView" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,6.5,0,0"  SelectionChanged="VanlliaListView_SelectionChanged" >
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
-                                        <Border BorderThickness="4,4,0,4" Margin="-12,0,0,0">
+                                        <Border BorderThickness="4,4,0,4" Margin="0,0,0,0">
                                             <DockPanel>
                                                 <Grid>
                                                     <TextBlock Text="{Binding Id}" FontSize="14" FontFamily="{DynamicResource Font}"/>
@@ -73,10 +92,10 @@
                 <ui:ClippingBorder CornerRadius="5" Padding="10" Background="{DynamicResource 1x}" MaxHeight="400">
                     <Expander Header="{x:Static properties:MainLang.OldVersion}" FontFamily="{DynamicResource Font}" >
                         <Grid  Height="300">
-                            <ListView  x:Name="OldVanlliaListView" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,6.5,0,0"  SelectionChanged="VanlliaListView_SelectionChanged" >
+                            <ListView Tag="Old" x:Name="OldVanlliaListView" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,6.5,0,0"  SelectionChanged="VanlliaListView_SelectionChanged" >
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
-                                        <Border BorderThickness="4,4,0,4" Margin="-12,0,0,0">
+                                        <Border BorderThickness="4,4,0,4" Margin="0,0,0,0">
                                             <DockPanel>
                                                 <Grid>
                                                     <TextBlock Text="{Binding Id}" FontSize="14" FontFamily="{DynamicResource Font}"/>
@@ -98,23 +117,26 @@
         </ScrollViewer>
         <ScrollViewer x:Name="InstallPreView" Visibility="Hidden" Margin="0,0,5,0">
             <ui:ClippingBorder Background="{DynamicResource 1x}" Margin="10,10,5,10" CornerRadius="5">
-            <StackPanel>
-                <ui:ClippingBorder Background="{DynamicResource BackgroundColor}" CornerRadius="5" Margin="10,10,10,6.5" Padding="5" VerticalAlignment="Top">
-                    <Grid>
-                        <Label Content="{x:Static properties:MainLang.InstallPreview}" FontFamily="{DynamicResource Font}" FontSize="13" Margin="5,2,0,0" Foreground="{DynamicResource TextColor}" Background="{x:Null}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                        <TextBlock x:Name="VersionId" FontFamily="{DynamicResource Font}" FontSize="14" Text="{}{Version}" Margin="10,20,0,0" Foreground="{DynamicResource TextColor}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                        <TextBlock FontFamily="{DynamicResource Font}" x:Name="AdditionalInstallText" Text="{x:Static properties:MainLang.AdditionalInstall}" Margin="10,38,0,0" Foreground="{DynamicResource Gray}" FontSize="11" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-                        <TextBox x:Name="CustomGameIdTextBox" VerticalAlignment="Bottom" Margin="5,55,5,5" FontFamily="{DynamicResource Font}"/>
-                        <Button Content="{x:Static properties:MainLang.BeginInstall}" x:Name="InstallBtn" Click="InstallBtn_Click" FontFamily="{DynamicResource Font}" VerticalAlignment="Top" Margin="100,20,5,0" HorizontalAlignment="Right"/>
-                    </Grid>
-                </ui:ClippingBorder>
-                <ui:ClippingBorder Background="{DynamicResource BackgroundColor}" CornerRadius="5" Margin="10,0,10,6.5" Padding="10" VerticalAlignment="Top">
-                    <DockPanel LastChildFill="False">
-                        <Label Content="Minecraft" FontFamily="{DynamicResource Font}" Margin="5,0,0,0"/>
-                        <ui:FontIcon x:Name="ReturnToVanlliaList" Glyph="&#xE974;" DockPanel.Dock="Right" Cursor="Hand" PreviewMouseDown="ReturnToVanlliaList_PreviewMouseDown"/>
-                        <Label x:Name="VersionIdLabel" Content="{}{Version}" FontFamily="{DynamicResource Font}" Margin="6.5,0,6.5,0" DockPanel.Dock="Right"/>
-                    </DockPanel>
-                </ui:ClippingBorder>
+                <StackPanel>
+                    <ui:ClippingBorder Background="{DynamicResource BackgroundColor}" CornerRadius="5" Margin="10,10,10,6.5" Padding="5" VerticalAlignment="Top">
+                        <Grid>
+                            <Label Content="{x:Static properties:MainLang.InstallPreview}" FontFamily="{DynamicResource Font}" FontSize="13" Margin="5,2,0,0" Foreground="{DynamicResource TextColor}" Background="{x:Null}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                            <TextBlock x:Name="VersionId" FontFamily="{DynamicResource Font}" FontSize="14" Text="{}{Version}" Margin="10,20,0,0" Foreground="{DynamicResource TextColor}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                            <TextBlock FontFamily="{DynamicResource Font}" x:Name="AdditionalInstallText" Text="{x:Static properties:MainLang.AdditionalInstall}" Margin="10,38,0,0" Foreground="{DynamicResource Gray}" FontSize="11" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                            <TextBox x:Name="CustomGameIdTextBox" VerticalAlignment="Bottom" Margin="5,55,5,5" FontFamily="{DynamicResource Font}"/>
+                            <DockPanel LastChildFill="False" Margin="100,20,5,0" HorizontalAlignment="Right" VerticalAlignment="Top" >
+                                <Button Content="{x:Static properties:MainLang.ViewUpdate}" x:Name="ViewUpdate" FontFamily="{DynamicResource Font}" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,6.5,0" Click="ViewUpdate_Click"/>
+                                <Button Content="{x:Static properties:MainLang.BeginInstall}" x:Name="InstallBtn" Click="InstallBtn_Click" FontFamily="{DynamicResource Font}" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+                            </DockPanel>
+                        </Grid>
+                    </ui:ClippingBorder>
+                    <ui:ClippingBorder Background="{DynamicResource BackgroundColor}" CornerRadius="5" Margin="10,0,10,6.5" Padding="10" VerticalAlignment="Top">
+                        <DockPanel LastChildFill="False">
+                            <Label Content="Minecraft" FontFamily="{DynamicResource Font}" Margin="5,0,0,0"/>
+                            <ui:FontIcon x:Name="ReturnToVanlliaList" Glyph="&#xE974;" DockPanel.Dock="Right" Cursor="Hand" PreviewMouseDown="ReturnToVanlliaList_PreviewMouseDown"/>
+                            <Label x:Name="VersionIdLabel" Content="{}{Version}" FontFamily="{DynamicResource Font}" Margin="6.5,0,6.5,0" DockPanel.Dock="Right"/>
+                        </DockPanel>
+                    </ui:ClippingBorder>
                     <ui:ClippingBorder Background="{DynamicResource BackgroundColor}" CornerRadius="5" Margin="10,0,10,6.5" Padding="10" VerticalAlignment="Top">
                         <Grid>
                             <Label x:Name="OptifineLabel" Content="Null" FontFamily="{DynamicResource Font}" Margin="6.5,0,6.5,0" HorizontalAlignment="Right"/>
@@ -125,7 +147,7 @@
                                 </Grid>
                             </Expander>
                         </Grid>
-                </ui:ClippingBorder>
+                    </ui:ClippingBorder>
                     <ui:ClippingBorder Background="{DynamicResource BackgroundColor}" CornerRadius="5" Margin="10,0,10,6.5" Padding="10" VerticalAlignment="Top">
                         <Grid>
                             <Label x:Name="ForgeLabel" Content="Null" FontFamily="{DynamicResource Font}" Margin="6.5,0,6.5,0" HorizontalAlignment="Right"/>
@@ -160,7 +182,7 @@
                         </Grid>
                     </ui:ClippingBorder>
                 </StackPanel>
-        </ui:ClippingBorder>
+            </ui:ClippingBorder>
         </ScrollViewer>
     </Grid>
 </Page>

@@ -19,37 +19,55 @@
         </EventTrigger>
     </Page.Triggers>
     <Grid>
-        <ui:ClippingBorder Background="{DynamicResource 1x}" HorizontalAlignment="Right" Margin="10,10,10,10" Width="257" CornerRadius="5,5,5,5" BorderThickness="2,2,2,2" BorderBrush="{DynamicResource TitleBarColor}">
-            <DockPanel>
-                <DockPanel VerticalAlignment="Bottom" Margin="10,0,10,10" DockPanel.Dock="Bottom">
-                    <ComboBox x:Name="AccountComboBox" DockPanel.Dock="Top" Margin="0,0,0,6.5" HorizontalAlignment="Stretch" FontFamily="{DynamicResource Font}" SelectionChanged="AccountComboBox_SelectionChanged"/>
-                    <Button x:Name="LaunchBtn" MinWidth="220" Margin="0,0,0,6.5" HorizontalAlignment="Stretch" VerticalAlignment="Top" Click="LaunchBtn_Click" DockPanel.Dock="Top">
-                        <StackPanel>
-                            <TextBlock Text="{x:Static properties:MainLang.Launch_LaunchGame}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="13" FontFamily="{DynamicResource Font}" Margin="0,3,0,0"/>
-                            <TextBlock x:Name="GameCoreText" Text="{x:Static properties:MainLang.Launch_NoChooseGame}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12" FontFamily="{DynamicResource Font}" Margin="0,2,0,3" TextWrapping="Wrap" TextAlignment="Center"/>
-                        </StackPanel>
-                    </Button>
-                    <UniformGrid DockPanel.Dock="Top" Rows="1" Columns="2" Height="34" >
-                        <Button Content="{x:Static properties:MainLang.Launch_ToVersionList}" FontFamily="{DynamicResource Font}" Click="OpenVersionList_Click"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,3.25,0"/>
-                        <Button Content="{x:Static properties:MainLang.Launch_ToVersionSetting}" FontFamily="{DynamicResource Font}" Click="OpenVersionSettings_Click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="3.25,0,0,0"/>
-                    </UniformGrid>
-                </DockPanel>
-                <Grid DockPanel.Dock="Top" >
-                    <ui:ClippingBorder HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="90" CornerRadius="5,5,5,5">
-                        <Image x:Name="SkinHeadImage" PreviewMouseRightButtonDown="SkinHeadImage_PreviewMouseRightButtonDown">
-                            <ui:FlyoutBase.AttachedFlyout>
-                                <ui:MenuFlyout Placement="RightEdgeAlignedBottom" ShowMode="Transient">
-                                    <ui:MenuFlyout.Items>
-                                        <MenuItem x:Name="SaveSkinBtn" Header="{x:Static properties:MainLang.SaveSkin}" FontFamily="{DynamicResource Font}" Click="SaveSkinBtn_Click" />
-                                    </ui:MenuFlyout.Items>
-                                </ui:MenuFlyout>
-                            </ui:FlyoutBase.AttachedFlyout>
-                        </Image>
+        <DockPanel>
+            <ui:ClippingBorder Background="{DynamicResource 1x}" HorizontalAlignment="Right" Margin="0,10,10,10" Width="257" CornerRadius="5,5,5,5" BorderThickness="2,2,2,2" BorderBrush="{DynamicResource TitleBarColor}" DockPanel.Dock="Right">
+                <Grid>
+                    <DockPanel>
+                        <DockPanel VerticalAlignment="Bottom" Margin="10,0,10,10" DockPanel.Dock="Bottom">
+                            <ComboBox x:Name="AccountComboBox" DockPanel.Dock="Top" Margin="0,0,0,6.5" HorizontalAlignment="Stretch" FontFamily="{DynamicResource Font}" SelectionChanged="AccountComboBox_SelectionChanged"/>
+                            <Button x:Name="LaunchBtn" MinWidth="220" Margin="0,0,0,6.5" HorizontalAlignment="Stretch" VerticalAlignment="Top" Click="LaunchBtn_Click" DockPanel.Dock="Top">
+                                <StackPanel>
+                                    <TextBlock Text="{x:Static properties:MainLang.Launch_LaunchGame}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="13" FontFamily="{DynamicResource Font}" Margin="0,3,0,0"/>
+                                    <TextBlock x:Name="GameCoreText" Text="{x:Static properties:MainLang.Launch_NoChooseGame}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12" FontFamily="{DynamicResource Font}" Margin="0,2,0,3" TextWrapping="Wrap" TextAlignment="Center"/>
+                                </StackPanel>
+                            </Button>
+                            <UniformGrid DockPanel.Dock="Top" Rows="1" Columns="2" Height="34" >
+                                <Button Content="{x:Static properties:MainLang.Launch_ToVersionList}" FontFamily="{DynamicResource Font}" Click="OpenVersionList_Click"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,3.25,0"/>
+                                <Button Content="{x:Static properties:MainLang.Launch_ToVersionSetting}" FontFamily="{DynamicResource Font}" Click="OpenVersionSettings_Click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="3.25,0,0,0"/>
+                            </UniformGrid>
+                        </DockPanel>
+                        <Grid DockPanel.Dock="Top" >
+                            <ui:ClippingBorder HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="90" CornerRadius="5,5,5,5">
+                                <Image x:Name="SkinHeadImage" PreviewMouseRightButtonDown="SkinHeadImage_PreviewMouseRightButtonDown">
+                                    <ui:FlyoutBase.AttachedFlyout>
+                                        <ui:MenuFlyout Placement="RightEdgeAlignedBottom" ShowMode="Transient">
+                                            <ui:MenuFlyout.Items>
+                                                <MenuItem x:Name="SaveSkinBtn" Header="{x:Static properties:MainLang.SaveSkin}" FontFamily="{DynamicResource Font}" Click="SaveSkinBtn_Click" />
+                                            </ui:MenuFlyout.Items>
+                                        </ui:MenuFlyout>
+                                    </ui:FlyoutBase.AttachedFlyout>
+                                </Image>
+                            </ui:ClippingBorder>
+                        </Grid>
+
+                    </DockPanel>
+                    <ui:ClippingBorder x:Name="LaunchProgressGrid" Visibility="Hidden" CornerRadius="5" Background="{DynamicResource 1x}">
+                        <DockPanel>
+                            <ui:ClippingBorder CornerRadius="5" Margin="10" VerticalAlignment="Center">
+                                <DockPanel>
+                                    <DockPanel Height="25" Background="{DynamicResource BackgroundColor}" DockPanel.Dock="Bottom">
+                                        <Label x:Name="LaunchProgressBarLabel" Margin="6.5,0,6.5,0" DockPanel.Dock="Right" FontFamily="{DynamicResource Font}" Content="0%" FontSize="12" VerticalAlignment="Center"/>
+                                        <ui:ProgressBar x:Name="LaunchProgressBar" Margin="6.5,7,0,7"/>
+                                    </DockPanel>
+                                    <TextBlock x:Name="LaunchProgressDescription" Margin="0,0,0,10" FontSize="14" TextWrapping="Wrap"/>
+                                </DockPanel>
+                            </ui:ClippingBorder>
+                        </DockPanel>
                     </ui:ClippingBorder>
                 </Grid>
-            </DockPanel>
-        </ui:ClippingBorder>
-
+            </ui:ClippingBorder>
+            <Border x:Name="CustomHomePageRoot" Margin="10,10,10,10"/>
+        </DockPanel>
         <Border x:Name="VersionListBorder" Background="{DynamicResource 1x}" CornerRadius="5,5,5,5" Margin="10,10,10,10" Visibility="Hidden">
             <DockPanel>
                 <DockPanel VerticalAlignment="Top" Margin="5,10,5,0" DockPanel.Dock="Top">
@@ -78,7 +96,7 @@
                 </ui:ListView>
             </DockPanel>
         </Border>
-        <ui:ClippingBorder x:Name="VersionSettingBorder" Background="{DynamicResource 1x}" CornerRadius="5,5,5,5" Visibility="Visible">
+        <ui:ClippingBorder x:Name="VersionSettingBorder" Background="{DynamicResource 1x}" CornerRadius="5,5,5,5" Visibility="Hidden">
             <TabControl ui:TabControlHelper.IsAddTabButtonVisible="False" Margin="0,2,0,0">
                 <TabItem Header="{x:Static properties:MainLang.Launch_TabItem_Overview}" Margin="1,0,0,0" FontFamily="{DynamicResource Font}">
                     <ui:TabItemHelper.Icon>
@@ -184,7 +202,6 @@
             </TabControl>
 
         </ui:ClippingBorder>
-
         <StackPanel x:Name="ReturnPanel" Margin="0,-60,80,0" VerticalAlignment="Top" Height="30" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button x:Name="ReturnHomePage" Style="{DynamicResource SvgButtonsStyle}" Content="{DynamicResource Return}" HorizontalAlignment="Right" VerticalAlignment="Center"  Cursor="Hand" Margin="0,0,3,0" Click="ReturnHomePage_Click" />
             <Label x:Name="ReturnHomePageLabel" Content="{x:Static properties:MainLang.Launch_VersionList}" FontFamily="{DynamicResource Font}" Foreground="{DynamicResource TextColor}" Background="{x:Null}" VerticalAlignment="Center" />

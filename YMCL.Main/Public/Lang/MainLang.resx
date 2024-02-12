@@ -561,4 +561,19 @@
   <data name="FileExists" xml:space="preserve">
     <value>文件夹已存在</value>
   </data>
+  <data name="ViewUpdate" xml:space="preserve">
+    <value>查看更新内容</value>
+  </data>
+  <data name="LatsetVersion" xml:space="preserve">
+    <value>最新版本</value>
+  </data>
+  <data name="WaitForGameWindowAppear" xml:space="preserve">
+    <value>等待游戏窗口出现</value>
+  </data>
+  <data name="LocalFile" xml:space="preserve">
+    <value>本地文件</value>
+  </data>
+  <data name="NetFile" xml:space="preserve">
+    <value>网络文件</value>
+  </data>
 </root>

@@ -556,6 +556,15 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
+        ///   查找类似 最新版本 的本地化字符串。
+        /// </summary>
+        public static string LatsetVersion {
+            get {
+                return ResourceManager.GetString("LatsetVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 添加文件夹 的本地化字符串。
         /// </summary>
         public static string Launch_AddMinecraftFolder {
@@ -1141,6 +1150,15 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
+        ///   查找类似 本地文件 的本地化字符串。
+        /// </summary>
+        public static string LocalFile {
+            get {
+                return ResourceManager.GetString("LocalFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 登录失败 的本地化字符串。
         /// </summary>
         public static string LoginFail {
@@ -1200,6 +1218,15 @@ namespace YMCL.Main.Public.Lang {
         public static string MaximumDownloadThread {
             get {
                 return ResourceManager.GetString("MaximumDownloadThread", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 网络文件 的本地化字符串。
+        /// </summary>
+        public static string NetFile {
+            get {
+                return ResourceManager.GetString("NetFile", resourceCulture);
             }
         }
         
@@ -1389,6 +1416,24 @@ namespace YMCL.Main.Public.Lang {
         public static string VerifyingAccount {
             get {
                 return ResourceManager.GetString("VerifyingAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 查看更新内容 的本地化字符串。
+        /// </summary>
+        public static string ViewUpdate {
+            get {
+                return ResourceManager.GetString("ViewUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 等待游戏窗口出现 的本地化字符串。
+        /// </summary>
+        public static string WaitForGameWindowAppear {
+            get {
+                return ResourceManager.GetString("WaitForGameWindowAppear", resourceCulture);
             }
         }
     }
