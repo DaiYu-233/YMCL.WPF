@@ -16,7 +16,8 @@ namespace YMCL.Main.Public.Class
         public string? Language { get; set; }
         public string? MinecraftFolder { get; set; } = null;
         public string? MinecraftVersionId { get; set; } = null;
-        public string? CustomHomePageNetFileUrl { get; set; } = string.Empty;
+        public string? CustomHomePageNetXamlUrl { get; set; } = string.Empty;
+        public string? CustomHomePageNetCSharpUrl { get; set; } = string.Empty;
         public JavaEntry Java { get; set; } = new JavaEntry() { JavaPath = "<Auto>" };
         public int AccountSelectionIndex { get; set; } = 0;
         public double MaxMem { get; set; } = 1024;

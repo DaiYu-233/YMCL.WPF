@@ -576,4 +576,22 @@
   <data name="NetFile" xml:space="preserve">
     <value>网络文件</value>
   </data>
+  <data name="EditXaml" xml:space="preserve">
+    <value>编辑Xaml</value>
+  </data>
+  <data name="EditCSharp" xml:space="preserve">
+    <value>编辑C#</value>
+  </data>
+  <data name="NeedRestartApp" xml:space="preserve">
+    <value>需要重启YMCL</value>
+  </data>
+  <data name="CustomHomePageCSharpSouceError" xml:space="preserve">
+    <value>自定义页面 (C#) 源代码错误</value>
+  </data>
+  <data name="ComPileCSharpError" xml:space="preserve">
+    <value>编译C#错误</value>
+  </data>
+  <data name="InstallFail" xml:space="preserve">
+    <value>安装失败</value>
+  </data>
 </root>

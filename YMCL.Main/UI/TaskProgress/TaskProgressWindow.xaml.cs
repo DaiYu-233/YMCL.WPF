@@ -221,6 +221,10 @@ namespace YMCL.Main.UI.TaskProgress
             TaskProgressBar.Value = progress;
             TaskProgressBarText.Content = $"{Math.Round(progress, 1)}%";
         }
+        public void UpdateTitle(string title)
+        {
+            Title.Text = LangHelper.Current.GetText("TaskProgressWindow_Title") + " - " + title;
+        }
 
         private void WindowX_Loaded(object sender, RoutedEventArgs e)
         {

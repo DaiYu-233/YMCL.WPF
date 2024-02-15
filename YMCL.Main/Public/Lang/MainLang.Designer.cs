@@ -295,6 +295,24 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
+        ///   查找类似 编译C#错误 的本地化字符串。
+        /// </summary>
+        public static string ComPileCSharpError {
+            get {
+                return ResourceManager.GetString("ComPileCSharpError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 自定义页面 (C#) 源代码错误 的本地化字符串。
+        /// </summary>
+        public static string CustomHomePageCSharpSouceError {
+            get {
+                return ResourceManager.GetString("CustomHomePageCSharpSouceError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 深色 的本地化字符串。
         /// </summary>
         public static string Dark {
@@ -354,6 +372,24 @@ namespace YMCL.Main.Public.Lang {
         public static string DownloadUpdateQuestion {
             get {
                 return ResourceManager.GetString("DownloadUpdateQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 编辑C# 的本地化字符串。
+        /// </summary>
+        public static string EditCSharp {
+            get {
+                return ResourceManager.GetString("EditCSharp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 编辑Xaml 的本地化字符串。
+        /// </summary>
+        public static string EditXaml {
+            get {
+                return ResourceManager.GetString("EditXaml", resourceCulture);
             }
         }
         
@@ -525,6 +561,15 @@ namespace YMCL.Main.Public.Lang {
         public static string InitializeWindow_Title_Download {
             get {
                 return ResourceManager.GetString("InitializeWindow_Title_Download", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 安装失败 的本地化字符串。
+        /// </summary>
+        public static string InstallFail {
+            get {
+                return ResourceManager.GetString("InstallFail", resourceCulture);
             }
         }
         
@@ -1218,6 +1263,15 @@ namespace YMCL.Main.Public.Lang {
         public static string MaximumDownloadThread {
             get {
                 return ResourceManager.GetString("MaximumDownloadThread", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 需要重启YMCL 的本地化字符串。
+        /// </summary>
+        public static string NeedRestartApp {
+            get {
+                return ResourceManager.GetString("NeedRestartApp", resourceCulture);
             }
         }
         

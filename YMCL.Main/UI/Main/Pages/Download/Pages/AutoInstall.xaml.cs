@@ -101,7 +101,27 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
         }
         private void InstallBtn_Click(object sender, RoutedEventArgs e)
         {
-            InstallGame(VersionId.Text, true, CustomGameIdTextBox.Text);
+            if (OptifineListView.SelectedIndex >= 0)
+            {
+
+            }
+            else if (ForgeListView.SelectedIndex >= 0)
+            {
+
+            }
+            else if (FabricListView.SelectedIndex >= 0)
+            {
+                var entry = FabricListView.SelectedItem as FabricBuildEntry;
+                InstallGame(VersionId.Text, true, CustomGameIdTextBox.Text, fabricBuildEntry: entry);
+            }
+            else if (QuiltListView.SelectedIndex >= 0)
+            {
+
+            }
+            else
+            {
+                InstallGame(VersionId.Text, true, CustomGameIdTextBox.Text);
+            }
         }
         private void ModLaderListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -214,7 +234,7 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
 
             InstallPreView.Visibility = Visibility.Hidden;
         }
-        public async void InstallGame(string versionId, bool msg, string versionName = null)
+        public async void InstallGame(string versionId, bool msg, string versionName = null, FabricBuildEntry fabricBuildEntry = null, QuiltBuildEntry quiltBuildEntry = null)
         {
             var customId = string.Empty;
             customId = string.IsNullOrEmpty(versionName) ? versionId : versionName;
@@ -247,29 +267,95 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
 
             TaskProgress.TaskProgressWindow taskProgress = new($"Vanllia - {versionId}", true);
             taskProgress.Show();
-
+            taskProgress.InsertProgressText("-----> Vanllia");
             await Task.Run(async () =>
             {
-                vanlliaInstaller.ProgressChanged += (_, x) =>
+                try
                 {
-                    Dispatcher.BeginInvoke(() =>
+                    vanlliaInstaller.ProgressChanged += (_, x) =>
                     {
-                        taskProgress.InsertProgressText(x.ProgressStatus);
-                        taskProgress.UpdateProgress(x.Progress * 100);
-                    });
-                };
+                        Dispatcher.BeginInvoke(() =>
+                        {
+                            taskProgress.InsertProgressText(x.ProgressStatus);
+                            taskProgress.UpdateProgress(x.Progress * 100);
+                        });
+                    };
 
-                var result = await vanlliaInstaller.InstallAsync();
+                    var result = await vanlliaInstaller.InstallAsync();
 
-                if (result)
+                    if (result)
+                    {
+                        await Dispatcher.BeginInvoke(() =>
+                        {
+                            Toast.Show(window: Const.Window.mainWindow, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("InstallFinish")}：Vanllia - {versionId}");
+                        });
+                    }
+                    else
+                    {
+                        await Dispatcher.BeginInvoke(() =>
+                        {
+                            Toast.Show(window: Const.Window.mainWindow, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("InstallFail")}：Vanllia - {versionId}");
+                        });
+                        return;
+                    }
+                }
+                catch (Exception ex)
                 {
                     await Dispatcher.BeginInvoke(() =>
                     {
-                        taskProgress.Hide();
-                        Toast.Show(window: Const.Window.mainWindow, position: ToastPosition.Top, message: $"Vanllia - {versionId} Install Successfully");
+                        MessageBoxX.Show($"{LangHelper.Current.GetText("InstallFail")}：Vanllia - {versionId}\n\n{ex.ToString()}", "Yu Minecraft Launcher");
                     });
                 }
-            });
+            });//Vanllia
+            var game = resolver.GetGameEntity(customId);
+            if (fabricBuildEntry != null)
+            {
+                await Task.Run(async () =>
+                {
+                    try
+                    {
+                        var fabricInstaller = new FabricInstaller(game, fabricBuildEntry, customId);
+                        await Dispatcher.BeginInvoke(() =>
+                        {
+                            taskProgress.UpdateTitle("Fabric");
+                            taskProgress.InsertProgressText("-----> Fabric");
+                        });
+                        fabricInstaller.ProgressChanged += (_, x) =>
+                        {
+                            Dispatcher.BeginInvoke(() =>
+                            {
+                                taskProgress.InsertProgressText(x.ProgressStatus);
+                                taskProgress.UpdateProgress(x.Progress * 100);
+                            });
+                        };
+
+                        var result = await fabricInstaller.InstallAsync();
+
+                        if (result)
+                        {
+                            await Dispatcher.BeginInvoke(() =>
+                            {
+                                Toast.Show(window: Const.Window.mainWindow, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("InstallFinish")}：Fabric");
+                            });
+                        }
+                        else
+                        {
+                            await Dispatcher.BeginInvoke(() =>
+                            {
+                                Toast.Show(window: Const.Window.mainWindow, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("InstallFail")}：Fabric");
+                            });
+                            return;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        await Dispatcher.BeginInvoke(() =>
+                        {
+                            MessageBoxX.Show($"{LangHelper.Current.GetText("InstallFail")}：Fabric\n\n{ex.ToString()}", "Yu Minecraft Launcher");
+                        });
+                    }
+                });
+            }//Fabric
         }
         public void ReadyInstallGame(string versionId)
         {
@@ -286,6 +372,10 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
             ForgeListView.SelectedIndex = -1;
             FabricListView.SelectedIndex = -1;
             QuiltListView.SelectedIndex = -1;
+            OptifineListView.Items.Clear();
+            ForgeListView.Items.Clear();
+            FabricListView.Items.Clear();
+            QuiltListView.Items.Clear();
 
             //_ = Task.Run(async () =>
             //{

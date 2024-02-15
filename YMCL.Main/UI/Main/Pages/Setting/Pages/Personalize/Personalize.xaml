@@ -36,23 +36,30 @@
                     </ComboBox>
                 </DockPanel>
             </Border>
-            <Border CornerRadius="5" Background="{DynamicResource 1x}" x:Name="CustomHomePageUIBorder" Height="83.5" Margin="0,0,0,10" >
+            <Border CornerRadius="5" Background="{DynamicResource 1x}" x:Name="CustomHomePageUIBorder" Height="122" Margin="0,0,0,10" >
                 <DockPanel>
                     <DockPanel DockPanel.Dock="Top" Height="45">
-                        <Label HorizontalAlignment="Left" VerticalAlignment="Center" Margin="18,0,0,0" FontSize="15" Foreground="{DynamicResource TextColor}" FontFamily="{DynamicResource Font}" Content="{x:Static properties:MainLang.Launcher_SettingItem_CustomMainPage}"/>
-                        <ui:HyperlinkButton Visibility="Collapsed" RaiseHyperlinkClicks="False" x:Name="EditCustomHomePageBtn" Height="32" Margin="0,0,6.5,0" HorizontalAlignment="Right" Click="EditCustomHomePageBtn_Click" DockPanel.Dock="Right">
+                        <Label HorizontalAlignment="Left" VerticalAlignment="Center" Margin="18,0,18,0" FontSize="15" Foreground="{DynamicResource TextColor}" FontFamily="{DynamicResource Font}" Content="{x:Static properties:MainLang.Launcher_SettingItem_CustomMainPage}"/>
+                        <ui:HyperlinkButton Visibility="Visible" RaiseHyperlinkClicks="False" x:Name="EditCustomHomePageXamlBtn" Height="32" HorizontalAlignment="Right" Click="EditCustomHomePageBtn_Click">
                             <StackPanel Orientation="Horizontal">
                                 <ui:FontIcon Glyph="&#xE70F;" />
-                                <Label Content="{x:Static properties:MainLang.Launcher_SettingItem_EditCustomHomePage}" Foreground="#004275" FontFamily="{DynamicResource Font}" Margin="5,0,0,0" FontSize="15"/>
+                                <Label Content="{x:Static properties:MainLang.EditXaml}" Foreground="#004275" FontFamily="{DynamicResource Font}" Margin="5,0,0,0" FontSize="15"/>
                             </StackPanel>
                         </ui:HyperlinkButton>
-                        <ComboBox  Margin="18,0,6.5,0" Height="32" x:Name="CustomHomePageComboBox" FontFamily="{DynamicResource Font}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="CustomHomePageComboBox_SelectionChanged" >
+                        <ui:HyperlinkButton Visibility="Visible" RaiseHyperlinkClicks="False" x:Name="EditCustomHomePageCSharpBtn" Height="32" Margin="0,0,6.5,0" HorizontalAlignment="Right" Click="EditCustomHomePageCSharpBtn_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <ui:FontIcon Glyph="&#xE70F;" />
+                                <Label Content="{x:Static properties:MainLang.EditCSharp}" Foreground="#004275" FontFamily="{DynamicResource Font}" Margin="5,0,0,0" FontSize="15"/>
+                            </StackPanel>
+                        </ui:HyperlinkButton>
+                        <ComboBox  Margin="0,0,6.5,0" Height="32" x:Name="CustomHomePageComboBox" FontFamily="{DynamicResource Font}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="CustomHomePageComboBox_SelectionChanged" >
                             <ComboBoxItem Content="{x:Static properties:MainLang.Off}"/>
                             <ComboBoxItem Content="{x:Static properties:MainLang.LocalFile}"/>
                             <ComboBoxItem Content="{x:Static properties:MainLang.NetFile}"/>
                         </ComboBox>
                     </DockPanel>
-                    <TextBox x:Name="CustomHomePageXamlUrlTextBox" DockPanel.Dock="Bottom" Margin="6.5,0,6.5,6.5" FontFamily="{DynamicResource Font}" Height="32" ui:ControlHelper.PlaceholderText="Url" LostFocus="CustomHomePageXamlUrlTextBox_LostFocus"/>
+                    <TextBox x:Name="CustomHomePageCSharpUrlTextBox" Visibility="Collapsed" DockPanel.Dock="Bottom" Margin="6.5,0,6.5,6.5" FontFamily="{DynamicResource Font}" Height="32" ui:ControlHelper.PlaceholderText="CSharp Url" LostFocus="CustomHomePageCSharpUrlTextBox_LostFocus" />
+                    <TextBox x:Name="CustomHomePageXamlUrlTextBox"  DockPanel.Dock="Bottom" Margin="6.5,0,6.5,6.5" FontFamily="{DynamicResource Font}" Height="32" ui:ControlHelper.PlaceholderText="Xaml Url" LostFocus="CustomHomePageXamlUrlTextBox_LostFocus"/>
                 </DockPanel>
             </Border>
         </StackPanel>

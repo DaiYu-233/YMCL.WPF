@@ -25,8 +25,6 @@ using System.Collections.ObjectModel;
 using System.Windows.Data;
 using Microsoft.VisualBasic.FileIO;
 using SearchOption = System.IO.SearchOption;
-using System.Reflection.Metadata.Ecma335;
-using YMCL.Main.UI.Main.Pages.Setting;
 using System.Runtime.InteropServices;
 using System.Reflection;
 using System.Windows.Markup;
@@ -39,7 +37,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
     /// </summary>
     public partial class Launch : Page
     {
-        bool _firstLoadCustomHomePageError = true;
+        bool _firstLoadCustomHomePage = true;
         private ObservableCollection<ModListEntry> modObservableCollection;
         private CollectionView modCollectionView;
         List<AccountInfo> accounts = JsonConvert.DeserializeObject<List<AccountInfo>>(File.ReadAllText(Const.AccountDataPath));
@@ -87,47 +85,44 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                     File.WriteAllText(Const.CustomHomePageXamlPath, result);
                 }
             }
-            if (setting.CustomHomePage == SettingItem.CustomHomePage.LocalFile)
+
+            if (setting.CustomHomePage == SettingItem.CustomHomePage.LocalFile && !File.Exists(Const.CustomHomePageCSharpPath))
             {
-                try
-                {
-                    FileStream fs = new FileStream(Const.CustomHomePageXamlPath, FileMode.Open);
-                    UIElement rootElement = (UIElement)XamlReader.Load(fs);
-                    this.CustomHomePageRoot.Child = rootElement;
-                }
-                catch (Exception ex)
-                {
-                    if (_firstLoadCustomHomePageError)
-                    {
-                        MessageBoxX.Show($"\n{LangHelper.Current.GetText("Launch_Launch_CustomPageSourceError")}：{ex.Message}\n\n{ex.ToString()}", "Yu Minecraft Launcher");
-                        _firstLoadCustomHomePageError = false;
-                    }
-                    else
-                    {
-                        Toast.Show(message: LangHelper.Current.GetText("Launch_Launch_CustomPageSourceError"), position: ToastPosition.Top, window: Const.Window.mainWindow);
-                    }
-                }
+                File.WriteAllText(Const.CustomHomePageCSharpPath, "-------\r\npublic class YMCLRunner\r\n{\r\n    public static void Main()\r\n    {\r\n        \r\n    }\r\n}");
             }
-            if (setting.CustomHomePage == SettingItem.CustomHomePage.NetFile)
+            if (_firstLoadCustomHomePage)
             {
-                try
+                _firstLoadCustomHomePage = false;
+                if (setting.CustomHomePage == SettingItem.CustomHomePage.LocalFile)
                 {
-                    WebRequest request = WebRequest.Create(setting.CustomHomePageNetFileUrl);
-                    WebResponse response = request.GetResponse();
-                    Stream dataStream = response.GetResponseStream();
-                    UIElement rootElement = (UIElement)XamlReader.Load(dataStream);
-                    this.CustomHomePageRoot.Child = rootElement;
-                }
-                catch (Exception ex)
-                {
-                    if (_firstLoadCustomHomePageError)
+                    try
+                    {
+                        FileStream fs = new FileStream(Const.CustomHomePageXamlPath, FileMode.Open);
+                        UIElement rootElement = (UIElement)XamlReader.Load(fs);
+                        this.CustomHomePageRoot.Child = rootElement;
+
+                        //var cs = File.ReadAllText(Const.CustomHomePageCSharpPath).Split("-------");
+                        //Function.RunCodeByString(cs[1], dlls: cs[0].Split("\r\n"));
+                    }
+                    catch (Exception ex)
                     {
                         MessageBoxX.Show($"\n{LangHelper.Current.GetText("Launch_Launch_CustomPageSourceError")}：{ex.Message}\n\n{ex.ToString()}", "Yu Minecraft Launcher");
-                        _firstLoadCustomHomePageError = false;
                     }
-                    else
+                }
+                if (setting.CustomHomePage == SettingItem.CustomHomePage.NetFile)
+                {
+                    try
                     {
-                        Toast.Show(message: LangHelper.Current.GetText("Launch_Launch_CustomPageSourceError"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+                        WebRequest request = WebRequest.Create(setting.CustomHomePageNetXamlUrl);
+                        WebResponse response = request.GetResponse();
+                        Stream dataStream = response.GetResponseStream();
+                        UIElement rootElement = (UIElement)XamlReader.Load(dataStream);
+                        this.CustomHomePageRoot.Child = rootElement;
+                    }
+                    catch (Exception ex)
+                    {
+
+                        MessageBoxX.Show($"\n{LangHelper.Current.GetText("Launch_Launch_CustomPageSourceError")}：{ex.Message}\n\n{ex.ToString()}", "Yu Minecraft Launcher");
                     }
                 }
             }

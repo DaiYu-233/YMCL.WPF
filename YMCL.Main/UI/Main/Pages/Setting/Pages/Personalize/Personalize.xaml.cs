@@ -1,6 +1,7 @@
 ﻿using iNKORE.UI.WPF.Modern;
 using Microsoft.Win32;
 using Newtonsoft.Json;
+using Panuon.WPF.UI;
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
@@ -8,6 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Threading;
 using YMCL.Main.Public;
 using YMCL.Main.Public.Class;
+using YMCL.Main.Public.Lang;
 using Application = System.Windows.Forms.Application;
 
 namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Personalize
@@ -48,7 +50,8 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Personalize
             timer.Start();
             ThemeComboBox.SelectedIndex = (int)setting.Theme;
             CustomHomePageComboBox.SelectedIndex = (int)setting.CustomHomePage;
-            CustomHomePageXamlUrlTextBox.Text = setting.CustomHomePageNetFileUrl;
+            CustomHomePageXamlUrlTextBox.Text = setting.CustomHomePageNetXamlUrl;
+            CustomHomePageCSharpUrlTextBox.Text = setting.CustomHomePageNetCSharpUrl;
             CustomHomePageComboBox_SelectionChanged(null, null);
         }
         private void LoadTheme(object? sender, EventArgs e)
@@ -114,27 +117,38 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Personalize
         private void CustomHomePageComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             CustomHomePageUIBorder.Height = CustomHomePageComboBox.SelectedIndex == 2 ? 83.5 : 45;
-            EditCustomHomePageBtn.Visibility = CustomHomePageComboBox.SelectedIndex == 1 ? Visibility.Visible : Visibility.Collapsed;
+            EditCustomHomePageXamlBtn.Visibility = CustomHomePageComboBox.SelectedIndex == 1 ? Visibility.Visible : Visibility.Collapsed;
+            //EditCustomHomePageCSharpBtn.Visibility = CustomHomePageComboBox.SelectedIndex == 1 ? Visibility.Visible : Visibility.Collapsed;
+            EditCustomHomePageCSharpBtn.Visibility = Visibility.Collapsed;
 
             var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
             if (CustomHomePageComboBox.SelectedIndex == (int)setting.CustomHomePage)
             {
                 return;
             }
+            Toast.Show(message: LangHelper.Current.GetText("NeedRestartApp"), position: ToastPosition.Top, window: Const.Window.mainWindow);
             setting.CustomHomePage = (SettingItem.CustomHomePage)CustomHomePageComboBox.SelectedIndex;
             File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
         }
-
         private void CustomHomePageXamlUrlTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
             var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
-            setting.CustomHomePageNetFileUrl = CustomHomePageXamlUrlTextBox.Text;
+            setting.CustomHomePageNetXamlUrl = CustomHomePageXamlUrlTextBox.Text;
             File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
         }
-
         private void EditCustomHomePageBtn_Click(object sender, RoutedEventArgs e)
         {
             Process.Start("notepad.exe", Const.CustomHomePageXamlPath);
+        }
+        private void EditCustomHomePageCSharpBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start("notepad.exe", Const.CustomHomePageCSharpPath);
+        }
+        private void CustomHomePageCSharpUrlTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
+            setting.CustomHomePageNetCSharpUrl = CustomHomePageCSharpUrlTextBox.Text;
+            File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
         }
     }
 }
