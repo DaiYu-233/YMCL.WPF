@@ -15,16 +15,14 @@
                     <Button x:Name="btnMinimize" Style="{DynamicResource IconButtonsStyle}" Content="{DynamicResource Minimize}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,3,0" Click="btnMinimize_Click" Cursor="Hand" />
                 </Grid>
             </Border>
-
             <DockPanel Margin="0,30,0,0">
-                <Border x:Name="ProgressBorder" Visibility="Hidden" Margin="10,10,10,10" Background="{DynamicResource 1x}" CornerRadius="8,8,8,8" Padding="5,5,5,5" DockPanel.Dock="Top" VerticalAlignment="Top">
+                <Border x:Name="ProgressBorder" Margin="10,10,10,0" Background="{DynamicResource 1x}" CornerRadius="4,4,4,4" DockPanel.Dock="Top" VerticalAlignment="Top" Padding="2,2,2,2" Visibility="Collapsed">
                     <DockPanel>
                         <Label x:Name="TaskProgressBarText" Content="0%" Foreground="{DynamicResource TextColor}" DockPanel.Dock="Right" FontFamily="{DynamicResource Font}" Margin="2,3,7,3" HorizontalAlignment="Right" />
                         <ui:ProgressBar x:Name="TaskProgressBar" Margin="8,0,11,0"/>
                     </DockPanel>
                 </Border>
-
-                <TextBox x:Name="TaskProgressTextBox" Margin="10,-43,10,10" FontFamily="{DynamicResource Font}" IsReadOnly="True"/>
+                <TextBox x:Name="TaskProgressTextBox" Margin="10,10,10,10" FontFamily="{DynamicResource Font}" IsReadOnly="True"/>
             </DockPanel>
         </Grid>
     </ui:ClippingBorder>

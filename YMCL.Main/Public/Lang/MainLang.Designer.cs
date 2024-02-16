@@ -439,6 +439,15 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
+        ///   查找类似 获取可安装版本失败 的本地化字符串。
+        /// </summary>
+        public static string GetInstallableVersionFail {
+            get {
+                return ResourceManager.GetString("GetInstallableVersionFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 YMCL 以 GPL-3.0 协议开放源代码，可以修改且分发，但不得删除原作品的标记，修改后的作品必须也采用 GPL 协议进行开源 的本地化字符串。
         /// </summary>
         public static string GPL3Text {

@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using Panuon.WPF.UI;
 using System.Diagnostics;
 using System.IO;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
@@ -129,6 +130,18 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Personalize
             Toast.Show(message: LangHelper.Current.GetText("NeedRestartApp"), position: ToastPosition.Top, window: Const.Window.mainWindow);
             setting.CustomHomePage = (SettingItem.CustomHomePage)CustomHomePageComboBox.SelectedIndex;
             File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+
+            if (setting.CustomHomePage == SettingItem.CustomHomePage.LocalFile && !File.Exists(Const.CustomHomePageXamlPath))
+            {
+                string resourceName = "YMCL.Main.Public.Text.CustomHomePageDefault.xaml";
+                Assembly _assembly = Assembly.GetExecutingAssembly();
+                Stream stream = _assembly.GetManifestResourceStream(resourceName);
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    string result = reader.ReadToEnd();
+                    File.WriteAllText(Const.CustomHomePageXamlPath, result);
+                }
+            }
         }
         private void CustomHomePageXamlUrlTextBox_LostFocus(object sender, RoutedEventArgs e)
         {

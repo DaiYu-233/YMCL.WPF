@@ -20,14 +20,17 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
     public partial class AutoInstall : Page
     {
         bool _firstLoad = true;
+        bool _loaded = false;
         #region UI
         private void LatestSnapshotBorder_PreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            ReadyInstallGame(LatestSnapshotVersionId.Content.ToString());
+            if (_loaded)
+                ReadyInstallGame(LatestSnapshotVersionId.Content.ToString());
         }
         private void LatestReleaseBorder_PreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            ReadyInstallGame(LatestReleaseVersionId.Content.ToString());
+            if (_loaded)
+                ReadyInstallGame(LatestReleaseVersionId.Content.ToString());
         }
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
@@ -42,6 +45,7 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
                         await Dispatcher.BeginInvoke(() =>
                         {
                             var latestRelease = false;
+                            _loaded = true;
                             var latestSnapshot = false;
                             foreach (var item in vanlliaList)
                             {
@@ -78,7 +82,7 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
                 }
                 catch
                 {
-                    Toast.Show(window: Const.Window.mainWindow, position: ToastPosition.Top, message: "Get Vanllia List Fail");
+                    Toast.Show(window: Const.Window.mainWindow, position: ToastPosition.Top, message: LangHelper.Current.GetText("GetInstallableVersionFail"));
                 }
             }
         }
@@ -231,7 +235,6 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
         public AutoInstall()
         {
             InitializeComponent();
-
             InstallPreView.Visibility = Visibility.Hidden;
         }
         public async void InstallGame(string versionId, bool msg, string versionName = null, FabricBuildEntry fabricBuildEntry = null, QuiltBuildEntry quiltBuildEntry = null)
@@ -264,9 +267,9 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
                     MessageBoxX.Show($"{LangHelper.Current.GetText("FileExists")}：{customId}", "Yu Minecraft Launcher");
                 return;
             }
-
             TaskProgress.TaskProgressWindow taskProgress = new($"Vanllia - {versionId}", true);
             taskProgress.Show();
+            ReturnToVanlliaList_PreviewMouseDown(null, null);
             taskProgress.InsertProgressText("-----> Vanllia");
             await Task.Run(async () =>
             {
@@ -283,14 +286,7 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
 
                     var result = await vanlliaInstaller.InstallAsync();
 
-                    if (result)
-                    {
-                        await Dispatcher.BeginInvoke(() =>
-                        {
-                            Toast.Show(window: Const.Window.mainWindow, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("InstallFinish")}：Vanllia - {versionId}");
-                        });
-                    }
-                    else
+                    if (!result)
                     {
                         await Dispatcher.BeginInvoke(() =>
                         {
@@ -356,6 +352,8 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
                     }
                 });
             }//Fabric
+
+            Toast.Show(window: Const.Window.mainWindow, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("InstallFinish")}：{customId}");
         }
         public void ReadyInstallGame(string versionId)
         {

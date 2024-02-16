@@ -594,4 +594,7 @@
   <data name="InstallFail" xml:space="preserve">
     <value>安装失败</value>
   </data>
+  <data name="GetInstallableVersionFail" xml:space="preserve">
+    <value>获取可安装版本失败</value>
+  </data>
 </root>

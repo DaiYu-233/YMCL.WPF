@@ -190,16 +190,15 @@ namespace YMCL.Main.UI.TaskProgress
         }
         #endregion
 
-        public TaskProgressWindow(string taskName,bool showProgressBar=true)
+        public TaskProgressWindow(string taskName, bool showProgressBar = true)
         {
             InitializeComponent();
 
             Title.Text = LangHelper.Current.GetText("TaskProgressWindow_Title") + " - " + taskName;
 
-            if(showProgressBar)
+            if (showProgressBar)
             {
                 ProgressBorder.Visibility = Visibility.Visible;
-                TaskProgressTextBox.Margin=new Thickness(10, 0, 10, 10);
             }
         }
 
@@ -208,16 +207,23 @@ namespace YMCL.Main.UI.TaskProgress
             e.Cancel = true;
         }
 
-        public void InsertProgressText(string text)
+        public void InsertProgressText(string text, bool time = true)
         {
             DateTime now = DateTime.Now;
-            TaskProgressTextBox.AppendText($"[{now.ToString("HH:mm:ss")}] {text}\n");
+            if (time)
+            {
+                TaskProgressTextBox.AppendText($"[{now.ToString("HH:mm:ss")}] {text}\n");
+            }
+            else
+            {
+                TaskProgressTextBox.AppendText($"{text}\n");
+            }
             TaskProgressTextBox.Focus();
             TaskProgressTextBox.CaretIndex = TaskProgressTextBox.Text.Length;
             TaskProgressTextBox.ScrollToEnd();
         }
         public void UpdateProgress(double progress)
-        {        
+        {
             TaskProgressBar.Value = progress;
             TaskProgressBarText.Content = $"{Math.Round(progress, 1)}%";
         }
@@ -232,11 +238,6 @@ namespace YMCL.Main.UI.TaskProgress
             var c = this.Content as UIElement;
             var layer = AdornerLayer.GetAdornerLayer(c);
             layer.Add(new WindowResizeAdorner(c));
-        }
-
-        private void T(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-
         }
     }
 }

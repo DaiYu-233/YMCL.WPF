@@ -543,4 +543,58 @@
   <data name="InstallFinish" xml:space="preserve">
     <value>The installation is complete</value>
   </data>
+  <data name="InstallPreview" xml:space="preserve">
+    <value>Install Preview</value>
+  </data>
+  <data name="BeginInstall" xml:space="preserve">
+    <value>Start Install</value>
+  </data>
+  <data name="AdditionalInstall" xml:space="preserve">
+    <value>No additional installation</value>
+  </data>
+  <data name="Return" xml:space="preserve">
+    <value>Return</value>
+  </data>
+  <data name="IncludeSpecialWord" xml:space="preserve">
+    <value>Contains Special Characters</value>
+  </data>
+  <data name="FileExists" xml:space="preserve">
+    <value>Folder already exists</value>
+  </data>
+  <data name="ViewUpdate" xml:space="preserve">
+    <value>What's New</value>
+  </data>
+  <data name="LatsetVersion" xml:space="preserve">
+    <value>Latest Version</value>
+  </data>
+  <data name="WaitForGameWindowAppear" xml:space="preserve">
+    <value>Wait for the game window to appear</value>
+  </data>
+  <data name="LocalFile" xml:space="preserve">
+    <value>Local File</value>
+  </data>
+  <data name="NetFile" xml:space="preserve">
+    <value>Net file</value>
+  </data>
+  <data name="EditXaml" xml:space="preserve">
+    <value>Edit Xaml</value>
+  </data>
+  <data name="EditCSharp" xml:space="preserve">
+    <value>Edit C #</value>
+  </data>
+  <data name="NeedRestartApp" xml:space="preserve">
+    <value>YMCL needs to be restarted</value>
+  </data>
+  <data name="CustomHomePageCSharpSouceError" xml:space="preserve">
+    <value>Custom page (C #) source code error</value>
+  </data>
+  <data name="ComPileCSharpError" xml:space="preserve">
+    <value>Compile C # Error</value>
+  </data>
+  <data name="InstallFail" xml:space="preserve">
+    <value>Installation failled</value>
+  </data>
+  <data name="GetInstallableVersionFail" xml:space="preserve">
+    <value>Failed to get installable version</value>
+  </data>
 </root>

@@ -543,4 +543,58 @@
   <data name="InstallFinish" xml:space="preserve">
     <value>Установка завершена</value>
   </data>
+  <data name="InstallPreview" xml:space="preserve">
+    <value>Установите предварительный просмотр</value>
+  </data>
+  <data name="BeginInstall" xml:space="preserve">
+    <value>Начать установку</value>
+  </data>
+  <data name="AdditionalInstall" xml:space="preserve">
+    <value>Никакой дополнительной установки</value>
+  </data>
+  <data name="Return" xml:space="preserve">
+    <value>Назад</value>
+  </data>
+  <data name="IncludeSpecialWord" xml:space="preserve">
+    <value>Содержит специальных персонажей</value>
+  </data>
+  <data name="FileExists" xml:space="preserve">
+    <value>Папка уже существует</value>
+  </data>
+  <data name="ViewUpdate" xml:space="preserve">
+    <value>Посмотрите, что нового</value>
+  </data>
+  <data name="LatsetVersion" xml:space="preserve">
+    <value>Последняя версия</value>
+  </data>
+  <data name="WaitForGameWindowAppear" xml:space="preserve">
+    <value>Дождитесь появления игрового окна</value>
+  </data>
+  <data name="LocalFile" xml:space="preserve">
+    <value>Локальные файлы</value>
+  </data>
+  <data name="NetFile" xml:space="preserve">
+    <value>Сетевые файлы</value>
+  </data>
+  <data name="EditXaml" xml:space="preserve">
+    <value>Редактировать Xaml</value>
+  </data>
+  <data name="EditCSharp" xml:space="preserve">
+    <value>Редактировать C #</value>
+  </data>
+  <data name="NeedRestartApp" xml:space="preserve">
+    <value>Необходимо перезапустить YMCL</value>
+  </data>
+  <data name="CustomHomePageCSharpSouceError" xml:space="preserve">
+    <value>Ошибка исходного кода пользовательской страницы (C #)</value>
+  </data>
+  <data name="ComPileCSharpError" xml:space="preserve">
+    <value>Ошибка компиляции C #</value>
+  </data>
+  <data name="InstallFail" xml:space="preserve">
+    <value>Ошибка установки</value>
+  </data>
+  <data name="GetInstallableVersionFail" xml:space="preserve">
+    <value>Не удалось получить устанавливаемую версию</value>
+  </data>
 </root>

@@ -29,6 +29,7 @@ using System.Runtime.InteropServices;
 using System.Reflection;
 using System.Windows.Markup;
 using System.Net;
+using System;
 
 namespace YMCL.Main.UI.Main.Pages.Launch
 {
@@ -602,11 +603,6 @@ namespace YMCL.Main.UI.Main.Pages.Launch
             var text = LangHelper.Current.GetText("Launch_SelectedModCount").Split("{|}");
             SelectedModCount.Text = $"{text[0]}0{text[1]}";
             VersionSettingBorder.Visibility = Visibility.Hidden;
-
-            LaunchProgressBar.ValueChanged += (_, _) =>
-            {
-                LaunchProgressBarLabel.Content = $"{Math.Round(LaunchProgressBar.Value, 0)}%";
-            };
         }
         public void LoadVersionMods()
         {
@@ -829,11 +825,37 @@ namespace YMCL.Main.UI.Main.Pages.Launch
             }
             var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
             var versionSetting = LoadVersionSettings();
+            if (string.IsNullOrEmpty(mcPath))
+            {
+                mcPath = setting.MinecraftFolder;
+            }
+            var idList = new List<string>();
+            var resolver = new GameResolver(mcPath);
+            resolver.GetGameEntitys().ToList().ForEach(ver =>
+            {
+                idList.Add(ver.Id);
+            });
+            var version = resolver.GetGameEntity(versionId);
+            if (!idList.Contains(versionId))
+            {
+                if (msg)
+                    Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_NoChooseGame"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+                else
+                    MessageBoxX.Show(LangHelper.Current.GetText("Launch_LaunchGame_Click_NoChooseGame"), "Yu Minecraft Launcher");
+                GameCoreText.Text = LangHelper.Current.GetText("Launch_NoChooseGame");
+                return;
+            }
             var accountJson = JsonConvert.DeserializeObject<List<Public.Class.AccountInfo>>(File.ReadAllText(Const.AccountDataPath))[setting.AccountSelectionIndex];
             Account account = null;
-            LaunchProgressGrid.Visibility = Visibility.Visible;
-            LaunchProgressDescription.Text = LangHelper.Current.GetText("VerifyingAccount");
-            LaunchProgressBar.Value = 50;
+            LaunchBtn.IsEnabled = false;
+            TaskProgressWindow taskProgress = new TaskProgressWindow($"{version.JarPath} - {DateTime.Now.ToString("yyyy-MM-ddTHH:mm:sszzz")}", false);
+
+            if (setting.GetOutput)
+            {
+                taskProgress.Show();
+            }
+            taskProgress.InsertProgressText("YMCL: " + LangHelper.Current.GetText("VerifyingAccount"));
+
             if (accountJson != null)
             {
                 if (accountJson.AccountType == SettingItem.AccountType.Offline)
@@ -853,20 +875,9 @@ namespace YMCL.Main.UI.Main.Pages.Launch
             }
             if (account != null)
             {
-                if (string.IsNullOrEmpty(mcPath))
-                {
-                    mcPath = setting.MinecraftFolder;
-                }
-                var idList = new List<string>();
-                var resolver = new GameResolver(mcPath);
-                resolver.GetGameEntitys().ToList().ForEach(ver =>
-                {
-                    idList.Add(ver.Id);
-                });
                 if (idList.Contains(versionId))
                 {
                     string javaPath = null;
-                    var version = resolver.GetGameEntity(versionId);
                     if (versionSetting.Java.JavaPath == "Global")
                     {
                         if (setting.Java.JavaPath == "<Auto>" || setting.Java == null || setting.Java.JavaPath == string.Empty)
@@ -879,7 +890,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                             }
                             catch (Exception)
                             {
-                                LaunchProgressGrid.Visibility = Visibility.Hidden;
+                                LaunchBtn.IsEnabled = true; taskProgress.Hide();
                                 if (msg)
                                     Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_CannotFandRightJava") + version.JavaVersion, position: ToastPosition.Top, window: Const.Window.mainWindow);
                                 else
@@ -903,7 +914,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                             }
                             catch (Exception)
                             {
-                                LaunchProgressGrid.Visibility = Visibility.Hidden;
+                                LaunchBtn.IsEnabled = true; taskProgress.Hide();
                                 if (msg)
                                     Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_CannotFandRightJava") + version.JavaVersion, position: ToastPosition.Top, window: Const.Window.mainWindow);
                                 else
@@ -1000,14 +1011,6 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                             {
                                 await Dispatcher.BeginInvoke(async () =>
                                 {
-
-                                    TaskProgressWindow taskProgress = new TaskProgressWindow($"{version.JarPath} - {DateTime.Now.ToString("yyyy-MM-ddTHH:mm:sszzz")}", false);
-
-                                    if (setting.GetOutput)
-                                    {
-                                        taskProgress.Show();
-                                    }
-
                                     var watcher = await launcher.LaunchAsync(version.Id);
 
                                     watcher.Exited += (_, args) =>
@@ -1019,6 +1022,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                                             {
                                                 taskProgress.Hide();
                                             }
+                                            Const.Window.mainWindow.Focus();
                                         });
                                     };
                                     watcher.OutputLogReceived += async (_, args) =>
@@ -1026,16 +1030,15 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                                         Debug.WriteLine(args.Text);
                                         await Dispatcher.BeginInvoke(() =>
                                         {
-                                            taskProgress.InsertProgressText(args.Text);
+                                            taskProgress.InsertProgressText(args.Text, false);
                                         });
                                     };
 
                                     await Dispatcher.BeginInvoke(() =>
                                     {
-                                        LaunchProgressDescription.Text = LangHelper.Current.GetText("WaitForGameWindowAppear");
-                                        LaunchProgressBar.Value = 99;
-
+                                        taskProgress.InsertProgressText("YMCL: " + LangHelper.Current.GetText("WaitForGameWindowAppear"));
                                         watcher.Process.WaitForInputIdle();
+                                        taskProgress.InsertProgressText("-----> JvmOutputLog", false);
                                         Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_FinishLaunch"), position: ToastPosition.Top, window: Const.Window.mainWindow);
                                     });
 
@@ -1054,7 +1057,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                     {
                         if (setting.Java.JavaPath == "<Auto>" || setting.Java == null || setting.Java.JavaPath == string.Empty)
                         {
-                            LaunchProgressGrid.Visibility = Visibility.Hidden;
+                            LaunchBtn.IsEnabled = true; taskProgress.Hide();
                             if (msg)
                                 Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_CannotFandRightJava") + version.JavaVersion, position: ToastPosition.Top, window: Const.Window.mainWindow);
                             else
@@ -1062,7 +1065,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                         }
                         else
                         {
-                            LaunchProgressGrid.Visibility = Visibility.Hidden;
+                            LaunchBtn.IsEnabled = true; taskProgress.Hide();
                             if (msg)
                                 Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_JavaError"), position: ToastPosition.Top, window: Const.Window.mainWindow);
                             else
@@ -1072,7 +1075,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                 }
                 else
                 {
-                    LaunchProgressGrid.Visibility = Visibility.Hidden;
+                    LaunchBtn.IsEnabled = true; taskProgress.Hide();
                     if (msg)
                         Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_NoChooseGame"), position: ToastPosition.Top, window: Const.Window.mainWindow);
                     else
@@ -1082,13 +1085,13 @@ namespace YMCL.Main.UI.Main.Pages.Launch
             }
             else
             {
-                LaunchProgressGrid.Visibility = Visibility.Hidden;
+                LaunchBtn.IsEnabled = true; taskProgress.Hide();
                 if (msg)
                     Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_AccountError"), position: ToastPosition.Top, window: Const.Window.mainWindow);
                 else
                     MessageBoxX.Show(LangHelper.Current.GetText("Launch_LaunchGame_Click_AccountError"), "Yu Minecraft Launcher");
             }
-            LaunchProgressGrid.Visibility = Visibility.Hidden;
+            LaunchBtn.IsEnabled = true;
         }
     }
 }

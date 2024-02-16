@@ -543,4 +543,58 @@
   <data name="InstallFinish" xml:space="preserve">
     <value>安裝完成</value>
   </data>
+  <data name="InstallPreview" xml:space="preserve">
+    <value>安裝預覽</value>
+  </data>
+  <data name="BeginInstall" xml:space="preserve">
+    <value>開始安裝</value>
+  </data>
+  <data name="AdditionalInstall" xml:space="preserve">
+    <value>無附加安裝</value>
+  </data>
+  <data name="Return" xml:space="preserve">
+    <value>返回</value>
+  </data>
+  <data name="IncludeSpecialWord" xml:space="preserve">
+    <value>包含特殊字元</value>
+  </data>
+  <data name="FileExists" xml:space="preserve">
+    <value>資料夾已存在</value>
+  </data>
+  <data name="ViewUpdate" xml:space="preserve">
+    <value>查看更新內容</value>
+  </data>
+  <data name="LatsetVersion" xml:space="preserve">
+    <value>最新版本</value>
+  </data>
+  <data name="WaitForGameWindowAppear" xml:space="preserve">
+    <value>等待遊戲視窗出現</value>
+  </data>
+  <data name="LocalFile" xml:space="preserve">
+    <value>本機檔案</value>
+  </data>
+  <data name="NetFile" xml:space="preserve">
+    <value>網路檔案</value>
+  </data>
+  <data name="EditXaml" xml:space="preserve">
+    <value>編輯Xaml</value>
+  </data>
+  <data name="EditCSharp" xml:space="preserve">
+    <value>編輯C#</value>
+  </data>
+  <data name="NeedRestartApp" xml:space="preserve">
+    <value>需要重啟YMCL</value>
+  </data>
+  <data name="CustomHomePageCSharpSouceError" xml:space="preserve">
+    <value>自訂頁面(C#) 原始碼錯誤</value>
+  </data>
+  <data name="ComPileCSharpError" xml:space="preserve">
+    <value>編譯C#錯誤</value>
+  </data>
+  <data name="InstallFail" xml:space="preserve">
+    <value>安裝失敗</value>
+  </data>
+  <data name="GetInstallableVersionFail" xml:space="preserve">
+    <value>取得可安裝版本失敗</value>
+  </data>
 </root>

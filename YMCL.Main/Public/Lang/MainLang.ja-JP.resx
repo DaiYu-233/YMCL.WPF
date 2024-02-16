@@ -543,4 +543,58 @@
   <data name="InstallFinish" xml:space="preserve">
     <value>インストールが完了しました</value>
   </data>
+  <data name="InstallPreview" xml:space="preserve">
+    <value>プレビューをインストール</value>
+  </data>
+  <data name="BeginInstall" xml:space="preserve">
+    <value>インストールを開始してください</value>
+  </data>
+  <data name="AdditionalInstall" xml:space="preserve">
+    <value>追加のインストールはありません</value>
+  </data>
+  <data name="Return" xml:space="preserve">
+    <value>戻る</value>
+  </data>
+  <data name="IncludeSpecialWord" xml:space="preserve">
+    <value>スペシャルキャラクター入り</value>
+  </data>
+  <data name="FileExists" xml:space="preserve">
+    <value>フォルダーは既に存在します</value>
+  </data>
+  <data name="ViewUpdate" xml:space="preserve">
+    <value>新着情報をチェック</value>
+  </data>
+  <data name="LatsetVersion" xml:space="preserve">
+    <value>最新バージョン</value>
+  </data>
+  <data name="WaitForGameWindowAppear" xml:space="preserve">
+    <value>ゲームウィンドウが表示されるまでお待ちください</value>
+  </data>
+  <data name="LocalFile" xml:space="preserve">
+    <value>ローカルファイル</value>
+  </data>
+  <data name="NetFile" xml:space="preserve">
+    <value>ネットワークファイル</value>
+  </data>
+  <data name="EditXaml" xml:space="preserve">
+    <value>Xamlを編集</value>
+  </data>
+  <data name="EditCSharp" xml:space="preserve">
+    <value>C #を編集</value>
+  </data>
+  <data name="NeedRestartApp" xml:space="preserve">
+    <value>YMCLを再起動する必要があります</value>
+  </data>
+  <data name="CustomHomePageCSharpSouceError" xml:space="preserve">
+    <value>カスタムページ（ C ＃）ソースコードエラー</value>
+  </data>
+  <data name="ComPileCSharpError" xml:space="preserve">
+    <value>C #コンパイルエラー</value>
+  </data>
+  <data name="InstallFail" xml:space="preserve">
+    <value>インストール失敗</value>
+  </data>
+  <data name="GetInstallableVersionFail" xml:space="preserve">
+    <value>インストール可能なバージョンの取得に失敗しました</value>
+  </data>
 </root>
