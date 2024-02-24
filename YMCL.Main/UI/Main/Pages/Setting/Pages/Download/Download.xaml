@@ -27,7 +27,7 @@
                     <ComboBox  Margin="18,0,6.5,0" Height="32" x:Name="DownloadSourceComboBox" FontFamily="{DynamicResource Font}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="DownloadSourceComboBox_SelectionChanged">
                         <ComboBoxItem Content="Mojang"/>
                         <ComboBoxItem Content="BmclApi"/>
-                        <ComboBoxItem Content="Mcbbs"/>
+                        <!--<ComboBoxItem Content="Mcbbs"/>-->
                     </ComboBox>
                 </DockPanel>
             </Border>

@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:properties="clr-namespace:YMCL.Main.Public.Lang"
+      xmlns:app="clr-namespace:YMCL.Main.Public"
       xmlns:local="clr-namespace:YMCL.Main.UI.Main.Pages.Setting.Pages.Launcher"
       mc:Ignorable="d" xmlns:ui="http://schemas.inkore.net/lib/ui/wpf/modern" xmlns:pu="https://opensource.panuon.com/wpf-ui"
       Title="About">
@@ -46,7 +47,7 @@
                                                     </GeometryDrawing>
                                                     <DrawingGroup>
                                                         <DrawingGroup.Children>
-                                                             <GeometryDrawing Brush="#FF515151">
+                                                            <GeometryDrawing Brush="#FF515151">
                                                                 <GeometryDrawing.Geometry>
                                                                     <PathGeometry FillRule="Nonzero" Figures="M404.6,172.5C414.1,165.2 426.20000000000005,161.1 438.20000000000005,161.2 483.00000000000006,161.2 527.9000000000001,161.2 572.8000000000001,161.2 578.5000000000001,161.2 584.3000000000001,161.1 589.8000000000001,162.39999999999998 605.4000000000001,165.59999999999997 619.2,176.09999999999997 626.6,190.09999999999997 633.8000000000001,203.59999999999997 634.8000000000001,220.29999999999995 629.2,234.59999999999997 622.1,253.59999999999997 603.6,267.2 583.3000000000001,268.99999999999994 583.3000000000001,323.99999999999994 583.3000000000001,379.19999999999993 583.3000000000001,434.19999999999993 583.4000000000001,444.79999999999995 582.4000000000001,455.69999999999993 584.6,466.0999999999999 588.7,485.8999999999999 596.1,504.8999999999999 603.9,523.4999999999999 608.8,534.2999999999998 613.1,545.5999999999999 619.6,555.5999999999999 649.2,603.9999999999999 678.9,652.5999999999999 708.3000000000001,700.9999999999999 712.7,708.2999999999998 717.5000000000001,715.5999999999999 720.9000000000001,723.2999999999998 727.8000000000001,738.9999999999999 730.8000000000001,756.8999999999999 726.7,773.6999999999998 723.9000000000001,785.8999999999999 717.2,796.9999999999998 707.5,804.9999999999998 698.4,812.3999999999997 687,816.8999999999997 675.2,817.3999999999997 565,817.6999999999997 454.70000000000005,817.7999999999997 344.50000000000006,818.1999999999997 329.70000000000005,818.2999999999997 314.90000000000003,812.4999999999997 304.40000000000003,801.9999999999997 294.00000000000006,791.6999999999997 288.20000000000005,777.3999999999996 287.3,762.8999999999996 286,743.8999999999996 292.7,725.1999999999996 303.1,709.6999999999996 333.70000000000005,658.4999999999995 364.20000000000005,607.3999999999996 394.8,556.0999999999996 401.6,545.2999999999996 407,533.4999999999995 412.1,521.7999999999996 418.5,507.39999999999964 424.3,492.89999999999964 428.6,477.89999999999964 430.90000000000003,470.0999999999996 432.5,461.99999999999966 432.5,453.7999999999996 432.9,422.6999999999996 432.5,391.5999999999996 432.4,360.39999999999964 432.4,329.7999999999996 432.4,299.49999999999966 432.4,268.89999999999964 418.7,267.69999999999965 405.29999999999995,260.89999999999964 396.4,250.49999999999963 386.7,239.49999999999963 381.7,224.39999999999964 383.4,209.89999999999964 384.9,195.4 392.7,181.4 404.6,172.5L404.6,172.5z M434.7,201.8C428.59999999999997,203 423.5,208.8 423.5,215.20000000000002 423.3,222.10000000000002 429.2,228.50000000000003 436.1,229.00000000000003 442.8,229.50000000000003 449.6,228.70000000000002 456.3,229.40000000000003 465.90000000000003,230.80000000000004 473.3,240.10000000000002 473,249.80000000000004 473.2,294.6 472.9,339.50000000000006 473.2,384.40000000000003 473.3,408.00000000000006 473.5,431.50000000000006 473.09999999999997,455.1 473.09999999999997,473.40000000000003 467.4,491 461.4,508.20000000000005 453.79999999999995,528.7 444.9,548.8000000000001 434.7,568.2 401,624.7 367.2,681.3000000000001 333.4,737.9000000000001 329.7,744.3000000000001 327.4,751.7 327.59999999999997,759.2 327.79999999999995,764.8000000000001 329.49999999999994,770.6 333.59999999999997,774.4000000000001 337.09999999999997,777.6000000000001 342.09999999999997,778.3000000000001 346.59999999999997,778.3000000000001 453.19999999999993,778.1 559.8,777.9000000000001 666.4,777.6 670.9,777.5 675.9,778.4 680,775.8000000000001 685.8,772.4000000000001 688.4,765.5000000000001 688.7,759.1 688.9000000000001,749.8000000000001 685.5,740.8000000000001 680.9000000000001,732.9 647.5000000000001,678.1999999999999 614.1000000000001,623.5 580.8000000000001,568.8 570.8000000000001,549.1999999999999 562.3000000000001,528.6999999999999 554.9000000000001,507.99999999999994 549.2,490.8999999999999 543.9000000000001,473.3999999999999 543.2,455.19999999999993 543.2,387.49999999999994 543.2,319.69999999999993 543.2,251.99999999999994 542.9000000000001,242.29999999999995 549.1,232.09999999999994 558.9000000000001,229.79999999999995 566.3000000000001,228.39999999999995 574.2,229.99999999999994 581.8000000000001,228.79999999999995 588.7,227.39999999999995 593.9000000000001,220.09999999999997 592.4000000000001,213.09999999999997 591.4000000000001,206.29999999999995 584.7,200.99999999999997 577.7,201.39999999999998 531.5,201.39999999999998 485.30000000000007,201.39999999999998 439.1,201.39999999999998 437.7,201.5 436.1,201.6 434.7,201.8z" />
                                                                 </GeometryDrawing.Geometry>
@@ -83,6 +84,42 @@
                             </Grid>
                             <Button x:Name="CheckUpdate"  Style="{StaticResource AccentButtonStyle}" FontFamily="{DynamicResource Font}" Content="{x:Static properties:MainLang.CheckUpdate}" HorizontalAlignment="Right" Margin="200,0,9,0" Click="CheckUpdate_Click" Foreground="White"/>
                         </Grid>
+                    </Border>
+                    <Border CornerRadius="3" Background="{DynamicResource 1x}" Margin="0,10,0,0" >
+                        <DockPanel>
+                            <Border Background="{DynamicResource 2x}" CornerRadius="3,3,3,3" Margin="10,10,10,10" DockPanel.Dock="Top">
+                                <DockPanel>
+                                    <ui:FontIcon Glyph="&#xEC25;" HorizontalAlignment="Left" Margin="15,10,0,10" FontSize="24" Foreground="{DynamicResource TextColor}" />
+                                    <DockPanel VerticalAlignment="Center" Margin="15,10,0,10">
+                                        <StackPanel>
+                                            <TextBlock FontFamily="{DynamicResource Font}" Foreground="{DynamicResource TextColor}" HorizontalAlignment="Left" FontSize="14">
+                                                <Run Text="{x:Static properties:MainLang.UserData}"/>
+                                                <Run Text="{x:Static properties:MainLang.Folder}"/>
+                                                <Run x:Name="UserDataSize" FontSize="12" Foreground="{DynamicResource Gray}"/>
+                                            </TextBlock>
+                                            <Label Content="{x:Static app:Const.DataRootPath}" FontFamily="{DynamicResource Font}" FontSize="11" Background="{x:Null}" Foreground="{DynamicResource Gray}"/>
+                                        </StackPanel>
+                                        <Button Content="{x:Static properties:MainLang.OpenFolder}" HorizontalAlignment="Right" FontFamily="{DynamicResource Font}" Margin="0,0,10,0" Click="OpenUserDataFolder"/>
+                                    </DockPanel>
+                                </DockPanel>
+                            </Border>
+                            <Border Background="{DynamicResource 2x}" CornerRadius="3,3,3,3" Margin="10,0,10,10" DockPanel.Dock="Bottom">
+                                <DockPanel>
+                                    <ui:FontIcon Glyph="&#xE8B7;" HorizontalAlignment="Left" Margin="15,10,0,10" FontSize="24" Foreground="{DynamicResource TextColor}" />
+                                    <DockPanel VerticalAlignment="Center" Margin="15,10,0,10">
+                                        <StackPanel>
+                                            <TextBlock FontFamily="{DynamicResource Font}" Foreground="{DynamicResource TextColor}" HorizontalAlignment="Left" FontSize="14">
+                                                <Run Text="{x:Static properties:MainLang.AppData}"/>
+                                                <Run Text="{x:Static properties:MainLang.Folder}"/>
+                                                <Run x:Name="AppDataSize" FontSize="12" Foreground="{DynamicResource Gray}"/>
+                                            </TextBlock>
+                                            <Label Content="{x:Static app:Const.PublicDataRootPath}" FontFamily="{DynamicResource Font}" FontSize="11" Background="{x:Null}" Foreground="{DynamicResource Gray}"/>
+                                        </StackPanel>
+                                        <Button Content="{x:Static properties:MainLang.OpenFolder}" HorizontalAlignment="Right" FontFamily="{DynamicResource Font}" Margin="0,0,10,0" Click="OpenAppDataFolder"/>
+                                    </DockPanel>
+                                </DockPanel>
+                            </Border>
+                        </DockPanel>
                     </Border>
                     <Border CornerRadius="5" Background="{DynamicResource 1x}" Margin="0,10,0,0" >
                         <DockPanel>
@@ -264,37 +301,37 @@
                                         </DockPanel>
                                     </Border>
                                 </ui:HyperlinkButton>
-                                </WrapPanel>
-                                <StackPanel Margin="20,10,20,0" VerticalAlignment="Top" DockPanel.Dock="Top">
-                                    <Grid VerticalAlignment="Top">
-                                        <Image Width="25" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top">
-                                            <Image.Source>
-                                                <DrawingImage>
-                                                    <DrawingImage.Drawing>
-                                                        <GeometryDrawing Brush="{DynamicResource TextColor}">
-                                                            <GeometryDrawing.Geometry>
-                                                                <PathGeometry FillRule="Nonzero" Figures="M723.77001953125,333.55999755859375L642.9000244140625,574.8599853515625C681.3400268554688,595.4299926757812,749.510009765625,619.239990234375,806.6199951171875,572.3400268554688L723.77001953125,333.55999755859375z M299.55999755859375,333.55999755859375L218.69000244140625,574.8599853515625C257.1099853515625,595.4099731445312,325.2699890136719,619.239990234375,382.4100036621094,572.3400268554688L299.55999755859375,333.55999755859375z M509.24639892578125,67.12796020507812C513.7525024414062,67.17749786376953 518.324951171875,68.11250305175781 522.719970703125,70.02999877929688 523.9400024414062,70.55999755859375 525,71.29000091552734 526.1300048828125,71.94000244140625 535.1300048828125,74.91000366210938 542.9299926757812,81.41000366210938 547.0599975585938,90.76000213623047 589.8900146484375,187.75999450683594 644.2000122070312,206.74000549316406 723.5499877929688,206.74000549316406 803.3400268554688,206.74000549316406 858,187.30999755859375 901.27001953125,87.97000122070312 908.9099731445312,70.41000366210938 929.3300170898438,62.36000061035156 946.9199829101562,70.02999877929688 964.47998046875,77.66999816894531 972.510009765625,98.12000274658203 964.8599853515625,115.66999816894531 915.7899780273438,228.3300018310547 845.530029296875,263.2200012207031 776.1199951171875,272.7900085449219L876.8900146484375,563.280029296875C882.7999877929688,580.3400268554688 878.4600219726562,599.489990234375 865.8599853515625,612.0900268554688 825.4400024414062,652.5900268554688 778.2000122070312,668.3699951171875 731.3800048828125,668.3699951171875 680.9500122070312,668.3699951171875 631,650.0700073242188 590.5399780273438,624.6099853515625 572.2999877929688,613.1500244140625 564.4099731445312,590.6900024414062 571.3599853515625,570L670.97998046875,272.80999755859375C628.1300048828125,266.94000244140625,585.010009765625,251.3699951171875,546.7899780273438,213.99000549316406L546.7899780273438,887.75 719.47998046875,887.75C738.6300048828125,887.75 754.1599731445312,903.280029296875 754.1599731445312,922.4299926757812 754.1599731445312,941.5800170898438 738.6400146484375,957.1099853515625 719.47998046875,957.1099853515625L315.29998779296875,957.1099853515625C296.1499938964844,957.1099853515625 280.6199951171875,941.5800170898438 280.6199951171875,922.4299926757812 280.6199951171875,903.280029296875 296.1400146484375,887.75 315.29998779296875,887.75L477.4200134277344,887.75 477.4200134277344,212.42999267578125C438.79998779296875,250.8800048828125,395.2099914550781,266.82000732421875,351.9100036621094,272.7900085449219L452.69000244140625,563.280029296875C458.6099853515625,580.25 454.30999755859375,599.4199829101562 441.7200012207031,612.0399780273438 401.260009765625,652.5700073242188 354,668.3599853515625 307.1600036621094,668.3599853515625 256.739990234375,668.3599853515625 206.8000030517578,650.0599975585938 166.33999633789062,624.6099853515625 148.08999633789062,613.1199951171875 140.22000122070312,590.6699829101562 147.16000366210938,570L246.75999450683594,272.82000732421875C177.82000732421875,263.3800048828125 108.08999633789062,229.08999633789062 59.400001525878906,118.79000091552734 51.650001525878906,101.25 59.59000015258789,80.77999877929688 77.11000061035156,73.05000305175781 94.66999816894531,65.30000305175781 115.0999984741211,73.26000213623047 122.8499984741211,90.76000213623047 165.6699981689453,187.75999450683594 219.99000549316406,206.74000549316406 299.3500061035156,206.74000549316406 379.1300048828125,206.74000549316406 433.7799987792969,187.30999755859375 477.07000732421875,87.97000122070312 482.8074951171875,74.80000305175781 495.7281494140625,66.97937774658203 509.24639892578125,67.12796020507812z" />
-                                                            </GeometryDrawing.Geometry>
-                                                        </GeometryDrawing>
-                                                    </DrawingImage.Drawing>
-                                                </DrawingImage>
-                                            </Image.Source>
-                                        </Image>
-                                        <TextBlock Foreground="{DynamicResource TextColor}" Text="GPL-3.0" Margin="30,0,0,0" FontFamily="{DynamicResource Font}" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" />
-                                    </Grid>
-                                    <TextBlock FontFamily="{DynamicResource Font}" Foreground="{DynamicResource TextColor}" Text="{x:Static properties:MainLang.GPL3Text}" TextWrapping="Wrap" DockPanel.Dock="Bottom" Margin="2,3,10,0" FontSize="13" />
-                                </StackPanel>
-                                <Grid Margin="10,12,10,10" DockPanel.Dock="Top">
-                                    <TextBlock Text="{x:Static properties:MainLang.OpenSourceProjectUsageTable}" FontFamily="{DynamicResource Font}" FontSize="15" HorizontalAlignment="Left" Margin="10,0,0,0" Foreground="{DynamicResource TextColor}" VerticalAlignment="Top" />
-                                    <WrapPanel Margin="5,25,5,0" Cursor="">
-                                        <ui:HyperlinkButton NavigateUri="https://github.com/Fody/Costura" Content=" Costura.Fody " FontFamily="{DynamicResource Font}" />
-                                        <ui:HyperlinkButton NavigateUri="https://github.com/Blessing-Studio/MinecraftLaunch" Content=" MinecraftLaunch " FontFamily="{DynamicResource Font}" />
-                                    <ui:HyperlinkButton NavigateUri="https://github.com/iNKORE-Public/UI.WPF.Modern" Content=" iNKORE.UI.WPF.Modern " FontFamily="{DynamicResource Font}" />
-                                        <ui:HyperlinkButton NavigateUri="https://www.newtonsoft.com/json" Content=" Newtonsoft.Json " FontFamily="{DynamicResource Font}" />
-                                        <ui:HyperlinkButton NavigateUri="https://github.com/Panuon/Panuon.WPF.UI" Content=" Panuon.WPF.UI " FontFamily="{DynamicResource Font}" />
-                                        <ui:HyperlinkButton NavigateUri="https://www.nuget.org/packages/UpdateD" Content=" UpdateD " FontFamily="{DynamicResource Font}" />
-                                    </WrapPanel>
+                            </WrapPanel>
+                            <StackPanel Margin="20,10,20,0" VerticalAlignment="Top" DockPanel.Dock="Top">
+                                <Grid VerticalAlignment="Top">
+                                    <Image Width="25" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                        <Image.Source>
+                                            <DrawingImage>
+                                                <DrawingImage.Drawing>
+                                                    <GeometryDrawing Brush="{DynamicResource TextColor}">
+                                                        <GeometryDrawing.Geometry>
+                                                            <PathGeometry FillRule="Nonzero" Figures="M723.77001953125,333.55999755859375L642.9000244140625,574.8599853515625C681.3400268554688,595.4299926757812,749.510009765625,619.239990234375,806.6199951171875,572.3400268554688L723.77001953125,333.55999755859375z M299.55999755859375,333.55999755859375L218.69000244140625,574.8599853515625C257.1099853515625,595.4099731445312,325.2699890136719,619.239990234375,382.4100036621094,572.3400268554688L299.55999755859375,333.55999755859375z M509.24639892578125,67.12796020507812C513.7525024414062,67.17749786376953 518.324951171875,68.11250305175781 522.719970703125,70.02999877929688 523.9400024414062,70.55999755859375 525,71.29000091552734 526.1300048828125,71.94000244140625 535.1300048828125,74.91000366210938 542.9299926757812,81.41000366210938 547.0599975585938,90.76000213623047 589.8900146484375,187.75999450683594 644.2000122070312,206.74000549316406 723.5499877929688,206.74000549316406 803.3400268554688,206.74000549316406 858,187.30999755859375 901.27001953125,87.97000122070312 908.9099731445312,70.41000366210938 929.3300170898438,62.36000061035156 946.9199829101562,70.02999877929688 964.47998046875,77.66999816894531 972.510009765625,98.12000274658203 964.8599853515625,115.66999816894531 915.7899780273438,228.3300018310547 845.530029296875,263.2200012207031 776.1199951171875,272.7900085449219L876.8900146484375,563.280029296875C882.7999877929688,580.3400268554688 878.4600219726562,599.489990234375 865.8599853515625,612.0900268554688 825.4400024414062,652.5900268554688 778.2000122070312,668.3699951171875 731.3800048828125,668.3699951171875 680.9500122070312,668.3699951171875 631,650.0700073242188 590.5399780273438,624.6099853515625 572.2999877929688,613.1500244140625 564.4099731445312,590.6900024414062 571.3599853515625,570L670.97998046875,272.80999755859375C628.1300048828125,266.94000244140625,585.010009765625,251.3699951171875,546.7899780273438,213.99000549316406L546.7899780273438,887.75 719.47998046875,887.75C738.6300048828125,887.75 754.1599731445312,903.280029296875 754.1599731445312,922.4299926757812 754.1599731445312,941.5800170898438 738.6400146484375,957.1099853515625 719.47998046875,957.1099853515625L315.29998779296875,957.1099853515625C296.1499938964844,957.1099853515625 280.6199951171875,941.5800170898438 280.6199951171875,922.4299926757812 280.6199951171875,903.280029296875 296.1400146484375,887.75 315.29998779296875,887.75L477.4200134277344,887.75 477.4200134277344,212.42999267578125C438.79998779296875,250.8800048828125,395.2099914550781,266.82000732421875,351.9100036621094,272.7900085449219L452.69000244140625,563.280029296875C458.6099853515625,580.25 454.30999755859375,599.4199829101562 441.7200012207031,612.0399780273438 401.260009765625,652.5700073242188 354,668.3599853515625 307.1600036621094,668.3599853515625 256.739990234375,668.3599853515625 206.8000030517578,650.0599975585938 166.33999633789062,624.6099853515625 148.08999633789062,613.1199951171875 140.22000122070312,590.6699829101562 147.16000366210938,570L246.75999450683594,272.82000732421875C177.82000732421875,263.3800048828125 108.08999633789062,229.08999633789062 59.400001525878906,118.79000091552734 51.650001525878906,101.25 59.59000015258789,80.77999877929688 77.11000061035156,73.05000305175781 94.66999816894531,65.30000305175781 115.0999984741211,73.26000213623047 122.8499984741211,90.76000213623047 165.6699981689453,187.75999450683594 219.99000549316406,206.74000549316406 299.3500061035156,206.74000549316406 379.1300048828125,206.74000549316406 433.7799987792969,187.30999755859375 477.07000732421875,87.97000122070312 482.8074951171875,74.80000305175781 495.7281494140625,66.97937774658203 509.24639892578125,67.12796020507812z" />
+                                                        </GeometryDrawing.Geometry>
+                                                    </GeometryDrawing>
+                                                </DrawingImage.Drawing>
+                                            </DrawingImage>
+                                        </Image.Source>
+                                    </Image>
+                                    <TextBlock Foreground="{DynamicResource TextColor}" Text="GPL-3.0" Margin="30,0,0,0" FontFamily="{DynamicResource Font}" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" />
                                 </Grid>
+                                <TextBlock FontFamily="{DynamicResource Font}" Foreground="{DynamicResource TextColor}" Text="{x:Static properties:MainLang.GPL3Text}" TextWrapping="Wrap" DockPanel.Dock="Bottom" Margin="2,3,10,0" FontSize="13" />
+                            </StackPanel>
+                            <Grid Margin="10,12,10,10" DockPanel.Dock="Top">
+                                <TextBlock Text="{x:Static properties:MainLang.OpenSourceProjectUsageTable}" FontFamily="{DynamicResource Font}" FontSize="15" HorizontalAlignment="Left" Margin="10,0,0,0" Foreground="{DynamicResource TextColor}" VerticalAlignment="Top" />
+                                <WrapPanel Margin="5,25,5,0" Cursor="">
+                                    <ui:HyperlinkButton NavigateUri="https://github.com/Fody/Costura" Content=" Costura.Fody " FontFamily="{DynamicResource Font}" />
+                                    <ui:HyperlinkButton NavigateUri="https://github.com/Blessing-Studio/MinecraftLaunch" Content=" MinecraftLaunch " FontFamily="{DynamicResource Font}" />
+                                    <ui:HyperlinkButton NavigateUri="https://github.com/iNKORE-Public/UI.WPF.Modern" Content=" iNKORE.UI.WPF.Modern " FontFamily="{DynamicResource Font}" />
+                                    <ui:HyperlinkButton NavigateUri="https://www.newtonsoft.com/json" Content=" Newtonsoft.Json " FontFamily="{DynamicResource Font}" />
+                                    <ui:HyperlinkButton NavigateUri="https://github.com/Panuon/Panuon.WPF.UI" Content=" Panuon.WPF.UI " FontFamily="{DynamicResource Font}" />
+                                    <ui:HyperlinkButton NavigateUri="https://www.nuget.org/packages/UpdateD" Content=" UpdateD " FontFamily="{DynamicResource Font}" />
+                                </WrapPanel>
+                            </Grid>
                         </DockPanel>
                     </Border>
                 </StackPanel>

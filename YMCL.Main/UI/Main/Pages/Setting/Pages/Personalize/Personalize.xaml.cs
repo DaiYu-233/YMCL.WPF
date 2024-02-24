@@ -142,6 +142,8 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Personalize
                     File.WriteAllText(Const.CustomHomePageXamlPath, result);
                 }
             }
+
+            Function.RestartApp();
         }
         private void CustomHomePageXamlUrlTextBox_LostFocus(object sender, RoutedEventArgs e)
         {

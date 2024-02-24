@@ -597,4 +597,16 @@
   <data name="GetInstallableVersionFail" xml:space="preserve">
     <value>Failed to get installable version</value>
   </data>
+  <data name="Folder" xml:space="preserve">
+    <value>Folder</value>
+  </data>
+  <data name="UserData" xml:space="preserve">
+    <value>User Data</value>
+  </data>
+  <data name="AppData" xml:space="preserve">
+    <value>App Data</value>
+  </data>
+  <data name="OpenFolder" xml:space="preserve">
+    <value>Open Folder</value>
+  </data>
 </root>

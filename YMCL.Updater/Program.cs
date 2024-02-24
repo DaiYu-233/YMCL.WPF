@@ -1,4 +1,6 @@
-﻿namespace YMCL.Updater
+﻿using System.Diagnostics;
+
+namespace YMCL.Updater
 {
     internal class Program
     {
@@ -42,7 +44,7 @@
                 File.Delete(args[0]);
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Successfully");
-                Console.ReadKey();
+                Process.Start(args[1]);
             }
             catch (Exception ex)
             {

@@ -597,4 +597,16 @@
   <data name="GetInstallableVersionFail" xml:space="preserve">
     <value>取得可安裝版本失敗</value>
   </data>
+  <data name="Folder" xml:space="preserve">
+    <value>文件夾</value>
+  </data>
+  <data name="UserData" xml:space="preserve">
+    <value>用戶資料</value>
+  </data>
+  <data name="AppData" xml:space="preserve">
+    <value>應用數據</value>
+  </data>
+  <data name="OpenFolder" xml:space="preserve">
+    <value>打開資料夾</value>
+  </data>
 </root>

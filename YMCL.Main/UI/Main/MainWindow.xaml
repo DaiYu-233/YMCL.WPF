@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:YMCL.Main.UI.Main" xmlns:lang="clr-namespace:YMCL.Main.Public.Lang" xmlns:properties="clr-namespace:YMCL.Main.Public.Lang"
         mc:Ignorable="d"  Background="Transparent" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True"
         Title="{x:Static properties:MainLang.MainWindow_Title}" Height="600" Width="1050" Loaded="Window_Loaded" MouseMove="WindowX_MouseMove" MouseLeftButtonDown="WindowX_MouseLeftButtonDown" MouseLeftButtonUp="WindowX_MouseLeftButtonUp">
-    <ui:ClippingBorder Background="{DynamicResource BackgroundColor}" CornerRadius="8,8,8,8" BorderBrush="{DynamicResource TitleBarColor}" BorderThickness="2,2,2,2">
+    <ui:ClippingBorder Background="{DynamicResource 2x}" CornerRadius="8,8,8,8" BorderBrush="{DynamicResource TitleBarColor}" BorderThickness="2,2,2,2">
         <Grid>
             <Border VerticalAlignment="Top" Height="30" CornerRadius="8,8,0,0" Background="{DynamicResource TitleBarColor}" >
                 <Grid x:Name="TitleBar" MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">

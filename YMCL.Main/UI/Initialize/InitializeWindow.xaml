@@ -6,7 +6,7 @@
             xmlns:lang="clr-namespace:YMCL.Main.Public.Lang"
             mc:Ignorable="d" Background="Transparent" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True"
         Title="{x:Static lang:MainLang.InitializeWindow_Title}" Height="450" Width="800" Loaded="Window_Loaded">
-    <Border Background="{DynamicResource BackgroundColor}" CornerRadius="8,8,8,8" BorderThickness="2,2,2,2" BorderBrush="{DynamicResource TitleBarColor}">
+    <Border Background="{DynamicResource 2x}" CornerRadius="8,8,8,8" BorderThickness="2,2,2,2" BorderBrush="{DynamicResource TitleBarColor}">
         <Grid>
             <Border VerticalAlignment="Top" Height="30" CornerRadius="6,6,0,0" Background="{DynamicResource TitleBarColor}">
                 <Grid x:Name="TitleBar" MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">

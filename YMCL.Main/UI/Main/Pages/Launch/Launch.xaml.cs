@@ -30,6 +30,7 @@ using System.Reflection;
 using System.Windows.Markup;
 using System.Net;
 using System;
+using UpdateD;
 
 namespace YMCL.Main.UI.Main.Pages.Launch
 {
@@ -603,6 +604,43 @@ namespace YMCL.Main.UI.Main.Pages.Launch
             var text = LangHelper.Current.GetText("Launch_SelectedModCount").Split("{|}");
             SelectedModCount.Text = $"{text[0]}0{text[1]}";
             VersionSettingBorder.Visibility = Visibility.Hidden;
+            Update updater = new();
+            var url = string.Empty;
+            var json = string.Empty;
+            try
+            {
+                json = updater.GetUpdateFile(Const.UpdaterId);
+                var obj = JsonConvert.DeserializeObject<_2018k>(json);
+                if (obj != null)
+                {
+                    if (!string.IsNullOrEmpty(obj.Notice.Msg))
+                    {
+                        NoticeBar.Visibility = Visibility.Visible;
+                        NoticeBar.Message = obj.Notice.Msg.Replace(@"\n", "\n");
+                        if (obj.Notice.Type == _2018k.InfoBar.InfoType.Informational)
+                        {
+                            NoticeBar.Severity = iNKORE.UI.WPF.Modern.Controls.InfoBarSeverity.Informational;
+                        }
+                        else if (obj.Notice.Type == _2018k.InfoBar.InfoType.Warning)
+                        {
+                            NoticeBar.Severity = iNKORE.UI.WPF.Modern.Controls.InfoBarSeverity.Warning;
+                        }
+                        else if (obj.Notice.Type == _2018k.InfoBar.InfoType.Success)
+                        {
+                            NoticeBar.Severity = iNKORE.UI.WPF.Modern.Controls.InfoBarSeverity.Success;
+                        }
+                        else if (obj.Notice.Type == _2018k.InfoBar.InfoType.Error)
+                        {
+                            NoticeBar.Severity = iNKORE.UI.WPF.Modern.Controls.InfoBarSeverity.Error;
+                        }
+                        NoticeBar.IsOpen = true;
+                    }
+                }
+            }
+            catch
+            {
+                Toast.Show(message: LangHelper.Current.GetText("GetNoticeFail"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+            }
         }
         public void LoadVersionMods()
         {
@@ -850,10 +888,8 @@ namespace YMCL.Main.UI.Main.Pages.Launch
             LaunchBtn.IsEnabled = false;
             TaskProgressWindow taskProgress = new TaskProgressWindow($"{version.JarPath} - {DateTime.Now.ToString("yyyy-MM-ddTHH:mm:sszzz")}", false);
 
-            if (setting.GetOutput)
-            {
-                taskProgress.Show();
-            }
+            taskProgress.Show();
+            taskProgress.InsertProgressText("-----> YMCLOutputLog", false);
             taskProgress.InsertProgressText("YMCL: " + LangHelper.Current.GetText("VerifyingAccount"));
 
             if (accountJson != null)
@@ -1037,7 +1073,11 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                                     await Dispatcher.BeginInvoke(() =>
                                     {
                                         taskProgress.InsertProgressText("YMCL: " + LangHelper.Current.GetText("WaitForGameWindowAppear"));
-                                        watcher.Process.WaitForInputIdle();
+                                        //watcher.Process.WaitForInputIdle();
+                                        if (!setting.GetOutput)
+                                        {
+                                            taskProgress.Hide();
+                                        }
                                         taskProgress.InsertProgressText("-----> JvmOutputLog", false);
                                         Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_FinishLaunch"), position: ToastPosition.Top, window: Const.Window.mainWindow);
                                     });
@@ -1092,6 +1132,15 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                     MessageBoxX.Show(LangHelper.Current.GetText("Launch_LaunchGame_Click_AccountError"), "Yu Minecraft Launcher");
             }
             LaunchBtn.IsEnabled = true;
+            if (!setting.GetOutput)
+            {
+                taskProgress.Hide();
+            }
+        }
+
+        private void NoticeBar_CloseButtonClick(iNKORE.UI.WPF.Modern.Controls.InfoBar sender, object args)
+        {
+            NoticeBar.Visibility = Visibility.Collapsed;
         }
     }
 }

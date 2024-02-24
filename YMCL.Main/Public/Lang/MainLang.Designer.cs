@@ -223,6 +223,15 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
+        ///   查找类似 应用数据 的本地化字符串。
+        /// </summary>
+        public static string AppData {
+            get {
+                return ResourceManager.GetString("AppData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 参数错误 的本地化字符串。
         /// </summary>
         public static string ArgsError {
@@ -421,6 +430,15 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
+        ///   查找类似 文件夹 的本地化字符串。
+        /// </summary>
+        public static string Folder {
+            get {
+                return ResourceManager.GetString("Folder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 跟随系统 的本地化字符串。
         /// </summary>
         public static string FollowSystem {
@@ -444,6 +462,15 @@ namespace YMCL.Main.Public.Lang {
         public static string GetInstallableVersionFail {
             get {
                 return ResourceManager.GetString("GetInstallableVersionFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 获取公告失败 的本地化字符串。
+        /// </summary>
+        public static string GetNoticeFail {
+            get {
+                return ResourceManager.GetString("GetNoticeFail", resourceCulture);
             }
         }
         
@@ -1294,6 +1321,24 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
+        ///   查找类似 无网络连接 的本地化字符串。
+        /// </summary>
+        public static string NoNetwork {
+            get {
+                return ResourceManager.GetString("NoNetwork", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 公告 的本地化字符串。
+        /// </summary>
+        public static string Notice {
+            get {
+                return ResourceManager.GetString("Notice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 关闭 的本地化字符串。
         /// </summary>
         public static string Off {
@@ -1317,6 +1362,15 @@ namespace YMCL.Main.Public.Lang {
         public static string On {
             get {
                 return ResourceManager.GetString("On", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 打开文件夹 的本地化字符串。
+        /// </summary>
+        public static string OpenFolder {
+            get {
+                return ResourceManager.GetString("OpenFolder", resourceCulture);
             }
         }
         
@@ -1461,6 +1515,15 @@ namespace YMCL.Main.Public.Lang {
         public static string UseGlobalSetting {
             get {
                 return ResourceManager.GetString("UseGlobalSetting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 用户数据 的本地化字符串。
+        /// </summary>
+        public static string UserData {
+            get {
+                return ResourceManager.GetString("UserData", resourceCulture);
             }
         }
         

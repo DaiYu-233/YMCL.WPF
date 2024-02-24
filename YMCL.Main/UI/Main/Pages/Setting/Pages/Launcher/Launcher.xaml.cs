@@ -30,16 +30,13 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launcher
     /// </summary>
     public partial class Launcher : Page
     {
-        public class CPU
-        {
-            public string? X64 { get; set; }
-            public string? X86 { get; set; }
-        }
         public Launcher()
         {
             InitializeComponent();
 
             Version.Text = "YMCL-" + Const.Version;
+            UserDataSize.Text = $"{Math.Round(Function.GetDirectoryLength(Const.DataRootPath) / 1024, 2)} KiB";
+            AppDataSize.Text = $"{Math.Round(Function.GetDirectoryLength(Const.PublicDataRootPath) / 1024 / 1024, 2)} MiB";
         }
 
         private async void CheckUpdate_Click(object sender, RoutedEventArgs e)
@@ -59,11 +56,11 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launcher
 
             if (Environment.Is64BitProcess)
             {
-                url = JsonConvert.DeserializeObject<CPU>(json).X64;
+                url = JsonConvert.DeserializeObject<Public.Class._2018k>(json).X64;
             }
             else
             {
-                url = JsonConvert.DeserializeObject<CPU>(json).X86;
+                url = JsonConvert.DeserializeObject<Public.Class._2018k>(json).X86;
             }
 
             if (updater.GetUpdate(Const.UpdaterId, Const.Version) == true)
@@ -125,9 +122,6 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launcher
                     {
                         MessageBoxX.Show(LangHelper.Current.GetText("DownloadFail") + "：" + ex.Message + "\n\n" + ex.ToString(), "Yu Minecraft Launcher");
                     }
-
-
-
                     taskProgress.InsertProgressText(LangHelper.Current.GetText("FinishUpdate"));
                     taskProgress.Hide();
                 }
@@ -136,6 +130,16 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launcher
             {
                 Toast.Show(Const.Window.mainWindow, LangHelper.Current.GetText("LatestVersion"), ToastPosition.Top);
             }
+        }
+
+        private void OpenUserDataFolder(object sender, RoutedEventArgs e)
+        {
+            Process.Start("explorer.exe", Const.DataRootPath);
+        }
+
+        private void OpenAppDataFolder(object sender, RoutedEventArgs e)
+        {
+            Process.Start("explorer.exe", Const.PublicDataRootPath);
         }
     }
 }

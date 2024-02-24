@@ -386,19 +386,19 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
             //        }
             //        OptifineLoading.Visibility = Visibility.Hidden;
             //    });
-            //}); 
-            //_ = Task.Run(async () =>
-            //{
-            //    var forge = await ForgeInstaller.EnumerableFromVersionAsync(versionId);
-            //    await Dispatcher.BeginInvoke(() =>
-            //    {
-            //        foreach (var item in forge)
-            //        {
-
-            //        }
-            //        ForgeLoading.Visibility = Visibility.Hidden;
-            //    });
             //});
+            _ = Task.Run(async () =>
+            {
+                var forge = await ForgeInstaller.EnumerableFromVersionAsync(versionId);
+                await Dispatcher.BeginInvoke(() =>
+                {
+                    foreach (var item in forge)
+                    {
+
+                    }
+                    ForgeLoading.Visibility = Visibility.Hidden;
+                });
+            });
             _ = Task.Run(async () =>
             {
                 var fabric = await FabricInstaller.EnumerableFromVersionAsync(versionId);

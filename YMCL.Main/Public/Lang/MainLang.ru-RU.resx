@@ -597,4 +597,16 @@
   <data name="GetInstallableVersionFail" xml:space="preserve">
     <value>Не удалось получить устанавливаемую версию</value>
   </data>
+  <data name="Folder" xml:space="preserve">
+    <value>Папка</value>
+  </data>
+  <data name="UserData" xml:space="preserve">
+    <value>Данные пользователя</value>
+  </data>
+  <data name="AppData" xml:space="preserve">
+    <value>Данные приложения</value>
+  </data>
+  <data name="OpenFolder" xml:space="preserve">
+    <value>Открыть папку</value>
+  </data>
 </root>

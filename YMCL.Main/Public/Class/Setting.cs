@@ -27,7 +27,7 @@ namespace YMCL.Main.Public.Class
         public SettingItem.Theme Theme { get; set; } = SettingItem.Theme.System;
         public SettingItem.CustomHomePage CustomHomePage { get; set; } = SettingItem.CustomHomePage.Disable;
         public SettingItem.GameWindow GameWindow { get; set; } = SettingItem.GameWindow.Default;
-        public SettingItem.DownloadSource DownloadSource { get; set; } = SettingItem.DownloadSource.Mcbbs;
+        public SettingItem.DownloadSource DownloadSource { get; set; } = SettingItem.DownloadSource.Mojang;
     }
 
     public class VersionSetting
@@ -67,8 +67,7 @@ namespace YMCL.Main.Public.Class
         public enum DownloadSource
         {
             Mojang,
-            BmclApi,
-            Mcbbs
+            BmclApi
         }
         public enum VersionSettingAloneCore
         {
