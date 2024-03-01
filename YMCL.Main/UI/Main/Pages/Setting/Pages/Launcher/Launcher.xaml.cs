@@ -1,10 +1,12 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Panuon.WPF.UI;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Security.Principal;
 using System.Text;
@@ -20,6 +22,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using UpdateD;
 using YMCL.Main.Public;
+using YMCL.Main.Public.Class;
 using YMCL.Main.Public.Lang;
 using YMCL.Main.UI.TaskProgress;
 
@@ -43,10 +46,11 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launcher
         {
             Update updater = new();
             var url = string.Empty;
-            var json = string.Empty;
+            _2018k obj = null;
+            CheckUpdate.IsEnabled = false;
             try
             {
-                json = updater.GetUpdateFile(Const.UpdaterId);
+                obj = JsonConvert.DeserializeObject<_2018k>(updater.GetUpdateFile(Const.UpdaterId));
             }
             catch
             {
@@ -54,15 +58,52 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launcher
                 return;
             }
 
-            if (Environment.Is64BitProcess)
+            bool Is64BitProcess = Environment.Is64BitProcess;
+            if (obj.EnabledGithubApi)
             {
-                url = JsonConvert.DeserializeObject<Public.Class._2018k>(json).X64;
+                try
+                {
+                    HttpClient httpClient = new HttpClient();
+                    httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36 Edg/91.0.864.54");
+                    var githubApi = JArray.Parse(await httpClient.GetStringAsync(obj.GithubApi));
+                    foreach (JObject root in githubApi)
+                    {
+                        JArray assets = (JArray)root["assets"];
+                        foreach (JObject asset in assets)
+                        {
+                            string name = (string)asset["name"];
+                            string browser_download_url = (string)asset["browser_download_url"];
+                            if (Is64BitProcess && name == "YMCL.Main.x64.exe")
+                            {
+                                url = browser_download_url;
+                                break;
+                            }
+                            if (!Is64BitProcess && name == "YMCL.Main.x86.exe")
+                            {
+                                url = browser_download_url;
+                                break;
+                            }
+                        }
+                    }
+                }
+                catch
+                {
+                    Toast.Show(message: LangHelper.Current.GetText("CheckUpdateFailed"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+                    return;
+                }
             }
             else
             {
-                url = JsonConvert.DeserializeObject<Public.Class._2018k>(json).X86;
+                if (Is64BitProcess)
+                {
+                    url = obj.X64;
+                }
+                else
+                {
+                    url = obj.X86;
+                }
             }
-
+            Debug.WriteLine(url);
             if (updater.GetUpdate(Const.UpdaterId, Const.Version) == true)
             {
                 var V = MessageBoxX.Show(LangHelper.Current.GetText("DownloadUpdateQuestion") + "\n\n" + LangHelper.Current.GetText("UpdateInfo") + "：| \n    " + updater.GetUpdateRem(Const.UpdaterId), LangHelper.Current.GetText("FindNewVersion") + " - " + updater.GetVersionInternet(Const.UpdaterId), MessageBoxButton.OKCancel);
@@ -78,15 +119,19 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launcher
 
                     try
                     {
-                        using (HttpClient client = new HttpClient())
+                        var handler = new HttpClientHandler();
+                        handler.ServerCertificateCustomValidationCallback = (httpRequestMessage, cert, cetChain, policyErrors) => { return true; };
+                        ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls13 | SecurityProtocolType.Tls12;
+                        using (HttpClient client = new HttpClient(handler))
                         {
+                            client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36 Edg/121.0.0.0");
                             using (HttpResponseMessage response = await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead))
                             {
                                 response.EnsureSuccessStatusCode();
 
                                 using (var downloadStream = await response.Content.ReadAsStreamAsync())
                                 {
-                                    using (var fileStream = new System.IO.FileStream(savePath, System.IO.FileMode.Create, System.IO.FileAccess.Write))
+                                    using (var fileStream = new FileStream(savePath, FileMode.Create, FileAccess.Write))
                                     {
                                         byte[] buffer = new byte[8192];
                                         int bytesRead;
@@ -111,7 +156,7 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launcher
                             {
                                 UseShellExecute = true,
                                 WorkingDirectory = Environment.CurrentDirectory,
-                                FileName = System.IO.Path.Combine(Const.PublicDataRootPath, "YMCL-Updater.exe"),
+                                FileName = System.IO.Path.Combine(Const.PublicDataRootPath, "YMCL.Updater.exe"),
                                 Arguments = $"{savePath} {System.Windows.Forms.Application.ExecutablePath}"
                             };
                             Process.Start(startInfo);
@@ -124,12 +169,19 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launcher
                     }
                     taskProgress.InsertProgressText(LangHelper.Current.GetText("FinishUpdate"));
                     taskProgress.Hide();
+                    CheckUpdate.IsEnabled = true;
+                }
+                else
+                {
+                    CheckUpdate.IsEnabled = true;
                 }
             }
             else
             {
                 Toast.Show(Const.Window.mainWindow, LangHelper.Current.GetText("LatestVersion"), ToastPosition.Top);
+                CheckUpdate.IsEnabled = true;
             }
+            CheckUpdate.IsEnabled = true;
         }
 
         private void OpenUserDataFolder(object sender, RoutedEventArgs e)

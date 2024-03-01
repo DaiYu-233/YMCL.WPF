@@ -609,4 +609,16 @@
   <data name="OpenFolder" xml:space="preserve">
     <value>Открыть папку</value>
   </data>
+  <data name="NoNetwork" xml:space="preserve">
+    <value>Нет подключения к Интернету</value>
+  </data>
+  <data name="GetNoticeFail" xml:space="preserve">
+    <value>Не удалось получить объявления</value>
+  </data>
+  <data name="Notice" xml:space="preserve">
+    <value>header|Добавить объявление</value>
+  </data>
+  <data name="CannotFandRightJavaText" xml:space="preserve">
+    <value>YMCL не может найти нужную Java прямо сейчас</value>
+  </data>
 </root>

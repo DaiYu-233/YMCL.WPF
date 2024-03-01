@@ -2,9 +2,9 @@
 
 public class Program
 {
-    public static void Main()
+    public static async Task Main()
     {
-        var forge = ForgeInstaller.EnumerableFromVersionAsync("1.12.2");
+        var forge = await ForgeInstaller.EnumerableFromVersionAsync("1.12.2");
 
         Console.ReadKey();
     }

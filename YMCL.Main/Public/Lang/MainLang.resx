@@ -618,4 +618,10 @@
   <data name="Notice" xml:space="preserve">
     <value>公告</value>
   </data>
+  <data name="CannotFandRightJavaText" xml:space="preserve">
+    <value>YMCL无法找到当前需要的Java</value>
+  </data>
+  <data name="YMCLNewVersion" xml:space="preserve">
+    <value>Ymcl 更新可用</value>
+  </data>
 </root>

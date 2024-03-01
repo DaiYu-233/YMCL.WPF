@@ -286,6 +286,15 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
+        ///   查找类似 YMCL无法找到当前需要的Java 的本地化字符串。
+        /// </summary>
+        public static string CannotFandRightJavaText {
+            get {
+                return ResourceManager.GetString("CannotFandRightJavaText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 检查更新 的本地化字符串。
         /// </summary>
         public static string CheckUpdate {
@@ -1560,6 +1569,15 @@ namespace YMCL.Main.Public.Lang {
         public static string WaitForGameWindowAppear {
             get {
                 return ResourceManager.GetString("WaitForGameWindowAppear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Ymcl 更新可用 的本地化字符串。
+        /// </summary>
+        public static string YMCLNewVersion {
+            get {
+                return ResourceManager.GetString("YMCLNewVersion", resourceCulture);
             }
         }
     }

@@ -609,4 +609,16 @@
   <data name="OpenFolder" xml:space="preserve">
     <value>打開資料夾</value>
   </data>
+  <data name="NoNetwork" xml:space="preserve">
+    <value>無網路連線</value>
+  </data>
+  <data name="GetNoticeFail" xml:space="preserve">
+    <value>取得公告失敗</value>
+  </data>
+  <data name="Notice" xml:space="preserve">
+    <value>公告</value>
+  </data>
+  <data name="CannotFandRightJavaText" xml:space="preserve">
+    <value>YMCL無法找到目前需要的Java</value>
+  </data>
 </root>

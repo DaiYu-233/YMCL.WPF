@@ -68,6 +68,7 @@
             </ui:ClippingBorder>
             <DockPanel Margin="10,10,10,10">
                 <ui:InfoBar x:Name="NoticeBar" DockPanel.Dock="Top" Margin="0,0,0,10" Title="{x:Static properties:MainLang.Notice}" Visibility="Collapsed" FontFamily="{DynamicResource Font}" FontSize="14" CloseButtonClick="NoticeBar_CloseButtonClick"/>
+                <ui:InfoBar x:Name="UpdateBar" DockPanel.Dock="Top" Margin="0,0,0,10" Title="{x:Static properties:MainLang.YMCLNewVersion}" FontFamily="{DynamicResource Font}" FontSize="14" CloseButtonClick="UpdateBar_CloseButtonClick" Severity="Warning" IsOpen="True" Visibility="Collapsed" />
                 <Border x:Name="CustomHomePageRoot" DockPanel.Dock="Bottom" />
             </DockPanel>
         </DockPanel>

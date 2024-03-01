@@ -224,8 +224,11 @@ namespace YMCL.Main.UI.TaskProgress
         }
         public void UpdateProgress(double progress)
         {
-            TaskProgressBar.Value = progress;
-            TaskProgressBarText.Content = $"{Math.Round(progress, 1)}%";
+            try
+            {
+                TaskProgressBar.Value = progress;
+                TaskProgressBarText.Content = $"{Math.Round(progress, 1)}%";
+            }catch (Exception ex) { }
         }
         public void UpdateTitle(string title)
         {

@@ -636,6 +636,12 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                         NoticeBar.IsOpen = true;
                     }
                 }
+                if (updater.GetUpdate(Const.UpdaterId, Const.Version) == true)
+                {
+                    UpdateBar.Message = $"{Const.Version} / {updater.GetVersionInternet(Const.UpdaterId)}";
+                    UpdateBar.IsOpen = true;
+                    UpdateBar.Visibility = Visibility.Visible;
+                }
             }
             catch
             {
@@ -1141,6 +1147,11 @@ namespace YMCL.Main.UI.Main.Pages.Launch
         private void NoticeBar_CloseButtonClick(iNKORE.UI.WPF.Modern.Controls.InfoBar sender, object args)
         {
             NoticeBar.Visibility = Visibility.Collapsed;
+        }
+
+        private void UpdateBar_CloseButtonClick(iNKORE.UI.WPF.Modern.Controls.InfoBar sender, object args)
+        {
+            UpdateBar.Visibility = Visibility.Collapsed;
         }
     }
 }

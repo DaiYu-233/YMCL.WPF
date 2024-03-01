@@ -79,6 +79,8 @@ namespace YMCL.Main.Public.Class
     }
     public class _2018k
     {
+        public bool EnabledGithubApi {  get; set; }
+        public string GithubApi {  get; set; }
         public string? X64 { get; set; }
         public string? X86 { get; set; }
         public InfoBar Notice { get; set; }

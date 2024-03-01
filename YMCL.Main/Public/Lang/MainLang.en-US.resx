@@ -609,4 +609,16 @@
   <data name="OpenFolder" xml:space="preserve">
     <value>Open Folder</value>
   </data>
+  <data name="NoNetwork" xml:space="preserve">
+    <value>No Network Connection</value>
+  </data>
+  <data name="GetNoticeFail" xml:space="preserve">
+    <value>Failed to get announcements!</value>
+  </data>
+  <data name="Notice" xml:space="preserve">
+    <value>Notice</value>
+  </data>
+  <data name="CannotFandRightJavaText" xml:space="preserve">
+    <value>YMCL can't find the Java you need right now!</value>
+  </data>
 </root>

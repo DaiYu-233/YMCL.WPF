@@ -609,4 +609,16 @@
   <data name="OpenFolder" xml:space="preserve">
     <value>フォルダーを開きます</value>
   </data>
+  <data name="NoNetwork" xml:space="preserve">
+    <value>インターネットに接続されていません！</value>
+  </data>
+  <data name="GetNoticeFail" xml:space="preserve">
+    <value>お知らせの取得に失敗しました！</value>
+  </data>
+  <data name="Notice" xml:space="preserve">
+    <value>公告</value>
+  </data>
+  <data name="CannotFandRightJavaText" xml:space="preserve">
+    <value>YMCLは今必要なJavaを見つけることができません</value>
+  </data>
 </root>

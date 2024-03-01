@@ -51,7 +51,7 @@ namespace YMCL.Main.UI.Initialize
                     Url="https://ymcl.daiyu.fun/Assets/YMCL/MiSans.ttf",
                     MD5="61729D264686DD2DCA5038648EA8C9FE"
                 },
-            new InitializeFile()
+                new InitializeFile()
                 {
                     Name="FluentIcons.ttf",
                     Url="https://ymcl.daiyu.fun/Assets/YMCL/FluentIcons.ttf",

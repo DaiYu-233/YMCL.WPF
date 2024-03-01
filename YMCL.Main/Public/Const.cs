@@ -31,7 +31,7 @@ namespace YMCL.Main.Public
             }
         }
 
-        public static string Version { get; } = "1.0.0.20240125_Alpha";
+        public static string Version { get; } = "1.0.0.202402251126_Alpha";
         public static string UpdaterId { get; } = "97B62D3AD1724EFA9AFC7A8D8971BBB1";
         public static string AzureClientId { get; } = "c06d4d68-7751-4a8a-a2ff-d1b46688f428";
         public static string VersionSettingFileName { get; } = "YMCL.Setting.DaiYu";

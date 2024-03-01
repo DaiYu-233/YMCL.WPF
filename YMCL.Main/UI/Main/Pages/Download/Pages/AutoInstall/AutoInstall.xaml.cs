@@ -1,5 +1,6 @@
 ﻿using MinecraftLaunch;
 using MinecraftLaunch.Classes.Models.Download;
+using MinecraftLaunch.Classes.Models.Game;
 using MinecraftLaunch.Classes.Models.Install;
 using MinecraftLaunch.Components.Installer;
 using MinecraftLaunch.Components.Resolver;
@@ -10,6 +11,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using YMCL.Main.Public;
 using YMCL.Main.Public.Lang;
 namespace YMCL.Main.UI.Main.Pages.Download.Pages
@@ -34,6 +36,15 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
         }
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
+            if (setting.DownloadSource == Public.Class.SettingItem.DownloadSource.BmclApi)
+            {
+                MirrorDownloadManager.IsUseMirrorDownloadSource = true;
+            }
+            else
+            {
+                MirrorDownloadManager.IsUseMirrorDownloadSource = false;
+            }
             if (_firstLoad)
             {
                 _firstLoad = false;
@@ -41,7 +52,7 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
                 {
                     await Task.Run(async () =>
                     {
-                        var vanlliaList = await VanlliaInstaller.EnumerableGameCoreAsync();
+                        var vanlliaList = await VanlliaInstaller.EnumerableGameCoreAsync(MirrorDownloadManager.Bmcl);
                         await Dispatcher.BeginInvoke(() =>
                         {
                             var latestRelease = false;
@@ -77,14 +88,24 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
                             ReleaseVanlliaLoading.Visibility = Visibility.Hidden;
                             SnapshotVanlliaLoading.Visibility = Visibility.Hidden;
                             OldVanlliaLoading.Visibility = Visibility.Hidden;
+                            VanlliaListGrid.Visibility = Visibility.Visible;
                         });
                     });
                 }
                 catch
                 {
                     Toast.Show(window: Const.Window.mainWindow, position: ToastPosition.Top, message: LangHelper.Current.GetText("GetInstallableVersionFail"));
+                    VanlliaLoading.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(196, 43, 28));
+                    VanlliaLoadFail.Visibility = Visibility.Visible;
+                    VanlliaLoading.Visibility = Visibility.Collapsed;
                 }
             }
+        }
+        private void VanlliaLoadFail_PreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            VanlliaLoading.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(0, 90, 158));
+            VanlliaLoadFail.Visibility = Visibility.Collapsed;
+            VanlliaLoading.Visibility = Visibility.Visible;
         }
         private void ReturnToVanlliaList_PreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
@@ -111,7 +132,8 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
             }
             else if (ForgeListView.SelectedIndex >= 0)
             {
-
+                var entry = ForgeListView.SelectedItem as ForgeInstallEntry;
+                InstallGame(VersionId.Text, true, CustomGameIdTextBox.Text, forgeInstallEntry: entry);
             }
             else if (FabricListView.SelectedIndex >= 0)
             {
@@ -120,7 +142,8 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
             }
             else if (QuiltListView.SelectedIndex >= 0)
             {
-
+                var entry = QuiltListView.SelectedItem as QuiltBuildEntry;
+                InstallGame(VersionId.Text, true, CustomGameIdTextBox.Text, quiltBuildEntry: entry);
             }
             else
             {
@@ -146,7 +169,7 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
                 case "Forge":
                     if (index >= 0)
                     {
-                        ForgeLabel.Content = (control.SelectedItem as ForgeInstallEntry).Build;
+                        ForgeLabel.Content = (control.SelectedItem as ForgeInstallEntry).ForgeVersion;
                     }
                     else
                     {
@@ -207,7 +230,7 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
             if (ForgeListView.SelectedIndex >= 0)
             {
                 var forge = control.SelectedItem as ForgeInstallEntry;
-                str += $"-Forge {forge.Build} ";
+                str += $"-Forge {forge.ForgeVersion} ";
             }
             if (OptifineListView.SelectedIndex >= 0)
             {
@@ -237,7 +260,7 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
             InitializeComponent();
             InstallPreView.Visibility = Visibility.Hidden;
         }
-        public async void InstallGame(string versionId, bool msg, string versionName = null, FabricBuildEntry fabricBuildEntry = null, QuiltBuildEntry quiltBuildEntry = null)
+        public async void InstallGame(string versionId, bool msg, string versionName = null, ForgeInstallEntry forgeInstallEntry = null, FabricBuildEntry fabricBuildEntry = null, QuiltBuildEntry quiltBuildEntry = null)
         {
             var customId = string.Empty;
             customId = string.IsNullOrEmpty(versionName) ? versionId : versionName;
@@ -258,7 +281,15 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
             }
             var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
             var resolver = new GameResolver(setting.MinecraftFolder);
-            var vanlliaInstaller = new VanlliaInstaller(resolver, versionId);
+            if (setting.DownloadSource == Public.Class.SettingItem.DownloadSource.BmclApi)
+            {
+                MirrorDownloadManager.IsUseMirrorDownloadSource = true;
+            }
+            else
+            {
+                MirrorDownloadManager.IsUseMirrorDownloadSource = false;
+            }
+            var vanlliaInstaller = new VanlliaInstaller(resolver, versionId, MirrorDownloadManager.Bmcl);
             if (Directory.Exists(Path.Combine(setting.MinecraftFolder, "versions", customId)))
             {
                 if (msg)
@@ -303,14 +334,70 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
                     });
                 }
             });//Vanllia
-            var game = resolver.GetGameEntity(customId);
+            var game = resolver.GetGameEntity(versionId);
+            if (forgeInstallEntry != null)
+            {
+                await Task.Run(async () =>
+                {
+                    try
+                    {
+                        var javas = JsonConvert.DeserializeObject<List<JavaEntry>>(File.ReadAllText(Const.JavaDataPath));
+                        if (javas.Count <= 0)
+                        {
+                            Toast.Show(window: Const.Window.mainWindow, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("CannotFandRightJavaText")}");
+                        }
+                        else
+                        {
+                            var forgeInstaller = new ForgeInstaller(game, forgeInstallEntry, javas[0].JavaPath, customId, MirrorDownloadManager.Bmcl);
+                            await Dispatcher.BeginInvoke(() =>
+                            {
+                                taskProgress.UpdateTitle("Forge");
+                                taskProgress.InsertProgressText("-----> Forge");
+                            });
+                            forgeInstaller.ProgressChanged += (_, x) =>
+                            {
+                                Dispatcher.BeginInvoke(() =>
+                                {
+                                    taskProgress.InsertProgressText(x.ProgressStatus);
+                                    taskProgress.UpdateProgress(x.Progress * 100);
+                                });
+                            };
+
+                            var result = await forgeInstaller.InstallAsync();
+
+                            if (result)
+                            {
+                                await Dispatcher.BeginInvoke(() =>
+                                {
+                                    Toast.Show(window: Const.Window.mainWindow, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("InstallFinish")}：Forge");
+                                });
+                            }
+                            else
+                            {
+                                await Dispatcher.BeginInvoke(() =>
+                                {
+                                    Toast.Show(window: Const.Window.mainWindow, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("InstallFail")}：Forge");
+                                });
+                                return;
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        await Dispatcher.BeginInvoke(() =>
+                        {
+                            MessageBoxX.Show($"{LangHelper.Current.GetText("InstallFail")}：Forge\n\n{ex.ToString()}", "Yu Minecraft Launcher");
+                        });
+                    }
+                });
+            }//Forge
             if (fabricBuildEntry != null)
             {
                 await Task.Run(async () =>
                 {
                     try
                     {
-                        var fabricInstaller = new FabricInstaller(game, fabricBuildEntry, customId);
+                        var fabricInstaller = new FabricInstaller(game, fabricBuildEntry, customId, MirrorDownloadManager.Bmcl);
                         await Dispatcher.BeginInvoke(() =>
                         {
                             taskProgress.UpdateTitle("Fabric");
@@ -352,8 +439,57 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
                     }
                 });
             }//Fabric
+            if (quiltBuildEntry != null)
+            {
+                await Task.Run(async () =>
+                {
+                    try
+                    {
+                        var quiltInstaller = new QuiltInstaller(game, quiltBuildEntry, customId, MirrorDownloadManager.Bmcl);
+                        await Dispatcher.BeginInvoke(() =>
+                        {
+                            taskProgress.UpdateTitle("Quilt");
+                            taskProgress.InsertProgressText("-----> Quilt");
+                        });
+                        quiltInstaller.ProgressChanged += (_, x) =>
+                        {
+                            Dispatcher.BeginInvoke(() =>
+                            {
+                                taskProgress.InsertProgressText(x.ProgressStatus);
+                                taskProgress.UpdateProgress(x.Progress * 100);
+                            });
+                        };
+
+                        var result = await quiltInstaller.InstallAsync();
+
+                        if (result)
+                        {
+                            await Dispatcher.BeginInvoke(() =>
+                            {
+                                Toast.Show(window: Const.Window.mainWindow, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("InstallFinish")}：Quilt");
+                            });
+                        }
+                        else
+                        {
+                            await Dispatcher.BeginInvoke(() =>
+                            {
+                                Toast.Show(window: Const.Window.mainWindow, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("InstallFail")}：Quilt");
+                            });
+                            return;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        await Dispatcher.BeginInvoke(() =>
+                        {
+                            MessageBoxX.Show($"{LangHelper.Current.GetText("InstallFail")}：Quilt\n\n{ex.ToString()}", "Yu Minecraft Launcher");
+                        });
+                    }
+                });
+            }//Quilt
 
             Toast.Show(window: Const.Window.mainWindow, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("InstallFinish")}：{customId}");
+            taskProgress.Hide();
         }
         public void ReadyInstallGame(string versionId)
         {
@@ -394,7 +530,7 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
                 {
                     foreach (var item in forge)
                     {
-
+                        ForgeListView.Items.Add(item);
                     }
                     ForgeLoading.Visibility = Visibility.Hidden;
                 });

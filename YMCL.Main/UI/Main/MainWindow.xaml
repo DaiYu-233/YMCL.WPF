@@ -44,9 +44,9 @@
                         <!-- Logo -->
                         <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" Height="36">
                             <Path Data="{DynamicResource Logo}" Margin="16 0 0 0" Stretch="Fill" Fill="{DynamicResource IconBlue}" Width="25" Height="25" HorizontalAlignment="Left"/>
-                            <Label Content="YMCL" Foreground="{DynamicResource IconBlue}" FontWeight="Bold" FontSize="20" VerticalAlignment="Center" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Margin="20,0,0,0"/>
+                            <Label Content="Ymcl" Foreground="{DynamicResource IconBlue}" FontWeight="Bold" FontSize="20" VerticalAlignment="Center" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Margin="20,0,0,0"/>
                         </StackPanel>
-                        <Label Content="YMCL" Foreground="{DynamicResource IconBlue}" FontWeight="Bold" FontSize="20" VerticalAlignment="Center" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Margin="60,0,0,0" Height="26" Width="0"/>
+                        <Label Content="Ymc" Foreground="{DynamicResource IconBlue}" FontWeight="Bold" FontSize="20" VerticalAlignment="Center" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Margin="60,0,0,0" Height="26" Width="0"/>
 
                         <!-- Menu 菜单-->
                         <StackPanel Grid.Row="2">
