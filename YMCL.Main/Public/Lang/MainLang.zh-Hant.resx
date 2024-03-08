@@ -183,9 +183,6 @@
   <data name="Launcher_SettingItem_EditCustomHomePage" xml:space="preserve">
     <value>編輯</value>
   </data>
-  <data name="App_UnhandledException" xml:space="preserve">
-    <value>YMCL發生未處理的異常，將崩潰退出</value>
-  </data>
   <data name="Launcher_UseCustomHomePageToggle_Toggled_On_Info" xml:space="preserve">
     <value>將啟用自訂頁面，YMCL不保證自訂內容安全性，不安全的自訂內容可能會導致裝置遭受攻擊等</value>
   </data>
@@ -620,5 +617,20 @@
   </data>
   <data name="CannotFandRightJavaText" xml:space="preserve">
     <value>YMCL無法找到目前需要的Java</value>
+  </data>
+  <data name="YMCLNewVersion" xml:space="preserve">
+    <value>Ymcl 更新可用</value>
+  </data>
+  <data name="YggdrasilServerUrlIsEmpty" xml:space="preserve">
+    <value>驗證伺服器不可為空</value>
+  </data>
+  <data name="YggdrasilPasswordIsEmpty" xml:space="preserve">
+    <value>密碼不可為空</value>
+  </data>
+  <data name="YggdrasilEmailIsEmpty" xml:space="preserve">
+    <value>信箱不可為空</value>
+  </data>
+  <data name="App_UnhandledException" xml:space="preserve">
+    <value>YMCL發生未處理的異常</value>
   </data>
 </root>

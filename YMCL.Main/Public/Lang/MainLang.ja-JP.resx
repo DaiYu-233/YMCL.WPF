@@ -183,9 +183,6 @@
   <data name="Launcher_SettingItem_EditCustomHomePage" xml:space="preserve">
     <value>編集</value>
   </data>
-  <data name="App_UnhandledException" xml:space="preserve">
-    <value>YMCLで未処理の例外が発生しました。クラッシュして終了します</value>
-  </data>
   <data name="Launcher_UseCustomHomePageToggle_Toggled_On_Info" xml:space="preserve">
     <value>カスタムページが有効になります。YMCLはカスタムコンテンツのセキュリティを保証しません。安全でないカスタムコンテンツは、デバイスが攻撃される可能性があります</value>
   </data>
@@ -610,15 +607,30 @@
     <value>フォルダーを開きます</value>
   </data>
   <data name="NoNetwork" xml:space="preserve">
-    <value>インターネットに接続されていません！</value>
+    <value>インターネットに接続されていません</value>
   </data>
   <data name="GetNoticeFail" xml:space="preserve">
-    <value>お知らせの取得に失敗しました！</value>
+    <value>お知らせの取得に失敗しました</value>
   </data>
   <data name="Notice" xml:space="preserve">
     <value>公告</value>
   </data>
   <data name="CannotFandRightJavaText" xml:space="preserve">
     <value>YMCLは今必要なJavaを見つけることができません</value>
+  </data>
+  <data name="YMCLNewVersion" xml:space="preserve">
+    <value>Ymclアップデートが利用可能です</value>
+  </data>
+  <data name="YggdrasilServerUrlIsEmpty" xml:space="preserve">
+    <value>検証サーバーを空にすることはできません</value>
+  </data>
+  <data name="YggdrasilPasswordIsEmpty" xml:space="preserve">
+    <value>パスワードを空にすることはできません</value>
+  </data>
+  <data name="YggdrasilEmailIsEmpty" xml:space="preserve">
+    <value>メールアドレスを空にすることはできません</value>
+  </data>
+  <data name="App_UnhandledException" xml:space="preserve">
+    <value>YMCLには未処理の例外があります</value>
   </data>
 </root>

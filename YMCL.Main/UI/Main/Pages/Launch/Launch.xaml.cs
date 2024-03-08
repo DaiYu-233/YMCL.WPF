@@ -45,6 +45,15 @@ namespace YMCL.Main.UI.Main.Pages.Launch
         List<AccountInfo> accounts = JsonConvert.DeserializeObject<List<AccountInfo>>(File.ReadAllText(Const.AccountDataPath));
         List<string> minecraftFolder = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(Const.MinecraftFolderDataPath));
         #region UI
+        private void NoticeBar_CloseButtonClick(iNKORE.UI.WPF.Modern.Controls.InfoBar sender, object args)
+        {
+            NoticeBar.Visibility = Visibility.Collapsed;
+        }
+
+        private void UpdateBar_CloseButtonClick(iNKORE.UI.WPF.Modern.Controls.InfoBar sender, object args)
+        {
+            UpdateBar.Visibility = Visibility.Collapsed;
+        }
         private void RefreshMod_Click(object sender, RoutedEventArgs e)
         {
             LoadVersionMods();
@@ -312,6 +321,10 @@ namespace YMCL.Main.UI.Main.Pages.Launch
             LoadVersionMods();
             LoadVersionSettings(true);
             var version = VersionListView.SelectedItem as GameEntry;
+            if (version == null)
+            {
+                return;
+            }
             VersionSettingPageVersionId.Text = version.Id;
             VersionSettingPageGameDescriptionVersion.Text = version.Version;
             VersionSettingPageGameDescriptionJava.Text = version.JavaVersion.ToString();
@@ -914,6 +927,10 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                     MicrosoftAuthenticator authenticator = new(profile, Const.AzureClientId, true);
                     account = await authenticator.AuthenticateAsync();
                 }
+                else if (accountJson.AccountType == SettingItem.AccountType.ThirdParty)
+                {
+                    account = JsonConvert.DeserializeObject<YggdrasilAccount>(accountJson.Data);
+                }
             }
             if (account != null)
             {
@@ -1142,16 +1159,6 @@ namespace YMCL.Main.UI.Main.Pages.Launch
             {
                 taskProgress.Hide();
             }
-        }
-
-        private void NoticeBar_CloseButtonClick(iNKORE.UI.WPF.Modern.Controls.InfoBar sender, object args)
-        {
-            NoticeBar.Visibility = Visibility.Collapsed;
-        }
-
-        private void UpdateBar_CloseButtonClick(iNKORE.UI.WPF.Modern.Controls.InfoBar sender, object args)
-        {
-            UpdateBar.Visibility = Visibility.Collapsed;
         }
     }
 }

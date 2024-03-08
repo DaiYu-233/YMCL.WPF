@@ -183,9 +183,6 @@
   <data name="Launcher_SettingItem_EditCustomHomePage" xml:space="preserve">
     <value>Edit</value>
   </data>
-  <data name="App_UnhandledException" xml:space="preserve">
-    <value>Unhandled exception occurred in YMCL, will crash and exit</value>
-  </data>
   <data name="Launcher_UseCustomHomePageToggle_Toggled_On_Info" xml:space="preserve">
     <value>Custom pages will be enabled, YMCL does not guarantee the security of custom content, insecure custom content may cause devices to be attacked, etc</value>
   </data>
@@ -613,12 +610,27 @@
     <value>No Network Connection</value>
   </data>
   <data name="GetNoticeFail" xml:space="preserve">
-    <value>Failed to get announcements!</value>
+    <value>Failed to get announcements</value>
   </data>
   <data name="Notice" xml:space="preserve">
     <value>Notice</value>
   </data>
   <data name="CannotFandRightJavaText" xml:space="preserve">
-    <value>YMCL can't find the Java you need right now!</value>
+    <value>YMCL can't find the Java you need right now</value>
+  </data>
+  <data name="YMCLNewVersion" xml:space="preserve">
+    <value>Ymcl update available</value>
+  </data>
+  <data name="YggdrasilServerUrlIsEmpty" xml:space="preserve">
+    <value>Verification server cannot be empty</value>
+  </data>
+  <data name="YggdrasilPasswordIsEmpty" xml:space="preserve">
+    <value>Password cannot be empty</value>
+  </data>
+  <data name="YggdrasilEmailIsEmpty" xml:space="preserve">
+    <value>Email cannot be empty</value>
+  </data>
+  <data name="App_UnhandledException" xml:space="preserve">
+    <value>YMCL has an unhandled exception</value>
   </data>
 </root>

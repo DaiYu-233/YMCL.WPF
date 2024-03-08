@@ -13,6 +13,7 @@ using System;
 using System.Globalization;
 using System.Windows.Data;
 using System.Security.Principal;
+using SixLabors.ImageSharp.PixelFormats;
 
 namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Account
 {
@@ -233,6 +234,84 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Account
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             LoadAccounts();
+        }
+
+        private async void YggdrasilAccountAddBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(YggdrasilServerUrlTextBox.Text))
+            {
+                Toast.Show(message: LangHelper.Current.GetText("YggdrasilServerUrlIsEmpty"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+                return;
+            }
+            if (string.IsNullOrEmpty(YggdrasilEmailTextBox.Text))
+            {
+                Toast.Show(message: LangHelper.Current.GetText("YggdrasilEmailIsEmpty"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+                return;
+            }
+            if (string.IsNullOrEmpty(YggdrasilPasswordTextBox.Password))
+            {
+                Toast.Show(message: LangHelper.Current.GetText("YggdrasilPasswordIsEmpty"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+                return;
+            }
+            IEnumerable<YggdrasilAccount> yggdrasilAccounts = null;
+            try
+            {
+                YggdrasilAuthenticator authenticator = new(YggdrasilServerUrlTextBox.Text, YggdrasilEmailTextBox.Text, YggdrasilPasswordTextBox.Password);
+                yggdrasilAccounts = await authenticator.AuthenticateAsync();
+            }
+            catch (Exception)
+            {
+                Toast.Show(message: LangHelper.Current.GetText("LoginFail"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+                return;
+            }
+            try
+            {
+                Toast.Show(message: LangHelper.Current.GetText("VerifyingAccount"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+
+                foreach (var account in yggdrasilAccounts)
+                {
+                    DateTime now = DateTime.Now;
+                    try
+                    {
+                        MinecraftLaunch.Skin.Class.Fetchers.YggdrasilSkinFetcher skinFetcher = new(account.YggdrasilServerUrl, account.Uuid.ToString());
+                        var bytes = await skinFetcher.GetSkinAsync();
+                        await Dispatcher.BeginInvoke(() =>
+                        {
+                            accounts.Add(new AccountInfo
+                            {
+                                AccountType = SettingItem.AccountType.ThirdParty,
+                                AddTime = now.ToString("yyyy-MM-ddTHH:mm:sszzz"),
+                                Data = JsonConvert.SerializeObject(account, formatting: Formatting.Indented),
+                                Name = account.Name,
+                                Skin = Function.BytesToBase64(bytes)
+                            });
+                        });
+                    }
+                    catch
+                    {
+                        await Dispatcher.BeginInvoke(() =>
+                        {
+                            accounts.Add(new AccountInfo
+                            {
+                                AccountType = SettingItem.AccountType.ThirdParty,
+                                AddTime = now.ToString("yyyy-MM-ddTHH:mm:sszzz"),
+                                Data = JsonConvert.SerializeObject(account, formatting: Formatting.Indented),
+                                Name = account.Name
+                            });
+                        });
+                    }
+                }
+
+                File.WriteAllText(Const.AccountDataPath, JsonConvert.SerializeObject(accounts, Formatting.Indented));
+                LoadAccounts();
+                LoginYggdrasilDialog.Hide();
+                Const.Window.mainWindow.Activate();
+                AccountsListView.SelectedIndex = AccountsListView.Items.Count - 1;
+            }
+            catch (Exception)
+            {
+                Toast.Show(message: LangHelper.Current.GetText("LoginFail"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+            }
         }
     }
 }

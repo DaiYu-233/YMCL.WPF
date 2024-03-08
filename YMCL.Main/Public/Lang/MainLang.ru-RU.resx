@@ -183,9 +183,6 @@
   <data name="Launcher_SettingItem_EditCustomHomePage" xml:space="preserve">
     <value>редактор</value>
   </data>
-  <data name="App_UnhandledException" xml:space="preserve">
-    <value>Необработанное исключение произошло в YMCL, произойдет сбой и выход</value>
-  </data>
   <data name="Launcher_UseCustomHomePageToggle_Toggled_On_Info" xml:space="preserve">
     <value>Пользовательские страницы будут включены, YMCL не гарантирует безопасность пользовательского контента, небезопасный пользовательский контент может привести к атаке на устройства и т. д</value>
   </data>
@@ -620,5 +617,20 @@
   </data>
   <data name="CannotFandRightJavaText" xml:space="preserve">
     <value>YMCL не может найти нужную Java прямо сейчас</value>
+  </data>
+  <data name="YMCLNewVersion" xml:space="preserve">
+    <value>Доступно обновление Ymcl</value>
+  </data>
+  <data name="YggdrasilServerUrlIsEmpty" xml:space="preserve">
+    <value>Сервер верификации не может быть пустым</value>
+  </data>
+  <data name="YggdrasilPasswordIsEmpty" xml:space="preserve">
+    <value>Пароль не может быть пустым</value>
+  </data>
+  <data name="YggdrasilEmailIsEmpty" xml:space="preserve">
+    <value>Адрес электронной почты не может быть пустым</value>
+  </data>
+  <data name="App_UnhandledException" xml:space="preserve">
+    <value>У YMCL есть необработанное исключение</value>
   </data>
 </root>

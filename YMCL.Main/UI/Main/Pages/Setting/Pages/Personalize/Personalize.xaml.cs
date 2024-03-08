@@ -58,6 +58,8 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Personalize
         private void LoadTheme(object? sender, EventArgs e)
         {
             var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
+            ThemeManager.Current.AccentColor = setting.ThemeColor;
+            ColorPicker.SelectedColor = setting.ThemeColor;
             if (setting.Theme == SettingItem.Theme.Light)
             {
                 System.Windows.Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/YMCL.Main;component/Public/Style/Light.xaml") });
@@ -164,6 +166,19 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Personalize
             var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
             setting.CustomHomePageNetCSharpUrl = CustomHomePageCSharpUrlTextBox.Text;
             File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+        }
+
+        private void ColorPicker_SelectedColorChanged(object sender, Panuon.WPF.SelectedValueChangedRoutedEventArgs<System.Windows.Media.Color?> e)
+        {
+            var color = ColorPicker.SelectedColor;
+            var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
+            if (setting.ThemeColor == color || color == null)
+            {
+                return;
+            }
+            setting.ThemeColor = (System.Windows.Media.Color)color;
+            File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+            LoadTheme(null, null);
         }
     }
 }

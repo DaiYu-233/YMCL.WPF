@@ -2,7 +2,6 @@
 using MinecraftLaunch.Components.Fetcher;
 using Newtonsoft.Json;
 using Panuon.WPF.UI;
-using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows;
@@ -167,7 +166,16 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launch
             JavaFetcher javaFetcher = new JavaFetcher();
             var includeItem = 0;
             var temp = new List<JavaEntry>();
-            var java = javaFetcher.Fetch().ToList();
+            List<JavaEntry> java = new List<JavaEntry>();
+            try
+            {
+                javaFetcher.Fetch().ToList();
+            }
+            catch (Exception ex)
+            {
+                Toast.Show(Const.Window.mainWindow, $"Error", ToastPosition.Top);
+                return;
+            }
             java = java.Distinct().ToList();
             foreach (var item in java)
             {

@@ -214,7 +214,7 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
-        ///   查找类似 YMCL发生未处理的异常，将崩溃退出 的本地化字符串。
+        ///   查找类似 YMCL发生未处理的异常 的本地化字符串。
         /// </summary>
         public static string App_UnhandledException {
             get {
@@ -1510,6 +1510,15 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
+        ///   查找类似 主题色 的本地化字符串。
+        /// </summary>
+        public static string ThemeColor {
+            get {
+                return ResourceManager.GetString("ThemeColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 更新内容 的本地化字符串。
         /// </summary>
         public static string UpdateInfo {
@@ -1569,6 +1578,33 @@ namespace YMCL.Main.Public.Lang {
         public static string WaitForGameWindowAppear {
             get {
                 return ResourceManager.GetString("WaitForGameWindowAppear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 邮箱不可为空 的本地化字符串。
+        /// </summary>
+        public static string YggdrasilEmailIsEmpty {
+            get {
+                return ResourceManager.GetString("YggdrasilEmailIsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 密码不可为空 的本地化字符串。
+        /// </summary>
+        public static string YggdrasilPasswordIsEmpty {
+            get {
+                return ResourceManager.GetString("YggdrasilPasswordIsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 验证服务器不可为空 的本地化字符串。
+        /// </summary>
+        public static string YggdrasilServerUrlIsEmpty {
+            get {
+                return ResourceManager.GetString("YggdrasilServerUrlIsEmpty", resourceCulture);
             }
         }
         

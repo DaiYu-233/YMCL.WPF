@@ -87,11 +87,11 @@
                     <Grid Width="429" Height="185">
                         <TextBox x:Name="YggdrasilServerUrlTextBox" FontFamily="{DynamicResource Font}" FontSize="15" VerticalAlignment="Top"  Width="420"  ui:ControlHelper.PlaceholderText="{x:Static properties:MainLang.Account_ServerUrl}" Height="30"/>
                         <TextBox x:Name="YggdrasilEmailTextBox" FontFamily="{DynamicResource Font}" FontSize="15" VerticalAlignment="Top"  Width="420"  ui:ControlHelper.PlaceholderText="{x:Static properties:MainLang.Account_Email}" Margin="0,39,0,0" Height="23"/>
-                        <TextBox x:Name="YggdrasilPasswordTextBox" FontFamily="{DynamicResource Font}" FontSize="15" VerticalAlignment="Top"  Width="420"  ui:ControlHelper.PlaceholderText="{x:Static properties:MainLang.Account_Password}" Margin="0,78,0,0" Height="19"/>
-                        <CheckBox x:Name="isLittleSkin" VerticalAlignment="Bottom" Margin="10,0,0,2" Content="LittleSkin" FontFamily="{DynamicResource Font}" HorizontalAlignment="Left"/>
+                        <PasswordBox x:Name="YggdrasilPasswordTextBox" FontFamily="{DynamicResource Font}" FontSize="15" VerticalAlignment="Top"  Width="420"  ui:ControlHelper.PlaceholderText="{x:Static properties:MainLang.Account_Password}" Margin="0,78,0,0" Height="32"/>
+                        <!--<CheckBox x:Name="isLittleSkin" VerticalAlignment="Bottom" Margin="10,0,0,2" Content="LittleSkin" FontFamily="{DynamicResource Font}" HorizontalAlignment="Left"/>-->
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right">
                             <Button VerticalAlignment="Bottom" Height="29" FontFamily="{DynamicResource Font}" Content="{x:Static properties:MainLang.Account_Cancel}" IsEnabled="True" HorizontalAlignment="Right" Margin="0,0,6.5,5" IsCancel="True" Click="Cancel_Login" />
-                            <Button x:Name="YggdrasilAccountAddBtn" VerticalAlignment="Bottom" Height="29" FontFamily="{DynamicResource Font}"  Style="{StaticResource AccentButtonStyle}" Content="{x:Static properties:MainLang.Account_Sure}" IsEnabled="True" HorizontalAlignment="Right" Margin="0,0,5,5" IsDefault="True" />
+                            <Button x:Name="YggdrasilAccountAddBtn" VerticalAlignment="Bottom" Height="30" FontFamily="{DynamicResource Font}"  Style="{StaticResource AccentButtonStyle}" Content="{x:Static properties:MainLang.Account_Sure}" IsEnabled="True" HorizontalAlignment="Right" Margin="0,0,5,5" IsDefault="True" Click="YggdrasilAccountAddBtn_Click" />
                         </StackPanel>
                     </Grid>
                 </ui:ContentDialog>

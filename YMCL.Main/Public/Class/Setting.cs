@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace YMCL.Main.Public.Class
 {
@@ -25,6 +26,7 @@ namespace YMCL.Main.Public.Class
         public bool GetOutput { get; set; } = false;
         public double MaxDownloadThread { get; set; } = 16;
         public SettingItem.Theme Theme { get; set; } = SettingItem.Theme.System;
+        public System.Windows.Media.Color ThemeColor { get; set; } = System.Windows.Media.Color.FromRgb(13, 107, 192);
         public SettingItem.CustomHomePage CustomHomePage { get; set; } = SettingItem.CustomHomePage.Disable;
         public SettingItem.GameWindow GameWindow { get; set; } = SettingItem.GameWindow.Default;
         public SettingItem.DownloadSource DownloadSource { get; set; } = SettingItem.DownloadSource.Mojang;

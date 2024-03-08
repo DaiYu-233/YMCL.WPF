@@ -107,6 +107,10 @@ namespace YMCL.Main
                 MessageBoxX.Show($"\n{LangHelper.Current.GetText("App_UnhandledException")}：{e.Exception.Message}\n\n{e.Exception.ToString()}", "Yu Minecraft Launcher");
             }
             catch { }
+            finally
+            {
+                e.Handled = true;
+            }
         }
     }
 
