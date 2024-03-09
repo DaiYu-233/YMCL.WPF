@@ -633,4 +633,28 @@
   <data name="App_UnhandledException" xml:space="preserve">
     <value>YMCL發生未處理的異常</value>
   </data>
+  <data name="ThemeColor" xml:space="preserve">
+    <value>主題色</value>
+  </data>
+  <data name="ShowWindow" xml:space="preserve">
+    <value>顯示視窗</value>
+  </data>
+  <data name="TrueExit" xml:space="preserve">
+    <value>徹底退出</value>
+  </data>
+  <data name="TasksCenter" xml:space="preserve">
+    <value>任務中心</value>
+  </data>
+  <data name="Install" xml:space="preserve">
+    <value>安裝</value>
+  </data>
+  <data name="CreateTask" xml:space="preserve">
+    <value>建立任務</value>
+  </data>
+  <data name="ClickToViewTaskCenter" xml:space="preserve">
+    <value>點選查看任務進度&gt;&gt;</value>
+  </data>
+  <data name="OpenTaskCenter" xml:space="preserve">
+    <value>打開任務中心</value>
+  </data>
 </root>

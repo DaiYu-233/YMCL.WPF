@@ -52,9 +52,9 @@
                             </WrapPanel>
                         </Grid>
                         <StackPanel x:Name="FileDownloadPage" Visibility="Hidden" >
-                            <Border Background="{DynamicResource 1x}" Padding="10,10,10,10" Margin="10,10,10,0">
+                            <Border Margin="10,10,10,0">
                                 <StackPanel>
-                                    <ui:HyperlinkButton Content="{x:Static properties:MainLang.InitializeWindow_DownloadHelp}" NavigateUri="https://support.qq.com/products/542108/blog/927530" FontFamily="{DynamicResource Font}"/>
+                                    <ui:HyperlinkButton Content="{x:Static properties:MainLang.InitializeWindow_DownloadHelp}" NavigateUri="https://support.qq.com/products/542108/faqs-more?id=151773" FontFamily="{DynamicResource Font}" Background="{x:Null}" HorizontalAlignment="Left"/>
                                 </StackPanel>
                             </Border>
                         </StackPanel>

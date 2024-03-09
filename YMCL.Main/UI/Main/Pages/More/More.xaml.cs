@@ -1,17 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows.Controls;
 
 namespace YMCL.Main.UI.Main.Pages.More
 {
@@ -20,9 +7,19 @@ namespace YMCL.Main.UI.Main.Pages.More
     /// </summary>
     public partial class More : Page
     {
+        Pages.TreasureBox.TreasureBox treasureBox = new();
         public More()
         {
             InitializeComponent();
+            MainFrame.Content = treasureBox;
+        }
+
+        private void Navigation_SelectionChanged(iNKORE.UI.WPF.Modern.Controls.NavigationView sender, iNKORE.UI.WPF.Modern.Controls.NavigationViewSelectionChangedEventArgs args)
+        {
+            if (TreasureBox.IsSealed)
+            {
+                MainFrame.Content = treasureBox;
+            }
         }
     }
 }

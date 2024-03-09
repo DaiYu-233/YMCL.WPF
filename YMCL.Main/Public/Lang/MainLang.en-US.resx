@@ -633,4 +633,28 @@
   <data name="App_UnhandledException" xml:space="preserve">
     <value>YMCL has an unhandled exception</value>
   </data>
+  <data name="ThemeColor" xml:space="preserve">
+    <value>Theme color</value>
+  </data>
+  <data name="ShowWindow" xml:space="preserve">
+    <value>Show Window</value>
+  </data>
+  <data name="TrueExit" xml:space="preserve">
+    <value>Quit altogether</value>
+  </data>
+  <data name="TasksCenter" xml:space="preserve">
+    <value>task center</value>
+  </data>
+  <data name="Install" xml:space="preserve">
+    <value>Installation</value>
+  </data>
+  <data name="CreateTask" xml:space="preserve">
+    <value>Create Task</value>
+  </data>
+  <data name="ClickToViewTaskCenter" xml:space="preserve">
+    <value>Click to view mission progress &gt;&gt;</value>
+  </data>
+  <data name="OpenTaskCenter" xml:space="preserve">
+    <value>Open Task Center</value>
+  </data>
 </root>

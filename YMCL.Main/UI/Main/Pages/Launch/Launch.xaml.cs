@@ -16,7 +16,7 @@ using YMCL.Main.Public;
 using YMCL.Main.Public.Lang;
 using MessageBoxIcon = Panuon.WPF.UI.MessageBoxIcon;
 using YMCL.Main.Public.Class;
-using YMCL.Main.UI.TaskProgress;
+using YMCL.Main.UI.TaskManage.TaskProgress;
 using MinecraftLaunch.Classes.Models.Auth;
 using iNKORE.UI.WPF.Modern.Controls.Primitives;
 using MinecraftLaunch.Utilities;
@@ -29,7 +29,6 @@ using System.Runtime.InteropServices;
 using System.Reflection;
 using System.Windows.Markup;
 using System.Net;
-using System;
 using UpdateD;
 
 namespace YMCL.Main.UI.Main.Pages.Launch
@@ -49,7 +48,6 @@ namespace YMCL.Main.UI.Main.Pages.Launch
         {
             NoticeBar.Visibility = Visibility.Collapsed;
         }
-
         private void UpdateBar_CloseButtonClick(iNKORE.UI.WPF.Modern.Controls.InfoBar sender, object args)
         {
             UpdateBar.Visibility = Visibility.Collapsed;
@@ -1064,6 +1062,8 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                         }
                         Launcher launcher = new(resolver, config);
 
+                        var task = Const.Window.tasksWindow.CreateTask($"{version.JarPath}", false);
+
                         await Task.Run(async () =>
                         {
                             try
@@ -1077,10 +1077,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                                         Dispatcher.BeginInvoke(() =>
                                         {
                                             Toast.Show(message: $"{LangHelper.Current.GetText("Launch_LaunchGame_Click_GameExit")}：{args.ExitCode}", position: ToastPosition.Top, window: Const.Window.mainWindow);
-                                            if (setting.GetOutput)
-                                            {
-                                                taskProgress.Hide();
-                                            }
+                                            taskProgress.Hide();
                                             Const.Window.mainWindow.Focus();
                                         });
                                     };
@@ -1089,7 +1086,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                                         Debug.WriteLine(args.Text);
                                         await Dispatcher.BeginInvoke(() =>
                                         {
-                                            taskProgress.InsertProgressText(args.Text, false);
+                                            task.AppendText(args.Text, false);
                                         });
                                     };
 
@@ -1097,10 +1094,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                                     {
                                         taskProgress.InsertProgressText("YMCL: " + LangHelper.Current.GetText("WaitForGameWindowAppear"));
                                         //watcher.Process.WaitForInputIdle();
-                                        if (!setting.GetOutput)
-                                        {
-                                            taskProgress.Hide();
-                                        }
+                                        taskProgress.Hide();
                                         taskProgress.InsertProgressText("-----> JvmOutputLog", false);
                                         Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_FinishLaunch"), position: ToastPosition.Top, window: Const.Window.mainWindow);
                                     });
@@ -1155,10 +1149,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                     MessageBoxX.Show(LangHelper.Current.GetText("Launch_LaunchGame_Click_AccountError"), "Yu Minecraft Launcher");
             }
             LaunchBtn.IsEnabled = true;
-            if (!setting.GetOutput)
-            {
-                taskProgress.Hide();
-            }
+            taskProgress.Hide();
         }
     }
 }

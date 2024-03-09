@@ -633,4 +633,28 @@
   <data name="App_UnhandledException" xml:space="preserve">
     <value>У YMCL есть необработанное исключение</value>
   </data>
+  <data name="ThemeColor" xml:space="preserve">
+    <value>Цвет темы</value>
+  </data>
+  <data name="ShowWindow" xml:space="preserve">
+    <value>Показать окно</value>
+  </data>
+  <data name="TrueExit" xml:space="preserve">
+    <value>Полностью бросьте курить</value>
+  </data>
+  <data name="TasksCenter" xml:space="preserve">
+    <value>Центр задач</value>
+  </data>
+  <data name="Install" xml:space="preserve">
+    <value>Установка</value>
+  </data>
+  <data name="CreateTask" xml:space="preserve">
+    <value>Создайте задачу</value>
+  </data>
+  <data name="ClickToViewTaskCenter" xml:space="preserve">
+    <value>Нажмите, чтобы просмотреть ход выполнения задания &gt;&gt;</value>
+  </data>
+  <data name="OpenTaskCenter" xml:space="preserve">
+    <value>Откройте Центр задач</value>
+  </data>
 </root>

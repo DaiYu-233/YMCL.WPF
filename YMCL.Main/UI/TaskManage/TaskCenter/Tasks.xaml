@@ -1,0 +1,24 @@
+﻿<pu:WindowX x:Class="YMCL.Main.UI.TaskManage.TaskCenter.Tasks"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" pu:WindowXCaption.Height="0" 
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Background="Transparent"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" ResizeMode="NoResize"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+            xmlns:ui="http://schemas.inkore.net/lib/ui/wpf/modern" xmlns:pu="https://opensource.panuon.com/wpf-ui"
+        mc:Ignorable="d"  xmlns:properties="clr-namespace:YMCL.Main.Public.Lang" WindowStyle="None" AllowsTransparency="True"
+        Title="{x:Static properties:MainLang.TaskProgressWindow_Title}" Height="499" Width="857" Loaded="WindowX_Loaded">
+    <ui:ClippingBorder Background="{DynamicResource 2x}" CornerRadius="8,8,8,8" BorderBrush="{DynamicResource TitleBarColor}" BorderThickness="2,2,2,2">
+        <Grid>
+            <ui:ClippingBorder x:Name="TitleBar" VerticalAlignment="Top" Height="30" CornerRadius="8,8,0,0" Background="{DynamicResource TitleBarColor}" MouseLeftButtonDown="TitleBar_MouseLeftButtonDown" >
+                <Grid>
+                    <TextBlock x:Name="Title" Text="{x:Static properties:MainLang.TasksCenter}" VerticalAlignment="Center" Margin="9,0,0,0" HorizontalAlignment="Left" FontSize="13" Foreground="{DynamicResource TextColor}" FontFamily="{DynamicResource Font}"  />
+                    <Button x:Name="btnClose" Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource Close}" Tag="IsCloseButton" HorizontalAlignment="Right" Margin="0,0,3,0" Click="btnClose_Click" />
+                    <Button x:Name="btnMaximize" Style="{DynamicResource IconButtonsStyle}" Content="{DynamicResource Maximize}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,30,0" Cursor="Hand" Click="btnMaximize_Click"/>
+                    <Button x:Name="btnMinimize" Style="{DynamicResource IconButtonsStyle}" Content="{DynamicResource Minimize}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,57,0" Cursor="Hand" Click="btnMinimize_Click" />
+                </Grid>
+            </ui:ClippingBorder>
+            <ScrollViewer Margin="0,30,0,0" VerticalScrollBarVisibility="Hidden">
+                <StackPanel x:Name="TaskContainer" Margin="10,10,10,10" DockPanel.Dock="Top"/>
+            </ScrollViewer>
+        </Grid>
+    </ui:ClippingBorder>
+</pu:WindowX>

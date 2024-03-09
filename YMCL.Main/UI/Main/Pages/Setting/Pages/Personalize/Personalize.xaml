@@ -39,7 +39,7 @@
             <Border CornerRadius="5" Background="{DynamicResource 1x}" Height="45" Margin="0,0,0,10" >
                 <DockPanel>
                     <Label HorizontalAlignment="Left" VerticalAlignment="Center" Margin="18,0,0,0" FontSize="15" Foreground="{DynamicResource TextColor}" FontFamily="{DynamicResource Font}" Content="{x:Static properties:MainLang.ThemeColor}"/>
-                    <pu:ColorPicker x:Name="ColorPicker" Height="32" Margin="18,0,6.5,0" CornerRadius="4,4,4,4" BorderBrush="#0F000000" Foreground="{DynamicResource TextColor}" FontSize="14" FontFamily="{DynamicResource Font}" DockPanel.Dock="Top" SelectedColorChanged="ColorPicker_SelectedColorChanged"/>
+                    <pu:ColorPicker x:Name="ColorPicker" Height="32" Margin="18,0,6.5,0" CornerRadius="4,4,4,4" BorderBrush="#0F000000" Foreground="{DynamicResource TextColor}" FontSize="14" FontFamily="{DynamicResource Font}" DockPanel.Dock="Top" SelectedColorChanged="ColorPicker_SelectedColorChanged" Background="{DynamicResource 2x}"/>
                 </DockPanel>
             </Border>
             <Border CornerRadius="5" Background="{DynamicResource 1x}" x:Name="CustomHomePageUIBorder" Height="84" Margin="0,0,0,10" >

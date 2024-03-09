@@ -633,4 +633,28 @@
   <data name="App_UnhandledException" xml:space="preserve">
     <value>YMCLには未処理の例外があります</value>
   </data>
+  <data name="ThemeColor" xml:space="preserve">
+    <value>テーマカラー</value>
+  </data>
+  <data name="ShowWindow" xml:space="preserve">
+    <value>ウィンドウを表示</value>
+  </data>
+  <data name="TrueExit" xml:space="preserve">
+    <value>まったくやめろ</value>
+  </data>
+  <data name="TasksCenter" xml:space="preserve">
+    <value>タスクセンター</value>
+  </data>
+  <data name="Install" xml:space="preserve">
+    <value>インストール</value>
+  </data>
+  <data name="CreateTask" xml:space="preserve">
+    <value>タスクを作成</value>
+  </data>
+  <data name="ClickToViewTaskCenter" xml:space="preserve">
+    <value>クリックしてミッションの進行状況を表示&gt;&gt;</value>
+  </data>
+  <data name="OpenTaskCenter" xml:space="preserve">
+    <value>タスクセンターを開きます</value>
+  </data>
 </root>

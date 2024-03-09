@@ -33,7 +33,6 @@ namespace YMCL.Main.Public
             }
             return len;
         }
-
         public static void RestartApp()
         {
             ProcessStartInfo startInfo = new ProcessStartInfo
@@ -45,7 +44,6 @@ namespace YMCL.Main.Public
             Process.Start(startInfo);
             System.Windows.Application.Current.Shutdown();
         }
-
         public static void CreateFolder(string path)
         {
             if (!Directory.Exists(path))

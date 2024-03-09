@@ -43,25 +43,37 @@ namespace YMCL.Main.UI.Initialize
         int page = 0;
         private System.Timers.Timer timer;
         private int countdown = 40;
-        List<InitializeFile> files = new List<InitializeFile>()
+        List<DownloadFile> files = new List<DownloadFile>()
             {
-                new InitializeFile()
+                new DownloadFile()
                 {
                     Name="MiSans.ttf",
                     Url="https://ymcl.daiyu.fun/Assets/YMCL/MiSans.ttf",
                     MD5="61729D264686DD2DCA5038648EA8C9FE"
                 },
-                new InitializeFile()
+                new DownloadFile()
                 {
                     Name="FluentIcons.ttf",
                     Url="https://ymcl.daiyu.fun/Assets/YMCL/FluentIcons.ttf",
                     MD5="460A1FFA29FBC20E97861B497601C552"
                 },
-                new InitializeFile()
+                new DownloadFile()
                 {
                     Name="YMCL.Updater.exe",
                     Url="https://ymcl.daiyu.fun/Assets/YMCL/YMCL.Updater.exe",
                     MD5="6851F1062F8CD545FBEBF2B755CE4DEC"
+                },
+                new DownloadFile()
+                {
+                    Name="Icon.ico",
+                    Url="https://ymcl.daiyu.fun/Assets/img/YMCL-Icon.ico",
+                    MD5="74985843B31E8BD0741B2C62A3C00853"
+                },
+                new DownloadFile()
+                {
+                    Name="Icon.png",
+                    Url="https://ymcl.daiyu.fun/Assets/img/YMCL-Icon.png",
+                    MD5="44953C3905C5EDBC3353AA89D359DC06"
                 }
             };
         List<TextBlock> lines = new List<TextBlock>();

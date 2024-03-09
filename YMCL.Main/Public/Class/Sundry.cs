@@ -60,7 +60,7 @@ namespace YMCL.Main.Public.Class
             public int length { get; set; }
         }
     }
-    public class InitializeFile
+    public class DownloadFile
     {
         public string Name { get; set; }
         public string Url { get; set; }

@@ -298,10 +298,13 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
                     MessageBoxX.Show($"{LangHelper.Current.GetText("FileExists")}：{customId}", "Yu Minecraft Launcher");
                 return;
             }
-            TaskProgress.TaskProgressWindow taskProgress = new($"Vanllia - {versionId}", true);
-            taskProgress.Show();
             ReturnToVanlliaList_PreviewMouseDown(null, null);
-            taskProgress.InsertProgressText("-----> Vanllia");
+
+
+            var task = Const.Window.tasksWindow.CreateTask($"{LangHelper.Current.GetText("Install")}：Vanllia - {versionId}", true);
+            task.AppendText("-----> Vanllia");
+
+
             await Task.Run(async () =>
             {
                 try
@@ -310,8 +313,8 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
                     {
                         Dispatcher.BeginInvoke(() =>
                         {
-                            taskProgress.InsertProgressText(x.ProgressStatus);
-                            taskProgress.UpdateProgress(x.Progress * 100);
+                            task.AppendText(x.ProgressStatus);
+                            task.UpdateProgress(x.Progress * 100);
                         });
                     };
 
@@ -351,15 +354,15 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
                             var forgeInstaller = new ForgeInstaller(game, forgeInstallEntry, javas[0].JavaPath, customId, MirrorDownloadManager.Bmcl);
                             await Dispatcher.BeginInvoke(() =>
                             {
-                                taskProgress.UpdateTitle("Forge");
-                                taskProgress.InsertProgressText("-----> Forge");
+                                task.UpdateTaskName($"{LangHelper.Current.GetText("Install")}：Forge - {versionId}");
+                                task.AppendText("-----> Forge");
                             });
                             forgeInstaller.ProgressChanged += (_, x) =>
                             {
                                 Dispatcher.BeginInvoke(() =>
                                 {
-                                    taskProgress.InsertProgressText(x.ProgressStatus);
-                                    taskProgress.UpdateProgress(x.Progress * 100);
+                                    task.AppendText(x.ProgressStatus);
+                                    task.UpdateProgress(x.Progress * 100);
                                 });
                             };
 
@@ -400,15 +403,15 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
                         var fabricInstaller = new FabricInstaller(game, fabricBuildEntry, customId, MirrorDownloadManager.Bmcl);
                         await Dispatcher.BeginInvoke(() =>
                         {
-                            taskProgress.UpdateTitle("Fabric");
-                            taskProgress.InsertProgressText("-----> Fabric");
+                            task.UpdateTaskName($"{LangHelper.Current.GetText("Install")}：Fabric - {versionId}");
+                            task.AppendText("-----> Fabric");
                         });
                         fabricInstaller.ProgressChanged += (_, x) =>
                         {
                             Dispatcher.BeginInvoke(() =>
                             {
-                                taskProgress.InsertProgressText(x.ProgressStatus);
-                                taskProgress.UpdateProgress(x.Progress * 100);
+                                task.AppendText(x.ProgressStatus);
+                                task.UpdateProgress(x.Progress * 100);
                             });
                         };
 
@@ -448,15 +451,15 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
                         var quiltInstaller = new QuiltInstaller(game, quiltBuildEntry, customId, MirrorDownloadManager.Bmcl);
                         await Dispatcher.BeginInvoke(() =>
                         {
-                            taskProgress.UpdateTitle("Quilt");
-                            taskProgress.InsertProgressText("-----> Quilt");
+                            task.UpdateTaskName($"{LangHelper.Current.GetText("Install")}：Quilt - {versionId}");
+                            task.AppendText("-----> Quilt");
                         });
                         quiltInstaller.ProgressChanged += (_, x) =>
                         {
                             Dispatcher.BeginInvoke(() =>
                             {
-                                taskProgress.InsertProgressText(x.ProgressStatus);
-                                taskProgress.UpdateProgress(x.Progress * 100);
+                                task.AppendText(x.ProgressStatus);
+                                task.UpdateProgress(x.Progress * 100);
                             });
                         };
 
@@ -489,7 +492,7 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
             }//Quilt
 
             Toast.Show(window: Const.Window.mainWindow, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("InstallFinish")}：{customId}");
-            taskProgress.Hide();
+            task.Destory();
         }
         public void ReadyInstallGame(string versionId)
         {

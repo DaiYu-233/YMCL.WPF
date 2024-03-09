@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using YMCL.Main.UI.Initialize;
+﻿using YMCL.Main.UI.Initialize;
 using YMCL.Main.UI.Main;
+using YMCL.Main.UI.TaskManage.TaskCenter;
 
 namespace YMCL.Main.Public
 {
@@ -15,6 +10,7 @@ namespace YMCL.Main.Public
         {
             public static MainWindow mainWindow { get; set; }
             public static InitializeWindow initializeWindow { get; set; }
+            public static Tasks tasksWindow { get; set; }
             static Window()
             {
                 foreach (System.Windows.Window window in System.Windows.Application.Current.Windows)
@@ -26,6 +22,10 @@ namespace YMCL.Main.Public
                     if (window.GetType() == typeof(MainWindow))
                     {
                         mainWindow = window as MainWindow;
+                    }
+                    if (window.GetType() == typeof(Tasks))
+                    {
+                        tasksWindow = window as Tasks;
                     }
                 }
             }

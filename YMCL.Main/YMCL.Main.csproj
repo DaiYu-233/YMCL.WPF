@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net8.0-windows</TargetFramework>
+    <TargetFramework>net8.0-windows7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
@@ -48,11 +48,12 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="iNKORE.UI.WPF.Modern" Version="0.9.26.1" />
+    <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.1.0" />
+    <PackageReference Include="iNKORE.UI.WPF.Modern" Version="0.9.26.3" />
     <PackageReference Include="MinecraftLaunch" Version="3.0.2" />
     <PackageReference Include="MinecraftLaunch.Skin" Version="1.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="Panuon.WPF.UI" Version="1.1.17.3" />
+    <PackageReference Include="Panuon.WPF.UI" Version="1.1.17.5" />
     <PackageReference Include="UpdateD" Version="1.0.6" />
   </ItemGroup>
 

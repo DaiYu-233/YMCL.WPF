@@ -636,4 +636,28 @@
   <data name="ThemeColor" xml:space="preserve">
     <value>主题色</value>
   </data>
+  <data name="ShowWindow" xml:space="preserve">
+    <value>显示窗口</value>
+  </data>
+  <data name="TrueExit" xml:space="preserve">
+    <value>彻底退出</value>
+  </data>
+  <data name="TasksCenter" xml:space="preserve">
+    <value>任务中心</value>
+  </data>
+  <data name="Install" xml:space="preserve">
+    <value>安装</value>
+  </data>
+  <data name="CreateTask" xml:space="preserve">
+    <value>创建任务</value>
+  </data>
+  <data name="ClickToViewTaskCenter" xml:space="preserve">
+    <value>点击查看任务进度 &gt;&gt;</value>
+  </data>
+  <data name="OpenTaskCenter" xml:space="preserve">
+    <value>打开任务中心</value>
+  </data>
+  <data name="TreasureBox" xml:space="preserve">
+    <value>百宝箱</value>
+  </data>
 </root>

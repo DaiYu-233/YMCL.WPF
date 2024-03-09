@@ -11,7 +11,7 @@ using UpdateD;
 using YMCL.Main.Public;
 using YMCL.Main.Public.Class;
 using YMCL.Main.Public.Lang;
-using YMCL.Main.UI.TaskProgress;
+using YMCL.Main.UI.TaskManage.TaskProgress;
 
 namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launcher
 {
@@ -96,14 +96,11 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launcher
                 var V = MessageBoxX.Show(LangHelper.Current.GetText("DownloadUpdateQuestion") + "\n\n" + LangHelper.Current.GetText("UpdateInfo") + "：| \n    " + updater.GetUpdateRem(Const.UpdaterId), LangHelper.Current.GetText("FindNewVersion") + " - " + updater.GetVersionInternet(Const.UpdaterId), MessageBoxButton.OKCancel);
                 if (V == MessageBoxResult.OK)
                 {
-                    TaskProgressWindow taskProgress = new TaskProgressWindow(LangHelper.Current.GetText("DownloadUpdate"));
-                    taskProgress.Show();
+                    var task = Const.Window.tasksWindow.CreateTask(LangHelper.Current.GetText("DownloadUpdate"), true);
 
                     DateTime now = DateTime.Now;
                     var savePath = $"{Const.PublicDataRootPath}\\{now.ToString("yyyy-MM-dd-HH-mm-ss")}--YMCL.exe";
-
-                    taskProgress.InsertProgressText(LangHelper.Current.GetText("BeginUpdate"));
-
+                    task.AppendText(LangHelper.Current.GetText("BeginUpdate"));
                     try
                     {
                         var handler = new HttpClientHandler();
@@ -133,7 +130,7 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launcher
                                             if (totalBytes > 0)
                                             {
                                                 double progress = ((double)totalBytesRead / totalBytes) * 100;
-                                                taskProgress.UpdateProgress(progress);
+                                                task.UpdateProgress(progress);
                                             }
                                         }
                                     }
@@ -154,8 +151,8 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launcher
                     {
                         MessageBoxX.Show(LangHelper.Current.GetText("DownloadFail") + "：" + ex.Message + "\n\n" + ex.ToString(), "Yu Minecraft Launcher");
                     }
-                    taskProgress.InsertProgressText(LangHelper.Current.GetText("FinishUpdate"));
-                    taskProgress.Hide();
+                    task.AppendText(LangHelper.Current.GetText("FinishUpdate"));
+                    task.Destory();
                     CheckUpdate.IsEnabled = true;
                 }
                 else

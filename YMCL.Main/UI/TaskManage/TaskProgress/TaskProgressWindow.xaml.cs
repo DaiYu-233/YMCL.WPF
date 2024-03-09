@@ -11,7 +11,7 @@ using System.Windows.Documents;
 using YMCL.Main.Public;
 using System;
 
-namespace YMCL.Main.UI.TaskProgress
+namespace YMCL.Main.UI.TaskManage.TaskProgress
 {
     /// <summary>
     /// TaskProgressWindow.xaml 的交互逻辑

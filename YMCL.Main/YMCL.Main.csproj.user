@@ -12,6 +12,9 @@
     <Compile Update="UI\Main\Pages\Download\Pages\AutoInstall\AutoInstall.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UI\Main\Pages\More\Pages\TreasureBox\TreasureBox.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UI\Main\Pages\Setting\Pages\Download\Download.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -24,7 +27,13 @@
     <Compile Update="UI\Main\Pages\Setting\Pages\Launch\Launch.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UI\TaskProgress\TaskProgressWindow.xaml.cs">
+    <Compile Update="UI\TaskManage\TaskProgress\TaskProgressWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UI\TaskManage\TaskCenter\TaskEntry.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UI\TaskManage\TaskCenter\Tasks.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -33,6 +42,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UI\Main\Pages\Download\Pages\AutoInstall\AutoInstall.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\Main\Pages\More\Pages\TreasureBox\TreasureBox.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UI\Main\Pages\Setting\Pages\Download\Download.xaml">
@@ -47,7 +59,13 @@
     <Page Update="UI\Main\Pages\Setting\Pages\Launch\Launch.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="UI\TaskProgress\TaskProgressWindow.xaml">
+    <Page Update="UI\TaskManage\TaskProgress\TaskProgressWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\TaskManage\TaskCenter\TaskEntry.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\TaskManage\TaskCenter\Tasks.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

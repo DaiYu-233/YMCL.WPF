@@ -313,11 +313,29 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
+        ///   查找类似 点击查看任务进度 &gt;&gt; 的本地化字符串。
+        /// </summary>
+        public static string ClickToViewTaskCenter {
+            get {
+                return ResourceManager.GetString("ClickToViewTaskCenter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 编译C#错误 的本地化字符串。
         /// </summary>
         public static string ComPileCSharpError {
             get {
                 return ResourceManager.GetString("ComPileCSharpError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 创建任务 的本地化字符串。
+        /// </summary>
+        public static string CreateTask {
+            get {
+                return ResourceManager.GetString("CreateTask", resourceCulture);
             }
         }
         
@@ -606,6 +624,15 @@ namespace YMCL.Main.Public.Lang {
         public static string InitializeWindow_Title_Download {
             get {
                 return ResourceManager.GetString("InitializeWindow_Title_Download", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 安装 的本地化字符串。
+        /// </summary>
+        public static string Install {
+            get {
+                return ResourceManager.GetString("Install", resourceCulture);
             }
         }
         
@@ -1393,6 +1420,15 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
+        ///   查找类似 打开任务中心 的本地化字符串。
+        /// </summary>
+        public static string OpenTaskCenter {
+            get {
+                return ResourceManager.GetString("OpenTaskCenter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 正式版 的本地化字符串。
         /// </summary>
         public static string ReleaseVersion {
@@ -1483,6 +1519,15 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
+        ///   查找类似 显示窗口 的本地化字符串。
+        /// </summary>
+        public static string ShowWindow {
+            get {
+                return ResourceManager.GetString("ShowWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 预览版 的本地化字符串。
         /// </summary>
         public static string SnapshotVersion {
@@ -1510,11 +1555,38 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
+        ///   查找类似 任务中心 的本地化字符串。
+        /// </summary>
+        public static string TasksCenter {
+            get {
+                return ResourceManager.GetString("TasksCenter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 主题色 的本地化字符串。
         /// </summary>
         public static string ThemeColor {
             get {
                 return ResourceManager.GetString("ThemeColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 百宝箱 的本地化字符串。
+        /// </summary>
+        public static string TreasureBox {
+            get {
+                return ResourceManager.GetString("TreasureBox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 彻底退出 的本地化字符串。
+        /// </summary>
+        public static string TrueExit {
+            get {
+                return ResourceManager.GetString("TrueExit", resourceCulture);
             }
         }
         
