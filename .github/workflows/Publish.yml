@@ -22,8 +22,8 @@ jobs:
         dotnet publish YMCL.Main/YMCL.Main.csproj -r win-x64 --self-contained false
     - name: Rename
       run: |
-        mv ./YMCL.Main/bin/Release/net8.0-windows/win-x86/publish/YMCL.Main.exe ./YMCL.Main/bin/Release/net8.0-windows/win-x86/publish/YMCL.Main.x86.exe
-        mv ./YMCL.Main/bin/Release/net8.0-windows/win-x64/publish/YMCL.Main.exe ./YMCL.Main/bin/Release/net8.0-windows/win-x64/publish/YMCL.Main.x64.exe
+        mv ./YMCL.Main/bin/Release/net8.0-windows7.0/win-x86/publish/YMCL.Main.exe ./YMCL.Main/bin/Release/net8.0-windows7.0/win-x86/publish/YMCL.Main.x86.exe
+        mv ./YMCL.Main/bin/Release/net8.0-windows7.0/win-x64/publish/YMCL.Main.exe ./YMCL.Main/bin/Release/net8.0-windows7.0/win-x64/publish/YMCL.Main.x64.exe
     - name: Publish
       uses: marvinpinto/action-automatic-releases@latest
       with:
@@ -32,6 +32,6 @@ jobs:
         automatic_release_tag: "AutoRelease-${{ steps.date.outputs.date }}"
         prerelease: true
         files: |
-          YMCL.Main/bin/Release/net8.0-windows/win-x86/publish/*
-          YMCL.Main/bin/Release/net8.0-windows/win-x64/publish/*
+          YMCL.Main/bin/Release/net8.0-windows7.0/win-x86/publish/*
+          YMCL.Main/bin/Release/net8.0-windows7.0/win-x64/publish/*
         
