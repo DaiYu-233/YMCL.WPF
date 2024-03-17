@@ -94,7 +94,7 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
                 }
                 catch
                 {
-                    Toast.Show(window: Const.Window.mainWindow, position: ToastPosition.Top, message: LangHelper.Current.GetText("GetInstallableVersionFail"));
+                    Toast.Show(window: Const.Window.main, position: ToastPosition.Top, message: LangHelper.Current.GetText("GetInstallableVersionFail"));
                     VanlliaLoading.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(196, 43, 28));
                     VanlliaLoadFail.Visibility = Visibility.Visible;
                     VanlliaLoading.Visibility = Visibility.Collapsed;
@@ -274,7 +274,7 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
                     str += match.Value;
                 }
                 if (msg)
-                    Toast.Show(window: Const.Window.mainWindow, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("IncludeSpecialWord")}：{str}");
+                    Toast.Show(window: Const.Window.main, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("IncludeSpecialWord")}：{str}");
                 else
                     MessageBoxX.Show($"{LangHelper.Current.GetText("IncludeSpecialWord")}：{str}", "Yu Minecraft Launcher");
                 return;
@@ -293,7 +293,7 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
             if (Directory.Exists(Path.Combine(setting.MinecraftFolder, "versions", customId)))
             {
                 if (msg)
-                    Toast.Show(window: Const.Window.mainWindow, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("FileExists")}：{customId}");
+                    Toast.Show(window: Const.Window.main, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("FileExists")}：{customId}");
                 else
                     MessageBoxX.Show($"{LangHelper.Current.GetText("FileExists")}：{customId}", "Yu Minecraft Launcher");
                 return;
@@ -301,7 +301,7 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
             ReturnToVanlliaList_PreviewMouseDown(null, null);
 
 
-            var task = Const.Window.tasksWindow.CreateTask($"{LangHelper.Current.GetText("Install")}：Vanllia - {versionId}", true);
+            var task = Const.Window.tasks.CreateTask($"{LangHelper.Current.GetText("Install")}：Vanllia - {versionId}", true);
             task.AppendText("-----> Vanllia");
 
 
@@ -324,7 +324,7 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
                     {
                         await Dispatcher.BeginInvoke(() =>
                         {
-                            Toast.Show(window: Const.Window.mainWindow, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("InstallFail")}：Vanllia - {versionId}");
+                            Toast.Show(window: Const.Window.main, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("InstallFail")}：Vanllia - {versionId}");
                         });
                         return;
                     }
@@ -347,7 +347,7 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
                         var javas = JsonConvert.DeserializeObject<List<JavaEntry>>(File.ReadAllText(Const.JavaDataPath));
                         if (javas.Count <= 0)
                         {
-                            Toast.Show(window: Const.Window.mainWindow, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("CannotFandRightJavaText")}");
+                            Toast.Show(window: Const.Window.main, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("CannotFandRightJavaText")}");
                         }
                         else
                         {
@@ -372,14 +372,14 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
                             {
                                 await Dispatcher.BeginInvoke(() =>
                                 {
-                                    Toast.Show(window: Const.Window.mainWindow, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("InstallFinish")}：Forge");
+                                    Toast.Show(window: Const.Window.main, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("InstallFinish")}：Forge");
                                 });
                             }
                             else
                             {
                                 await Dispatcher.BeginInvoke(() =>
                                 {
-                                    Toast.Show(window: Const.Window.mainWindow, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("InstallFail")}：Forge");
+                                    Toast.Show(window: Const.Window.main, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("InstallFail")}：Forge");
                                 });
                                 return;
                             }
@@ -421,14 +421,14 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
                         {
                             await Dispatcher.BeginInvoke(() =>
                             {
-                                Toast.Show(window: Const.Window.mainWindow, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("InstallFinish")}：Fabric");
+                                Toast.Show(window: Const.Window.main, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("InstallFinish")}：Fabric");
                             });
                         }
                         else
                         {
                             await Dispatcher.BeginInvoke(() =>
                             {
-                                Toast.Show(window: Const.Window.mainWindow, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("InstallFail")}：Fabric");
+                                Toast.Show(window: Const.Window.main, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("InstallFail")}：Fabric");
                             });
                             return;
                         }
@@ -469,14 +469,14 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
                         {
                             await Dispatcher.BeginInvoke(() =>
                             {
-                                Toast.Show(window: Const.Window.mainWindow, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("InstallFinish")}：Quilt");
+                                Toast.Show(window: Const.Window.main, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("InstallFinish")}：Quilt");
                             });
                         }
                         else
                         {
                             await Dispatcher.BeginInvoke(() =>
                             {
-                                Toast.Show(window: Const.Window.mainWindow, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("InstallFail")}：Quilt");
+                                Toast.Show(window: Const.Window.main, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("InstallFail")}：Quilt");
                             });
                             return;
                         }
@@ -491,7 +491,7 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
                 });
             }//Quilt
 
-            Toast.Show(window: Const.Window.mainWindow, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("InstallFinish")}：{customId}");
+            Toast.Show(window: Const.Window.main, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("InstallFinish")}：{customId}");
             task.Destory();
         }
         public void ReadyInstallGame(string versionId)

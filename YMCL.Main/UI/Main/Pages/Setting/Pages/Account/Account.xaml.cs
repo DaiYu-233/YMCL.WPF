@@ -136,7 +136,7 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Account
         {
             if (OfflineUserNameTextBox.Text == string.Empty)
             {
-                Toast.Show(message: LangHelper.Current.GetText("Account_OfflineAccountAddBtn_Click_OfflineUserNameNull"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+                Toast.Show(message: LangHelper.Current.GetText("Account_OfflineAccountAddBtn_Click_OfflineUserNameNull"), position: ToastPosition.Top, window: Const.Window.main);
                 OfflineUserNameTextBox.Focus();
             }
             else
@@ -194,12 +194,12 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Account
             }
             catch (Exception ex)
             {
-                Toast.Show(message: LangHelper.Current.GetText("LoginFail"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+                Toast.Show(message: LangHelper.Current.GetText("LoginFail"), position: ToastPosition.Top, window: Const.Window.main);
                 return;
             }
             try
             {
-                Toast.Show(message: LangHelper.Current.GetText("VerifyingAccount"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+                Toast.Show(message: LangHelper.Current.GetText("VerifyingAccount"), position: ToastPosition.Top, window: Const.Window.main);
                 MinecraftLaunch.Skin.Class.Fetchers.MicrosoftSkinFetcher skinFetcher = new(userProfile.Uuid.ToString());
                 var bytes = await skinFetcher.GetSkinAsync();
                 DateTime now = DateTime.Now;
@@ -215,12 +215,12 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Account
                 File.WriteAllText(Const.AccountDataPath, JsonConvert.SerializeObject(accounts, Formatting.Indented));
                 LoadAccounts();
                 LoginMicrosoftDialog.Hide();
-                Const.Window.mainWindow.Activate();
+                Const.Window.main.Activate();
                 AccountsListView.SelectedIndex = AccountsListView.Items.Count - 1;
             }
             catch (Exception)
             {
-                Toast.Show(message: LangHelper.Current.GetText("LoginFail"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+                Toast.Show(message: LangHelper.Current.GetText("LoginFail"), position: ToastPosition.Top, window: Const.Window.main);
             }
         }
 
@@ -240,17 +240,17 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Account
         {
             if (string.IsNullOrEmpty(YggdrasilServerUrlTextBox.Text))
             {
-                Toast.Show(message: LangHelper.Current.GetText("YggdrasilServerUrlIsEmpty"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+                Toast.Show(message: LangHelper.Current.GetText("YggdrasilServerUrlIsEmpty"), position: ToastPosition.Top, window: Const.Window.main);
                 return;
             }
             if (string.IsNullOrEmpty(YggdrasilEmailTextBox.Text))
             {
-                Toast.Show(message: LangHelper.Current.GetText("YggdrasilEmailIsEmpty"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+                Toast.Show(message: LangHelper.Current.GetText("YggdrasilEmailIsEmpty"), position: ToastPosition.Top, window: Const.Window.main);
                 return;
             }
             if (string.IsNullOrEmpty(YggdrasilPasswordTextBox.Password))
             {
-                Toast.Show(message: LangHelper.Current.GetText("YggdrasilPasswordIsEmpty"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+                Toast.Show(message: LangHelper.Current.GetText("YggdrasilPasswordIsEmpty"), position: ToastPosition.Top, window: Const.Window.main);
                 return;
             }
             IEnumerable<YggdrasilAccount> yggdrasilAccounts = null;
@@ -261,12 +261,12 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Account
             }
             catch (Exception)
             {
-                Toast.Show(message: LangHelper.Current.GetText("LoginFail"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+                Toast.Show(message: LangHelper.Current.GetText("LoginFail"), position: ToastPosition.Top, window: Const.Window.main);
                 return;
             }
             try
             {
-                Toast.Show(message: LangHelper.Current.GetText("VerifyingAccount"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+                Toast.Show(message: LangHelper.Current.GetText("VerifyingAccount"), position: ToastPosition.Top, window: Const.Window.main);
 
                 foreach (var account in yggdrasilAccounts)
                 {
@@ -305,12 +305,12 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Account
                 File.WriteAllText(Const.AccountDataPath, JsonConvert.SerializeObject(accounts, Formatting.Indented));
                 LoadAccounts();
                 LoginYggdrasilDialog.Hide();
-                Const.Window.mainWindow.Activate();
+                Const.Window.main.Activate();
                 AccountsListView.SelectedIndex = AccountsListView.Items.Count - 1;
             }
             catch (Exception)
             {
-                Toast.Show(message: LangHelper.Current.GetText("LoginFail"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+                Toast.Show(message: LangHelper.Current.GetText("LoginFail"), position: ToastPosition.Top, window: Const.Window.main);
             }
         }
     }

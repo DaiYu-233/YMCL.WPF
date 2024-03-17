@@ -24,11 +24,6 @@
 
   <ItemGroup>
     <Page Remove="Public\Text\CustomHomePageDefault.xaml" />
-    <Page Update="UI\MusicPlayer\Main\MusicPlayer.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <XamlRuntime>Wpf</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
   </ItemGroup>
 
   <ItemGroup>
@@ -73,9 +68,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>MainLang.resx</DependentUpon>
     </Compile>
-    <Compile Update="UI\MusicPlayer\Main\MusicPlayer.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -87,6 +79,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>MainLang.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="UI\MusicPlayer\Main\" />
   </ItemGroup>
 
 </Project>

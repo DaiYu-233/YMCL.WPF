@@ -1,4 +1,5 @@
-﻿using System;
+﻿using iNKORE.UI.WPF.Modern.Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Page = System.Windows.Controls.Page;
 
 namespace YMCL.Main.UI.Main.Pages.More.Pages.TreasureBox
 {
@@ -20,9 +22,21 @@ namespace YMCL.Main.UI.Main.Pages.More.Pages.TreasureBox
     /// </summary>
     public partial class TreasureBox : Page
     {
+        MusicPlayer.Main.MusicPlayer musicPlayer = new();
         public TreasureBox()
         {
             InitializeComponent();
+        }
+
+        private void HyperlinkButton_Click(object sender, RoutedEventArgs e)
+        {
+            var tag = (sender as HyperlinkButton).Tag.ToString();
+            if (tag == "Player")
+            {
+                musicPlayer.Show();
+                musicPlayer.WindowState = WindowState.Normal;
+                musicPlayer.Activate();
+            }
         }
     }
 }

@@ -657,4 +657,46 @@
   <data name="OpenTaskCenter" xml:space="preserve">
     <value>Откройте Центр задач</value>
   </data>
+  <data name="TreasureBox" xml:space="preserve">
+    <value>Сундук с сокровищами</value>
+  </data>
+  <data name="MusicPlayer" xml:space="preserve">
+    <value>Музыкальный плеер</value>
+  </data>
+  <data name="OpenApp" xml:space="preserve">
+    <value>Открыть</value>
+  </data>
+  <data name="RepeatOpen" xml:space="preserve">
+    <value>Перезапустите YMCL, перейдите в системный лоток, чтобы просмотреть открытый экземпляр YMCL</value>
+  </data>
+  <data name="SearchFail" xml:space="preserve">
+    <value>Поиск не удался</value>
+  </data>
+  <data name="SearchNoResult" xml:space="preserve">
+    <value>Нет результатов для поиска</value>
+  </data>
+  <data name="AddLocalFile" xml:space="preserve">
+    <value>Add File</value>
+  </data>
+  <data name="SongFile" xml:space="preserve">
+    <value>Аудиофайлы</value>
+  </data>
+  <data name="SourceFileNotExists" xml:space="preserve">
+    <value>Исходный файл не существует, его можно переместить, переименовать или удалить</value>
+  </data>
+  <data name="CheckSongAvailability" xml:space="preserve">
+    <value>Проверка доступности музыки...</value>
+  </data>
+  <data name="CannotConnectToApi" xml:space="preserve">
+    <value>Не удалось подключиться к API</value>
+  </data>
+  <data name="MusicUnavailable" xml:space="preserve">
+    <value>Музыка недоступна</value>
+  </data>
+  <data name="GettingMusic" xml:space="preserve">
+    <value>Получить музыку...</value>
+  </data>
+  <data name="GettingLyric" xml:space="preserve">
+    <value>Получить текст...</value>
+  </data>
 </root>

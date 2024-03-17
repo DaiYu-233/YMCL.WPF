@@ -1,15 +1,11 @@
-﻿using Hardcodet.Wpf.TaskbarNotification;
+﻿using iNKORE.UI.WPF.Modern;
 using Newtonsoft.Json;
 using Panuon.WPF.UI;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Reflection.Metadata;
-using System.Runtime.InteropServices;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,86 +13,21 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using System.Xml.Linq;
 using YMCL.Main.Public;
-using YMCL.Main.Public.Lang;
-using YMCL.Main.UI.TaskManage.TaskCenter;
-using static YMCL.Main.App;
 using Cursors = System.Windows.Input.Cursors;
 using Size = System.Windows.Size;
 
-namespace YMCL.Main.UI.Main
+namespace YMCL.Main.UI.MusicPlayer.DesktopLyric
 {
     /// <summary>
-    /// MainWindow.xaml 的交互逻辑
+    /// DesktopLyric.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : WindowX
+    public partial class DesktopLyric : WindowX
     {
-        bool _firstLoad = true;
-        private TaskbarIcon _tb;
-        #region UI
-        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
-        {
-            Root.Visibility = Visibility.Hidden;
-            ShowInTaskbar = false;
-            e.Cancel = true;
-        }
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            //将装饰器添加到窗口的Content控件上(Resize)
-            var c = this.Content as UIElement;
-            var layer = AdornerLayer.GetAdornerLayer(c);
-            layer.Add(new WindowResizeAdorner(c));
-
-            if (_firstLoad)
-            {
-                _firstLoad = false;
-                ParameterProcessing();
-            }
-        }
-
-        bool isMouseDown = false;
-        private void WindowX_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            if (isMouseDown)
-            {
-                var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
-                setting.MainWidth = ActualWidth;
-                setting.MainHeight = ActualHeight;
-                File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
-            }
-        }
-
-        private void WindowX_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            isMouseDown = true;
-        }
-
-        private void WindowX_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            isMouseDown = false;
-        }
-        private void TitleBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            DragMove();
-        }
-
-        private void btnMinimize_Click(object sender, RoutedEventArgs e)
-        {
-            WindowState = WindowState.Minimized;
-        }
-
-        private void btnClose_Click(object sender, RoutedEventArgs e)
-        {
-            Root.Visibility = Visibility.Hidden;
-            ShowInTaskbar = false;
-            Environment.Exit(0);
-        }
-        #endregion
+        bool open = false;
         #region Resize
         public class WindowResizeAdorner : Adorner
         {
@@ -251,123 +182,54 @@ namespace YMCL.Main.UI.Main
             FrameworkElementFactory GetFactory(System.Windows.Media.Brush back)
             {
                 var fef = new FrameworkElementFactory(typeof(System.Windows.Shapes.Rectangle));
-                fef.SetValue(System.Windows.Shapes.Rectangle.FillProperty, back);
+                fef.SetValue(Shape.FillProperty, back);
                 return fef;
             }
         }
+
         #endregion
-        #region Pages
-        Pages.Launch.Launch launch = new();
-        Pages.Setting.Setting setting = new();
-        Pages.Download.Download download = new();
-        Pages.More.More more = new();
-        Tasks tasks = new();
-        #endregion
-        #region TurnPage
-        private void ToLaunch_Checked(object sender, RoutedEventArgs e)
-        {
-            MainFrame.Content = launch;
-        }
-
-        private void ToSetting_Checked(object sender, RoutedEventArgs e)
-        {
-            MainFrame.Content = setting;
-        }
-
-        private void ToDownload_Checked(object sender, RoutedEventArgs e)
-        {
-            MainFrame.Content = download;
-        }
-
-        private void ToMore_Checked(object sender, RoutedEventArgs e)
-        {
-            MainFrame.Content = more;
-        }
-        #endregion
-        //protected override void OnSourceInitialized(EventArgs e)
-        //{
-        //    MessageBoxX.Show("Show");
-        //    base.OnSourceInitialized(e);
-        //    HwndSource hwndSource = PresentationSource.FromVisual(this) as HwndSource;
-        //    if (hwndSource != null)
-        //    {
-        //        IntPtr handle = hwndSource.Handle;
-        //        hwndSource.AddHook(new HwndSourceHook(WndProc));
-        //    }
-        //}
-
-        //IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
-        //{
-        //    if (msg == 9001)
-        //    {
-
-        //        Root.Visibility = Visibility.Visible;
-        //        WindowState = WindowState.Normal;
-        //        ShowInTaskbar = true;
-        //        Show();
-        //    }
-        //    return hwnd;
-        //}
-
-        public MainWindow()
+        public DesktopLyric()
         {
             InitializeComponent();
             var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
-            Width = setting.MainWidth;
-            Height = setting.MainHeight;
-
-            _tb = (TaskbarIcon)FindResource("NotifyIcon");
-            _tb.Icon = new Icon(System.IO.Path.Combine(Const.PublicDataRootPath, "Icon.ico"));
+            Lyric.FontSize = setting.DesktopLyricTextSize;
+            Lyric.TextAlignment = setting.DesktopLyricTextAlignment;
         }
-        void ParameterProcessing()
+        private void WindowX_Loaded(object sender, RoutedEventArgs e)
         {
-            if (App.StartupArgs.Length > 0)
+            //将装饰器添加到窗口的Content控件上(Resize)
+            var c = this.Content as UIElement;
+            var layer = AdornerLayer.GetAdornerLayer(c);
+            //layer.Add(new WindowResizeAdorner(c));
+        }
+        public void Enabled()
+        {
+            WindowState = WindowState.Normal;
+            Show();
+            Activate();
+            open = true;
+        }
+        public void Disabled()
+        {
+            WindowState = WindowState.Minimized;
+            Hide();
+            open = false;
+        }
+        public void Change()
+        {
+            if (open)
             {
-                var urlScheme = System.Web.HttpUtility.UrlDecode(App.StartupArgs[0]);
-                urlScheme = urlScheme.Substring(7, urlScheme.Length - 8);
-                var actions = urlScheme.Split("--| ").ToList();
-                actions.RemoveAt(0);
-                foreach (var item in actions)
-                {
-                    var action = item.Trim();
-                    string[] temp = Regex.Split(action, "(?=(?:(?:[^\"]*\"){2})*[^\"]*$) ");
-                    var args = new List<string>();
-                    foreach (var arg in temp)
-                    {
-                        var a = arg.Trim();
-                        a = a.Trim('\"');
-                        a = a.Trim('\'');
-                        args.Add(a);
-                    }
-                    try
-                    {
-                        switch (args[0])
-                        {
-                            case "launch":
-                                if (args.Count >= 3 && args[2] != null)
-                                {
-                                    if (args.Count >= 4 && args[3] != null)
-                                    {
-                                        launch.LaunchClient(args[1], args[2], false, args[3]);
-                                    }
-                                    else
-                                    {
-                                        launch.LaunchClient(args[1], args[2], false);
-                                    }
-                                }
-                                else
-                                {
-                                    launch.LaunchClient(args[1], msg: false);
-                                }
-                                break;
-                        }
-                    }
-                    catch
-                    {
-                        MessageBoxX.Show(LangHelper.Current.GetText("ArgsError"), "Yu Minecraft Launcher");
-                    }
-                }
+                Disabled();
             }
+            else
+            {
+                Enabled();
+            }
+        }
+
+        private void Lyric_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
         }
     }
 }

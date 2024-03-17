@@ -1,0 +1,121 @@
+﻿<pu:WindowX x:Class="YMCL.Main.UI.MusicPlayer.Main.MusicPlayer"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" pu:WindowXCaption.Height="0" 
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Background="Transparent"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" ResizeMode="NoResize"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ui="http://schemas.inkore.net/lib/ui/wpf/modern" xmlns:pu="https://opensource.panuon.com/wpf-ui"
+        mc:Ignorable="d"  xmlns:properties="clr-namespace:YMCL.Main.Public.Lang" WindowStyle="None" AllowsTransparency="True"
+        Title="{x:Static properties:MainLang.MusicPlayer}" Height="590" Width="1012" Loaded="WindowX_Loaded">
+    <ui:ClippingBorder Background="{DynamicResource 2x}" CornerRadius="8,8,8,8" BorderBrush="{DynamicResource TitleBarColor}" BorderThickness="2,2,2,2">
+        <Grid>
+            <ui:ClippingBorder x:Name="TitleBar" VerticalAlignment="Top" Height="30" CornerRadius="8,8,0,0" Background="{DynamicResource TitleBarColor}" MouseLeftButtonDown="TitleBar_PreviewMouseLeftButtonDown" >
+                <Grid>
+                    <TextBlock x:Name="Title" Text="{x:Static properties:MainLang.MusicPlayer}" VerticalAlignment="Center" Margin="9,0,0,0" HorizontalAlignment="Left" FontSize="13" Foreground="{DynamicResource TextColor}" FontFamily="{DynamicResource Font}"  />
+                    <Button x:Name="btnClose" Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource Close}" Tag="IsCloseButton" HorizontalAlignment="Right" Margin="0,0,3,0" Click="btnClose_Click" />
+                    <Button x:Name="btnMaximize" Style="{DynamicResource IconButtonsStyle}" Content="{DynamicResource Maximize}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,30,0" Cursor="Hand" Click="btnMaximize_Click"/>
+                    <Button x:Name="btnMinimize" Style="{DynamicResource IconButtonsStyle}" Content="{DynamicResource Minimize}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,57,0" Cursor="Hand" Click="btnMinimize_Click" />
+                </Grid>
+            </ui:ClippingBorder>
+            <DockPanel>
+                <DockPanel Background="{DynamicResource 1x}" DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
+                    <Slider x:Name="PlaySlider" Margin="0,-15,0,-11" DockPanel.Dock="Top" PreviewMouseDown="PlaySlider_MouseDown" PreviewMouseUp="PlaySlider_MouseUp"/>
+                    <Grid Margin="0,5,10,5">
+                        <DockPanel DockPanel.Dock="Bottom">
+                        <DockPanel VerticalAlignment="Center">
+                            <ui:ClippingBorder CornerRadius="5" Background="Wheat" Height="38" Width="38" Margin="10,0,10,0">
+                                <Image x:Name="Pic"/>
+                            </ui:ClippingBorder>
+                            <DockPanel HorizontalAlignment="Left" VerticalAlignment="Center">
+                                <TextBlock x:Name="PlayingSongName" MaxWidth="230" FontFamily="{DynamicResource Font}" Background="{x:Null}" Foreground="{DynamicResource TextColor}" DockPanel.Dock="Top" HorizontalAlignment="Left" TextWrapping="Wrap"/>
+                                <TextBlock x:Name="PlayingSongAuthor" FontFamily="{DynamicResource Font}" Background="{x:Null}" Foreground="{DynamicResource Gray}" FontSize="12" HorizontalAlignment="Left"/>
+                            </DockPanel>
+                        </DockPanel>
+                        <DockPanel VerticalAlignment="Stretch" HorizontalAlignment="Right" DockPanel.Dock="Right">
+                            <TextBlock x:Name="TimeText" Text="00:00/00:00" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="{DynamicResource TextColor}" FontFamily="{DynamicResource Font}" Margin="0,0,15,0" FontSize="15" Width="100" TextAlignment="Right"/>
+                                <ui:FontIcon x:Name="LyricBtn" Glyph="&#xF2B7;" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="20" Cursor="Hand" Foreground="{DynamicResource TextColor}" Margin="0,0,15,0" MouseDown="Lyric_MouseDown"/>
+                                <ui:FontIcon x:Name="DesktopLyric" Glyph="&#xE8A7;" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="20" Cursor="Hand" Foreground="{DynamicResource TextColor}" Margin="0,0,15,0" MouseDown="DesktopLyric_MouseDown" />
+                                <ui:FontIcon x:Name="Download" Glyph="&#xEBD3;" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="20" Cursor="Hand" Foreground="{DynamicResource TextColor}" Margin="0,0,15,0" MouseDown="Download_MouseDown"/>
+                                <ui:FontIcon x:Name="Repeat" Glyph="&#xF5E7;" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="18" Cursor="Hand" Foreground="{DynamicResource TextColor}" Margin="0,0,15,0" MouseDown="Repeat_MouseDown" />
+                            </DockPanel>
+                        
+                    </DockPanel>
+                        <DockPanel HorizontalAlignment="Center">
+                            <ui:FontIcon x:Name="Back" Glyph="&#xF8AC;" FontSize="20" Margin="0,0,10,0" Foreground="{DynamicResource TextColor}" MouseDown="Back_MouseDown" />
+                            <Border Background="#FF16E9B8" HorizontalAlignment="Center" VerticalAlignment="Center" Width="42" Height="42" CornerRadius="999" Cursor="Hand" MouseDown="Play_Click">
+                                <Grid>
+                                    <ui:FontIcon x:Name="PlayBtnIcon" Glyph="&#xF5B0;" HorizontalAlignment="Center" Foreground="{DynamicResource TextColor}" VerticalAlignment="Center" FontSize="22" Visibility="Visible" Margin="2,0,0,0"/>
+                                </Grid>
+                            </Border>
+                            <ui:FontIcon x:Name="Next" Glyph="&#xF8AD;" Foreground="{DynamicResource TextColor}" FontSize="20" Margin="10,0,0,0" MouseDown="Next_MouseDown" />
+                        </DockPanel>
+                    </Grid>
+                </DockPanel>
+                <DockPanel DockPanel.Dock="Top" Margin="0,30,0,10">
+                    <ui:ClippingBorder DockPanel.Dock="Right" Margin="0,10,10,0" MinWidth="240" MaxWidth="280" CornerRadius="5,5,5,5" Background="{DynamicResource 1x}">
+                        <DockPanel>
+                            <DockPanel DockPanel.Dock="Top" VerticalAlignment="Top" Margin="10,10,10,10">
+                                <Button x:Name="AddLocalSong" Margin="3.25,0,0,0" HorizontalAlignment="Stretch" Click="AddLocalSong_Click" DockPanel.Dock="Right">
+                                    <DockPanel>
+                                        <ui:FontIcon Glyph="&#xE8E5;" Foreground="{DynamicResource TextColor}" />
+                                        <Label Content="{x:Static properties:MainLang.AddLocalFile}" Margin="6.5,0,0,0" FontFamily="{DynamicResource Font}" Foreground="{DynamicResource TextColor}"/>
+                                    </DockPanel>
+                                </Button>
+                                <Button x:Name="DelSongFromPlayList" Margin="0,0,3.25,0" HorizontalAlignment="Stretch" Click="DelSongFromPlayList_Click">
+                                    <DockPanel>
+                                        <ui:FontIcon Glyph="&#xE74D;" Foreground="{DynamicResource TextColor}" />
+                                        <Label Content="{x:Static properties:MainLang.Launch_DeleteSelectedItem}" Margin="6.5,0,0,0" FontFamily="{DynamicResource Font}" Foreground="{DynamicResource TextColor}"/>
+                                    </DockPanel>
+                                </Button>
+                            </DockPanel>
+                            <ui:ListView x:Name="PlayListView"   FontFamily="{StaticResource Font}" d:ItemsSource="{d:SampleData ItemCount=10}" Margin="5,0,5,5" CornerRadius="3,3,3,3" SelectionChanged="PlayListView_SelectionChanged" >
+                                <ui:ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <DockPanel Margin="-8,3,10,3">
+                                            <DockPanel Margin="6.5,1,0,1">
+                                                <TextBlock TextWrapping="Wrap" DockPanel.Dock="Top" ><Run  FontFamily="{StaticResource Font}"  Text="{Binding SongName}" FontSize="13" Foreground="{DynamicResource TextColor}"/><Run Text=" "/><Run FontFamily="{StaticResource Font}"  Text="{Binding DisplayDuration}"  FontSize="10" Foreground="#E48A8A8A"/></TextBlock>
+                                                <TextBlock  Margin="0,0,0,0" FontSize="11" Foreground="#E48A8A8A" DockPanel.Dock="Bottom"><Run FontFamily="{StaticResource Font}"  Text="{Binding Type}"/><Run Text=" - "/><Run FontFamily="{StaticResource Font}"  Text="{Binding Authors}"/></TextBlock>
+                                            </DockPanel>
+                                        </DockPanel>
+                                    </DataTemplate>
+                                </ui:ListView.ItemTemplate>
+                            </ui:ListView>
+                        </DockPanel>
+                    </ui:ClippingBorder>
+                    <Grid>
+                        <DockPanel>
+                            <ui:AutoSuggestBox x:Name="SearchBox" Margin="10,10,10,0" FontFamily="{DynamicResource Font}" QuerySubmitted="AutoSuggestBox_QuerySubmitted" DockPanel.Dock="Top">
+                                <ui:AutoSuggestBox.QueryIcon>
+                                    <ui:FontIcon Glyph="&#xF78B;" />
+                                </ui:AutoSuggestBox.QueryIcon>
+                            </ui:AutoSuggestBox>
+                            <ScrollViewer x:Name="SongsListViewScroll" DockPanel.Dock="Bottom" Margin="0,10,10,0">
+                                <DockPanel>
+                                    <ui:ProgressRing x:Name="LoadingMore" DockPanel.Dock="Bottom" VerticalAlignment="Top" Margin="0,10,0,30" Height="52" Width="52" Visibility="Collapsed"/>
+                                    <ui:HyperlinkButton x:Name="LoadMore" RaiseHyperlinkClicks="False"  DockPanel.Dock="Bottom" FontFamily="{DynamicResource Font}" Content="→ 加载更多 ←" HorizontalAlignment="Center" Margin="0,0,0,15" Click="LoadMore_Click" Visibility="Collapsed"/>
+                                    <ui:ListView x:Name="SongsListView"  FontFamily="{DynamicResource Font}" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,0,0,10" DockPanel.Dock="Top" ScrollViewer.VerticalScrollBarVisibility="Disabled" SelectionChanged="SongsListView_SelectionChanged"   >
+                                        <ui:ListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <DockPanel Margin="-8,3,10,3">
+                                                    <Grid Margin="6.5,1,0,1">
+                                                        <TextBlock ><Run  Text="{Binding SongName}"  FontFamily="MiSans Medium"  FontSize="14"/><Run Text=" "/><Run Text="{Binding DisplayDuration}" FontFamily="MiSans Medium"   FontSize="10" Foreground="#E48A8A8A"/></TextBlock>
+                                                        <TextBlock  Margin="2,17,0,0" FontSize="12" Foreground="#E48A8A8A"><Run FontFamily="MiSans Medium"  Text="{Binding Authors}" FontSize="11"/><Run Text="  "/></TextBlock>
+                                                    </Grid>
+                                                </DockPanel>
+                                            </DataTemplate>
+                                        </ui:ListView.ItemTemplate>
+                                    </ui:ListView>
+                                </DockPanel>
+                            </ScrollViewer>
+                        </DockPanel>
+                        <ui:ProgressRing x:Name="Loading" Width="52" Height="52" Margin="0,42,0,0" Visibility="Collapsed"/>
+                        <ui:ClippingBorder x:Name="Lyric" Background="{DynamicResource 1x}" Margin="10,10,10,0" CornerRadius="5,5,5,5" Visibility="Hidden" >
+                            <Grid x:Name="LyricRoot" ClipToBounds="True">
+                                <TextBlock x:Name="LyricBlock" FontFamily="{DynamicResource Font}" FontSize="15" TextAlignment="Center" LineHeight="24" Margin="10,10,10,10" Text=""/>
+                            </Grid>
+                        </ui:ClippingBorder>
+                    </Grid>
+                </DockPanel>
+            </DockPanel>
+        </Grid>
+    </ui:ClippingBorder>
+</pu:WindowX>

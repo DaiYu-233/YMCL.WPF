@@ -272,12 +272,12 @@ namespace YMCL.Main.UI.TaskManage.TaskCenter
                     };
                     hyperlinkButton.Click += (_, _) =>
                     {
-                        Const.Window.tasksWindow.WindowState = WindowState.Normal;
-                        Const.Window.tasksWindow.Show();
-                        Const.Window.tasksWindow.Activate();
+                        Const.Window.tasks.WindowState = WindowState.Normal;
+                        Const.Window.tasks.Show();
+                        Const.Window.tasks.Activate();
                     };
                     infoBar.ActionButton = hyperlinkButton;
-                    Const.Window.mainWindow.InfoBarShowArea.Children.Add(infoBar);
+                    Const.Window.main.InfoBarShowArea.Children.Add(infoBar);
                     await Task.Delay(3000);
                     infoBar.IsOpen = false;
                 });

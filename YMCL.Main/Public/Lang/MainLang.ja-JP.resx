@@ -657,4 +657,46 @@
   <data name="OpenTaskCenter" xml:space="preserve">
     <value>タスクセンターを開きます</value>
   </data>
+  <data name="TreasureBox" xml:space="preserve">
+    <value>宝箱</value>
+  </data>
+  <data name="MusicPlayer" xml:space="preserve">
+    <value>ミュージックプレーヤー</value>
+  </data>
+  <data name="OpenApp" xml:space="preserve">
+    <value>開ける</value>
+  </data>
+  <data name="RepeatOpen" xml:space="preserve">
+    <value>YMCLを再起動し、システムトレイに移動して開いているYMCLインスタンスを表示します</value>
+  </data>
+  <data name="SearchFail" xml:space="preserve">
+    <value>検索に失敗しました</value>
+  </data>
+  <data name="SearchNoResult" xml:space="preserve">
+    <value>結果が見つかりません</value>
+  </data>
+  <data name="AddLocalFile" xml:space="preserve">
+    <value>ファイルを追加</value>
+  </data>
+  <data name="SongFile" xml:space="preserve">
+    <value>オーディオファイル</value>
+  </data>
+  <data name="SourceFileNotExists" xml:space="preserve">
+    <value>ソースファイルが存在しません。移動、名前変更、または削除される可能性があります</value>
+  </data>
+  <data name="CheckSongAvailability" xml:space="preserve">
+    <value>音楽の利用可能性を確認しています... </value>
+  </data>
+  <data name="CannotConnectToApi" xml:space="preserve">
+    <value>APIに接続できません</value>
+  </data>
+  <data name="MusicUnavailable" xml:space="preserve">
+    <value>音楽は利用できません</value>
+  </data>
+  <data name="GettingMusic" xml:space="preserve">
+    <value>音楽を手に入れよう...</value>
+  </data>
+  <data name="GettingLyric" xml:space="preserve">
+    <value>歌詞をゲット…</value>
+  </data>
 </root>

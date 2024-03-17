@@ -205,6 +205,15 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
+        ///   查找类似 添加文件 的本地化字符串。
+        /// </summary>
+        public static string AddLocalFile {
+            get {
+                return ResourceManager.GetString("AddLocalFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 所有版本 的本地化字符串。
         /// </summary>
         public static string AllVersion {
@@ -259,6 +268,15 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
+        ///   查找类似 开始下载 的本地化字符串。
+        /// </summary>
+        public static string BeginDownload {
+            get {
+                return ResourceManager.GetString("BeginDownload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 开始安装 的本地化字符串。
         /// </summary>
         public static string BeginInstall {
@@ -286,11 +304,38 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
+        ///   查找类似 无法连接到api 的本地化字符串。
+        /// </summary>
+        public static string CannotConnectToApi {
+            get {
+                return ResourceManager.GetString("CannotConnectToApi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 YMCL无法找到当前需要的Java 的本地化字符串。
         /// </summary>
         public static string CannotFandRightJavaText {
             get {
                 return ResourceManager.GetString("CannotFandRightJavaText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 居中对齐 的本地化字符串。
+        /// </summary>
+        public static string CenterAlignment {
+            get {
+                return ResourceManager.GetString("CenterAlignment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 检测音乐可用性... 的本地化字符串。
+        /// </summary>
+        public static string CheckSongAvailability {
+            get {
+                return ResourceManager.GetString("CheckSongAvailability", resourceCulture);
             }
         }
         
@@ -331,6 +376,15 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
+        ///   查找类似 复制文件失败 的本地化字符串。
+        /// </summary>
+        public static string CopyFileFail {
+            get {
+                return ResourceManager.GetString("CopyFileFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 创建任务 的本地化字符串。
         /// </summary>
         public static string CreateTask {
@@ -354,6 +408,33 @@ namespace YMCL.Main.Public.Lang {
         public static string Dark {
             get {
                 return ResourceManager.GetString("Dark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 桌面歌词 的本地化字符串。
+        /// </summary>
+        public static string DesktopLyric {
+            get {
+                return ResourceManager.GetString("DesktopLyric", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 桌面歌词文本对齐方向 的本地化字符串。
+        /// </summary>
+        public static string DesktopLyricTextAlignment {
+            get {
+                return ResourceManager.GetString("DesktopLyricTextAlignment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 桌面歌词文本大小 的本地化字符串。
+        /// </summary>
+        public static string DesktopLyricTextSize {
+            get {
+                return ResourceManager.GetString("DesktopLyricTextSize", resourceCulture);
             }
         }
         
@@ -498,6 +579,24 @@ namespace YMCL.Main.Public.Lang {
         public static string GetNoticeFail {
             get {
                 return ResourceManager.GetString("GetNoticeFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 获取歌词... 的本地化字符串。
+        /// </summary>
+        public static string GettingLyric {
+            get {
+                return ResourceManager.GetString("GettingLyric", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 获取音乐... 的本地化字符串。
+        /// </summary>
+        public static string GettingMusic {
+            get {
+                return ResourceManager.GetString("GettingMusic", resourceCulture);
             }
         }
         
@@ -1249,6 +1348,15 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
+        ///   查找类似 左对齐 的本地化字符串。
+        /// </summary>
+        public static string LeftAlignment {
+            get {
+                return ResourceManager.GetString("LeftAlignment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 浅色 的本地化字符串。
         /// </summary>
         public static string Light {
@@ -1339,6 +1447,24 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
+        ///   查找类似 音乐播放器 的本地化字符串。
+        /// </summary>
+        public static string MusicPlayer {
+            get {
+                return ResourceManager.GetString("MusicPlayer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 音乐不可用 的本地化字符串。
+        /// </summary>
+        public static string MusicUnavailable {
+            get {
+                return ResourceManager.GetString("MusicUnavailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 需要重启YMCL 的本地化字符串。
         /// </summary>
         public static string NeedRestartApp {
@@ -1353,6 +1479,15 @@ namespace YMCL.Main.Public.Lang {
         public static string NetFile {
             get {
                 return ResourceManager.GetString("NetFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 尚未选择音乐 的本地化字符串。
+        /// </summary>
+        public static string NoChooseSong {
+            get {
+                return ResourceManager.GetString("NoChooseSong", resourceCulture);
             }
         }
         
@@ -1402,6 +1537,15 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
+        ///   查找类似 → 打开 ← 的本地化字符串。
+        /// </summary>
+        public static string OpenApp {
+            get {
+                return ResourceManager.GetString("OpenApp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 打开文件夹 的本地化字符串。
         /// </summary>
         public static string OpenFolder {
@@ -1438,6 +1582,15 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
+        ///   查找类似 重复启动YMCL，转到系统托盘查看已打开的YMCL实例 的本地化字符串。
+        /// </summary>
+        public static string RepeatOpen {
+            get {
+                return ResourceManager.GetString("RepeatOpen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 返回 的本地化字符串。
         /// </summary>
         public static string Return {
@@ -1447,11 +1600,29 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
+        ///   查找类似 右对齐 的本地化字符串。
+        /// </summary>
+        public static string RightAlignment {
+            get {
+                return ResourceManager.GetString("RightAlignment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 已取消保存 的本地化字符串。
         /// </summary>
         public static string SaveCancel {
             get {
                 return ResourceManager.GetString("SaveCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 保存音频文件 的本地化字符串。
+        /// </summary>
+        public static string SaveMusicFile {
+            get {
+                return ResourceManager.GetString("SaveMusicFile", resourceCulture);
             }
         }
         
@@ -1470,6 +1641,24 @@ namespace YMCL.Main.Public.Lang {
         public static string SaveSuccess {
             get {
                 return ResourceManager.GetString("SaveSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 搜索失败 的本地化字符串。
+        /// </summary>
+        public static string SearchFail {
+            get {
+                return ResourceManager.GetString("SearchFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 搜索无结果 的本地化字符串。
+        /// </summary>
+        public static string SearchNoResult {
+            get {
+                return ResourceManager.GetString("SearchNoResult", resourceCulture);
             }
         }
         
@@ -1537,6 +1726,24 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
+        ///   查找类似 音频文件 的本地化字符串。
+        /// </summary>
+        public static string SongFile {
+            get {
+                return ResourceManager.GetString("SongFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 源文件不存在，它可能被移动、重命名或删除 的本地化字符串。
+        /// </summary>
+        public static string SourceFileNotExists {
+            get {
+                return ResourceManager.GetString("SourceFileNotExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 将以下Mod移动到回收站 的本地化字符串。
         /// </summary>
         public static string SureDeleteMod {
@@ -1596,6 +1803,15 @@ namespace YMCL.Main.Public.Lang {
         public static string UpdateInfo {
             get {
                 return ResourceManager.GetString("UpdateInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 应用更改 的本地化字符串。
+        /// </summary>
+        public static string UseChange {
+            get {
+                return ResourceManager.GetString("UseChange", resourceCulture);
             }
         }
         

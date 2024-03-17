@@ -41,7 +41,7 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launcher
             }
             catch
             {
-                Toast.Show(message: LangHelper.Current.GetText("CheckUpdateFailed"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+                Toast.Show(message: LangHelper.Current.GetText("CheckUpdateFailed"), position: ToastPosition.Top, window: Const.Window.main);
                 return;
             }
 
@@ -75,7 +75,7 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launcher
                 }
                 catch
                 {
-                    Toast.Show(message: LangHelper.Current.GetText("CheckUpdateFailed"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+                    Toast.Show(message: LangHelper.Current.GetText("CheckUpdateFailed"), position: ToastPosition.Top, window: Const.Window.main);
                     return;
                 }
             }
@@ -96,7 +96,7 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launcher
                 var V = MessageBoxX.Show(LangHelper.Current.GetText("DownloadUpdateQuestion") + "\n\n" + LangHelper.Current.GetText("UpdateInfo") + "：| \n    " + updater.GetUpdateRem(Const.UpdaterId), LangHelper.Current.GetText("FindNewVersion") + " - " + updater.GetVersionInternet(Const.UpdaterId), MessageBoxButton.OKCancel);
                 if (V == MessageBoxResult.OK)
                 {
-                    var task = Const.Window.tasksWindow.CreateTask(LangHelper.Current.GetText("DownloadUpdate"), true);
+                    var task = Const.Window.tasks.CreateTask(LangHelper.Current.GetText("DownloadUpdate"), true);
 
                     DateTime now = DateTime.Now;
                     var savePath = $"{Const.PublicDataRootPath}\\{now.ToString("yyyy-MM-dd-HH-mm-ss")}--YMCL.exe";
@@ -162,7 +162,7 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launcher
             }
             else
             {
-                Toast.Show(Const.Window.mainWindow, LangHelper.Current.GetText("LatestVersion"), ToastPosition.Top);
+                Toast.Show(Const.Window.main, LangHelper.Current.GetText("LatestVersion"), ToastPosition.Top);
                 CheckUpdate.IsEnabled = true;
             }
             CheckUpdate.IsEnabled = true;

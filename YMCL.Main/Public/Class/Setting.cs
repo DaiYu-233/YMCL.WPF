@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media;
 
 namespace YMCL.Main.Public.Class
@@ -30,6 +31,9 @@ namespace YMCL.Main.Public.Class
         public SettingItem.CustomHomePage CustomHomePage { get; set; } = SettingItem.CustomHomePage.Disable;
         public SettingItem.GameWindow GameWindow { get; set; } = SettingItem.GameWindow.Default;
         public SettingItem.DownloadSource DownloadSource { get; set; } = SettingItem.DownloadSource.Mojang;
+        public Repeat PlayerRepeat { get; set; } = Repeat.RepeatOff;
+        public TextAlignment DesktopLyricTextAlignment { get; set; } = TextAlignment.Center;
+        public double DesktopLyricTextSize { get; set; } = 14;
     }
 
     public class VersionSetting

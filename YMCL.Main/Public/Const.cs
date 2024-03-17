@@ -1,5 +1,8 @@
 ﻿using YMCL.Main.UI.Initialize;
 using YMCL.Main.UI.Main;
+using YMCL.Main.UI.MusicPlayer;
+using YMCL.Main.UI.MusicPlayer.DesktopLyric;
+using YMCL.Main.UI.MusicPlayer.Main;
 using YMCL.Main.UI.TaskManage.TaskCenter;
 
 namespace YMCL.Main.Public
@@ -8,24 +11,34 @@ namespace YMCL.Main.Public
     {
         public class Window
         {
-            public static MainWindow mainWindow { get; set; }
-            public static InitializeWindow initializeWindow { get; set; }
-            public static Tasks tasksWindow { get; set; }
+            public static MainWindow main { get; set; }
+            public static InitializeWindow initialize { get; set; }
+            public static Tasks tasks { get; set; }
+            public static MusicPlayer musicPlayer { get; set; }
+            public static DesktopLyric desktopLyric { get; set; }
             static Window()
             {
                 foreach (System.Windows.Window window in System.Windows.Application.Current.Windows)
                 {
                     if (window.GetType() == typeof(InitializeWindow))
                     {
-                        initializeWindow = window as InitializeWindow;
+                        initialize = window as InitializeWindow;
                     }
                     if (window.GetType() == typeof(MainWindow))
                     {
-                        mainWindow = window as MainWindow;
+                        main = window as MainWindow;
                     }
                     if (window.GetType() == typeof(Tasks))
                     {
-                        tasksWindow = window as Tasks;
+                        tasks = window as Tasks;
+                    }
+                    if (window.GetType() == typeof(MusicPlayer))
+                    {
+                        musicPlayer = window as MusicPlayer;
+                    }
+                    if (window.GetType() == typeof(DesktopLyric))
+                    {
+                        desktopLyric = window as DesktopLyric;
                     }
                 }
             }
@@ -45,6 +58,7 @@ namespace YMCL.Main.Public
         public static string CustomHomePageDllPath { get; } = DataRootPath + "\\YMCL.CustomHomePageXaml.DaiYu";
         public static string CustomHomePageCSharpPath { get; } = DataRootPath + "\\YMCL.CustomHomePageCSharp.DaiYu";
         public static string AccountDataPath { get; } = DataRootPath + "\\YMCL.Account.DaiYu";
+        public static string PlayListDataPath { get; } = DataRootPath + "\\YMCL.PlayList.DaiYu";
         public static string MinecraftFolderDataPath { get; } = DataRootPath + "\\YMCL.MinecraftFolder.DaiYu";
         public static string YMCLPathData { get; } = DataRootPath + "\\YMCL.ExePath.DaiYu";
         public static string YMCLBat { get; } = PublicDataRootPath + "\\launch.bat";

@@ -657,4 +657,46 @@
   <data name="OpenTaskCenter" xml:space="preserve">
     <value>打開任務中心</value>
   </data>
+  <data name="TreasureBox" xml:space="preserve">
+    <value>百寶箱</value>
+  </data>
+  <data name="MusicPlayer" xml:space="preserve">
+    <value>音樂播放器</value>
+  </data>
+  <data name="OpenApp" xml:space="preserve">
+    <value>打開</value>
+  </data>
+  <data name="RepeatOpen" xml:space="preserve">
+    <value>重複啟動YMCL，前往系統托盤查看已開啟的YMCL實例</value>
+  </data>
+  <data name="SearchFail" xml:space="preserve">
+    <value>搜尋失敗</value>
+  </data>
+  <data name="SearchNoResult" xml:space="preserve">
+    <value>搜尋無結果</value>
+  </data>
+  <data name="AddLocalFile" xml:space="preserve">
+    <value>新增檔案</value>
+  </data>
+  <data name="SongFile" xml:space="preserve">
+    <value>音頻文件</value>
+  </data>
+  <data name="SourceFileNotExists" xml:space="preserve">
+    <value>來源檔案不存在，它可能被移動、重新命名或刪除</value>
+  </data>
+  <data name="CheckSongAvailability" xml:space="preserve">
+    <value>檢測音樂可用性...</value>
+  </data>
+  <data name="CannotConnectToApi" xml:space="preserve">
+    <value>無法連線到api</value>
+  </data>
+  <data name="MusicUnavailable" xml:space="preserve">
+    <value>音樂不可用</value>
+  </data>
+  <data name="GettingMusic" xml:space="preserve">
+    <value>取得音樂...</value>
+  </data>
+  <data name="GettingLyric" xml:space="preserve">
+    <value>取得歌詞...</value>
+  </data>
 </root>

@@ -660,4 +660,76 @@
   <data name="TreasureBox" xml:space="preserve">
     <value>百宝箱</value>
   </data>
+  <data name="MusicPlayer" xml:space="preserve">
+    <value>音乐播放器</value>
+  </data>
+  <data name="OpenApp" xml:space="preserve">
+    <value>→ 打开 ←</value>
+  </data>
+  <data name="RepeatOpen" xml:space="preserve">
+    <value>重复启动YMCL，转到系统托盘查看已打开的YMCL实例</value>
+  </data>
+  <data name="SearchFail" xml:space="preserve">
+    <value>搜索失败</value>
+  </data>
+  <data name="SearchNoResult" xml:space="preserve">
+    <value>搜索无结果</value>
+  </data>
+  <data name="AddLocalFile" xml:space="preserve">
+    <value>添加文件</value>
+  </data>
+  <data name="SongFile" xml:space="preserve">
+    <value>音频文件</value>
+  </data>
+  <data name="SourceFileNotExists" xml:space="preserve">
+    <value>源文件不存在，它可能被移动、重命名或删除</value>
+  </data>
+  <data name="CheckSongAvailability" xml:space="preserve">
+    <value>检测音乐可用性...</value>
+  </data>
+  <data name="CannotConnectToApi" xml:space="preserve">
+    <value>无法连接到api</value>
+  </data>
+  <data name="MusicUnavailable" xml:space="preserve">
+    <value>音乐不可用</value>
+  </data>
+  <data name="GettingMusic" xml:space="preserve">
+    <value>获取音乐...</value>
+  </data>
+  <data name="GettingLyric" xml:space="preserve">
+    <value>获取歌词...</value>
+  </data>
+  <data name="NoChooseSong" xml:space="preserve">
+    <value>尚未选择音乐</value>
+  </data>
+  <data name="SaveMusicFile" xml:space="preserve">
+    <value>保存音频文件</value>
+  </data>
+  <data name="CopyFileFail" xml:space="preserve">
+    <value>复制文件失败</value>
+  </data>
+  <data name="BeginDownload" xml:space="preserve">
+    <value>开始下载</value>
+  </data>
+  <data name="DesktopLyric" xml:space="preserve">
+    <value>桌面歌词</value>
+  </data>
+  <data name="DesktopLyricTextSize" xml:space="preserve">
+    <value>桌面歌词文本大小</value>
+  </data>
+  <data name="DesktopLyricTextAlignment" xml:space="preserve">
+    <value>桌面歌词文本对齐方向</value>
+  </data>
+  <data name="UseChange" xml:space="preserve">
+    <value>应用更改</value>
+  </data>
+  <data name="LeftAlignment" xml:space="preserve">
+    <value>左对齐</value>
+  </data>
+  <data name="RightAlignment" xml:space="preserve">
+    <value>右对齐</value>
+  </data>
+  <data name="CenterAlignment" xml:space="preserve">
+    <value>居中对齐</value>
+  </data>
 </root>

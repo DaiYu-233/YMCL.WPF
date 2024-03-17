@@ -107,7 +107,7 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launch
                 string[] array = path.Split(@"\");
                 if (array[array.Length - 1] != ".minecraft")
                 {
-                    Toast.Show(Const.Window.mainWindow, LangHelper.Current.GetText("Launch_AddMinecraftFolder_Click_NeedMinecraftFolder"), ToastPosition.Top);
+                    Toast.Show(Const.Window.main, LangHelper.Current.GetText("Launch_AddMinecraftFolder_Click_NeedMinecraftFolder"), ToastPosition.Top);
                     return;
                 }
                 var isIncludePath = false;
@@ -123,7 +123,7 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launch
                     }
                     if (isIncludePath)
                     {
-                        Toast.Show(Const.Window.mainWindow, LangHelper.Current.GetText("Launch_AddMinecraftFolder_Click_ExistsMinecraftFolder"), ToastPosition.Top);
+                        Toast.Show(Const.Window.main, LangHelper.Current.GetText("Launch_AddMinecraftFolder_Click_ExistsMinecraftFolder"), ToastPosition.Top);
                         MinecraftFolderComboBox.SelectedItem = path;
                     }
                     else
@@ -169,11 +169,11 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launch
             List<JavaEntry> java = new List<JavaEntry>();
             try
             {
-                javaFetcher.Fetch().ToList();
+                java = javaFetcher.Fetch().ToList();
             }
             catch (Exception ex)
             {
-                Toast.Show(Const.Window.mainWindow, $"Error", ToastPosition.Top);
+                Toast.Show(Const.Window.main, $"Error", ToastPosition.Top);
                 return;
             }
             java = java.Distinct().ToList();
@@ -194,7 +194,7 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launch
             {
                 javasPath.Add(item.JavaPath);
             }
-            Toast.Show(Const.Window.mainWindow, $"{str[0]}{javas.Count}{str[1]}{includeItem}{str[2]}", ToastPosition.Top);
+            Toast.Show(Const.Window.main, $"{str[0]}{javas.Count}{str[1]}{includeItem}{str[2]}", ToastPosition.Top);
             File.WriteAllText(Const.JavaDataPath, JsonConvert.SerializeObject(javas, Formatting.Indented));
             LoadJavas();
             if (javas.Count > 0) { JavaComboBox.SelectedIndex = 0; }
@@ -252,7 +252,7 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launch
                 }
                 if (isIncludePath)
                 {
-                    Toast.Show(Const.Window.mainWindow, LangHelper.Current.GetText("Launch_ManualAddJava_Click_ExistsJava"), ToastPosition.Top);
+                    Toast.Show(Const.Window.main, LangHelper.Current.GetText("Launch_ManualAddJava_Click_ExistsJava"), ToastPosition.Top);
                     JavaComboBox.SelectedItem = path;
                 }
                 else

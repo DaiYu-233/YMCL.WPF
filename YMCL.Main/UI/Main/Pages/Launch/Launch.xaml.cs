@@ -39,6 +39,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
     public partial class Launch : Page
     {
         bool _firstLoadCustomHomePage = true;
+        bool _firstLoadPage = true;
         private ObservableCollection<ModListEntry> modObservableCollection;
         private CollectionView modCollectionView;
         List<AccountInfo> accounts = JsonConvert.DeserializeObject<List<AccountInfo>>(File.ReadAllText(Const.AccountDataPath));
@@ -58,6 +59,15 @@ namespace YMCL.Main.UI.Main.Pages.Launch
         }
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            if (_firstLoadPage)
+            {
+                Task task = new Task(() =>
+                {
+                    LoadNoticeAsync();
+                });
+                task.Start();
+                _firstLoadPage = false;
+            }
             VersionSettingBorder.Visibility = Visibility.Hidden;
             minecraftFolder = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(Const.MinecraftFolderDataPath));
             MinecraftFolderComboBox.Items.Clear();
@@ -207,7 +217,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                 string[] array = path.Split(@"\");
                 if (array[array.Length - 1] != ".minecraft")
                 {
-                    Toast.Show(Const.Window.mainWindow, LangHelper.Current.GetText("Launch_AddMinecraftFolder_Click_NeedMinecraftFolder"), ToastPosition.Top);
+                    Toast.Show(Const.Window.main, LangHelper.Current.GetText("Launch_AddMinecraftFolder_Click_NeedMinecraftFolder"), ToastPosition.Top);
                     return;
                 }
                 var isIncludePath = false;
@@ -223,7 +233,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                     }
                     if (isIncludePath)
                     {
-                        Toast.Show(Const.Window.mainWindow, LangHelper.Current.GetText("Launch_AddMinecraftFolder_Click_ExistsMinecraftFolder"), ToastPosition.Top);
+                        Toast.Show(Const.Window.main, LangHelper.Current.GetText("Launch_AddMinecraftFolder_Click_ExistsMinecraftFolder"), ToastPosition.Top);
                         MinecraftFolderComboBox.SelectedItem = path;
                     }
                     else
@@ -312,7 +322,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
             var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
             if (setting.MinecraftVersionId == null)
             {
-                Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_NoChooseGame"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+                Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_NoChooseGame"), position: ToastPosition.Top, window: Const.Window.main);
                 GameCoreText.Text = LangHelper.Current.GetText("Launch_NoChooseGame");
                 return;
             }
@@ -350,7 +360,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
             var version = VersionListView.SelectedItem as GameEntry;
             if (version == null)
             {
-                Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_NoChooseGame"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+                Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_NoChooseGame"), position: ToastPosition.Top, window: Const.Window.main);
                 GameCoreText.Text = LangHelper.Current.GetText("Launch_NoChooseGame");
                 return;
             }
@@ -384,7 +394,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
 
             if (path == accounts[setting.AccountSelectionIndex].Name)
             {
-                Toast.Show(message: LangHelper.Current.GetText("SaveCancel"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+                Toast.Show(message: LangHelper.Current.GetText("SaveCancel"), position: ToastPosition.Top, window: Const.Window.main);
                 return;
             }
 
@@ -392,7 +402,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
             {
                 var bytes = Convert.FromBase64String(accounts[setting.AccountSelectionIndex].Skin);
                 stream.Write(bytes, 0, bytes.Length);
-                Toast.Show(message: LangHelper.Current.GetText("SaveSuccess"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+                Toast.Show(message: LangHelper.Current.GetText("SaveSuccess"), position: ToastPosition.Top, window: Const.Window.main);
             }
         }
         private void OpenVersionFolder_Click(object sender, RoutedEventArgs e)
@@ -485,7 +495,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
             var version = VersionListView.SelectedItem as GameEntry;
             if (version == null)
             {
-                Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchBtn_Click_NoChooseGame"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+                Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchBtn_Click_NoChooseGame"), position: ToastPosition.Top, window: Const.Window.main);
                 return;
             }
             var filePath = Path.Combine(Path.GetDirectoryName(version.JarPath), Const.VersionSettingFileName);
@@ -502,7 +512,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
             var version = VersionListView.SelectedItem as GameEntry;
             if (version == null)
             {
-                Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchBtn_Click_NoChooseGame"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+                Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchBtn_Click_NoChooseGame"), position: ToastPosition.Top, window: Const.Window.main);
                 return;
             }
             var filePath = Path.Combine(Path.GetDirectoryName(version.JarPath), Const.VersionSettingFileName);
@@ -565,7 +575,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
             var version = VersionListView.SelectedItem as GameEntry;
             if (version == null)
             {
-                Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchBtn_Click_NoChooseGame"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+                Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchBtn_Click_NoChooseGame"), position: ToastPosition.Top, window: Const.Window.main);
                 return;
             }
             var filePath = Path.Combine(Path.GetDirectoryName(version.JarPath), Const.VersionSettingFileName);
@@ -578,7 +588,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
             var version = VersionListView.SelectedItem as GameEntry;
             if (version == null)
             {
-                Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchBtn_Click_NoChooseGame"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+                Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchBtn_Click_NoChooseGame"), position: ToastPosition.Top, window: Const.Window.main);
                 return;
             }
             var filePath = Path.Combine(Path.GetDirectoryName(version.JarPath), Const.VersionSettingFileName);
@@ -615,49 +625,14 @@ namespace YMCL.Main.UI.Main.Pages.Launch
             var text = LangHelper.Current.GetText("Launch_SelectedModCount").Split("{|}");
             SelectedModCount.Text = $"{text[0]}0{text[1]}";
             VersionSettingBorder.Visibility = Visibility.Hidden;
+        }
+        public async Task LoadNoticeAsync()
+        {
+            return;
             Update updater = new();
             var url = string.Empty;
             var json = string.Empty;
-            try
-            {
-                json = updater.GetUpdateFile(Const.UpdaterId);
-                var obj = JsonConvert.DeserializeObject<_2018k>(json);
-                if (obj != null)
-                {
-                    if (!string.IsNullOrEmpty(obj.Notice.Msg))
-                    {
-                        NoticeBar.Visibility = Visibility.Visible;
-                        NoticeBar.Message = obj.Notice.Msg.Replace(@"\n", "\n");
-                        if (obj.Notice.Type == _2018k.InfoBar.InfoType.Informational)
-                        {
-                            NoticeBar.Severity = iNKORE.UI.WPF.Modern.Controls.InfoBarSeverity.Informational;
-                        }
-                        else if (obj.Notice.Type == _2018k.InfoBar.InfoType.Warning)
-                        {
-                            NoticeBar.Severity = iNKORE.UI.WPF.Modern.Controls.InfoBarSeverity.Warning;
-                        }
-                        else if (obj.Notice.Type == _2018k.InfoBar.InfoType.Success)
-                        {
-                            NoticeBar.Severity = iNKORE.UI.WPF.Modern.Controls.InfoBarSeverity.Success;
-                        }
-                        else if (obj.Notice.Type == _2018k.InfoBar.InfoType.Error)
-                        {
-                            NoticeBar.Severity = iNKORE.UI.WPF.Modern.Controls.InfoBarSeverity.Error;
-                        }
-                        NoticeBar.IsOpen = true;
-                    }
-                }
-                if (updater.GetUpdate(Const.UpdaterId, Const.Version) == true)
-                {
-                    UpdateBar.Message = $"{Const.Version} / {updater.GetVersionInternet(Const.UpdaterId)}";
-                    UpdateBar.IsOpen = true;
-                    UpdateBar.Visibility = Visibility.Visible;
-                }
-            }
-            catch
-            {
-                Toast.Show(message: LangHelper.Current.GetText("GetNoticeFail"), position: ToastPosition.Top, window: Const.Window.mainWindow);
-            }
+            await Task.Run(() => { try { Dispatcher.BeginInvoke(() => { json = updater.GetUpdateFile(Const.UpdaterId); var obj = JsonConvert.DeserializeObject<_2018k>(json); if (obj != null) { if (!string.IsNullOrEmpty(obj.Notice.Msg)) { NoticeBar.Visibility = Visibility.Visible; NoticeBar.Message = obj.Notice.Msg.Replace(@"\n", "\n"); if (obj.Notice.Type == _2018k.InfoBar.InfoType.Informational) { NoticeBar.Severity = iNKORE.UI.WPF.Modern.Controls.InfoBarSeverity.Informational; } else if (obj.Notice.Type == _2018k.InfoBar.InfoType.Warning) { NoticeBar.Severity = iNKORE.UI.WPF.Modern.Controls.InfoBarSeverity.Warning; } else if (obj.Notice.Type == _2018k.InfoBar.InfoType.Success) { NoticeBar.Severity = iNKORE.UI.WPF.Modern.Controls.InfoBarSeverity.Success; } else if (obj.Notice.Type == _2018k.InfoBar.InfoType.Error) { NoticeBar.Severity = iNKORE.UI.WPF.Modern.Controls.InfoBarSeverity.Error; } NoticeBar.IsOpen = true; } } if (updater.GetUpdate(Const.UpdaterId, Const.Version) == true) { UpdateBar.Message = $"{Const.Version} / {updater.GetVersionInternet(Const.UpdaterId)}"; UpdateBar.IsOpen = true; UpdateBar.Visibility = Visibility.Visible; } }); } catch { Dispatcher.BeginInvoke(() => { Toast.Show(message: LangHelper.Current.GetText("GetNoticeFail"), position: ToastPosition.Top, window: Const.Window.main); }); } });
         }
         public void LoadVersionMods()
         {
@@ -819,7 +794,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
             var version = VersionListView.SelectedItem as GameEntry;
             if (version == null)
             {
-                Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchBtn_Click_NoChooseGame"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+                Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchBtn_Click_NoChooseGame"), position: ToastPosition.Top, window: Const.Window.main);
                 return null;
             }
             var filePath = Path.Combine(Path.GetDirectoryName(version.JarPath), Const.VersionSettingFileName);
@@ -874,7 +849,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
             var mcPath = minecraftPath;
             if (string.IsNullOrEmpty(versionId))
             {
-                Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_NoChooseGame"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+                Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_NoChooseGame"), position: ToastPosition.Top, window: Const.Window.main);
                 GameCoreText.Text = LangHelper.Current.GetText("Launch_NoChooseGame");
                 return;
             }
@@ -894,7 +869,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
             if (!idList.Contains(versionId))
             {
                 if (msg)
-                    Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_NoChooseGame"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+                    Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_NoChooseGame"), position: ToastPosition.Top, window: Const.Window.main);
                 else
                     MessageBoxX.Show(LangHelper.Current.GetText("Launch_LaunchGame_Click_NoChooseGame"), "Yu Minecraft Launcher");
                 GameCoreText.Text = LangHelper.Current.GetText("Launch_NoChooseGame");
@@ -949,7 +924,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                             {
                                 LaunchBtn.IsEnabled = true; taskProgress.Hide();
                                 if (msg)
-                                    Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_CannotFandRightJava") + version.JavaVersion, position: ToastPosition.Top, window: Const.Window.mainWindow);
+                                    Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_CannotFandRightJava") + version.JavaVersion, position: ToastPosition.Top, window: Const.Window.main);
                                 else
                                     MessageBoxX.Show(LangHelper.Current.GetText("Launch_LaunchGame_Click_CannotFandRightJava"), "Yu Minecraft Launcher");
                             }
@@ -973,7 +948,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                             {
                                 LaunchBtn.IsEnabled = true; taskProgress.Hide();
                                 if (msg)
-                                    Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_CannotFandRightJava") + version.JavaVersion, position: ToastPosition.Top, window: Const.Window.mainWindow);
+                                    Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_CannotFandRightJava") + version.JavaVersion, position: ToastPosition.Top, window: Const.Window.main);
                                 else
                                     MessageBoxX.Show(LangHelper.Current.GetText("Launch_LaunchGame_Click_CannotFandRightJava"), "Yu Minecraft Launcher");
                             }
@@ -1062,7 +1037,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                         }
                         Launcher launcher = new(resolver, config);
 
-                        var task = Const.Window.tasksWindow.CreateTask($"{version.JarPath}", false);
+                        var task = Const.Window.tasks.CreateTask($"{version.JarPath}", false);
 
                         await Task.Run(async () =>
                         {
@@ -1076,9 +1051,9 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                                     {
                                         Dispatcher.BeginInvoke(() =>
                                         {
-                                            Toast.Show(message: $"{LangHelper.Current.GetText("Launch_LaunchGame_Click_GameExit")}：{args.ExitCode}", position: ToastPosition.Top, window: Const.Window.mainWindow);
+                                            Toast.Show(message: $"{LangHelper.Current.GetText("Launch_LaunchGame_Click_GameExit")}：{args.ExitCode}", position: ToastPosition.Top, window: Const.Window.main);
                                             taskProgress.Hide();
-                                            Const.Window.mainWindow.Focus();
+                                            Const.Window.main.Focus();
                                         });
                                     };
                                     watcher.OutputLogReceived += async (_, args) =>
@@ -1096,7 +1071,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                                         //watcher.Process.WaitForInputIdle();
                                         taskProgress.Hide();
                                         taskProgress.InsertProgressText("-----> JvmOutputLog", false);
-                                        Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_FinishLaunch"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+                                        Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_FinishLaunch"), position: ToastPosition.Top, window: Const.Window.main);
                                     });
 
                                 });
@@ -1116,7 +1091,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                         {
                             LaunchBtn.IsEnabled = true; taskProgress.Hide();
                             if (msg)
-                                Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_CannotFandRightJava") + version.JavaVersion, position: ToastPosition.Top, window: Const.Window.mainWindow);
+                                Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_CannotFandRightJava") + version.JavaVersion, position: ToastPosition.Top, window: Const.Window.main);
                             else
                                 MessageBoxX.Show(LangHelper.Current.GetText("Launch_LaunchGame_Click_CannotFandRightJava"), "Yu Minecraft Launcher");
                         }
@@ -1124,7 +1099,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                         {
                             LaunchBtn.IsEnabled = true; taskProgress.Hide();
                             if (msg)
-                                Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_JavaError"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+                                Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_JavaError"), position: ToastPosition.Top, window: Const.Window.main);
                             else
                                 MessageBoxX.Show(LangHelper.Current.GetText("Launch_LaunchGame_Click_JavaError"), "Yu Minecraft Launcher");
                         }
@@ -1134,7 +1109,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                 {
                     LaunchBtn.IsEnabled = true; taskProgress.Hide();
                     if (msg)
-                        Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_NoChooseGame"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+                        Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_NoChooseGame"), position: ToastPosition.Top, window: Const.Window.main);
                     else
                         MessageBoxX.Show(LangHelper.Current.GetText("Launch_LaunchGame_Click_NoChooseGame"), "Yu Minecraft Launcher");
                     GameCoreText.Text = LangHelper.Current.GetText("Launch_NoChooseGame");
@@ -1144,7 +1119,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
             {
                 LaunchBtn.IsEnabled = true; taskProgress.Hide();
                 if (msg)
-                    Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_AccountError"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+                    Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_AccountError"), position: ToastPosition.Top, window: Const.Window.main);
                 else
                     MessageBoxX.Show(LangHelper.Current.GetText("Launch_LaunchGame_Click_AccountError"), "Yu Minecraft Launcher");
             }

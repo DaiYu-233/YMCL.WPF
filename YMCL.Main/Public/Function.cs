@@ -119,5 +119,25 @@ namespace YMCL.Main.Public
             //}
             return null;
         }
+        public static string MsToTime(double ms)//转换为分秒格式
+        {
+            int minute = 0;
+            int second = 0;
+            second = (int)(ms / 1000);
+
+            string secondStr = string.Empty;
+            string minuteStr = string.Empty;
+
+            if (second > 60)
+            {
+                minute = second / 60;
+                second = second % 60;
+            }
+
+            secondStr = second < 10 ? $"0{second}" : $"{second}";
+            minuteStr = minute < 10 ? $"0{minute}" : $"{minute}";
+
+            return $"{minuteStr}:{secondStr}";
+        }
     }
 }

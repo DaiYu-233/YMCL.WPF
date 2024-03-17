@@ -657,4 +657,46 @@
   <data name="OpenTaskCenter" xml:space="preserve">
     <value>Open Task Center</value>
   </data>
+  <data name="TreasureBox" xml:space="preserve">
+    <value>Treasure chest</value>
+  </data>
+  <data name="MusicPlayer" xml:space="preserve">
+    <value>Music Player</value>
+  </data>
+  <data name="OpenApp" xml:space="preserve">
+    <value>Open</value>
+  </data>
+  <data name="RepeatOpen" xml:space="preserve">
+    <value>Restart YMCL, go to the system tray to view the opened YMCL instance</value>
+  </data>
+  <data name="SearchFail" xml:space="preserve">
+    <value>Search failed</value>
+  </data>
+  <data name="SearchNoResult" xml:space="preserve">
+    <value>No result found</value>
+  </data>
+  <data name="AddLocalFile" xml:space="preserve">
+    <value>Add files</value>
+  </data>
+  <data name="SongFile" xml:space="preserve">
+    <value>Audio file</value>
+  </data>
+  <data name="SourceFileNotExists" xml:space="preserve">
+    <value>Source file does not exist, it may be moved, renamed or deleted</value>
+  </data>
+  <data name="CheckSongAvailability" xml:space="preserve">
+    <value>Checking music availability...</value>
+  </data>
+  <data name="CannotConnectToApi" xml:space="preserve">
+    <value>Unable to connect to the API</value>
+  </data>
+  <data name="MusicUnavailable" xml:space="preserve">
+    <value>Music not available</value>
+  </data>
+  <data name="GettingMusic" xml:space="preserve">
+    <value>Getting music...</value>
+  </data>
+  <data name="GettingLyric" xml:space="preserve">
+    <value>Get lyrics...</value>
+  </data>
 </root>

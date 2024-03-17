@@ -59,7 +59,7 @@ namespace YMCL.Main.UI.TaskManage.TaskCenter
         public async void Destory()
         {
             await Task.Delay(2000);
-            Const.Window.tasksWindow.TaskContainer.Children.Remove(this);
+            Const.Window.tasks.TaskContainer.Children.Remove(this);
         }
     }
 }

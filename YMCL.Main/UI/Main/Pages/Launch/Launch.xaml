@@ -42,7 +42,8 @@
                                     <ui:FlyoutBase.AttachedFlyout>
                                         <ui:MenuFlyout Placement="RightEdgeAlignedBottom" ShowMode="Transient">
                                             <ui:MenuFlyout.Items>
-                                                <MenuItem x:Name="SaveSkinBtn" Header="{x:Static properties:MainLang.SaveSkin}" FontFamily="{DynamicResource Font}" Click="SaveSkinBtn_Click" />
+                                                <MenuItem x:Name="SaveSkinBtn" Header="{x:Static properties:MainLang.SaveSkin}" FontFamily="{DynamicResource Font}" Click="SaveSkinBtn_Click" >
+                                                </MenuItem>
                                             </ui:MenuFlyout.Items>
                                         </ui:MenuFlyout>
                                     </ui:FlyoutBase.AttachedFlyout>

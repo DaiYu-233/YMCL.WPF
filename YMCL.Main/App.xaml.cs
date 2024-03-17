@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using iNKORE.UI.WPF.Modern.Controls.Primitives;
+using Newtonsoft.Json;
 using Panuon.WPF.UI;
 using System.Diagnostics;
 using System.IO;
@@ -42,7 +43,8 @@ namespace YMCL.Main
                 //        SendMessage(hWnd, 9001, 1, (IntPtr)0);
                 //    }
                 //}
-                Shutdown();
+                //MessageBoxX.Show(MainLang.RepeatOpen, "Yu Minecraft Launcher");
+                //Shutdown();
             }
             base.OnStartup(e);
             StartupArgs = e.Args;
@@ -111,6 +113,10 @@ namespace YMCL.Main
             {
                 File.WriteAllText(Const.JavaDataPath, "[]");
             }
+            if (!File.Exists(Const.PlayListDataPath))
+            {
+                File.WriteAllText(Const.PlayListDataPath, "[]");
+            }
             if (!File.Exists(Const.AccountDataPath))
             {
                 DateTime now = DateTime.Now;
@@ -139,21 +145,32 @@ namespace YMCL.Main
         #region NotifyIcon
         private void ShowWindow_Click(object sender, RoutedEventArgs e)
         {
-            Const.Window.mainWindow.WindowState = WindowState.Normal;
-            Const.Window.mainWindow.Root.Visibility = Visibility.Visible;
-            Const.Window.mainWindow.ShowInTaskbar = true;
-            Const.Window.mainWindow.Show();
-            Const.Window.mainWindow.Activate();
+            Const.Window.main.WindowState = WindowState.Normal;
+            Const.Window.main.Root.Visibility = Visibility.Visible;
+            Const.Window.main.ShowInTaskbar = true;
+            Const.Window.main.Show();
+            Const.Window.main.Activate();
         }
         private void ShowTasks_Click(object sender, RoutedEventArgs e)
         {
-            Const.Window.tasksWindow.WindowState = WindowState.Normal;
-            Const.Window.tasksWindow.Show();
-            Const.Window.tasksWindow.Activate();
+            Const.Window.tasks.WindowState = WindowState.Normal;
+            Const.Window.tasks.Show();
+            Const.Window.tasks.Activate();
+        }
+        private void ShowPlayerWindow_Click(object sender, RoutedEventArgs e)
+        {
+            Const.Window.musicPlayer.WindowState = WindowState.Normal;
+            Const.Window.musicPlayer.ShowInTaskbar = true;
+            Const.Window.musicPlayer.Show();
+            Const.Window.musicPlayer.Activate();
         }
         private void TrueExit_Click(object sender, RoutedEventArgs e)
         {
             Environment.Exit(0);
+        }
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            Const.Window.desktopLyric.Change();
         }
         #endregion
     }

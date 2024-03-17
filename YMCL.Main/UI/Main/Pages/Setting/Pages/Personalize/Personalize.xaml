@@ -42,6 +42,23 @@
                     <pu:ColorPicker x:Name="ColorPicker" Height="32" Margin="18,0,6.5,0" CornerRadius="4,4,4,4" BorderBrush="#0F000000" Foreground="{DynamicResource TextColor}" FontSize="14" FontFamily="{DynamicResource Font}" DockPanel.Dock="Top" SelectedColorChanged="ColorPicker_SelectedColorChanged" Background="{DynamicResource 2x}"/>
                 </DockPanel>
             </Border>
+            <Border CornerRadius="5" Background="{DynamicResource 1x}" Height="84" Margin="0,0,0,10" >
+                <DockPanel LastChildFill="False">
+                    <DockPanel DockPanel.Dock="Top" Margin="0,6.5,0,0">
+                        <Label HorizontalAlignment="Left" VerticalAlignment="Center" Margin="18,0,0,0" FontSize="15" Foreground="{DynamicResource TextColor}" FontFamily="{DynamicResource Font}" Content="{x:Static properties:MainLang.DesktopLyricTextAlignment}"/>
+                        <ComboBox x:Name="DesktopLyricTextAlignmentComboBox" VerticalAlignment="Center" Margin="18,0,6.5,0" HorizontalAlignment="Stretch" SelectionChanged="DesktopLyricTextAlignmentComboBox_SelectionChanged" FontFamily="{DynamicResource Font}">
+                            <ComboBoxItem Content="{x:Static properties:MainLang.LeftAlignment}" FontFamily="{DynamicResource Font}"/>
+                            <ComboBoxItem Content="{x:Static properties:MainLang.RightAlignment}" FontFamily="{DynamicResource Font}"/>
+                            <ComboBoxItem Content="{x:Static properties:MainLang.CenterAlignment}" FontFamily="{DynamicResource Font}"/>
+                        </ComboBox>
+                    </DockPanel>
+                    <DockPanel DockPanel.Dock="Top" Height="32" Margin="0,6.5,0,0">
+                        <Label HorizontalAlignment="Left" VerticalAlignment="Center" Margin="18,0,0,0" FontSize="15" Foreground="{DynamicResource TextColor}" FontFamily="{DynamicResource Font}" Content="{x:Static properties:MainLang.DesktopLyricTextSize}"/>
+                        <Button x:Name="UseDesktopLyricTextSizeNumberBox" DockPanel.Dock="Right" Margin="0,0,6.5,0" FontFamily="{DynamicResource Font}" Content="{x:Static properties:MainLang.UseChange}" Click="UseDesktopLyricTextSizeNumberBox_Click"/>
+                        <ui:NumberBox x:Name="DesktopLyricTextSizeNumberBox" Text="14" SpinButtonPlacementMode="Compact" FontSize="14" Margin="18,0,6.5,0" FontFamily="{DynamicResource Font}" Foreground="{DynamicResource TextColor}" />
+                    </DockPanel>
+                </DockPanel>
+            </Border>
             <Border CornerRadius="5" Background="{DynamicResource 1x}" x:Name="CustomHomePageUIBorder" Height="84" Margin="0,0,0,10" >
                 <DockPanel>
                     <DockPanel DockPanel.Dock="Top" Height="45">

@@ -8,7 +8,39 @@
             <tb:TaskbarIcon x:Name="NotifyIcon" x:Key="NotifyIcon" ToolTipText="Ymcl" PopupActivation="RightClick">
                 <tb:TaskbarIcon.TrayPopup>
                     <ui:ClippingBorder CornerRadius="8" Background="{DynamicResource 2x}">
-                        <DockPanel Margin="0,1,0,1">
+                        <DockPanel Margin="0,2,0,1">
+                            <Menu DockPanel.Dock="Bottom">
+                                <MenuItem x:Name="Treasure" DockPanel.Dock="Top" FontFamily="{DynamicResource Font}" Click="ShowWindow_Click">
+                                    <MenuItem.Header>
+                                        <DockPanel>
+                                            <ui:FontIcon Glyph="&#xEC5C;" Margin="1,0,12,0"/>
+                                            <TextBlock Text="{x:Static properties:MainLang.TreasureBox}"/>
+                                        </DockPanel>
+                                    </MenuItem.Header>
+                                    <DockPanel>
+                                        <Menu HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-14,-9,-14,-10">
+                                            <MenuItem>
+                                                <MenuItem.Header>
+                                                    <DockPanel>
+                                                        <ui:FontIcon Glyph="&#xEC4F;" Margin="1,0,12,0"/>
+                                                        <TextBlock Text="{x:Static properties:MainLang.MusicPlayer}"/>
+                                                    </DockPanel>
+                                                </MenuItem.Header>
+                                                <MenuItem Header="{x:Static properties:MainLang.ShowWindow}" DockPanel.Dock="Top" FontFamily="{DynamicResource Font}" Click="ShowPlayerWindow_Click">
+                                                    <MenuItem.Icon>
+                                                        <ui:FontIcon Glyph="&#xE70A;" />
+                                                    </MenuItem.Icon>
+                                                </MenuItem>
+                                                <MenuItem Header="{x:Static properties:MainLang.DesktopLyric}" DockPanel.Dock="Top" FontFamily="{DynamicResource Font}" Click="MenuItem_Click" >
+                                                    <MenuItem.Icon>
+                                                        <ui:FontIcon Glyph="&#xED1E;" />
+                                                    </MenuItem.Icon>
+                                                </MenuItem>
+                                            </MenuItem>
+                                        </Menu>
+                                    </DockPanel>
+                                </MenuItem>
+                            </Menu>
                             <MenuItem x:Name="ShowWindow" Header="{x:Static properties:MainLang.ShowWindow}" DockPanel.Dock="Top" FontFamily="{DynamicResource Font}" Click="ShowWindow_Click">
                                 <MenuItem.Icon>
                                     <ui:FontIcon Glyph="&#xE70A;" />

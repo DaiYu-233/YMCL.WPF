@@ -7,6 +7,7 @@ using System.IO;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Threading;
 using YMCL.Main.Public;
 using YMCL.Main.Public.Class;
@@ -50,6 +51,8 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Personalize
             timer.Interval = TimeSpan.FromSeconds(0.2);
             timer.Start();
             ThemeComboBox.SelectedIndex = (int)setting.Theme;
+            DesktopLyricTextAlignmentComboBox.SelectedIndex = (int)setting.DesktopLyricTextAlignment;
+            DesktopLyricTextSizeNumberBox.Value = (int)setting.DesktopLyricTextSize;
             CustomHomePageComboBox.SelectedIndex = (int)setting.CustomHomePage;
             CustomHomePageXamlUrlTextBox.Text = setting.CustomHomePageNetXamlUrl;
             CustomHomePageCSharpUrlTextBox.Text = setting.CustomHomePageNetCSharpUrl;
@@ -59,6 +62,8 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Personalize
         {
             var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
             ThemeManager.Current.AccentColor = setting.ThemeColor;
+            ResourceDictionary appResources = System.Windows.Application.Current.Resources;
+            appResources["IconBlue"] = new SolidColorBrush((System.Windows.Media.Color)ThemeManager.Current.AccentColor);
             ColorPicker.SelectedColor = setting.ThemeColor;
             if (setting.Theme == SettingItem.Theme.Light)
             {
@@ -129,7 +134,7 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Personalize
             {
                 return;
             }
-            Toast.Show(message: LangHelper.Current.GetText("NeedRestartApp"), position: ToastPosition.Top, window: Const.Window.mainWindow);
+            Toast.Show(message: LangHelper.Current.GetText("NeedRestartApp"), position: ToastPosition.Top, window: Const.Window.main);
             setting.CustomHomePage = (SettingItem.CustomHomePage)CustomHomePageComboBox.SelectedIndex;
             File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
 
@@ -179,6 +184,30 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Personalize
             setting.ThemeColor = (System.Windows.Media.Color)color;
             File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
             LoadTheme(null, null);
+        }
+
+        private void DesktopLyricTextAlignmentComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
+            if (DesktopLyricTextAlignmentComboBox.SelectedIndex == (int)setting.DesktopLyricTextAlignment)
+            {
+                return;
+            }
+            setting.DesktopLyricTextAlignment = (TextAlignment)DesktopLyricTextAlignmentComboBox.SelectedIndex;
+            File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+            Const.Window.desktopLyric.Lyric.TextAlignment = (TextAlignment)DesktopLyricTextAlignmentComboBox.SelectedIndex;
+        }
+
+        private void UseDesktopLyricTextSizeNumberBox_Click(object sender, RoutedEventArgs e)
+        {
+            var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
+            if (DesktopLyricTextSizeNumberBox.Value == (int)setting.DesktopLyricTextSize)
+            {
+                return;
+            }
+            setting.DesktopLyricTextSize = DesktopLyricTextSizeNumberBox.Value;
+            File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+            Const.Window.desktopLyric.Lyric.FontSize = DesktopLyricTextSizeNumberBox.Value;
         }
     }
 }
