@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using YMCL.Main.Public;
 using Page = System.Windows.Controls.Page;
 
 namespace YMCL.Main.UI.Main.Pages.More.Pages.TreasureBox
@@ -22,7 +23,6 @@ namespace YMCL.Main.UI.Main.Pages.More.Pages.TreasureBox
     /// </summary>
     public partial class TreasureBox : Page
     {
-        MusicPlayer.Main.MusicPlayer musicPlayer = new();
         public TreasureBox()
         {
             InitializeComponent();
@@ -33,9 +33,9 @@ namespace YMCL.Main.UI.Main.Pages.More.Pages.TreasureBox
             var tag = (sender as HyperlinkButton).Tag.ToString();
             if (tag == "Player")
             {
-                musicPlayer.Show();
-                musicPlayer.WindowState = WindowState.Normal;
-                musicPlayer.Activate();
+                Const.Window.musicPlayer.Show();
+                Const.Window.musicPlayer.WindowState = WindowState.Normal;
+                Const.Window.musicPlayer.Activate();
             }
         }
     }

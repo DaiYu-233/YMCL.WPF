@@ -1037,7 +1037,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                         }
                         Launcher launcher = new(resolver, config);
 
-                        var task = Const.Window.tasks.CreateTask($"{version.JarPath}", false);
+                        //var task = Const.Window.tasks.CreateTask($"{version.JarPath}", false);
 
                         await Task.Run(async () =>
                         {
@@ -1061,7 +1061,8 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                                         Debug.WriteLine(args.Text);
                                         await Dispatcher.BeginInvoke(() =>
                                         {
-                                            task.AppendText(args.Text, false);
+                                            //task.AppendText(args.Text, false);
+                                            taskProgress.InsertProgressText(args.Text, false);
                                         });
                                     };
 
@@ -1069,7 +1070,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                                     {
                                         taskProgress.InsertProgressText("YMCL: " + LangHelper.Current.GetText("WaitForGameWindowAppear"));
                                         //watcher.Process.WaitForInputIdle();
-                                        taskProgress.Hide();
+                                        //taskProgress.Hide();
                                         taskProgress.InsertProgressText("-----> JvmOutputLog", false);
                                         Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_FinishLaunch"), position: ToastPosition.Top, window: Const.Window.main);
                                     });
@@ -1117,14 +1118,15 @@ namespace YMCL.Main.UI.Main.Pages.Launch
             }
             else
             {
-                LaunchBtn.IsEnabled = true; taskProgress.Hide();
+                LaunchBtn.IsEnabled = true; 
+                taskProgress.Hide();
                 if (msg)
                     Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_AccountError"), position: ToastPosition.Top, window: Const.Window.main);
                 else
                     MessageBoxX.Show(LangHelper.Current.GetText("Launch_LaunchGame_Click_AccountError"), "Yu Minecraft Launcher");
             }
             LaunchBtn.IsEnabled = true;
-            taskProgress.Hide();
+            //taskProgress.Hide();
         }
     }
 }

@@ -57,7 +57,7 @@ namespace YMCL.Main.UI.MusicPlayer.Main
             {
                 if (repeat == Public.Class.Repeat.RepeatAll)
                 {
-                    if (PlayListView.Items.Count > 0)
+                    if (PlayListView.Items.Count > 1)
                     {
                         Next_MouseDown(null, null);
                     }

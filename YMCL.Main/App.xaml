@@ -9,7 +9,7 @@
                 <tb:TaskbarIcon.TrayPopup>
                     <ui:ClippingBorder CornerRadius="8" Background="{DynamicResource 2x}">
                         <DockPanel Margin="0,2,0,1">
-                            <Menu DockPanel.Dock="Bottom">
+                            <!--<Menu DockPanel.Dock="Bottom">
                                 <MenuItem x:Name="Treasure" DockPanel.Dock="Top" FontFamily="{DynamicResource Font}" Click="ShowWindow_Click">
                                     <MenuItem.Header>
                                         <DockPanel>
@@ -40,7 +40,7 @@
                                         </Menu>
                                     </DockPanel>
                                 </MenuItem>
-                            </Menu>
+                            </Menu>-->
                             <MenuItem x:Name="ShowWindow" Header="{x:Static properties:MainLang.ShowWindow}" DockPanel.Dock="Top" FontFamily="{DynamicResource Font}" Click="ShowWindow_Click">
                                 <MenuItem.Icon>
                                     <ui:FontIcon Glyph="&#xE70A;" />

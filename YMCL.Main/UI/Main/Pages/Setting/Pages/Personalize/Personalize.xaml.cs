@@ -5,6 +5,7 @@ using Panuon.WPF.UI;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using System.Security.Cryptography.Pkcs;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -52,7 +53,7 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Personalize
             timer.Start();
             ThemeComboBox.SelectedIndex = (int)setting.Theme;
             DesktopLyricTextAlignmentComboBox.SelectedIndex = (int)setting.DesktopLyricTextAlignment;
-            DesktopLyricTextSizeNumberBox.Value = (int)setting.DesktopLyricTextSize;
+            DesktopLyricTextSizeSlider.Value = (int)setting.DesktopLyricTextSize;
             CustomHomePageComboBox.SelectedIndex = (int)setting.CustomHomePage;
             CustomHomePageXamlUrlTextBox.Text = setting.CustomHomePageNetXamlUrl;
             CustomHomePageCSharpUrlTextBox.Text = setting.CustomHomePageNetCSharpUrl;
@@ -198,16 +199,21 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Personalize
             Const.Window.desktopLyric.Lyric.TextAlignment = (TextAlignment)DesktopLyricTextAlignmentComboBox.SelectedIndex;
         }
 
-        private void UseDesktopLyricTextSizeNumberBox_Click(object sender, RoutedEventArgs e)
+        private void DesktopLyricTextSizeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            DesktopLyricTextSizeSlider.Value = Math.Round(DesktopLyricTextSizeSlider.Value);
+            DesktopLyricTextSizeSilderInfo.Text = $"{DesktopLyricTextSizeSlider.Value}";
+            if (Const.Window.desktopLyric != null)
+            {
+                Const.Window.desktopLyric.Lyric.FontSize = DesktopLyricTextSizeSlider.Value;
+            }
+        }
+
+        private void DesktopLyricTextSizeSlider_LostFocus(object sender, RoutedEventArgs e)
         {
             var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
-            if (DesktopLyricTextSizeNumberBox.Value == (int)setting.DesktopLyricTextSize)
-            {
-                return;
-            }
-            setting.DesktopLyricTextSize = DesktopLyricTextSizeNumberBox.Value;
+            setting.DesktopLyricTextSize = DesktopLyricTextSizeSlider.Value;
             File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
-            Const.Window.desktopLyric.Lyric.FontSize = DesktopLyricTextSizeNumberBox.Value;
         }
     }
 }

@@ -261,7 +261,6 @@ namespace YMCL.Main.UI.Main
         Pages.Setting.Setting setting = new();
         Pages.Download.Download download = new();
         Pages.More.More more = new();
-        Tasks tasks = new();
         #endregion
         #region TurnPage
         private void ToLaunch_Checked(object sender, RoutedEventArgs e)

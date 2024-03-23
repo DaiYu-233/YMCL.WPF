@@ -28,6 +28,11 @@
                             <ui:FontIcon Glyph="&#xE756;" />
                         </ui:NavigationViewItem.Icon>
                     </ui:NavigationViewItem>
+                    <!--<ui:NavigationViewItem x:Name="Mods" FontFamily="{StaticResource Font}"  Content="Mod" Tag="NavigationLaunch" Height="40" Margin="0,-8,0,0" >
+                        <ui:NavigationViewItem.Icon>
+                            <ui:FontIcon Glyph="&#xE8F1;" />
+                        </ui:NavigationViewItem.Icon>
+                    </ui:NavigationViewItem>-->
                 </ui:NavigationView.MenuItems>
             </ui:NavigationView>
         </Grid>

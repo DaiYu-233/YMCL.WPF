@@ -490,7 +490,7 @@ namespace YMCL.Main.UI.Initialize
 
             if (!needInstallFont && File.Exists(Path.Combine(Const.PublicDataRootPath, "FontHasBeenInstalled")) && !App.StartupArgs.Contains("InstallFont"))
             {
-                MainWindow main = new MainWindow();
+                MainWindow main = Const.Window.main;
                 Hide();
                 main.Show();
             }
@@ -615,7 +615,7 @@ namespace YMCL.Main.UI.Initialize
             if (page == 1)
             {
                 MessageBoxX.Show(LangHelper.Current.GetText("InitializeWindow_InitializeFinish"), "Yu Minecraft Launcher", MessageBoxIcon.Success);
-                MainWindow main = new MainWindow();
+                MainWindow main = Const.Window.main;
                 Hide();
                 main.Show();
             }

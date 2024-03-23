@@ -685,7 +685,7 @@
     <value>ソースファイルが存在しません。移動、名前変更、または削除される可能性があります</value>
   </data>
   <data name="CheckSongAvailability" xml:space="preserve">
-    <value>音楽の利用可能性を確認しています... </value>
+    <value>音楽の利用可能性を確認しています...</value>
   </data>
   <data name="CannotConnectToApi" xml:space="preserve">
     <value>APIに接続できません</value>
@@ -697,6 +697,39 @@
     <value>音楽を手に入れよう...</value>
   </data>
   <data name="GettingLyric" xml:space="preserve">
-    <value>歌詞をゲット…</value>
+    <value>歌詞をゲット...</value>
+  </data>
+  <data name="NoChooseSong" xml:space="preserve">
+    <value>音楽がまだ選択されていません</value>
+  </data>
+  <data name="SaveMusicFile" xml:space="preserve">
+    <value>オーディオファイルを保存します</value>
+  </data>
+  <data name="CopyFileFail" xml:space="preserve">
+    <value>ファイルのコピーに失敗しました</value>
+  </data>
+  <data name="BeginDownload" xml:space="preserve">
+    <value>ダウンロードを開始してください</value>
+  </data>
+  <data name="DesktopLyric" xml:space="preserve">
+    <value>デスクトップの歌詞</value>
+  </data>
+  <data name="DesktopLyricTextSize" xml:space="preserve">
+    <value>デスクトップの歌詞のテキストサイズ</value>
+  </data>
+  <data name="DesktopLyricTextAlignment" xml:space="preserve">
+    <value>デスクトップの歌詞のテキストの配置方向</value>
+  </data>
+  <data name="UseChange" xml:space="preserve">
+    <value>変更を適用してください</value>
+  </data>
+  <data name="LeftAlignment" xml:space="preserve">
+    <value>左揃え</value>
+  </data>
+  <data name="RightAlignment" xml:space="preserve">
+    <value>または</value>
+  </data>
+  <data name="CenterAlignment" xml:space="preserve">
+    <value>中央揃え</value>
   </data>
 </root>

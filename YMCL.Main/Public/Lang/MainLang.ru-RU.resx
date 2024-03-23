@@ -699,4 +699,37 @@
   <data name="GettingLyric" xml:space="preserve">
     <value>Получить текст...</value>
   </data>
+  <data name="NoChooseSong" xml:space="preserve">
+    <value>Музыка еще не выбрана</value>
+  </data>
+  <data name="SaveMusicFile" xml:space="preserve">
+    <value>Сохраните аудиофайл</value>
+  </data>
+  <data name="CopyFileFail" xml:space="preserve">
+    <value>Не удалось скопировать файл</value>
+  </data>
+  <data name="BeginDownload" xml:space="preserve">
+    <value>Начать загрузку</value>
+  </data>
+  <data name="DesktopLyric" xml:space="preserve">
+    <value>Тексты песен для настольных компьютеров</value>
+  </data>
+  <data name="DesktopLyricTextSize" xml:space="preserve">
+    <value>Размер текста текстов песен Desktop</value>
+  </data>
+  <data name="DesktopLyricTextAlignment" xml:space="preserve">
+    <value>Направление выравнивания текста текстов песен Desktop</value>
+  </data>
+  <data name="UseChange" xml:space="preserve">
+    <value>Применить изменения</value>
+  </data>
+  <data name="LeftAlignment" xml:space="preserve">
+    <value>по левому краю</value>
+  </data>
+  <data name="RightAlignment" xml:space="preserve">
+    <value>Выровняйте по правому краю</value>
+  </data>
+  <data name="CenterAlignment" xml:space="preserve">
+    <value>Выравнивание по центру</value>
+  </data>
 </root>

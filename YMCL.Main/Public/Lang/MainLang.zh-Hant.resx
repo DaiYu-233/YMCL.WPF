@@ -699,4 +699,37 @@
   <data name="GettingLyric" xml:space="preserve">
     <value>取得歌詞...</value>
   </data>
+  <data name="NoChooseSong" xml:space="preserve">
+    <value>尚未選擇音樂</value>
+  </data>
+  <data name="SaveMusicFile" xml:space="preserve">
+    <value>儲存音訊檔案</value>
+  </data>
+  <data name="CopyFileFail" xml:space="preserve">
+    <value>複製文件失敗</value>
+  </data>
+  <data name="BeginDownload" xml:space="preserve">
+    <value>開始下載</value>
+  </data>
+  <data name="DesktopLyric" xml:space="preserve">
+    <value>桌面歌詞</value>
+  </data>
+  <data name="DesktopLyricTextSize" xml:space="preserve">
+    <value>桌面歌詞文字大小</value>
+  </data>
+  <data name="DesktopLyricTextAlignment" xml:space="preserve">
+    <value>桌面歌詞文字對齊方向</value>
+  </data>
+  <data name="UseChange" xml:space="preserve">
+    <value>應用更改</value>
+  </data>
+  <data name="LeftAlignment" xml:space="preserve">
+    <value>左對齊</value>
+  </data>
+  <data name="RightAlignment" xml:space="preserve">
+    <value>右對齊</value>
+  </data>
+  <data name="CenterAlignment" xml:space="preserve">
+    <value>居中對齊</value>
+  </data>
 </root>

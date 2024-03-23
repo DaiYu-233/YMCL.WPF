@@ -11,40 +11,14 @@ namespace YMCL.Main.Public
     {
         public class Window
         {
-            public static MainWindow main { get; set; }
-            public static InitializeWindow initialize { get; set; }
-            public static Tasks tasks { get; set; }
-            public static MusicPlayer musicPlayer { get; set; }
-            public static DesktopLyric desktopLyric { get; set; }
-            static Window()
-            {
-                foreach (System.Windows.Window window in System.Windows.Application.Current.Windows)
-                {
-                    if (window.GetType() == typeof(InitializeWindow))
-                    {
-                        initialize = window as InitializeWindow;
-                    }
-                    if (window.GetType() == typeof(MainWindow))
-                    {
-                        main = window as MainWindow;
-                    }
-                    if (window.GetType() == typeof(Tasks))
-                    {
-                        tasks = window as Tasks;
-                    }
-                    if (window.GetType() == typeof(MusicPlayer))
-                    {
-                        musicPlayer = window as MusicPlayer;
-                    }
-                    if (window.GetType() == typeof(DesktopLyric))
-                    {
-                        desktopLyric = window as DesktopLyric;
-                    }
-                }
-            }
+            public static MainWindow main { get; set; } = new MainWindow();
+            public static InitializeWindow initialize { get; set; } = new InitializeWindow();
+            public static Tasks tasks { get; set; } = new Tasks();
+            public static MusicPlayer musicPlayer { get; set; } = new MusicPlayer();
+            public static DesktopLyric desktopLyric { get; set; } = new DesktopLyric();
         }
 
-        public static string Version { get; } = "1.0.0.202402251126_Alpha";
+        public static string Version { get; } = "1.0.0.20240324.0_Beta";
         public static string UpdaterId { get; } = "97B62D3AD1724EFA9AFC7A8D8971BBB1";
         public static string AzureClientId { get; } = "c06d4d68-7751-4a8a-a2ff-d1b46688f428";
         public static string VersionSettingFileName { get; } = "YMCL.Setting.DaiYu";

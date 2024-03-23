@@ -699,4 +699,37 @@
   <data name="GettingLyric" xml:space="preserve">
     <value>Get lyrics...</value>
   </data>
+  <data name="NoChooseSong" xml:space="preserve">
+    <value>No music selected yet</value>
+  </data>
+  <data name="SaveMusicFile" xml:space="preserve">
+    <value>Save the audio file</value>
+  </data>
+  <data name="CopyFileFail" xml:space="preserve">
+    <value>Failed to copy file</value>
+  </data>
+  <data name="BeginDownload" xml:space="preserve">
+    <value>Start Download</value>
+  </data>
+  <data name="DesktopLyric" xml:space="preserve">
+    <value>Desktop lyrics</value>
+  </data>
+  <data name="DesktopLyricTextSize" xml:space="preserve">
+    <value>Desktop Lyrics Text Size</value>
+  </data>
+  <data name="DesktopLyricTextAlignment" xml:space="preserve">
+    <value>Desktop Lyrics Text Alignment Direction</value>
+  </data>
+  <data name="UseChange" xml:space="preserve">
+    <value>Apply changes</value>
+  </data>
+  <data name="LeftAlignment" xml:space="preserve">
+    <value>Left</value>
+  </data>
+  <data name="RightAlignment" xml:space="preserve">
+    <value>Right align</value>
+  </data>
+  <data name="CenterAlignment" xml:space="preserve">
+    <value>Center Align</value>
+  </data>
 </root>
