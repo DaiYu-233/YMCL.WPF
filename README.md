@@ -4,7 +4,7 @@ Yu Minecraft Launcher (YMCL) 是使用 [.NET 8.0](https://dotnet.microsoft.com/z
 
 ## 下载
 
->- [Github](https://github.com/DaiYu-233/YMCL/releases?q=Release)
+>- [Github](https://github.com/DaiYu-233/YMCL/releases?q=Release+Tag&expanded=false)
 >- [123Pan](https://www.123pan.com/s/pt7RVv-j8Htv.html)
 
 ## 使用组件
