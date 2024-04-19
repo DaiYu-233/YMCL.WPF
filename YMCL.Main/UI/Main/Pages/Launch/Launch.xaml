@@ -78,6 +78,7 @@
                 <DockPanel VerticalAlignment="Top" Margin="5,10,5,0" DockPanel.Dock="Top">
                     <Button x:Name="DelMinecraftFolder" Content="{x:Static properties:MainLang.Launch_DelMinecraftFolder}" FontFamily="{StaticResource Font}" Height="32"  Margin="0,0,5,0" HorizontalAlignment="Right" DockPanel.Dock="Right" Click="DelMinecraftFolder_Click"/>
                     <Button x:Name="AddMinecraftFolder" Content="{x:Static properties:MainLang.Launch_AddMinecraftFolder}" FontFamily="{StaticResource Font}" Height="32" Margin="0,0,6.5,0" HorizontalAlignment="Right" DockPanel.Dock="Right" Click="AddMinecraftFolder_Click"/>
+                    <Button x:Name="Open" Content="{x:Static properties:MainLang.OpenFolder}" FontFamily="{StaticResource Font}" Height="32" Margin="0,0,6.5,0" HorizontalAlignment="Right" DockPanel.Dock="Right" Click="Open_Click"/>
                     <Button x:Name="ImportModPackBtn" Content="{x:Static properties:MainLang.Launch_ImportPack}" FontFamily="{StaticResource Font}" Height="32" HorizontalAlignment="Right" Margin="0,0,6.5,0" DockPanel.Dock="Right"/>
                     <Button x:Name="Refresh" Content="{x:Static properties:MainLang.Launch_Refresh}" FontFamily="{StaticResource Font}" DockPanel.Dock="Right" Margin="0,0,6.5,0" Click="Refresh_Click"/>
                     <ComboBox x:Name="MinecraftFolderComboBox" Margin="5,0,6.5,0" VerticalAlignment="Center" Height="32" IsReadOnly="True" HorizontalAlignment="Stretch" FontFamily="{StaticResource Font}" SelectionChanged="MinecraftFolderComboBox_SelectionChanged" />

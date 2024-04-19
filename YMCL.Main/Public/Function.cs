@@ -1,11 +1,20 @@
-﻿using System.Diagnostics;
+﻿using Panuon.WPF.UI;
+using System.Diagnostics;
 using System.IO;
 using System.Windows.Media.Imaging;
+using YMCL.Main.Public.Lang;
 
 namespace YMCL.Main.Public
 {
     internal class Function
     {
+        public static void LauncherErrorShow(string errorTypeMsg, Exception exception, bool useToast = false)
+        {
+            if (!useToast)
+            {
+                MessageBoxX.Show($"\n{errorTypeMsg}：{exception.Message}\n\n{exception.ToString()}", "Yu Minecraft Launcher");
+            }
+        }
         public static double GetDirectoryLength(string dirPath)
         {
             //判断给定的路径是否存在,如果不存在则退出

@@ -30,6 +30,8 @@ using System.Reflection;
 using System.Windows.Markup;
 using System.Net;
 using UpdateD;
+using System.Windows.Shapes;
+using Path = System.IO.Path;
 
 namespace YMCL.Main.UI.Main.Pages.Launch
 {
@@ -68,6 +70,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                 task.Start();
                 _firstLoadPage = false;
             }
+            ReturnPanelSetting.Visibility = Visibility.Hidden;
             VersionSettingBorder.Visibility = Visibility.Hidden;
             minecraftFolder = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(Const.MinecraftFolderDataPath));
             MinecraftFolderComboBox.Items.Clear();
@@ -319,6 +322,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
         }
         private void OpenVersionSettings_Click(object sender, RoutedEventArgs e)
         {
+            ReturnPanelSetting.Visibility = Visibility.Visible;
             var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
             if (setting.MinecraftVersionId == null)
             {
@@ -327,8 +331,9 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                 return;
             }
             LoadVersionMods();
-            LoadVersionSettings(true);
             var version = VersionListView.SelectedItem as GameEntry;
+            LoadVersionSettings(version, true);
+
             if (version == null)
             {
                 return;
@@ -421,6 +426,10 @@ namespace YMCL.Main.UI.Main.Pages.Launch
         {
             VersionModListView.SelectAll();
         }
+        private void Open_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start("explorer.exe", MinecraftFolderComboBox.Text);
+        }
         private void DeselectAll_Click(object sender, RoutedEventArgs e)
         {
             VersionModListView.SelectedIndex = -1;
@@ -499,7 +508,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                 return;
             }
             var filePath = Path.Combine(Path.GetDirectoryName(version.JarPath), Const.VersionSettingFileName);
-            var versionSetting = LoadVersionSettings();
+            var versionSetting = LoadVersionSettings(version);
             if ((int)versionSetting.AloneCore == AloneCoreComboBox.SelectedIndex)
             {
                 return;
@@ -516,7 +525,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                 return;
             }
             var filePath = Path.Combine(Path.GetDirectoryName(version.JarPath), Const.VersionSettingFileName);
-            var versionSetting = LoadVersionSettings();
+            var versionSetting = LoadVersionSettings(version);
             if (JavaComboBox.SelectedItem == null || JavaComboBox.SelectedItem.ToString() == versionSetting.Java.JavaPath)
             {
                 return;
@@ -579,7 +588,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                 return;
             }
             var filePath = Path.Combine(Path.GetDirectoryName(version.JarPath), Const.VersionSettingFileName);
-            var versionSetting = LoadVersionSettings();
+            var versionSetting = LoadVersionSettings(version);
             versionSetting.MaxMem = Math.Round(SilderBox.Value);
             File.WriteAllText(filePath, JsonConvert.SerializeObject(versionSetting, Formatting.Indented));
         }
@@ -592,7 +601,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                 return;
             }
             var filePath = Path.Combine(Path.GetDirectoryName(version.JarPath), Const.VersionSettingFileName);
-            var versionSetting = LoadVersionSettings();
+            var versionSetting = LoadVersionSettings(version);
             versionSetting.AutoJoinServerIp = AutoJoinServerTextBox.Text;
             File.WriteAllText(filePath, JsonConvert.SerializeObject(versionSetting, Formatting.Indented));
         }
@@ -729,21 +738,28 @@ namespace YMCL.Main.UI.Main.Pages.Launch
             }
             var list = new List<string>();
             GameResolver resolver = new(setting.MinecraftFolder);
-            versions = resolver.GetGameEntitys().ToList();
-            versions.ForEach(version =>
+            try
             {
-                VersionListView.Items.Add(version);
-                list.Add(version.Id);
-                if (version.Id == setting.MinecraftVersionId)
+                versions = resolver.GetGameEntitys().ToList();
+                versions.ForEach(version =>
                 {
-                    VersionListView.SelectedItem = version;
-                    GameCoreText.Text = version.Id;
+                    VersionListView.Items.Add(version);
+                    list.Add(version.Id);
+                    if (version.Id == setting.MinecraftVersionId)
+                    {
+                        VersionListView.SelectedItem = version;
+                        GameCoreText.Text = version.Id;
+                    }
+                });
+                if (!list.Contains(setting.MinecraftVersionId))
+                {
+                    setting.MinecraftVersionId = null;
+                    File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
                 }
-            });
-            if (!list.Contains(setting.MinecraftVersionId))
+            }
+            catch
             {
-                setting.MinecraftVersionId = null;
-                File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+                Toast.Show(message: MainLang.GetVersionListFail, position: ToastPosition.Top, window: Const.Window.main);
             }
         }
         void LoadAccounts()
@@ -789,9 +805,8 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                 SkinHeadImage.Source = Function.Base64ToImage(skin);
             }
         }
-        VersionSetting LoadVersionSettings(bool loadUI = false)
+        VersionSetting LoadVersionSettings(GameEntry version, bool loadUI = false)
         {
-            var version = VersionListView.SelectedItem as GameEntry;
             if (version == null)
             {
                 Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchBtn_Click_NoChooseGame"), position: ToastPosition.Top, window: Const.Window.main);
@@ -854,7 +869,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                 return;
             }
             var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
-            var versionSetting = LoadVersionSettings();
+            
             if (string.IsNullOrEmpty(mcPath))
             {
                 mcPath = setting.MinecraftFolder;
@@ -866,6 +881,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                 idList.Add(ver.Id);
             });
             var version = resolver.GetGameEntity(versionId);
+            var versionSetting = LoadVersionSettings(version);
             if (!idList.Contains(versionId))
             {
                 if (msg)
@@ -898,7 +914,14 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                 {
                     var profile = JsonConvert.DeserializeObject<MicrosoftAccount>(accountJson.Data);
                     MicrosoftAuthenticator authenticator = new(profile, Const.AzureClientId, true);
-                    account = await authenticator.AuthenticateAsync();
+                    try
+                    {
+                        account = await authenticator.AuthenticateAsync();
+                    }
+                    catch
+                    {
+
+                    }
                 }
                 else if (accountJson.AccountType == SettingItem.AccountType.ThirdParty)
                 {
@@ -910,7 +933,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                 if (idList.Contains(versionId))
                 {
                     string javaPath = null;
-                    if (versionSetting.Java.JavaPath == "Global")
+                    if (versionSetting.Java.JavaPath == "Global" || versionSetting == null)
                     {
                         if (setting.Java.JavaPath == "<Auto>" || setting.Java == null || setting.Java.JavaPath == string.Empty)
                         {
@@ -956,6 +979,18 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                         else
                         {
                             javaPath = versionSetting.Java.JavaPath;
+                        }
+                    }
+                    if (Convert.ToInt32(version.Version.Split(".")[1]) >= 17)
+                    {
+                        List<JavaEntry> javas = JsonConvert.DeserializeObject<List<JavaEntry>>(File.ReadAllText(Const.JavaDataPath));
+                        foreach (var item in javas)
+                        {
+                            if (item.JavaSlugVersion >= 17)
+                            {
+                                javaPath = item.JavaPath;
+                                break;
+                            }
                         }
                     }
                     if (!string.IsNullOrEmpty(javaPath))
@@ -1071,6 +1106,10 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                                         taskProgress.InsertProgressText("YMCL: " + LangHelper.Current.GetText("WaitForGameWindowAppear"));
                                         //watcher.Process.WaitForInputIdle();
                                         //taskProgress.Hide();
+                                        if (!setting.GetOutput)
+                                        {
+                                            taskProgress.Hide();
+                                        }
                                         taskProgress.InsertProgressText("-----> JvmOutputLog", false);
                                         Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_FinishLaunch"), position: ToastPosition.Top, window: Const.Window.main);
                                     });
@@ -1118,7 +1157,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
             }
             else
             {
-                LaunchBtn.IsEnabled = true; 
+                LaunchBtn.IsEnabled = true;
                 taskProgress.Hide();
                 if (msg)
                     Toast.Show(message: LangHelper.Current.GetText("Launch_LaunchGame_Click_AccountError"), position: ToastPosition.Top, window: Const.Window.main);
@@ -1128,5 +1167,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
             LaunchBtn.IsEnabled = true;
             //taskProgress.Hide();
         }
+
+
     }
 }

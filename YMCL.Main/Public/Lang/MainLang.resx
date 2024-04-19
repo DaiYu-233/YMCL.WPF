@@ -732,4 +732,10 @@
   <data name="CenterAlignment" xml:space="preserve">
     <value>居中对齐</value>
   </data>
+  <data name="ImportFinish" xml:space="preserve">
+    <value>导入完成</value>
+  </data>
+  <data name="GetVersionListFail" xml:space="preserve">
+    <value>版本列表获取失败</value>
+  </data>
 </root>

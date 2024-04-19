@@ -601,11 +601,29 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
+        ///   查找类似 版本列表获取失败 的本地化字符串。
+        /// </summary>
+        public static string GetVersionListFail {
+            get {
+                return ResourceManager.GetString("GetVersionListFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 YMCL 以 GPL-3.0 协议开放源代码，可以修改且分发，但不得删除原作品的标记，修改后的作品必须也采用 GPL 协议进行开源 的本地化字符串。
         /// </summary>
         public static string GPL3Text {
             get {
                 return ResourceManager.GetString("GPL3Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 导入完成 的本地化字符串。
+        /// </summary>
+        public static string ImportFinish {
+            get {
+                return ResourceManager.GetString("ImportFinish", resourceCulture);
             }
         }
         

@@ -25,7 +25,7 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launcher
             InitializeComponent();
 
             Version.Text = "YMCL-" + Const.Version;
-            UserDataSize.Text = $"{Math.Round(Function.GetDirectoryLength(Const.DataRootPath) / 1024, 2)} KiB";
+            UserDataSize.Text = $"{Math.Round(Function.GetDirectoryLength(Const.DataRootPath) / 1024 / 1024, 2)} MiB";
             AppDataSize.Text = $"{Math.Round(Function.GetDirectoryLength(Const.PublicDataRootPath) / 1024 / 1024, 2)} MiB";
         }
 

@@ -1,8 +1,10 @@
 ﻿using Hardcodet.Wpf.TaskbarNotification;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Panuon.WPF.UI;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.SymbolStore;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -322,14 +324,13 @@ namespace YMCL.Main.UI.Main
         {
             if (App.StartupArgs.Length > 0)
             {
-                var urlScheme = System.Web.HttpUtility.UrlDecode(App.StartupArgs[0]);
+                var urlScheme = System.Web.HttpUtility.UrlDecode(StartupArgs[0]);
                 urlScheme = urlScheme.Substring(7, urlScheme.Length - 8);
-                var actions = urlScheme.Split("--| ").ToList();
-                actions.RemoveAt(0);
-                foreach (var item in actions)
+                foreach (Match match in Regex.Matches(urlScheme, "--\\w+(\\s(\\\"|')?(\\w+)(=*)(\\\"|')?)*"))
                 {
-                    var action = item.Trim();
-                    string[] temp = Regex.Split(action, "(?=(?:(?:[^\"]*\"){2})*[^\"]*$) ");
+                    var text = match.Value.Trim().Substring(2, match.Value.Trim().Length - 2);
+                    var method = text.Split(' ')[0];
+                    string[] temp = Regex.Split(text.Substring(method.Length, text.Length - method.Length), "(?=(?:(?:[^\']*\'){2})*[^\']*$) ");
                     var args = new List<string>();
                     foreach (var arg in temp)
                     {
@@ -340,7 +341,7 @@ namespace YMCL.Main.UI.Main
                     }
                     try
                     {
-                        switch (args[0])
+                        switch (method)
                         {
                             case "launch":
                                 if (args.Count >= 3 && args[2] != null)
@@ -359,11 +360,26 @@ namespace YMCL.Main.UI.Main
                                     launch.LaunchClient(args[1], msg: false);
                                 }
                                 break;
+                            case "import":
+                                if (args[1] == "setting")
+                                {
+                                    var data = Encoding.UTF8.GetString(Convert.FromBase64String(args[2]));
+                                    var source = JObject.FromObject(JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath)));
+                                    var import = JObject.Parse(data);
+                                    source.Merge(import, new JsonMergeSettings
+                                    {
+                                        MergeArrayHandling = MergeArrayHandling.Union
+                                    });
+                                    File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(source, Formatting.Indented));
+                                    MessageBoxX.Show($"{MainLang.ImportFinish}\n\n{data}", "Yu Minecraft Launcher");
+                                    Function.RestartApp();
+                                }
+                                break;
                         }
                     }
-                    catch
+                    catch (Exception ex)
                     {
-                        MessageBoxX.Show(LangHelper.Current.GetText("ArgsError"), "Yu Minecraft Launcher");
+                        Function.LauncherErrorShow(LangHelper.Current.GetText("ArgsError"), ex);
                     }
                 }
             }

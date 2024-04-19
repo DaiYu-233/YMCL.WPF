@@ -300,10 +300,8 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
             }
             ReturnToVanlliaList_PreviewMouseDown(null, null);
 
-
             var task = Const.Window.tasks.CreateTask($"{LangHelper.Current.GetText("Install")}：Vanllia - {versionId}", true);
             task.AppendText("-----> Vanllia");
-
 
             await Task.Run(async () =>
             {
@@ -384,15 +382,15 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
                                 return;
                             }
                         }
-                    }
+                }
                     catch (Exception ex)
                     {
-                        await Dispatcher.BeginInvoke(() =>
-                        {
-                            MessageBoxX.Show($"{LangHelper.Current.GetText("InstallFail")}：Forge\n\n{ex.ToString()}", "Yu Minecraft Launcher");
-                        });
-                    }
-                });
+                    await Dispatcher.BeginInvoke(() =>
+                    {
+                        MessageBoxX.Show($"{LangHelper.Current.GetText("InstallFail")}：Forge\n\n{ex.ToString()}", "Yu Minecraft Launcher");
+                    });
+                }
+            });
             }//Forge
             if (fabricBuildEntry != null)
             {
