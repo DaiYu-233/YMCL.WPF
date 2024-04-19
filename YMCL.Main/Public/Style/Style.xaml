@@ -112,9 +112,9 @@
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Background" TargetName="border" Value="Transparent"/>
                             <Setter Property="BorderBrush" TargetName="border" Value="#FFFFFF"/>
-                            <Setter Property="Fill" TargetName="ico" Value="{DynamicResource IconBlue}"/>
-                            <Setter Property="Fill" TargetName="ico1" Value="{DynamicResource IconBlue}"/>
-                            <Setter Property="Fill" TargetName="ico2" Value="{DynamicResource IconBlue}"/>
+                            <Setter Property="Fill" TargetName="ico" Value="{DynamicResource ThemeColor}"/>
+                            <Setter Property="Fill" TargetName="ico1" Value="{DynamicResource ThemeColor}"/>
+                            <Setter Property="Fill" TargetName="ico2" Value="{DynamicResource ThemeColor}"/>
                         </Trigger>
                         <Trigger Property="IsChecked" Value="True">
                             <Setter Property="Background" TargetName="border" Value="Transparent"/>
@@ -162,18 +162,18 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="txtName" Property="Foreground" Value="{DynamicResource IconBlue}"/>
-                            <Setter TargetName="Icon" Property="Fill" Value="{DynamicResource IconBlue}"/>
+                            <Setter TargetName="txtName" Property="Foreground" Value="{DynamicResource ThemeColor}"/>
+                            <Setter TargetName="Icon" Property="Fill" Value="{DynamicResource ThemeColor}"/>
                             <!-- Optional 
                     <Setter TargetName="Indicator" Property="Fill" Value="red"/>
                     <Setter TargetName="Indicator" Property="Height" Value="20"/>-->
                         </Trigger>
                         <Trigger Property="IsChecked" Value="True">
-                            <Setter TargetName="Icon" Property="Fill" Value="{DynamicResource IconBlue}"/>
-                            <Setter TargetName="Indicator" Property="Fill" Value="{DynamicResource IconBlue}"/>
+                            <Setter TargetName="Icon" Property="Fill" Value="{DynamicResource ThemeColor}"/>
+                            <Setter TargetName="Indicator" Property="Fill" Value="{DynamicResource ThemeColor}"/>
                             <Setter TargetName="Indicator" Property="Height" Value="20"/>
                             <Setter TargetName="btnSelected" Property="Background" Value="{DynamicResource ThemeNavigationBackground}"/>
-                            <Setter TargetName="txtName" Property="Foreground" Value="{DynamicResource IconBlue}"/>
+                            <Setter TargetName="txtName" Property="Foreground" Value="{DynamicResource ThemeColor}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

@@ -34,6 +34,10 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
             if (_loaded)
                 ReadyInstallGame(LatestReleaseVersionId.Content.ToString());
         }
+        private void CustomGameIdTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            HandleCustomId(VersionId.Text, CustomGameIdTextBox.Text);
+        }
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
             var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
@@ -248,6 +252,7 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
                 str += $"-Quilt {quilt.BuildVersion} ";
             }
             AdditionalInstallText.Text = str;
+            HandleCustomId(VersionId.Text,CustomGameIdTextBox.Text);
         }
         private void ViewUpdate_Click(object sender, RoutedEventArgs e)
         {
@@ -262,8 +267,7 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
         }
         public async void InstallGame(string versionId, bool msg, string versionName = null, ForgeInstallEntry forgeInstallEntry = null, FabricBuildEntry fabricBuildEntry = null, QuiltBuildEntry quiltBuildEntry = null)
         {
-            var customId = string.Empty;
-            customId = string.IsNullOrEmpty(versionName) ? versionId : versionName;
+            var customId = HandleCustomId(VersionId.Text, CustomGameIdTextBox.Text);
             Regex regex = new Regex(@"[\\/:*?""<>|]");
             MatchCollection matches = regex.Matches(customId);
             if (matches.Count > 0)
@@ -382,15 +386,15 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
                                 return;
                             }
                         }
-                }
+                    }
                     catch (Exception ex)
                     {
-                    await Dispatcher.BeginInvoke(() =>
-                    {
-                        MessageBoxX.Show($"{LangHelper.Current.GetText("InstallFail")}：Forge\n\n{ex.ToString()}", "Yu Minecraft Launcher");
-                    });
-                }
-            });
+                        await Dispatcher.BeginInvoke(() =>
+                        {
+                            MessageBoxX.Show($"{LangHelper.Current.GetText("InstallFail")}：Forge\n\n{ex.ToString()}", "Yu Minecraft Launcher");
+                        });
+                    }
+                });
             }//Forge
             if (fabricBuildEntry != null)
             {
@@ -560,6 +564,38 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
                     QuiltLoading.Visibility = Visibility.Hidden;
                 });
             });
+
+            InstallPreviewControlGrid.Height = 92;
+        }
+        public string HandleCustomId(string versionId, string customId)
+        {
+            if ((ForgeListView.SelectedIndex >= 0 || FabricListView.SelectedIndex >= 0 || QuiltListView.SelectedIndex >= 0) && customId == versionId)
+            {
+                var value = versionId;
+                InstallPreviewControlGrid.Height = 108;
+                if (ForgeListView.SelectedIndex >= 0)
+                {
+                    var entry = ForgeListView.SelectedItem as ForgeInstallEntry;
+                    value = $"{versionId}-Forge_{entry.ForgeVersion}";
+                }
+                else if (FabricListView.SelectedIndex >= 0)
+                {
+                    var entry = FabricListView.SelectedItem as FabricBuildEntry;
+                    value = $"{versionId}-Fabric_{entry.BuildVersion}";
+                }
+                else if (QuiltListView.SelectedIndex >= 0)
+                {
+                    var entry = QuiltListView.SelectedItem as QuiltBuildEntry;
+                    value = $"{versionId}-Quilt_{entry.BuildVersion}";
+                }
+                HandleCustomIdWarning.Text = value;
+                return value;
+            }
+            else
+            {
+                InstallPreviewControlGrid.Height = 92;
+                return customId;
+            }
         }
     }
 }

@@ -64,7 +64,7 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Personalize
             var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
             ThemeManager.Current.AccentColor = setting.ThemeColor;
             ResourceDictionary appResources = System.Windows.Application.Current.Resources;
-            appResources["IconBlue"] = new SolidColorBrush((System.Windows.Media.Color)ThemeManager.Current.AccentColor);
+            appResources["ThemeColor"] = new SolidColorBrush((System.Windows.Media.Color)ThemeManager.Current.AccentColor);
             ColorPicker.SelectedColor = setting.ThemeColor;
             if (setting.Theme == SettingItem.Theme.Light)
             {

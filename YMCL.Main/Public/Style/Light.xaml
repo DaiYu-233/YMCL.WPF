@@ -9,7 +9,7 @@
     <SolidColorBrush x:Key="ButtonHover" Color="#d5edff"/>
     <SolidColorBrush x:Key="TabControlBackground" Color="#f9f9f9"/>
 
-    <SolidColorBrush x:Key="IconBlue" Color="#00a0e9"/>
+    <SolidColorBrush x:Key="ThemeColor" Color="#00a0e9"/>
     <SolidColorBrush x:Key="NavigationButtonColor" Color="#BFBFC4"/>
 
 </ResourceDictionary>

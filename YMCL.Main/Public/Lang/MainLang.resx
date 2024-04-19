@@ -738,4 +738,7 @@
   <data name="GetVersionListFail" xml:space="preserve">
     <value>版本列表获取失败</value>
   </data>
+  <data name="CustomIdHandleText" xml:space="preserve">
+    <value>当前版本名称将被保存为</value>
+  </data>
 </root>

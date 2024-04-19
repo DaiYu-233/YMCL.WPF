@@ -403,6 +403,15 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
+        ///   查找类似 当前版本名称将被保存为 的本地化字符串。
+        /// </summary>
+        public static string CustomIdHandleText {
+            get {
+                return ResourceManager.GetString("CustomIdHandleText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 深色 的本地化字符串。
         /// </summary>
         public static string Dark {
