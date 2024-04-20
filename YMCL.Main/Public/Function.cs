@@ -8,6 +8,24 @@ namespace YMCL.Main.Public
 {
     internal class Function
     {
+        public static void ShowWin10Notice(string msg, string title = "Yu Minecraft Launcher", string logoUri = "")
+        {
+            string logo = string.Empty;
+            if (string.IsNullOrEmpty(logoUri))
+            {
+                logo = Path.Combine(Const.PublicDataRootPath, "Icon.ico");
+            }
+            else
+            {
+                logo = logoUri;
+            }
+            Process.Start(Path.Combine(Const.PublicDataRootPath, "YMCL.Notifier.exe"), new string[]
+            {
+                $"'{title}'",
+                $"'{msg}'",
+                $"'{logo}'"
+            });
+        }
         public static void LauncherErrorShow(string errorTypeMsg, Exception exception, bool useToast = false)
         {
             if (!useToast)

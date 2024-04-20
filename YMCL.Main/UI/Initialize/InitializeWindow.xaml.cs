@@ -53,6 +53,12 @@ namespace YMCL.Main.UI.Initialize
                 },
                 new DownloadFile()
                 {
+                    Name="YMCL.Notifier.exe",
+                    Url="https://ymcl.daiyu.fun/Assets/YMCL/YMCL.Notifier.exe",
+                    MD5="7ECB82C30E2BECFDC442B41368789D5A"
+                },
+                new DownloadFile()
+                {
                     Name="FluentIcons.ttf",
                     Url="https://ymcl.daiyu.fun/Assets/YMCL/FluentIcons.ttf",
                     MD5="460A1FFA29FBC20E97861B497601C552"
@@ -81,6 +87,7 @@ namespace YMCL.Main.UI.Initialize
         public InitializeWindow()
         {
             InitializeComponent();
+            
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {

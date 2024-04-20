@@ -252,7 +252,7 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
                 str += $"-Quilt {quilt.BuildVersion} ";
             }
             AdditionalInstallText.Text = str;
-            HandleCustomId(VersionId.Text,CustomGameIdTextBox.Text);
+            HandleCustomId(VersionId.Text, CustomGameIdTextBox.Text);
         }
         private void ViewUpdate_Click(object sender, RoutedEventArgs e)
         {
@@ -330,6 +330,13 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
                         });
                         return;
                     }
+                    else
+                    {
+                        if (forgeInstallEntry == null && quiltBuildEntry == null && fabricBuildEntry == null)
+                        {
+                            Function.ShowWin10Notice($"{LangHelper.Current.GetText("InstallFinish")}：Vanllia - {versionId}");
+                        }
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -374,14 +381,16 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
                             {
                                 await Dispatcher.BeginInvoke(() =>
                                 {
-                                    Toast.Show(window: Const.Window.main, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("InstallFinish")}：Forge");
+                                    Toast.Show(window: Const.Window.main, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("InstallFinish")}：Forge-{customId}");
+                                    Function.ShowWin10Notice($"{LangHelper.Current.GetText("InstallFinish")}：Forge-{customId}");
                                 });
                             }
                             else
                             {
                                 await Dispatcher.BeginInvoke(() =>
                                 {
-                                    Toast.Show(window: Const.Window.main, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("InstallFail")}：Forge");
+                                    Toast.Show(window: Const.Window.main, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("InstallFail")}：Forge-{customId}");
+                                    Function.ShowWin10Notice($"{LangHelper.Current.GetText("InstallFail")}：Forge-{customId}");
                                 });
                                 return;
                             }
@@ -391,7 +400,7 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
                     {
                         await Dispatcher.BeginInvoke(() =>
                         {
-                            MessageBoxX.Show($"{LangHelper.Current.GetText("InstallFail")}：Forge\n\n{ex.ToString()}", "Yu Minecraft Launcher");
+                            MessageBoxX.Show($"{LangHelper.Current.GetText("InstallFail")}：Forge-{customId}\n\n{ex.ToString()}", "Yu Minecraft Launcher");
                         });
                     }
                 });
@@ -423,14 +432,16 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
                         {
                             await Dispatcher.BeginInvoke(() =>
                             {
-                                Toast.Show(window: Const.Window.main, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("InstallFinish")}：Fabric");
+                                Toast.Show(window: Const.Window.main, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("InstallFinish")}：Fabric-{customId}");
+                                Function.ShowWin10Notice($"{LangHelper.Current.GetText("InstallFinish")}：Fabric-{customId}");
                             });
                         }
                         else
                         {
                             await Dispatcher.BeginInvoke(() =>
                             {
-                                Toast.Show(window: Const.Window.main, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("InstallFail")}：Fabric");
+                                Toast.Show(window: Const.Window.main, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("InstallFail")}：Fabric-{customId}");
+                                Function.ShowWin10Notice($"{LangHelper.Current.GetText("InstallFail")}：Fabric-{customId}");
                             });
                             return;
                         }
@@ -439,7 +450,7 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
                     {
                         await Dispatcher.BeginInvoke(() =>
                         {
-                            MessageBoxX.Show($"{LangHelper.Current.GetText("InstallFail")}：Fabric\n\n{ex.ToString()}", "Yu Minecraft Launcher");
+                            MessageBoxX.Show($"{LangHelper.Current.GetText("InstallFail")}：Fabric-{customId}\n\n{ex.ToString()}", "Yu Minecraft Launcher");
                         });
                     }
                 });
@@ -471,14 +482,16 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
                         {
                             await Dispatcher.BeginInvoke(() =>
                             {
-                                Toast.Show(window: Const.Window.main, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("InstallFinish")}：Quilt");
+                                Toast.Show(window: Const.Window.main, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("InstallFinish")}：Quilt-{customId}");
+                                Function.ShowWin10Notice($"{LangHelper.Current.GetText("InstallFinish")}：Quilt-{customId}");
                             });
                         }
                         else
                         {
                             await Dispatcher.BeginInvoke(() =>
                             {
-                                Toast.Show(window: Const.Window.main, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("InstallFail")}：Quilt");
+                                Toast.Show(window: Const.Window.main, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("InstallFail")}：Quilt-{customId}");
+                                Function.ShowWin10Notice($"{LangHelper.Current.GetText("InstallFail")}：Quilt-{customId}");
                             });
                             return;
                         }
@@ -487,7 +500,7 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
                     {
                         await Dispatcher.BeginInvoke(() =>
                         {
-                            MessageBoxX.Show($"{LangHelper.Current.GetText("InstallFail")}：Quilt\n\n{ex.ToString()}", "Yu Minecraft Launcher");
+                            MessageBoxX.Show($"{LangHelper.Current.GetText("InstallFail")}：Quilt-{customId}\n\n{ex.ToString()}", "Yu Minecraft Launcher");
                         });
                     }
                 });
