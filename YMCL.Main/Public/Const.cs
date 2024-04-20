@@ -1,9 +1,9 @@
-﻿using YMCL.Main.UI.Initialize;
-using YMCL.Main.UI.Main;
-using YMCL.Main.UI.MusicPlayer;
-using YMCL.Main.UI.MusicPlayer.DesktopLyric;
-using YMCL.Main.UI.MusicPlayer.Main;
-using YMCL.Main.UI.TaskManage.TaskCenter;
+﻿using YMCL.Main.Views.MusicPlayer;
+using YMCL.Main.Views.Initialize;
+using YMCL.Main.Views.Main;
+using YMCL.Main.Views.MusicPlayer.DesktopLyric;
+using YMCL.Main.Views.MusicPlayer.Main;
+using YMCL.Main.Views.TaskManage.TaskCenter;
 
 namespace YMCL.Main.Public
 {

@@ -2,7 +2,7 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"  xmlns:properties="clr-namespace:YMCL.Main.Public.Lang"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:YMCL.Main"
-             StartupUri="\UI\Initialize\InitializeWindow.xaml">
+             StartupUri="\Views\Initialize\InitializeWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <tb:TaskbarIcon x:Name="NotifyIcon" x:Key="NotifyIcon" ToolTipText="Ymcl" PopupActivation="RightClick">
