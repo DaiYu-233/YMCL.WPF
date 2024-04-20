@@ -1,9 +1,8 @@
-﻿<Page x:Class="YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall.AutoInstall" xmlns:ui="http://schemas.inkore.net/lib/ui/wpf/modern" xmlns:properties="clr-namespace:YMCL.Main.Public.Lang" xmlns:pu="https://opensource.panuon.com/wpf-ui"
+﻿<Page x:Class="YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall.AutoInstall" xmlns:ui="http://schemas.inkore.net/lib/ui/wpf/modern" xmlns:properties="clr-namespace:YMCL.Main.Public.Lang"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:YMCL.Main.Views.Main.Pages.Download.Pages"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       mc:Ignorable="d" Loaded="Page_Loaded" 
       Title="AutoInstall">
     <Page.Triggers>

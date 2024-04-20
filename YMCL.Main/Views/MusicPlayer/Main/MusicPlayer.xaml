@@ -91,7 +91,7 @@
                             <ScrollViewer x:Name="SongsListViewScroll" DockPanel.Dock="Bottom" Margin="0,10,10,0">
                                 <DockPanel>
                                     <ui:ProgressRing x:Name="LoadingMore" DockPanel.Dock="Bottom" VerticalAlignment="Top" Margin="0,10,0,30" Height="52" Width="52" Visibility="Collapsed"/>
-                                    <ui:HyperlinkButton x:Name="LoadMore" RaiseHyperlinkClicks="False"  DockPanel.Dock="Bottom" FontFamily="{DynamicResource Font}" Content="→ 加载更多 ←" HorizontalAlignment="Center" Margin="0,0,0,15" Click="LoadMore_Click" Visibility="Collapsed"/>
+                                    <ui:HyperlinkButton x:Name="LoadMore" RaiseHyperlinkClicks="False"  DockPanel.Dock="Bottom" FontFamily="{DynamicResource Font}" Content="{x:Static properties:MainLang.LoadingMore}" HorizontalAlignment="Center" Margin="0,0,0,15" Click="LoadMore_Click" Visibility="Collapsed"/>
                                     <ui:ListView x:Name="SongsListView"  FontFamily="{DynamicResource Font}" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,0,0,10" DockPanel.Dock="Top" ScrollViewer.VerticalScrollBarVisibility="Disabled" SelectionChanged="SongsListView_SelectionChanged"   >
                                         <ui:ListView.ItemTemplate>
                                             <DataTemplate>

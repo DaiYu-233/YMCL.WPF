@@ -741,4 +741,19 @@
   <data name="CustomIdHandleText" xml:space="preserve">
     <value>当前版本名称将被保存为</value>
   </data>
+  <data name="All" xml:space="preserve">
+    <value>全部</value>
+  </data>
+  <data name="ModName" xml:space="preserve">
+    <value>Mod名称</value>
+  </data>
+  <data name="MinecraftVersion" xml:space="preserve">
+    <value>Minecraft版本</value>
+  </data>
+  <data name="LoadingMore" xml:space="preserve">
+    <value>→ 加载更多 ←</value>
+  </data>
+  <data name="AnyModLoader" xml:space="preserve">
+    <value>任意加载器</value>
+  </data>
 </root>

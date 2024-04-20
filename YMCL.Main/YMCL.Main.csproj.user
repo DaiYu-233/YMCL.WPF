@@ -9,34 +9,7 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="UI\Main\Pages\Download\Pages\AutoInstall\AutoInstall.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="UI\Main\Pages\More\Pages\TreasureBox\TreasureBox.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="UI\Main\Pages\Setting\Pages\Download\Download.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="UI\Main\Pages\Setting\Pages\Launcher\Launcher.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="UI\Main\Pages\Setting\Pages\Account\Account.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="UI\Main\Pages\Setting\Pages\Launch\Launch.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="UI\MusicPlayer\DesktopLyric\DesktopLyric.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="UI\TaskManage\TaskProgress\TaskProgressWindow.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="UI\TaskManage\TaskCenter\TaskEntry.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="UI\TaskManage\TaskCenter\Tasks.xaml.cs">
+    <Compile Update="Views\Main\Pages\Download\Pages\Mods\Mods.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -44,34 +17,7 @@
     <Page Update="Public\Style\Dark.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="UI\Main\Pages\Download\Pages\AutoInstall\AutoInstall.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="UI\Main\Pages\More\Pages\TreasureBox\TreasureBox.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="UI\Main\Pages\Setting\Pages\Download\Download.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="UI\Main\Pages\Setting\Pages\Launcher\Launcher.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="UI\Main\Pages\Setting\Pages\Account\Account.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="UI\Main\Pages\Setting\Pages\Launch\Launch.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="UI\MusicPlayer\DesktopLyric\DesktopLyric.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="UI\TaskManage\TaskProgress\TaskProgressWindow.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="UI\TaskManage\TaskCenter\TaskEntry.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="UI\TaskManage\TaskCenter\Tasks.xaml">
+    <Page Update="Views\Main\Pages\Download\Pages\Mods\Mods.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

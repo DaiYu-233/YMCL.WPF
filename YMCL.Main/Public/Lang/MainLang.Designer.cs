@@ -214,11 +214,29 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
+        ///   查找类似 全部 的本地化字符串。
+        /// </summary>
+        public static string All {
+            get {
+                return ResourceManager.GetString("All", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 所有版本 的本地化字符串。
         /// </summary>
         public static string AllVersion {
             get {
                 return ResourceManager.GetString("AllVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 任意加载器 的本地化字符串。
+        /// </summary>
+        public static string AnyModLoader {
+            get {
+                return ResourceManager.GetString("AnyModLoader", resourceCulture);
             }
         }
         
@@ -1393,6 +1411,15 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
+        ///   查找类似 → 加载更多 ← 的本地化字符串。
+        /// </summary>
+        public static string LoadingMore {
+            get {
+                return ResourceManager.GetString("LoadingMore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 加载版本设置失败 的本地化字符串。
         /// </summary>
         public static string LoadVersionSettingFail {
@@ -1470,6 +1497,24 @@ namespace YMCL.Main.Public.Lang {
         public static string MaximumDownloadThread {
             get {
                 return ResourceManager.GetString("MaximumDownloadThread", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Minecraft版本 的本地化字符串。
+        /// </summary>
+        public static string MinecraftVersion {
+            get {
+                return ResourceManager.GetString("MinecraftVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Mod名称 的本地化字符串。
+        /// </summary>
+        public static string ModName {
+            get {
+                return ResourceManager.GetString("ModName", resourceCulture);
             }
         }
         

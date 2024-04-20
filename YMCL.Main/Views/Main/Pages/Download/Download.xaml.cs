@@ -1,5 +1,6 @@
 ﻿using System.Windows.Controls;
 using YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall;
+using YMCL.Main.Views.Main.Pages.Download.Pages.Mods;
 
 namespace YMCL.Main.Views.Main.Pages.Download
 {
@@ -9,6 +10,7 @@ namespace YMCL.Main.Views.Main.Pages.Download
     public partial class Download : Page
     {
         AutoInstall autoInstall = new();
+        Mods mods = new();
         public Download()
         {
             InitializeComponent();
@@ -20,6 +22,10 @@ namespace YMCL.Main.Views.Main.Pages.Download
             if (AutoInstall.IsSelected)
             {
                 MainFrame.Content = autoInstall;
+            }
+            if (Mods.IsSelected)
+            {
+                MainFrame.Content = mods;
             }
         }
     }

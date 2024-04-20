@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="MinecraftLaunch" Version="3.0.2" />
+    <PackageReference Include="MinecraftLaunch" Version="3.0.6" />
     <PackageReference Include="MinecraftLaunch.Skin" Version="1.0.0" />
   </ItemGroup>
 
