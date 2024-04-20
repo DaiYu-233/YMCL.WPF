@@ -25,8 +25,8 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Launcher
             InitializeComponent();
 
             Version.Text = "YMCL-" + Const.Version;
-            UserDataSize.Text = $"{Math.Round(Function.GetDirectoryLength(Const.DataRootPath) / 1024 / 1024, 2)} MiB";
-            AppDataSize.Text = $"{Math.Round(Function.GetDirectoryLength(Const.PublicDataRootPath) / 1024 / 1024, 2)} MiB";
+            UserDataSize.Text = $"{Math.Round(Method.GetDirectoryLength(Const.DataRootPath) / 1024 / 1024, 2)} MiB";
+            AppDataSize.Text = $"{Math.Round(Method.GetDirectoryLength(Const.PublicDataRootPath) / 1024 / 1024, 2)} MiB";
         }
 
         private async void CheckUpdate_Click(object sender, RoutedEventArgs e)

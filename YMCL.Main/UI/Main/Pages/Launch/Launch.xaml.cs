@@ -20,7 +20,7 @@ using YMCL.Main.UI.TaskManage.TaskProgress;
 using MinecraftLaunch.Classes.Models.Auth;
 using iNKORE.UI.WPF.Modern.Controls.Primitives;
 using MinecraftLaunch.Utilities;
-using Function = YMCL.Main.Public.Function;
+using Method = YMCL.Main.Public.Method;
 using System.Collections.ObjectModel;
 using System.Windows.Data;
 using Microsoft.VisualBasic.FileIO;
@@ -418,7 +418,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
                 var gameFolder = Path.GetDirectoryName(version.JarPath);
                 System.Windows.Controls.Button button = sender as System.Windows.Controls.Button;
                 var path = Path.Combine(gameFolder, button.Tag.ToString());
-                Function.CreateFolder(path);
+                Method.CreateFolder(path);
                 Process.Start("explorer.exe", path);
             }
         }
@@ -708,7 +708,7 @@ namespace YMCL.Main.UI.Main.Pages.Launch
             }
             try
             {
-                Function.CreateFolder(Path.Combine(setting.MinecraftFolder, "versions"));
+                Method.CreateFolder(Path.Combine(setting.MinecraftFolder, "versions"));
             }
             catch (Exception)
             {
@@ -800,9 +800,9 @@ namespace YMCL.Main.UI.Main.Pages.Launch
             {
                 MinecraftLaunch.Skin.SkinResolver SkinResolver = new(Convert.FromBase64String(accounts[setting.AccountSelectionIndex].Skin));
                 var bytes = MinecraftLaunch.Skin.ImageHelper.ConvertToByteArray(SkinResolver.CropSkinHeadBitmap());
-                var skin = Function.BytesToBase64(bytes);
+                var skin = Method.BytesToBase64(bytes);
 
-                SkinHeadImage.Source = Function.Base64ToImage(skin);
+                SkinHeadImage.Source = Method.Base64ToImage(skin);
             }
         }
         VersionSetting LoadVersionSettings(GameEntry version, bool loadUI = false)

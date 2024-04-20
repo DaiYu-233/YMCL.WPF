@@ -50,8 +50,8 @@ namespace YMCL.Main
             StartupArgs = e.Args;
             var args = e.Args;
 
-            Function.CreateFolder(Const.PublicDataRootPath);
-            Function.CreateFolder(Const.DataRootPath);
+            Method.CreateFolder(Const.PublicDataRootPath);
+            Method.CreateFolder(Const.DataRootPath);
 
             DispatcherUnhandledException += App_DispatcherUnhandledException;
 
@@ -78,8 +78,8 @@ namespace YMCL.Main
                 };
                 try
                 {
-                    Function.CreateFolder(Path.Combine(System.Windows.Forms.Application.StartupPath, ".minecraft"));
-                    Function.CreateFolder(Path.Combine(System.Windows.Forms.Application.StartupPath, ".minecraft", "versions"));
+                    Method.CreateFolder(Path.Combine(System.Windows.Forms.Application.StartupPath, ".minecraft"));
+                    Method.CreateFolder(Path.Combine(System.Windows.Forms.Application.StartupPath, ".minecraft", "versions"));
                 }
                 catch
                 {

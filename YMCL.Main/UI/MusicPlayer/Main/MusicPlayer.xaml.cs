@@ -403,7 +403,7 @@ namespace YMCL.Main.UI.MusicPlayer.Main
                             SongName = song.name,
                             Authors = authors,
                             Img = song.al.picUrl,
-                            DisplayDuration = Function.MsToTime(Convert.ToInt32(song.dt))
+                            DisplayDuration = Method.MsToTime(Convert.ToInt32(song.dt))
                         });
                     }
                 }
@@ -469,7 +469,7 @@ namespace YMCL.Main.UI.MusicPlayer.Main
                             SongName = song.name,
                             Authors = authors,
                             Img = song.al.picUrl,
-                            DisplayDuration = Function.MsToTime(Convert.ToInt32(song.dt))
+                            DisplayDuration = Method.MsToTime(Convert.ToInt32(song.dt))
                         });
                     }
                 }
@@ -506,7 +506,7 @@ namespace YMCL.Main.UI.MusicPlayer.Main
                         SongName = song.SongName,
                         Authors = song.Authors,
                         DisplayDuration = song.DisplayDuration,
-                        Img = Function.BytesToBase64(bytes),
+                        Img = Method.BytesToBase64(bytes),
                         Type = PlaySongListViewItemEntry.PlaySongListViewItemEntryType.Network
                     });
                 });
@@ -551,7 +551,7 @@ namespace YMCL.Main.UI.MusicPlayer.Main
                 Type = PlaySongListViewItemEntry.PlaySongListViewItemEntryType.Local,
                 Authors = Array[Array.Length - 1].Split(".")[1],
                 Duration = time,
-                DisplayDuration = Function.MsToTime(time),
+                DisplayDuration = Method.MsToTime(time),
                 SongId = -1
             });
             PlayListView.Items.Clear();
@@ -786,21 +786,21 @@ namespace YMCL.Main.UI.MusicPlayer.Main
             playing = true;
             player.Play();
             PlaySlider.Maximum = time;
-            TimeText.Text = $"00:00/{Function.MsToTime(time)}";
+            TimeText.Text = $"00:00/{Method.MsToTime(time)}";
             PlaySlider.Value = 0;
             PlayingSongAuthor.Text = song.Authors;
             PlayingSongName.Text = song.SongName;
             PlaySlider.IsEnabled = true;
             try
             {
-                Pic.Source = Function.Base64ToImage(song.Img);
+                Pic.Source = Method.Base64ToImage(song.Img);
             }
             catch { Pic.Source = null; }
         }
         private void Timer_Tick(object? sender, EventArgs e)
         {
-            var nowtime = Function.MsToTime(player.Position.TotalMilliseconds);
-            TimeText.Text = $"{nowtime.Split(".")[0]}/{Function.MsToTime(PlaySlider.Maximum)}";
+            var nowtime = Method.MsToTime(player.Position.TotalMilliseconds);
+            TimeText.Text = $"{nowtime.Split(".")[0]}/{Method.MsToTime(PlaySlider.Maximum)}";
             if (!movingSilder)
             {
                 PlaySlider.Value = player.Position.TotalMilliseconds;

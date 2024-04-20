@@ -530,17 +530,17 @@ namespace YMCL.Main.UI.Initialize
                 else
                 {
                     var fontFilePath = "C:\\ProgramData\\DaiYu.YMCL\\MiSans.ttf";
-                    string fontPath = Path.Combine(Environment.GetEnvironmentVariable("WINDIR"), "fonts", $"YMCL_{Function.GetTimeStamp()}_" + Path.GetFileName(fontFilePath));
+                    string fontPath = Path.Combine(Environment.GetEnvironmentVariable("WINDIR"), "fonts", $"YMCL_{Method.GetTimeStamp()}_" + Path.GetFileName(fontFilePath));
                     File.Copy(fontFilePath, fontPath, true); //font是程序目录下放字体的文件夹
                     AddFontResource(fontPath);
-                    WriteProfileString("fonts", Path.GetFileNameWithoutExtension(fontFilePath) + "(TrueType)", $"YMCL_{Function.GetTimeStamp()}_" + Path.GetFileName(fontFilePath));
+                    WriteProfileString("fonts", Path.GetFileNameWithoutExtension(fontFilePath) + "(TrueType)", $"YMCL_{Method.GetTimeStamp()}_" + Path.GetFileName(fontFilePath));
 
 
                     var fontFilePath1 = "C:\\ProgramData\\DaiYu.YMCL\\FluentIcons.ttf";
-                    string fontPath1 = Path.Combine(Environment.GetEnvironmentVariable("WINDIR"), "fonts", $"YMCL_{Function.GetTimeStamp()}_" + Path.GetFileName(fontFilePath1));
+                    string fontPath1 = Path.Combine(Environment.GetEnvironmentVariable("WINDIR"), "fonts", $"YMCL_{Method.GetTimeStamp()}_" + Path.GetFileName(fontFilePath1));
                     File.Copy(fontFilePath1, fontPath1, true); //font是程序目录下放字体的文件夹
                     AddFontResource(fontPath1);
-                    WriteProfileString("fonts", Path.GetFileNameWithoutExtension(fontFilePath1) + "(TrueType)", $"YMCL_{Function.GetTimeStamp()}_" + Path.GetFileName(fontFilePath1));
+                    WriteProfileString("fonts", Path.GetFileNameWithoutExtension(fontFilePath1) + "(TrueType)", $"YMCL_{Method.GetTimeStamp()}_" + Path.GetFileName(fontFilePath1));
 
                     File.WriteAllText(Path.Combine(Const.PublicDataRootPath, "FontHasBeenInstalled"), "");
                 }

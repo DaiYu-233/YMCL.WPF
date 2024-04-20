@@ -6,7 +6,7 @@ using YMCL.Main.Public.Lang;
 
 namespace YMCL.Main.Public
 {
-    internal class Function
+    internal class Method
     {
         public static void ShowWin10Notice(string msg, string title = "Yu Minecraft Launcher", string logoUri = "")
         {

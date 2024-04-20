@@ -334,7 +334,7 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
                     {
                         if (forgeInstallEntry == null && quiltBuildEntry == null && fabricBuildEntry == null)
                         {
-                            Function.ShowWin10Notice($"{LangHelper.Current.GetText("InstallFinish")}：Vanllia - {versionId}");
+                            Method.ShowWin10Notice($"{LangHelper.Current.GetText("InstallFinish")}：Vanllia - {versionId}");
                         }
                     }
                 }
@@ -382,7 +382,7 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
                                 await Dispatcher.BeginInvoke(() =>
                                 {
                                     Toast.Show(window: Const.Window.main, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("InstallFinish")}：Forge-{customId}");
-                                    Function.ShowWin10Notice($"{LangHelper.Current.GetText("InstallFinish")}：Forge-{customId}");
+                                    Method.ShowWin10Notice($"{LangHelper.Current.GetText("InstallFinish")}：Forge-{customId}");
                                 });
                             }
                             else
@@ -390,7 +390,7 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
                                 await Dispatcher.BeginInvoke(() =>
                                 {
                                     Toast.Show(window: Const.Window.main, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("InstallFail")}：Forge-{customId}");
-                                    Function.ShowWin10Notice($"{LangHelper.Current.GetText("InstallFail")}：Forge-{customId}");
+                                    Method.ShowWin10Notice($"{LangHelper.Current.GetText("InstallFail")}：Forge-{customId}");
                                 });
                                 return;
                             }
@@ -433,7 +433,7 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
                             await Dispatcher.BeginInvoke(() =>
                             {
                                 Toast.Show(window: Const.Window.main, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("InstallFinish")}：Fabric-{customId}");
-                                Function.ShowWin10Notice($"{LangHelper.Current.GetText("InstallFinish")}：Fabric-{customId}");
+                                Method.ShowWin10Notice($"{LangHelper.Current.GetText("InstallFinish")}：Fabric-{customId}");
                             });
                         }
                         else
@@ -441,7 +441,7 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
                             await Dispatcher.BeginInvoke(() =>
                             {
                                 Toast.Show(window: Const.Window.main, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("InstallFail")}：Fabric-{customId}");
-                                Function.ShowWin10Notice($"{LangHelper.Current.GetText("InstallFail")}：Fabric-{customId}");
+                                Method.ShowWin10Notice($"{LangHelper.Current.GetText("InstallFail")}：Fabric-{customId}");
                             });
                             return;
                         }
@@ -483,7 +483,7 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
                             await Dispatcher.BeginInvoke(() =>
                             {
                                 Toast.Show(window: Const.Window.main, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("InstallFinish")}：Quilt-{customId}");
-                                Function.ShowWin10Notice($"{LangHelper.Current.GetText("InstallFinish")}：Quilt-{customId}");
+                                Method.ShowWin10Notice($"{LangHelper.Current.GetText("InstallFinish")}：Quilt-{customId}");
                             });
                         }
                         else
@@ -491,7 +491,7 @@ namespace YMCL.Main.UI.Main.Pages.Download.Pages
                             await Dispatcher.BeginInvoke(() =>
                             {
                                 Toast.Show(window: Const.Window.main, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("InstallFail")}：Quilt-{customId}");
-                                Function.ShowWin10Notice($"{LangHelper.Current.GetText("InstallFail")}：Quilt-{customId}");
+                                Method.ShowWin10Notice($"{LangHelper.Current.GetText("InstallFail")}：Quilt-{customId}");
                             });
                             return;
                         }

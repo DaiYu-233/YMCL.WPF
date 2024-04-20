@@ -38,14 +38,14 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Account
             {
                 MinecraftLaunch.Skin.SkinResolver SkinResolver = new(Convert.FromBase64String(x.Skin));
                 var bytes = MinecraftLaunch.Skin.ImageHelper.ConvertToByteArray(SkinResolver.CropSkinHeadBitmap());
-                var skin = Function.BytesToBase64(bytes);
+                var skin = Method.BytesToBase64(bytes);
                 AccountsListView.Items.Add(new
                 {
                     x.Name,
                     x.AccountType,
                     x.AddTime,
                     x.Data,
-                    Skin = Function.Base64ToImage(skin)
+                    Skin = Method.Base64ToImage(skin)
                 });
             });
 
@@ -209,7 +209,7 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Account
                     AddTime = now.ToString("yyyy-MM-ddTHH:mm:sszzz"),
                     Data = JsonConvert.SerializeObject(userProfile, formatting: Formatting.Indented),
                     Name = userProfile.Name,
-                    Skin = Function.BytesToBase64(bytes)
+                    Skin = Method.BytesToBase64(bytes)
                 });
 
                 File.WriteAllText(Const.AccountDataPath, JsonConvert.SerializeObject(accounts, Formatting.Indented));
@@ -283,7 +283,7 @@ namespace YMCL.Main.UI.Main.Pages.Setting.Pages.Account
                                 AddTime = now.ToString("yyyy-MM-ddTHH:mm:sszzz"),
                                 Data = JsonConvert.SerializeObject(account, formatting: Formatting.Indented),
                                 Name = account.Name,
-                                Skin = Function.BytesToBase64(bytes)
+                                Skin = Method.BytesToBase64(bytes)
                             });
                         });
                     }

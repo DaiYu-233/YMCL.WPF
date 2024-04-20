@@ -372,14 +372,14 @@ namespace YMCL.Main.UI.Main
                                     });
                                     File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(source, Formatting.Indented));
                                     MessageBoxX.Show($"{MainLang.ImportFinish}\n\n{data}", "Yu Minecraft Launcher");
-                                    Function.RestartApp();
+                                    Method.RestartApp();
                                 }
                                 break;
                         }
                     }
                     catch (Exception ex)
                     {
-                        Function.LauncherErrorShow(LangHelper.Current.GetText("ArgsError"), ex);
+                        Method.LauncherErrorShow(LangHelper.Current.GetText("ArgsError"), ex);
                     }
                 }
             }
