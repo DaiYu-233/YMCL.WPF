@@ -32,6 +32,7 @@ namespace YMCL.Main.Views.Main
             Root.Visibility = Visibility.Hidden;
             ShowInTaskbar = false;
             e.Cancel = true;
+            Environment.Exit(0);
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
