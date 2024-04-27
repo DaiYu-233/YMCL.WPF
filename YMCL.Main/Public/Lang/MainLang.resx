@@ -762,4 +762,28 @@
   <data name="MainWindow_NavigationMusic" xml:space="preserve">
     <value>   音乐</value>
   </data>
+  <data name="WriteShortCut" xml:space="preserve">
+    <value>写出快捷方式</value>
+  </data>
+  <data name="WriteShortCutDescription" xml:space="preserve">
+    <value>创建用于启动YMCL的快捷方式</value>
+  </data>
+  <data name="UseCommandLaunchYMCLDescription" xml:space="preserve">
+    <value>通过命令启动YMCL</value>
+  </data>
+  <data name="UseCommandLaunchYMCL" xml:space="preserve">
+    <value>外部启动</value>
+  </data>
+  <data name="SeletFolder" xml:space="preserve">
+    <value>选择文件夹</value>
+  </data>
+  <data name="WriteReg" xml:space="preserve">
+    <value>写入注册表</value>
+  </data>
+  <data name="FailToWriteReg" xml:space="preserve">
+    <value>无法写入注册表</value>
+  </data>
+  <data name="WriteFinish" xml:space="preserve">
+    <value>写入完成</value>
+  </data>
 </root>

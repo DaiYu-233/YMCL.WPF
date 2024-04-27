@@ -1,9 +1,14 @@
 ﻿using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Net;
 using System.Net.Http;
+using System.Security.Principal;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
+using IWshRuntimeLibrary;
+using Microsoft.Win32;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Panuon.WPF.UI;
@@ -11,6 +16,10 @@ using UpdateD;
 using YMCL.Main.Public;
 using YMCL.Main.Public.Class;
 using YMCL.Main.Public.Lang;
+using Application = System.Windows.Application;
+using File = System.IO.File;
+using MessageBoxIcon = Panuon.WPF.UI.MessageBoxIcon;
+using SaveFileDialog = Microsoft.Win32.SaveFileDialog;
 
 namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launcher
 {
@@ -175,6 +184,68 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launcher
         private void OpenAppDataFolder(object sender, RoutedEventArgs e)
         {
             Process.Start("explorer.exe", Const.PublicDataRootPath);
+        }
+
+        private void CreateShortCutButton_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog saveDataSend = new SaveFileDialog();
+            saveDataSend.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+            saveDataSend.Filter = "*.lnk | Short Cut";
+            saveDataSend.DefaultExt = ".lnk";
+            saveDataSend.FileName = "YMCL.lnk";
+            saveDataSend.ShowDialog();
+            if (saveDataSend.FileName != "YMCL.lnk")
+            {
+                string fName = saveDataSend.FileName;
+                IWshShortcut shortcut = new WshShell().CreateShortcut(fName);
+                shortcut.TargetPath = @"ymcl://";
+                shortcut.IconLocation = Const.IconPath;
+                shortcut.Save();
+            }
+        }
+
+        private void WriteRegButton_Click(object sender, RoutedEventArgs e)
+        {
+            WindowsIdentity identity = WindowsIdentity.GetCurrent();
+            WindowsPrincipal principal = new WindowsPrincipal(identity);
+            if (!principal.IsInRole(WindowsBuiltInRole.Administrator))
+            {
+                var message = MessageBoxX.Show(LangHelper.Current.GetText("InitializeWindow_Download_AdministratorPermissionRequired"), "Yu Minecraft Launcher", MessageBoxButton.OKCancel, MessageBoxIcon.Info);
+                if (message == MessageBoxResult.OK)
+                {
+                    ProcessStartInfo startInfo = new ProcessStartInfo
+                    {
+                        UseShellExecute = true,
+                        WorkingDirectory = Environment.CurrentDirectory,
+                        FileName = System.Windows.Forms.Application.ExecutablePath,
+                        Verb = "runas"
+                    };
+                    Process.Start(startInfo);
+                    Application.Current.Shutdown();
+                }
+                else
+                {
+                    MessageBoxX.Show(YMCL.Main.Public.Lang.MainLang.FailToWriteReg, "Yu Minecraft Launcher", MessageBoxIcon.Error);
+                }
+            }
+
+            var bat = "set /p ymcl=<%USERPROFILE%\\AppData\\Roaming\\DaiYu.YMCL\\YMCL.ExePath.DaiYu\r\necho %ymcl%\r\necho %1\r\nstart %ymcl% %1";
+            File.WriteAllText(Const.YMCLBat, bat);
+
+            try { Registry.ClassesRoot.DeleteSubKey("YMCL"); } catch { }
+            try
+            {
+                RegistryKey keyRoot = Registry.ClassesRoot.CreateSubKey("YMCL", true);
+                keyRoot.SetValue("", "Yu Minecraft Launcher");
+                keyRoot.SetValue("URL Protocol", Const.YMCLBat);
+                RegistryKey registryKeya = Registry.ClassesRoot.OpenSubKey("YMCL", true).CreateSubKey("DefaultIcon");
+                registryKeya.SetValue("", Const.YMCLBat);
+                RegistryKey registryKeyb = Registry.ClassesRoot.OpenSubKey("YMCL", true).CreateSubKey(@"shell\open\command");
+                registryKeyb.SetValue("", $"\"{Const.YMCLBat}\" \"%1\"");
+            }
+            catch { }
+
+            Toast.Show(Const.Window.main, YMCL.Main.Public.Lang.MainLang.WriteFinish, ToastPosition.Top);
         }
     }
 }

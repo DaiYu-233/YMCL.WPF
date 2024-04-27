@@ -28,6 +28,7 @@ namespace YMCL.Main.Public
         public static string DataRootPath { get; } = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\DaiYu.YMCL";
         public static string PublicDataRootPath { get; } = "C:\\ProgramData\\DaiYu.YMCL";
         public static string JavaDataPath { get; } = DataRootPath + "\\YMCL.Java.DaiYu";
+        public static string IconPath { get; } = PublicDataRootPath + "\\Icon.ico";
         public static string SettingDataPath { get; } = DataRootPath + "\\YMCL.Setting.DaiYu";
         public static string CustomHomePageXamlPath { get; } = DataRootPath + "\\YMCL.CustomHomePageXaml.DaiYu";
         public static string CustomHomePageDllPath { get; } = DataRootPath + "\\YMCL.CustomHomePageXaml.DaiYu";

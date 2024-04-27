@@ -538,6 +538,15 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
+        ///   查找类似 无法写入注册表 的本地化字符串。
+        /// </summary>
+        public static string FailToWriteReg {
+            get {
+                return ResourceManager.GetString("FailToWriteReg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 文件夹已存在 的本地化字符串。
         /// </summary>
         public static string FileExists {
@@ -1753,6 +1762,15 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
+        ///   查找类似 选择文件夹 的本地化字符串。
+        /// </summary>
+        public static string SeletFolder {
+            get {
+                return ResourceManager.GetString("SeletFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 启动器 的本地化字符串。
         /// </summary>
         public static string Setting_Navigation_About {
@@ -1906,6 +1924,24 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
+        ///   查找类似 外部启动 的本地化字符串。
+        /// </summary>
+        public static string UseCommandLaunchYMCL {
+            get {
+                return ResourceManager.GetString("UseCommandLaunchYMCL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 通过命令启动YMCL 的本地化字符串。
+        /// </summary>
+        public static string UseCommandLaunchYMCLDescription {
+            get {
+                return ResourceManager.GetString("UseCommandLaunchYMCLDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 使用全局设置 的本地化字符串。
         /// </summary>
         public static string UseGlobalSetting {
@@ -1956,6 +1992,42 @@ namespace YMCL.Main.Public.Lang {
         public static string WaitForGameWindowAppear {
             get {
                 return ResourceManager.GetString("WaitForGameWindowAppear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 写入完成 的本地化字符串。
+        /// </summary>
+        public static string WriteFinish {
+            get {
+                return ResourceManager.GetString("WriteFinish", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 写入注册表 的本地化字符串。
+        /// </summary>
+        public static string WriteReg {
+            get {
+                return ResourceManager.GetString("WriteReg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 写出快捷方式 的本地化字符串。
+        /// </summary>
+        public static string WriteShortCut {
+            get {
+                return ResourceManager.GetString("WriteShortCut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 创建用于启动YMCL的快捷方式 的本地化字符串。
+        /// </summary>
+        public static string WriteShortCutDescription {
+            get {
+                return ResourceManager.GetString("WriteShortCutDescription", resourceCulture);
             }
         }
         
