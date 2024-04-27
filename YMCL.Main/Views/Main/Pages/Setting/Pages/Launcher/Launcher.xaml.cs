@@ -7,7 +7,6 @@ using System.Security.Principal;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
-using IWshRuntimeLibrary;
 using Microsoft.Win32;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -197,10 +196,13 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launcher
             if (saveDataSend.FileName != "YMCL.lnk")
             {
                 string fName = saveDataSend.FileName;
-                IWshShortcut shortcut = new WshShell().CreateShortcut(fName);
-                shortcut.TargetPath = @"ymcl://";
-                shortcut.IconLocation = Const.IconPath;
-                shortcut.Save();
+                using (StreamWriter writer = new StreamWriter(fName))
+                {
+                    writer.WriteLine("[InternetShortcut]");
+                    writer.WriteLine("URL=ymcl://");
+                    writer.WriteLine("IconFile=C:\\ProgramData\\DaiYu.YMCL\\Icon.ico");
+                    writer.WriteLine("IconIndex=0");
+                }
             }
         }
 
