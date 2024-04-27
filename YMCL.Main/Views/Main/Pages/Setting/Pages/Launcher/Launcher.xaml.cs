@@ -189,11 +189,11 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launcher
         {
             SaveFileDialog saveDataSend = new SaveFileDialog();
             saveDataSend.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-            saveDataSend.Filter = "*.lnk | Short Cut";
-            saveDataSend.DefaultExt = ".lnk";
-            saveDataSend.FileName = "YMCL.lnk";
+            saveDataSend.Filter = "*.url | Short Cut";
+            saveDataSend.DefaultExt = ".url";
+            saveDataSend.FileName = "YMCL.url";
             saveDataSend.ShowDialog();
-            if (saveDataSend.FileName != "YMCL.lnk")
+            if (saveDataSend.FileName != "YMCL.url")
             {
                 string fName = saveDataSend.FileName;
                 using (StreamWriter writer = new StreamWriter(fName))
