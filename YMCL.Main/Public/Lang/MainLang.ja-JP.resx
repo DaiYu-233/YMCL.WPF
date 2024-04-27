@@ -732,4 +732,58 @@
   <data name="CenterAlignment" xml:space="preserve">
     <value>中央揃え</value>
   </data>
+  <data name="ImportFinish" xml:space="preserve">
+    <value>インポートが終了しました</value>
+  </data>
+  <data name="GetVersionListFail" xml:space="preserve">
+    <value>バージョンリストの取得に失敗しました</value>
+  </data>
+  <data name="CustomIdHandleText" xml:space="preserve">
+    <value>現在のバージョン名はとして保存されます</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>すべて</value>
+  </data>
+  <data name="ModName" xml:space="preserve">
+    <value>モッド名</value>
+  </data>
+  <data name="MinecraftVersion" xml:space="preserve">
+    <value>Minecraftバージョン</value>
+  </data>
+  <data name="LoadingMore" xml:space="preserve">
+    <value>もっと読み込む</value>
+  </data>
+  <data name="AnyModLoader" xml:space="preserve">
+    <value>任意のローダー</value>
+  </data>
+  <data name="Music" xml:space="preserve">
+    <value>音楽</value>
+  </data>
+  <data name="MainWindow_NavigationMusic" xml:space="preserve">
+    <value>   音楽</value>
+  </data>
+  <data name="WriteShortCut" xml:space="preserve">
+    <value>ショートカットを書こう</value>
+  </data>
+  <data name="WriteShortCutDescription" xml:space="preserve">
+    <value>YMCLを起動するためのショートカットを作成してください</value>
+  </data>
+  <data name="UseCommandLaunchYMCLDescription" xml:space="preserve">
+    <value>コマンドでYMCLを起動してください</value>
+  </data>
+  <data name="UseCommandLaunchYMCL" xml:space="preserve">
+    <value>外部発売</value>
+  </data>
+  <data name="SeletFolder" xml:space="preserve">
+    <value>ソースを選択</value>
+  </data>
+  <data name="WriteReg" xml:space="preserve">
+    <value>レジストリを書き込みます</value>
+  </data>
+  <data name="FailToWriteReg" xml:space="preserve">
+    <value>レジストリに書き込めませんでした</value>
+  </data>
+  <data name="WriteFinish" xml:space="preserve">
+    <value>書き込みが完了しました</value>
+  </data>
 </root>
