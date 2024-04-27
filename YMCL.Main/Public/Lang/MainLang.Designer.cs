@@ -1474,6 +1474,15 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
+        ///   查找类似    音乐 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_NavigationMusic {
+            get {
+                return ResourceManager.GetString("MainWindow_NavigationMusic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似    设置 的本地化字符串。
         /// </summary>
         public static string MainWindow_NavigationSetting {
@@ -1515,6 +1524,15 @@ namespace YMCL.Main.Public.Lang {
         public static string ModName {
             get {
                 return ResourceManager.GetString("ModName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 音乐 的本地化字符串。
+        /// </summary>
+        public static string Music {
+            get {
+                return ResourceManager.GetString("Music", resourceCulture);
             }
         }
         

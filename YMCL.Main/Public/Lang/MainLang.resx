@@ -756,4 +756,10 @@
   <data name="AnyModLoader" xml:space="preserve">
     <value>任意加载器</value>
   </data>
+  <data name="Music" xml:space="preserve">
+    <value>音乐</value>
+  </data>
+  <data name="MainWindow_NavigationMusic" xml:space="preserve">
+    <value>   音乐</value>
+  </data>
 </root>

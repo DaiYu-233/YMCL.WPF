@@ -18,7 +18,6 @@
             <Grid x:Name="Main" >
                 <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" Margin="59,30,0,0" />
                 <Grid x:Name="InfoBarShowArea" Margin="59,30,0,0" >
-                    
                 </Grid>
                 <Border Background="{DynamicResource TitleBarColor}" CornerRadius="8,0,0,8" HorizontalAlignment="Left">
                     <Border.Triggers>
@@ -55,7 +54,8 @@
                         <StackPanel Grid.Row="2">
                             <RadioButton x:Name="ToLaunch" Content="{x:Static properties:MainLang.MainWindow_NavigationLaunch}"  Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource LaunchPageIcon}"  IsChecked="True" FontFamily="{DynamicResource Font}" Checked="ToLaunch_Checked"/>
                             <RadioButton x:Name="ToSetting" Content="{x:Static properties:MainLang.MainWindow_NavigationSetting}" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource SettingPageIcon}" Margin="0 5 0 5" FontFamily="{DynamicResource Font}" Checked="ToSetting_Checked" />
-                            <RadioButton x:Name="ToDownload" Content="{x:Static properties:MainLang.MainWindow_NavigationDownload}" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource DownloadPageIcon}" FontFamily="{DynamicResource Font}" Checked="ToDownload_Checked"/>
+                            <RadioButton x:Name="ToDownload" Content="{x:Static properties:MainLang.MainWindow_NavigationDownload}" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource DownloadPageIcon}" FontFamily="{DynamicResource Font}" Checked="ToDownload_Checked" Cursor="Hand"/>
+                            <RadioButton x:Name="ToPlayer" Content="{x:Static properties:MainLang.MainWindow_NavigationMusic}" Style="{DynamicResource PlayerMenuStyle}" Tag="{DynamicResource PlayerPageIcon}" FontFamily="{DynamicResource Font}" Checked="ToPlayer_Checked" Margin="0,5,0,0" Cursor="Hand"/>
                             <RadioButton x:Name="ToMore" Content="{x:Static properties:MainLang.MainWindow_NavigationMore}" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource MorePageIcon}" Margin="0 5 0 5" FontFamily="{DynamicResource Font}" Checked="ToMore_Checked" />
                         </StackPanel>
                     </Grid>

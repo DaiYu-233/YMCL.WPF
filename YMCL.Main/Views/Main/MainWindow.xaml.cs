@@ -249,6 +249,7 @@ namespace YMCL.Main.Views.Main
         Pages.Setting.Setting setting = new();
         Pages.Download.Download download = new();
         Pages.More.More more = new();
+        Pages.MusicPlayer.MusicPlayer musicPlayer = new();
         #endregion
         #region TurnPage
         private void ToLaunch_Checked(object sender, RoutedEventArgs e)
@@ -269,6 +270,11 @@ namespace YMCL.Main.Views.Main
         private void ToMore_Checked(object sender, RoutedEventArgs e)
         {
             MainFrame.Content = more;
+        }
+
+        private void ToPlayer_Checked(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = musicPlayer;
         }
         #endregion
         //protected override void OnSourceInitialized(EventArgs e)

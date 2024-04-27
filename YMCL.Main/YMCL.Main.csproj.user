@@ -12,12 +12,18 @@
     <Compile Update="Views\Main\Pages\Download\Pages\Mods\Mods.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Main\Pages\MusicPlayer\MusicPlayer.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Public\Style\Dark.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Main\Pages\Download\Pages\Mods\Mods.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Main\Pages\MusicPlayer\MusicPlayer.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

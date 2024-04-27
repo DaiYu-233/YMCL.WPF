@@ -1,28 +1,38 @@
-﻿using System.IO;
+﻿using iNKORE.UI.WPF.Modern;
+using Newtonsoft.Json;
+using Panuon.WPF.UI;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 using System.Windows.Threading;
-using iNKORE.UI.WPF.Modern;
-using Newtonsoft.Json;
-using Panuon.WPF.UI;
-using YMCL.Main.Public;
 using YMCL.Main.Public.Class;
 using YMCL.Main.Public.Lang;
-using Cursors = System.Windows.Input.Cursors;
+using YMCL.Main.Public;
+using YMCL.Main.Views.MusicPlayer.DesktopLyric;
 using Size = System.Windows.Size;
+using Cursors = System.Windows.Input.Cursors;
 
-namespace YMCL.Main.Views.MusicPlayer.Main
+namespace YMCL.Main.Views.Main.Pages.MusicPlayer
 {
     /// <summary>
     /// MusicPlayer.xaml 的交互逻辑
     /// </summary>
-    public partial class MusicPlayer : WindowX
+    public partial class MusicPlayer : Page
     {
         int page = 0;
         string key = string.Empty;
@@ -34,7 +44,7 @@ namespace YMCL.Main.Views.MusicPlayer.Main
         bool gettingMusic = false;
         bool movingSilder = false;
         bool playing = false;
-        DesktopLyric.DesktopLyric desktopLyric = new();
+        DesktopLyric desktopLyric = new();
         Repeat repeat = Public.Class.Repeat.RepeatOff;
         private List<Lyrics> lyrics;
         private List<Run> lyricRuns;
@@ -158,34 +168,6 @@ namespace YMCL.Main.Views.MusicPlayer.Main
                 playing = true;
                 UpdatePlayStatus(true);
             }
-        }
-        private void btnClose_Click(object sender, RoutedEventArgs e)
-        {
-            Hide();
-        }
-        private void btnMaximize_Click(object sender, RoutedEventArgs e)
-        {
-            if (WindowState == WindowState.Maximized)
-            {
-                WindowState = WindowState.Normal;
-            }
-            else
-            {
-                WindowState = WindowState.Maximized;
-            }
-        }
-        private void btnMinimize_Click(object sender, RoutedEventArgs e)
-        {
-            WindowState = WindowState.Minimized;
-        }
-        private void TitleBar_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            DragMove();
-        }
-        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
-        {
-            Hide();
-            e.Cancel = true;
         }
         private void WindowX_Loaded(object sender, RoutedEventArgs e)
         {
@@ -380,7 +362,7 @@ namespace YMCL.Main.Views.MusicPlayer.Main
             catch (Exception ex)
             {
                 SearchBox.IsEnabled = true;
-                Panuon.WPF.UI.Toast.Show(message: $"{MainLang.SearchFail}：{ex}", position: ToastPosition.Top, window: Const.Window.musicPlayer);
+                Panuon.WPF.UI.Toast.Show(message: $"{MainLang.SearchFail}：{ex}", position: ToastPosition.Top, window: Const.Window.main);
                 Loading.Visibility = Visibility.Collapsed;
                 return;
             }
@@ -409,12 +391,12 @@ namespace YMCL.Main.Views.MusicPlayer.Main
                 }
                 else
                 {
-                    Panuon.WPF.UI.Toast.Show(message: $"{MainLang.SearchNoResult}", position: ToastPosition.Top, window: Const.Window.musicPlayer);
+                    Panuon.WPF.UI.Toast.Show(message: $"{MainLang.SearchNoResult}", position: ToastPosition.Top, window: Const.Window.main);
                 }
             }
             else
             {
-                Panuon.WPF.UI.Toast.Show(message: $"{MainLang.SearchFail}", position: ToastPosition.Top, window: Const.Window.musicPlayer);
+                Panuon.WPF.UI.Toast.Show(message: $"{MainLang.SearchFail}", position: ToastPosition.Top, window: Const.Window.main);
             }
             if (SongsListView.Items.Count > 0)
             {
@@ -445,7 +427,7 @@ namespace YMCL.Main.Views.MusicPlayer.Main
             {
                 SearchBox.IsEnabled = true;
                 LoadMore.IsEnabled = true;
-                Panuon.WPF.UI.Toast.Show(message: $"{MainLang.SearchFail}：{ex}", position: ToastPosition.Top, window: Const.Window.musicPlayer);
+                Panuon.WPF.UI.Toast.Show(message: $"{MainLang.SearchFail}：{ex}", position: ToastPosition.Top, window: Const.Window.main);
                 LoadingMore.Visibility = Visibility.Collapsed;
                 LoadMore.Visibility = Visibility.Visible;
                 return;
@@ -475,12 +457,12 @@ namespace YMCL.Main.Views.MusicPlayer.Main
                 }
                 else
                 {
-                    Panuon.WPF.UI.Toast.Show(message: $"{MainLang.SearchNoResult}", position: ToastPosition.Top, window: Const.Window.musicPlayer);
+                    Panuon.WPF.UI.Toast.Show(message: $"{MainLang.SearchNoResult}", position: ToastPosition.Top, window: Const.Window.main);
                 }
             }
             else
             {
-                Panuon.WPF.UI.Toast.Show(message: $"{MainLang.SearchFail}", position: ToastPosition.Top, window: Const.Window.musicPlayer);
+                Panuon.WPF.UI.Toast.Show(message: $"{MainLang.SearchFail}", position: ToastPosition.Top, window: Const.Window.main);
             }
             if (SongsListView.Items.Count > 0)
             {
@@ -533,7 +515,7 @@ namespace YMCL.Main.Views.MusicPlayer.Main
 
             player_for_duration.Open(new Uri(openFileDialog.FileName));
             bool HasTimeSpan = false;
-            Panuon.WPF.UI.Toast.Show(Const.Window.musicPlayer, MainLang.Account_Loading, ToastPosition.Top);
+            Panuon.WPF.UI.Toast.Show(Const.Window.main, MainLang.Account_Loading, ToastPosition.Top);
             while (!HasTimeSpan)
             {
                 await Task.Delay(500);
@@ -590,7 +572,7 @@ namespace YMCL.Main.Views.MusicPlayer.Main
             {
                 if (!File.Exists(song.Path))
                 {
-                    Panuon.WPF.UI.Toast.Show(Const.Window.musicPlayer, MainLang.SourceFileNotExists, ToastPosition.Top);
+                    Panuon.WPF.UI.Toast.Show(Const.Window.main, MainLang.SourceFileNotExists, ToastPosition.Top);
                     playing = false;
                     PlaySlider.Maximum = 0;
                     TimeText.Text = $"00:00/00:00";
@@ -608,7 +590,7 @@ namespace YMCL.Main.Views.MusicPlayer.Main
             {
                 var availability = false;
                 #region CheckSong
-                Panuon.WPF.UI.Toast.Show(Const.Window.musicPlayer, MainLang.CheckSongAvailability, ToastPosition.Top);
+                Panuon.WPF.UI.Toast.Show(Const.Window.main, MainLang.CheckSongAvailability, ToastPosition.Top);
                 using var client = new HttpClient();
                 var res = "";
                 var url = $"http://music.api.daiyu.fun/check/music?id={song.SongId}";
@@ -620,7 +602,7 @@ namespace YMCL.Main.Views.MusicPlayer.Main
                 }
                 catch (Exception)
                 {
-                    Panuon.WPF.UI.Toast.Show(Const.Window.musicPlayer, MainLang.CannotConnectToApi, ToastPosition.Top);
+                    Panuon.WPF.UI.Toast.Show(Const.Window.main, MainLang.CannotConnectToApi, ToastPosition.Top);
                     SearchBox.IsEnabled = true;
                     gettingMusic = false;
                     return;
@@ -628,7 +610,7 @@ namespace YMCL.Main.Views.MusicPlayer.Main
                 var obj = JsonConvert.DeserializeObject<Usefulness>(res);
                 if (!obj.success)
                 {
-                    Panuon.WPF.UI.Toast.Show(Const.Window.musicPlayer, MainLang.MusicUnavailable, ToastPosition.Top);
+                    Panuon.WPF.UI.Toast.Show(Const.Window.main, MainLang.MusicUnavailable, ToastPosition.Top);
                     availability = false;
                 }
                 else
@@ -645,7 +627,7 @@ namespace YMCL.Main.Views.MusicPlayer.Main
                     return;
                 }
                 #endregion
-                Panuon.WPF.UI.Toast.Show(Const.Window.musicPlayer, MainLang.GettingMusic, ToastPosition.Top);
+                Panuon.WPF.UI.Toast.Show(Const.Window.main, MainLang.GettingMusic, ToastPosition.Top);
                 using var client1 = new HttpClient();
                 var res1 = "";
                 var url1 = $"http://music.api.daiyu.fun/song/url?id={song.SongId}";
@@ -657,13 +639,13 @@ namespace YMCL.Main.Views.MusicPlayer.Main
                 }
                 catch (Exception)
                 {
-                    Panuon.WPF.UI.Toast.Show(Const.Window.musicPlayer, MainLang.CannotConnectToApi, ToastPosition.Top);
+                    Panuon.WPF.UI.Toast.Show(Const.Window.main, MainLang.CannotConnectToApi, ToastPosition.Top);
                     gettingMusic = false;
                     return;
                 }
                 var obj1 = JsonConvert.DeserializeObject<NetWorkSong>(res1);
 
-                Panuon.WPF.UI.Toast.Show(Const.Window.musicPlayer, MainLang.GettingLyric, ToastPosition.Top);
+                Panuon.WPF.UI.Toast.Show(Const.Window.main, MainLang.GettingLyric, ToastPosition.Top);
                 using var client2 = new HttpClient();
                 var res2 = "";
                 try
@@ -675,7 +657,7 @@ namespace YMCL.Main.Views.MusicPlayer.Main
                 }
                 catch (Exception)
                 {
-                    Panuon.WPF.UI.Toast.Show(Const.Window.musicPlayer, MainLang.CannotConnectToApi, ToastPosition.Top);
+                    Panuon.WPF.UI.Toast.Show(Const.Window.main, MainLang.CannotConnectToApi, ToastPosition.Top);
                     SearchBox.IsEnabled = true;
                     return;
                 }
@@ -762,11 +744,11 @@ namespace YMCL.Main.Views.MusicPlayer.Main
                 if (lyrics[i].Time > currentTime)
                 {
                     // 更新Run元素的样式
-                    if (i - 2 >= 0)
+                    lyricRuns.ForEach(x =>
                     {
-                        lyricRuns[i - 2].Foreground = (SolidColorBrush)appResources["TextColor"];
-                        lyricRuns[i - 2].FontWeight = FontWeights.Normal;
-                    }
+                        x.Foreground = (SolidColorBrush)appResources["TextColor"];
+                        x.FontWeight = FontWeights.Normal;
+                    });
                     lyricRuns[i - 1].Foreground = new SolidColorBrush((System.Windows.Media.Color)ThemeManager.Current.AccentColor);
                     Const.Window.desktopLyric.Lyric.Text = lyricRuns[i - 1].Text;
                     Const.Window.desktopLyric.Lyric.Foreground = new SolidColorBrush((System.Windows.Media.Color)ThemeManager.Current.AccentColor);
@@ -879,7 +861,7 @@ namespace YMCL.Main.Views.MusicPlayer.Main
             }
             if (save)
             {
-                var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.SettingDataPath));
+                var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
                 setting.PlayerRepeat = repeat;
                 File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
             }
@@ -889,7 +871,7 @@ namespace YMCL.Main.Views.MusicPlayer.Main
             var song = PlayListView.SelectedItem as PlaySongListViewItemEntry;
             if (song == null)
             {
-                Panuon.WPF.UI.Toast.Show(Const.Window.musicPlayer, MainLang.NoChooseSong, ToastPosition.Top);
+                Panuon.WPF.UI.Toast.Show(Const.Window.main, MainLang.NoChooseSong, ToastPosition.Top);
                 return;
             }
             var SaveFileName = song.SongName;
@@ -901,14 +883,14 @@ namespace YMCL.Main.Views.MusicPlayer.Main
             save.ShowDialog();
             if (save.FileName == SaveFileName)
             {
-                Panuon.WPF.UI.Toast.Show(Const.Window.musicPlayer, MainLang.SaveCancel, ToastPosition.Top);
+                Panuon.WPF.UI.Toast.Show(Const.Window.main, MainLang.SaveCancel, ToastPosition.Top);
                 return;
             }
             if (song.Type == PlaySongListViewItemEntry.PlaySongListViewItemEntryType.Local)
             {
                 if (!File.Exists(song.Path))
                 {
-                    Panuon.WPF.UI.Toast.Show(Const.Window.musicPlayer, MainLang.SourceFileNotExists, ToastPosition.Top);
+                    Panuon.WPF.UI.Toast.Show(Const.Window.main, MainLang.SourceFileNotExists, ToastPosition.Top);
                     return;
                 }
                 string sourceFile = song.Path;
@@ -919,14 +901,14 @@ namespace YMCL.Main.Views.MusicPlayer.Main
                 }
                 catch (Exception ex)
                 {
-                    Panuon.WPF.UI.Toast.Show(Const.Window.musicPlayer, $"{MainLang.CopyFileFail}：" + ex.Message, ToastPosition.Top);
+                    Panuon.WPF.UI.Toast.Show(Const.Window.main, $"{MainLang.CopyFileFail}：" + ex.Message, ToastPosition.Top);
                 }
             }
             else
             {
                 try
                 {
-                    Panuon.WPF.UI.Toast.Show(Const.Window.musicPlayer, MainLang.BeginDownload, ToastPosition.Top);
+                    Panuon.WPF.UI.Toast.Show(Const.Window.main, MainLang.BeginDownload, ToastPosition.Top);
                     await Task.Run(async () =>
                     {
                         using (var client = new HttpClient())
@@ -938,11 +920,11 @@ namespace YMCL.Main.Views.MusicPlayer.Main
                             }
                         }
                     });
-                    Panuon.WPF.UI.Toast.Show(Const.Window.musicPlayer, MainLang.InitializeWindow_DownloadFinish, ToastPosition.Top);
+                    Panuon.WPF.UI.Toast.Show(Const.Window.main, MainLang.InitializeWindow_DownloadFinish, ToastPosition.Top);
                 }
                 catch (Exception ex)
                 {
-                    Panuon.WPF.UI.Toast.Show(Const.Window.musicPlayer, $"{MainLang.DownloadFail}：" + ex.Message, ToastPosition.Top);
+                    Panuon.WPF.UI.Toast.Show(Const.Window.main, $"{MainLang.DownloadFail}：" + ex.Message, ToastPosition.Top);
                 }
             }
         }
