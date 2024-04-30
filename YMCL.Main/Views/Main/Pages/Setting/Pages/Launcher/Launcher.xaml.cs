@@ -7,6 +7,7 @@ using System.Security.Principal;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
+using iNKORE.UI.WPF.Modern.Controls;
 using Microsoft.Win32;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -18,6 +19,7 @@ using YMCL.Main.Public.Lang;
 using Application = System.Windows.Application;
 using File = System.IO.File;
 using MessageBoxIcon = Panuon.WPF.UI.MessageBoxIcon;
+using Page = System.Windows.Controls.Page;
 using SaveFileDialog = Microsoft.Win32.SaveFileDialog;
 
 namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launcher
@@ -42,16 +44,34 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launcher
             var url = string.Empty;
             _2018k obj = null;
             CheckUpdate.IsEnabled = false;
-            try
+            ProgressRing ring = new ProgressRing();
+            CheckUpdate.Width = CheckUpdate.ActualWidth;
+            CheckUpdate.Content = ring;
+            ring.Height = 17;
+            ring.Width = 17;
+            await Task.Run(() =>
             {
-                obj = JsonConvert.DeserializeObject<_2018k>(updater.GetUpdateFile(Const.UpdaterId));
-            }
-            catch
+                try
+                {
+                    obj = JsonConvert.DeserializeObject<_2018k>(updater.GetUpdateFile(Const.UpdaterId));
+                }
+                catch
+                {
+                    Dispatcher.BeginInvoke(() =>
+                    {
+                        Toast.Show(message: LangHelper.Current.GetText("CheckUpdateFailed"), position: ToastPosition.Top, window: Const.Window.main);
+                        CheckUpdate.Content = MainLang.CheckUpdate;
+                        CheckUpdate.IsEnabled = true;
+                    });
+                    return;
+                }
+            });
+            CheckUpdate.Content = MainLang.CheckUpdate;
+            if (obj != null)
             {
-                Toast.Show(message: LangHelper.Current.GetText("CheckUpdateFailed"), position: ToastPosition.Top, window: Const.Window.main);
-                return;
+                CheckUpdate.Content = MainLang.CheckUpdate;
+                CheckUpdate.IsEnabled = true; return;
             }
-
             bool Is64BitProcess = Environment.Is64BitProcess;
             if (obj.EnabledGithubApi)
             {

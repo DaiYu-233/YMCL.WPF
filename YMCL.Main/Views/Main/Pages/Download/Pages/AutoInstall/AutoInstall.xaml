@@ -19,7 +19,7 @@
         </EventTrigger>
     </Page.Triggers>
     <Grid>
-        <ui:ProgressRing x:Name="VanlliaLoading" Height="52" Width="52" Value="67" IsIndeterminate="True" Maximum="100" Minimum="0"/>
+        <ui:ProgressRing x:Name="VanlliaLoading" Height="52" Width="52" IsIndeterminate="True" Maximum="100" Minimum="0"/>
         <ui:FontIcon x:Name="VanlliaLoadFail" Glyph="&#xE8BB;" Foreground="#FFC42B1C" FontSize="32" Visibility="Hidden" Cursor="Hand" PreviewMouseDown="VanlliaLoadFail_PreviewMouseDown" />
         <Grid x:Name="VanlliaListGrid" Background="{DynamicResource 2x}" Visibility="Collapsed" >
             <ScrollViewer x:Name="VanlliaScrollViewer" Margin="0,0,5,0">
