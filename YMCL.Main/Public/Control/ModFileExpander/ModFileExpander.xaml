@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="YMCL.Main.Public.Control.ModFileExpander.ModFileExpander" 
+             xmlns:properties="clr-namespace:YMCL.Main.Public.Lang" xmlns:ui="http://schemas.inkore.net/lib/ui/wpf/modern" 
+             xmlns:pu="https://opensource.panuon.com/wpf-ui"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" >
+    <ui:ClippingBorder CornerRadius="5" Padding="10" Background="{DynamicResource 2x}">
+        <Expander x:Name="Expander" Header="Header" FontFamily="{DynamicResource Font}" >
+            <Grid x:Name="Grid">
+                <ui:ListView x:Name="ModFileListView"  FontFamily="{DynamicResource Font}" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,10,10,10" DockPanel.Dock="Top" ScrollViewer.VerticalScrollBarVisibility="Disabled" >
+                    <ui:ListView.ItemTemplate>
+                        <DataTemplate>
+                            <DockPanel Margin="-8,0,10,0">
+                                <Grid Margin="6.5,0,0,0">
+                                    <TextBlock ><Run  Text="{Binding FileName}"  FontFamily="MiSans Medium"  FontSize="14"/><Run Text=" "/></TextBlock>
+                                    <!--<TextBlock  Margin="1,17,0,0" FontSize="12" Foreground="#E48A8A8A"><Run FontFamily="MiSans Medium"  Text="{Binding ModLoaderType}" FontSize="11"/><Run Text="  "/></TextBlock>-->
+                                </Grid>
+                            </DockPanel>
+                        </DataTemplate>
+                    </ui:ListView.ItemTemplate>
+                </ui:ListView>
+            </Grid>
+        </Expander>
+    </ui:ClippingBorder>
+</UserControl>

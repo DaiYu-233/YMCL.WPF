@@ -1,0 +1,11 @@
+﻿[*.cs]
+
+# CS8600: 将 null 字面量或可能为 null 的值转换为非 null 类型。
+dotnet_diagnostic.CS8600.severity = suggestion
+dotnet_diagnostic.CS8602.severity = suggestion
+dotnet_diagnostic.CS8604.severity = suggestion
+dotnet_diagnostic.CS8618.severity = suggestion
+dotnet_diagnostic.CS8601.severity = suggestion
+dotnet_diagnostic.CS8625.severity = suggestion
+dotnet_diagnostic.CS8612.severity = suggestion
+dotnet_diagnostic.CS0108.severity = suggestion

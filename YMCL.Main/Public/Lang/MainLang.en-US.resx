@@ -1,0 +1,789 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="InitializeWindow_Title" xml:space="preserve">
+    <value>YMCL Initialization</value>
+  </data>
+  <data name="InitializeWindow_Title_Download" xml:space="preserve">
+    <value>YMCL Initialization - Download Resources</value>
+  </data>
+  <data name="InitializeWindow_NextSetpBtn" xml:space="preserve">
+    <value>Next Step</value>
+  </data>
+  <data name="InitializeWindow_DownloadFinish" xml:space="preserve">
+    <value>Download completed</value>
+  </data>
+  <data name="InitializeWindow_Download_AdministratorPermissionRequired" xml:space="preserve">
+    <value>Administrator privileges are required to initialize YMCL, Click OK to restart the program with administrator privileges</value>
+  </data>
+  <data name="InitializeWindow_DownloadWaiting" xml:space="preserve">
+    <value>Waiting</value>
+  </data>
+  <data name="InitializeWindow_InitializeFinish" xml:space="preserve">
+    <value>YMCL initialization complete</value>
+  </data>
+  <data name="InitializeWindow_Connecting" xml:space="preserve">
+    <value>Connecting</value>
+  </data>
+  <data name="InitializeWindow_ConnectionFailed" xml:space="preserve">
+    <value>Connection Failed</value>
+  </data>
+  <data name="InitializeWindow_ConnectionTimeout" xml:space="preserve">
+    <value>Connection Timeout</value>
+  </data>
+  <data name="MainWindow_Title" xml:space="preserve">
+    <value>YMCL</value>
+  </data>
+  <data name="InitializeWindow_FailedToObtainAdministratorPrivileges" xml:space="preserve">
+    <value>Failed to get administrator privileges, YMCL initialization failed</value>
+  </data>
+  <data name="MainWindow_NavigationLaunch" xml:space="preserve">
+    <value>   Launch</value>
+  </data>
+  <data name="MainWindow_NavigationSetting" xml:space="preserve">
+    <value>   Settings</value>
+  </data>
+  <data name="MainWindow_NavigationDownload" xml:space="preserve">
+    <value>   Download</value>
+  </data>
+  <data name="MainWindow_NavigationMore" xml:space="preserve">
+    <value>   More</value>
+  </data>
+  <data name="Setting_Navigation_Launch" xml:space="preserve">
+    <value>Launch</value>
+  </data>
+  <data name="Setting_Navigation_Account" xml:space="preserve">
+    <value>Account</value>
+  </data>
+  <data name="Setting_Navigation_Download" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="Launcher_SettingItem_Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="Launcher_SettingItem_CustomMainPage" xml:space="preserve">
+    <value>Customize the home screen</value>
+  </data>
+  <data name="Launcher_SettingItem_EditCustomHomePage" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="Launcher_UseCustomHomePageToggle_Toggled_On_Info" xml:space="preserve">
+    <value>Custom pages will be enabled, YMCL does not guarantee the security of custom content, insecure custom content may cause devices to be attacked, etc</value>
+  </data>
+  <data name="Launch_Launch_CustomPageSourceError" xml:space="preserve">
+    <value>Custom page (Xaml) source code error</value>
+  </data>
+  <data name="Launch_MinecraftFolder" xml:space="preserve">
+    <value>Minecraft Folder</value>
+  </data>
+  <data name="Launch_AddMinecraftFolder" xml:space="preserve">
+    <value>Add Folder</value>
+  </data>
+  <data name="Launch_DelMinecraftFolder" xml:space="preserve">
+    <value>Remove Selected</value>
+  </data>
+  <data name="Launch_AddMinecraftFolder_Click_NeedMinecraftFolder" xml:space="preserve">
+    <value>Need to select the .minecraft folder</value>
+  </data>
+  <data name="Launch_AddMinecraftFolder_Click_ExistsMinecraftFolder" xml:space="preserve">
+    <value>This folder already exists</value>
+  </data>
+  <data name="Launch_AutoFindJava" xml:space="preserve">
+    <value>Automatic Scan</value>
+  </data>
+  <data name="Launch_ManualAddJava" xml:space="preserve">
+    <value>Added manually</value>
+  </data>
+  <data name="Launch_ManualAddJava_Click_ExistsJava" xml:space="preserve">
+    <value>This Java already exists</value>
+  </data>
+  <data name="Launch_AutoFindJava_Click_ScanCompleted" xml:space="preserve">
+    <value>Scan Complete: {|} Java found, of which {|} already exist in the list</value>
+  </data>
+  <data name="Account_AddAccount" xml:space="preserve">
+    <value>Add New Account</value>
+  </data>
+  <data name="Account_DelAccount" xml:space="preserve">
+    <value>Delete the selected account</value>
+  </data>
+  <data name="Account_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Account_Offline" xml:space="preserve">
+    <value>Offline Login</value>
+  </data>
+  <data name="Account_Microsoft" xml:space="preserve">
+    <value>Microsoft Login</value>
+  </data>
+  <data name="Account_Third_Party" xml:space="preserve">
+    <value>The Third-Party Login</value>
+  </data>
+  <data name="Account_UserName" xml:space="preserve">
+    <value>Game username</value>
+  </data>
+  <data name="Account_Sure" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Account_VerificationCode" xml:space="preserve">
+    <value>Verification Code</value>
+  </data>
+  <data name="Account_Loading" xml:space="preserve">
+    <value>Loading...</value>
+  </data>
+  <data name="Account_CopyCodeAndOpenBrowser" xml:space="preserve">
+    <value>Copy the code and open your browser</value>
+  </data>
+  <data name="Account_Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="Account_ServerUrl" xml:space="preserve">
+    <value>Authentication server</value>
+  </data>
+  <data name="Account_Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Account_OfflineAccountAddBtn_Click_OfflineUserNameNull" xml:space="preserve">
+    <value>Username cannot be empty</value>
+  </data>
+  <data name="Launch_MaxMem" xml:space="preserve">
+    <value>Maximum Running Memory</value>
+  </data>
+  <data name="Launch_ImportPack" xml:space="preserve">
+    <value>Import Package</value>
+  </data>
+  <data name="Launch_Refresh" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="Launch_VersionList" xml:space="preserve">
+    <value>Version List</value>
+  </data>
+  <data name="Launch_ToVersionList" xml:space="preserve">
+    <value> Version List </value>
+  </data>
+  <data name="Launch_ToVersionSetting" xml:space="preserve">
+    <value> Version Settings </value>
+  </data>
+  <data name="Launch_LaunchGame" xml:space="preserve">
+    <value>Launch</value>
+  </data>
+  <data name="Launch_NoChooseGame" xml:space="preserve">
+    <value>&lt; No game core selected &gt;</value>
+  </data>
+  <data name="Launch_LoadMinecraftVersion_GetVersionListError" xml:space="preserve">
+    <value>Error fetching version list</value>
+  </data>
+  <data name="Launch_AutoSelectJava" xml:space="preserve">
+    <value>Let YMCL choose the right Java</value>
+  </data>
+  <data name="InitializeWindow_DownloadHelp" xml:space="preserve">
+    <value>Can't finish downloading? Click for help</value>
+  </data>
+  <data name="Launch_LaunchGame_Click_AccountError" xml:space="preserve">
+    <value>Account Error</value>
+  </data>
+  <data name="Launch_LaunchGame_Click_JavaError" xml:space="preserve">
+    <value>Java Error</value>
+  </data>
+  <data name="Launch_AloneCore" xml:space="preserve">
+    <value>Version Isolated</value>
+  </data>
+  <data name="Launch_LaunchGame_Click_Launched" xml:space="preserve">
+    <value>Startup complete</value>
+  </data>
+  <data name="Launch_LaunchGame_Click_CannotFandRightJava" xml:space="preserve">
+    <value>YMCL can't find the Java you need right now: Java</value>
+  </data>
+  <data name="Launch_LaunchGame_Click_FinishLaunch" xml:space="preserve">
+    <value>Launch complete, waiting for the game window to appear</value>
+  </data>
+  <data name="Launch_LaunchGame_Click_GameExit" xml:space="preserve">
+    <value>Game exited</value>
+  </data>
+  <data name="Launch_LaunchGame_Click_LaunchSuccess" xml:space="preserve">
+    <value>Launch successfully</value>
+  </data>
+  <data name="OpenSourceProjectUsageTable" xml:space="preserve">
+    <value>Open Source Project Usage Sheet</value>
+  </data>
+  <data name="CheckUpdate" xml:space="preserve">
+    <value>Check updates now</value>
+  </data>
+  <data name="GPL3Text" xml:space="preserve">
+    <value>The YMCL is open source under the GPL-3.0 protocol. It can be modified and distributed, but the mark of the original work must not be deleted. The modified work must also be open-sourced under the GPL</value>
+  </data>
+  <data name="FindNewVersion" xml:space="preserve">
+    <value>Found new version</value>
+  </data>
+  <data name="LatestVersion" xml:space="preserve">
+    <value>Is currently the latest version</value>
+  </data>
+  <data name="UpdateInfo" xml:space="preserve">
+    <value>Update of Content</value>
+  </data>
+  <data name="DownloadUpdateQuestion" xml:space="preserve">
+    <value>New version found, would you like to download the update?</value>
+  </data>
+  <data name="TaskProgressWindow_Title" xml:space="preserve">
+    <value>Task Progress</value>
+  </data>
+  <data name="DownloadUpdate" xml:space="preserve">
+    <value>Download Update</value>
+  </data>
+  <data name="CheckUpdateFailed" xml:space="preserve">
+    <value>Check update failed</value>
+  </data>
+  <data name="BeginUpdate" xml:space="preserve">
+    <value>Start downloading update</value>
+  </data>
+  <data name="FinishUpdate" xml:space="preserve">
+    <value>Update Download Completed</value>
+  </data>
+  <data name="DownloadFail" xml:space="preserve">
+    <value>Download failed</value>
+  </data>
+  <data name="Setting_Navigation_Launcher" xml:space="preserve">
+    <value>Personalize</value>
+  </data>
+  <data name="Setting_Navigation_About" xml:space="preserve">
+    <value>Launcher</value>
+  </data>
+  <data name="DisplayTheme" xml:space="preserve">
+    <value>Color Mode</value>
+  </data>
+  <data name="FollowSystem" xml:space="preserve">
+    <value>Follow System</value>
+  </data>
+  <data name="Light" xml:space="preserve">
+    <value>Light</value>
+  </data>
+  <data name="Dark" xml:space="preserve">
+    <value>Dark</value>
+  </data>
+  <data name="DownloadSource" xml:space="preserve">
+    <value>Download Source</value>
+  </data>
+  <data name="MaximumDownloadThread" xml:space="preserve">
+    <value>Max Download Threads</value>
+  </data>
+  <data name="Launch_LaunchGame_Click_NoChooseGame" xml:space="preserve">
+    <value>No game version selected or this version not found</value>
+  </data>
+  <data name="ArgsError" xml:space="preserve">
+    <value>Parameter error</value>
+  </data>
+  <data name="Launch_GameWindow" xml:space="preserve">
+    <value>Game Window</value>
+  </data>
+  <data name="Launch_DefaultSize" xml:space="preserve">
+    <value>Default Size</value>
+  </data>
+  <data name="Launch_FullScreen" xml:space="preserve">
+    <value>Full Screen</value>
+  </data>
+  <data name="Launch_CustomSize" xml:space="preserve">
+    <value>Custom</value>
+  </data>
+  <data name="Launch_OutputLogReceived" xml:space="preserve">
+    <value>Show Output Log</value>
+  </data>
+  <data name="LaunchFail" xml:space="preserve">
+    <value>Launch Fail</value>
+  </data>
+  <data name="GameExitLogWindow" xml:space="preserve">
+    <value>Close this window after 3s</value>
+  </data>
+  <data name="BuildLaunchConfigError" xml:space="preserve">
+    <value>Build launch parameter error, check launch settings for errors</value>
+  </data>
+  <data name="Launch_TabItem_Overview" xml:space="preserve">
+    <value>Overview</value>
+  </data>
+  <data name="Launch_TabItem_Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Launch_TabItem_Mods" xml:space="preserve">
+    <value>Mods</value>
+  </data>
+  <data name="VerifyingAccount" xml:space="preserve">
+    <value>Verifying Account</value>
+  </data>
+  <data name="Launch_LaunchBtn" xml:space="preserve">
+    <value>Launch</value>
+  </data>
+  <data name="Launch_LaunchBtn_Click_AccountError" xml:space="preserve">
+    <value>Account Error</value>
+  </data>
+  <data name="Launch_LaunchBtn_Click_NoChooseGame" xml:space="preserve">
+    <value>No choose game core or game not found</value>
+  </data>
+  <data name="Launch_LaunchBtn_Click_JavaError" xml:space="preserve">
+    <value>Java Error</value>
+  </data>
+  <data name="Launch_LaunchBtn_Click_Launched" xml:space="preserve">
+    <value>Launched</value>
+  </data>
+  <data name="Launch_LaunchBtn_Click_FinishLaunch" xml:space="preserve">
+    <value>Launch complete, waiting for the game window to appear</value>
+  </data>
+  <data name="Launch_LaunchBtn_Click_GameExit" xml:space="preserve">
+    <value>Game exited</value>
+  </data>
+  <data name="Launch_LaunchBtn_Click_LaunchSuccess" xml:space="preserve">
+    <value>Launch successfully</value>
+  </data>
+  <data name="SaveCancel" xml:space="preserve">
+    <value>Saved canceled</value>
+  </data>
+  <data name="SaveSuccess" xml:space="preserve">
+    <value>Save successfully</value>
+  </data>
+  <data name="SaveSkin" xml:space="preserve">
+    <value>Save skin file</value>
+  </data>
+  <data name="Launch_LaunchBtn_Click_CannotFandRightJava" xml:space="preserve">
+    <value>YMCL can't find the Java you need right now: Java</value>
+  </data>
+  <data name="Launch_VersionFolder" xml:space="preserve">
+    <value>Version Folder</value>
+  </data>
+  <data name="Launch_SavesFolder" xml:space="preserve">
+    <value>Archive Folder</value>
+  </data>
+  <data name="Launch_ModFolder" xml:space="preserve">
+    <value>Mod Folder</value>
+  </data>
+  <data name="Launch_ResourcePackFolder" xml:space="preserve">
+    <value>ResourcePack Folder</value>
+  </data>
+  <data name="Launch_ShaderPackFolder" xml:space="preserve">
+    <value>ShaderPack Folder</value>
+  </data>
+  <data name="Launch_UseGlobalSettings" xml:space="preserve">
+    <value>Use Global Setting</value>
+  </data>
+  <data name="Launch_SelectAll" xml:space="preserve">
+    <value>Select All</value>
+  </data>
+  <data name="Launch_DeselectAll" xml:space="preserve">
+    <value>Deselect all</value>
+  </data>
+  <data name="Launch_DisableSelectedItem" xml:space="preserve">
+    <value>Disable Selected</value>
+  </data>
+  <data name="Launch_EnableSelectedItem" xml:space="preserve">
+    <value>Enable Selected</value>
+  </data>
+  <data name="Launch_DeleteSelectedItem" xml:space="preserve">
+    <value>Delete Selected</value>
+  </data>
+  <data name="Launch_SelectedModCount" xml:space="preserve">
+    <value>{|} files selected</value>
+  </data>
+  <data name="SureDeleteMod" xml:space="preserve">
+    <value>Move the following Mods to the Trash</value>
+  </data>
+  <data name="LoginFail" xml:space="preserve">
+    <value>Login failed</value>
+  </data>
+  <data name="UserDataError" xml:space="preserve">
+    <value>User data processing failed</value>
+  </data>
+  <data name="DownloadThreadTooBig" xml:space="preserve">
+    <value>The download thread is too large and may cause the device to crash</value>
+  </data>
+  <data name="LoadVersionSettingFail" xml:space="preserve">
+    <value>Failed to load version settings</value>
+  </data>
+  <data name="On" xml:space="preserve">
+    <value>On</value>
+  </data>
+  <data name="Off" xml:space="preserve">
+    <value>Off</value>
+  </data>
+  <data name="UseGlobalSetting" xml:space="preserve">
+    <value>Use Global Setting</value>
+  </data>
+  <data name="AutoJoinServer" xml:space="preserve">
+    <value>Automatically enter the server</value>
+  </data>
+  <data name="AutoInstall" xml:space="preserve">
+    <value>Automatic installation</value>
+  </data>
+  <data name="AllVersion" xml:space="preserve">
+    <value>All versions</value>
+  </data>
+  <data name="ReleaseVersion" xml:space="preserve">
+    <value>formal edition</value>
+  </data>
+  <data name="SnapshotVersion" xml:space="preserve">
+    <value>preview edition</value>
+  </data>
+  <data name="OldVersion" xml:space="preserve">
+    <value>ancient version</value>
+  </data>
+  <data name="InstallFinish" xml:space="preserve">
+    <value>The installation is complete</value>
+  </data>
+  <data name="InstallPreview" xml:space="preserve">
+    <value>Install Preview</value>
+  </data>
+  <data name="BeginInstall" xml:space="preserve">
+    <value>Start Install</value>
+  </data>
+  <data name="AdditionalInstall" xml:space="preserve">
+    <value>No additional installation</value>
+  </data>
+  <data name="Return" xml:space="preserve">
+    <value>Return</value>
+  </data>
+  <data name="IncludeSpecialWord" xml:space="preserve">
+    <value>Contains Special Characters</value>
+  </data>
+  <data name="FileExists" xml:space="preserve">
+    <value>Folder already exists</value>
+  </data>
+  <data name="ViewUpdate" xml:space="preserve">
+    <value>What's New</value>
+  </data>
+  <data name="LatsetVersion" xml:space="preserve">
+    <value>Latest Version</value>
+  </data>
+  <data name="WaitForGameWindowAppear" xml:space="preserve">
+    <value>Wait for the game window to appear</value>
+  </data>
+  <data name="LocalFile" xml:space="preserve">
+    <value>Local File</value>
+  </data>
+  <data name="NetFile" xml:space="preserve">
+    <value>Net file</value>
+  </data>
+  <data name="EditXaml" xml:space="preserve">
+    <value>Edit Xaml</value>
+  </data>
+  <data name="EditCSharp" xml:space="preserve">
+    <value>Edit C #</value>
+  </data>
+  <data name="NeedRestartApp" xml:space="preserve">
+    <value>YMCL needs to be restarted</value>
+  </data>
+  <data name="CustomHomePageCSharpSouceError" xml:space="preserve">
+    <value>Custom page (C #) source code error</value>
+  </data>
+  <data name="ComPileCSharpError" xml:space="preserve">
+    <value>Compile C # Error</value>
+  </data>
+  <data name="InstallFail" xml:space="preserve">
+    <value>Installation failled</value>
+  </data>
+  <data name="GetInstallableVersionFail" xml:space="preserve">
+    <value>Failed to get installable version</value>
+  </data>
+  <data name="Folder" xml:space="preserve">
+    <value>Folder</value>
+  </data>
+  <data name="UserData" xml:space="preserve">
+    <value>User Data</value>
+  </data>
+  <data name="AppData" xml:space="preserve">
+    <value>App Data</value>
+  </data>
+  <data name="OpenFolder" xml:space="preserve">
+    <value>Open Folder</value>
+  </data>
+  <data name="NoNetwork" xml:space="preserve">
+    <value>No Network Connection</value>
+  </data>
+  <data name="GetNoticeFail" xml:space="preserve">
+    <value>Failed to get announcements</value>
+  </data>
+  <data name="Notice" xml:space="preserve">
+    <value>Notice</value>
+  </data>
+  <data name="CannotFandRightJavaText" xml:space="preserve">
+    <value>YMCL can't find the Java you need right now</value>
+  </data>
+  <data name="YMCLNewVersion" xml:space="preserve">
+    <value>Ymcl update available</value>
+  </data>
+  <data name="YggdrasilServerUrlIsEmpty" xml:space="preserve">
+    <value>Verification server cannot be empty</value>
+  </data>
+  <data name="YggdrasilPasswordIsEmpty" xml:space="preserve">
+    <value>Password cannot be empty</value>
+  </data>
+  <data name="YggdrasilEmailIsEmpty" xml:space="preserve">
+    <value>Email cannot be empty</value>
+  </data>
+  <data name="App_UnhandledException" xml:space="preserve">
+    <value>YMCL has an unhandled exception</value>
+  </data>
+  <data name="ThemeColor" xml:space="preserve">
+    <value>Theme color</value>
+  </data>
+  <data name="ShowWindow" xml:space="preserve">
+    <value>Show Window</value>
+  </data>
+  <data name="TrueExit" xml:space="preserve">
+    <value>Quit altogether</value>
+  </data>
+  <data name="TasksCenter" xml:space="preserve">
+    <value>task center</value>
+  </data>
+  <data name="Install" xml:space="preserve">
+    <value>Installation</value>
+  </data>
+  <data name="CreateTask" xml:space="preserve">
+    <value>Create Task</value>
+  </data>
+  <data name="ClickToViewTaskCenter" xml:space="preserve">
+    <value>Click to view mission progress &gt;&gt;</value>
+  </data>
+  <data name="OpenTaskCenter" xml:space="preserve">
+    <value>Open Task Center</value>
+  </data>
+  <data name="TreasureBox" xml:space="preserve">
+    <value>Treasure chest</value>
+  </data>
+  <data name="MusicPlayer" xml:space="preserve">
+    <value>Music Player</value>
+  </data>
+  <data name="OpenApp" xml:space="preserve">
+    <value>Open</value>
+  </data>
+  <data name="RepeatOpen" xml:space="preserve">
+    <value>Restart YMCL, go to the system tray to view the opened YMCL instance</value>
+  </data>
+  <data name="SearchFail" xml:space="preserve">
+    <value>Search failed</value>
+  </data>
+  <data name="SearchNoResult" xml:space="preserve">
+    <value>No result found</value>
+  </data>
+  <data name="AddLocalFile" xml:space="preserve">
+    <value>Add files</value>
+  </data>
+  <data name="SongFile" xml:space="preserve">
+    <value>Audio file</value>
+  </data>
+  <data name="SourceFileNotExists" xml:space="preserve">
+    <value>Source file does not exist, it may be moved, renamed or deleted</value>
+  </data>
+  <data name="CheckSongAvailability" xml:space="preserve">
+    <value>Checking music availability...</value>
+  </data>
+  <data name="CannotConnectToApi" xml:space="preserve">
+    <value>Unable to connect to the API</value>
+  </data>
+  <data name="MusicUnavailable" xml:space="preserve">
+    <value>Music not available</value>
+  </data>
+  <data name="GettingMusic" xml:space="preserve">
+    <value>Getting music...</value>
+  </data>
+  <data name="GettingLyric" xml:space="preserve">
+    <value>Get lyrics...</value>
+  </data>
+  <data name="NoChooseSong" xml:space="preserve">
+    <value>No music selected yet</value>
+  </data>
+  <data name="SaveMusicFile" xml:space="preserve">
+    <value>Save the audio file</value>
+  </data>
+  <data name="CopyFileFail" xml:space="preserve">
+    <value>Failed to copy file</value>
+  </data>
+  <data name="BeginDownload" xml:space="preserve">
+    <value>Start Download</value>
+  </data>
+  <data name="DesktopLyric" xml:space="preserve">
+    <value>Desktop lyrics</value>
+  </data>
+  <data name="DesktopLyricTextSize" xml:space="preserve">
+    <value>Desktop Lyrics Text Size</value>
+  </data>
+  <data name="DesktopLyricTextAlignment" xml:space="preserve">
+    <value>Desktop Lyrics Text Alignment Direction</value>
+  </data>
+  <data name="UseChange" xml:space="preserve">
+    <value>Apply changes</value>
+  </data>
+  <data name="LeftAlignment" xml:space="preserve">
+    <value>Left</value>
+  </data>
+  <data name="RightAlignment" xml:space="preserve">
+    <value>Right align</value>
+  </data>
+  <data name="CenterAlignment" xml:space="preserve">
+    <value>Center Align</value>
+  </data>
+  <data name="ImportFinish" xml:space="preserve">
+    <value>Imported</value>
+  </data>
+  <data name="GetVersionListFail" xml:space="preserve">
+    <value>Failed to get version list</value>
+  </data>
+  <data name="CustomIdHandleText" xml:space="preserve">
+    <value>The current version name will be saved as</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="ModName" xml:space="preserve">
+    <value>Mod Name</value>
+  </data>
+  <data name="MinecraftVersion" xml:space="preserve">
+    <value>Minecraft version</value>
+  </data>
+  <data name="LoadingMore" xml:space="preserve">
+    <value>Loading more</value>
+  </data>
+  <data name="AnyModLoader" xml:space="preserve">
+    <value>Any loader</value>
+  </data>
+  <data name="Music" xml:space="preserve">
+    <value>Music</value>
+  </data>
+  <data name="MainWindow_NavigationMusic" xml:space="preserve">
+    <value>   Music</value>
+  </data>
+  <data name="WriteShortCut" xml:space="preserve">
+    <value>Write a shortcut</value>
+  </data>
+  <data name="WriteShortCutDescription" xml:space="preserve">
+    <value>Create a shortcut to launch YMCL</value>
+  </data>
+  <data name="UseCommandLaunchYMCLDescription" xml:space="preserve">
+    <value>Launch YMCL by command</value>
+  </data>
+  <data name="UseCommandLaunchYMCL" xml:space="preserve">
+    <value>External launch</value>
+  </data>
+  <data name="SeletFolder" xml:space="preserve">
+    <value>Select Folder</value>
+  </data>
+  <data name="WriteReg" xml:space="preserve">
+    <value>Write registry</value>
+  </data>
+  <data name="FailToWriteReg" xml:space="preserve">
+    <value>Could not write to registry</value>
+  </data>
+  <data name="WriteFinish" xml:space="preserve">
+    <value>Writing image done</value>
+  </data>
+</root>

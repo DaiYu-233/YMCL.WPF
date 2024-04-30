@@ -1,0 +1,789 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="InitializeWindow_Title" xml:space="preserve">
+    <value>Инициализация YMCL</value>
+  </data>
+  <data name="InitializeWindow_Title_Download" xml:space="preserve">
+    <value>YMCL - Загрузите ресурсы</value>
+  </data>
+  <data name="InitializeWindow_NextSetpBtn" xml:space="preserve">
+    <value>Cледующий шаг</value>
+  </data>
+  <data name="InitializeWindow_DownloadFinish" xml:space="preserve">
+    <value>Загрузка завершена</value>
+  </data>
+  <data name="InitializeWindow_Download_AdministratorPermissionRequired" xml:space="preserve">
+    <value>Для инициализации YMCL требуются права администратора, Нажмите OK, чтобы перезапустить программу с правами администратора</value>
+  </data>
+  <data name="InitializeWindow_DownloadWaiting" xml:space="preserve">
+    <value>Ожидание</value>
+  </data>
+  <data name="InitializeWindow_InitializeFinish" xml:space="preserve">
+    <value>Инициализация YMCL завершена</value>
+  </data>
+  <data name="InitializeWindow_Connecting" xml:space="preserve">
+    <value>Соединение</value>
+  </data>
+  <data name="InitializeWindow_ConnectionFailed" xml:space="preserve">
+    <value>Не удалось подключить</value>
+  </data>
+  <data name="InitializeWindow_ConnectionTimeout" xml:space="preserve">
+    <value>Истекло время ожидания ответа</value>
+  </data>
+  <data name="MainWindow_Title" xml:space="preserve">
+    <value>YMCL</value>
+  </data>
+  <data name="InitializeWindow_FailedToObtainAdministratorPrivileges" xml:space="preserve">
+    <value>Не удалось получить права администратора, не удалось инициализировать YMCL</value>
+  </data>
+  <data name="MainWindow_NavigationLaunch" xml:space="preserve">
+    <value>   Пуск</value>
+  </data>
+  <data name="MainWindow_NavigationSetting" xml:space="preserve">
+    <value>   устанавливать</value>
+  </data>
+  <data name="MainWindow_NavigationDownload" xml:space="preserve">
+    <value>   загружать</value>
+  </data>
+  <data name="MainWindow_NavigationMore" xml:space="preserve">
+    <value>   Больше</value>
+  </data>
+  <data name="Setting_Navigation_Launch" xml:space="preserve">
+    <value>Пуск</value>
+  </data>
+  <data name="Setting_Navigation_Account" xml:space="preserve">
+    <value>Аккаунты</value>
+  </data>
+  <data name="Setting_Navigation_Download" xml:space="preserve">
+    <value>загружать</value>
+  </data>
+  <data name="Launcher_SettingItem_Language" xml:space="preserve">
+    <value>язык</value>
+  </data>
+  <data name="Launcher_SettingItem_CustomMainPage" xml:space="preserve">
+    <value>Настройте домашний экран</value>
+  </data>
+  <data name="Launcher_SettingItem_EditCustomHomePage" xml:space="preserve">
+    <value>редактор</value>
+  </data>
+  <data name="Launcher_UseCustomHomePageToggle_Toggled_On_Info" xml:space="preserve">
+    <value>Пользовательские страницы будут включены, YMCL не гарантирует безопасность пользовательского контента, небезопасный пользовательский контент может привести к атаке на устройства и т. д</value>
+  </data>
+  <data name="Launch_Launch_CustomPageSourceError" xml:space="preserve">
+    <value>Ошибка исходного кода пользовательской страницы (XAML)</value>
+  </data>
+  <data name="Launch_MinecraftFolder" xml:space="preserve">
+    <value>Папка Minecraft</value>
+  </data>
+  <data name="Launch_AddMinecraftFolder" xml:space="preserve">
+    <value>Добавить папку</value>
+  </data>
+  <data name="Launch_DelMinecraftFolder" xml:space="preserve">
+    <value>Удалить выбранное</value>
+  </data>
+  <data name="Launch_AddMinecraftFolder_Click_NeedMinecraftFolder" xml:space="preserve">
+    <value>Необходимо выбрать папку .minecraft</value>
+  </data>
+  <data name="Launch_AddMinecraftFolder_Click_ExistsMinecraftFolder" xml:space="preserve">
+    <value>Эта папка уже существует</value>
+  </data>
+  <data name="Launch_AutoFindJava" xml:space="preserve">
+    <value>Автоматическое сканирование</value>
+  </data>
+  <data name="Launch_ManualAddJava" xml:space="preserve">
+    <value>Добавить вручную</value>
+  </data>
+  <data name="Launch_ManualAddJava_Click_ExistsJava" xml:space="preserve">
+    <value>Эта Java уже существует</value>
+  </data>
+  <data name="Launch_AutoFindJava_Click_ScanCompleted" xml:space="preserve">
+    <value>Сканирование завершено: {|} Java найдена, из которых {|} уже существуют в списке</value>
+  </data>
+  <data name="Account_AddAccount" xml:space="preserve">
+    <value>Добавить новую учетную запись</value>
+  </data>
+  <data name="Account_DelAccount" xml:space="preserve">
+    <value>Удалите выбранную учетную запись</value>
+  </data>
+  <data name="Account_Cancel" xml:space="preserve">
+    <value>Отменить</value>
+  </data>
+  <data name="Account_Offline" xml:space="preserve">
+    <value>Войти в автономном режиме</value>
+  </data>
+  <data name="Account_Microsoft" xml:space="preserve">
+    <value>Microsoft Login</value>
+  </data>
+  <data name="Account_Third_Party" xml:space="preserve">
+    <value>Сторонний вход</value>
+  </data>
+  <data name="Account_UserName" xml:space="preserve">
+    <value>Имя пользователя игры</value>
+  </data>
+  <data name="Account_Sure" xml:space="preserve">
+    <value>Подтвердить</value>
+  </data>
+  <data name="Account_VerificationCode" xml:space="preserve">
+    <value>Проверьте код</value>
+  </data>
+  <data name="Account_Loading" xml:space="preserve">
+    <value>Загрузка...</value>
+  </data>
+  <data name="Account_CopyCodeAndOpenBrowser" xml:space="preserve">
+    <value>Скопируйте код и откройте браузер</value>
+  </data>
+  <data name="Account_Password" xml:space="preserve">
+    <value>Пароль учетной записи</value>
+  </data>
+  <data name="Account_ServerUrl" xml:space="preserve">
+    <value>Адрес сервера аутентификации</value>
+  </data>
+  <data name="Account_Email" xml:space="preserve">
+    <value>E-mail</value>
+  </data>
+  <data name="Account_OfflineAccountAddBtn_Click_OfflineUserNameNull" xml:space="preserve">
+    <value>Имя пользователя не может быть пустым</value>
+  </data>
+  <data name="Launch_MaxMem" xml:space="preserve">
+    <value>Максимальный объем оперативной памяти</value>
+  </data>
+  <data name="Launch_ImportPack" xml:space="preserve">
+    <value>Импортируйте интеграционный пакет</value>
+  </data>
+  <data name="Launch_Refresh" xml:space="preserve">
+    <value>Обновить</value>
+  </data>
+  <data name="Launch_VersionList" xml:space="preserve">
+    <value>Список версий</value>
+  </data>
+  <data name="Launch_ToVersionList" xml:space="preserve">
+    <value> Список версий </value>
+  </data>
+  <data name="Launch_ToVersionSetting" xml:space="preserve">
+    <value> Настройки версии </value>
+  </data>
+  <data name="Launch_LaunchGame" xml:space="preserve">
+    <value>Запустите игру</value>
+  </data>
+  <data name="Launch_NoChooseGame" xml:space="preserve">
+    <value>&lt; Ядро игры не выбрано &gt;</value>
+  </data>
+  <data name="Launch_LoadMinecraftVersion_GetVersionListError" xml:space="preserve">
+    <value>Ошибка при получении списка версий</value>
+  </data>
+  <data name="Launch_AutoSelectJava" xml:space="preserve">
+    <value>Пусть YMCL выберет правильную Java</value>
+  </data>
+  <data name="InitializeWindow_DownloadHelp" xml:space="preserve">
+    <value>Не можете завершить загрузку? Нажмите, чтобы получить помощь</value>
+  </data>
+  <data name="Launch_LaunchGame_Click_AccountError" xml:space="preserve">
+    <value>Ошибка аккаунта</value>
+  </data>
+  <data name="Launch_LaunchGame_Click_JavaError" xml:space="preserve">
+    <value>Ошибка Java</value>
+  </data>
+  <data name="Launch_AloneCore" xml:space="preserve">
+    <value>Версия изолирована</value>
+  </data>
+  <data name="Launch_LaunchGame_Click_Launched" xml:space="preserve">
+    <value>Запуск завершен</value>
+  </data>
+  <data name="Launch_LaunchGame_Click_CannotFandRightJava" xml:space="preserve">
+    <value>YMCL не может найти нужную вам Java прямо сейчас: Java</value>
+  </data>
+  <data name="Launch_LaunchGame_Click_FinishLaunch" xml:space="preserve">
+    <value>Запуск завершен, ждем появления игрового окна</value>
+  </data>
+  <data name="Launch_LaunchGame_Click_GameExit" xml:space="preserve">
+    <value>Игра завершена</value>
+  </data>
+  <data name="Launch_LaunchGame_Click_LaunchSuccess" xml:space="preserve">
+    <value>Успешно запущено</value>
+  </data>
+  <data name="OpenSourceProjectUsageTable" xml:space="preserve">
+    <value>Лист использования проекта с открытым исходным кодом</value>
+  </data>
+  <data name="CheckUpdate" xml:space="preserve">
+    <value>Проверить наличие обновлений</value>
+  </data>
+  <data name="GPL3Text" xml:space="preserve">
+    <value>YMCL является открытым исходным кодом под протоколом GPL-3.0. Он может быть изменен и распространен, но знак оригинальной работы не должен быть удален. Измененная работа также должна быть с открытым исходным кодом под GPL</value>
+  </data>
+  <data name="FindNewVersion" xml:space="preserve">
+    <value>Откройте для себя новые версии</value>
+  </data>
+  <data name="LatestVersion" xml:space="preserve">
+    <value>Вы обновлены</value>
+  </data>
+  <data name="UpdateInfo" xml:space="preserve">
+    <value>Обновления</value>
+  </data>
+  <data name="DownloadUpdateQuestion" xml:space="preserve">
+    <value>Найдена новая версия, хотите загрузить обновление?</value>
+  </data>
+  <data name="TaskProgressWindow_Title" xml:space="preserve">
+    <value>Прогресс миссии</value>
+  </data>
+  <data name="DownloadUpdate" xml:space="preserve">
+    <value>Скачать обновление</value>
+  </data>
+  <data name="CheckUpdateFailed" xml:space="preserve">
+    <value>Не удалось проверить наличие обновлений</value>
+  </data>
+  <data name="BeginUpdate" xml:space="preserve">
+    <value>Начните загрузку обновлений</value>
+  </data>
+  <data name="FinishUpdate" xml:space="preserve">
+    <value>Обновление загрузки завершено</value>
+  </data>
+  <data name="DownloadFail" xml:space="preserve">
+    <value>Загрузка не удалась</value>
+  </data>
+  <data name="Setting_Navigation_Launcher" xml:space="preserve">
+    <value>Персонализация</value>
+  </data>
+  <data name="Setting_Navigation_About" xml:space="preserve">
+    <value>Пусковая установка</value>
+  </data>
+  <data name="DisplayTheme" xml:space="preserve">
+    <value>Цветовой режим</value>
+  </data>
+  <data name="FollowSystem" xml:space="preserve">
+    <value>Следите за системой</value>
+  </data>
+  <data name="Light" xml:space="preserve">
+    <value>Светлый</value>
+  </data>
+  <data name="Dark" xml:space="preserve">
+    <value>Темный</value>
+  </data>
+  <data name="DownloadSource" xml:space="preserve">
+    <value>Скачать исходный код</value>
+  </data>
+  <data name="MaximumDownloadThread" xml:space="preserve">
+    <value>Максимальное количество загружаемых потоков</value>
+  </data>
+  <data name="Launch_LaunchGame_Click_NoChooseGame" xml:space="preserve">
+    <value>Версия игры не выбрана или эта версия не найдена</value>
+  </data>
+  <data name="ArgsError" xml:space="preserve">
+    <value>Ошибка параметра</value>
+  </data>
+  <data name="Launch_GameWindow" xml:space="preserve">
+    <value>Окно игры</value>
+  </data>
+  <data name="Launch_DefaultSize" xml:space="preserve">
+    <value>Размер по умолчанию</value>
+  </data>
+  <data name="Launch_FullScreen" xml:space="preserve">
+    <value>Полноэкранный режим</value>
+  </data>
+  <data name="Launch_CustomSize" xml:space="preserve">
+    <value>Пользовательское</value>
+  </data>
+  <data name="Launch_OutputLogReceived" xml:space="preserve">
+    <value>Показать журнал вывода</value>
+  </data>
+  <data name="LaunchFail" xml:space="preserve">
+    <value>Ошибка при запуске</value>
+  </data>
+  <data name="GameExitLogWindow" xml:space="preserve">
+    <value>Закройте это окно через 3 секунды</value>
+  </data>
+  <data name="BuildLaunchConfigError" xml:space="preserve">
+    <value>Ошибка параметра запуска сборки, проверьте настройки запуска на наличие ошибок</value>
+  </data>
+  <data name="Launch_TabItem_Overview" xml:space="preserve">
+    <value>Обзор</value>
+  </data>
+  <data name="Launch_TabItem_Settings" xml:space="preserve">
+    <value>устанавливать</value>
+  </data>
+  <data name="Launch_TabItem_Mods" xml:space="preserve">
+    <value>Mods</value>
+  </data>
+  <data name="VerifyingAccount" xml:space="preserve">
+    <value>Подтверждение аккаунта</value>
+  </data>
+  <data name="Launch_LaunchBtn" xml:space="preserve">
+    <value>Запустите игру</value>
+  </data>
+  <data name="Launch_LaunchBtn_Click_AccountError" xml:space="preserve">
+    <value>Ошибка аккаунта</value>
+  </data>
+  <data name="Launch_LaunchBtn_Click_NoChooseGame" xml:space="preserve">
+    <value>Не выбрано игровое ядро или игра не найдена</value>
+  </data>
+  <data name="Launch_LaunchBtn_Click_JavaError" xml:space="preserve">
+    <value>Ошибка Java</value>
+  </data>
+  <data name="Launch_LaunchBtn_Click_Launched" xml:space="preserve">
+    <value>Начато</value>
+  </data>
+  <data name="Launch_LaunchBtn_Click_FinishLaunch" xml:space="preserve">
+    <value>Запуск завершен, ждем появления игрового окна</value>
+  </data>
+  <data name="Launch_LaunchBtn_Click_GameExit" xml:space="preserve">
+    <value>Игра завершена</value>
+  </data>
+  <data name="Launch_LaunchBtn_Click_LaunchSuccess" xml:space="preserve">
+    <value>Успешно запущено</value>
+  </data>
+  <data name="SaveCancel" xml:space="preserve">
+    <value>Сохраненные данные отменены</value>
+  </data>
+  <data name="SaveSuccess" xml:space="preserve">
+    <value>Сохранение выполнено успешно</value>
+  </data>
+  <data name="SaveSkin" xml:space="preserve">
+    <value>Сохранить файл скина</value>
+  </data>
+  <data name="Launch_LaunchBtn_Click_CannotFandRightJava" xml:space="preserve">
+    <value>YMCL не может найти нужную вам Java прямо сейчас: Java</value>
+  </data>
+  <data name="Launch_VersionFolder" xml:space="preserve">
+    <value>Папка версий</value>
+  </data>
+  <data name="Launch_SavesFolder" xml:space="preserve">
+    <value>Архивировать папку</value>
+  </data>
+  <data name="Launch_ModFolder" xml:space="preserve">
+    <value>Папка модификаций</value>
+  </data>
+  <data name="Launch_ResourcePackFolder" xml:space="preserve">
+    <value>Папка пакета ресурсов</value>
+  </data>
+  <data name="Launch_ShaderPackFolder" xml:space="preserve">
+    <value>Папка Light Pack</value>
+  </data>
+  <data name="Launch_UseGlobalSettings" xml:space="preserve">
+    <value>Использовать общие настройки</value>
+  </data>
+  <data name="Launch_SelectAll" xml:space="preserve">
+    <value>Выбрать всё</value>
+  </data>
+  <data name="Launch_DeselectAll" xml:space="preserve">
+    <value>Не выбирайте ни одного</value>
+  </data>
+  <data name="Launch_DisableSelectedItem" xml:space="preserve">
+    <value>Отключить выбранное</value>
+  </data>
+  <data name="Launch_EnableSelectedItem" xml:space="preserve">
+    <value>Включить Проверено</value>
+  </data>
+  <data name="Launch_DeleteSelectedItem" xml:space="preserve">
+    <value>Удалить выбранное</value>
+  </data>
+  <data name="Launch_SelectedModCount" xml:space="preserve">
+    <value>Выбрано файлов: {|}</value>
+  </data>
+  <data name="SureDeleteMod" xml:space="preserve">
+    <value>Переместите следующие моды в корзину</value>
+  </data>
+  <data name="LoginFail" xml:space="preserve">
+    <value>Ошибка входа в систему</value>
+  </data>
+  <data name="UserDataError" xml:space="preserve">
+    <value>Обработка пользовательских данных не удалась</value>
+  </data>
+  <data name="DownloadThreadTooBig" xml:space="preserve">
+    <value>Поток загрузки слишком велик и может привести к сбою устройства</value>
+  </data>
+  <data name="LoadVersionSettingFail" xml:space="preserve">
+    <value>Не удалось загрузить настройки версии</value>
+  </data>
+  <data name="On" xml:space="preserve">
+    <value>включать</value>
+  </data>
+  <data name="Off" xml:space="preserve">
+    <value>закрыть</value>
+  </data>
+  <data name="UseGlobalSetting" xml:space="preserve">
+    <value>Использовать общие настройки</value>
+  </data>
+  <data name="AutoJoinServer" xml:space="preserve">
+    <value>Автоматический вход на сервер</value>
+  </data>
+  <data name="AutoInstall" xml:space="preserve">
+    <value>Автоматическая установка</value>
+  </data>
+  <data name="AllVersion" xml:space="preserve">
+    <value>Все версии</value>
+  </data>
+  <data name="ReleaseVersion" xml:space="preserve">
+    <value>официальное издание</value>
+  </data>
+  <data name="SnapshotVersion" xml:space="preserve">
+    <value>предварительное издание</value>
+  </data>
+  <data name="OldVersion" xml:space="preserve">
+    <value>древняя версия</value>
+  </data>
+  <data name="InstallFinish" xml:space="preserve">
+    <value>Установка завершена</value>
+  </data>
+  <data name="InstallPreview" xml:space="preserve">
+    <value>Установите предварительный просмотр</value>
+  </data>
+  <data name="BeginInstall" xml:space="preserve">
+    <value>Начать установку</value>
+  </data>
+  <data name="AdditionalInstall" xml:space="preserve">
+    <value>Никакой дополнительной установки</value>
+  </data>
+  <data name="Return" xml:space="preserve">
+    <value>Назад</value>
+  </data>
+  <data name="IncludeSpecialWord" xml:space="preserve">
+    <value>Содержит специальных персонажей</value>
+  </data>
+  <data name="FileExists" xml:space="preserve">
+    <value>Папка уже существует</value>
+  </data>
+  <data name="ViewUpdate" xml:space="preserve">
+    <value>Посмотрите, что нового</value>
+  </data>
+  <data name="LatsetVersion" xml:space="preserve">
+    <value>Последняя версия</value>
+  </data>
+  <data name="WaitForGameWindowAppear" xml:space="preserve">
+    <value>Дождитесь появления игрового окна</value>
+  </data>
+  <data name="LocalFile" xml:space="preserve">
+    <value>Локальные файлы</value>
+  </data>
+  <data name="NetFile" xml:space="preserve">
+    <value>Сетевые файлы</value>
+  </data>
+  <data name="EditXaml" xml:space="preserve">
+    <value>Редактировать Xaml</value>
+  </data>
+  <data name="EditCSharp" xml:space="preserve">
+    <value>Редактировать C #</value>
+  </data>
+  <data name="NeedRestartApp" xml:space="preserve">
+    <value>Необходимо перезапустить YMCL</value>
+  </data>
+  <data name="CustomHomePageCSharpSouceError" xml:space="preserve">
+    <value>Ошибка исходного кода пользовательской страницы (C #)</value>
+  </data>
+  <data name="ComPileCSharpError" xml:space="preserve">
+    <value>Ошибка компиляции C #</value>
+  </data>
+  <data name="InstallFail" xml:space="preserve">
+    <value>Ошибка установки</value>
+  </data>
+  <data name="GetInstallableVersionFail" xml:space="preserve">
+    <value>Не удалось получить устанавливаемую версию</value>
+  </data>
+  <data name="Folder" xml:space="preserve">
+    <value>Папка</value>
+  </data>
+  <data name="UserData" xml:space="preserve">
+    <value>Данные пользователя</value>
+  </data>
+  <data name="AppData" xml:space="preserve">
+    <value>Данные приложения</value>
+  </data>
+  <data name="OpenFolder" xml:space="preserve">
+    <value>Открыть папку</value>
+  </data>
+  <data name="NoNetwork" xml:space="preserve">
+    <value>Нет подключения к Интернету</value>
+  </data>
+  <data name="GetNoticeFail" xml:space="preserve">
+    <value>Не удалось получить объявления</value>
+  </data>
+  <data name="Notice" xml:space="preserve">
+    <value>header|Добавить объявление</value>
+  </data>
+  <data name="CannotFandRightJavaText" xml:space="preserve">
+    <value>YMCL не может найти нужную Java прямо сейчас</value>
+  </data>
+  <data name="YMCLNewVersion" xml:space="preserve">
+    <value>Доступно обновление Ymcl</value>
+  </data>
+  <data name="YggdrasilServerUrlIsEmpty" xml:space="preserve">
+    <value>Сервер верификации не может быть пустым</value>
+  </data>
+  <data name="YggdrasilPasswordIsEmpty" xml:space="preserve">
+    <value>Пароль не может быть пустым</value>
+  </data>
+  <data name="YggdrasilEmailIsEmpty" xml:space="preserve">
+    <value>Адрес электронной почты не может быть пустым</value>
+  </data>
+  <data name="App_UnhandledException" xml:space="preserve">
+    <value>У YMCL есть необработанное исключение</value>
+  </data>
+  <data name="ThemeColor" xml:space="preserve">
+    <value>Цвет темы</value>
+  </data>
+  <data name="ShowWindow" xml:space="preserve">
+    <value>Показать окно</value>
+  </data>
+  <data name="TrueExit" xml:space="preserve">
+    <value>Полностью бросьте курить</value>
+  </data>
+  <data name="TasksCenter" xml:space="preserve">
+    <value>Центр задач</value>
+  </data>
+  <data name="Install" xml:space="preserve">
+    <value>Установка</value>
+  </data>
+  <data name="CreateTask" xml:space="preserve">
+    <value>Создайте задачу</value>
+  </data>
+  <data name="ClickToViewTaskCenter" xml:space="preserve">
+    <value>Нажмите, чтобы просмотреть ход выполнения задания &gt;&gt;</value>
+  </data>
+  <data name="OpenTaskCenter" xml:space="preserve">
+    <value>Откройте Центр задач</value>
+  </data>
+  <data name="TreasureBox" xml:space="preserve">
+    <value>Сундук с сокровищами</value>
+  </data>
+  <data name="MusicPlayer" xml:space="preserve">
+    <value>Музыкальный плеер</value>
+  </data>
+  <data name="OpenApp" xml:space="preserve">
+    <value>Открыть</value>
+  </data>
+  <data name="RepeatOpen" xml:space="preserve">
+    <value>Перезапустите YMCL, перейдите в системный лоток, чтобы просмотреть открытый экземпляр YMCL</value>
+  </data>
+  <data name="SearchFail" xml:space="preserve">
+    <value>Поиск не удался</value>
+  </data>
+  <data name="SearchNoResult" xml:space="preserve">
+    <value>Нет результатов для поиска</value>
+  </data>
+  <data name="AddLocalFile" xml:space="preserve">
+    <value>Add File</value>
+  </data>
+  <data name="SongFile" xml:space="preserve">
+    <value>Аудиофайлы</value>
+  </data>
+  <data name="SourceFileNotExists" xml:space="preserve">
+    <value>Исходный файл не существует, его можно переместить, переименовать или удалить</value>
+  </data>
+  <data name="CheckSongAvailability" xml:space="preserve">
+    <value>Проверка доступности музыки...</value>
+  </data>
+  <data name="CannotConnectToApi" xml:space="preserve">
+    <value>Не удалось подключиться к API</value>
+  </data>
+  <data name="MusicUnavailable" xml:space="preserve">
+    <value>Музыка недоступна</value>
+  </data>
+  <data name="GettingMusic" xml:space="preserve">
+    <value>Получить музыку...</value>
+  </data>
+  <data name="GettingLyric" xml:space="preserve">
+    <value>Получить текст...</value>
+  </data>
+  <data name="NoChooseSong" xml:space="preserve">
+    <value>Музыка еще не выбрана</value>
+  </data>
+  <data name="SaveMusicFile" xml:space="preserve">
+    <value>Сохраните аудиофайл</value>
+  </data>
+  <data name="CopyFileFail" xml:space="preserve">
+    <value>Не удалось скопировать файл</value>
+  </data>
+  <data name="BeginDownload" xml:space="preserve">
+    <value>Начать загрузку</value>
+  </data>
+  <data name="DesktopLyric" xml:space="preserve">
+    <value>Тексты песен для настольных компьютеров</value>
+  </data>
+  <data name="DesktopLyricTextSize" xml:space="preserve">
+    <value>Размер текста текстов песен Desktop</value>
+  </data>
+  <data name="DesktopLyricTextAlignment" xml:space="preserve">
+    <value>Направление выравнивания текста текстов песен Desktop</value>
+  </data>
+  <data name="UseChange" xml:space="preserve">
+    <value>Применить изменения</value>
+  </data>
+  <data name="LeftAlignment" xml:space="preserve">
+    <value>по левому краю</value>
+  </data>
+  <data name="RightAlignment" xml:space="preserve">
+    <value>Выровняйте по правому краю</value>
+  </data>
+  <data name="CenterAlignment" xml:space="preserve">
+    <value>Выравнивание по центру</value>
+  </data>
+  <data name="ImportFinish" xml:space="preserve">
+    <value>Фильтры импорта</value>
+  </data>
+  <data name="GetVersionListFail" xml:space="preserve">
+    <value>Не удалось получить список версий</value>
+  </data>
+  <data name="CustomIdHandleText" xml:space="preserve">
+    <value>Имя текущей версии будет сохранено как</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>полностью</value>
+  </data>
+  <data name="ModName" xml:space="preserve">
+    <value>Название мода</value>
+  </data>
+  <data name="MinecraftVersion" xml:space="preserve">
+    <value>Версия Minecraft</value>
+  </data>
+  <data name="LoadingMore" xml:space="preserve">
+    <value>Загрузи больше</value>
+  </data>
+  <data name="AnyModLoader" xml:space="preserve">
+    <value>Любой погрузчик</value>
+  </data>
+  <data name="Music" xml:space="preserve">
+    <value>Музыка</value>
+  </data>
+  <data name="MainWindow_NavigationMusic" xml:space="preserve">
+    <value>   Музыка</value>
+  </data>
+  <data name="WriteShortCut" xml:space="preserve">
+    <value>Напишите ярлык</value>
+  </data>
+  <data name="WriteShortCutDescription" xml:space="preserve">
+    <value>Создайте ярлык для запуска YMCL</value>
+  </data>
+  <data name="UseCommandLaunchYMCLDescription" xml:space="preserve">
+    <value>Запустите YMCL по команде</value>
+  </data>
+  <data name="UseCommandLaunchYMCL" xml:space="preserve">
+    <value>Внешний запуск</value>
+  </data>
+  <data name="SeletFolder" xml:space="preserve">
+    <value>Выберите папку</value>
+  </data>
+  <data name="WriteReg" xml:space="preserve">
+    <value>Напишите реестр</value>
+  </data>
+  <data name="FailToWriteReg" xml:space="preserve">
+    <value>Не удалось записать в реестр</value>
+  </data>
+  <data name="WriteFinish" xml:space="preserve">
+    <value>Запись завершена</value>
+  </data>
+</root>

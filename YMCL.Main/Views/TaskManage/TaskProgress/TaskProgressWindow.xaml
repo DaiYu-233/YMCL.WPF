@@ -1,0 +1,29 @@
+﻿<pu:WindowX x:Class="YMCL.Main.Views.TaskManage.TaskProgress.TaskProgressWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" pu:WindowXCaption.Height="0" 
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Background="Transparent"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" ResizeMode="NoResize"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" Loaded="WindowX_Loaded"
+        xmlns:ui="http://schemas.inkore.net/lib/ui/wpf/modern" xmlns:pu="https://opensource.panuon.com/wpf-ui"
+        mc:Ignorable="d"  xmlns:properties="clr-namespace:YMCL.Main.Public.Lang" WindowStyle="None" AllowsTransparency="True"
+        Title="{x:Static properties:MainLang.TaskProgressWindow_Title}" Height="450" Width="800">
+    <ui:ClippingBorder Background="{DynamicResource 2x}" CornerRadius="8,8,8,8" BorderBrush="{DynamicResource TitleBarColor}" BorderThickness="2,2,2,2">
+        <Grid>
+            <Border VerticalAlignment="Top" Height="30" CornerRadius="8,8,0,0" Background="{DynamicResource TitleBarColor}" >
+                <Grid x:Name="TitleBar" MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
+                    <TextBlock/>
+                    <TextBlock x:Name="Title" Text="" VerticalAlignment="Center" Margin="9,0,0,0" HorizontalAlignment="Left" FontSize="13" Foreground="{DynamicResource TextColor}" FontFamily="{DynamicResource Font}"  />
+                    <Button x:Name="btnMinimize" Style="{DynamicResource IconButtonsStyle}" Content="{DynamicResource Minimize}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,3,0" Click="btnMinimize_Click" Cursor="Hand" />
+                </Grid>
+            </Border>
+            <DockPanel Margin="0,30,0,0">
+                <Border x:Name="ProgressBorder" Margin="10,10,10,0" Background="{DynamicResource 1x}" CornerRadius="4,4,4,4" DockPanel.Dock="Top" VerticalAlignment="Top" Padding="2,2,2,2" Visibility="Collapsed">
+                    <DockPanel>
+                        <Label x:Name="TaskProgressBarText" Content="0%" Foreground="{DynamicResource TextColor}" DockPanel.Dock="Right" FontFamily="{DynamicResource Font}" Margin="2,3,7,3" HorizontalAlignment="Right" />
+                        <ui:ProgressBar x:Name="TaskProgressBar" Margin="8,0,11,0"/>
+                    </DockPanel>
+                </Border>
+                <TextBox x:Name="TaskProgressTextBox" Margin="10,10,10,10" FontFamily="{DynamicResource Font}" IsReadOnly="True"/>
+            </DockPanel>
+        </Grid>
+    </ui:ClippingBorder>
+</pu:WindowX>

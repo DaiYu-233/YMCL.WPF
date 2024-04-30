@@ -1,0 +1,789 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="InitializeWindow_Title" xml:space="preserve">
+    <value>YMCL初始化</value>
+  </data>
+  <data name="InitializeWindow_Title_Download" xml:space="preserve">
+    <value>YMCL - 下载资源</value>
+  </data>
+  <data name="InitializeWindow_NextSetpBtn" xml:space="preserve">
+    <value>下一步</value>
+  </data>
+  <data name="InitializeWindow_DownloadFinish" xml:space="preserve">
+    <value>下载完成</value>
+  </data>
+  <data name="InitializeWindow_Download_AdministratorPermissionRequired" xml:space="preserve">
+    <value>需要管理员权限以初始化YMCL，点击确定使用管理员权限重启程序</value>
+  </data>
+  <data name="InitializeWindow_DownloadWaiting" xml:space="preserve">
+    <value>等待中</value>
+  </data>
+  <data name="InitializeWindow_InitializeFinish" xml:space="preserve">
+    <value>YMCL初始化完成</value>
+  </data>
+  <data name="InitializeWindow_Connecting" xml:space="preserve">
+    <value>连接中</value>
+  </data>
+  <data name="InitializeWindow_ConnectionFailed" xml:space="preserve">
+    <value>连接失败</value>
+  </data>
+  <data name="InitializeWindow_ConnectionTimeout" xml:space="preserve">
+    <value>连接超时</value>
+  </data>
+  <data name="MainWindow_Title" xml:space="preserve">
+    <value>YMCL</value>
+  </data>
+  <data name="InitializeWindow_FailedToObtainAdministratorPrivileges" xml:space="preserve">
+    <value>获取管理员权限失败，YMCL初始化失败</value>
+  </data>
+  <data name="MainWindow_NavigationLaunch" xml:space="preserve">
+    <value>   启动</value>
+  </data>
+  <data name="MainWindow_NavigationSetting" xml:space="preserve">
+    <value>   设置</value>
+  </data>
+  <data name="MainWindow_NavigationDownload" xml:space="preserve">
+    <value>   下载</value>
+  </data>
+  <data name="MainWindow_NavigationMore" xml:space="preserve">
+    <value>   更多</value>
+  </data>
+  <data name="Setting_Navigation_Launch" xml:space="preserve">
+    <value>启动</value>
+  </data>
+  <data name="Setting_Navigation_Account" xml:space="preserve">
+    <value>账户</value>
+  </data>
+  <data name="Setting_Navigation_Download" xml:space="preserve">
+    <value>下载</value>
+  </data>
+  <data name="Setting_Navigation_Launcher" xml:space="preserve">
+    <value>个性化</value>
+  </data>
+  <data name="Setting_Navigation_About" xml:space="preserve">
+    <value>启动器</value>
+  </data>
+  <data name="Launcher_SettingItem_Language" xml:space="preserve">
+    <value>语言</value>
+  </data>
+  <data name="App_UnhandledException" xml:space="preserve">
+    <value>YMCL发生未处理的异常</value>
+  </data>
+  <data name="Launcher_SettingItem_CustomMainPage" xml:space="preserve">
+    <value>自定义主界面</value>
+  </data>
+  <data name="Launcher_SettingItem_EditCustomHomePage" xml:space="preserve">
+    <value>编辑</value>
+  </data>
+  <data name="Launcher_UseCustomHomePageToggle_Toggled_On_Info" xml:space="preserve">
+    <value>将启用自定义页面，YMCL不保证自定义内容安全性，不安全的自定义内容可能会导致设备遭受攻击等</value>
+  </data>
+  <data name="Launch_Launch_CustomPageSourceError" xml:space="preserve">
+    <value>自定义页面 (Xaml) 源代码错误</value>
+  </data>
+  <data name="Launch_MinecraftFolder" xml:space="preserve">
+    <value>Minecraft文件夹</value>
+  </data>
+  <data name="Launch_AddMinecraftFolder" xml:space="preserve">
+    <value>添加文件夹</value>
+  </data>
+  <data name="Launch_DelMinecraftFolder" xml:space="preserve">
+    <value>移除选中项</value>
+  </data>
+  <data name="Launch_AddMinecraftFolder_Click_NeedMinecraftFolder" xml:space="preserve">
+    <value>需选择 .minecraft 文件夹</value>
+  </data>
+  <data name="Launch_AddMinecraftFolder_Click_ExistsMinecraftFolder" xml:space="preserve">
+    <value>已存在此文件夹</value>
+  </data>
+  <data name="Launch_AutoFindJava" xml:space="preserve">
+    <value>自动扫描</value>
+  </data>
+  <data name="Launch_ManualAddJava" xml:space="preserve">
+    <value>手动添加</value>
+  </data>
+  <data name="Launch_ManualAddJava_Click_ExistsJava" xml:space="preserve">
+    <value>已存在此Java</value>
+  </data>
+  <data name="Launch_AutoFindJava_Click_ScanCompleted" xml:space="preserve">
+    <value>扫描完成：发现{|}个Java，其中已有{|}个存在列表中</value>
+  </data>
+  <data name="Account_AddAccount" xml:space="preserve">
+    <value>添加新账户</value>
+  </data>
+  <data name="Account_DelAccount" xml:space="preserve">
+    <value>删除选中账户</value>
+  </data>
+  <data name="Account_Cancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="Account_Offline" xml:space="preserve">
+    <value>离线登录</value>
+  </data>
+  <data name="Account_Microsoft" xml:space="preserve">
+    <value>微软登录</value>
+  </data>
+  <data name="Account_Third_Party" xml:space="preserve">
+    <value>第三方登录</value>
+  </data>
+  <data name="Account_UserName" xml:space="preserve">
+    <value>游戏用户名</value>
+  </data>
+  <data name="Account_Sure" xml:space="preserve">
+    <value>确定</value>
+  </data>
+  <data name="Account_VerificationCode" xml:space="preserve">
+    <value>验证代码</value>
+  </data>
+  <data name="Account_Loading" xml:space="preserve">
+    <value>加载中...</value>
+  </data>
+  <data name="Account_CopyCodeAndOpenBrowser" xml:space="preserve">
+    <value>复制代码并打开浏览器</value>
+  </data>
+  <data name="Account_Password" xml:space="preserve">
+    <value>账户密码</value>
+  </data>
+  <data name="Account_ServerUrl" xml:space="preserve">
+    <value>认证服务器地址</value>
+  </data>
+  <data name="Account_Email" xml:space="preserve">
+    <value>邮箱地址</value>
+  </data>
+  <data name="Account_OfflineAccountAddBtn_Click_OfflineUserNameNull" xml:space="preserve">
+    <value>用户名不可为空</value>
+  </data>
+  <data name="Launch_MaxMem" xml:space="preserve">
+    <value>最大运行内存</value>
+  </data>
+  <data name="Launch_ImportPack" xml:space="preserve">
+    <value>导入整合包</value>
+  </data>
+  <data name="Launch_Refresh" xml:space="preserve">
+    <value>刷新</value>
+  </data>
+  <data name="Launch_VersionList" xml:space="preserve">
+    <value>版本列表</value>
+  </data>
+  <data name="Launch_ToVersionList" xml:space="preserve">
+    <value> 版本列表 </value>
+  </data>
+  <data name="Launch_ToVersionSetting" xml:space="preserve">
+    <value> 版本设置 </value>
+  </data>
+  <data name="Launch_LaunchGame" xml:space="preserve">
+    <value>启动游戏</value>
+  </data>
+  <data name="Launch_NoChooseGame" xml:space="preserve">
+    <value>&lt;未选择游戏核心&gt;</value>
+  </data>
+  <data name="Launch_LoadMinecraftVersion_GetVersionListError" xml:space="preserve">
+    <value>获取版本列表发生错误</value>
+  </data>
+  <data name="Launch_AutoSelectJava" xml:space="preserve">
+    <value>让YMCL选择合适的Java</value>
+  </data>
+  <data name="InitializeWindow_DownloadHelp" xml:space="preserve">
+    <value>无法完成下载？点击查看帮助</value>
+  </data>
+  <data name="Launch_LaunchGame_Click_AccountError" xml:space="preserve">
+    <value>账户错误</value>
+  </data>
+  <data name="Launch_LaunchGame_Click_NoChooseGame" xml:space="preserve">
+    <value>未选择游戏版本或未找到此版本</value>
+  </data>
+  <data name="Launch_LaunchGame_Click_JavaError" xml:space="preserve">
+    <value>Java错误</value>
+  </data>
+  <data name="Launch_AloneCore" xml:space="preserve">
+    <value>版本隔离</value>
+  </data>
+  <data name="Launch_LaunchGame_Click_Launched" xml:space="preserve">
+    <value>启动完成</value>
+  </data>
+  <data name="Launch_LaunchGame_Click_CannotFandRightJava" xml:space="preserve">
+    <value>YMCL无法找到当前需要的Java：Java</value>
+  </data>
+  <data name="Launch_LaunchGame_Click_FinishLaunch" xml:space="preserve">
+    <value>启动完成，等待游戏窗口出现</value>
+  </data>
+  <data name="Launch_LaunchGame_Click_GameExit" xml:space="preserve">
+    <value>游戏已退出</value>
+  </data>
+  <data name="Launch_LaunchGame_Click_LaunchSuccess" xml:space="preserve">
+    <value>启动成功</value>
+  </data>
+  <data name="OpenSourceProjectUsageTable" xml:space="preserve">
+    <value>开源项目使用表</value>
+  </data>
+  <data name="CheckUpdate" xml:space="preserve">
+    <value>检查更新</value>
+  </data>
+  <data name="GPL3Text" xml:space="preserve">
+    <value>YMCL 以 GPL-3.0 协议开放源代码，可以修改且分发，但不得删除原作品的标记，修改后的作品必须也采用 GPL 协议进行开源</value>
+  </data>
+  <data name="FindNewVersion" xml:space="preserve">
+    <value>发现新版本</value>
+  </data>
+  <data name="LatestVersion" xml:space="preserve">
+    <value>当前已是最新版本</value>
+  </data>
+  <data name="UpdateInfo" xml:space="preserve">
+    <value>更新内容</value>
+  </data>
+  <data name="DownloadUpdateQuestion" xml:space="preserve">
+    <value>发现新版本，是否下载更新？</value>
+  </data>
+  <data name="TaskProgressWindow_Title" xml:space="preserve">
+    <value>任务进度</value>
+  </data>
+  <data name="DownloadUpdate" xml:space="preserve">
+    <value>下载更新</value>
+  </data>
+  <data name="CheckUpdateFailed" xml:space="preserve">
+    <value>检查更新失败</value>
+  </data>
+  <data name="BeginUpdate" xml:space="preserve">
+    <value>开始下载更新</value>
+  </data>
+  <data name="FinishUpdate" xml:space="preserve">
+    <value>更新下载完成</value>
+  </data>
+  <data name="DownloadFail" xml:space="preserve">
+    <value>下载失败</value>
+  </data>
+  <data name="DisplayTheme" xml:space="preserve">
+    <value>色彩模式</value>
+  </data>
+  <data name="FollowSystem" xml:space="preserve">
+    <value>跟随系统</value>
+  </data>
+  <data name="Light" xml:space="preserve">
+    <value>浅色</value>
+  </data>
+  <data name="Dark" xml:space="preserve">
+    <value>深色</value>
+  </data>
+  <data name="DownloadSource" xml:space="preserve">
+    <value>下载源</value>
+  </data>
+  <data name="MaximumDownloadThread" xml:space="preserve">
+    <value>最大下载线程</value>
+  </data>
+  <data name="ArgsError" xml:space="preserve">
+    <value>参数错误</value>
+  </data>
+  <data name="Launch_GameWindow" xml:space="preserve">
+    <value>游戏窗口</value>
+  </data>
+  <data name="Launch_DefaultSize" xml:space="preserve">
+    <value>默认大小</value>
+  </data>
+  <data name="Launch_FullScreen" xml:space="preserve">
+    <value>全屏</value>
+  </data>
+  <data name="Launch_CustomSize" xml:space="preserve">
+    <value>自定义</value>
+  </data>
+  <data name="Launch_OutputLogReceived" xml:space="preserve">
+    <value>显示输出日志</value>
+  </data>
+  <data name="LaunchFail" xml:space="preserve">
+    <value>启动失败</value>
+  </data>
+  <data name="GameExitLogWindow" xml:space="preserve">
+    <value>3s 后关闭此窗口</value>
+  </data>
+  <data name="BuildLaunchConfigError" xml:space="preserve">
+    <value>构建启动参数错误，检查启动设置是否有误</value>
+  </data>
+  <data name="Launch_TabItem_Overview" xml:space="preserve">
+    <value>概览</value>
+  </data>
+  <data name="Launch_TabItem_Settings" xml:space="preserve">
+    <value>设置</value>
+  </data>
+  <data name="Launch_TabItem_Mods" xml:space="preserve">
+    <value>Mods</value>
+  </data>
+  <data name="VerifyingAccount" xml:space="preserve">
+    <value>正在验证账户</value>
+  </data>
+  <data name="SaveSkin" xml:space="preserve">
+    <value>保存皮肤文件</value>
+  </data>
+  <data name="Launch_LaunchBtn" xml:space="preserve">
+    <value>启动游戏</value>
+  </data>
+  <data name="Launch_LaunchBtn_Click_AccountError" xml:space="preserve">
+    <value>账户错误</value>
+  </data>
+  <data name="Launch_LaunchBtn_Click_NoChooseGame" xml:space="preserve">
+    <value>未选择游戏核心或未找到游戏</value>
+  </data>
+  <data name="Launch_LaunchBtn_Click_JavaError" xml:space="preserve">
+    <value>Java错误</value>
+  </data>
+  <data name="Launch_LaunchBtn_Click_CannotFandRightJava" xml:space="preserve">
+    <value>YMCL无法找到当前需要的Java：Java</value>
+  </data>
+  <data name="Launch_LaunchBtn_Click_FinishLaunch" xml:space="preserve">
+    <value>启动完成，等待游戏窗口出现</value>
+  </data>
+  <data name="Launch_LaunchBtn_Click_GameExit" xml:space="preserve">
+    <value>游戏已退出</value>
+  </data>
+  <data name="Launch_LaunchBtn_Click_LaunchSuccess" xml:space="preserve">
+    <value>启动成功</value>
+  </data>
+  <data name="Launch_LaunchBtn_Click_Launched" xml:space="preserve">
+    <value>已启动</value>
+  </data>
+  <data name="SaveCancel" xml:space="preserve">
+    <value>已取消保存</value>
+  </data>
+  <data name="SaveSuccess" xml:space="preserve">
+    <value>保存成功</value>
+  </data>
+  <data name="Launch_VersionFolder" xml:space="preserve">
+    <value>版本文件夹</value>
+  </data>
+  <data name="Launch_SavesFolder" xml:space="preserve">
+    <value>存档文件夹</value>
+  </data>
+  <data name="Launch_ModFolder" xml:space="preserve">
+    <value>Mod 文件夹</value>
+  </data>
+  <data name="Launch_ResourcePackFolder" xml:space="preserve">
+    <value>资源包文件夹</value>
+  </data>
+  <data name="Launch_ShaderPackFolder" xml:space="preserve">
+    <value>光影包文件夹</value>
+  </data>
+  <data name="Launch_UseGlobalSettings" xml:space="preserve">
+    <value>使用全局设置</value>
+  </data>
+  <data name="Launch_SelectAll" xml:space="preserve">
+    <value>全选</value>
+  </data>
+  <data name="Launch_DeselectAll" xml:space="preserve">
+    <value>全不选</value>
+  </data>
+  <data name="Launch_DisableSelectedItem" xml:space="preserve">
+    <value>禁用选中项</value>
+  </data>
+  <data name="Launch_EnableSelectedItem" xml:space="preserve">
+    <value>启用选中项</value>
+  </data>
+  <data name="Launch_DeleteSelectedItem" xml:space="preserve">
+    <value>删除选中项</value>
+  </data>
+  <data name="Launch_SelectedModCount" xml:space="preserve">
+    <value>已选择{|}个文件</value>
+  </data>
+  <data name="SureDeleteMod" xml:space="preserve">
+    <value>将以下Mod移动到回收站</value>
+  </data>
+  <data name="LoginFail" xml:space="preserve">
+    <value>登录失败</value>
+  </data>
+  <data name="UserDataError" xml:space="preserve">
+    <value>用户数据处理失败</value>
+  </data>
+  <data name="DownloadThreadTooBig" xml:space="preserve">
+    <value>下载线程过大可能导致设备卡顿</value>
+  </data>
+  <data name="LoadVersionSettingFail" xml:space="preserve">
+    <value>加载版本设置失败</value>
+  </data>
+  <data name="On" xml:space="preserve">
+    <value>开启</value>
+  </data>
+  <data name="Off" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="UseGlobalSetting" xml:space="preserve">
+    <value>使用全局设置</value>
+  </data>
+  <data name="AutoJoinServer" xml:space="preserve">
+    <value>自动进入服务器</value>
+  </data>
+  <data name="AutoInstall" xml:space="preserve">
+    <value>自动安装</value>
+  </data>
+  <data name="AllVersion" xml:space="preserve">
+    <value>所有版本</value>
+  </data>
+  <data name="ReleaseVersion" xml:space="preserve">
+    <value>正式版</value>
+  </data>
+  <data name="SnapshotVersion" xml:space="preserve">
+    <value>预览版</value>
+  </data>
+  <data name="OldVersion" xml:space="preserve">
+    <value>远古版</value>
+  </data>
+  <data name="InstallFinish" xml:space="preserve">
+    <value>安装完成</value>
+  </data>
+  <data name="InstallPreview" xml:space="preserve">
+    <value>安装预览</value>
+  </data>
+  <data name="BeginInstall" xml:space="preserve">
+    <value>开始安装</value>
+  </data>
+  <data name="AdditionalInstall" xml:space="preserve">
+    <value>无附加安装</value>
+  </data>
+  <data name="Return" xml:space="preserve">
+    <value>返回</value>
+  </data>
+  <data name="IncludeSpecialWord" xml:space="preserve">
+    <value>包含特殊字符</value>
+  </data>
+  <data name="FileExists" xml:space="preserve">
+    <value>文件夹已存在</value>
+  </data>
+  <data name="ViewUpdate" xml:space="preserve">
+    <value>查看更新内容</value>
+  </data>
+  <data name="LatsetVersion" xml:space="preserve">
+    <value>最新版本</value>
+  </data>
+  <data name="WaitForGameWindowAppear" xml:space="preserve">
+    <value>等待游戏窗口出现</value>
+  </data>
+  <data name="LocalFile" xml:space="preserve">
+    <value>本地文件</value>
+  </data>
+  <data name="NetFile" xml:space="preserve">
+    <value>网络文件</value>
+  </data>
+  <data name="EditXaml" xml:space="preserve">
+    <value>编辑Xaml</value>
+  </data>
+  <data name="EditCSharp" xml:space="preserve">
+    <value>编辑C#</value>
+  </data>
+  <data name="NeedRestartApp" xml:space="preserve">
+    <value>需要重启YMCL</value>
+  </data>
+  <data name="CustomHomePageCSharpSouceError" xml:space="preserve">
+    <value>自定义页面 (C#) 源代码错误</value>
+  </data>
+  <data name="ComPileCSharpError" xml:space="preserve">
+    <value>编译C#错误</value>
+  </data>
+  <data name="InstallFail" xml:space="preserve">
+    <value>安装失败</value>
+  </data>
+  <data name="GetInstallableVersionFail" xml:space="preserve">
+    <value>获取可安装版本失败</value>
+  </data>
+  <data name="Folder" xml:space="preserve">
+    <value>文件夹</value>
+  </data>
+  <data name="UserData" xml:space="preserve">
+    <value>用户数据</value>
+  </data>
+  <data name="AppData" xml:space="preserve">
+    <value>应用数据</value>
+  </data>
+  <data name="OpenFolder" xml:space="preserve">
+    <value>打开文件夹</value>
+  </data>
+  <data name="NoNetwork" xml:space="preserve">
+    <value>无网络连接</value>
+  </data>
+  <data name="GetNoticeFail" xml:space="preserve">
+    <value>获取公告失败</value>
+  </data>
+  <data name="Notice" xml:space="preserve">
+    <value>公告</value>
+  </data>
+  <data name="CannotFandRightJavaText" xml:space="preserve">
+    <value>YMCL无法找到当前需要的Java</value>
+  </data>
+  <data name="YMCLNewVersion" xml:space="preserve">
+    <value>Ymcl 更新可用</value>
+  </data>
+  <data name="YggdrasilServerUrlIsEmpty" xml:space="preserve">
+    <value>验证服务器不可为空</value>
+  </data>
+  <data name="YggdrasilPasswordIsEmpty" xml:space="preserve">
+    <value>密码不可为空</value>
+  </data>
+  <data name="YggdrasilEmailIsEmpty" xml:space="preserve">
+    <value>邮箱不可为空</value>
+  </data>
+  <data name="ThemeColor" xml:space="preserve">
+    <value>主题色</value>
+  </data>
+  <data name="ShowWindow" xml:space="preserve">
+    <value>显示窗口</value>
+  </data>
+  <data name="TrueExit" xml:space="preserve">
+    <value>彻底退出</value>
+  </data>
+  <data name="TasksCenter" xml:space="preserve">
+    <value>任务中心</value>
+  </data>
+  <data name="Install" xml:space="preserve">
+    <value>安装</value>
+  </data>
+  <data name="CreateTask" xml:space="preserve">
+    <value>创建任务</value>
+  </data>
+  <data name="ClickToViewTaskCenter" xml:space="preserve">
+    <value>点击查看任务进度 &gt;&gt;</value>
+  </data>
+  <data name="OpenTaskCenter" xml:space="preserve">
+    <value>打开任务中心</value>
+  </data>
+  <data name="TreasureBox" xml:space="preserve">
+    <value>百宝箱</value>
+  </data>
+  <data name="MusicPlayer" xml:space="preserve">
+    <value>音乐播放器</value>
+  </data>
+  <data name="OpenApp" xml:space="preserve">
+    <value>→ 打开 ←</value>
+  </data>
+  <data name="RepeatOpen" xml:space="preserve">
+    <value>重复启动YMCL，转到系统托盘查看已打开的YMCL实例</value>
+  </data>
+  <data name="SearchFail" xml:space="preserve">
+    <value>搜索失败</value>
+  </data>
+  <data name="SearchNoResult" xml:space="preserve">
+    <value>搜索无结果</value>
+  </data>
+  <data name="AddLocalFile" xml:space="preserve">
+    <value>添加文件</value>
+  </data>
+  <data name="SongFile" xml:space="preserve">
+    <value>音频文件</value>
+  </data>
+  <data name="SourceFileNotExists" xml:space="preserve">
+    <value>源文件不存在，它可能被移动、重命名或删除</value>
+  </data>
+  <data name="CheckSongAvailability" xml:space="preserve">
+    <value>检测音乐可用性...</value>
+  </data>
+  <data name="CannotConnectToApi" xml:space="preserve">
+    <value>无法连接到api</value>
+  </data>
+  <data name="MusicUnavailable" xml:space="preserve">
+    <value>音乐不可用</value>
+  </data>
+  <data name="GettingMusic" xml:space="preserve">
+    <value>获取音乐...</value>
+  </data>
+  <data name="GettingLyric" xml:space="preserve">
+    <value>获取歌词...</value>
+  </data>
+  <data name="NoChooseSong" xml:space="preserve">
+    <value>尚未选择音乐</value>
+  </data>
+  <data name="SaveMusicFile" xml:space="preserve">
+    <value>保存音频文件</value>
+  </data>
+  <data name="CopyFileFail" xml:space="preserve">
+    <value>复制文件失败</value>
+  </data>
+  <data name="BeginDownload" xml:space="preserve">
+    <value>开始下载</value>
+  </data>
+  <data name="DesktopLyric" xml:space="preserve">
+    <value>桌面歌词</value>
+  </data>
+  <data name="DesktopLyricTextSize" xml:space="preserve">
+    <value>桌面歌词文本大小</value>
+  </data>
+  <data name="DesktopLyricTextAlignment" xml:space="preserve">
+    <value>桌面歌词文本对齐方向</value>
+  </data>
+  <data name="UseChange" xml:space="preserve">
+    <value>应用更改</value>
+  </data>
+  <data name="LeftAlignment" xml:space="preserve">
+    <value>左对齐</value>
+  </data>
+  <data name="RightAlignment" xml:space="preserve">
+    <value>右对齐</value>
+  </data>
+  <data name="CenterAlignment" xml:space="preserve">
+    <value>居中对齐</value>
+  </data>
+  <data name="ImportFinish" xml:space="preserve">
+    <value>导入完成</value>
+  </data>
+  <data name="GetVersionListFail" xml:space="preserve">
+    <value>版本列表获取失败</value>
+  </data>
+  <data name="CustomIdHandleText" xml:space="preserve">
+    <value>当前版本名称将被保存为</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>全部</value>
+  </data>
+  <data name="ModName" xml:space="preserve">
+    <value>Mod名称</value>
+  </data>
+  <data name="MinecraftVersion" xml:space="preserve">
+    <value>Minecraft版本</value>
+  </data>
+  <data name="LoadingMore" xml:space="preserve">
+    <value>→ 加载更多 ←</value>
+  </data>
+  <data name="AnyModLoader" xml:space="preserve">
+    <value>任意加载器</value>
+  </data>
+  <data name="Music" xml:space="preserve">
+    <value>音乐</value>
+  </data>
+  <data name="MainWindow_NavigationMusic" xml:space="preserve">
+    <value>   音乐</value>
+  </data>
+  <data name="WriteShortCut" xml:space="preserve">
+    <value>写出快捷方式</value>
+  </data>
+  <data name="WriteShortCutDescription" xml:space="preserve">
+    <value>创建用于启动YMCL的快捷方式</value>
+  </data>
+  <data name="UseCommandLaunchYMCLDescription" xml:space="preserve">
+    <value>通过命令启动YMCL</value>
+  </data>
+  <data name="UseCommandLaunchYMCL" xml:space="preserve">
+    <value>外部启动</value>
+  </data>
+  <data name="SeletFolder" xml:space="preserve">
+    <value>选择文件夹</value>
+  </data>
+  <data name="WriteReg" xml:space="preserve">
+    <value>写入注册表</value>
+  </data>
+  <data name="FailToWriteReg" xml:space="preserve">
+    <value>无法写入注册表</value>
+  </data>
+  <data name="WriteFinish" xml:space="preserve">
+    <value>写入完成</value>
+  </data>
+</root>
