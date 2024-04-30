@@ -157,13 +157,6 @@ namespace YMCL.Main
             Const.Window.tasks.Show();
             Const.Window.tasks.Activate();
         }
-        private void ShowPlayerWindow_Click(object sender, RoutedEventArgs e)
-        {
-            Const.Window.musicPlayer.WindowState = WindowState.Normal;
-            Const.Window.musicPlayer.ShowInTaskbar = true;
-            Const.Window.musicPlayer.Show();
-            Const.Window.musicPlayer.Activate();
-        }
         private void TrueExit_Click(object sender, RoutedEventArgs e)
         {
             Environment.Exit(0);

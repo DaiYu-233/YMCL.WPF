@@ -26,6 +26,7 @@ using YMCL.Main.Public;
 using YMCL.Main.Views.MusicPlayer.DesktopLyric;
 using Size = System.Windows.Size;
 using Cursors = System.Windows.Input.Cursors;
+using static YMCL.Main.Public.Class.PlaySongListViewItemEntry;
 
 namespace YMCL.Main.Views.Main.Pages.MusicPlayer
 {
@@ -37,6 +38,7 @@ namespace YMCL.Main.Views.Main.Pages.MusicPlayer
         int page = 0;
         string key = string.Empty;
         List<PlaySongListViewItemEntry> playSongListViewItemEntries = [];
+        PlaySongListViewItemEntry playingSong = null;
         DispatcherTimer timer = new DispatcherTimer();
         MediaPlayer player_for_duration = new MediaPlayer();
         MediaPlayer player = new MediaPlayer();
@@ -482,7 +484,15 @@ namespace YMCL.Main.Views.Main.Pages.MusicPlayer
                 byte[] bytes = await httpClient.GetByteArrayAsync(song.Img);
                 await Dispatcher.BeginInvoke(() =>
                 {
-                    playSongListViewItemEntries.Add(new PlaySongListViewItemEntry
+                    PlayListView.Items.Add(new PlaySongListViewItemEntry
+                    {
+                        SongId = song.SongId,
+                        SongName = song.SongName,
+                        Authors = song.Authors,
+                        DisplayDuration = song.DisplayDuration,
+                        Img = Method.BytesToBase64(bytes),
+                        Type = PlaySongListViewItemEntry.PlaySongListViewItemEntryType.Network
+                    }); playSongListViewItemEntries.Add(new PlaySongListViewItemEntry
                     {
                         SongId = song.SongId,
                         SongName = song.SongName,
@@ -491,11 +501,14 @@ namespace YMCL.Main.Views.Main.Pages.MusicPlayer
                         Img = Method.BytesToBase64(bytes),
                         Type = PlaySongListViewItemEntry.PlaySongListViewItemEntryType.Network
                     });
-                });
-                PlayListView.Items.Clear();
-                playSongListViewItemEntries.ForEach(song =>
-                {
-                    PlayListView.Items.Add(song);
+                    if (PlayListView.Items.Count > 0)
+                    {
+                        PlayListView.SelectedIndex = PlayListView.Items.Count - 1;
+                    }
+                    else
+                    {
+                        PlayListView.SelectedIndex = -1;
+                    }
                 });
                 File.WriteAllText(Const.PlayListDataPath, JsonConvert.SerializeObject(playSongListViewItemEntries, Formatting.Indented));
             }
@@ -535,11 +548,15 @@ namespace YMCL.Main.Views.Main.Pages.MusicPlayer
                 Duration = time,
                 DisplayDuration = Method.MsToTime(time),
                 SongId = -1
-            });
-            PlayListView.Items.Clear();
-            playSongListViewItemEntries.ForEach(song =>
+            }); PlayListView.Items.Add(new PlaySongListViewItemEntry()
             {
-                PlayListView.Items.Add(song);
+                Path = openFileDialog.FileName,
+                SongName = Array[Array.Length - 1].Split(".")[0],
+                Type = PlaySongListViewItemEntry.PlaySongListViewItemEntryType.Local,
+                Authors = Array[Array.Length - 1].Split(".")[1],
+                Duration = time,
+                DisplayDuration = Method.MsToTime(time),
+                SongId = -1
             });
             File.WriteAllText(Const.PlayListDataPath, JsonConvert.SerializeObject(playSongListViewItemEntries, Formatting.Indented));
         }
@@ -547,11 +564,7 @@ namespace YMCL.Main.Views.Main.Pages.MusicPlayer
         {
             if (playSongListViewItemEntries.Count == 0) return;
             playSongListViewItemEntries.RemoveAt(PlayListView.SelectedIndex);
-            PlayListView.Items.Clear();
-            playSongListViewItemEntries.ForEach(song =>
-            {
-                PlayListView.Items.Add(song);
-            });
+            PlayListView.Items.RemoveAt(PlayListView.SelectedIndex);
             if (PlayListView.Items.Count > 0)
             {
                 PlayListView.SelectedIndex = 0;
@@ -568,7 +581,7 @@ namespace YMCL.Main.Views.Main.Pages.MusicPlayer
             var song = PlayListView.SelectedItem as PlaySongListViewItemEntry;
             if (song == null) return;
             LyricBlock.Inlines.Clear();
-            if (song.Type == PlaySongListViewItemEntry.PlaySongListViewItemEntryType.Local)
+            if (song.Type == PlaySongListViewItemEntryType.Local)
             {
                 if (!File.Exists(song.Path))
                 {
@@ -627,7 +640,7 @@ namespace YMCL.Main.Views.Main.Pages.MusicPlayer
                     return;
                 }
                 #endregion
-                Panuon.WPF.UI.Toast.Show(Const.Window.main, MainLang.GettingMusic, ToastPosition.Top);
+                Toast.Show(Const.Window.main, MainLang.GettingMusic, ToastPosition.Top);
                 using var client1 = new HttpClient();
                 var res1 = "";
                 var url1 = $"http://music.api.daiyu.fun/song/url?id={song.SongId}";
@@ -639,13 +652,13 @@ namespace YMCL.Main.Views.Main.Pages.MusicPlayer
                 }
                 catch (Exception)
                 {
-                    Panuon.WPF.UI.Toast.Show(Const.Window.main, MainLang.CannotConnectToApi, ToastPosition.Top);
+                    Toast.Show(Const.Window.main, MainLang.CannotConnectToApi, ToastPosition.Top);
                     gettingMusic = false;
                     return;
                 }
                 var obj1 = JsonConvert.DeserializeObject<NetWorkSong>(res1);
 
-                Panuon.WPF.UI.Toast.Show(Const.Window.main, MainLang.GettingLyric, ToastPosition.Top);
+                Toast.Show(Const.Window.main, MainLang.GettingLyric, ToastPosition.Top);
                 using var client2 = new HttpClient();
                 var res2 = "";
                 try
@@ -663,6 +676,12 @@ namespace YMCL.Main.Views.Main.Pages.MusicPlayer
                 }
                 var obj2 = JsonConvert.DeserializeObject<LyricApi>(res2);
                 var data = obj2.lrc.lyric;
+
+                var seletedSong = PlayListView.SelectedItem as PlaySongListViewItemEntry;
+                if ((song.Type == PlaySongListViewItemEntryType.Network && seletedSong.SongId != song.SongId) || (song.Type == PlaySongListViewItemEntryType.Local && seletedSong.Path != song.Path))
+                {
+                    return;
+                }
 
                 lyrics = ParseLyrics(data); // 歌词数据
 
@@ -760,6 +779,15 @@ namespace YMCL.Main.Views.Main.Pages.MusicPlayer
         }
         void Play(double time, PlaySongListViewItemEntry song, string url)
         {
+            var seletedSong = PlayListView.SelectedItem as PlaySongListViewItemEntry;
+            if ((song.Type == PlaySongListViewItemEntryType.Network && seletedSong.SongId != song.SongId) || (song.Type == PlaySongListViewItemEntryType.Local && seletedSong.Path != song.Path))
+            {
+                return;
+            }
+            if (song == playingSong)
+            {
+                return;
+            }
             downloadUrl = url;
             player.Open(new Uri(url));
             timer.Start();

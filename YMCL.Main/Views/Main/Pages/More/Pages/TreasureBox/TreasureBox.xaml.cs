@@ -20,9 +20,7 @@ namespace YMCL.Main.Views.Main.Pages.More.Pages.TreasureBox
             var tag = (sender as HyperlinkButton).Tag.ToString();
             if (tag == "Player")
             {
-                Const.Window.musicPlayer.Show();
-                Const.Window.musicPlayer.WindowState = WindowState.Normal;
-                Const.Window.musicPlayer.Activate();
+
             }
         }
     }
