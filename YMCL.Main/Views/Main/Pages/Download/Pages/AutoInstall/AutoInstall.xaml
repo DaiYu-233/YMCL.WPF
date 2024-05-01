@@ -21,7 +21,7 @@
     <Grid>
         <ui:ProgressRing x:Name="VanlliaLoading" Height="52" Width="52" IsIndeterminate="True" Maximum="100" Minimum="0"/>
         <ui:FontIcon x:Name="VanlliaLoadFail" Glyph="&#xE8BB;" Foreground="#FFC42B1C" FontSize="32" Visibility="Hidden" Cursor="Hand" PreviewMouseDown="VanlliaLoadFail_PreviewMouseDown" />
-        <Grid x:Name="VanlliaListGrid" Background="{DynamicResource 2x}" Visibility="Collapsed" >
+        <Grid x:Name="VanlliaListGrid" Background="{DynamicResource 2x}" Visibility="Visible" >
             <ScrollViewer x:Name="VanlliaScrollViewer" Margin="0,0,5,0">
                 <StackPanel Margin="10,10,5,10">
                     <ui:ClippingBorder Background="{DynamicResource 1x}" CornerRadius="5" Margin="0,0,0,10" Padding="5" VerticalAlignment="Top">
@@ -117,7 +117,7 @@
                     </ui:ClippingBorder>
                 </StackPanel>
             </ScrollViewer>
-            <ScrollViewer x:Name="InstallPreView" Visibility="Hidden" Margin="0,0,5,0">
+            <ScrollViewer x:Name="InstallPreView" Visibility="Visible" Margin="0,0,5,0">
                 <ui:ClippingBorder Background="{DynamicResource 1x}" Margin="10,10,5,10" CornerRadius="5">
                     <StackPanel>
                         <ui:ClippingBorder Background="{DynamicResource 2x}" CornerRadius="5" Margin="10,10,10,6.5" Padding="5" VerticalAlignment="Top">
@@ -156,6 +156,7 @@
                                             </ListView.ItemTemplate>
                                         </ListView>
                                         <ui:ProgressRing Name="OptifineLoading"/>
+                                        <TextBlock x:Name="OptifineNoVersion" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{DynamicResource Font}" Text="{x:Static properties:MainLang.NoAvailableVersion}" Foreground="{DynamicResource Gray}" Visibility="Collapsed"/>
                                     </Grid>
                                 </Expander>
                             </Grid>
@@ -167,6 +168,7 @@
                                     <Grid  Height="300">
                                         <ListView x:Name="ForgeListView" DisplayMemberPath="ForgeVersion" Tag="Forge" SelectionChanged="ModLaderListView_SelectionChanged" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,6.5,0,0" FontFamily="{DynamicResource Font}" />
                                         <ui:ProgressRing Name="ForgeLoading"/>
+                                        <TextBlock x:Name="ForgeNoVersion" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{DynamicResource Font}" Text="{x:Static properties:MainLang.NoAvailableVersion}" Foreground="{DynamicResource Gray}" Visibility="Collapsed"/>
                                     </Grid>
                                 </Expander>
                             </Grid>
@@ -178,6 +180,7 @@
                                     <Grid  Height="300">
                                         <ListView DisplayMemberPath="BuildVersion" Tag="Fabric" SelectionChanged="ModLaderListView_SelectionChanged" x:Name="FabricListView" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,6.5,0,0" FontFamily="{DynamicResource Font}" />
                                         <ui:ProgressRing Name="FabricLoading"/>
+                                        <TextBlock x:Name="FabricNoVersion" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{DynamicResource Font}" Text="{x:Static properties:MainLang.NoAvailableVersion}" Foreground="{DynamicResource Gray}" Visibility="Collapsed"/>
                                     </Grid>
                                 </Expander>
                             </Grid>
@@ -189,6 +192,7 @@
                                     <Grid  Height="300">
                                         <ListView DisplayMemberPath="BuildVersion" Tag="Quilt" x:Name="QuiltListView" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,6.5,0,0" FontFamily="{DynamicResource Font}" SelectionChanged="ModLaderListView_SelectionChanged" />
                                         <ui:ProgressRing Name="QuiltLoading"/>
+                                        <TextBlock x:Name="QuiltNoVersion" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{DynamicResource Font}" Text="{x:Static properties:MainLang.NoAvailableVersion}" Foreground="{DynamicResource Gray}" Visibility="Collapsed"/>
                                     </Grid>
                                 </Expander>
                             </Grid>

@@ -1582,6 +1582,15 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
+        ///   查找类似 无可用版本 的本地化字符串。
+        /// </summary>
+        public static string NoAvailableVersion {
+            get {
+                return ResourceManager.GetString("NoAvailableVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 尚未选择音乐 的本地化字符串。
         /// </summary>
         public static string NoChooseSong {

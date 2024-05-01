@@ -126,6 +126,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
                 return;
             }
             var manifest = ((System.Windows.Controls.ListView)sender).SelectedItem as VersionManifestEntry;
+            AdditionalInstallText.Text = MainLang.AdditionalInstall;
             ReadyInstallGame(manifest.Id);
         }
         private void InstallBtn_Click(object sender, RoutedEventArgs e)
@@ -355,7 +356,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
                     shouldReturn = true;
                 }
             });//Vanllia
-            if(shouldReturn) { return; }
+            if (shouldReturn) { return; }
             var game = resolver.GetGameEntity(versionId);
             if (forgeInstallEntry != null)
             {
@@ -604,6 +605,10 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
             ForgeListView.Items.Clear();
             FabricListView.Items.Clear();
             QuiltListView.Items.Clear();
+            OptifineNoVersion.Visibility = Visibility.Collapsed;
+            ForgeNoVersion.Visibility = Visibility.Collapsed;
+            FabricNoVersion.Visibility = Visibility.Collapsed;
+            QuiltNoVersion.Visibility = Visibility.Collapsed;
 
             _ = Task.Run(async () =>
             {
@@ -615,6 +620,10 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
                         OptifineListView.Items.Add(item);
                     }
                     OptifineLoading.Visibility = Visibility.Hidden;
+                    if (OptifineListView.Items.Count == 0)
+                    {
+                        OptifineNoVersion.Visibility = Visibility.Visible;
+                    }
                 });
             });
             _ = Task.Run(async () =>
@@ -627,6 +636,10 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
                         ForgeListView.Items.Add(item);
                     }
                     ForgeLoading.Visibility = Visibility.Hidden;
+                    if (ForgeListView.Items.Count == 0)
+                    {
+                        ForgeNoVersion.Visibility = Visibility.Visible;
+                    }
                 });
             });
             _ = Task.Run(async () =>
@@ -639,6 +652,10 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
                         FabricListView.Items.Add(item);
                     }
                     FabricLoading.Visibility = Visibility.Hidden;
+                    if (FabricListView.Items.Count == 0)
+                    {
+                        FabricNoVersion.Visibility = Visibility.Visible;
+                    }
                 });
             });
             _ = Task.Run(async () =>
@@ -651,6 +668,10 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
                         QuiltListView.Items.Add(item);
                     }
                     QuiltLoading.Visibility = Visibility.Hidden;
+                    if (QuiltListView.Items.Count == 0)
+                    {
+                        QuiltNoVersion.Visibility = Visibility.Visible;
+                    }
                 });
             });
 
