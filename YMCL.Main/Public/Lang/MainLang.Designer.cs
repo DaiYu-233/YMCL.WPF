@@ -637,6 +637,15 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
+        ///   查找类似 获取更新 的本地化字符串。
+        /// </summary>
+        public static string GetUpdate {
+            get {
+                return ResourceManager.GetString("GetUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 版本列表获取失败 的本地化字符串。
         /// </summary>
         public static string GetVersionListFail {

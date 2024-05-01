@@ -786,4 +786,10 @@
   <data name="WriteFinish" xml:space="preserve">
     <value>書き込みが完了しました</value>
   </data>
+  <data name="NoAvailableVersion" xml:space="preserve">
+    <value>利用可能なバージョンがありません</value>
+  </data>
+  <data name="GetUpdate" xml:space="preserve">
+    <value>アップデートをゲット</value>
+  </data>
 </root>

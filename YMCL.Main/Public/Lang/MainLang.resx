@@ -789,4 +789,7 @@
   <data name="NoAvailableVersion" xml:space="preserve">
     <value>无可用版本</value>
   </data>
+  <data name="GetUpdate" xml:space="preserve">
+    <value>获取更新</value>
+  </data>
 </root>

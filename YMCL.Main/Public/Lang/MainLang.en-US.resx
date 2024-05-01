@@ -786,4 +786,10 @@
   <data name="WriteFinish" xml:space="preserve">
     <value>Writing image done</value>
   </data>
+  <data name="NoAvailableVersion" xml:space="preserve">
+    <value>No version available</value>
+  </data>
+  <data name="GetUpdate" xml:space="preserve">
+    <value>Get updates</value>
+  </data>
 </root>

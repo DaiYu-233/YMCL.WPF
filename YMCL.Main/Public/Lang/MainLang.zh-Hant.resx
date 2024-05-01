@@ -786,4 +786,10 @@
   <data name="WriteFinish" xml:space="preserve">
     <value>寫入完成</value>
   </data>
+  <data name="NoAvailableVersion" xml:space="preserve">
+    <value>無可用版本</value>
+  </data>
+  <data name="GetUpdate" xml:space="preserve">
+    <value>取得更新</value>
+  </data>
 </root>

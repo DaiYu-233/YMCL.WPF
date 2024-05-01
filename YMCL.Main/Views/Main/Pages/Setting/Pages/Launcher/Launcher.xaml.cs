@@ -49,11 +49,25 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launcher
             CheckUpdate.Content = ring;
             ring.Height = 17;
             ring.Width = 17;
+            var shouldReturn = false;
+            var needUpdate = false;
             await Task.Run(() =>
             {
                 try
                 {
-                    obj = JsonConvert.DeserializeObject<_2018k>(updater.GetUpdateFile(Const.UpdaterId));
+                    needUpdate = updater.GetUpdate(Const.UpdaterId, Const.Version);
+                    if (needUpdate)
+                    {
+                        obj = JsonConvert.DeserializeObject<_2018k>(updater.GetUpdateFile(Const.UpdaterId));
+                    }
+                    else
+                    {
+                        Dispatcher.BeginInvoke(() =>
+                        {
+                            CheckUpdate.Content = MainLang.CheckUpdate;
+                            CheckUpdate.IsEnabled = true;
+                        });
+                    }
                 }
                 catch
                 {
@@ -63,133 +77,139 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launcher
                         CheckUpdate.Content = MainLang.CheckUpdate;
                         CheckUpdate.IsEnabled = true;
                     });
-                    return;
+                    shouldReturn = true;
                 }
             });
-            CheckUpdate.Content = MainLang.CheckUpdate;
-            if (obj != null)
+            if (shouldReturn) { return; }
+            if (!needUpdate)
+            {
+                Toast.Show(Const.Window.main, LangHelper.Current.GetText("LatestVersion"), ToastPosition.Top);
+                return;
+            }
+            if (obj == null)
             {
                 CheckUpdate.Content = MainLang.CheckUpdate;
                 CheckUpdate.IsEnabled = true; return;
             }
-            bool Is64BitProcess = Environment.Is64BitProcess;
-            if (obj.EnabledGithubApi)
+
+            var V = MessageBoxX.Show(LangHelper.Current.GetText("DownloadUpdateQuestion") + "\n\n" + LangHelper.Current.GetText("UpdateInfo") + "：| \n    " + updater.GetUpdateRem(Const.UpdaterId), LangHelper.Current.GetText("FindNewVersion") + " - " + updater.GetVersionInternet(Const.UpdaterId), MessageBoxButton.OKCancel);
+
+            CheckUpdate.Content = MainLang.CheckUpdate;
+            CheckUpdate.IsEnabled = true;
+
+            if (V == MessageBoxResult.OK)
             {
-                try
+                var task = Const.Window.tasks.CreateTask(LangHelper.Current.GetText("DownloadUpdate"), true);
+
+                DateTime now = DateTime.Now;
+                var savePath = $"{Const.PublicDataRootPath}\\{now.ToString("yyyy-MM-dd-HH-mm-ss")}--YMCL.exe";
+
+                task.AppendText(YMCL.Main.Public.Lang.MainLang.GetUpdate);
+
+                bool Is64BitProcess = Environment.Is64BitProcess;
+                if (obj.EnabledGithubApi)
                 {
-                    HttpClient httpClient = new HttpClient();
-                    httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36 Edg/91.0.864.54");
-                    var githubApi = JArray.Parse(await httpClient.GetStringAsync(obj.GithubApi));
-                    foreach (JObject root in githubApi)
+                    try
                     {
-                        JArray assets = (JArray)root["assets"];
-                        foreach (JObject asset in assets)
+                        HttpClient httpClient = new HttpClient();
+                        httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36 Edg/91.0.864.54");
+                        var githubApi = JArray.Parse(await httpClient.GetStringAsync(obj.GithubApi));
+                        foreach (JObject root in githubApi)
                         {
-                            string name = (string)asset["name"];
-                            string browser_download_url = (string)asset["browser_download_url"];
-                            if (Is64BitProcess && name == "YMCL.Main.x64.exe")
+                            JArray assets = (JArray)root["assets"];
+                            foreach (JObject asset in assets)
                             {
-                                url = browser_download_url;
-                                break;
-                            }
-                            if (!Is64BitProcess && name == "YMCL.Main.x86.exe")
-                            {
-                                url = browser_download_url;
-                                break;
+                                string name = (string)asset["name"];
+                                string browser_download_url = (string)asset["browser_download_url"];
+                                if (Is64BitProcess && name == "YMCL.Main.x64.exe")
+                                {
+                                    url = browser_download_url;
+                                    break;
+                                }
+                                if (!Is64BitProcess && name == "YMCL.Main.x86.exe")
+                                {
+                                    url = browser_download_url;
+                                    break;
+                                }
                             }
                         }
                     }
-                }
-                catch
-                {
-                    Toast.Show(message: LangHelper.Current.GetText("CheckUpdateFailed"), position: ToastPosition.Top, window: Const.Window.main);
-                    return;
-                }
-            }
-            else
-            {
-                if (Is64BitProcess)
-                {
-                    url = obj.X64;
+                    catch
+                    {
+                        Toast.Show(message: LangHelper.Current.GetText("CheckUpdateFailed"), position: ToastPosition.Top, window: Const.Window.main);
+                        return;
+                    }
                 }
                 else
                 {
-                    url = obj.X86;
-                }
-            }
-            Debug.WriteLine(url);
-            if (updater.GetUpdate(Const.UpdaterId, Const.Version) == true)
-            {
-                var V = MessageBoxX.Show(LangHelper.Current.GetText("DownloadUpdateQuestion") + "\n\n" + LangHelper.Current.GetText("UpdateInfo") + "：| \n    " + updater.GetUpdateRem(Const.UpdaterId), LangHelper.Current.GetText("FindNewVersion") + " - " + updater.GetVersionInternet(Const.UpdaterId), MessageBoxButton.OKCancel);
-                if (V == MessageBoxResult.OK)
-                {
-                    var task = Const.Window.tasks.CreateTask(LangHelper.Current.GetText("DownloadUpdate"), true);
-
-                    DateTime now = DateTime.Now;
-                    var savePath = $"{Const.PublicDataRootPath}\\{now.ToString("yyyy-MM-dd-HH-mm-ss")}--YMCL.exe";
-                    task.AppendText(LangHelper.Current.GetText("BeginUpdate"));
-                    try
+                    if (Is64BitProcess)
                     {
-                        var handler = new HttpClientHandler();
-                        handler.ServerCertificateCustomValidationCallback = (httpRequestMessage, cert, cetChain, policyErrors) => { return true; };
-                        ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls13 | SecurityProtocolType.Tls12;
-                        using (HttpClient client = new HttpClient(handler))
+                        url = obj.X64;
+                    }
+                    else
+                    {
+                        url = obj.X86;
+                    }
+                }
+
+                task.AppendText(LangHelper.Current.GetText("BeginUpdate"));
+
+                try
+                {
+                    var handler = new HttpClientHandler();
+                    handler.ServerCertificateCustomValidationCallback = (httpRequestMessage, cert, cetChain, policyErrors) => { return true; };
+                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls13 | SecurityProtocolType.Tls12;
+                    using (HttpClient client = new HttpClient(handler))
+                    {
+                        client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36 Edg/121.0.0.0");
+                        using (HttpResponseMessage response = await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead))
                         {
-                            client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36 Edg/121.0.0.0");
-                            using (HttpResponseMessage response = await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead))
+                            response.EnsureSuccessStatusCode();
+
+                            using (var downloadStream = await response.Content.ReadAsStreamAsync())
                             {
-                                response.EnsureSuccessStatusCode();
-
-                                using (var downloadStream = await response.Content.ReadAsStreamAsync())
+                                using (var fileStream = new FileStream(savePath, FileMode.Create, FileAccess.Write))
                                 {
-                                    using (var fileStream = new FileStream(savePath, FileMode.Create, FileAccess.Write))
+                                    byte[] buffer = new byte[8192];
+                                    int bytesRead;
+                                    long totalBytesRead = 0;
+                                    long totalBytes = response.Content.Headers.ContentLength.HasValue ? response.Content.Headers.ContentLength.Value : -1;
+
+                                    while ((bytesRead = await downloadStream.ReadAsync(buffer, 0, buffer.Length)) > 0)
                                     {
-                                        byte[] buffer = new byte[8192];
-                                        int bytesRead;
-                                        long totalBytesRead = 0;
-                                        long totalBytes = response.Content.Headers.ContentLength.HasValue ? response.Content.Headers.ContentLength.Value : -1;
+                                        await fileStream.WriteAsync(buffer, 0, bytesRead);
+                                        totalBytesRead += bytesRead;
 
-                                        while ((bytesRead = await downloadStream.ReadAsync(buffer, 0, buffer.Length)) > 0)
+                                        if (totalBytes > 0)
                                         {
-                                            await fileStream.WriteAsync(buffer, 0, bytesRead);
-                                            totalBytesRead += bytesRead;
-
-                                            if (totalBytes > 0)
-                                            {
-                                                double progress = ((double)totalBytesRead / totalBytes) * 100;
-                                                task.UpdateProgress(progress);
-                                            }
+                                            double progress = ((double)totalBytesRead / totalBytes) * 100;
+                                            task.UpdateProgress(progress);
                                         }
                                     }
                                 }
                             }
-                            ProcessStartInfo startInfo = new ProcessStartInfo
-                            {
-                                UseShellExecute = true,
-                                WorkingDirectory = Environment.CurrentDirectory,
-                                FileName = System.IO.Path.Combine(Const.PublicDataRootPath, "YMCL.Updater.exe"),
-                                Arguments = $"{savePath} {System.Windows.Forms.Application.ExecutablePath}"
-                            };
-                            Process.Start(startInfo);
-                            App.Current.Shutdown();
                         }
+                        ProcessStartInfo startInfo = new ProcessStartInfo
+                        {
+                            UseShellExecute = true,
+                            WorkingDirectory = Environment.CurrentDirectory,
+                            FileName = System.IO.Path.Combine(Const.PublicDataRootPath, "YMCL.Updater.exe"),
+                            Arguments = $"{savePath} {System.Windows.Forms.Application.ExecutablePath}"
+                        };
+                        Process.Start(startInfo);
+                        App.Current.Shutdown();
                     }
-                    catch (Exception ex)
-                    {
-                        MessageBoxX.Show(LangHelper.Current.GetText("DownloadFail") + "：" + ex.Message + "\n\n" + ex.ToString(), "Yu Minecraft Launcher");
-                    }
-                    task.AppendText(LangHelper.Current.GetText("FinishUpdate"));
-                    task.Destory();
-                    CheckUpdate.IsEnabled = true;
                 }
-                else
+                catch (Exception ex)
                 {
-                    CheckUpdate.IsEnabled = true;
+                    MessageBoxX.Show(LangHelper.Current.GetText("DownloadFail") + "：" + ex.Message + "\n\n" + ex.ToString(), "Yu Minecraft Launcher");
                 }
+                task.AppendText(LangHelper.Current.GetText("FinishUpdate"));
+                task.Destory();
+                CheckUpdate.IsEnabled = true;
             }
             else
             {
-                Toast.Show(Const.Window.main, LangHelper.Current.GetText("LatestVersion"), ToastPosition.Top);
                 CheckUpdate.IsEnabled = true;
             }
             CheckUpdate.IsEnabled = true;

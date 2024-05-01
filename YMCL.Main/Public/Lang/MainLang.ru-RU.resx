@@ -786,4 +786,10 @@
   <data name="WriteFinish" xml:space="preserve">
     <value>Запись завершена</value>
   </data>
+  <data name="NoAvailableVersion" xml:space="preserve">
+    <value>Версия недоступна</value>
+  </data>
+  <data name="GetUpdate" xml:space="preserve">
+    <value>Получайте обновления</value>
+  </data>
 </root>
