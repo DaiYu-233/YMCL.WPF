@@ -148,7 +148,13 @@
                                 <Label x:Name="OptifineLabel" Content="Null" FontFamily="{DynamicResource Font}" Margin="6.5,0,6.5,0" HorizontalAlignment="Right"/>
                                 <Expander Header="Optifine" FontFamily="{DynamicResource Font}" >
                                     <Grid  Height="300">
-                                        <ListView x:Name="OptifineListView" Tag="Optifine" SelectionChanged="ModLaderListView_SelectionChanged" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,6.5,0,0" FontFamily="{DynamicResource Font}" />
+                                        <ListView x:Name="OptifineListView" Tag="Optifine" SelectionChanged="ModLaderListView_SelectionChanged" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,6.5,0,0" FontFamily="{DynamicResource Font}" >
+                                            <ListView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock FontFamily="MiSans Medium" FontSize="14"><Run Text="{Binding Type}"/><Run Text=" "/><Run Text="{Binding Patch}"/></TextBlock>
+                                                </DataTemplate>
+                                            </ListView.ItemTemplate>
+                                        </ListView>
                                         <ui:ProgressRing Name="OptifineLoading"/>
                                     </Grid>
                                 </Expander>

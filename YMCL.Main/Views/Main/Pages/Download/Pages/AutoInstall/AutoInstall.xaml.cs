@@ -130,9 +130,16 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
         }
         private void InstallBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (OptifineListView.SelectedIndex >= 0)
+            if (OptifineListView.SelectedIndex >= 0 && ForgeListView.SelectedIndex >= 0)
             {
-
+                var entry1 = ForgeListView.SelectedItem as ForgeInstallEntry;
+                var entry2 = OptifineListView.SelectedItem as OptiFineInstallEntity;
+                InstallGame(VersionId.Text, true, CustomGameIdTextBox.Text, optiFineInstallEntity: entry2, forgeInstallEntry: entry1);
+            }
+            else if (OptifineListView.SelectedIndex >= 0)
+            {
+                var entry = OptifineListView.SelectedItem as OptiFineInstallEntity;
+                InstallGame(VersionId.Text, true, CustomGameIdTextBox.Text, optiFineInstallEntity: entry);
             }
             else if (ForgeListView.SelectedIndex >= 0)
             {
@@ -163,7 +170,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
                 case "Optifine":
                     if (index >= 0)
                     {
-                        OptifineLabel.Content = (control.SelectedItem as Object).ToString();
+                        OptifineLabel.Content = (control.SelectedItem as OptiFineInstallEntity).Type + " " + (control.SelectedItem as OptiFineInstallEntity).Patch;
                     }
                     else
                     {
@@ -233,22 +240,22 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
             }
             if (ForgeListView.SelectedIndex >= 0)
             {
-                var forge = control.SelectedItem as ForgeInstallEntry;
+                var forge = ForgeListView.SelectedItem as ForgeInstallEntry;
                 str += $"-Forge {forge.ForgeVersion} ";
             }
             if (OptifineListView.SelectedIndex >= 0)
             {
-                var optifine = control.SelectedItem as Object;
-                str += $"-Optifine {optifine.ToString()} ";
+                var optifine = OptifineListView.SelectedItem as OptiFineInstallEntity;
+                str += $"-Optifine {optifine.Type + " " + optifine.Patch} ";
             }
             if (FabricListView.SelectedIndex >= 0)
             {
-                var fabric = control.SelectedItem as FabricBuildEntry;
+                var fabric = FabricListView.SelectedItem as FabricBuildEntry;
                 str += $"-Fabric {fabric.BuildVersion} ";
             }
             if (QuiltListView.SelectedIndex >= 0)
             {
-                var quilt = control.SelectedItem as QuiltBuildEntry;
+                var quilt = QuiltListView.SelectedItem as QuiltBuildEntry;
                 str += $"-Quilt {quilt.BuildVersion} ";
             }
             AdditionalInstallText.Text = str;
@@ -265,8 +272,9 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
             InitializeComponent();
             InstallPreView.Visibility = Visibility.Hidden;
         }
-        public async void InstallGame(string versionId, bool msg, string versionName = null, ForgeInstallEntry forgeInstallEntry = null, FabricBuildEntry fabricBuildEntry = null, QuiltBuildEntry quiltBuildEntry = null)
+        public async void InstallGame(string versionId, bool msg, string versionName = null, ForgeInstallEntry forgeInstallEntry = null, FabricBuildEntry fabricBuildEntry = null, QuiltBuildEntry quiltBuildEntry = null, OptiFineInstallEntity optiFineInstallEntity = null)
         {
+            var shouldReturn = false;
             var customId = HandleCustomId(VersionId.Text, CustomGameIdTextBox.Text);
             Regex regex = new Regex(@"[\\/:*?""<>|]");
             MatchCollection matches = regex.Matches(customId);
@@ -328,7 +336,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
                         {
                             Toast.Show(window: Const.Window.main, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("InstallFail")}：Vanllia - {versionId}");
                         });
-                        return;
+                        shouldReturn = true;
                     }
                     else
                     {
@@ -344,8 +352,10 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
                     {
                         MessageBoxX.Show($"{LangHelper.Current.GetText("InstallFail")}：Vanllia - {versionId}\n\n{ex.ToString()}", "Yu Minecraft Launcher");
                     });
+                    shouldReturn = true;
                 }
             });//Vanllia
+            if(shouldReturn) { return; }
             var game = resolver.GetGameEntity(versionId);
             if (forgeInstallEntry != null)
             {
@@ -392,7 +402,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
                                     Toast.Show(window: Const.Window.main, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("InstallFail")}：Forge-{customId}");
                                     Method.ShowWin10Notice($"{LangHelper.Current.GetText("InstallFail")}：Forge-{customId}");
                                 });
-                                return;
+                                shouldReturn = true;
                             }
                         }
                     }
@@ -402,9 +412,71 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
                         {
                             MessageBoxX.Show($"{LangHelper.Current.GetText("InstallFail")}：Forge-{customId}\n\n{ex.ToString()}", "Yu Minecraft Launcher");
                         });
+                        shouldReturn = true;
                     }
                 });
+                if (shouldReturn) { return; }
             }//Forge
+            if (optiFineInstallEntity != null)
+            {
+                await Task.Run(async () =>
+                {
+                    try
+                    {
+                        var javas = JsonConvert.DeserializeObject<List<JavaEntry>>(File.ReadAllText(Const.JavaDataPath));
+                        if (javas.Count <= 0)
+                        {
+                            Toast.Show(window: Const.Window.main, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("CannotFandRightJavaText")}");
+                        }
+                        else
+                        {
+                            var optifineInstaller = new OptifineInstaller(game, optiFineInstallEntity, javas[0].JavaPath, customId, MirrorDownloadManager.Bmcl);
+                            await Dispatcher.BeginInvoke(() =>
+                            {
+                                task.UpdateTaskName($"{LangHelper.Current.GetText("Install")}：Optifine - {versionId}");
+                                task.AppendText("-----> Optifine");
+                            });
+                            optifineInstaller.ProgressChanged += (_, x) =>
+                            {
+                                Dispatcher.BeginInvoke(() =>
+                                {
+                                    task.AppendText(x.ProgressStatus);
+                                    task.UpdateProgress(x.Progress * 100);
+                                });
+                            };
+
+                            var result = await optifineInstaller.InstallAsync();
+
+                            if (result)
+                            {
+                                await Dispatcher.BeginInvoke(() =>
+                                {
+                                    Toast.Show(window: Const.Window.main, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("InstallFinish")}：Optifine-{customId}");
+                                    Method.ShowWin10Notice($"{LangHelper.Current.GetText("InstallFinish")}：Optifine-{customId}");
+                                });
+                            }
+                            else
+                            {
+                                await Dispatcher.BeginInvoke(() =>
+                                {
+                                    Toast.Show(window: Const.Window.main, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("InstallFail")}：Optifine-{customId}");
+                                    Method.ShowWin10Notice($"{LangHelper.Current.GetText("InstallFail")}：Optifine-{customId}");
+                                });
+                                shouldReturn = true;
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        await Dispatcher.BeginInvoke(() =>
+                        {
+                            MessageBoxX.Show($"{LangHelper.Current.GetText("InstallFail")}：Optifine-{customId}\n\n{ex.ToString()}", "Yu Minecraft Launcher");
+                        });
+                        shouldReturn = true;
+                    }
+                });
+                if (shouldReturn) { return; }
+            }//Optifine
             if (fabricBuildEntry != null)
             {
                 await Task.Run(async () =>
@@ -443,7 +515,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
                                 Toast.Show(window: Const.Window.main, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("InstallFail")}：Fabric-{customId}");
                                 Method.ShowWin10Notice($"{LangHelper.Current.GetText("InstallFail")}：Fabric-{customId}");
                             });
-                            return;
+                            shouldReturn = true;
                         }
                     }
                     catch (Exception ex)
@@ -452,8 +524,10 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
                         {
                             MessageBoxX.Show($"{LangHelper.Current.GetText("InstallFail")}：Fabric-{customId}\n\n{ex.ToString()}", "Yu Minecraft Launcher");
                         });
+                        shouldReturn = true;
                     }
                 });
+                if (shouldReturn) { return; }
             }//Fabric
             if (quiltBuildEntry != null)
             {
@@ -493,7 +567,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
                                 Toast.Show(window: Const.Window.main, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("InstallFail")}：Quilt-{customId}");
                                 Method.ShowWin10Notice($"{LangHelper.Current.GetText("InstallFail")}：Quilt-{customId}");
                             });
-                            return;
+                            shouldReturn = true;
                         }
                     }
                     catch (Exception ex)
@@ -502,8 +576,10 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
                         {
                             MessageBoxX.Show($"{LangHelper.Current.GetText("InstallFail")}：Quilt-{customId}\n\n{ex.ToString()}", "Yu Minecraft Launcher");
                         });
+                        shouldReturn = true;
                     }
                 });
+                if (shouldReturn) { return; }
             }//Quilt
 
             Toast.Show(window: Const.Window.main, position: ToastPosition.Top, message: $"{LangHelper.Current.GetText("InstallFinish")}：{customId}");
@@ -529,18 +605,18 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
             FabricListView.Items.Clear();
             QuiltListView.Items.Clear();
 
-            //_ = Task.Run(async () =>
-            //{
-            //    var optifine = await OptifineInstaller.EnumerableFromVersionAsync(versionId);
-            //    await Dispatcher.BeginInvoke(() =>
-            //    {
-            //        foreach (var item in optifine)
-            //        {
-
-            //        }
-            //        OptifineLoading.Visibility = Visibility.Hidden;
-            //    });
-            //});
+            _ = Task.Run(async () =>
+            {
+                var optifine = await OptifineInstaller.EnumerableFromVersionAsync(versionId);
+                await Dispatcher.BeginInvoke(() =>
+                {
+                    foreach (var item in optifine)
+                    {
+                        OptifineListView.Items.Add(item);
+                    }
+                    OptifineLoading.Visibility = Visibility.Hidden;
+                });
+            });
             _ = Task.Run(async () =>
             {
                 var forge = await ForgeInstaller.EnumerableFromVersionAsync(versionId);
@@ -586,10 +662,21 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
             {
                 var value = versionId;
                 InstallPreviewControlGrid.Height = 108;
-                if (ForgeListView.SelectedIndex >= 0)
+                if (ForgeListView.SelectedIndex >= 0 && OptifineListView.SelectedIndex >= 0)
+                {
+                    var entry1 = ForgeListView.SelectedItem as ForgeInstallEntry;
+                    var entry2 = OptifineListView.SelectedItem as OptiFineInstallEntity;
+                    value = $"{versionId}-Forge_{entry1.ForgeVersion}-Optifine_{entry2.Type}_{entry2.Patch}";
+                }
+                else if (ForgeListView.SelectedIndex >= 0)
                 {
                     var entry = ForgeListView.SelectedItem as ForgeInstallEntry;
                     value = $"{versionId}-Forge_{entry.ForgeVersion}";
+                }
+                else if (OptifineListView.SelectedIndex >= 0)
+                {
+                    var entry = OptifineListView.SelectedItem as OptiFineInstallEntity;
+                    value = $"{versionId}-Optifine_{entry.Type}_{entry.Patch}";
                 }
                 else if (FabricListView.SelectedIndex >= 0)
                 {
