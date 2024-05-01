@@ -17,7 +17,7 @@ namespace YMCL.Main.Public
         }
 
         public static string CurseForgeApiKey { get; } = "$2a$10$ndSPnOpYqH3DRmLTWJTf5Ofm7lz9uYoTGvhSj0OjJWJ8WdO4ZTsr.";
-        public static string Version { get; } = "2024.04.30.20.41";
+        public static string Version { get; } = "2024.05.01.11.30";
         public static string UpdaterId { get; } = "97B62D3AD1724EFA9AFC7A8D8971BBB1";
         public static string AzureClientId { get; } = "c06d4d68-7751-4a8a-a2ff-d1b46688f428";
         public static string VersionSettingFileName { get; } = "YMCL.Setting.DaiYu";

@@ -679,7 +679,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
         }
         public string HandleCustomId(string versionId, string customId)
         {
-            if ((ForgeListView.SelectedIndex >= 0 || FabricListView.SelectedIndex >= 0 || QuiltListView.SelectedIndex >= 0) && customId == versionId)
+            if ((ForgeListView.SelectedIndex >= 0 || FabricListView.SelectedIndex >= 0 || QuiltListView.SelectedIndex >= 0 || OptifineListView.SelectedIndex >= 0) && customId == versionId)
             {
                 var value = versionId;
                 InstallPreviewControlGrid.Height = 108;
