@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:lang="clr-namespace:YMCL.Main.Public.Lang" xmlns:properties="clr-namespace:YMCL.Main.Public.Lang"
         mc:Ignorable="d"  Background="Transparent" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True"
-        Title="{x:Static properties:MainLang.MainWindow_Title}" Height="600" Width="1050" Loaded="Window_Loaded" MouseMove="WindowX_MouseMove" MouseLeftButtonDown="WindowX_MouseLeftButtonDown" MouseLeftButtonUp="WindowX_MouseLeftButtonUp">
-    <ui:ClippingBorder x:Name="Root" Background="{DynamicResource 2x}" CornerRadius="8,8,8,8" BorderBrush="{DynamicResource TitleBarColor}" BorderThickness="2,2,2,2">
+        Title="{x:Static properties:MainLang.MainWindow_Title}" MinHeight="320" MinWidth="520" Loaded="Window_Loaded" MouseMove="WindowX_MouseMove" MouseLeftButtonDown="WindowX_MouseLeftButtonDown" MouseLeftButtonUp="WindowX_MouseLeftButtonUp">
+    <ui:ClippingBorder x:Name="Root" Background="{DynamicResource 1x}" CornerRadius="8,8,8,8" BorderBrush="{DynamicResource TitleBarColor}" BorderThickness="2,2,2,2">
         <Grid>
             <Border VerticalAlignment="Top" Height="30" CornerRadius="8,8,0,0" Background="{DynamicResource TitleBarColor}" >
                 <Grid x:Name="TitleBar" MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
@@ -15,8 +15,11 @@
                     <Button x:Name="btnClose" Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource Close}" Tag="IsCloseButton" HorizontalAlignment="Right" Margin="0,0,3,0" Click="btnClose_Click" VerticalAlignment="Center" />
                 </Grid>
             </Border>
+
             <Grid x:Name="Main" >
-                <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" Margin="59,30,0,0" />
+                <ui:ClippingBorder CornerRadius="8,0,0,0" Margin="59,30,0,0">
+                    <Frame Background="{DynamicResource 2x}" x:Name="MainFrame" NavigationUIVisibility="Hidden"  />
+                </ui:ClippingBorder>
                 <Grid x:Name="InfoBarShowArea" Margin="59,30,0,0" >
                 </Grid>
                 <Border Background="{DynamicResource TitleBarColor}" CornerRadius="8,0,0,8" HorizontalAlignment="Left">
@@ -61,6 +64,7 @@
                     </Grid>
                 </Border>
             </Grid>
+
         </Grid>
     </ui:ClippingBorder>
 </pu:WindowX>

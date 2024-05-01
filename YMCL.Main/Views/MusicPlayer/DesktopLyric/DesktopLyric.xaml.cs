@@ -196,9 +196,11 @@ namespace YMCL.Main.Views.MusicPlayer.DesktopLyric
         }
         public void Enabled()
         {
+            Topmost = false;
             WindowState = WindowState.Normal;
             Show();
             Activate();
+            Topmost = true;
             open = true;
         }
         public void Disabled()
