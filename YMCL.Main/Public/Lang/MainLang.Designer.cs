@@ -349,6 +349,15 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
+        ///   查找类似 检查资源缺失 的本地化字符串。
+        /// </summary>
+        public static string CheckMissingResource {
+            get {
+                return ResourceManager.GetString("CheckMissingResource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 检测音乐可用性... 的本地化字符串。
         /// </summary>
         public static string CheckSongAvailability {
@@ -1618,6 +1627,15 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
+        ///   查找类似 无资源缺失 的本地化字符串。
+        /// </summary>
+        public static string NoResourceAreMissing {
+            get {
+                return ResourceManager.GetString("NoResourceAreMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 公告 的本地化字符串。
         /// </summary>
         public static string Notice {
@@ -1704,6 +1722,15 @@ namespace YMCL.Main.Public.Lang {
         public static string RepeatOpen {
             get {
                 return ResourceManager.GetString("RepeatOpen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 有资源缺失 的本地化字符串。
+        /// </summary>
+        public static string ResourceAreMissing {
+            get {
+                return ResourceManager.GetString("ResourceAreMissing", resourceCulture);
             }
         }
         

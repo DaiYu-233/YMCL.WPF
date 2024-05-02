@@ -127,6 +127,7 @@
                                     <Button Content="{x:Static properties:MainLang.Launch_ModFolder}" FontFamily="{DynamicResource Font}" FontSize="13" Margin="3.25,0,3.25,0" Click="OpenVersionFolder_Click" Tag="mods"/>
                                     <Button Content="{x:Static properties:MainLang.Launch_ResourcePackFolder}" FontFamily="{DynamicResource Font}" FontSize="13" Margin="3.25,0,3.25,0" Click="OpenVersionFolder_Click" Tag="resourcepacks"/>
                                     <Button Content="{x:Static properties:MainLang.Launch_ShaderPackFolder}" FontFamily="{DynamicResource Font}" FontSize="13" Margin="3.25,0,3.25,0" Click="OpenVersionFolder_Click" Tag="shaderpacks"/>
+                                    <Button x:Name="CheckMissingResource" Content="{x:Static properties:MainLang.CheckMissingResource}" FontFamily="{DynamicResource Font}" FontSize="13" Margin="3.25,0,3.25,0" Click="CheckMissingResource_Click" />
                                 </WrapPanel>
                             </Border>
                         </StackPanel>
@@ -205,15 +206,7 @@
                     </Grid>
                 </TabItem>
             </TabControl>
-
         </ui:ClippingBorder>
-        <StackPanel x:Name="ReturnPanel" Margin="0,-60,80,0" VerticalAlignment="Top" Height="30" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button x:Name="ReturnHomePage" Style="{DynamicResource SvgButtonsStyle}" Content="{DynamicResource Return}" HorizontalAlignment="Right" VerticalAlignment="Center"  Cursor="Hand" Margin="0,0,3,0" Click="ReturnHomePage_Click" />
-            <Label x:Name="ReturnHomePageLabel" Content="{x:Static properties:MainLang.Launch_VersionList}" FontFamily="{DynamicResource Font}" Foreground="{DynamicResource TextColor}" Background="{x:Null}" VerticalAlignment="Center" />
-        </StackPanel>
-        <StackPanel x:Name="ReturnPanelSetting" Margin="0,-60,80,0" VerticalAlignment="Top" Height="30" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button x:Name="ReturnBtn" Style="{DynamicResource SvgButtonsStyle}" Content="{DynamicResource Return}" HorizontalAlignment="Right" VerticalAlignment="Center"  Cursor="Hand" Margin="0,0,3,0" Click="ReturnBtn_Click" />
-            <Label x:Name="ReturnBtnLabel" Content="{x:Static properties:MainLang.Launch_VersionList}" FontFamily="{DynamicResource Font}" Foreground="{DynamicResource TextColor}" Background="{x:Null}" VerticalAlignment="Center" />
-        </StackPanel>
+        
     </Grid>
 </Page>

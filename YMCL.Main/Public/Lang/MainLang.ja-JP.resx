@@ -792,4 +792,13 @@
   <data name="GetUpdate" xml:space="preserve">
     <value>アップデートをゲット</value>
   </data>
+  <data name="CheckMissingResource" xml:space="preserve">
+    <value>不足している資源を確認してください</value>
+  </data>
+  <data name="NoResourceAreMissing" xml:space="preserve">
+    <value>不足している資源はありません</value>
+  </data>
+  <data name="ResourceAreMissing" xml:space="preserve">
+    <value>資源が足りません</value>
+  </data>
 </root>

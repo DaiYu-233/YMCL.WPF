@@ -7,6 +7,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using Hardcodet.Wpf.TaskbarNotification;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -376,6 +377,45 @@ namespace YMCL.Main.Views.Main
                     }
                 }
             }
+        }
+
+        private async void ReturnHomePage_Click(object sender, RoutedEventArgs e)
+        {
+            ThicknessAnimation animation = new ThicknessAnimation()
+            {
+                From = new Thickness(10, 10, 10, 10),
+                To = new Thickness(10, launch.PageRoot.ActualHeight, 0, 0),
+                Duration = TimeSpan.Parse("0:0:0.35")
+            };
+            ThicknessAnimation animation1 = new ThicknessAnimation()
+            {
+                From = new Thickness(0, -30, 80, 0),
+                To = new Thickness(0, -80, 80, 00),
+                Duration = TimeSpan.Parse("0:0:0.35")
+            };
+            launch.VersionListBorder.BeginAnimation(MarginProperty, animation);
+            Const.Window.main.ReturnVersionListPanel.BeginAnimation(MarginProperty, animation1);
+            await Task.Delay(250);
+            launch.VersionListBorder.Visibility = Visibility.Hidden;
+        }
+        private async void ReturnBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ThicknessAnimation animation = new ThicknessAnimation()
+            {
+                From = new Thickness(0, 0, 0, 0),
+                To = new Thickness(0, launch.PageRoot.ActualHeight, 0, 0),
+                Duration = TimeSpan.Parse("0:0:0.25")
+            };
+            ThicknessAnimation animation1 = new ThicknessAnimation()
+            {
+                From = new Thickness(0, -30, 80, 0),
+                To = new Thickness(0, -80, 80, 00),
+                Duration = TimeSpan.Parse("0:0:0.25")
+            };
+            launch.VersionSettingBorder.BeginAnimation(MarginProperty, animation);
+            Const.Window.main.ReturnlVersionSettingPane.BeginAnimation(MarginProperty, animation1);
+            await Task.Delay(250);
+            launch.VersionSettingBorder.Visibility = Visibility.Hidden;
         }
     }
 }

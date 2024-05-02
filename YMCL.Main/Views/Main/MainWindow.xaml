@@ -6,65 +6,74 @@
         xmlns:lang="clr-namespace:YMCL.Main.Public.Lang" xmlns:properties="clr-namespace:YMCL.Main.Public.Lang"
         mc:Ignorable="d"  Background="Transparent" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True"
         Title="{x:Static properties:MainLang.MainWindow_Title}" MinHeight="320" MinWidth="520" Loaded="Window_Loaded" MouseMove="WindowX_MouseMove" MouseLeftButtonDown="WindowX_MouseLeftButtonDown" MouseLeftButtonUp="WindowX_MouseLeftButtonUp">
-    <ui:ClippingBorder x:Name="Root" Background="{DynamicResource 1x}" CornerRadius="8,8,8,8" BorderBrush="{DynamicResource TitleBarColor}" BorderThickness="2,2,2,2">
-        <Grid>
-            <Border VerticalAlignment="Top" Height="30" CornerRadius="8,8,0,0" Background="{DynamicResource TitleBarColor}" >
-                <Grid x:Name="TitleBar" MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
-                    <TextBlock/>
-                    <Button x:Name="btnMinimize" Style="{DynamicResource IconButtonsStyle}" Content="{DynamicResource Minimize}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,30,0" Click="btnMinimize_Click" Cursor="Hand" />
-                    <Button x:Name="btnClose" Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource Close}" Tag="IsCloseButton" HorizontalAlignment="Right" Margin="0,0,3,0" Click="btnClose_Click" VerticalAlignment="Center" />
-                </Grid>
-            </Border>
-
-            <Grid x:Name="Main" >
-                <ui:ClippingBorder CornerRadius="8,0,0,0" Margin="59,30,0,0">
-                    <Frame Background="{DynamicResource 2x}" x:Name="MainFrame" NavigationUIVisibility="Hidden"  />
-                </ui:ClippingBorder>
-                <Grid x:Name="InfoBarShowArea" Margin="59,30,0,0" >
-                </Grid>
-                <Border Background="{DynamicResource TitleBarColor}" CornerRadius="8,0,0,8" HorizontalAlignment="Left">
-                    <Border.Triggers>
-                        <EventTrigger RoutedEvent="UIElement.MouseLeave">
-                            <BeginStoryboard>
-                                <Storyboard x:Name="HideStackPanel">
-                                    <DoubleAnimation Storyboard.TargetName="MenuGrid" Storyboard.TargetProperty="Width" BeginTime="0:0:0" From="200" To="59" Duration="0:0:0.3"/>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                        <EventTrigger RoutedEvent="UIElement.MouseEnter">
-                            <BeginStoryboard>
-                                <Storyboard x:Name="ShowStackPanel">
-                                    <DoubleAnimation Storyboard.TargetName="MenuGrid" Storyboard.TargetProperty="Width" BeginTime="0:0:0" From="59" To="200" Duration="0:0:0.3"/>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                    </Border.Triggers>
-                    <Grid x:Name="MenuGrid" Width="59" Margin="0,-10,0,0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="10"/>
-                            <RowDefinition Height="60"/>
-                            <RowDefinition />
-                        </Grid.RowDefinitions>
-
-                        <!-- Logo -->
-                        <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" Height="36">
-                            <Path Data="{DynamicResource Logo}" Margin="16 0 0 0" Stretch="Fill" Fill="{DynamicResource ThemeColor}" Width="25" Height="25" HorizontalAlignment="Left"/>
-                            <Label Content="Ymcl" Foreground="{DynamicResource ThemeColor}" FontWeight="Bold" FontSize="20" VerticalAlignment="Center" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Margin="20,0,0,0"/>
-                        </StackPanel>
-                        <Label Content="Ymc" Foreground="{DynamicResource ThemeColor}" FontWeight="Bold" FontSize="20" VerticalAlignment="Center" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Margin="60,0,0,0" Height="26" Width="0"/>
-
-                        <!-- Menu 菜单-->
-                        <StackPanel Grid.Row="2">
-                            <RadioButton x:Name="ToLaunch" Content="{x:Static properties:MainLang.MainWindow_NavigationLaunch}"  Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource LaunchPageIcon}"  IsChecked="True" FontFamily="{DynamicResource Font}" Checked="ToLaunch_Checked"/>
-                            <RadioButton x:Name="ToSetting" Content="{x:Static properties:MainLang.MainWindow_NavigationSetting}" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource SettingPageIcon}" Margin="0 5 0 5" FontFamily="{DynamicResource Font}" Checked="ToSetting_Checked" />
-                            <RadioButton x:Name="ToDownload" Content="{x:Static properties:MainLang.MainWindow_NavigationDownload}" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource DownloadPageIcon}" FontFamily="{DynamicResource Font}" Checked="ToDownload_Checked" Cursor="Hand"/>
-                            <RadioButton x:Name="ToPlayer" Content="{x:Static properties:MainLang.MainWindow_NavigationMusic}" Style="{DynamicResource PlayerMenuStyle}" Tag="{DynamicResource PlayerPageIcon}" FontFamily="{DynamicResource Font}" Checked="ToPlayer_Checked" Margin="0,5,0,0" Cursor="Hand"/>
-                            <RadioButton x:Name="ToMore" Content="{x:Static properties:MainLang.MainWindow_NavigationMore}" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource MorePageIcon}" Margin="0 5 0 5" FontFamily="{DynamicResource Font}" Checked="ToMore_Checked" />
-                        </StackPanel>
+    <Grid>
+        <ui:ClippingBorder x:Name="Root" Background="{DynamicResource 1x}" CornerRadius="8,8,8,8" BorderBrush="{DynamicResource TitleBarColor}" BorderThickness="2,2,2,2">
+            <Grid>
+                <Border VerticalAlignment="Top" Height="30" CornerRadius="8,8,0,0" Background="{DynamicResource TitleBarColor}" >
+                    <Grid x:Name="TitleBar" MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
+                        <TextBlock/>
+                        <Button x:Name="btnMinimize" Style="{DynamicResource IconButtonsStyle}" Content="{DynamicResource Minimize}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,30,0" Click="btnMinimize_Click" Cursor="Hand" />
+                        <Button x:Name="btnClose" Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource Close}" Tag="IsCloseButton" HorizontalAlignment="Right" Margin="0,0,3,0" Click="btnClose_Click" VerticalAlignment="Center" />
                     </Grid>
                 </Border>
-            </Grid>
 
-        </Grid>
-    </ui:ClippingBorder>
+                <Grid x:Name="Main" >
+                    <ui:ClippingBorder CornerRadius="8,0,0,0" Margin="59,30,0,0">
+                        <Frame Background="{DynamicResource 2x}" x:Name="MainFrame" NavigationUIVisibility="Hidden"  />
+                    </ui:ClippingBorder>
+                    <Grid x:Name="InfoBarShowArea" Margin="59,30,0,0" >
+                    </Grid>
+                    <Border Background="{DynamicResource TitleBarColor}" CornerRadius="8,0,0,8" HorizontalAlignment="Left">
+                        <Border.Triggers>
+                            <EventTrigger RoutedEvent="UIElement.MouseLeave">
+                                <BeginStoryboard>
+                                    <Storyboard x:Name="HideStackPanel">
+                                        <DoubleAnimation Storyboard.TargetName="MenuGrid" Storyboard.TargetProperty="Width" BeginTime="0:0:0" From="200" To="59" Duration="0:0:0.3"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="UIElement.MouseEnter">
+                                <BeginStoryboard>
+                                    <Storyboard x:Name="ShowStackPanel">
+                                        <DoubleAnimation Storyboard.TargetName="MenuGrid" Storyboard.TargetProperty="Width" BeginTime="0:0:0" From="59" To="200" Duration="0:0:0.3"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Border.Triggers>
+                        <Grid x:Name="MenuGrid" Width="59" Margin="0,-10,0,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="10"/>
+                                <RowDefinition Height="60"/>
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+
+                            <!-- Logo -->
+                            <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" Height="36">
+                                <Path Data="{DynamicResource Logo}" Margin="16 0 0 0" Stretch="Fill" Fill="{DynamicResource ThemeColor}" Width="25" Height="25" HorizontalAlignment="Left"/>
+                                <Label Content="Ymcl" Foreground="{DynamicResource ThemeColor}" FontWeight="Bold" FontSize="20" VerticalAlignment="Center" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Margin="20,0,0,0"/>
+                            </StackPanel>
+                            <Label Content="Ymc" Foreground="{DynamicResource ThemeColor}" FontWeight="Bold" FontSize="20" VerticalAlignment="Center" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Margin="60,0,0,0" Height="26" Width="0"/>
+
+                            <!-- Menu 菜单-->
+                            <StackPanel Grid.Row="2">
+                                <RadioButton x:Name="ToLaunch" Content="{x:Static properties:MainLang.MainWindow_NavigationLaunch}"  Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource LaunchPageIcon}"  IsChecked="True" FontFamily="{DynamicResource Font}" Checked="ToLaunch_Checked"/>
+                                <RadioButton x:Name="ToSetting" Content="{x:Static properties:MainLang.MainWindow_NavigationSetting}" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource SettingPageIcon}" Margin="0 5 0 5" FontFamily="{DynamicResource Font}" Checked="ToSetting_Checked" />
+                                <RadioButton x:Name="ToDownload" Content="{x:Static properties:MainLang.MainWindow_NavigationDownload}" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource DownloadPageIcon}" FontFamily="{DynamicResource Font}" Checked="ToDownload_Checked" Cursor="Hand"/>
+                                <RadioButton x:Name="ToPlayer" Content="{x:Static properties:MainLang.MainWindow_NavigationMusic}" Style="{DynamicResource PlayerMenuStyle}" Tag="{DynamicResource PlayerPageIcon}" FontFamily="{DynamicResource Font}" Checked="ToPlayer_Checked" Margin="0,5,0,0" Cursor="Hand"/>
+                                <RadioButton x:Name="ToMore" Content="{x:Static properties:MainLang.MainWindow_NavigationMore}" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource MorePageIcon}" Margin="0 5 0 5" FontFamily="{DynamicResource Font}" Checked="ToMore_Checked" />
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Grid>
+        </ui:ClippingBorder>
+        <StackPanel x:Name="ReturnVersionListPanel" Margin="0,-60,80,0" VerticalAlignment="Top" Height="30" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button x:Name="ReturnHomePage" Style="{DynamicResource SvgButtonsStyle}" Content="{DynamicResource Return}" HorizontalAlignment="Right" VerticalAlignment="Center"  Cursor="Hand" Margin="0,0,3,0" Click="ReturnHomePage_Click" />
+            <Label x:Name="ReturnHomePageLabel" Content="{x:Static properties:MainLang.Launch_VersionList}" FontFamily="{DynamicResource Font}" Foreground="{DynamicResource TextColor}" Background="{x:Null}" VerticalAlignment="Center" />
+        </StackPanel>
+        <StackPanel x:Name="ReturnlVersionSettingPane" Margin="0,-60,80,0" VerticalAlignment="Top" Height="30" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button x:Name="ReturnBtn" Style="{DynamicResource SvgButtonsStyle}" Content="{DynamicResource Return}" HorizontalAlignment="Right" VerticalAlignment="Center"  Cursor="Hand" Margin="0,0,3,0" Click="ReturnBtn_Click" />
+            <Label x:Name="ReturnBtnLabel" Content="{x:Static properties:MainLang.Launch_VersionList}" FontFamily="{DynamicResource Font}" Foreground="{DynamicResource TextColor}" Background="{x:Null}" VerticalAlignment="Center" />
+        </StackPanel>
+    </Grid>
 </pu:WindowX>

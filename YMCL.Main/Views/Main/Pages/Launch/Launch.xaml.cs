@@ -31,6 +31,9 @@ using MessageBoxIcon = Panuon.WPF.UI.MessageBoxIcon;
 using Method = YMCL.Main.Public.Method;
 using SearchOption = System.IO.SearchOption;
 using Path = System.IO.Path;
+using MinecraftLaunch.Classes.Interfaces;
+using MinecraftLaunch.Components.Checker;
+using System;
 
 namespace YMCL.Main.Views.Main.Pages.Launch
 {
@@ -69,7 +72,7 @@ namespace YMCL.Main.Views.Main.Pages.Launch
                 task.Start();
                 _firstLoadPage = false;
             }
-            ReturnPanelSetting.Visibility = Visibility.Hidden;
+            Const.Window.main.ReturnlVersionSettingPane.Visibility = Visibility.Hidden;
             VersionSettingBorder.Visibility = Visibility.Hidden;
             minecraftFolder = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(Const.MinecraftFolderDataPath));
             MinecraftFolderComboBox.Items.Clear();
@@ -150,7 +153,7 @@ namespace YMCL.Main.Views.Main.Pages.Launch
         }
         private void OpenVersionList_Click(object sender, RoutedEventArgs e)
         {
-            ReturnHomePageLabel.Content = LangHelper.Current.GetText("Launch_VersionList");
+            Const.Window.main.ReturnHomePageLabel.Content = LangHelper.Current.GetText("Launch_VersionList");
             VersionListBorder.Visibility = Visibility.Visible;
             VersionListView.IsEnabled = true;
             ThicknessAnimation animation = new ThicknessAnimation()
@@ -161,33 +164,14 @@ namespace YMCL.Main.Views.Main.Pages.Launch
             };
             ThicknessAnimation animation1 = new ThicknessAnimation()
             {
-                To = new Thickness(0, -30, 80, 0),
+                To = new Thickness(0, 0, 80, 0),
                 From = new Thickness(0, -80, 80, 00),
                 Duration = TimeSpan.Parse("0:0:0.25")
             };
             VersionListBorder.BeginAnimation(MarginProperty, animation);
-            ReturnPanel.BeginAnimation(MarginProperty, animation1);
+            Const.Window.main.ReturnVersionListPanel.BeginAnimation(MarginProperty, animation1);
 
             LoadMinecraftVersion();
-        }
-        private async void ReturnHomePage_Click(object sender, RoutedEventArgs e)
-        {
-            ThicknessAnimation animation = new ThicknessAnimation()
-            {
-                From = new Thickness(10, 10, 10, 10),
-                To = new Thickness(10, PageRoot.ActualHeight, 0, 0),
-                Duration = TimeSpan.Parse("0:0:0.35")
-            };
-            ThicknessAnimation animation1 = new ThicknessAnimation()
-            {
-                From = new Thickness(0, -30, 80, 0),
-                To = new Thickness(0, -80, 80, 00),
-                Duration = TimeSpan.Parse("0:0:0.35")
-            };
-            VersionListBorder.BeginAnimation(MarginProperty, animation);
-            ReturnPanel.BeginAnimation(MarginProperty, animation1);
-            await Task.Delay(250);
-            VersionListBorder.Visibility = Visibility.Hidden;
         }
         private void Refresh_Click(object sender, RoutedEventArgs e)
         {
@@ -284,7 +268,7 @@ namespace YMCL.Main.Views.Main.Pages.Launch
                 Duration = TimeSpan.Parse("0:0:0.15")
             };
             VersionListBorder.BeginAnimation(MarginProperty, animation);
-            ReturnPanel.BeginAnimation(MarginProperty, animation1);
+            Const.Window.main.ReturnVersionListPanel.BeginAnimation(MarginProperty, animation1);
 
             setting.MinecraftVersionId = version.Id;
             File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
@@ -300,28 +284,9 @@ namespace YMCL.Main.Views.Main.Pages.Launch
             File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
             LoadMinecraftVersion();
         }
-        private async void ReturnBtn_Click(object sender, RoutedEventArgs e)
-        {
-            ThicknessAnimation animation = new ThicknessAnimation()
-            {
-                From = new Thickness(0, 0, 0, 0),
-                To = new Thickness(0, PageRoot.ActualHeight, 0, 0),
-                Duration = TimeSpan.Parse("0:0:0.25")
-            };
-            ThicknessAnimation animation1 = new ThicknessAnimation()
-            {
-                From = new Thickness(0, -30, 80, 0),
-                To = new Thickness(0, -80, 80, 00),
-                Duration = TimeSpan.Parse("0:0:0.25")
-            };
-            VersionSettingBorder.BeginAnimation(MarginProperty, animation);
-            ReturnPanelSetting.BeginAnimation(MarginProperty, animation1);
-            await Task.Delay(250);
-            VersionSettingBorder.Visibility = Visibility.Hidden;
-        }
         private void OpenVersionSettings_Click(object sender, RoutedEventArgs e)
         {
-            ReturnPanelSetting.Visibility = Visibility.Visible;
+            Const.Window.main.ReturnlVersionSettingPane.Visibility = Visibility.Visible;
             var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
             if (setting.MinecraftVersionId == null)
             {
@@ -341,7 +306,7 @@ namespace YMCL.Main.Views.Main.Pages.Launch
             VersionSettingPageGameDescriptionVersion.Text = version.Version;
             VersionSettingPageGameDescriptionJava.Text = version.JavaVersion.ToString();
             VersionSettingPageGameDescriptionLoaderType.Text = version.MainLoaderType.ToString();
-            ReturnBtnLabel.Content = LangHelper.Current.GetText("Launch_ToVersionSetting") + " - " + GameCoreText.Text;
+            Const.Window.main.ReturnBtnLabel.Content = LangHelper.Current.GetText("Launch_ToVersionSetting") + " - " + GameCoreText.Text;
             VersionSettingBorder.Visibility = Visibility.Visible;
             VersionListView.IsEnabled = true;
             ThicknessAnimation animation = new ThicknessAnimation()
@@ -352,12 +317,12 @@ namespace YMCL.Main.Views.Main.Pages.Launch
             };
             ThicknessAnimation animation1 = new ThicknessAnimation()
             {
-                To = new Thickness(0, -30, 80, 0),
+                To = new Thickness(0, 0, 80, 0),
                 From = new Thickness(0, -80, 80, 00),
                 Duration = TimeSpan.Parse("0:0:0.25")
             };
             VersionSettingBorder.BeginAnimation(MarginProperty, animation);
-            ReturnPanelSetting.BeginAnimation(MarginProperty, animation1);
+            Const.Window.main.ReturnlVersionSettingPane.BeginAnimation(MarginProperty, animation1);
         }
         private void LaunchBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -1166,7 +1131,20 @@ namespace YMCL.Main.Views.Main.Pages.Launch
             LaunchBtn.IsEnabled = true;
             //taskProgress.Hide();
         }
+        private async void CheckMissingResource_Click(object sender, RoutedEventArgs e)
+        {
+            var resourceChecker = new ResourceChecker(VersionListView.SelectedItem as GameEntry);
+            var result = await resourceChecker.CheckAsync();
 
-
+            if (!result)
+            {
+                MessageBoxX.Show($"{MainLang.ResourceAreMissing}：{resourceChecker.MissingResources.Count}", "Yu Minecraft Launcher");
+                Console.WriteLine();
+            }
+            else
+            {
+                Toast.Show(message: MainLang.NoResourceAreMissing, position: ToastPosition.Top, window: Const.Window.main);
+            }
+        }
     }
 }

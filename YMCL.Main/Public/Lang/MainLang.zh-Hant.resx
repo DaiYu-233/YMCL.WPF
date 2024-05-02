@@ -792,4 +792,13 @@
   <data name="GetUpdate" xml:space="preserve">
     <value>取得更新</value>
   </data>
+  <data name="CheckMissingResource" xml:space="preserve">
+    <value>檢查資源缺失</value>
+  </data>
+  <data name="NoResourceAreMissing" xml:space="preserve">
+    <value>無資源缺失</value>
+  </data>
+  <data name="ResourceAreMissing" xml:space="preserve">
+    <value>有資源缺失</value>
+  </data>
 </root>
