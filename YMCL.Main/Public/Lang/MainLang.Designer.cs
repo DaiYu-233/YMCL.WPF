@@ -1537,6 +1537,15 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
+        ///   查找类似 Minecraft发生崩溃 的本地化字符串。
+        /// </summary>
+        public static string MinecraftCrash {
+            get {
+                return ResourceManager.GetString("MinecraftCrash", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Minecraft版本 的本地化字符串。
         /// </summary>
         public static string MinecraftVersion {

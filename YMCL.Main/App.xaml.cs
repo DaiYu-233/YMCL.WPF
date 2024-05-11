@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using Panuon.WPF.UI;
 using System.Diagnostics;
 using System.IO;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Security.Principal;
 using System.Windows;
@@ -47,6 +48,15 @@ namespace YMCL.Main
                 //Shutdown();
             }
             base.OnStartup(e);
+
+            string resourceName = "YMCL.Main.Public.Text.DateTime.txt";
+            Assembly _assembly = Assembly.GetExecutingAssembly();
+            Stream stream = _assembly.GetManifestResourceStream(resourceName);
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                Const.Version = reader.ReadToEnd();
+            }
+
             StartupArgs = e.Args;
             var args = e.Args;
 

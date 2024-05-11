@@ -34,6 +34,7 @@ using Path = System.IO.Path;
 using MinecraftLaunch.Classes.Interfaces;
 using MinecraftLaunch.Components.Checker;
 using System;
+using MinecraftLaunch.Components.Analyzer;
 
 namespace YMCL.Main.Views.Main.Pages.Launch
 {
@@ -833,7 +834,7 @@ namespace YMCL.Main.Views.Main.Pages.Launch
                 return;
             }
             var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
-            
+
             if (string.IsNullOrEmpty(mcPath))
             {
                 mcPath = setting.MinecraftFolder;
@@ -957,6 +958,7 @@ namespace YMCL.Main.Views.Main.Pages.Launch
                             }
                         }
                     }
+                    bool aloneCore = true;
                     if (!string.IsNullOrEmpty(javaPath))
                     {
                         LaunchConfig config = new();
@@ -995,7 +997,7 @@ namespace YMCL.Main.Views.Main.Pages.Launch
                             {
                                 maxMem = versionSetting.MaxMem;
                             }
-                            bool aloneCore = true;
+
                             if (versionSetting.AloneCore == SettingItem.VersionSettingAloneCore.Global)
                             {
                                 aloneCore = setting.AloneCore;
@@ -1053,15 +1055,27 @@ namespace YMCL.Main.Views.Main.Pages.Launch
                                             Toast.Show(message: $"{LangHelper.Current.GetText("Launch_LaunchGame_Click_GameExit")}：{args.ExitCode}", position: ToastPosition.Top, window: Const.Window.main);
                                             taskProgress.Hide();
                                             Const.Window.main.Focus();
+
+                                            if (args.ExitCode == 1)
+                                            {
+                                                var crashAnalyzer = new GameCrashAnalyzer(version, aloneCore);
+                                                var reports = crashAnalyzer.AnalysisLogs();
+                                                var msg = string.Empty;
+                                                foreach (var report in reports)
+                                                {
+                                                    msg += $"\n{report.CrashCauses}";
+                                                }
+                                                MessageBoxX.Show($"{MainLang.MinecraftCrash}\n{msg}", "Yu Minecraft Launcher");
+                                            }
                                         });
                                     };
                                     watcher.OutputLogReceived += async (_, args) =>
                                     {
-                                        Debug.WriteLine(args.Text);
+                                        Debug.WriteLine(args.Log);
                                         await Dispatcher.BeginInvoke(() =>
                                         {
                                             //task.AppendText(args.Text, false);
-                                            taskProgress.InsertProgressText(args.Text, false);
+                                            taskProgress.InsertProgressText(args.Original, false);
                                         });
                                     };
 

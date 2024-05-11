@@ -22,7 +22,7 @@
                         <ui:ProgressBar x:Name="TaskProgressBar" Margin="8,0,11,0"/>
                     </DockPanel>
                 </Border>
-                <TextBox x:Name="TaskProgressTextBox" Margin="10,10,10,10" FontFamily="{DynamicResource Font}" IsReadOnly="True"/>
+                <TextBox x:Name="TaskProgressTextBox" Margin="10,10,10,10" FontFamily="{DynamicResource Font}" IsReadOnly="True" TextWrapping="Wrap"/>
             </DockPanel>
         </Grid>
     </ui:ClippingBorder>

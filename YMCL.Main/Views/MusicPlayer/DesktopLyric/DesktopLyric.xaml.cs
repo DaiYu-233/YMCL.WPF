@@ -200,12 +200,12 @@ namespace YMCL.Main.Views.MusicPlayer.DesktopLyric
             WindowState = WindowState.Normal;
             Show();
             Activate();
+            Focus();
             Topmost = true;
             open = true;
         }
         public void Disabled()
         {
-            WindowState = WindowState.Minimized;
             Hide();
             open = false;
         }

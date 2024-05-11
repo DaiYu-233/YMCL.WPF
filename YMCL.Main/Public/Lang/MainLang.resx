@@ -801,4 +801,7 @@
   <data name="ResourceAreMissing" xml:space="preserve">
     <value>有资源缺失</value>
   </data>
+  <data name="MinecraftCrash" xml:space="preserve">
+    <value>Minecraft发生崩溃</value>
+  </data>
 </root>
