@@ -14,7 +14,9 @@ jobs:
         fetch-depth: 0
     - name: Time
       id: date
-      run: echo "date=$(date +'%Y-%m-%d.%H-%M-%S')" >> $GITHUB_OUTPUT
+      run: |
+        echo "date=$(date +'%Y-%m-%d.%H-%M-%S')" >> $GITHUB_OUTPUT
+        echo "$(date +'%Y.%m.%d.%H.%M')" > ./YMCL.Main/Public/Text/DateTime.txt
       shell: bash
     - name: Build
       run: |

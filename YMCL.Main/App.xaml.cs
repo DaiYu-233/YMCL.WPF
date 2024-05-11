@@ -54,7 +54,8 @@ namespace YMCL.Main
             Stream stream = _assembly.GetManifestResourceStream(resourceName);
             using (StreamReader reader = new StreamReader(stream))
             {
-                Const.Version = reader.ReadToEnd();
+                var result = reader.ReadToEnd().Trim();
+                Const.Version = result;
             }
 
             StartupArgs = e.Args;
