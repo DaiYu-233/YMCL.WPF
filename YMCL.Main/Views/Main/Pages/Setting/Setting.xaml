@@ -46,6 +46,11 @@
                                 <ui:FontIcon Glyph="&#xE946;" />
                             </ui:NavigationViewItem.Icon>
                         </ui:NavigationViewItem>
+                        <ui:NavigationViewItem x:Name="SettingTransfer" FontFamily="{StaticResource Font}" Content="设置迁移" Height="40" Margin="0,-8,0,0" >
+                            <ui:NavigationViewItem.Icon>
+                            <ui:FontIcon Glyph="&#xE835;" />
+                            </ui:NavigationViewItem.Icon>
+                        </ui:NavigationViewItem>
                     </ui:NavigationView.MenuItems>
                 </ui:NavigationView>
             </Grid>

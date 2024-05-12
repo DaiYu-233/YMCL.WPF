@@ -13,6 +13,7 @@ namespace YMCL.Main.Views.Main.Pages.Setting
         Pages.Account.Account account = new();
         Pages.Launcher.Launcher about = new();
         Pages.Download.Download download = new();
+        Pages.SettingTransfer.SettingTransfer settingTransfer = new();
 
         public Setting()
         {
@@ -41,6 +42,10 @@ namespace YMCL.Main.Views.Main.Pages.Setting
             if(Download.IsSelected)
             {
                 MainFrame.Content = download;
+            }
+            if(SettingTransfer.IsSelected)
+            {
+                MainFrame.Content = settingTransfer;
             }
         }
     }

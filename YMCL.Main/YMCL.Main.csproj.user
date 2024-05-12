@@ -15,6 +15,9 @@
     <Compile Update="Views\Main\Pages\MusicPlayer\MusicPlayer.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Main\Pages\Setting\Pages\SettingTransfer\SettingTransfer.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Public\Style\Dark.xaml">
@@ -24,6 +27,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Main\Pages\MusicPlayer\MusicPlayer.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Main\Pages\Setting\Pages\SettingTransfer\SettingTransfer.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

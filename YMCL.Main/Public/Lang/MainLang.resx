@@ -804,4 +804,22 @@
   <data name="MinecraftCrash" xml:space="preserve">
     <value>Minecraft发生崩溃</value>
   </data>
+  <data name="ExportSetting" xml:space="preserve">
+    <value>导出设置</value>
+  </data>
+  <data name="ExportImportParameter" xml:space="preserve">
+    <value>输出导入参数</value>
+  </data>
+  <data name="ExportHexString" xml:space="preserve">
+    <value>输出Hex字符串</value>
+  </data>
+  <data name="ImportSetting" xml:space="preserve">
+    <value>导入设置</value>
+  </data>
+  <data name="BeginImport" xml:space="preserve">
+    <value>开始导入</value>
+  </data>
+  <data name="Copied" xml:space="preserve">
+    <value>已复制至剪贴板</value>
+  </data>
 </root>

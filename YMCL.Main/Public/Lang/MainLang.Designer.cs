@@ -295,6 +295,15 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
+        ///   查找类似 开始导入 的本地化字符串。
+        /// </summary>
+        public static string BeginImport {
+            get {
+                return ResourceManager.GetString("BeginImport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 开始安装 的本地化字符串。
         /// </summary>
         public static string BeginInstall {
@@ -399,6 +408,15 @@ namespace YMCL.Main.Public.Lang {
         public static string ComPileCSharpError {
             get {
                 return ResourceManager.GetString("ComPileCSharpError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 已复制至剪贴板 的本地化字符串。
+        /// </summary>
+        public static string Copied {
+            get {
+                return ResourceManager.GetString("Copied", resourceCulture);
             }
         }
         
@@ -547,6 +565,33 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
+        ///   查找类似 输出Hex字符串 的本地化字符串。
+        /// </summary>
+        public static string ExportHexString {
+            get {
+                return ResourceManager.GetString("ExportHexString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 输出导入参数 的本地化字符串。
+        /// </summary>
+        public static string ExportImportParameter {
+            get {
+                return ResourceManager.GetString("ExportImportParameter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 导出设置 的本地化字符串。
+        /// </summary>
+        public static string ExportSetting {
+            get {
+                return ResourceManager.GetString("ExportSetting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 无法写入注册表 的本地化字符串。
         /// </summary>
         public static string FailToWriteReg {
@@ -678,6 +723,15 @@ namespace YMCL.Main.Public.Lang {
         public static string ImportFinish {
             get {
                 return ResourceManager.GetString("ImportFinish", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 导入设置 的本地化字符串。
+        /// </summary>
+        public static string ImportSetting {
+            get {
+                return ResourceManager.GetString("ImportSetting", resourceCulture);
             }
         }
         

@@ -15,12 +15,10 @@ namespace YMCL.Main.Public
         public static void ParameterProcessing()
         {
             if (App.StartupArgs.Length == 0) return;
-            MessageBoxX.Show(App.StartupArgs[0]);
             var urlScheme = System.Web.HttpUtility.UrlDecode(App.StartupArgs[0]);
             urlScheme = urlScheme.Substring(7).Trim('"');
             if (urlScheme.EndsWith("/"))
                 urlScheme = urlScheme.TrimEnd('/');
-            MessageBoxX.Show(urlScheme);
             foreach (Match match in Regex.Matches(urlScheme, @"--\w+(\s+('[^']*'|[^'\s]+))*?(?=\s*--\w+|$)"))
             {
                 var value = match.Value.Trim().Substring(2, match.Value.Trim().Length - 2);
@@ -56,7 +54,6 @@ namespace YMCL.Main.Public
                                     .Select(i => Convert.ToByte(hexString.Substring(i * 2, 2), 16))
                                     .ToArray();
                                 string data = Encoding.ASCII.GetString(hexBytes);
-                                MessageBoxX.Show(data);
                                 var source = JObject.FromObject(JsonConvert.DeserializeObject<Class.Setting>(File.ReadAllText(Const.SettingDataPath)));
                                 var import = JObject.Parse(data);
                                 source.Merge(import, new JsonMergeSettings
@@ -105,6 +102,10 @@ namespace YMCL.Main.Public
                 Toast.Show(message: message, position: ToastPosition.Top, window: window);
             else
                 MessageBoxX.Show(message, "Yu Minecraft Launcher");
+        }
+        public static void LauncherMessageBoxShow(string msg)
+        {
+            MessageBoxX.Show(msg, "Yu Minecraft Launcher");
         }
         public static double GetDirectoryLength(string dirPath)
         {
