@@ -10,12 +10,12 @@ Yu Minecraft Launcher (YMCL) 是使用 [.NET 8.0](https://dotnet.microsoft.com/z
 
 ```UrlScheme
 #参数内不可包含特殊字符，如包含空格需使用单引号。[参数]必须，<参数>可选。
-#在终端中使用：start ymcl://"<参数>"/
-ymcl://<参数>/ #参数格式，示例："ymcl://--launch 1.12.2/"
+#在终端中使用：start ymcl://"<参数>"
+ymcl://<参数> #参数格式，示例：ymcl://--launch 1.12.2
 
 --launch [version] <minecraftFolder> <serverIP> #启动Minecraft
 
---import setting [json(base64格式)] #导入启动器设置
+--import setting [json(UTF-8编码的十六进制字符串)] #导入启动器设置，json示例：796d636c(ymcl)
 ```
 ## 开源项目使用
 

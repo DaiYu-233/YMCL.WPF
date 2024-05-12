@@ -7,7 +7,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Media.Imaging;
 using YMCL.Main.Public.Lang;
-using YMCL.Main.Views.Main.Pages.Download.Pages.Mods;
 
 namespace YMCL.Main.Public
 {
@@ -16,8 +15,12 @@ namespace YMCL.Main.Public
         public static void ParameterProcessing()
         {
             if (App.StartupArgs.Length == 0) return;
-            var urlScheme = App.StartupArgs[0];
-            urlScheme = urlScheme.Substring(7, urlScheme.Length - 8).Trim('"');
+            MessageBoxX.Show(App.StartupArgs[0]);
+            var urlScheme = System.Web.HttpUtility.UrlDecode(App.StartupArgs[0]);
+            urlScheme = urlScheme.Substring(7).Trim('"');
+            if (urlScheme.EndsWith("/"))
+                urlScheme = urlScheme.TrimEnd('/');
+            MessageBoxX.Show(urlScheme);
             foreach (Match match in Regex.Matches(urlScheme, @"--\w+(\s+('[^']*'|[^'\s]+))*?(?=\s*--\w+|$)"))
             {
                 var value = match.Value.Trim().Substring(2, match.Value.Trim().Length - 2);
@@ -48,8 +51,12 @@ namespace YMCL.Main.Public
                         case "import":
                             if (parameters[0] == "setting")
                             {
-                                var base64 = parameters[1].ToString();
-                                var data = Encoding.UTF8.GetString(Convert.FromBase64String(base64));
+                                var hexString = parameters[1];
+                                byte[] hexBytes = Enumerable.Range(0, hexString.Length / 2)
+                                    .Select(i => Convert.ToByte(hexString.Substring(i * 2, 2), 16))
+                                    .ToArray();
+                                string data = Encoding.ASCII.GetString(hexBytes);
+                                MessageBoxX.Show(data);
                                 var source = JObject.FromObject(JsonConvert.DeserializeObject<Class.Setting>(File.ReadAllText(Const.SettingDataPath)));
                                 var import = JObject.Parse(data);
                                 source.Merge(import, new JsonMergeSettings
