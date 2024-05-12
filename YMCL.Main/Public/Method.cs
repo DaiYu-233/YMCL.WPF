@@ -1,13 +1,74 @@
-﻿using Panuon.WPF.UI;
+﻿using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
+using Panuon.WPF.UI;
 using System.Diagnostics;
 using System.IO;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Media.Imaging;
 using YMCL.Main.Public.Lang;
+using YMCL.Main.Views.Main.Pages.Download.Pages.Mods;
 
 namespace YMCL.Main.Public
 {
     internal class Method
     {
+        public static void ParameterProcessing()
+        {
+            if (App.StartupArgs.Length == 0) return;
+            var urlScheme = App.StartupArgs[0];
+            urlScheme = urlScheme.Substring(7, urlScheme.Length - 8).Trim('"');
+            foreach (Match match in Regex.Matches(urlScheme, @"--\w+(\s+('[^']*'|[^'\s]+))*?(?=\s*--\w+|$)"))
+            {
+                var value = match.Value.Trim().Substring(2, match.Value.Trim().Length - 2);
+                var method = value.Split(' ')[0];
+                List<string> parameters = new List<string>();
+                Regex.Matches(match.Value, @"(?<quote>')(.*?)(?<-quote>')|([^\s']+)", RegexOptions.ExplicitCapture).ToList().ForEach(item =>
+                {
+                    parameters.Add(item.Value.TrimStart('\'').TrimEnd('\''));
+                });
+                parameters.RemoveAt(0);
+                try
+                {
+                    switch (method)
+                    {
+                        case "launch":
+                            if (parameters.Count >= 1)
+                            {
+                                string versionId = parameters[0];
+                                string minecraftPath = parameters.Count >= 2 && parameters[1] != null ? parameters[1] : "";
+                                string serverIP = parameters.Count >= 3 && parameters[2] != null ? parameters[2] : "";
+                                Const.Window.main.launch.LaunchClient(versionId, minecraftPath, msg: false, serverIP: serverIP);
+                            }
+                            else
+                            {
+                                LauncherErrorShow(LangHelper.Current.GetText("ArgsError"));
+                            }
+                            break;
+                        case "import":
+                            if (parameters[0] == "setting")
+                            {
+                                var base64 = parameters[1].ToString();
+                                var data = Encoding.UTF8.GetString(Convert.FromBase64String(base64));
+                                var source = JObject.FromObject(JsonConvert.DeserializeObject<Class.Setting>(File.ReadAllText(Const.SettingDataPath)));
+                                var import = JObject.Parse(data);
+                                source.Merge(import, new JsonMergeSettings
+                                {
+                                    MergeArrayHandling = MergeArrayHandling.Union
+                                });
+                                File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(source, Formatting.Indented));
+                                MessageBoxX.Show($"\n{MainLang.ImportFinish}\n\n{data}", "Yu Minecraft Launcher");
+                                RestartApp();
+                            }
+                            break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    LauncherErrorShow(LangHelper.Current.GetText("ArgsError"), ex);
+                }
+            }
+        }
         public static void ShowWin10Notice(string msg, string title = "Yu Minecraft Launcher", string logoUri = "")
         {
             string logo = string.Empty;
@@ -26,12 +87,17 @@ namespace YMCL.Main.Public
                 $"'{logo}'"
             });
         }
-        public static void LauncherErrorShow(string errorTypeMsg, Exception exception, bool useToast = false)
+        public static void LauncherErrorShow(string errorTypeMsg, Exception exception = null, bool useToast = false, WindowX window = null)
         {
-            if (!useToast)
-            {
-                MessageBoxX.Show($"\n{errorTypeMsg}：{exception.Message}\n\n{exception.ToString()}", "Yu Minecraft Launcher");
-            }
+            string message;
+            if (exception != null)
+                message = useToast ? $"{errorTypeMsg}：{exception.Message}" : $"{errorTypeMsg}：{exception.Message}\n\n{exception.ToString()}";
+            else
+                message = errorTypeMsg;
+            if (useToast && window != null)
+                Toast.Show(message: message, position: ToastPosition.Top, window: window);
+            else
+                MessageBoxX.Show(message, "Yu Minecraft Launcher");
         }
         public static double GetDirectoryLength(string dirPath)
         {

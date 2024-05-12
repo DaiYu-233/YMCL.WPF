@@ -45,7 +45,7 @@ namespace YMCL.Main.Views.Main
             if (_firstLoad)
             {
                 _firstLoad = false;
-                ParameterProcessing();
+                Method.ParameterProcessing();
             }
         }
 
@@ -247,11 +247,11 @@ namespace YMCL.Main.Views.Main
         }
         #endregion
         #region Pages
-        Pages.Launch.Launch launch = new();
-        Pages.Setting.Setting setting = new();
-        Pages.Download.Download download = new();
-        Pages.More.More more = new();
-        Pages.MusicPlayer.MusicPlayer musicPlayer = new();
+        public Pages.Launch.Launch launch = new();
+        public Pages.Setting.Setting setting = new();
+        public Pages.Download.Download download = new();
+        public Pages.More.More more = new();
+        public Pages.MusicPlayer.MusicPlayer musicPlayer = new();
         #endregion
         #region TurnPage
         private void ToLaunch_Checked(object sender, RoutedEventArgs e)
@@ -314,71 +314,6 @@ namespace YMCL.Main.Views.Main
             _tb = (TaskbarIcon)FindResource("NotifyIcon");
             _tb.Icon = new Icon(System.IO.Path.Combine(Const.PublicDataRootPath, "Icon.ico"));
         }
-        void ParameterProcessing()
-        {
-            if (App.StartupArgs.Length > 0)
-            {
-                var urlScheme = System.Web.HttpUtility.UrlDecode(StartupArgs[0]);
-                urlScheme = urlScheme.Substring(7, urlScheme.Length - 8);
-                foreach (Match match in Regex.Matches(urlScheme, "--\\w+(\\s(\\\"|')?(\\w+)(=*)(\\\"|')?)*"))
-                {
-                    var text = match.Value.Trim().Substring(2, match.Value.Trim().Length - 2);
-                    var method = text.Split(' ')[0];
-                    string[] temp = Regex.Split(text.Substring(method.Length, text.Length - method.Length), "(?=(?:(?:[^\']*\'){2})*[^\']*$) ");
-                    var args = new List<string>();
-                    foreach (var arg in temp)
-                    {
-                        var a = arg.Trim();
-                        a = a.Trim('\"');
-                        a = a.Trim('\'');
-                        args.Add(a);
-                    }
-                    try
-                    {
-                        switch (method)
-                        {
-                            case "launch":
-                                if (args.Count >= 3 && args[2] != null)
-                                {
-                                    if (args.Count >= 4 && args[3] != null)
-                                    {
-                                        launch.LaunchClient(args[1], args[2], false, args[3]);
-                                    }
-                                    else
-                                    {
-                                        launch.LaunchClient(args[1], args[2], false);
-                                    }
-                                }
-                                else
-                                {
-                                    launch.LaunchClient(args[1], msg: false);
-                                }
-                                break;
-                            case "import":
-                                if (args[1] == "setting")
-                                {
-                                    var data = Encoding.UTF8.GetString(Convert.FromBase64String(args[2]));
-                                    var source = JObject.FromObject(JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath)));
-                                    var import = JObject.Parse(data);
-                                    source.Merge(import, new JsonMergeSettings
-                                    {
-                                        MergeArrayHandling = MergeArrayHandling.Union
-                                    });
-                                    File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(source, Formatting.Indented));
-                                    MessageBoxX.Show($"{MainLang.ImportFinish}\n\n{data}", "Yu Minecraft Launcher");
-                                    Method.RestartApp();
-                                }
-                                break;
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        Method.LauncherErrorShow(LangHelper.Current.GetText("ArgsError"), ex);
-                    }
-                }
-            }
-        }
-
         private async void ReturnHomePage_Click(object sender, RoutedEventArgs e)
         {
             ThicknessAnimation animation = new ThicknessAnimation()
