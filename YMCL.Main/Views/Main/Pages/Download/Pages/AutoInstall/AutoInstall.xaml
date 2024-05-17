@@ -20,8 +20,8 @@
     </Page.Triggers>
     <Grid>
         <ui:ProgressRing x:Name="VanlliaLoading" Height="52" Width="52" IsIndeterminate="True" Maximum="100" Minimum="0"/>
-        <ui:FontIcon x:Name="VanlliaLoadFail" Glyph="&#xE8BB;" Foreground="#FFC42B1C" FontSize="32" Visibility="Hidden" Cursor="Hand" PreviewMouseDown="VanlliaLoadFail_PreviewMouseDown" />
-        <Grid x:Name="VanlliaListGrid" Background="{DynamicResource 2x}" Visibility="Visible" >
+        <ui:FontIcon x:Name="VanlliaLoadFail" Glyph="&#xE8BB;" Foreground="#FFC42B1C" FontSize="32" Visibility="Collapsed" Cursor="Hand" PreviewMouseDown="VanlliaLoadFail_PreviewMouseDown" />
+        <Grid x:Name="VanlliaListGrid" Background="{DynamicResource 2x}" Visibility="Collapsed" >
             <ScrollViewer x:Name="VanlliaScrollViewer" Margin="0,0,5,0">
                 <StackPanel Margin="10,10,5,10">
                     <ui:ClippingBorder Background="{DynamicResource 1x}" CornerRadius="5" Margin="0,0,0,10" Padding="5" VerticalAlignment="Top">
@@ -117,7 +117,7 @@
                     </ui:ClippingBorder>
                 </StackPanel>
             </ScrollViewer>
-            <ScrollViewer x:Name="InstallPreView" Visibility="Visible" Margin="0,0,5,0">
+            <ScrollViewer x:Name="InstallPreView" Visibility="Hidden" Margin="0,0,5,0">
                 <ui:ClippingBorder Background="{DynamicResource 1x}" Margin="10,10,5,10" CornerRadius="5">
                     <StackPanel>
                         <ui:ClippingBorder Background="{DynamicResource 2x}" CornerRadius="5" Margin="10,10,10,6.5" Padding="5" VerticalAlignment="Top">

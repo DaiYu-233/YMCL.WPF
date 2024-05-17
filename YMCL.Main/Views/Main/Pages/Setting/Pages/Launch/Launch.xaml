@@ -57,17 +57,17 @@
                     </ComboBox>
                 </DockPanel>
             </Border>
-            <Border CornerRadius="5" Background="{DynamicResource 1x}" Height="45" Margin="0,0,0,10" >
-                <DockPanel LastChildFill="False">
-                    <Label HorizontalAlignment="Left" VerticalAlignment="Center" Margin="18,0,0,0" FontSize="15" Foreground="{DynamicResource TextColor}" FontFamily="{DynamicResource Font}" Content="{x:Static properties:MainLang.Launch_AloneCore}"/>
-                    <ui:ToggleSwitch x:Name="AloneCoreToggle" HorizontalAlignment="Right" FontFamily="{DynamicResource Font}" Toggled="AloneCoreToggle_Toggled" DockPanel.Dock="Right" OffContent="Off" OnContent="On" Margin="0,0,-68,0" />
-                </DockPanel>
-            </Border>
-            <Border CornerRadius="5" Background="{DynamicResource 1x}" Height="45" Margin="0,0,0,10" >
-                <DockPanel LastChildFill="False">
-                    <Label HorizontalAlignment="Left" VerticalAlignment="Center" Margin="18,0,0,0" FontSize="15" Foreground="{DynamicResource TextColor}" FontFamily="{DynamicResource Font}" Content="{x:Static properties:MainLang.Launch_OutputLogReceived}"/>
-                    <ui:ToggleSwitch x:Name="OutputLogToggle" HorizontalAlignment="Right" FontFamily="{DynamicResource Font}" Toggled="OutputLogToggle_Toggled" DockPanel.Dock="Right" OffContent="Off" OnContent="On" Margin="0,0,-68,0" />
-                </DockPanel>
+            <Border CornerRadius="5" Background="{DynamicResource 1x}" Margin="0,0,0,10" >
+                <StackPanel>
+                    <DockPanel LastChildFill="False" Margin="0,6,0,0">
+                        <Label HorizontalAlignment="Left" VerticalAlignment="Center" Margin="18,0,0,0" FontSize="15" Foreground="{DynamicResource TextColor}" FontFamily="{DynamicResource Font}" Content="{x:Static properties:MainLang.Launch_AloneCore}"/>
+                        <ui:ToggleSwitch x:Name="AloneCoreToggle" HorizontalAlignment="Right" FontFamily="{DynamicResource Font}" Toggled="AloneCoreToggle_Toggled" DockPanel.Dock="Right" OffContent="Off" OnContent="On" Margin="0,0,-68,0" />
+                    </DockPanel>
+                    <DockPanel LastChildFill="False" Margin="0,0,0,6">
+                        <Label HorizontalAlignment="Left" VerticalAlignment="Center" Margin="18,0,0,0" FontSize="15" Foreground="{DynamicResource TextColor}" FontFamily="{DynamicResource Font}" Content="{x:Static properties:MainLang.Launch_OutputLogReceived}"/>
+                        <ui:ToggleSwitch x:Name="OutputLogToggle" HorizontalAlignment="Right" FontFamily="{DynamicResource Font}" Toggled="OutputLogToggle_Toggled" DockPanel.Dock="Right" OffContent="Off" OnContent="On" Margin="0,0,-68,0" />
+                    </DockPanel>
+                </StackPanel>
             </Border>
         </StackPanel>
     </ScrollViewer>

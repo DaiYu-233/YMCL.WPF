@@ -17,18 +17,20 @@
             </EventTrigger.Actions>
         </EventTrigger>
     </Page.Triggers>
-    <Grid>
-        <Grid VerticalAlignment="Top" Height="40" Background="{DynamicResource TitleBarColor}">
-            <ui:NavigationView x:Name="Navigation" IsSettingsVisible="False" PaneDisplayMode="Top" IsBackButtonVisible="Collapsed" SelectionChanged="Navigation_SelectionChanged">
-                <ui:NavigationView.MenuItems>
-                    <ui:NavigationViewItem x:Name="TreasureBox" IsSelected="True" FontFamily="{StaticResource Font}"  Content="{x:Static properties:MainLang.TreasureBox}" Tag="NavigationLaunch" Height="40" Margin="0,-8,0,0" >
-                        <ui:NavigationViewItem.Icon>
-                            <ui:FontIcon Glyph="&#xEC5C;" />
-                        </ui:NavigationViewItem.Icon>
-                    </ui:NavigationViewItem>
-                </ui:NavigationView.MenuItems>
-            </ui:NavigationView>
-        </Grid>
-        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" Margin="0,40,0,0" />
-    </Grid>
+    <DockPanel>
+        <ui:ClippingBorder CornerRadius="8" DockPanel.Dock="Top" Margin="10,10,10,0">
+            <Grid VerticalAlignment="Top" Height="40" Background="{DynamicResource TitleBarColor}">
+                <ui:NavigationView x:Name="Navigation" IsSettingsVisible="False" PaneDisplayMode="Top" IsBackButtonVisible="Collapsed" SelectionChanged="Navigation_SelectionChanged">
+                    <ui:NavigationView.MenuItems>
+                        <ui:NavigationViewItem x:Name="TreasureBox" IsSelected="True" FontFamily="{StaticResource Font}"  Content="{x:Static properties:MainLang.TreasureBox}" Tag="NavigationLaunch" Height="40" Margin="0,-8,0,0" >
+                            <ui:NavigationViewItem.Icon>
+                                <ui:FontIcon Glyph="&#xEC5C;" />
+                            </ui:NavigationViewItem.Icon>
+                        </ui:NavigationViewItem>
+                    </ui:NavigationView.MenuItems>
+                </ui:NavigationView>
+            </Grid>
+        </ui:ClippingBorder>
+        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" />
+    </DockPanel>
 </Page>

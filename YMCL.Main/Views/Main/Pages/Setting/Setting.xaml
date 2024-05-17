@@ -17,7 +17,8 @@
             </EventTrigger.Actions>
         </EventTrigger>
     </Page.Triggers>
-    <Grid>
+    <DockPanel>
+        <ui:ClippingBorder CornerRadius="8" DockPanel.Dock="Top" Margin="10,10,10,0">
             <Grid VerticalAlignment="Top" Height="40" Background="{DynamicResource TitleBarColor}">
                 <ui:NavigationView x:Name="Navigation" IsSettingsVisible="False" PaneDisplayMode="Top" IsBackButtonVisible="Collapsed" SelectionChanged="Navigation_SelectionChanged" >
                     <ui:NavigationView.MenuItems>
@@ -48,12 +49,13 @@
                         </ui:NavigationViewItem>
                         <ui:NavigationViewItem x:Name="SettingTransfer" FontFamily="{StaticResource Font}" Content="设置迁移" Height="40" Margin="0,-8,0,0" >
                             <ui:NavigationViewItem.Icon>
-                            <ui:FontIcon Glyph="&#xE835;" />
+                                <ui:FontIcon Glyph="&#xE835;" />
                             </ui:NavigationViewItem.Icon>
                         </ui:NavigationViewItem>
                     </ui:NavigationView.MenuItems>
                 </ui:NavigationView>
             </Grid>
-            <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" Margin="0,40,0,0" />
-        </Grid>
+        </ui:ClippingBorder>
+        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" DockPanel.Dock="Top" />
+    </DockPanel>
 </Page>
