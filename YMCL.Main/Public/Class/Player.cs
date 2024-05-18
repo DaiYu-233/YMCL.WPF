@@ -403,11 +403,11 @@
             /// <summary>
             /// 
             /// </summary>
-            public int type { get; set; }
+            public double type { get; set; }
             /// <summary>
             /// 
             /// </summary>
-            public int remainTime { get; set; }
+            public double remainTime { get; set; }
         }
 
         public class DataItem
@@ -415,7 +415,7 @@
             /// <summary>
             /// 
             /// </summary>
-            public int id { get; set; }
+            public double id { get; set; }
             /// <summary>
             /// 
             /// </summary>
@@ -423,11 +423,11 @@
             /// <summary>
             /// 
             /// </summary>
-            public int br { get; set; }
+            public double br { get; set; }
             /// <summary>
             /// 
             /// </summary>
-            public int size { get; set; }
+            public double size { get; set; }
             /// <summary>
             /// 
             /// </summary>
@@ -435,11 +435,11 @@
             /// <summary>
             /// 
             /// </summary>
-            public int code { get; set; }
+            public double code { get; set; }
             /// <summary>
             /// 
             /// </summary>
-            public int expi { get; set; }
+            public double expi { get; set; }
             /// <summary>
             /// 
             /// </summary>
@@ -455,7 +455,7 @@
             /// <summary>
             /// 
             /// </summary>
-            public int fee { get; set; }
+            public double fee { get; set; }
             /// <summary>
             /// 
             /// </summary>
@@ -463,11 +463,11 @@
             /// <summary>
             /// 
             /// </summary>
-            public int payed { get; set; }
+            public double payed { get; set; }
             /// <summary>
             /// 
             /// </summary>
-            public int flag { get; set; }
+            public double flag { get; set; }
             /// <summary>
             /// 
             /// </summary>
@@ -495,11 +495,11 @@
             /// <summary>
             /// 
             /// </summary>
-            public int urlSource { get; set; }
+            public double urlSource { get; set; }
             /// <summary>
             /// 
             /// </summary>
-            public int rightSource { get; set; }
+            public double rightSource { get; set; }
             /// <summary>
             /// 
             /// </summary>
@@ -511,14 +511,14 @@
             /// <summary>
             /// 
             /// </summary>
-            public int time { get; set; }
+            public double time { get; set; }
         }
 
         public List<DataItem> data { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public int code { get; set; }
+        public double code { get; set; }
 
     }
     public class LyricApi
@@ -528,7 +528,7 @@
             /// <summary>
             /// 
             /// </summary>
-            public int version { get; set; }
+            public double version { get; set; }
             /// <summary>
             /// 
             /// </summary>
@@ -540,7 +540,7 @@
             /// <summary>
             /// 
             /// </summary>
-            public int version { get; set; }
+            public double version { get; set; }
             /// <summary>
             /// 
             /// </summary>
@@ -552,7 +552,7 @@
             /// <summary>
             /// 
             /// </summary>
-            public int version { get; set; }
+            public double version { get; set; }
             /// <summary>
             /// 
             /// </summary>
@@ -564,7 +564,7 @@
             /// <summary>
             /// 
             /// </summary>
-            public int version { get; set; }
+            public double version { get; set; }
             /// <summary>
             /// 
             /// </summary>
@@ -602,13 +602,13 @@
         /// <summary>
         /// 
         /// </summary>
-        public int code { get; set; }
+        public double code { get; set; }
     }
     public class Lyrics
     {
         public TimeSpan Time { get; set; }
         public string Text { get; set; }
-        public int Index { get; set; } 
+        public double Index { get; set; } 
     }
     public enum Repeat
     {

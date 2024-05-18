@@ -801,4 +801,25 @@
   <data name="ResourceAreMissing" xml:space="preserve">
     <value>There are missing resources</value>
   </data>
+  <data name="MinecraftCrash" xml:space="preserve">
+    <value>Minecraft crashed</value>
+  </data>
+  <data name="ExportSetting" xml:space="preserve">
+    <value>Export Settings</value>
+  </data>
+  <data name="ExportImportParameter" xml:space="preserve">
+    <value>Output import parameters</value>
+  </data>
+  <data name="ExportHexString" xml:space="preserve">
+    <value>Output Hex String</value>
+  </data>
+  <data name="ImportSetting" xml:space="preserve">
+    <value>Import Setting</value>
+  </data>
+  <data name="BeginImport" xml:space="preserve">
+    <value>Start Import</value>
+  </data>
+  <data name="Copied" xml:space="preserve">
+    <value>Copied to clipboard</value>
+  </data>
 </root>

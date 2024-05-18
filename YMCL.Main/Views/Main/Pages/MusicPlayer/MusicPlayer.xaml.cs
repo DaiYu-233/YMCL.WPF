@@ -513,22 +513,16 @@ namespace YMCL.Main.Views.Main.Pages.MusicPlayer
                 File.WriteAllText(Const.PlayListDataPath, JsonConvert.SerializeObject(playSongListViewItemEntries, Formatting.Indented));
             }
         }
-        private async void AddLocalSong_Click(object sender, RoutedEventArgs e)
+        string _theLastLocalSong = string.Empty;
+        public async void AddLocalSong(string path)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog
-            {
-                Filter = $"{MainLang.SongFile}|*.wav;*.mp3;*.flac"
-            };
-            openFileDialog.ShowDialog();
-            if (openFileDialog.FileNames.ToString().Trim().Equals("") || openFileDialog.FileNames.Length == 0)
-            {
-                return;
-            }
-            string[] Array = openFileDialog.FileName.Split(@"\");
-
-            player_for_duration.Open(new Uri(openFileDialog.FileName));
+            if (_theLastLocalSong == path)
+                return; 
+            _theLastLocalSong = path;
+            string[] Array = path.Split(@"\");
+            player_for_duration.Open(new Uri(path));
             bool HasTimeSpan = false;
-            Panuon.WPF.UI.Toast.Show(Const.Window.main, MainLang.Account_Loading, ToastPosition.Top);
+            Toast.Show(Const.Window.main, MainLang.Account_Loading, ToastPosition.Top);
             while (!HasTimeSpan)
             {
                 await Task.Delay(500);
@@ -541,7 +535,7 @@ namespace YMCL.Main.Views.Main.Pages.MusicPlayer
 
             playSongListViewItemEntries.Add(new PlaySongListViewItemEntry()
             {
-                Path = openFileDialog.FileName,
+                Path = path,
                 SongName = Array[Array.Length - 1].Split(".")[0],
                 Type = PlaySongListViewItemEntry.PlaySongListViewItemEntryType.Local,
                 Authors = Array[Array.Length - 1].Split(".")[1],
@@ -550,7 +544,7 @@ namespace YMCL.Main.Views.Main.Pages.MusicPlayer
                 SongId = -1
             }); PlayListView.Items.Add(new PlaySongListViewItemEntry()
             {
-                Path = openFileDialog.FileName,
+                Path = path,
                 SongName = Array[Array.Length - 1].Split(".")[0],
                 Type = PlaySongListViewItemEntry.PlaySongListViewItemEntryType.Local,
                 Authors = Array[Array.Length - 1].Split(".")[1],
@@ -559,6 +553,19 @@ namespace YMCL.Main.Views.Main.Pages.MusicPlayer
                 SongId = -1
             });
             File.WriteAllText(Const.PlayListDataPath, JsonConvert.SerializeObject(playSongListViewItemEntries, Formatting.Indented));
+        }
+        private void AddLocalSongBtn_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Filter = $"{MainLang.SongFile}|*.wav;*.mp3;*.flac"
+            };
+            openFileDialog.ShowDialog();
+            if (openFileDialog.FileNames.ToString().Trim().Equals("") || openFileDialog.FileNames.Length == 0)
+            {
+                return;
+            }
+            AddLocalSong(openFileDialog.FileName);
         }
         private void DelSongFromPlayList_Click(object sender, RoutedEventArgs e)
         {
@@ -956,6 +963,11 @@ namespace YMCL.Main.Views.Main.Pages.MusicPlayer
                     Panuon.WPF.UI.Toast.Show(Const.Window.main, $"{MainLang.DownloadFail}：" + ex.Message, ToastPosition.Top);
                 }
             }
+        }
+
+        private void Page_Drop(object sender, System.Windows.DragEventArgs e)
+        {
+            Const.Window.main.DropMethod(e);
         }
     }
 }

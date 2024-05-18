@@ -801,4 +801,25 @@
   <data name="ResourceAreMissing" xml:space="preserve">
     <value>Не хватает ресурсов</value>
   </data>
+  <data name="MinecraftCrash" xml:space="preserve">
+    <value>Minecraft разбился</value>
+  </data>
+  <data name="ExportSetting" xml:space="preserve">
+    <value>Экспортировать настройки</value>
+  </data>
+  <data name="ExportImportParameter" xml:space="preserve">
+    <value>Выходные параметры импорта</value>
+  </data>
+  <data name="ExportHexString" xml:space="preserve">
+    <value>Выходная шестнадцатеричная строка</value>
+  </data>
+  <data name="ImportSetting" xml:space="preserve">
+    <value>Настройки импорта</value>
+  </data>
+  <data name="BeginImport" xml:space="preserve">
+    <value>Начните импорт</value>
+  </data>
+  <data name="Copied" xml:space="preserve">
+    <value>Скопировано в буфер обмена</value>
+  </data>
 </root>

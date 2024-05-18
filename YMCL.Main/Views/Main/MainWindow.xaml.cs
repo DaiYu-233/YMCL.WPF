@@ -16,6 +16,8 @@ using YMCL.Main.Public;
 using YMCL.Main.Public.Lang;
 using static YMCL.Main.App;
 using Cursors = System.Windows.Input.Cursors;
+using DataFormats = System.Windows.DataFormats;
+using MessageBoxIcon = Panuon.WPF.UI.MessageBoxIcon;
 using Size = System.Windows.Size;
 
 namespace YMCL.Main.Views.Main
@@ -351,6 +353,35 @@ namespace YMCL.Main.Views.Main
             Const.Window.main.ReturnlVersionSettingPane.BeginAnimation(MarginProperty, animation1);
             await Task.Delay(250);
             launch.VersionSettingBorder.Visibility = Visibility.Hidden;
+        }
+        public void DropMethod(System.Windows.DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                var files = ((string[])e.Data.GetData(DataFormats.FileDrop)).Distinct().ToList();
+                files.ForEach(file =>
+                {
+                    string extension = Path.GetExtension(file);
+                    switch (extension)
+                    {
+                        case ".mp3" or ".wav" or ".flac":
+                            MainFrame.Content = musicPlayer;
+                            Const.Window.main.musicPlayer.AddLocalSong(file);
+                            break;
+                        case ".jar":
+                            MainFrame.Content = launch;
+                            var message = MessageBoxX.Show($"{MainLang.InstallThisFileAsMod}\n\n{Path.GetFileName(file)}", "Yu Minecraft Launcher", MessageBoxButton.OKCancel, MessageBoxIcon.Info);
+                            if (message == MessageBoxResult.OK)
+                                launch.AddModInThisVersion(file);
+                            break;
+                    }
+                });
+            }
+        }
+
+        private void WindowX_Drop(object sender, System.Windows.DragEventArgs e)
+        {
+            Const.Window.main.DropMethod(e);
         }
     }
 }

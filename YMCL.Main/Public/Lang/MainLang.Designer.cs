@@ -61,6 +61,15 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
+        ///   查找类似 访问被拒绝 的本地化字符串。
+        /// </summary>
+        public static string AccessWasDenied {
+            get {
+                return ResourceManager.GetString("AccessWasDenied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 添加新账户 的本地化字符串。
         /// </summary>
         public static string Account_AddAccount {
@@ -592,6 +601,15 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
+        ///   查找类似 获取管理员权限失败 的本地化字符串。
+        /// </summary>
+        public static string FailedToObtainAdministratorPrivileges {
+            get {
+                return ResourceManager.GetString("FailedToObtainAdministratorPrivileges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 无法写入注册表 的本地化字符串。
         /// </summary>
         public static string FailToWriteReg {
@@ -885,6 +903,15 @@ namespace YMCL.Main.Public.Lang {
         public static string InstallPreview {
             get {
                 return ResourceManager.GetString("InstallPreview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 将此文件作为Mod到当前版本？ 的本地化字符串。
+        /// </summary>
+        public static string InstallThisFileAsMod {
+            get {
+                return ResourceManager.GetString("InstallThisFileAsMod", resourceCulture);
             }
         }
         
@@ -1965,6 +1992,15 @@ namespace YMCL.Main.Public.Lang {
         public static string SureDeleteMod {
             get {
                 return ResourceManager.GetString("SureDeleteMod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 点击确定使用管理员权限重启程序 的本地化字符串。
+        /// </summary>
+        public static string SureObtainAdministratorPrivileges {
+            get {
+                return ResourceManager.GetString("SureObtainAdministratorPrivileges", resourceCulture);
             }
         }
         

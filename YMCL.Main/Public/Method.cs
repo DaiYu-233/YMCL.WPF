@@ -7,11 +7,47 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Media.Imaging;
 using YMCL.Main.Public.Lang;
+using System.Security.Principal;
+using System.Windows;
+using MessageBoxIcon = Panuon.WPF.UI.MessageBoxIcon;
 
 namespace YMCL.Main.Public
 {
     internal class Method
     {
+        public static void ObtainAdministratorPrivileges(string msg = "", bool failNotice = true)
+        {
+            var showMsg = msg;
+            if (string.IsNullOrEmpty(showMsg))
+            {
+                showMsg = MainLang.SureObtainAdministratorPrivileges;
+            }
+            WindowsIdentity identity = WindowsIdentity.GetCurrent();
+            WindowsPrincipal principal = new WindowsPrincipal(identity);
+            if (!principal.IsInRole(WindowsBuiltInRole.Administrator))
+            {
+                var message = MessageBoxX.Show(showMsg, "Yu Minecraft Launcher", MessageBoxButton.OKCancel, MessageBoxIcon.Info);
+                if (message == MessageBoxResult.OK)
+                {
+                    ProcessStartInfo startInfo = new ProcessStartInfo
+                    {
+                        UseShellExecute = true,
+                        WorkingDirectory = Environment.CurrentDirectory,
+                        FileName = System.Windows.Forms.Application.ExecutablePath,
+                        Verb = "runas"
+                    };
+                    Process.Start(startInfo);
+                    System.Windows.Application.Current.Shutdown();
+                }
+                else
+                {
+                    if (failNotice)
+                    {
+                        MessageBoxX.Show(MainLang.FailedToObtainAdministratorPrivileges, "Yu Minecraft Launcher", MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
         public static void ParameterProcessing()
         {
             if (App.StartupArgs.Length == 0) return;
@@ -140,7 +176,7 @@ namespace YMCL.Main.Public
             {
                 UseShellExecute = true,
                 WorkingDirectory = Environment.CurrentDirectory,
-                FileName = Application.ExecutablePath
+                FileName = System.Windows.Forms.Application.ExecutablePath
             };
             Process.Start(startInfo);
             System.Windows.Application.Current.Shutdown();

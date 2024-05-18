@@ -801,4 +801,25 @@
   <data name="ResourceAreMissing" xml:space="preserve">
     <value>資源が足りません</value>
   </data>
+  <data name="MinecraftCrash" xml:space="preserve">
+    <value>マインクラフトがクラッシュしました</value>
+  </data>
+  <data name="ExportSetting" xml:space="preserve">
+    <value>設定をエクスポート</value>
+  </data>
+  <data name="ExportImportParameter" xml:space="preserve">
+    <value>インポートパラメータを出力</value>
+  </data>
+  <data name="ExportHexString" xml:space="preserve">
+    <value>出力16進数文字列</value>
+  </data>
+  <data name="ImportSetting" xml:space="preserve">
+    <value>設定をインポート</value>
+  </data>
+  <data name="BeginImport" xml:space="preserve">
+    <value>インポートを開始してください</value>
+  </data>
+  <data name="Copied" xml:space="preserve">
+    <value>クリップボードにコピーしました</value>
+  </data>
 </root>

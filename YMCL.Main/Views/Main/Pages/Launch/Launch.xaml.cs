@@ -50,6 +50,10 @@ namespace YMCL.Main.Views.Main.Pages.Launch
         List<AccountInfo> accounts = JsonConvert.DeserializeObject<List<AccountInfo>>(File.ReadAllText(Const.AccountDataPath));
         List<string> minecraftFolder = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(Const.MinecraftFolderDataPath));
         #region UI
+        private void PageRoot_Drop(object sender, System.Windows.DragEventArgs e)
+        {
+            Const.Window.main.DropMethod(e);
+        }
         private void NoticeBar_CloseButtonClick(iNKORE.UI.WPF.Modern.Controls.InfoBar sender, object args)
         {
             NoticeBar.Visibility = Visibility.Collapsed;
@@ -1158,6 +1162,24 @@ namespace YMCL.Main.Views.Main.Pages.Launch
             else
             {
                 Toast.Show(message: MainLang.NoResourceAreMissing, position: ToastPosition.Top, window: Const.Window.main);
+            }
+        }
+        public void AddModInThisVersion(string mod)
+        {
+            if (Path.GetExtension(mod) != ".jar")
+                return;
+            var version = VersionListView.SelectedItem as GameEntry;
+            if (version != null)
+            {
+                var path = Path.Combine(Path.GetDirectoryName(version.JarPath), "mods");
+                try
+                {
+                    File.Copy(path, mod);
+                }
+                catch (UnauthorizedAccessException)
+                {
+                    Method.ObtainAdministratorPrivileges($"{MainLang.AccessWasDenied}，{MainLang.SureObtainAdministratorPrivileges}", false);
+                }
             }
         }
     }
