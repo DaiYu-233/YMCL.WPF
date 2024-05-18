@@ -517,7 +517,7 @@ namespace YMCL.Main.Views.Main.Pages.MusicPlayer
         public async void AddLocalSong(string path)
         {
             if (_theLastLocalSong == path)
-                return; 
+                return;
             _theLastLocalSong = path;
             string[] Array = path.Split(@"\");
             player_for_duration.Open(new Uri(path));
@@ -968,6 +968,11 @@ namespace YMCL.Main.Views.Main.Pages.MusicPlayer
         private void Page_Drop(object sender, System.Windows.DragEventArgs e)
         {
             Const.Window.main.DropMethod(e);
+        }
+
+        private void Voiume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            player.Volume = Voiume.Value / 100;
         }
     }
 }

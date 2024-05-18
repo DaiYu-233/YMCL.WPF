@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YMCL.Updater", "YMCL.Update
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YMCL.Notifier", "YMCL.Notifier\YMCL.Notifier.csproj", "{6F580E3D-0E22-4D07-A114-DF87D6C38AB9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YMCL.Starter", "YMCL.Starter\YMCL.Starter.csproj", "{1CDB284E-93BF-4147-BBE2-6D688A768611}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,12 +41,16 @@ Global
 		{6F580E3D-0E22-4D07-A114-DF87D6C38AB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F580E3D-0E22-4D07-A114-DF87D6C38AB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F580E3D-0E22-4D07-A114-DF87D6C38AB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CDB284E-93BF-4147-BBE2-6D688A768611}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CDB284E-93BF-4147-BBE2-6D688A768611}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CDB284E-93BF-4147-BBE2-6D688A768611}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CDB284E-93BF-4147-BBE2-6D688A768611}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {AA3DCF72-989A-4AF3-B1D8-E38534D8879A}
 		RESX_NeutralResourcesLanguage = zh-Hans
+		SolutionGuid = {AA3DCF72-989A-4AF3-B1D8-E38534D8879A}
 	EndGlobalSection
 EndGlobal

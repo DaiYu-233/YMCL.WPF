@@ -58,6 +58,12 @@ namespace YMCL.Main.Views.Initialize
                 },
                 new DownloadFile()
                 {
+                    Name="YMCL.Starter.exe",
+                    Url="https://ymcl.daiyu.fun/Assets/YMCL/YMCL.Starter.exe",
+                    MD5="51B4B0BF4F1C7499B7BD1AF7FD2CCAE4"
+                },
+                new DownloadFile()
+                {
                     Name="FluentIcons.ttf",
                     Url="https://ymcl.daiyu.fun/Assets/YMCL/FluentIcons.ttf",
                     MD5="460A1FFA29FBC20E97861B497601C552"
@@ -86,7 +92,7 @@ namespace YMCL.Main.Views.Initialize
         public InitializeWindow()
         {
             InitializeComponent();
-            
+
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -342,6 +348,7 @@ namespace YMCL.Main.Views.Initialize
                 Timeout = new TimeSpan(0, 0, 40)
             };
 
+            var down = false;
             foreach (var item in files)
             {
                 #region MD5
@@ -403,10 +410,12 @@ namespace YMCL.Main.Views.Initialize
                     registryKeya.SetValue("", Const.YMCLBat);
                     RegistryKey registryKeyb = Registry.ClassesRoot.OpenSubKey("YMCL", true).CreateSubKey(@"shell\open\command");
                     registryKeyb.SetValue("", $"\"{Const.YMCLBat}\" \"%1\"");
+
+                    File.Copy(Path.Combine(Const.PublicDataRootPath, "YMCL.Starter.exe"), "C:\\Windows\\ymcl.exe", true);
                 }
                 catch { }
 
-
+                
                 if (File.Exists(Path.Combine(Const.PublicDataRootPath, item.Name)) && md5 == item.MD5)
                 {
                     lines[i].Text = LangHelper.Current.GetText("InitializeWindow_DownloadFinish");
@@ -415,6 +424,7 @@ namespace YMCL.Main.Views.Initialize
                 }
                 else
                 {
+                    down = true;
                     await Task.Run(async () =>
                     {
                         try
@@ -496,9 +506,25 @@ namespace YMCL.Main.Views.Initialize
 
             if (!needInstallFont && File.Exists(Path.Combine(Const.PublicDataRootPath, "FontHasBeenInstalled")) && !App.StartupArgs.Contains("InstallFont"))
             {
-                MainWindow main = Const.Window.main;
-                Hide();
-                main.Show();
+                if (!down)
+                {
+                    MainWindow main = Const.Window.main;
+                    Hide();
+                    main.Show();
+                }
+                else
+                {
+                    ProcessStartInfo startInfo = new ProcessStartInfo
+                    {
+                        UseShellExecute = true,
+                        WorkingDirectory = Environment.CurrentDirectory,
+                        FileName = System.Windows.Forms.Application.ExecutablePath,
+                        Verb = "runas",
+                        Arguments = "InstallFont"
+                    };
+                    Process.Start(startInfo);
+                    Application.Current.Shutdown();
+                }
             }
             else
             {
@@ -542,8 +568,64 @@ namespace YMCL.Main.Views.Initialize
                     WriteProfileString("fonts", Path.GetFileNameWithoutExtension(fontFilePath1) + "(TrueType)", $"YMCL_{Method.GetTimeStamp()}_" + Path.GetFileName(fontFilePath1));
 
                     File.WriteAllText(Path.Combine(Const.PublicDataRootPath, "FontHasBeenInstalled"), "");
+                    File.Copy(Path.Combine(Const.PublicDataRootPath, "YMCL.Starter.exe"), "C:\\Windows\\ymcl.exe", true);
                 }
                 Next.IsEnabled = true;
+            }
+
+            if (down)
+            {
+                WindowsIdentity identity = WindowsIdentity.GetCurrent();
+                WindowsPrincipal principal = new WindowsPrincipal(identity);
+                if (!principal.IsInRole(WindowsBuiltInRole.Administrator))
+                {
+                    var message = MessageBoxX.Show(LangHelper.Current.GetText("InitializeWindow_Download_AdministratorPermissionRequired"), "Yu Minecraft Launcher", MessageBoxButton.OKCancel, MessageBoxIcon.Info);
+                    if (message == MessageBoxResult.OK)
+                    {
+                        ProcessStartInfo startInfo = new ProcessStartInfo
+                        {
+                            UseShellExecute = true,
+                            WorkingDirectory = Environment.CurrentDirectory,
+                            FileName = System.Windows.Forms.Application.ExecutablePath,
+                            Verb = "runas",
+                            Arguments = "InstallFont"
+                        };
+                        Process.Start(startInfo);
+                        Application.Current.Shutdown();
+                    }
+                    else
+                    {
+                        MessageBoxX.Show(LangHelper.Current.GetText("InitializeWindow_FailedToObtainAdministratorPrivileges"), "Yu Minecraft Launcher", MessageBoxIcon.Error);
+                        Application.Current.Shutdown();
+                    }
+                }
+                else
+                {
+                    RegistryKey keyRoot = Registry.ClassesRoot.CreateSubKey("YMCL", true);
+                    keyRoot.SetValue("", "Yu Minecraft Launcher");
+                    keyRoot.SetValue("URL Protocol", Const.YMCLBat);
+                    RegistryKey registryKeya = Registry.ClassesRoot.OpenSubKey("YMCL", true).CreateSubKey("DefaultIcon");
+                    registryKeya.SetValue("", Const.YMCLBat);
+                    RegistryKey registryKeyb = Registry.ClassesRoot.OpenSubKey("YMCL", true).CreateSubKey(@"shell\open\command");
+                    registryKeyb.SetValue("", $"\"{Const.YMCLBat}\" \"%1\"");
+
+                    File.Copy(Path.Combine(Const.PublicDataRootPath, "YMCL.Starter.exe"), "C:\\Windows\\ymcl.exe", true);
+
+                    var fontFilePath = "C:\\ProgramData\\DaiYu.YMCL\\MiSans.ttf";
+                    string fontPath = Path.Combine(Environment.GetEnvironmentVariable("WINDIR"), "fonts", $"YMCL_{Method.GetTimeStamp()}_" + Path.GetFileName(fontFilePath));
+                    File.Copy(fontFilePath, fontPath, true); //font是程序目录下放字体的文件夹
+                    AddFontResource(fontPath);
+                    WriteProfileString("fonts", Path.GetFileNameWithoutExtension(fontFilePath) + "(TrueType)", $"YMCL_{Method.GetTimeStamp()}_" + Path.GetFileName(fontFilePath));
+
+
+                    var fontFilePath1 = "C:\\ProgramData\\DaiYu.YMCL\\FluentIcons.ttf";
+                    string fontPath1 = Path.Combine(Environment.GetEnvironmentVariable("WINDIR"), "fonts", $"YMCL_{Method.GetTimeStamp()}_" + Path.GetFileName(fontFilePath1));
+                    File.Copy(fontFilePath1, fontPath1, true); //font是程序目录下放字体的文件夹
+                    AddFontResource(fontPath1);
+                    WriteProfileString("fonts", Path.GetFileNameWithoutExtension(fontFilePath1) + "(TrueType)", $"YMCL_{Method.GetTimeStamp()}_" + Path.GetFileName(fontFilePath1));
+
+                    File.WriteAllText(Path.Combine(Const.PublicDataRootPath, "FontHasBeenInstalled"), "");
+                }
             }
         }
         private void TimerElapsed(object sender, ElapsedEventArgs e)

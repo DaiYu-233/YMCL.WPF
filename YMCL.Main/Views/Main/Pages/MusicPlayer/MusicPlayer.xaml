@@ -9,10 +9,9 @@
     xmlns:pu="https://opensource.panuon.com/wpf-ui"
     xmlns:ui="http://schemas.inkore.net/lib/ui/wpf/modern"
     Title="MusicPlayer"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
     AllowDrop="True"
     Background="{DynamicResource 2x}"
+    Cursor=""
     Drop="Page_Drop"
     mc:Ignorable="d">
     <Page.Triggers>
@@ -85,7 +84,6 @@
                             DockPanel.Dock="Right">
                             <TextBlock
                                 x:Name="TimeText"
-                                Width="100"
                                 Margin="0,0,15,0"
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Center"
@@ -94,6 +92,23 @@
                                 Foreground="{DynamicResource TextColor}"
                                 Text="00:00/00:00"
                                 TextAlignment="Right" />
+                            <ui:FontIcon
+                                Margin="0,0,6,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Cursor="Hand"
+                                FontSize="24"
+                                Foreground="{DynamicResource TextColor}"
+                                Glyph="&#xE994;" />
+                            <Slider
+                                x:Name="Voiume"
+                                Width="80"
+                                Margin="0,0,15,0"
+                                VerticalAlignment="Center"
+                                LargeChange="1"
+                                Maximum="100"
+                                ValueChanged="Voiume_ValueChanged"
+                                Value="50" />
                             <ui:FontIcon
                                 x:Name="LyricBtn"
                                 Margin="0,0,15,0"
