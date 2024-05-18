@@ -1,53 +1,115 @@
-﻿<Page x:Class="YMCL.Main.Views.Main.Pages.Setting.Setting" xmlns:ui="http://schemas.inkore.net/lib/ui/wpf/modern"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:properties="clr-namespace:YMCL.Main.Public.Lang"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      mc:Ignorable="d"  >
+﻿<Page
+    x:Class="YMCL.Main.Views.Main.Pages.Setting.Setting"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:properties="clr-namespace:YMCL.Main.Public.Lang"
+    xmlns:ui="http://schemas.inkore.net/lib/ui/wpf/modern"
+    mc:Ignorable="d">
     <Page.Triggers>
         <EventTrigger RoutedEvent="Page.Loaded">
             <EventTrigger.Actions>
                 <BeginStoryboard>
                     <Storyboard>
                         <!--<ThicknessAnimation Duration="0:0:.85" Storyboard.TargetProperty="Margin" From="900,0,-900,0" To="0" DecelerationRatio=".9" />-->
-                        <ThicknessAnimation Duration="0:0:.45" Storyboard.TargetProperty="Margin" From="-50,0,50,0" To="0" DecelerationRatio=".9" />
-                        <DoubleAnimation Duration="0:0:.35" Storyboard.TargetProperty="Opacity" From="0" To="1" />
+                        <ThicknessAnimation
+                            DecelerationRatio=".9"
+                            Storyboard.TargetProperty="Margin"
+                            From="-50,0,50,0"
+                            To="0"
+                            Duration="0:0:.45" />
+                        <DoubleAnimation
+                            Storyboard.TargetProperty="Opacity"
+                            From="0"
+                            To="1"
+                            Duration="0:0:.35" />
                     </Storyboard>
                 </BeginStoryboard>
             </EventTrigger.Actions>
         </EventTrigger>
     </Page.Triggers>
     <DockPanel>
-        <ui:ClippingBorder CornerRadius="8" DockPanel.Dock="Top" Margin="10,10,10,0">
-            <Grid VerticalAlignment="Top" Height="40" Background="{DynamicResource TitleBarColor}">
-                <ui:NavigationView x:Name="Navigation" IsSettingsVisible="False" PaneDisplayMode="Top" IsBackButtonVisible="Collapsed" SelectionChanged="Navigation_SelectionChanged" >
+        <ui:ClippingBorder
+            Margin="10,10,10,0"
+            CornerRadius="8"
+            DockPanel.Dock="Top">
+            <Grid
+                Height="40"
+                VerticalAlignment="Top"
+                Background="{DynamicResource TitleBarColor}">
+                <ui:NavigationView
+                    x:Name="Navigation"
+                    IsBackButtonVisible="Collapsed"
+                    IsSettingsVisible="False"
+                    PaneDisplayMode="Top"
+                    SelectionChanged="Navigation_SelectionChanged">
                     <ui:NavigationView.MenuItems>
-                        <ui:NavigationViewItem x:Name="Launch" IsSelected="True" FontFamily="{StaticResource Font}"  Content="{x:Static properties:MainLang.Setting_Navigation_Launch}" Tag="NavigationLaunch" Height="40" Margin="0,-8,0,0" >
+                        <ui:NavigationViewItem
+                            x:Name="Launch"
+                            Height="40"
+                            Margin="0,-8,0,0"
+                            Content="{x:Static properties:MainLang.Setting_Navigation_Launch}"
+                            FontFamily="{StaticResource Font}"
+                            IsSelected="True"
+                            Tag="NavigationLaunch">
                             <ui:NavigationViewItem.Icon>
                                 <ui:FontIcon Glyph="&#xE7FC;" />
                             </ui:NavigationViewItem.Icon>
                         </ui:NavigationViewItem>
-                        <ui:NavigationViewItem x:Name="Account" FontFamily="{StaticResource Font}" Content="{x:Static properties:MainLang.Setting_Navigation_Account}" Tag="NavigationAccount" Background="{x:Null}" Height="40" Margin="0,-8,0,0" >
+                        <ui:NavigationViewItem
+                            x:Name="Account"
+                            Height="40"
+                            Margin="0,-8,0,0"
+                            Background="{x:Null}"
+                            Content="{x:Static properties:MainLang.Setting_Navigation_Account}"
+                            FontFamily="{StaticResource Font}"
+                            Tag="NavigationAccount">
                             <ui:NavigationViewItem.Icon>
                                 <ui:FontIcon Glyph="&#xE748;" />
                             </ui:NavigationViewItem.Icon>
                         </ui:NavigationViewItem>
-                        <ui:NavigationViewItem x:Name="Download" FontFamily="{StaticResource Font}" Content="{x:Static properties:MainLang.Setting_Navigation_Download}" Tag="NavigationDownload" Background="{x:Null}" Height="40" Margin="0,-8,0,0" >
+                        <ui:NavigationViewItem
+                            x:Name="Download"
+                            Height="40"
+                            Margin="0,-8,0,0"
+                            Background="{x:Null}"
+                            Content="{x:Static properties:MainLang.Setting_Navigation_Download}"
+                            FontFamily="{StaticResource Font}"
+                            Tag="NavigationDownload">
                             <ui:NavigationViewItem.Icon>
                                 <ui:FontIcon Glyph="&#xEBD3;" />
                             </ui:NavigationViewItem.Icon>
                         </ui:NavigationViewItem>
-                        <ui:NavigationViewItem x:Name="Launcher" FontFamily="{StaticResource Font}" Content="{x:Static properties:MainLang.Setting_Navigation_Launcher}" Tag="NavigationIndividuation" Background="{x:Null}" Height="40" Margin="0,-8,0,0" >
+                        <ui:NavigationViewItem
+                            x:Name="Launcher"
+                            Height="40"
+                            Margin="0,-8,0,0"
+                            Background="{x:Null}"
+                            Content="{x:Static properties:MainLang.Setting_Navigation_Launcher}"
+                            FontFamily="{StaticResource Font}"
+                            Tag="NavigationIndividuation">
                             <ui:NavigationViewItem.Icon>
                                 <ui:FontIcon Glyph="&#xE771;" />
                             </ui:NavigationViewItem.Icon>
                         </ui:NavigationViewItem>
-                        <ui:NavigationViewItem x:Name="About" FontFamily="{StaticResource Font}" Content="{x:Static properties:MainLang.Setting_Navigation_About}" Tag="NavigationAbout" Height="40" Margin="0,-8,0,0" >
+                        <ui:NavigationViewItem
+                            x:Name="About"
+                            Height="40"
+                            Margin="0,-8,0,0"
+                            Content="{x:Static properties:MainLang.Setting_Navigation_About}"
+                            FontFamily="{StaticResource Font}"
+                            Tag="NavigationAbout">
                             <ui:NavigationViewItem.Icon>
                                 <ui:FontIcon Glyph="&#xE946;" />
                             </ui:NavigationViewItem.Icon>
                         </ui:NavigationViewItem>
-                        <ui:NavigationViewItem x:Name="SettingTransfer" FontFamily="{StaticResource Font}" Content="设置迁移" Height="40" Margin="0,-8,0,0" >
+                        <ui:NavigationViewItem
+                            x:Name="SettingTransfer"
+                            Height="40"
+                            Margin="0,-8,0,0"
+                            Content="{x:Static properties:MainLang.SettingTransfer}"
+                            FontFamily="{StaticResource Font}">
                             <ui:NavigationViewItem.Icon>
                                 <ui:FontIcon Glyph="&#xE835;" />
                             </ui:NavigationViewItem.Icon>
@@ -56,6 +118,9 @@
                 </ui:NavigationView>
             </Grid>
         </ui:ClippingBorder>
-        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" DockPanel.Dock="Top" />
+        <Frame
+            x:Name="MainFrame"
+            DockPanel.Dock="Top"
+            NavigationUIVisibility="Hidden" />
     </DockPanel>
 </Page>

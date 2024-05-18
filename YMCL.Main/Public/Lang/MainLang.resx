@@ -834,4 +834,7 @@
   <data name="AccessWasDenied" xml:space="preserve">
     <value>访问被拒绝</value>
   </data>
+  <data name="SettingTransfer" xml:space="preserve">
+    <value>设置迁移</value>
+  </data>
 </root>

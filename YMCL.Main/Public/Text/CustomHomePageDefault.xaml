@@ -2,12 +2,13 @@
 
 <Grid
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:ui="http://schemas.inkore.net/lib/ui/wpf/modern"
-    xmlns:sys="clr-namespace:System;assembly=mscorlib" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:ui="http://schemas.inkore.net/lib/ui/wpf/modern"
     Name="root">
     <ui:ClippingBorder>
         <DockPanel>
-            <TextBlock Text="Hello Custom HomePage !"/>
+            <TextBlock Text="Hello Custom HomePage !" />
         </DockPanel>
     </ui:ClippingBorder>
 </Grid>

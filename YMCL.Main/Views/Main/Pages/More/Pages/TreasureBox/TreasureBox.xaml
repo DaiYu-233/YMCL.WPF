@@ -1,17 +1,41 @@
-﻿<Page x:Class="YMCL.Main.Views.Main.Pages.More.Pages.TreasureBox.TreasureBox"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:ui="http://schemas.inkore.net/lib/ui/wpf/modern" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:pu="https://opensource.panuon.com/wpf-ui"
-      mc:Ignorable="d"  xmlns:properties="clr-namespace:YMCL.Main.Public.Lang"
-      Title="TreasureBox">
+﻿<Page
+    x:Class="YMCL.Main.Views.Main.Pages.More.Pages.TreasureBox.TreasureBox"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:properties="clr-namespace:YMCL.Main.Public.Lang"
+    xmlns:pu="https://opensource.panuon.com/wpf-ui"
+    xmlns:ui="http://schemas.inkore.net/lib/ui/wpf/modern"
+    Title="TreasureBox"
+    mc:Ignorable="d">
     <ScrollViewer>
         <StackPanel Margin="10,10,10,10">
-            <ui:ClippingBorder Visibility="Collapsed" Background="{DynamicResource 1x}" CornerRadius="5" Padding="10,10,10,10" Cursor="">
+            <ui:ClippingBorder
+                Padding="10,10,10,10"
+                Background="{DynamicResource 1x}"
+                CornerRadius="5"
+                Cursor=""
+                Visibility="Collapsed">
                 <DockPanel>
-                    <ui:FontIcon Glyph="&#xE90B;" FontSize="22" Foreground="{DynamicResource TextColor}" Margin="8,0,0,0" />
-                    <Label Content="{x:Static properties:MainLang.MusicPlayer}" FontFamily="{DynamicResource Font}" Margin="6.5,0,0,0" VerticalAlignment="Center" Foreground="{DynamicResource TextColor}"/>
-                    <ui:HyperlinkButton RaiseHyperlinkClicks="False" Tag="Player" Content="{x:Static properties:MainLang.OpenApp}" FontFamily="{DynamicResource Font}" Click="HyperlinkButton_Click" HorizontalAlignment="Right"/>
+                    <ui:FontIcon
+                        Margin="8,0,0,0"
+                        FontSize="22"
+                        Foreground="{DynamicResource TextColor}"
+                        Glyph="&#xE90B;" />
+                    <Label
+                        Margin="6.5,0,0,0"
+                        VerticalAlignment="Center"
+                        Content="{x:Static properties:MainLang.MusicPlayer}"
+                        FontFamily="{DynamicResource Font}"
+                        Foreground="{DynamicResource TextColor}" />
+                    <ui:HyperlinkButton
+                        HorizontalAlignment="Right"
+                        Click="HyperlinkButton_Click"
+                        Content="{x:Static properties:MainLang.OpenApp}"
+                        FontFamily="{DynamicResource Font}"
+                        RaiseHyperlinkClicks="False"
+                        Tag="Player" />
                 </DockPanel>
             </ui:ClippingBorder>
         </StackPanel>

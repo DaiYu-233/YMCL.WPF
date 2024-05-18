@@ -1,19 +1,31 @@
-﻿<Page x:Class="YMCL.Main.Views.Main.Pages.Setting.Pages.Download.Download"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:properties="clr-namespace:YMCL.Main.Public.Lang"
-      mc:Ignorable="d" xmlns:ui="http://schemas.inkore.net/lib/ui/wpf/modern" xmlns:pu="https://opensource.panuon.com/wpf-ui"
-      Title="Download">
+﻿<Page
+    x:Class="YMCL.Main.Views.Main.Pages.Setting.Pages.Download.Download"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:properties="clr-namespace:YMCL.Main.Public.Lang"
+    xmlns:pu="https://opensource.panuon.com/wpf-ui"
+    xmlns:ui="http://schemas.inkore.net/lib/ui/wpf/modern"
+    Title="Download"
+    mc:Ignorable="d">
     <Page.Triggers>
         <EventTrigger RoutedEvent="Page.Loaded">
             <EventTrigger.Actions>
                 <BeginStoryboard>
                     <Storyboard>
                         <!--<ThicknessAnimation Duration="0:0:.85" Storyboard.TargetProperty="Margin" From="900,0,-900,0" To="0" DecelerationRatio=".9" />-->
-                        <ThicknessAnimation Duration="0:0:.20" Storyboard.TargetProperty="Margin" From="0,50,0,-50" To="0" DecelerationRatio=".9" />
-                        <DoubleAnimation Duration="0:0:.35" Storyboard.TargetProperty="Opacity" From="0" To="1" />
+                        <ThicknessAnimation
+                            DecelerationRatio=".9"
+                            Storyboard.TargetProperty="Margin"
+                            From="0,50,0,-50"
+                            To="0"
+                            Duration="0:0:.20" />
+                        <DoubleAnimation
+                            Storyboard.TargetProperty="Opacity"
+                            From="0"
+                            To="1"
+                            Duration="0:0:.35" />
                     </Storyboard>
                 </BeginStoryboard>
             </EventTrigger.Actions>
@@ -21,24 +33,83 @@
     </Page.Triggers>
     <ScrollViewer Margin="10,10,5,0">
         <StackPanel Margin="0,0,5,0">
-            <Border CornerRadius="5" Background="{DynamicResource 1x}" Height="45" Margin="0,0,0,10" >
+            <Border
+                Height="45"
+                Margin="0,0,0,10"
+                Background="{DynamicResource 1x}"
+                CornerRadius="5">
                 <DockPanel>
-                    <Label HorizontalAlignment="Left" VerticalAlignment="Center" Margin="18,0,0,0" FontSize="15" Foreground="{DynamicResource TextColor}" FontFamily="{DynamicResource Font}" Content="{x:Static properties:MainLang.DownloadSource}"/>
-                    <ComboBox  Margin="18,0,6.5,0" Height="32" x:Name="DownloadSourceComboBox" FontFamily="{DynamicResource Font}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="DownloadSourceComboBox_SelectionChanged">
-                        <ComboBoxItem Content="Mojang"/>
-                        <ComboBoxItem Content="BmclApi"/>
+                    <Label
+                        Margin="18,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Content="{x:Static properties:MainLang.DownloadSource}"
+                        FontFamily="{DynamicResource Font}"
+                        FontSize="15"
+                        Foreground="{DynamicResource TextColor}" />
+                    <ComboBox
+                        x:Name="DownloadSourceComboBox"
+                        Height="32"
+                        Margin="18,0,6.5,0"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        FontFamily="{DynamicResource Font}"
+                        SelectionChanged="DownloadSourceComboBox_SelectionChanged">
+                        <ComboBoxItem Content="Mojang" />
+                        <ComboBoxItem Content="BmclApi" />
                         <!--<ComboBoxItem Content="Mcbbs"/>-->
                     </ComboBox>
                 </DockPanel>
             </Border>
-            <Border CornerRadius="5" Background="{DynamicResource 1x}" Height="45" Margin="0,0,0,10" >
+            <Border
+                Height="45"
+                Margin="0,0,0,10"
+                Background="{DynamicResource 1x}"
+                CornerRadius="5">
                 <DockPanel>
-                    <Label HorizontalAlignment="Left" VerticalAlignment="Center" Margin="18,0,0,0" FontSize="15" Foreground="{DynamicResource TextColor}" FontFamily="{DynamicResource Font}" Content="{x:Static properties:MainLang.MaximumDownloadThread}"/>
-                    <TextBlock x:Name="SilderInfo" VerticalAlignment="Center" HorizontalAlignment="Right" RenderTransformOrigin="0.5,0.5" Text="∞" FontFamily="MiSans Medium" TextAlignment="Center" Foreground="{DynamicResource TextColor}" Margin="0,0,18,0" FontSize="14" DockPanel.Dock="Right"/>
-                    <Slider x:Name="SilderBox" Margin="18,0,18,0" VerticalAlignment="Center" SmallChange="1" Minimum="1" Value="16" Maximum="512" ValueChanged="SilderBox_ValueChanged" LostFocus="SilderBox_LostFocus" />
+                    <Label
+                        Margin="18,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Content="{x:Static properties:MainLang.MaximumDownloadThread}"
+                        FontFamily="{DynamicResource Font}"
+                        FontSize="15"
+                        Foreground="{DynamicResource TextColor}" />
+                    <TextBlock
+                        x:Name="SilderInfo"
+                        Margin="0,0,18,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        DockPanel.Dock="Right"
+                        FontFamily="MiSans Medium"
+                        FontSize="14"
+                        Foreground="{DynamicResource TextColor}"
+                        RenderTransformOrigin="0.5,0.5"
+                        Text="∞"
+                        TextAlignment="Center" />
+                    <Slider
+                        x:Name="SilderBox"
+                        Margin="18,0,18,0"
+                        VerticalAlignment="Center"
+                        LostFocus="SilderBox_LostFocus"
+                        Maximum="512"
+                        Minimum="1"
+                        SmallChange="1"
+                        ValueChanged="SilderBox_ValueChanged"
+                        Value="16" />
                 </DockPanel>
             </Border>
-            <ui:InfoBar x:Name="DownloadThreadTooBig" FontFamily="{DynamicResource Font}" Message="{x:Static properties:MainLang.DownloadThreadTooBig}" IsOpen="True" IsClosable="False" Severity="Warning" FontSize="14" CornerRadius="5,5,5,5" Loaded="DownloadThreadTooBig_Loaded" Height="50"/>
+            <ui:InfoBar
+                x:Name="DownloadThreadTooBig"
+                Height="50"
+                CornerRadius="5,5,5,5"
+                FontFamily="{DynamicResource Font}"
+                FontSize="14"
+                IsClosable="False"
+                IsOpen="True"
+                Loaded="DownloadThreadTooBig_Loaded"
+                Message="{x:Static properties:MainLang.DownloadThreadTooBig}"
+                Severity="Warning" />
         </StackPanel>
     </ScrollViewer>
 </Page>

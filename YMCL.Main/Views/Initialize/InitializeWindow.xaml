@@ -1,66 +1,215 @@
-﻿<pu:WindowX x:Class="YMCL.Main.Views.Initialize.InitializeWindow" xmlns:properties="clr-namespace:YMCL.Main.Public.Lang"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" pu:WindowXCaption.Height="0" xmlns:pu="https://opensource.panuon.com/wpf-ui"
-            xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:ui="http://schemas.inkore.net/lib/ui/wpf/modern" 
-            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-            xmlns:lang="clr-namespace:YMCL.Main.Public.Lang"
-            mc:Ignorable="d" Background="Transparent" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True"
-        Title="{x:Static lang:MainLang.InitializeWindow_Title}" Height="450" Width="800" Loaded="Window_Loaded">
-    <Border Background="{DynamicResource 2x}" CornerRadius="8,8,8,8" BorderThickness="2,2,2,2" BorderBrush="{DynamicResource TitleBarColor}">
+﻿<pu:WindowX
+    x:Class="YMCL.Main.Views.Initialize.InitializeWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:lang="clr-namespace:YMCL.Main.Public.Lang"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:properties="clr-namespace:YMCL.Main.Public.Lang"
+    xmlns:pu="https://opensource.panuon.com/wpf-ui"
+    xmlns:ui="http://schemas.inkore.net/lib/ui/wpf/modern"
+    Title="{x:Static lang:MainLang.InitializeWindow_Title}"
+    Width="800"
+    Height="450"
+    pu:WindowXCaption.Height="0"
+    AllowsTransparency="True"
+    Background="Transparent"
+    Loaded="Window_Loaded"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <Border
+        Background="{DynamicResource 2x}"
+        BorderBrush="{DynamicResource TitleBarColor}"
+        BorderThickness="2,2,2,2"
+        CornerRadius="8,8,8,8">
         <Grid>
-            <Border VerticalAlignment="Top" Height="30" CornerRadius="6,6,0,0" Background="{DynamicResource TitleBarColor}">
+            <Border
+                Height="30"
+                VerticalAlignment="Top"
+                Background="{DynamicResource TitleBarColor}"
+                CornerRadius="6,6,0,0">
                 <Grid x:Name="TitleBar" MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
-                    <TextBlock></TextBlock>
-                    <TextBlock x:Name="Title" Text="{x:Static lang:MainLang.InitializeWindow_Title}" VerticalAlignment="Center" Margin="9,0,0,0" HorizontalAlignment="Left" FontSize="13" Foreground="{DynamicResource TextColor}" FontFamily="{DynamicResource Font}"  />
-                    <Button x:Name="btnMinimize" Style="{DynamicResource IconButtonsStyle}" Content="{DynamicResource Minimize}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,30,0" Click="btnMinimize_Click"/>
-                    <Button x:Name="btnClose" Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource Close}" Tag="IsCloseButton" HorizontalAlignment="Right" Margin="0,0,3,0" Click="btnClose_Click" />
+                    <TextBlock />
+                    <TextBlock
+                        x:Name="Title"
+                        Margin="9,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        FontFamily="{DynamicResource Font}"
+                        FontSize="13"
+                        Foreground="{DynamicResource TextColor}"
+                        Text="{x:Static lang:MainLang.InitializeWindow_Title}" />
+                    <Button
+                        x:Name="btnMinimize"
+                        Margin="0,0,30,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Click="btnMinimize_Click"
+                        Content="{DynamicResource Minimize}"
+                        Style="{DynamicResource IconButtonsStyle}" />
+                    <Button
+                        x:Name="btnClose"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        Click="btnClose_Click"
+                        Content="{DynamicResource Close}"
+                        Style="{StaticResource IconButtonsStyle}"
+                        Tag="IsCloseButton" />
                 </Grid>
             </Border>
-            <Grid x:Name="Main" >
+            <Grid x:Name="Main">
                 <ScrollViewer Margin="0,26,0,40">
                     <Grid>
-                        <Grid x:Name="ChooseLanguagePage" Visibility="Visible" >
-                            <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="{DynamicResource Font}" Text="选择语言 / Choose Language" FontSize="16" Margin="14,8,0,0" Foreground="{DynamicResource TextColor}"/>
-                            <WrapPanel x:Name="Languages" Orientation="Horizontal" Margin="0,40,0,0" HorizontalAlignment="Center">
-                                <ToggleButton Tag="zh-CN" Click="ChooseLanguageBtn_Click" FontFamily="{DynamicResource Font}" Width="170" Height="60" Margin="10,0,10,20" VerticalAlignment="Top" FontSize="18" >
+                        <Grid x:Name="ChooseLanguagePage" Visibility="Visible">
+                            <TextBlock
+                                Margin="14,8,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                FontFamily="{DynamicResource Font}"
+                                FontSize="16"
+                                Foreground="{DynamicResource TextColor}"
+                                Text="选择语言 / Choose Language" />
+                            <WrapPanel
+                                x:Name="Languages"
+                                Margin="0,40,0,0"
+                                HorizontalAlignment="Center"
+                                Orientation="Horizontal">
+                                <ToggleButton
+                                    Width="170"
+                                    Height="60"
+                                    Margin="10,0,10,20"
+                                    VerticalAlignment="Top"
+                                    Click="ChooseLanguageBtn_Click"
+                                    FontFamily="{DynamicResource Font}"
+                                    FontSize="18"
+                                    Tag="zh-CN">
                                     <StackPanel>
-                                        <TextBlock FontFamily="{DynamicResource Font}" Text="zh-CN" FontSize="20"/>
-                                        <TextBlock FontFamily="{DynamicResource Font}" Text="简体中文" FontSize="14" HorizontalAlignment="Center"/>
-                                    </StackPanel>
-                                </ToggleButton> <ToggleButton Tag="zh-Hant" Click="ChooseLanguageBtn_Click" FontFamily="{DynamicResource Font}" Width="170" Height="60" Margin="10,0,10,20" VerticalAlignment="Top" FontSize="18" >
-                                    <StackPanel>
-                                        <TextBlock FontFamily="{DynamicResource Font}" Text="zh-Hant" FontSize="20"/>
-                                        <TextBlock FontFamily="{DynamicResource Font}" Text="繁體中文" FontSize="14" HorizontalAlignment="Center"/>
+                                        <TextBlock
+                                            FontFamily="{DynamicResource Font}"
+                                            FontSize="20"
+                                            Text="zh-CN" />
+                                        <TextBlock
+                                            HorizontalAlignment="Center"
+                                            FontFamily="{DynamicResource Font}"
+                                            FontSize="14"
+                                            Text="简体中文" />
                                     </StackPanel>
                                 </ToggleButton>
-                                <ToggleButton Tag="en-US" Click="ChooseLanguageBtn_Click" FontFamily="{DynamicResource Font}" Width="170" Height="60" Margin="10,0,10,20" VerticalAlignment="Top" FontSize="18" >
+                                <ToggleButton
+                                    Width="170"
+                                    Height="60"
+                                    Margin="10,0,10,20"
+                                    VerticalAlignment="Top"
+                                    Click="ChooseLanguageBtn_Click"
+                                    FontFamily="{DynamicResource Font}"
+                                    FontSize="18"
+                                    Tag="zh-Hant">
                                     <StackPanel>
-                                        <TextBlock FontFamily="{DynamicResource Font}" Text="en-US" FontSize="20"/>
-                                        <TextBlock FontFamily="{DynamicResource Font}" Text="English" FontSize="14" HorizontalAlignment="Center"/>
+                                        <TextBlock
+                                            FontFamily="{DynamicResource Font}"
+                                            FontSize="20"
+                                            Text="zh-Hant" />
+                                        <TextBlock
+                                            HorizontalAlignment="Center"
+                                            FontFamily="{DynamicResource Font}"
+                                            FontSize="14"
+                                            Text="繁體中文" />
                                     </StackPanel>
-                                </ToggleButton> <ToggleButton Tag="ja-JP" Click="ChooseLanguageBtn_Click" FontFamily="{DynamicResource Font}" Width="170" Height="60" Margin="10,0,10,20" VerticalAlignment="Top" FontSize="18" >
+                                </ToggleButton>
+                                <ToggleButton
+                                    Width="170"
+                                    Height="60"
+                                    Margin="10,0,10,20"
+                                    VerticalAlignment="Top"
+                                    Click="ChooseLanguageBtn_Click"
+                                    FontFamily="{DynamicResource Font}"
+                                    FontSize="18"
+                                    Tag="en-US">
                                     <StackPanel>
-                                        <TextBlock FontFamily="{DynamicResource Font}" Text="ja-JP" FontSize="20" TextAlignment="Center"/>
-                                        <TextBlock FontFamily="{DynamicResource Font}" Text="日本語" FontSize="14" HorizontalAlignment="Center"/>
+                                        <TextBlock
+                                            FontFamily="{DynamicResource Font}"
+                                            FontSize="20"
+                                            Text="en-US" />
+                                        <TextBlock
+                                            HorizontalAlignment="Center"
+                                            FontFamily="{DynamicResource Font}"
+                                            FontSize="14"
+                                            Text="English" />
                                     </StackPanel>
-                                </ToggleButton> <ToggleButton Tag="ru-RU" Click="ChooseLanguageBtn_Click" FontFamily="{DynamicResource Font}" Width="170" Height="60" Margin="10,0,10,20" VerticalAlignment="Top" FontSize="18" >
+                                </ToggleButton>
+                                <ToggleButton
+                                    Width="170"
+                                    Height="60"
+                                    Margin="10,0,10,20"
+                                    VerticalAlignment="Top"
+                                    Click="ChooseLanguageBtn_Click"
+                                    FontFamily="{DynamicResource Font}"
+                                    FontSize="18"
+                                    Tag="ja-JP">
                                     <StackPanel>
-                                        <TextBlock FontFamily="{DynamicResource Font}" FontSize="20" TextAlignment="Center"><Run Language="zh-cn" Text="ru-RU"/></TextBlock>
-                                        <TextBlock FontFamily="{DynamicResource Font}" Text="Русский язык" FontSize="14" HorizontalAlignment="Center"/>
+                                        <TextBlock
+                                            FontFamily="{DynamicResource Font}"
+                                            FontSize="20"
+                                            Text="ja-JP"
+                                            TextAlignment="Center" />
+                                        <TextBlock
+                                            HorizontalAlignment="Center"
+                                            FontFamily="{DynamicResource Font}"
+                                            FontSize="14"
+                                            Text="日本語" />
+                                    </StackPanel>
+                                </ToggleButton>
+                                <ToggleButton
+                                    Width="170"
+                                    Height="60"
+                                    Margin="10,0,10,20"
+                                    VerticalAlignment="Top"
+                                    Click="ChooseLanguageBtn_Click"
+                                    FontFamily="{DynamicResource Font}"
+                                    FontSize="18"
+                                    Tag="ru-RU">
+                                    <StackPanel>
+                                        <TextBlock
+                                            FontFamily="{DynamicResource Font}"
+                                            FontSize="20"
+                                            TextAlignment="Center"><Run Language="zh-cn" Text="ru-RU" /></TextBlock>
+                                        <TextBlock
+                                            HorizontalAlignment="Center"
+                                            FontFamily="{DynamicResource Font}"
+                                            FontSize="14"
+                                            Text="Русский язык" />
                                     </StackPanel>
                                 </ToggleButton>
                             </WrapPanel>
                         </Grid>
-                        <StackPanel x:Name="FileDownloadPage" Visibility="Hidden" >
+                        <StackPanel x:Name="FileDownloadPage" Visibility="Hidden">
                             <Border Margin="10,10,10,0">
                                 <StackPanel>
-                                    <ui:HyperlinkButton Content="{x:Static properties:MainLang.InitializeWindow_DownloadHelp}" NavigateUri="https://support.qq.com/products/542108/faqs-more?id=151773" FontFamily="{DynamicResource Font}" Background="{x:Null}" HorizontalAlignment="Left"/>
+                                    <ui:HyperlinkButton
+                                        HorizontalAlignment="Left"
+                                        Background="{x:Null}"
+                                        Content="{x:Static properties:MainLang.InitializeWindow_DownloadHelp}"
+                                        FontFamily="{DynamicResource Font}"
+                                        NavigateUri="https://support.qq.com/products/542108/faqs-more?id=151773" />
                                 </StackPanel>
                             </Border>
                         </StackPanel>
                     </Grid>
                 </ScrollViewer>
-                <Button x:Name="Next" Style="{StaticResource AccentButtonStyle}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="32" Margin="0,0,5,5" IsEnabled="False" Content="{x:Static lang:MainLang.InitializeWindow_NextSetpBtn}" Width="142" FontFamily="MiSans Medium" Click="Next_Click"/>
+                <Button
+                    x:Name="Next"
+                    Width="142"
+                    Height="32"
+                    Margin="0,0,5,5"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Click="Next_Click"
+                    Content="{x:Static lang:MainLang.InitializeWindow_NextSetpBtn}"
+                    FontFamily="MiSans Medium"
+                    IsEnabled="False"
+                    Style="{StaticResource AccentButtonStyle}" />
             </Grid>
         </Grid>
     </Border>

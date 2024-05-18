@@ -822,4 +822,19 @@
   <data name="Copied" xml:space="preserve">
     <value>クリップボードにコピーしました</value>
   </data>
+  <data name="InstallThisFileAsMod" xml:space="preserve">
+    <value>このファイルをModとして現在のバージョンにしますか？</value>
+  </data>
+  <data name="FailedToObtainAdministratorPrivileges" xml:space="preserve">
+    <value>管理者権限の取得に失敗しました</value>
+  </data>
+  <data name="SureObtainAdministratorPrivileges" xml:space="preserve">
+    <value>[OK]をクリックして、管理者権限でプログラムを再起動します</value>
+  </data>
+  <data name="AccessWasDenied" xml:space="preserve">
+    <value>許可がありません</value>
+  </data>
+  <data name="SettingTransfer" xml:space="preserve">
+    <value>設定が移行されました</value>
+  </data>
 </root>

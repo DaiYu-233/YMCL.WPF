@@ -1951,6 +1951,15 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
+        ///   查找类似 设置迁移 的本地化字符串。
+        /// </summary>
+        public static string SettingTransfer {
+            get {
+                return ResourceManager.GetString("SettingTransfer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 显示窗口 的本地化字符串。
         /// </summary>
         public static string ShowWindow {

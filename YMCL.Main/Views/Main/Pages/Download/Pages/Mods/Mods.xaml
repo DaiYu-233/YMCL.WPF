@@ -1,21 +1,32 @@
-﻿<Page x:Class="YMCL.Main.Views.Main.Pages.Download.Pages.Mods.Mods"  
-      xmlns:properties="clr-namespace:YMCL.Main.Public.Lang" xmlns:ui="http://schemas.inkore.net/lib/ui/wpf/modern" 
-      xmlns:pu="https://opensource.panuon.com/wpf-ui"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:YMCL.Main.Views.Main.Pages.Download.Pages.Mods"
-      mc:Ignorable="d" 
-      Title="Mods">
+﻿<Page
+    x:Class="YMCL.Main.Views.Main.Pages.Download.Pages.Mods.Mods"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:YMCL.Main.Views.Main.Pages.Download.Pages.Mods"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:properties="clr-namespace:YMCL.Main.Public.Lang"
+    xmlns:pu="https://opensource.panuon.com/wpf-ui"
+    xmlns:ui="http://schemas.inkore.net/lib/ui/wpf/modern"
+    Title="Mods"
+    mc:Ignorable="d">
     <Page.Triggers>
         <EventTrigger RoutedEvent="Page.Loaded">
             <EventTrigger.Actions>
                 <BeginStoryboard>
                     <Storyboard>
                         <!--<ThicknessAnimation Duration="0:0:.85" Storyboard.TargetProperty="Margin" From="900,0,-900,0" To="0" DecelerationRatio=".9" />-->
-                        <ThicknessAnimation Duration="0:0:.20" Storyboard.TargetProperty="Margin" From="0,50,0,-50" To="0" DecelerationRatio=".9" />
-                        <DoubleAnimation Duration="0:0:.35" Storyboard.TargetProperty="Opacity" From="0" To="1" />
+                        <ThicknessAnimation
+                            DecelerationRatio=".9"
+                            Storyboard.TargetProperty="Margin"
+                            From="0,50,0,-50"
+                            To="0"
+                            Duration="0:0:.20" />
+                        <DoubleAnimation
+                            Storyboard.TargetProperty="Opacity"
+                            From="0"
+                            To="1"
+                            Duration="0:0:.35" />
                     </Storyboard>
                 </BeginStoryboard>
             </EventTrigger.Actions>
@@ -23,74 +34,158 @@
     </Page.Triggers>
     <Grid>
         <DockPanel Margin="10">
-            <ui:ClippingBorder CornerRadius="5" VerticalAlignment="Top" DockPanel.Dock="Top">
+            <ui:ClippingBorder
+                VerticalAlignment="Top"
+                CornerRadius="5"
+                DockPanel.Dock="Top">
                 <DockPanel Background="{DynamicResource 1x}">
-                    <StackPanel DockPanel.Dock="Right" Margin="10,0,10,0">
-                        <ComboBox Margin="0,10,0,0" FontFamily="{DynamicResource Font}" SelectedIndex="0" Width="160">
-                            <ComboBoxItem FontFamily="{DynamicResource Font}" Content="{x:Static properties:MainLang.All}"/>
-                            <ComboBoxItem FontFamily="{DynamicResource Font}" Content="CurseForge"/>
-                            <ComboBoxItem FontFamily="{DynamicResource Font}" Content="Modrinth"/>
+                    <StackPanel Margin="10,0,10,0" DockPanel.Dock="Right">
+                        <ComboBox
+                            Width="160"
+                            Margin="0,10,0,0"
+                            FontFamily="{DynamicResource Font}"
+                            SelectedIndex="0">
+                            <ComboBoxItem Content="{x:Static properties:MainLang.All}" FontFamily="{DynamicResource Font}" />
+                            <ComboBoxItem Content="CurseForge" FontFamily="{DynamicResource Font}" />
+                            <ComboBoxItem Content="Modrinth" FontFamily="{DynamicResource Font}" />
                         </ComboBox>
-                        <ComboBox Margin="0,10,0,0" FontFamily="{DynamicResource Font}" SelectedIndex="0" Width="160">
-                            <ComboBoxItem FontFamily="{DynamicResource Font}" Content="{x:Static properties:MainLang.All}"/>
+                        <ComboBox
+                            Width="160"
+                            Margin="0,10,0,0"
+                            FontFamily="{DynamicResource Font}"
+                            SelectedIndex="0">
+                            <ComboBoxItem Content="{x:Static properties:MainLang.All}" FontFamily="{DynamicResource Font}" />
                         </ComboBox>
                     </StackPanel>
                     <StackPanel Margin="0,0,0,10">
-                        <ui:AutoSuggestBox x:Name="ModSearchBox" Margin="10,10,0,0" FontFamily="{DynamicResource Font}" ui:ControlHelper.PlaceholderText="{x:Static properties:MainLang.ModName}" QuerySubmitted="ModSearchBox_QuerySubmitted">
+                        <ui:AutoSuggestBox
+                            x:Name="ModSearchBox"
+                            Margin="10,10,0,0"
+                            ui:ControlHelper.PlaceholderText="{x:Static properties:MainLang.ModName}"
+                            FontFamily="{DynamicResource Font}"
+                            QuerySubmitted="ModSearchBox_QuerySubmitted">
                             <ui:AutoSuggestBox.QueryIcon>
                                 <ui:FontIcon Glyph="&#xF78B;" />
                             </ui:AutoSuggestBox.QueryIcon>
                         </ui:AutoSuggestBox>
                         <DockPanel>
-                            <ComboBox x:Name="LoaderTypeComboBox" Margin="10,10,0,0" FontFamily="{DynamicResource Font}" SelectedIndex="0" Width="160">
-                                <ComboBoxItem FontFamily="{DynamicResource Font}" Content="{x:Static properties:MainLang.AnyModLoader}"/>
-                                <ComboBoxItem FontFamily="{DynamicResource Font}" Content="Forge"/>
-                                <ComboBoxItem FontFamily="{DynamicResource Font}" Content="Quilt"/>
-                                <ComboBoxItem FontFamily="{DynamicResource Font}" Content="Fabric"/>
-                                <ComboBoxItem FontFamily="{DynamicResource Font}" Content="Vanilla"/>
-                                <ComboBoxItem FontFamily="{DynamicResource Font}" Content="Optifine"/>
-                                <ComboBoxItem FontFamily="{DynamicResource Font}" Content="LiteLoader"/>
+                            <ComboBox
+                                x:Name="LoaderTypeComboBox"
+                                Width="160"
+                                Margin="10,10,0,0"
+                                FontFamily="{DynamicResource Font}"
+                                SelectedIndex="0">
+                                <ComboBoxItem Content="{x:Static properties:MainLang.AnyModLoader}" FontFamily="{DynamicResource Font}" />
+                                <ComboBoxItem Content="Forge" FontFamily="{DynamicResource Font}" />
+                                <ComboBoxItem Content="Quilt" FontFamily="{DynamicResource Font}" />
+                                <ComboBoxItem Content="Fabric" FontFamily="{DynamicResource Font}" />
+                                <ComboBoxItem Content="Vanilla" FontFamily="{DynamicResource Font}" />
+                                <ComboBoxItem Content="Optifine" FontFamily="{DynamicResource Font}" />
+                                <ComboBoxItem Content="LiteLoader" FontFamily="{DynamicResource Font}" />
                             </ComboBox>
-                            <TextBox Margin="6.5,10,0,0" Name="MinecraftVersionBox" FontFamily="{DynamicResource Font}" ui:ControlHelper.PlaceholderText="{x:Static properties:MainLang.MinecraftVersion}"/>
+                            <TextBox
+                                Name="MinecraftVersionBox"
+                                Margin="6.5,10,0,0"
+                                ui:ControlHelper.PlaceholderText="{x:Static properties:MainLang.MinecraftVersion}"
+                                FontFamily="{DynamicResource Font}" />
                         </DockPanel>
                     </StackPanel>
                 </DockPanel>
             </ui:ClippingBorder>
-            <ui:ClippingBorder CornerRadius="5" Margin="0,10,0,0" >
+            <ui:ClippingBorder Margin="0,10,0,0" CornerRadius="5">
                 <Grid>
                     <DockPanel Background="{DynamicResource 1x}">
-                        <ui:HyperlinkButton x:Name="LoadMore" RaiseHyperlinkClicks="False"  DockPanel.Dock="Bottom" FontFamily="{DynamicResource Font}" Content="{x:Static properties:MainLang.LoadingMore}" HorizontalAlignment="Center" Margin="0,0,0,15" Visibility="Collapsed"/>
-                        <ui:ListView x:Name="ModsListView"  FontFamily="{DynamicResource Font}" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,10,10,10" DockPanel.Dock="Top" SelectionChanged="ModsListView_SelectionChanged" >
+                        <ui:HyperlinkButton
+                            x:Name="LoadMore"
+                            Margin="0,0,0,15"
+                            HorizontalAlignment="Center"
+                            Content="{x:Static properties:MainLang.LoadingMore}"
+                            DockPanel.Dock="Bottom"
+                            FontFamily="{DynamicResource Font}"
+                            RaiseHyperlinkClicks="False"
+                            Visibility="Collapsed" />
+                        <ui:ListView
+                            x:Name="ModsListView"
+                            Margin="10,10,10,10"
+                            d:ItemsSource="{d:SampleData ItemCount=5}"
+                            DockPanel.Dock="Top"
+                            FontFamily="{DynamicResource Font}"
+                            SelectionChanged="ModsListView_SelectionChanged">
                             <ui:ListView.ItemTemplate>
                                 <DataTemplate>
                                     <DockPanel Margin="-8,3,10,3">
-                                        <ui:ClippingBorder CornerRadius="5" Background="Wheat" Height="32" Width="32">
-                                            <Image Width="32" Height="32" Source="{Binding IconUrl}"/>
+                                        <ui:ClippingBorder
+                                            Width="32"
+                                            Height="32"
+                                            Background="Wheat"
+                                            CornerRadius="5">
+                                            <Image
+                                                Width="32"
+                                                Height="32"
+                                                Source="{Binding IconUrl}" />
                                         </ui:ClippingBorder>
                                         <Grid Margin="6.5,1,0,1">
-                                            <TextBlock ><Run  Text="{Binding Name}"  FontFamily="MiSans Medium"  FontSize="14"/><Run Text=" "/></TextBlock>
-                                            <TextBlock  Margin="1,17,0,0" FontSize="12" Foreground="#E48A8A8A"><Run FontFamily="MiSans Medium"  Text="{Binding Summary}" FontSize="11"/><Run Text="  "/></TextBlock>
+                                            <TextBlock><Run
+                                                    FontFamily="MiSans Medium"
+                                                    FontSize="14"
+                                                    Text="{Binding Name}" /><Run Text=" " /></TextBlock>
+                                            <TextBlock
+                                                Margin="1,17,0,0"
+                                                FontSize="12"
+                                                Foreground="#E48A8A8A"><Run
+                                                    FontFamily="MiSans Medium"
+                                                    FontSize="11"
+                                                    Text="{Binding Summary}" /><Run Text="  " /></TextBlock>
                                         </Grid>
                                     </DockPanel>
                                 </DataTemplate>
                             </ui:ListView.ItemTemplate>
                         </ui:ListView>
                     </DockPanel>
-                    <ui:ProgressRing x:Name="LoadingMore" DockPanel.Dock="Top" VerticalAlignment="Center" Margin="0,10,0,30" Height="52" Width="52" Visibility="Collapsed"/>
+                    <ui:ProgressRing
+                        x:Name="LoadingMore"
+                        Width="52"
+                        Height="52"
+                        Margin="0,10,0,30"
+                        VerticalAlignment="Center"
+                        DockPanel.Dock="Top"
+                        Visibility="Collapsed" />
                 </Grid>
             </ui:ClippingBorder>
         </DockPanel>
-        <DockPanel Margin="10" x:Name="ModDetails" Visibility="Collapsed">
-            <ui:ClippingBorder CornerRadius="5" >
+        <DockPanel
+            x:Name="ModDetails"
+            Margin="10"
+            Visibility="Collapsed">
+            <ui:ClippingBorder CornerRadius="5">
                 <DockPanel Background="{DynamicResource 1x}">
-                    <DockPanel VerticalAlignment="Top" Height="35" DockPanel.Dock="Top" Margin="5,0,0,0">
-                        <ui:FontIcon x:Name="ReturnToModSearch" Glyph="&#xE973;" Cursor="Hand" Foreground="{DynamicResource TextColor}" VerticalAlignment="Center" Margin="4,0,0,0" PreviewMouseLeftButtonDown="ReturnToModSearch_PreviewMouseLeftButtonDown" FontSize="18"/>
-                        <Label x:Name="ModDetailsName" Content="{}{Version}" FontFamily="{DynamicResource Font}" Margin="4,0,6.5,0" DockPanel.Dock="Right" Foreground="{DynamicResource TextColor}" VerticalAlignment="Center" FontSize="16" HorizontalAlignment="Left"/>
+                    <DockPanel
+                        Height="35"
+                        Margin="5,0,0,0"
+                        VerticalAlignment="Top"
+                        DockPanel.Dock="Top">
+                        <ui:FontIcon
+                            x:Name="ReturnToModSearch"
+                            Margin="4,0,0,0"
+                            VerticalAlignment="Center"
+                            Cursor="Hand"
+                            FontSize="18"
+                            Foreground="{DynamicResource TextColor}"
+                            Glyph="&#xE973;"
+                            PreviewMouseLeftButtonDown="ReturnToModSearch_PreviewMouseLeftButtonDown" />
+                        <Label
+                            x:Name="ModDetailsName"
+                            Margin="4,0,6.5,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Content="{}{Version}"
+                            DockPanel.Dock="Right"
+                            FontFamily="{DynamicResource Font}"
+                            FontSize="16"
+                            Foreground="{DynamicResource TextColor}" />
                     </DockPanel>
                     <ScrollViewer>
-                        <StackPanel x:Name="ModDetailsVersionPanel" Margin="10,2,10,10" >
-
-                        </StackPanel>
+                        <StackPanel x:Name="ModDetailsVersionPanel" Margin="10,2,10,10" />
                     </ScrollViewer>
                 </DockPanel>
             </ui:ClippingBorder>

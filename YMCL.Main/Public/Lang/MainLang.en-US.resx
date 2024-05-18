@@ -822,4 +822,19 @@
   <data name="Copied" xml:space="preserve">
     <value>Copied to clipboard</value>
   </data>
+  <data name="InstallThisFileAsMod" xml:space="preserve">
+    <value>Make this file as a Mod to the current version?</value>
+  </data>
+  <data name="FailedToObtainAdministratorPrivileges" xml:space="preserve">
+    <value>Failed to get admin permissions</value>
+  </data>
+  <data name="SureObtainAdministratorPrivileges" xml:space="preserve">
+    <value>Click OK to restart the program with administrator privileges</value>
+  </data>
+  <data name="AccessWasDenied" xml:space="preserve">
+    <value>Access denied</value>
+  </data>
+  <data name="SettingTransfer" xml:space="preserve">
+    <value>Settings Migrated</value>
+  </data>
 </root>

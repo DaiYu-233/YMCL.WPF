@@ -822,4 +822,19 @@
   <data name="Copied" xml:space="preserve">
     <value>已複製至剪貼簿</value>
   </data>
+  <data name="InstallThisFileAsMod" xml:space="preserve">
+    <value>將此文件作為Mod到目前版本？</value>
+  </data>
+  <data name="FailedToObtainAdministratorPrivileges" xml:space="preserve">
+    <value>取得管理員權限失敗</value>
+  </data>
+  <data name="SureObtainAdministratorPrivileges" xml:space="preserve">
+    <value>點選確定使用管理員權限重新啟動程式</value>
+  </data>
+  <data name="AccessWasDenied" xml:space="preserve">
+    <value>訪問被拒絕</value>
+  </data>
+  <data name="SettingTransfer" xml:space="preserve">
+    <value>設定遷移</value>
+  </data>
 </root>

@@ -822,4 +822,19 @@
   <data name="Copied" xml:space="preserve">
     <value>Скопировано в буфер обмена</value>
   </data>
+  <data name="InstallThisFileAsMod" xml:space="preserve">
+    <value>Сделать этот файл модом на текущую версию?</value>
+  </data>
+  <data name="FailedToObtainAdministratorPrivileges" xml:space="preserve">
+    <value>Не удалось получить разрешения администратора</value>
+  </data>
+  <data name="SureObtainAdministratorPrivileges" xml:space="preserve">
+    <value>Нажмите OK, чтобы перезапустить программу с правами администратора</value>
+  </data>
+  <data name="AccessWasDenied" xml:space="preserve">
+    <value>Нет доступа</value>
+  </data>
+  <data name="SettingTransfer" xml:space="preserve">
+    <value>Настройки перенесены</value>
+  </data>
 </root>
