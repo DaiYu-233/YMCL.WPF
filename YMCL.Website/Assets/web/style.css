@@ -6,6 +6,9 @@
   --font-color: #4c4948;
   --function-img-width: 0.8;
 }
+html{
+  overflow-x: hidden;
+}
 @font-face {
   font-family: ZhuZiAYuanJWD;
   src: url(../web/font.woff2);
