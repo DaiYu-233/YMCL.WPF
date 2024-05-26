@@ -27,6 +27,7 @@ using YMCL.Main.Views.MusicPlayer.DesktopLyric;
 using Size = System.Windows.Size;
 using Cursors = System.Windows.Input.Cursors;
 using static YMCL.Main.Public.Class.PlaySongListViewItemEntry;
+using System.Diagnostics;
 
 namespace YMCL.Main.Views.Main.Pages.MusicPlayer
 {
@@ -44,6 +45,7 @@ namespace YMCL.Main.Views.Main.Pages.MusicPlayer
         MediaPlayer player = new MediaPlayer();
         string downloadUrl = string.Empty;
         bool gettingMusic = false;
+        bool dragging = false;
         bool movingSilder = false;
         bool playing = false;
         DesktopLyric desktopLyric = new();
@@ -685,6 +687,10 @@ namespace YMCL.Main.Views.Main.Pages.MusicPlayer
                 var data = obj2.lrc.lyric;
 
                 var seletedSong = PlayListView.SelectedItem as PlaySongListViewItemEntry;
+                if (dragging || seletedSong == null)
+                {
+                    return;
+                }
                 if ((song.Type == PlaySongListViewItemEntryType.Network && seletedSong.SongId != song.SongId) || (song.Type == PlaySongListViewItemEntryType.Local && seletedSong.Path != song.Path))
                 {
                     return;
@@ -973,6 +979,19 @@ namespace YMCL.Main.Views.Main.Pages.MusicPlayer
         private void Voiume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             player.Volume = Voiume.Value / 100;
+        }
+
+        private void PlayListView_DragOver(object sender, System.Windows.DragEventArgs e)
+        {
+            dragging = true;
+        }
+
+        private async void PlayListView_Drop(object sender, System.Windows.DragEventArgs e)
+        {
+            dragging= false;
+            await Task.Delay(250);
+            var list = PlayListView.Items.Cast<PlaySongListViewItemEntry>().ToList();
+            File.WriteAllText(Const.PlayListDataPath, JsonConvert.SerializeObject(list, Formatting.Indented));
         }
     }
 }

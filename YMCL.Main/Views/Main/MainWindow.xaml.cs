@@ -14,6 +14,7 @@ using Newtonsoft.Json.Linq;
 using Panuon.WPF.UI;
 using YMCL.Main.Public;
 using YMCL.Main.Public.Lang;
+using YMCL.Main.Public.Lang;
 using static YMCL.Main.App;
 using Cursors = System.Windows.Input.Cursors;
 using DataFormats = System.Windows.DataFormats;

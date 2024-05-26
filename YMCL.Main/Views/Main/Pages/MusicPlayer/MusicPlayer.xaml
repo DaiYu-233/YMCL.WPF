@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dd="urn:gong-wpf-dragdrop"
     xmlns:local="clr-namespace:YMCL.Main.Views.Main.Pages.MusicPlayer"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:properties="clr-namespace:YMCL.Main.Public.Lang"
@@ -238,7 +239,13 @@
                             x:Name="PlayListView"
                             Margin="5,0,5,5"
                             d:ItemsSource="{d:SampleData ItemCount=10}"
+                            dd:DragDrop.IsDragSource="True"
+                            dd:DragDrop.IsDropTarget="True"
+                            dd:DragDrop.UseDefaultDragAdorner="True"
+                            dd:DragDrop.UseDefaultEffectDataTemplate="True"
                             CornerRadius="3,3,3,3"
+                            DragOver="PlayListView_DragOver"
+                            Drop="PlayListView_Drop"
                             FontFamily="{StaticResource Font}"
                             SelectionChanged="PlayListView_SelectionChanged">
                             <ui:ListView.ItemTemplate>
