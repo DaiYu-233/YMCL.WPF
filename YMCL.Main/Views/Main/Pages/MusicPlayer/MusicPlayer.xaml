@@ -83,6 +83,43 @@
                             HorizontalAlignment="Right"
                             VerticalAlignment="Stretch"
                             DockPanel.Dock="Right">
+                            <DockPanel Margin="0,0,15,0" HorizontalAlignment="Center">
+                                <ui:FontIcon
+                                    x:Name="Back"
+                                    Margin="0,0,10,0"
+                                    FontSize="20"
+                                    Foreground="{DynamicResource TextColor}"
+                                    Glyph="&#xF8AC;"
+                                    MouseDown="Back_MouseDown" />
+                                <Border
+                                    Width="42"
+                                    Height="42"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Background="#FF16E9B8"
+                                    CornerRadius="999"
+                                    Cursor="Hand"
+                                    MouseDown="Play_Click">
+                                    <Grid>
+                                        <ui:FontIcon
+                                            x:Name="PlayBtnIcon"
+                                            Margin="2,0,0,0"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            FontSize="22"
+                                            Foreground="{DynamicResource TextColor}"
+                                            Glyph="&#xF5B0;"
+                                            Visibility="Visible" />
+                                    </Grid>
+                                </Border>
+                                <ui:FontIcon
+                                    x:Name="Next"
+                                    Margin="10,0,0,0"
+                                    FontSize="20"
+                                    Foreground="{DynamicResource TextColor}"
+                                    Glyph="&#xF8AD;"
+                                    MouseDown="Next_MouseDown" />
+                            </DockPanel>
                             <TextBlock
                                 x:Name="TimeText"
                                 Margin="0,0,15,0"
@@ -151,44 +188,6 @@
                                 Glyph="&#xF5E7;"
                                 MouseDown="Repeat_MouseDown" />
                         </DockPanel>
-
-                    </DockPanel>
-                    <DockPanel HorizontalAlignment="Center">
-                        <ui:FontIcon
-                            x:Name="Back"
-                            Margin="0,0,10,0"
-                            FontSize="20"
-                            Foreground="{DynamicResource TextColor}"
-                            Glyph="&#xF8AC;"
-                            MouseDown="Back_MouseDown" />
-                        <Border
-                            Width="42"
-                            Height="42"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Background="#FF16E9B8"
-                            CornerRadius="999"
-                            Cursor="Hand"
-                            MouseDown="Play_Click">
-                            <Grid>
-                                <ui:FontIcon
-                                    x:Name="PlayBtnIcon"
-                                    Margin="2,0,0,0"
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Center"
-                                    FontSize="22"
-                                    Foreground="{DynamicResource TextColor}"
-                                    Glyph="&#xF5B0;"
-                                    Visibility="Visible" />
-                            </Grid>
-                        </Border>
-                        <ui:FontIcon
-                            x:Name="Next"
-                            Margin="10,0,0,0"
-                            FontSize="20"
-                            Foreground="{DynamicResource TextColor}"
-                            Glyph="&#xF8AD;"
-                            MouseDown="Next_MouseDown" />
                     </DockPanel>
                 </Grid>
             </DockPanel>

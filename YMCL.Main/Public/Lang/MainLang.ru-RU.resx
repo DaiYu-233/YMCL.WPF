@@ -837,4 +837,7 @@
   <data name="SettingTransfer" xml:space="preserve">
     <value>Настройки перенесены</value>
   </data>
+  <data name="ResizeWindow" xml:space="preserve">
+    <value>Отрегулируйте окно</value>
+  </data>
 </root>

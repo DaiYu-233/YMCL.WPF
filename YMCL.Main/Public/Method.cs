@@ -10,6 +10,7 @@ using YMCL.Main.Public.Lang;
 using System.Security.Principal;
 using System.Windows;
 using MessageBoxIcon = Panuon.WPF.UI.MessageBoxIcon;
+using System.Globalization;
 
 namespace YMCL.Main.Public
 {
@@ -275,6 +276,24 @@ namespace YMCL.Main.Public
             minuteStr = minute < 10 ? $"0{minute}" : $"{minute}";
 
             return $"{minuteStr}:{secondStr}";
+        }
+        public static string FormatNumberWithWanYi(string numberStr)
+        {
+            // 先转换为decimal，确保精度  
+            decimal number = decimal.Parse(numberStr, CultureInfo.InvariantCulture);
+
+            if (number < 10000) // 小于万位，直接返回  
+            {
+                return number.ToString("N0", CultureInfo.InvariantCulture);
+            }
+            else if (number < 100000000) // 小于亿位，转换为万位  
+            {
+                return (number / 10000).ToString("N2") + "万";
+            }
+            else // 大于等于亿位，转换为亿位  
+            {
+                return (number / 100000000).ToString("N2") + "亿";
+            }
         }
     }
 }

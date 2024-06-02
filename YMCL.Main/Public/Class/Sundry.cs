@@ -98,4 +98,13 @@ namespace YMCL.Main.Public.Class
             }
         }
     }
+    public class ModListViewEntry()
+    {
+        public string Name { get; set; }
+        public string Summary { get; set; }
+        public string DownloadCount { get; set; }
+        public string DateModified { get; set; }
+        public string Source { get; set; }
+        public string IconUrl { get; set; }
+    }
 }

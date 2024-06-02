@@ -28,6 +28,16 @@
                                 </MenuItem.Icon>
                             </MenuItem>
                             <MenuItem
+                                x:Name="ResizeWindow"
+                                Click="ResizeWindow_Click"
+                                DockPanel.Dock="Top"
+                                FontFamily="{DynamicResource Font}"
+                                Header="{x:Static properties:MainLang.ResizeWindow}">
+                                <MenuItem.Icon>
+                                    <ui:FontIcon Glyph="&#xE70A;" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem
                                 x:Name="ShowTasks"
                                 Click="ShowTasks_Click"
                                 DockPanel.Dock="Top"

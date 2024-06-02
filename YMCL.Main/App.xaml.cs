@@ -154,6 +154,14 @@ namespace YMCL.Main
             }
         }
         #region NotifyIcon
+        private void ResizeWindow_Click(object sender, RoutedEventArgs e)
+        {
+            var setting = JsonConvert.DeserializeObject<Public.Class.Setting>(File.ReadAllText(Const.SettingDataPath));
+            setting.MainWidth = 1050;
+            setting.MainHeight = 600;
+            File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+            Method.RestartApp();
+        }
         private void ShowWindow_Click(object sender, RoutedEventArgs e)
         {
             Const.Window.main.WindowState = WindowState.Normal;

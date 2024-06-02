@@ -1816,6 +1816,15 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
+        ///   查找类似 调整窗口 的本地化字符串。
+        /// </summary>
+        public static string ResizeWindow {
+            get {
+                return ResourceManager.GetString("ResizeWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 有资源缺失 的本地化字符串。
         /// </summary>
         public static string ResourceAreMissing {

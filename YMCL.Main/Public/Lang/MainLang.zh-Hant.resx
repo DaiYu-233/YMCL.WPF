@@ -837,4 +837,7 @@
   <data name="SettingTransfer" xml:space="preserve">
     <value>設定遷移</value>
   </data>
+  <data name="ResizeWindow" xml:space="preserve">
+    <value>調整視窗</value>
+  </data>
 </root>

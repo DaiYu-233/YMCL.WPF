@@ -2,21 +2,9 @@
 using MinecraftLaunch.Classes.Enums;
 using MinecraftLaunch.Classes.Models.Download;
 using MinecraftLaunch.Components.Fetcher;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using YMCL.Main.Public;
 using YMCL.Main.Public.Control.ModFileExpander;
 using ListView = iNKORE.UI.WPF.Modern.Controls.ListView;
@@ -58,7 +46,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.Mods
         {
             InitializeComponent();
         }
-        private async void ModSearchBox_QuerySubmitted(iNKORE.UI.WPF.Modern.Controls.AutoSuggestBox sender, iNKORE.UI.WPF.Modern.Controls.AutoSuggestBoxQuerySubmittedEventArgs args)
+        private async void ModSearchBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
         {
             ModsListView.Items.Clear();
             ModSearchBox.IsEnabled = false;
@@ -77,7 +65,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.Mods
             ModSearchBox.IsEnabled = true;
             entries.ForEach(entry =>
             {
-                ModsListView.Items.Add(entry);
+                ModsListView.Items.Add(new Public.Class.ModListViewEntry() { Name = entry.Name, Summary = entry.Summary, DownloadCount = Method.FormatNumberWithWanYi(entry.DownloadCount.ToString()), DateModified = entry.DateModified.ToString(), Source = "CurseForge", IconUrl = entry.IconUrl });
             });
         }
 
@@ -102,7 +90,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.Mods
             {
                 var expander = new ModFileExpander(mcVersion);
                 expander.Margin = new Thickness(0, 0, 0, 10);
-                expander.Name = $"mod_{mcVersion.Replace(".","_")}";
+                expander.Name = $"mod_{mcVersion.Replace(".", "_")}";
                 expander.ModFileListView.SelectionChanged += ModFileListView_SelectionChanged;
                 ModDetailsVersionPanel.Children.Add(expander);
                 foreach (var file in item.Files)
@@ -121,7 +109,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.Mods
             var item = control.SelectedItem as CurseFileEntry;
             if (item != null)
             {
-                
+
             }
         }
 

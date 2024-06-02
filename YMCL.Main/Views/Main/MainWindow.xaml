@@ -42,11 +42,20 @@
                         <TextBlock />
                         <Button
                             x:Name="btnMinimize"
-                            Margin="0,0,30,0"
+                            Margin="0,0,57,0"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Center"
                             Click="btnMinimize_Click"
                             Content="{DynamicResource Minimize}"
+                            Cursor="Hand"
+                            Style="{DynamicResource IconButtonsStyle}" />
+                        <Button
+                            x:Name="btnMaximize"
+                            Margin="0,0,30,0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Click="btnMaximize_Click"
+                            Content="{DynamicResource Maximize}"
                             Cursor="Hand"
                             Style="{DynamicResource IconButtonsStyle}" />
                         <Button

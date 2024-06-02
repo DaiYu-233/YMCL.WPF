@@ -384,5 +384,17 @@ namespace YMCL.Main.Views.Main
         {
             Const.Window.main.DropMethod(e);
         }
+
+        private void btnMaximize_Click(object sender, RoutedEventArgs e)
+        {
+            if (WindowState == WindowState.Maximized)
+            {
+                WindowState = WindowState.Normal;
+            }
+            else
+            {
+                WindowState = WindowState.Maximized;
+            }
+        }
     }
 }
