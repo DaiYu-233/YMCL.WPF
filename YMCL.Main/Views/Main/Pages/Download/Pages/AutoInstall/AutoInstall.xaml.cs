@@ -23,7 +23,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
     {
         bool _firstLoad = true;
         bool _loaded = false;
-        #region UI
+            #region UI
         private void LatestSnapshotBorder_PreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             if (_loaded)

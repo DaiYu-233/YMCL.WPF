@@ -498,8 +498,8 @@
   <data name="Launch_SelectedModCount" xml:space="preserve">
     <value>已选择{|}个文件</value>
   </data>
-  <data name="SureDeleteMod" xml:space="preserve">
-    <value>将以下Mod移动到回收站</value>
+  <data name="MoveToRecycleBin" xml:space="preserve">
+    <value>移动到回收站</value>
   </data>
   <data name="LoginFail" xml:space="preserve">
     <value>登录失败</value>

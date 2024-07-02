@@ -495,7 +495,7 @@
   <data name="Launch_SelectedModCount" xml:space="preserve">
     <value>{|}個のファイルが選択されました</value>
   </data>
-  <data name="SureDeleteMod" xml:space="preserve">
+  <data name="MoveToRecycleBin" xml:space="preserve">
     <value>以下のモッドをゴミ箱に移動しましょう</value>
   </data>
   <data name="LoginFail" xml:space="preserve">

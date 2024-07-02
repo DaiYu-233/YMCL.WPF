@@ -128,10 +128,9 @@ namespace YMCL.Main.Views.Main.Pages.Launch
                     {
                         FileStream fs = new FileStream(Const.CustomHomePageXamlPath, FileMode.Open);
                         UIElement rootElement = (UIElement)XamlReader.Load(fs);
-                        this.CustomHomePageRoot.Child = rootElement;
+                        CustomHomePageRoot.Child = rootElement;
 
-                        //var cs = File.ReadAllText(Const.CustomHomePageCSharpPath).Split("-------");
-                        //Function.RunCodeByString(cs[1], dlls: cs[0].Split("\r\n"));
+
                     }
                     catch (Exception ex)
                     {

@@ -1,10 +1,13 @@
+
+# 此项目暂停更新
+
 <p align="center">
 <img Height="200" Width="200" src="https://github.com/DaiYu-233/YMCL/blob/main/Assets/YMCL-Icon.png?raw=true"/>
 </p>
 <div align="center">
 <h1 align="center">Yu Minecraft Launcher</h1>
 </div>
-Yu Minecraft Launcher (YMCL) 是使用 [.NET 8.0](https://dotnet.microsoft.com/zh-cn/download/dotnet/8.0) 、Windows Presentation Foundation（WPF） 开发的 Minecraft 启动器。YMCL 以 GPL-3.0 协议开放源代码，可以修改且分发，但不得删除原作品的标记，修改后的作品必须也采用 GPL 协议进行开源。
+Yu Minecraft Launcher (YMCL) 是使用 [.NET 8.0](https://dotnet.microsoft.com/zh-cn/download/dotnet/8.0) 、Windows Presentation Foundation（WPF） 开发的 Minecraft 启动器。YMCL 以 Apache License 协议开放源代码，软件必须包含原始代码的版权声明和许可声明，以及一个包含许可信息的通知文件。
 
 ## UrlScheme
 

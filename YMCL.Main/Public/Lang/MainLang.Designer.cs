@@ -1645,6 +1645,15 @@ namespace YMCL.Main.Public.Lang {
         }
         
         /// <summary>
+        ///   查找类似 移动到回收站 的本地化字符串。
+        /// </summary>
+        public static string MoveToRecycleBin {
+            get {
+                return ResourceManager.GetString("MoveToRecycleBin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 音乐 的本地化字符串。
         /// </summary>
         public static string Music {
@@ -2001,15 +2010,6 @@ namespace YMCL.Main.Public.Lang {
         public static string SourceFileNotExists {
             get {
                 return ResourceManager.GetString("SourceFileNotExists", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 将以下Mod移动到回收站 的本地化字符串。
-        /// </summary>
-        public static string SureDeleteMod {
-            get {
-                return ResourceManager.GetString("SureDeleteMod", resourceCulture);
             }
         }
         

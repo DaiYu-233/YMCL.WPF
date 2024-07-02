@@ -14,7 +14,7 @@ namespace YMCL.Updater
                 return;
             }
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("更新将在5秒后开始");
+            Console.WriteLine("Update will be strated in 5 sec.");
             Console.CursorVisible = false;
             int totalSeconds = 5;
             for (int i = 0; i <= totalSeconds; i++)

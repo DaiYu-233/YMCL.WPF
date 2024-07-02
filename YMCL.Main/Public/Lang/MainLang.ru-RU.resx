@@ -495,7 +495,7 @@
   <data name="Launch_SelectedModCount" xml:space="preserve">
     <value>Выбрано файлов: {|}</value>
   </data>
-  <data name="SureDeleteMod" xml:space="preserve">
+  <data name="MoveToRecycleBin" xml:space="preserve">
     <value>Переместите следующие моды в корзину</value>
   </data>
   <data name="LoginFail" xml:space="preserve">

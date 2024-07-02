@@ -495,7 +495,7 @@
   <data name="Launch_SelectedModCount" xml:space="preserve">
     <value>{|} files selected</value>
   </data>
-  <data name="SureDeleteMod" xml:space="preserve">
+  <data name="MoveToRecycleBin" xml:space="preserve">
     <value>Move the following Mods to the Trash</value>
   </data>
   <data name="LoginFail" xml:space="preserve">
