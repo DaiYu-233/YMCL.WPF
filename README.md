@@ -1,6 +1,8 @@
 
 # 此项目暂停更新
 
+ → https://github.com/DaiYu-233/YMCL.Avalonia
+
 <p align="center">
 <img Height="200" Width="200" src="https://github.com/DaiYu-233/YMCL/blob/main/Assets/YMCL-Icon.png?raw=true"/>
 </p>
